@@ -1,0 +1,43 @@
+<ion-content>
+    <div class="xinxi">
+        <p class="fontw">{{schoolName||''}}学籍登记表</p>
+        <p class="fontq">请认真填写学籍登记表，此表将会放入您的档案</p>
+
+    </div>
+
+    <div>
+        <ion-list class="xiangxi">
+            <p class="xinxileftx">何时、何地、经何人介绍参加何种党团组织、任何职务</p>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiaoj">
+                <textarea [(ngModel)]="Reward.PartyOrganization" placeholder="2018年6月-2018年7月在山东体育学院经xxx介绍加入中国共产党担任xx职务  若没有填“无”即可" rows="2" class="teat"></textarea>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <p class="xinxileftx">主要亲属中有无被镇压或被管制的、以及有何重大政治历史问题</p>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiaoj">
+                <textarea placeholder="若没有填“无”即可" rows="2" class="teat" [(ngModel)]="Reward.HistoryIssues"></textarea>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">填表日期</ion-label>
+                <!--<ion-input class="xinxiright " placeholder="请选择 "></ion-input>-->
+                <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY MMM DD" monthShortNames="1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月 " [(ngModel)]="Reward.WriteDate" doneText="完成" cancelText="取消" placeholder="请选择"></ion-datetime>
+
+            </ion-item>
+        </ion-list>
+    </div>
+    <div class="footbtu">
+        <button ion-button (click)="onDetailPageTJ() " class="btn-shaw">
+         确认提交
+      </button>
+        <button type="button" (click)="onTopPage() " class="btnu">返回上一页</button>
+    </div>
+    <!-- <div class="yeshu">
+        5/5
+    </div> -->
+</ion-content>

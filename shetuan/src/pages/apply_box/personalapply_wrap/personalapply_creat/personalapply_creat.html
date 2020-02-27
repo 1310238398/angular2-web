@@ -1,0 +1,22 @@
+<ion-content padding-top>
+  <div class="cover">
+    <div class="content overh" style="padding:0 15px;">
+      <p class="change-title fn18 color4a center" style="margin:15px 0;">{{item.name}}</p>
+
+      <div class="pro-text overh relative">
+        <p class="left color4a fn14">
+          <span style="color: red;">*</span>
+          <span>主要事迹</span>
+        </p>
+        <p class="color9b" style="line-height: 18px;text-indent:2em;" *ngIf="item.code != 'Process_college_class_advanced_class_group'">
+          (主要事迹应包括：思想政治素质情况，各学期学业成绩及获得奖学金情况，所受表彰奖励情况，参加文体社会活动情况，是否获得校级优秀学生称号等，内容填写要客观、翔实。)</p>
+        <textarea class='file-message mr' #textarea name="filetext" [(ngModel)]="filetext" (ngModelChange)="txtChange(textarea.value)"
+          maxlength="3000" rows="5"></textarea>
+        <p class="file-num absolute">{{values}}</p>
+      </div>
+    </div>
+    <div class="pro-btn center">
+      <button ion-button color="secondary" [disabled]="numdisb" (click)="setcokie()">确定</button>
+    </div>
+  </div>
+</ion-content>

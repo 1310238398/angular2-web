@@ -1,0 +1,13 @@
+
+    <div>
+      <div nz-row nzType="flex" nzJustify="center" nzAlign="middle">
+        <div><img class="school-icon" [src]="Logo" alt=""></div>
+        <div>
+          <div class="text-center base-font font26">{{Campus||''}}</div>
+          <div  class="text-left base-font font16">学院人数统计</div>
+        </div>
+      </div>
+    </div>
+<div (window:resize)="onResize($event)" id="bar-academy" style="width:auto;height: 80%;margin: 6px"></div>
+    <a   [routerLink]="['/']" [queryParams]='{academy:""}'><img class="b-cancle" src="assets/images/back.png" ></a>
+

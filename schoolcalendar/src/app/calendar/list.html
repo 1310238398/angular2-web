@@ -1,0 +1,159 @@
+<div class="room">
+  <nz-card class="mr-20 ml-20 mt-20">
+    <nz-tabset>
+      <nz-tab nzTitle="校历生成">
+        <form nz-form [formGroup]="calendarForm" style="max-width:1200px;">
+          <div nz-row>
+            <div nz-col nzXs="24" nzSm="12" nzMd="6">
+              <nz-form-item>
+                <nz-form-label [nzMd]="8" [nzSm]="8" [nzXs]="24" nzRequired>学年</nz-form-label>
+                <nz-form-control [nzMd]="16" [nzSm]="16" [nzXs]="24">
+                  <nz-select style="width: 100%;" formControlName="AcademicYearCode" nzShowSearch nzAllowClear
+                    nzPlaceHolder="请选择">
+                    <nz-option *ngFor="let year of AcademicYear" [nzLabel]="year.ItemName" [nzValue]="year.ItemCode"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXs="24" nzSm="12" nzMd="8">
+              <nz-form-item>
+                <nz-form-label [nzMd]="10" [nzSm]="8" [nzXs]="24" nzRequired>从周几开始</nz-form-label>
+                <nz-form-control [nzMd]="14" [nzSm]="16" [nzXs]="24">
+                  <nz-radio-group formControlName="FirstWeek">
+                    <label nz-radio nzValue="1">周一</label>
+                    <label nz-radio nzValue="0">周日</label>
+                  </nz-radio-group>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXs="24" nzSm="12" nzMd="6">
+              <nz-form-item>
+                <nz-form-label [nzMd]="8" [nzSm]="8" [nzXs]="24" nzRequired>开学日期</nz-form-label>
+                <nz-form-control [nzMd]="16" [nzSm]="16" [nzXs]="24">
+                  <nz-date-picker style="width:80%;" [nzDisabledDate]="disabledStartDate" nzFormat="yyyy-MM-dd"
+                    formControlName="start" nzPlaceHolder="">
+                  </nz-date-picker>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXs="24" nzSm="12" nzMd="4">
+              <nz-form-control [nzMd]="24" [nzSm]="24" [nzXs]="24">
+                <div style="height:48px;"></div>
+              </nz-form-control>
+            </div>
+            <div nz-col nzXs="24" nzSm="12" nzMd="6">
+              <nz-form-item>
+                <nz-form-label [nzMd]="8" [nzSm]="8" [nzXs]="24" nzRequired>学期</nz-form-label>
+                <nz-form-control [nzMd]="16" [nzSm]="16" [nzXs]="24">
+                  <nz-select style="width: 100%;" formControlName="AcademicTermCode" nzShowSearch nzAllowClear
+                    nzPlaceHolder="请选择">
+                    <nz-option *ngFor="let term of AcademicTerm" [nzLabel]="term.ItemName" [nzValue]="term.ItemCode"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXs="24" nzSm="12" nzMd="8">
+              <nz-form-item>
+                <nz-form-label [nzMd]="10" [nzSm]="8" [nzXs]="24" nzRequired>第几周开始</nz-form-label>
+                <nz-form-control [nzMd]="14" [nzSm]="16" [nzXs]="24">
+                  <nz-radio-group formControlName="FirstWeeks">
+                    <label nz-radio nzValue="1">第一周</label>
+                    <label nz-radio nzValue="0">第零周</label>
+                  </nz-radio-group>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXs="24" nzSm="12" nzMd="6">
+              <nz-form-item>
+                <nz-form-label [nzMd]="8" [nzSm]="8" [nzXs]="24" nzRequired>放假日期 </nz-form-label>
+                <nz-form-control [nzMd]="16" [nzSm]="16" [nzXs]="24">
+                  <nz-date-picker style="width:80%;" [nzDisabledDate]="disabledEndDate" nzFormat="yyyy-MM-dd"
+                    formControlName="end" nzPlaceHolder="">
+                  </nz-date-picker>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <!-- <div nz-col nzXs="24" nzSm="12" nzMd="8">
+                  <nz-form-item>
+                    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>当前学期 </nz-form-label>
+                    <nz-form-control [nzSm]="16" [nzXs]="24">
+                      <nz-radio-group formControlName="IsCurrent">
+                        <label nz-radio nzValue="1">是</label>
+                        <label nz-radio nzValue="-1">否</label>
+                      </nz-radio-group>
+                    </nz-form-control>
+                  </nz-form-item>
+                </div> -->
+            <div nz-col nzXs="24" nzSm="12" nzMd="4">
+              <nz-form-control>
+                <button nz-button nzType="primary" [nzSize]="'small'" style="margin-right: 8px" (click)="generateCalendar()">自动生成</button>
+                <button nz-button nzType="default" [nzSize]="'small'" style="margin-right: 8px" (click)="reset()">重置</button>
+              </nz-form-control>
+            </div>
+          </div>
+        </form>
+      </nz-tab>
+      <nz-tab nzTitle="校历查询">
+        <form nz-form [formGroup]="searchForm" style="max-width:1200px;">
+          <div nz-row nzGutter="16">
+            <div nz-col nzXs="24" nzSm="12" nzMd="6">
+              <nz-form-item>
+                <nz-form-label [nzMd]="8" [nzSm]="8" [nzXs]="24">学年</nz-form-label>
+                <nz-form-control [nzMd]="16" [nzSm]="16" [nzXs]="24">
+                  <nz-select style="width: 100%;" formControlName="AcademicYearCode" nzShowSearch nzAllowClear
+                    nzPlaceHolder="请选择">
+                    <nz-option *ngFor="let year of AcademicYear" [nzLabel]="year.ItemName" [nzValue]="year.ItemCode"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXs="24" nzSm="12" nzMd="6">
+              <nz-form-item>
+                <nz-form-label [nzMd]="8" [nzSm]="8" [nzXs]="24">学期</nz-form-label>
+                <nz-form-control [nzMd]="16" [nzSm]="16" [nzXs]="24">
+                  <nz-select style="width: 100%;" formControlName="AcademicTermCode" nzShowSearch nzAllowClear
+                    nzPlaceHolder="请选择">
+                    <nz-option *ngFor="let term of AcademicTerm" [nzLabel]="term.ItemName" [nzValue]="term.ItemCode"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+            <div nz-col nzXs="24" nzSm="12" nzMd="6">
+              <nz-form-control>
+                <button nz-button nzType="primary" [nzSize]="'small'" style="margin-right: 8px" (click)="searchFuc()">查询</button>
+                <button nz-button nzType="default" [nzSize]="'small'" style="margin-right: 8px" (click)="resetSearch()">重置</button>
+              </nz-form-control>
+            </div>
+          </div>
+        </form>
+      </nz-tab>
+    </nz-tabset>
+
+  </nz-card>
+  <div class="biaoge">
+    <div class="statis_table">
+      <h3>周次列表</h3>
+      <nz-table #basicTable [nzData]="weeksDataSet" [nzFrontPagination]="false" [nzShowPagination]="false" [nzLoading]='loading'>
+        <!-- <nz-table #basicTable [nzData]="dataSet" [nzTotal]="total" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" > -->
+        <thead>
+          <tr>
+            <th nzWidth="80px"></th>
+            <th>周次</th>
+            <th>周次开始时间</th>
+            <th>周次结束时间</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data;let i=index;">
+            <td style="text-align: center">
+              <a nz-popconfirm nzTitle="确定删除?" (nzOnConfirm)="confirm(data.RecordId)" (nzOnCancel)="cancel()"
+                nzPlacement="right">删除</a>
+            </td>
+            <td>{{data.Weeks}}</td>
+            <td>{{data.StartDate}}</td>
+            <td>{{data.EndDate}}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>

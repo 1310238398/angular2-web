@@ -1,0 +1,32 @@
+<ion-content class="index-cont">
+  <div class="cont-box">
+    <div class="overh head-wrap">
+      <P class="head-title center fn17">未统计人员</P>
+      <p class="head-cont fn14 left">
+        <span class="col9b">{{total}}人未统计</span>
+      </p>
+    </div>
+    <div class="list-cont">
+      <ion-list no-lines>
+        <div class="overh list-li" *ngFor="let data of dataSet" style="margin-bottom:1px;box-shadow: 0 2px 5px 0 #E3E3E3;">
+          <ion-item style="border-bottom:none!important;" (click)="NavigationTo(data.classname)">
+            <p class="item-start fn15 col4a">
+              <span class="dib fl">{{data.name}}&nbsp;</span>
+              <img class="dib fl img1" *ngIf="data.sex == '男'" src="assets/images/nan@2x.png" alt="">
+              <img class="dib fl img2" *ngIf="data.sex == '女'" src="assets/images/nv@2x.png" alt="">
+              <span class="col9b dib fl">&nbsp;----&nbsp;{{data.usercode}}</span>
+            </p>
+          </ion-item>
+        </div>
+      </ion-list>
+    </div>
+  </div>
+
+  <div class="ssc-ov fixed" *ngIf="mengGo"></div>
+  <div class="spinnerw fixed" *ngIf="mengGo" id="spinnerw">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+
+</ion-content>

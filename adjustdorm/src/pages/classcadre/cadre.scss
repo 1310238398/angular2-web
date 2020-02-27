@@ -1,0 +1,53 @@
+page-cadre {
+  .scroll-content {background-color: #f5f5f5;margin: 0px;overflow-y: auto;}
+  ul,li,p {margin: 0px;padding: 0px;}
+  .fl{float: left;}
+  .fr{float: right;}
+  .center{text-align: center;}
+  .dib{display: inline-block;}
+  .db{display: block;}
+  .relative{position: relative;}
+  .absolute{position: absolute;}
+  .middle{vertical-align: middle;}
+  .fixed{position: fixed}
+  .overh{overflow: hidden;}
+  .mr{margin:0 auto;}
+  .db{display: block;}
+  .fn9{font-size: 9px;}
+  .fn12{font-size: 12px;}
+  .fn13{font-size: 13px;}
+  .fn14{font-size: 14px;}
+  .fn16{font-size: 16px;}
+  .fn18{font-size: 18px;}
+  
+  .info_list {.item.item-ios .checkbox-ios {position: static;display: block;margin: 8px 0px 8px 2px;}}
+  .index-cont{color:#4A4A4A;}
+  .username {font-size: 14px;color: #666666;margin-left:10px;}
+  .username img{vertical-align: middle;width:20px;margin-left:5px;}
+  .useraddress {font-size: 13px;color: #909090;}
+  .toolbar-title-ios {text-align: center;pointer-events: auto;}
+  .info_list .label-ios{margin:9px 0;}
+  .item-ios.item-block .item-inner{padding-right:0px;}
+  .toolbar-background-ios {background: #FFC000;}
+  .footer-ios .toolbar-background-ios {border-style: solid;border-color: #FFC000;}
+  .button-ios {width: 100%;border-radius: 4px;height: 40px;line-height: 40px;font-size: 2rem;color: #fff;background-color: #FFC000;margin: 0px;padding: 0px;}
+  .button-ios.activated {background-color: #FFC000;opacity: 1;}
+
+  .img-wrap{margin-top:5px;padding-left:10px;}
+  .wain-txt{padding:8px;color: #4A4A4A;background: #fff;border-bottom:0.55px solid #c8c7cc;text-indent: 2em;margin-bottom:8px;}
+
+  .checkbox-ios .checkbox-icon{border-radius:0;width:18px;height:18px;}
+  .checkbox-ios .checkbox-checked .checkbox-inner{left:6px;top:3px;}
+
+
+
+
+
+
+
+
+
+
+
+
+}

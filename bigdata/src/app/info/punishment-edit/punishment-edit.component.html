@@ -1,0 +1,96 @@
+<div class="modal-header">
+    <div class="modal-title">{{data? '编辑' : '添加'}}-违纪处分</div>
+</div>
+<form #f="ngForm" nz-form>
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">学年</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'AcademicYear'" [ModelName]="'academicYear'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">学期</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'AcademicTerm'" [ModelName]="'academicTerm'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">日期</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <nz-date-picker [nzFormat]="'yyyy-MM-dd'" name="punishmentDate" [(ngModel)]="params.punishmentDate" placeholder="日期"></nz-date-picker>
+            </nz-form-control>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">分类</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'PunishmentSort'" [PlaceHolder]="'分类'" [ModelName]="'punishmentSort'"></ant-bizcode>
+                <!--   <input nz-input name="rewardName" placeholder="奖励名称" [(ngModel)]="params.rewardName" maxlength="18" required> -->
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">类型</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'PunishmentType'" [PlaceHolder]="'类型'" [ModelName]="'punishmentType'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">原因</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'PunishmentReason'" [PlaceHolder]="'原因'" [ModelName]="'punishmentReason'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">处理部门</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <nz-select class='col-w' [nzPlaceHolder]="'处理部门'" [nzShowSearch]="true" [(ngModel)]="params.departmentCode" name="departmentCode" required>
+                    <nz-option *ngFor="let option of AllDepartment" [nzLabel]="option.DepartmentName" [nzValue]="option.DepartmentCode">
+                    </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">处分文号</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <input nz-input name="punishmentFileNo" placeholder="处分文号" [(ngModel)]="params.punishmentFileNo" maxlength="18" required>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">处分期限</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'PunishmentTerm'" [PlaceHolder]="'处分期限'" [ModelName]="'punishmentTerm'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">处分状态</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'PunishmentStatus'" [PlaceHolder]="'处分状态'" [ModelName]="'punishmentStatus'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+
+        <div nz-col nzSpan="24">
+            <nz-form-label [nzSpan]="3">详情描述</nz-form-label>
+            <nz-form-control [nzSpan]="21">
+                <textarea nz-input name="detailDescription" placeholder="详情描述" [(ngModel)]="params.detailDescription" maxlength="100" required [nzAutosize]="{ minRows: 2, maxRows: 6 }"></textarea>
+            </nz-form-control>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button nz-button type="button" (click)="close()">关闭</button>
+        <button nz-button class="btn-zj-color" [disabled]="!f.form.valid||!params.academicYear||!params.academicTerm||!params.punishmentDate||!params.punishmentSort||!params.punishmentType||!params.punishmentReason||!params.punishmentTerm||!params.punishmentStatus"
+            [nzType]="'primary'" (click)="save()">保存</button>
+    </div>
+</form>

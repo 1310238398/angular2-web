@@ -1,0 +1,59 @@
+<ion-content class="index-cont">
+    <form name="f">
+        <div class="row-mar overh">
+            <P class="fn18 color4a center" style="margin:15px 0;color:gray;">社团活动总结</P>
+            <div class="cont-form">
+                <ul>
+                    <li class="overh">
+                        <p class="text-css">
+                            <i style="color: #ff0000;">*</i> 活动名称：</p>
+                        <ion-item>
+                            <ion-input type="text" maxlength="18" [(ngModel)]="LeaveApply.Activity" name="Activity" style="color:#9B9B9B;"></ion-input>
+                        </ion-item>
+                    </li>
+                    <li class="surplus-num-box">
+                        <p class="text-css">
+                            <i style="color: #ff0000;">*</i> 活动内容：</p>
+                        <!-- <textarea class='file-message mr' #textarea name="filetext" [(ngModel)]="LeaveApply.filetext" (ngModelChange)="txtChange(textarea.value)"
+                                    maxlength="50" rows="2"></textarea> -->
+                        <ion-item>
+                            <ion-textarea maxlength="50" max="50" class="textarea" [(ngModel)]="LeaveApply.Info" name="Info" style="color:#9B9B9B;"></ion-textarea>
+                        </ion-item>
+                        <p class="surplus-num" *ngIf="LeaveApply.Info.length">{{50 - LeaveApply.Info.length}}</p>
+                    </li>
+                    <li class="surplus-num-box">
+                        <p class="text-css">
+                            <i style="color: #ff0000;">*</i> 活动总结：</p>
+                        <!-- <textarea class='file-message mr' #textarea name="filetext" [(ngModel)]="LeaveApply.filetext" (ngModelChange)="txtChange(textarea.value)"
+                                    maxlength="50" rows="2"></textarea> -->
+                        <ion-item>
+                            <ion-textarea maxlength="50" max="50" class="textarea" [(ngModel)]="LeaveApply.endinfo" name="endinfo"></ion-textarea>
+                        </ion-item>
+                        <p class="surplus-num" *ngIf="LeaveApply.endinfo.length">{{50 - LeaveApply.endinfo.length}}</p>
+                    </li>
+                    <li>
+                        <p class="text-css">
+                            <i style="color: #ff0000;">*</i> 现场照片：</p>
+                        <div class="upload overh">
+                            <span class="container fl relative" *ngIf="CertifyImgs.length<9">
+                                <input type="file" value="file" class="hiddenFile" (change)="handleFiles($event)">
+                                <img src="assets/images/add.png" style="width: 100%;">
+                            </span>
+                            <div class="Certify fl relative center" *ngFor="let item of CertifyImgs;let index=index;" [ngClass]="{'underimg':index==9}">
+                                <img class="delete-icon absolute" src="assets/images/delete.png" (click)="deleteCertify($event,index)">
+                                <img class="file-img" [src]="DomS.bypassSecurityTrustUrl(item.AttachmentURL)">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+    <div class="center" style="margin-top:20px;margin-bottom: 20px;">
+        <!-- <button class="submit-tab mr fn16" ion-button [disabled]="subStop" (click)="tabAlert()" block>提交</button> -->
+        <!-- <button *ngIf="UserIconUrl" ion-button color="light" [disabled]="subStop" (click)="tabAlert()">取消</button>
+        <button *ngIf="UserIconUrl" ion-button color="default" [disabled]="subStop" (click)="tabAlert()">提交</button> -->
+        <button ion-button class="submit-tab mr fn16" [disabled]="subStop" (click)="tabAlert()" block>完成</button>
+    </div>
+</ion-content>

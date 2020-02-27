@@ -1,0 +1,110 @@
+<ion-content>
+  <div>
+    <form [formGroup]="valForm">
+      <ul class="form-list">
+        <li>
+          <div class="listone">
+            <label class="lineone">
+              <span class="requird">*</span>报修区域：</label>
+            <ion-item class="select-search">
+              <select-searchable formControlName="SelectAreaRecordId" [items]="ports" itemValueField="RecordID"
+                itemTextField="Name" [canSearch]="true" [noItemsFoundText]="'未能搜索到该区域，请重新搜索或选择“其他区域”'"
+                searchPlaceholder="搜索" closeButtonText="X" (onChange)="portChange($event)">
+                <ng-template selectSearchableLabelTemplate>
+
+                </ng-template>
+              </select-searchable>
+            </ion-item>
+          </div>
+          <p class="erorstips" *ngIf="valForm.controls.SelectAreaRecordId.dirty&&valForm.controls.SelectAreaRecordId.hasError('required')">请选择报修区域</p>
+        </li>
+        <li>
+          <div class="listone surplus-num-box">
+            <label class="lineone">
+              <span class="requird">*</span>具体地点：</label>
+            <ion-input formControlName="SpecificSite" maxlength="10" max="10" class="b-input"></ion-input>
+            <p class="surplus-num" *ngIf="valForm.value.SpecificSite.length<11">{{10 -
+              valForm.value.SpecificSite.length}}</p>
+          </div>
+          <div *ngIf="valForm.controls.SpecificSite.dirty">
+            <p class="erorstips" *ngIf="valForm.controls.SpecificSite.hasError('required')||valForm.controls.SpecificSite.hasError('space')">请填写具体地点</p>
+            <p class="erorstips" *ngIf="valForm.value.SpecificSite.length>10">最多可输入10个字</p>
+          </div>
+        </li>
+        <li>
+          <div class="listone surplus-num-box">
+            <label class="lineone">
+              <span class="requird">*</span>联系电话：</label>
+            <ion-input formControlName="Phone" maxlength="11" class="b-input"></ion-input>
+            <p class="surplus-num" *ngIf="valForm.value.Phone.length<12">{{11 - valForm.value.Phone.length}}</p>
+          </div>
+          <div *ngIf="valForm.controls.Phone.dirty">
+            <p class="erorstips" *ngIf="valForm.controls.Phone.hasError('required')||valForm.controls.Phone.hasError('space')">请填写联系电话</p>
+            <p class="erorstips" *ngIf="valForm.value.Phone.length>=11&&valForm.controls.Phone.hasError('pattern')">联系电话输入错误</p>
+          </div>
+        </li>
+        <li class="bxitem">
+          <div class="listone">
+            <label class="lineone lineitem">
+              <span class="requird">*</span>报修项目：</label>
+            <div class="item">
+              <!-- <a class="item-list" (click)="itemChange('0009020')" [ngClass]="{'item-select': valForm.value.ItemCode==='0009020'}">水</a>
+              <a class="item-list" (click)="itemChange('0009030')" [ngClass]="{'item-select': valForm.value.ItemCode==='0009030'}">电</a>
+              <a class="item-list" (click)="itemChange('0009040')" [ngClass]="{'item-select': valForm.value.ItemCode==='0009040'}">门、窗</a>
+              <a class="item-list" (click)="itemChange('0009010')" [ngClass]="{'item-select': valForm.value.ItemCode==='0009010'}">其他</a> -->
+              <a class="item-list" *ngFor="let item of itemData" (click)="itemChange(item)" [ngClass]="{'item-select': item.checked}">{{item.Name}}</a>
+            </div>
+          </div>
+          <p class="erorstips" *ngIf="valForm.controls.ItemCode.dirty&&valForm.controls.ItemCode.hasError('required')">请选择报修项目</p>
+        </li>
+        <li class="listtwo">
+          <label class="instruction">
+            <span class="requird">*</span>损坏情况说明：</label>
+          <div class="instructioninput surplus-num-box">
+            <!-- <input type="textarea" formControlName="Caption" rows="4" /> -->
+            <ion-textarea placeholder="请输入" formControlName="Caption" maxlength="30" max="30"></ion-textarea>
+            <p class="surplus-num" *ngIf="valForm.value.Caption.length<31">{{30 - valForm.value.Caption.length}}</p>
+          </div>
+          <div *ngIf="valForm.controls.Caption.dirty">
+            <p class="erorstips" style="margin-left:0px;" *ngIf="valForm.controls.Caption.hasError('required')||valForm.controls.Caption.hasError('space')">请填写损坏情况说明</p>
+            <p class="erorstips" style="margin-left:0px;" *ngIf="valForm.controls.Caption.hasError('overlength')">最多可输入30个字</p>
+          </div>
+        </li>
+        <li class="listtwo">
+          <label class="instruction">
+            损坏情况图片说明：</label>
+          <div class="instructioninput">
+            <div class="upload" #b_button>
+              <div class="add" *ngIf="certifyImgs.length < 9">
+                <input type="file" value="file" class="hiddenFile" (change)="handleFiles($event)">
+                <img src="assets/imgs/add.png">
+              </div>
+              <div class="Certify" *ngFor="let item of certifyImgs;let index=index;" [ngClass]="{'mtimg':index==0&&certifyImgs.length<9}">
+                <span class="delete">
+                  <ion-icon ios="ios-close-outline" md="close" (click)="deleteCertify($event,index)" class="delete-icon"></ion-icon>
+                </span>
+                <img [src]="DomSanitization.bypassSecurityTrustUrl(item.url)">
+              </div>
+              <div class="clear"></div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="btn-wapper">
+        <button ion-button [disabled]="!valForm.valid || disabledSave" (click)="save()">上报</button>
+      </div>
+    </form>
+  </div>
+  <!-- 报修成功的弹窗 -->
+  <div class="photoalert" *ngIf="showSuccessfulTips">
+    <div class="alertback"></div>
+    <div class="alertwapper">
+      <div class="alert-content padding0">
+        <p class="alert-title" style="padding:35px 14px;">报修单已上报，稍后会以推送及待办的形式告知该报修单的进度情况，请耐心等待维修</p>
+        <div class="btn-wapper-line">
+          <button ion-button class="btn-one" (click)="successful()">好的</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

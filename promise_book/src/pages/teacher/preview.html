@@ -1,0 +1,23 @@
+<ion-content class="detail">
+  <p class="title">{{promiseBook.Title}}</p>
+  <div class="content" [innerHTML]="promiseBook.Content">
+
+  </div>
+  <div class="sign">
+    <p *ngIf="promiseBook.WrittenTime"><span>{{year}}年{{month}}月{{day}}日</span></p>
+    <div class="sign_list">
+      <p class="sign2">承诺人：</p>
+      <p class="sign1"></p>
+    </div>
+    <div class="sign_list">
+      <p class="sign2">时&nbsp;&nbsp;&nbsp;&nbsp;间：</p>
+      <p class="sign1"></p>
+    </div>
+  </div>
+  <!-- <button class="btn" (click)="use()">完成</button> -->
+</ion-content>
+<ion-footer (click)="use()">
+  <ion-toolbar>
+    <ion-title>完成</ion-title>
+  </ion-toolbar>
+</ion-footer>

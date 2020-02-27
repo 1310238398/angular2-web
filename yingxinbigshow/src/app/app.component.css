@@ -1,0 +1,398 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.font-32 {
+  font-size: 32px;
+}
+
+.font-180 {
+  font-size: 180px;
+}
+
+.font-70 {
+  font-size: 70px;
+}
+
+.font-100 {
+  font-size: 100px;
+}
+
+.color-ff982b {
+  color: #ff982b;
+  text-shadow: 0 0 20px #d17009;
+}
+
+.no-break {
+  overflow: hidden;
+  word-break: keep-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.main_cotent {
+  width: 100%;
+  height: auto;
+  /* background-color: #01102b; */
+}
+
+.top_content {
+  height: 286px;
+  padding: 0px 56px;
+}
+
+@media (min-width: 1280px) {
+  .top_content {
+    width: 1280px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 1280px) {
+  .top_content {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+  }
+}
+
+.campus {
+  margin-top: 38px;
+  /*margin-bottom: 75px;*/
+  float: left;
+}
+
+.logo {
+  margin: 0px auto;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  display: block;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.campus_p {
+  margin-top: 20px;
+}
+
+.campus_name {
+  font-size: 32px;
+  color: #ffffff;
+  letter-spacing: 0.38px;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+  text-align: center;
+}
+
+.report {
+  float: left;
+  margin: 38px 0px 0px 70px;
+}
+
+.report li {
+  float: left;
+}
+
+.report1 {
+  padding-right: 15px;
+}
+
+.vertical-line {
+  width: 2px;
+  height: 220px;
+  background-image: linear-gradient(rgba(255, 152, 43, 0.00), #ff982b, rgba(255, 152, 43, 0.00));
+}
+
+.report2 {
+  padding-left: 30px;
+}
+
+.li-line {
+  background-image: linear-gradient(90deg, rgba(255, 152, 43, 0.00) 0%, #ff982b 52%, rgba(255, 152, 43, 0.00) 100%);
+  width: 4px;
+  height: 100%;
+}
+
+.report-num {
+  font-size: 32px;
+  color: #ffffff;
+  letter-spacing: 0.38px;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+}
+
+.report-num22 {
+  margin-top: -30px;
+}
+
+.campus_time {
+  font-size: 24px;
+  color: #ffffff;
+  letter-spacing: 0.38px;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+  text-align: left;
+}
+
+.realtime_people {
+  font-size: 18px;
+  /*color: #ffffff;*/
+  color: #f8e71c;
+  margin-top: 40px;
+}
+
+.percent {
+  margin-top: 65px;
+}
+
+.percent_title {
+  font-size: 24px;
+  color: #ffffff;
+  letter-spacing: 0.29px;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+}
+
+.percent_num {
+  font-size: 48px;
+  color: #ffffff;
+  letter-spacing: 0.58px;
+  line-height: 35px;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+  text-align: left;
+}
+
+.real_time {
+  margin-top: 90px;
+  float: right;
+}
+
+.real_time_num {
+  font-size: 160px;
+  color: #ffffff;
+  letter-spacing: 1.92px;
+  text-shadow: 0 3px 4px rgba(0, 0, 0, 0.16);
+}
+
+.real_time_title {
+  font-size: 24px;
+  color: #ffffff;
+  letter-spacing: 0.29px;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+}
+
+.line {
+  background-image: linear-gradient(90deg, rgba(255, 152, 43, 0.00) 0%, #ff982b 52%, rgba(255, 152, 43, 0.00) 100%);
+  width: 100%;
+  height: 4px;
+}
+
+@media (min-width: 1280px) {
+  .vary_width {
+    width: 1280px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 1280px) {
+  .vary_width {
+    width: 100%;
+  }
+}
+
+.roll_font {
+  height: 80px;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.roll_font .roll_bg {
+  position: absolute;
+  width: 100%;
+}
+
+/*.roll_font .roll2,.roll_font .roll4{
+    top: 45px;
+}
+.roll_font .roll1,.roll_font .roll3{
+    top: 10px;
+}*/
+.roll_font .roll1 {
+  top: 45px;
+}
+
+.roll_font .roll0 {
+  top: 10px;
+}
+
+.roll_font .roll_title {
+  /*height: 25px;
+  line-height: 27px;*/
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 200;
+  /*color: #ffffff;*/
+  color: #f8e71c;
+  letter-spacing: 0.22px;
+  padding: 2px 25px;
+  margin-right: 15px;
+  text-align: left;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 55px;
+  white-space: nowrap;
+}
+
+@media (min-width: 1300px) {
+  .bottom {
+    width: 1280px;
+    overflow: hidden;
+    margin: 33px auto 13px;
+  }
+
+  .aca_roll {
+    padding: 0px 56px;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 1060px) {
+  .bottom {
+    width: 100%;
+    padding: 33px 0px 33px 0px;
+    box-sizing: border-box;
+  }
+
+  .aca_roll {
+    width: 800px;
+    margin: 0px auto;
+  }
+}
+
+@media (min-width: 1060px) and (max-width: 1300px) {
+  .bottom {
+    width: 100%;
+    padding: 33px 0px 33px 0px;
+    box-sizing: border-box;
+  }
+
+  .aca_roll {
+    width: 1060px;
+    margin: 0px auto;
+  }
+}
+
+.aca_bg {
+  width: 562px;
+  height: 204px;
+  margin-right: 28px;
+  margin-bottom: 20px;
+  float: left;
+  /*width: 100%;
+  height: 100%;*/
+  background: inherit;
+  border: 4px solid #ffffff;
+  border-radius: 8px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.aca_bg:nth-child(2n) {
+  margin-right: 0;
+}
+
+.academy_show {
+  overflow: hidden;
+  display: inline-block;
+  margin: 15px auto;
+}
+
+.academy_show_left {
+  float: left;
+}
+
+.academy_title_font {
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.academy_num_font {
+  font-size: 72px;
+  color: #ff982b;
+  text-shadow: 0 0 20px #d17009;
+}
+
+.academy_rate_font {
+  line-height: 95px;
+  font-size: 48px;
+  color: #ff982b;
+  text-shadow: 0 0 20px #d17009;
+}
+
+.academy_show_rate {
+  margin-left: 25px;
+}
+
+.academy_name {
+  height: 50px;
+  line-height: 50px;
+  padding: 0px 15px;
+  text-align: center;
+  position: relative;
+  font-size: 36px;
+  color: #ffffff;
+  border-bottom: 4px solid #ffffff;
+}
+
+.academy_text {
+  position: relative;
+  display: block;
+}
+
+.academy_number {
+  position: relative;
+  height: 38px;
+  line-height: 38px;
+  margin: 0px 0px;
+  font-size: 24px;
+}
+
+.aca_line {
+  margin: 0px 35px;
+  height: 2px;
+  background-color: #ffffff;
+}
+
+.academy_rate {
+  position: relative;
+  height: 55px;
+  line-height: 55px;
+  font-size: 20px;
+}
+
+.academy_item {
+  /*-webkit-mask: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 1)));*/
+  overflow-y: hidden;
+  overflow-x: hidden;
+  white-space: nowrap;
+}

@@ -1,0 +1,99 @@
+page-index {
+ul,li{list-style: none;margin:0;padding:0;}
+p,h1,h2,h3{margin:0;padding:0;}
+.fl{float: left;}
+.fr{float: right;}
+.center{text-align: center;}
+.dib{display: inline-block;}
+.relative{position: relative;}
+.absolute{position: absolute;}
+.fixed{position: fixed}
+.overh{overflow: hidden;}
+.mr{margin:0 auto;}
+.db{display: block;}
+.fn9{font-size: 9px;}
+.fn12{font-size: 12px;}
+.fn14{font-size: 14px;}
+.fn16{font-size: 16px;}
+.fn18{font-size: 18px;}
+.color4a{color: #4A4A4A;}
+.color9b{color: #9B9B9B;}
+
+.index-cont{background: #FAFAFA;color: #4A4A4A;}
+.wain-txt{padding:10px;color: #4A4A4A;background: #fff;border-bottom:0.55px solid #c8c7cc;text-indent: 2em;margin-bottom:10px;}
+
+.cont-form{width: 100%;padding: 0 15px;margin-top:40px;}
+.cont-form .text-css{margin:15px 0 5px;}
+
+.text-input-ios{padding:0 11px;margin:9px 8px 8px 0}
+.item-ios {padding-left: 0px;border-radius: 8px;}
+.item-ios.item-block .item-inner {padding-right: 0px;padding-left: 0px;border: 1px solid #E4E4E4;border-radius: 8px;box-shadow: 0 2px 5px 0 #E3E3E3;background: #fff;} 
+//下拉选择
+.item-block {min-height: 34px;   }
+
+.input-box{height:34px;}
+.foot-btn-wrap button{background: #4A90E2;border-radius: 6px;width: 120px;height:35px;margin:0 10px;color: #fff;}
+.label-ios{margin:8px 8px 8px 0;}
+
+.item-ios {
+    padding-left: 0px;
+    border-radius: 8px;
+}
+.item-ios.item-block .item-inner {
+    padding-right: 0px;
+    padding-left: 0px;
+    border: 1px solid #E4E4E4;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px 0 #E3E3E3;
+    background: #fff;
+} 
+
+.select-search {
+    .item-inner {
+        padding-right: 0px;
+        padding-left: 0px;
+        border: 1px solid #E4E4E4;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px 0 #E3E3E3;
+        background: #fff;
+    }
+    .label-ios {
+        margin: 7px 0px;
+    }
+    
+    .select-searchable-label {
+        flex: 0;
+        width: 0px;
+        display: none;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    .select-searchable-ios .select-searchable-value {
+        padding-left: 10px;
+    }
+    .select-searchable-value {
+        max-width: 100%;
+    }
+    .select-searchable-value-item {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        font-size: 16px;
+        color: #4A4A4A;
+    }
+    .select-searchable-icon {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 10px;
+        height:10px;
+    }
+    .select-searchable-icon-inner{
+        border-top: none;
+    }
+}
+
+
+
+
+
+}

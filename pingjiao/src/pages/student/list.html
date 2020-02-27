@@ -1,0 +1,32 @@
+<ion-content class="outer-content" padding-top >
+    <ion-list *ngFor="let item of items; let j = index">
+        <ion-list-header class="header_text">
+            <ion-note item-left>{{item.AcademicYear}}</ion-note>
+            <ion-note item-right>{{item.AcademicTerm}}</ion-note>
+        </ion-list-header>
+        <ion-list text-wrap class="optColor" *ngFor="let opt of item.Course;  let i = index">
+            <ion-item *ngIf="opt.IsEvaluation == 1" class="gray style">
+                <!--<ion-icon item-left></ion-icon>-->
+                <span item-left class="course">
+                 {{opt.CourseName}}
+                </span>
+                <ion-note item-right class="picture_ok"> 
+                    <img src="assets/images/ok2.png">
+                </ion-note>
+            </ion-item>
+
+            <ion-item *ngIf="opt.IsEvaluation == 0" (click)="nextPage(opt)">
+                <!--<ion-icon item-left></ion-icon>-->
+                <span item-left class="course">
+                   {{opt.CourseName}}
+                </span>
+                <ion-note item-right class="picture_go">
+                    <img src="assets/images/go2.png">
+                </ion-note>
+            </ion-item>
+
+        </ion-list> 
+
+    </ion-list>
+
+</ion-content>

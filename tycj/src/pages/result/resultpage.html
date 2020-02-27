@@ -1,0 +1,18 @@
+<ion-content class="bg">
+
+  <div class="layer pt">
+    <div class="auto">
+      <div *ngFor="let item of results" class="white">
+        <span class="overflow-hidden">{{item.ProjectName}}</span><span
+        class="overflow"> 已抽签，参赛顺序为 {{item.Number}} 号</span>
+      </div>
+    </div>
+  </div>
+  <p class="publish des">对应参赛时间和地点将在校园集结号第一时间发布，敬请留意。</p>
+
+  <div class="fix">
+    <div class="btn-mb">
+      <button ion-button class="btn-radius orange" full (click)="onShuoming()">马上开始</button>
+    </div>
+  </div>
+</ion-content>

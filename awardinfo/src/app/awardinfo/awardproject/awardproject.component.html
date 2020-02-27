@@ -1,0 +1,100 @@
+<div class="cont-page">
+    <div class="page-header overh relative">
+        <div class="overh absolute" style="z-index:1;">
+            <div class="award-head-txt overh fl">
+                <p class="overh">
+                    <span class="cir-icon dib marn-r10"></span>
+                    <span class="fn22 dib colfff marn-r10">{{titleName}}</span>
+                    <span class="fn14 dib colfff">所有数据均由您角色权限下的学生资助信息统计生成</span>
+                </p>
+                <p class="overh">
+                    <span class="fn14 coldde marn-r10 marn-l18">岗位数量 :</span>
+                    <span class="fn18 colfff marn-r30">{{titleData.Works}} 个</span>
+                    <span class="fn14 coldde marn-r10">资助学生 :</span>
+                    <span class="fn18 colfff marn-r30">{{titleData.Members}} 人</span>
+                    <span class="fn14 coldde marn-r10">资助金额 :</span>
+                    <span class="fn18 colfff">{{titleData.Amount}}万</span>
+                </p>
+                <p class="overh">
+                    <span class="cir-icon dib marn-r10"></span>
+                    <span class="fn14 colfff">共</span>
+                    <span class="fn18 colfff"> {{total}} </span>
+                    <span class="fn14 colfff"> 条结果 </span>
+                </p>
+            </div>
+        </div>
+        <a *ngIf="false" class="more-search dib absolute colfff fn18 center" [routerLink]="['/awardinfo/awarddetail',{startTime: '',endTime: ''}]">多条件查询</a>
+        <img class="absolute header-floor" src="assets/images/small_m.png" alt="">
+    </div>
+
+    <div class="table-box overh">
+        <div class="table-wrap center">
+            <!-- 勤工助学 -->
+            <nz-table class="table-center" #nzTable2 [nzShowPagination]="true" [nzData]="DiligentStudyObj" [nzBordered]="true"
+                [nzTotal]="total" [(nzPageIndex)]="Page" [nzPageSize]="PageSize" [nzFrontPagination]="false"
+                (nzPageIndexChange)="getAwardWork(false)">
+                <thead nz-thead>
+                    <tr>
+                        <th>
+                            <span>序号</span>
+                        </th>
+                        <th>
+                            <span>学号</span>
+                        </th>
+                        <th>
+                            <span>姓名</span>
+                        </th>
+                        <th>
+                            <span>学院</span>
+                        </th>
+                        <th>
+                            <span>班级</span>
+                        </th>
+                        <th>
+                            <span>联系方式</span>
+                        </th>
+                        <th>
+                            <span>银行卡号</span>
+                        </th>
+                        <th>
+                            <span>所属部门</span>
+                        </th>
+                        <th>
+                            <span>岗位名称</span>
+                        </th>
+                        <th>
+                            <span>工作起始时间</span>
+                        </th>
+                        <th>
+                            <span>工作截止时间</span>
+                        </th>
+                        <th>
+                            <span>工资合计</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of nzTable2.data;let i=index;">
+                        <td>{{Page*PageSize-PageSize + i +1}}</td>
+                        <td>{{data.UserCode}}</td>
+                        <td>{{data.Name}}</td>
+                        <td>{{data.AcademyName}}</td>
+                        <td>{{data.ClassName}}</td>
+                        <td>{{data.Phone}}</td>
+                        <td>{{data.BankCardNumber}}</td>
+                        <td>{{data.DepartmentName}}</td>
+                        <td>{{data.PartWorkName}}</td>
+                        <td>{{data.Startdate}}</td>
+                        <td>{{data.Enddate}}</td>
+                        <td>{{data.Amount}}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+
+</div>
+
+
+
+<a (click)="goBack()"><img class="b-cancle fixed" src="assets/images/back.png"></a>

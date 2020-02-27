@@ -1,0 +1,29 @@
+page-notice-main{
+// .tabs-md .tab-button-text{
+//     font-size: 16px;
+// }
+.tabs-md .tab-button-text{
+    font-size: 16px !important;
+     font-family: "Microsoft YaHei";
+}
+.tabs-md .tab-button{
+    color: #3e3e3e;
+}
+.tab-button{
+    margin-top: 27px;
+    border-top: 1px solid #d5d5d5;
+}
+// .tabs-md .tab-button-text{
+
+// }
+
+ion-fab[bottom]{
+    bottom: 30px;
+}
+ion-fab[right]{
+    right: 30px;
+}
+button{
+    background-color: transparent;
+}
+}

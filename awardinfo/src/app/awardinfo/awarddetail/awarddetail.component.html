@@ -1,0 +1,230 @@
+<div class="cont-page">
+    <div class="page-header overh relative">
+        <div class="overh">
+            <div class="award-head-txt overh">
+                <div class="input-box overh">
+                    <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form">
+                        <div class="input-css fl" nz-row nz-form-item>
+                            <div class="dib" nz-form-label><label>学号 : </label></div>
+                            <div class="dib" nz-form-control>
+                                <input class="w120" placeholder="请输入" autocomplete="off" type="text" maxlength="14"
+                                    [(ngModel)]="searchObj.schoolId" name="schoolId">
+                            </div>
+                        </div>
+                        <div class="input-css fl" nz-row nz-form-item>
+                            <div class="dib" nz-form-label><label>姓名 : </label> </div>
+                            <div class="dib" nz-form-control>
+                                <input class="w120" placeholder="请输入" autocomplete="off" type="text" maxlength="14"
+                                    [(ngModel)]="searchObj.name" name="name">
+                            </div>
+                        </div>
+                        <div class="input-css fl" nz-row nz-form-item>
+                            <div class="dib" nz-form-label><label>学院 : </label></div>
+                            <div class="dib" nz-form-control>
+                                <nz-select class="w130" [nzPlaceHolder]="''" [(ngModel)]="searchObj.academy" name="academy"
+                                    (ngModelChange)="loadMajor()" nzAllowClear [nzDropdownMatchSelectWidth]="false">
+                                    <nz-option *ngFor="let option of academyOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                                    </nz-option>
+                                </nz-select>
+                            </div>
+                        </div>
+                        <div class="input-css fl" nz-row nz-form-item>
+                            <div class="dib" nz-form-label><label>专业 : </label></div>
+                            <div class="dib" nz-form-control>
+                                <nz-select class="w120" [nzPlaceHolder]="''" [(ngModel)]="searchObj.major" name="major"
+                                    (ngModelChange)="loadClass(true)" nzAllowClear [nzDropdownMatchSelectWidth]="false">
+                                    <nz-option *ngFor="let option of majorOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                                    </nz-option>
+                                </nz-select>
+                            </div>
+                        </div>
+                        <div class="input-css fl" nz-row nz-form-item>
+                            <div class="dib" nz-form-label><label>年级 : </label></div>
+                            <div class="dib" nz-form-control>
+                                <nz-select class="w120" [nzPlaceHolder]="''" [(ngModel)]="searchObj.grade" name="grade"
+                                    (ngModelChange)="loadClass(true)" nzAllowClear>
+                                    <nz-option *ngFor="let option of gradeOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                                    </nz-option>
+                                </nz-select>
+                            </div>
+                        </div>
+                        <div class="input-css fl" nz-row nz-form-item>
+                            <div class="dib" nz-form-label><label>班级 : </label></div>
+                            <div class="dib" nz-form-control>
+                                <nz-select class="w120" [nzPlaceHolder]="''" [(ngModel)]="searchObj.class" name="class"
+                                    nzAllowClear [nzDropdownMatchSelectWidth]="false">
+                                    <nz-option *ngFor="let option of classOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                                    </nz-option>
+                                </nz-select>
+                            </div>
+                        </div>
+                        <div class="input-css fl" nz-row nz-form-item>
+                            <div class="dib" nz-form-label><label>困难等级 : </label></div>
+                            <div class="dib" nz-form-control>
+                                <nz-select class="w120" [nzPlaceHolder]="''" [(ngModel)]="searchObj.rank" name="rank"
+                                    nzAllowClear>
+                                    <nz-option *ngFor="let option of ranksOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                                    </nz-option>
+                                </nz-select>
+                            </div>
+                        </div>
+                        <div class="input-css fl" nz-row nz-form-item>
+                            <div class="dib" nz-form-label><label>奖助项目 : </label></div>
+                            <div class="dib" nz-form-control>
+                                <nz-select class="w120" [nzPlaceHolder]="''" [(ngModel)]="searchObj.project" name="project"
+                                    (ngModelChange)="loadType(true)" nzAllowClear [nzDropdownMatchSelectWidth]="false">
+                                    <nz-option *ngFor="let option of projectOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                                    </nz-option>
+                                </nz-select>
+                            </div>
+                        </div>
+                        <div class="input-css fl" nz-row nz-form-item>
+                            <div class="dib" nz-form-label><label>项目类别 : </label></div>
+                            <div class="dib" nz-form-control>
+                                <nz-select class="w120" [nzPlaceHolder]="''" [(ngModel)]="searchObj.type" name="type"
+                                    nzAllowClear [nzDropdownMatchSelectWidth]="false">
+                                    <nz-option *ngFor="let option of typeOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                                    </nz-option>
+                                </nz-select>
+                            </div>
+                        </div>
+                        <div class="input-css fl" nz-row nz-form-item>
+                            <div class="dib" nz-form-label><label>时间 : </label></div>
+                            <div class="dib" nz-form-control>
+                                <nz-date-picker class="w120" [nzPlaceHolder]="''" [(ngModel)]="searchObj.time" name="time"></nz-date-picker>
+                            </div>
+                        </div>
+                        <div class="input-css fl" nz-row nz-form-item>
+                            <div class="dib" nz-form-label><label>档次 : </label></div>
+                            <div class="dib" nz-form-control>
+                                <input class="w120" placeholder="请输入" autocomplete="off" type="text" maxlength="22"
+                                    [(ngModel)]="searchObj.level" name="level">
+                            </div>
+                        </div>
+                        <div class="input-css fl" nz-row nz-form-item>
+                            <div class="dib" nz-form-label><label>金额 : </label></div>
+                            <div class="dib" nz-form-control>
+                                <input class="w120" placeholder="请输入" autocomplete="off" type="text" maxlength="22"
+                                    [(ngModel)]="searchObj.money" name="money">
+                            </div>
+                        </div>
+                        <div class="input-css fl" nz-row nz-form-item>
+                            <div class="dib" nz-form-label><label>项目名称 : </label></div>
+                            <div class="dib" nz-form-control>
+                                <input class="w120" placeholder="请输入" autocomplete="off" type="text" maxlength="22"
+                                    [(ngModel)]="searchObj.projectname" name="projectname">
+                            </div>
+                        </div>
+                        <div class="input-css fl" nz-row nz-form-item>
+                            <div class="dib" nz-form-label><label>资金来源 : </label></div>
+                            <div class="dib" nz-form-control>
+                                <input class="w120" placeholder="请输入" autocomplete="off" type="text" maxlength="22"
+                                    [(ngModel)]="searchObj.moneyadress" name="moneyadress">
+                            </div>
+                        </div>
+                        <div class="input-css fl" nz-row nz-form-item>
+                            <button class="btn-sub fl center fn12" nz-button [disabled]="http.loading" [nzType]="'primary'"
+                                (click)="onSearch(true)">查询</button>
+                            <button class="btn-sub fl center fn12" nz-button (click)="resetForm(f)">重置</button>
+                        </div>
+
+                    </form>
+                </div>
+                <p class="overh">
+                    <span class="cir-icon dib marn-r10"></span>
+                    <span class="fn14 colfff">共</span>
+                    <span class="fn18 colfff"> {{searchObj.total}} </span>
+                    <span class="fn14 colfff"> 条结果 </span>
+                </p>
+            </div>
+        </div>
+        <img class="absolute header-floor" src="assets/images/small_m.png" alt="">
+    </div>
+
+    <div class="table-box overh">
+        <div class="table-wrap center">
+            <nz-table class="table-center" #nzTable [nzShowPagination]="true" [nzData]="dataSet" [nzBordered]="true"
+                [nzTotal]="searchObj.total" [(nzPageIndex)]='searchObj.Page' [nzPageSize]="searchObj.PageSize"
+                [nzFrontPagination]="false" (nzPageIndexChange)="onSearch(false)" [nzLoading]="_loading">
+                <thead nz-thead>
+                    <tr>
+                        <th>
+                            <span>序号</span>
+                        </th>
+                        <th>
+                            <span>学号</span>
+                        </th>
+                        <th>
+                            <span>姓名</span>
+                        </th>
+                        <th>
+                            <span>身份证号</span>
+                        </th>
+                        <th>
+                            <span>学院</span>
+                        </th>
+                        <th>
+                            <span>班级</span>
+                        </th>
+                        <th>
+                            <span>困难等级</span>
+                        </th>
+                        <th>
+                            <span>银行卡号</span>
+                        </th>
+                        <th>
+                            <span>学年</span>
+                        </th>
+                        <th>
+                            <span>学期</span>
+                        </th>
+                        <th>
+                            <span>资助项目</span>
+                        </th>
+                        <th>
+                            <span>资助类别</span>
+                        </th>
+                        <th>
+                            <span>金额</span>
+                        </th>
+                        <th>
+                            <span>时间</span>
+                        </th>
+                        <th>
+                            <span>档次</span>
+                        </th>
+                        <th>
+                            <span>项目名称</span>
+                        </th>
+                        <th>
+                            <span>资金来源</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of nzTable.data;let i=index;">
+                        <td>{{searchObj.Page*searchObj.PageSize-searchObj.PageSize + i +1}}</td>
+                        <td>{{data.UserCode}}</td>
+                        <td>{{data.Name}}</td>
+                        <td>{{data.IdentityNum}}</td>
+                        <td>{{data.AcademyName}}</td>
+                        <td>{{data.ClassName}}</td>
+                        <td>{{data.RecognitionLevel}}</td>
+                        <td>{{data.BankCardNumber}}</td>
+                        <td>{{data.AcademicYear}}</td>
+                        <td>{{data.AcademicTerm}}</td>
+                        <td>{{data.ScholarshipAidType}}</td>
+                        <td>{{data.ProjectCate}}</td>
+                        <td>{{data.Amount}}</td>
+                        <td>{{data.Time}}</td>
+                        <td>{{data.RankCode}}</td>
+                        <td>{{data.ProjectName}}</td>
+                        <td>{{data.StemFrom}}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+</div>
+
+<a (click)="goBack()"><img class="b-cancle fixed" src="assets/images/back.png"></a>

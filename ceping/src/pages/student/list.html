@@ -1,0 +1,33 @@
+<!--<ion-header>
+    <ion-navbar color="twitter">
+        <ion-title text-center>
+            {{Person.Name}}
+        </ion-title>
+    </ion-navbar>
+</ion-header>-->
+
+<ion-content class="outer-content" padding-top>
+    <ion-list padding-top>
+        <!--[navPush]="LeaveApplyDetailPage"-->
+        <ion-item *ngIf="iscol == 1" detail-push class="gray">
+            <h2>学院测评(已评测完)</h2>
+        </ion-item>
+        <!-- <ion-item *ngIf="iscol == 0" detail-push [navPush]="explainPage"> -->
+        <ion-item *ngIf="iscol == 0" detail-push [navPush]="collegePage">
+
+            <h2>学院测评</h2>
+        </ion-item>
+        <ion-item detail-push [navPush]="instructorList">
+            <h2>辅导员测评</h2>
+        </ion-item>
+
+    </ion-list>
+    <div class="explain">
+        <p>
+            说明
+        </p>
+        <p>
+            本次评测由第三方机构组织实施，保证第三方机构的独立、公正、客观，并保证每位同学的评测结果严格保密。
+        </p>
+    </div>
+</ion-content>

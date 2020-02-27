@@ -1,0 +1,123 @@
+<ion-content class="index-cont">
+  <div class="info-cont overh">
+    <div class="fl">
+      <img class="user-header" [src]="items.AvatarUrl" onerror="this.src='assets/images/header.png'">
+    </div>
+    <div class="fl info-detail" [ngStyle]="{'line-height':items.RecognitionLevelCode == '' ? '40px' : '25px' }">
+      <span class="info-detail-name fn16 db">{{items.Name}} ({{items.UserCode}})</span>
+      <span class="db fn14">学院: {{items.Acadamy}}</span>
+
+      <span class="db fn14" *ngIf="items.TmpTime != '' && items.ApprovalTime != '' && items.EndTime != '' && items.StatusMain != '42' && items.RecognitionLevelCode != '87000040' && items.Effective == '1'">认定结论: 认定成功</span>
+      <span class="db fn14" *ngIf="items.TmpTime != '' && items.ApprovalTime != '' && items.EndTime != '' && items.RecognitionLevelCode == '87000040'">认定结论: 未被认定</span>
+      <span class="db fn14" *ngIf="items.TmpTime != '' && items.ApprovalTime != '' && items.EndTime != '' && items.StatusMain == '42'">认定结论: 未被认定</span>
+    </div>
+  </div>
+
+  <div class="cognise-class center fn12" [ngClass]="items.ConfirmStage == '0'?'cognisebg1':'cognisebg2'">
+    <span *ngIf="items.ConfirmStage == '0'">认定关闭阶段</span>
+    <span *ngIf="items.ConfirmStage != '0'">认定开启阶段</span>
+  </div>
+
+  <div class="btn-wrap overh">
+    <div class="tit-num fl">
+      <span class="bor-dash1 db"></span>
+      <div class="overh">
+        <span class="cir-num center dib fn16 fl">1</span>
+        <span class="w-bor-dash dib fl"></span>
+      </div>
+      <span class="bor-dash2 db"></span>
+      <div class="overh">
+        <span class="cir-num center dib fn16 fl">2</span>
+        <span class="w-bor-dash dib fl"></span>
+      </div>
+      <span class="bor-dash2 db"></span>
+      <div class="overh">
+        <span class="cir-num center dib fn16 fl">3</span>
+        <span class="w-bor-dash dib fl"></span>
+      </div>
+    </div>
+
+    <div class="overh">
+      <div class="info-li" style="margin-top:22px;">
+        <button class="apply-btn1 fn14 fl" (click)="NavtoUploading()">申请所需资料</button>
+        <div class="over-off fn12 overh fr center" *ngIf="items.Attachs == '0'">
+          <img class="db" src="assets/images/unfinish.png" alt="">
+          <span class="db fn12">请完成</span>
+        </div>
+        <div class="over-off fn12 overh fr center" *ngIf="items.Attachs == '1'">
+          <img class="db" src="assets/images/finish.png" alt="">
+          <span class="db fn12">已完成</span>
+        </div>
+      </div>
+      <li class="info-li" style="margin-top:22px;">
+
+        <button class="apply-btn1 fn14 fl" (click)="jingjiFunc()">家庭情况调查问卷</button>
+
+        <div class="over-off fn12 overh fr center" *ngIf="items.Enconomic == '0'">
+          <img class="db" src="assets/images/unfinish.png" alt="">
+          <span class="db fn12">请完成</span>
+        </div>
+        <div class="over-off fn12 overh fr center" *ngIf="items.Enconomic == '1'">
+          <img class="db" src="assets/images/finish.png" alt="">
+          <span class="db fn12">已完成</span>
+        </div>
+      </li>
+      <li class="info-li" style="margin-top:22px;">
+
+        <button [disabled]="openbtn" class="apply-btn1 text-two fn14 fl" (click)="zipingFunc()">
+          学生自评调查问卷
+          <br> {{items.SelfAssessmentTime}}
+        </button>
+        <div class="over-off fn12 overh fr center" *ngIf="items.SelfAssessment == '0'">
+          <img class="db" src="assets/images/unfinish.png" alt="">
+          <span class="db fn12">请完成</span>
+        </div>
+        <div class="over-off fn12 overh fr center" *ngIf="items.SelfAssessment == '1'">
+          <img class="db" src="assets/images/finish.png" alt="">
+          <span class="db fn12">已完成</span>
+        </div>
+      </li>
+    </div>
+  </div>
+
+  <div class="overh process-box" *ngIf="items.TmpTime	!= ''">
+    <ul>
+      <p class="fn14" style="margin-bottom:10px;">进程说明</p>
+      <li class="overh process-li" *ngFor="let data of proCess">
+        <p class="overh">
+          <span class="dib fl didi"></span>
+          <span class="fl">{{data.name}}</span>
+          <span class="fr" style="color: #9B9B9B;">{{data.time}}</span>
+        </p>
+      </li>
+      <!-- 审核不通过 -->
+      <p class="proerrbg" *ngIf="items.Status == '2' && items.ApprovalTime != '' && items.EndTime == ''">原因 : {{items.RefuseReason}}</p>
+      <!-- 一票否决 -->
+      <div *ngIf="items.Status == '53' && items.EndTime != ''" class="proerrbg">
+        <p>{{items.ConfirmReason}}</p>
+        <p *ngIf="items.ConfirmReasonSelect != ''">{{items.ConfirmReasonSelect}}</p>
+      </div>
+      <!-- 不予评级 -->
+      <p class="overh proerrbg" *ngIf="items.RecognitionLevelCode == '87000040'">你的认定结论为不予评级,如果想要认定成为困难生只能在明年认定开启后再次参与认定。下次认定前,请再次提交你的认定资料</p>
+    </ul>
+  </div>
+
+  <div class="center foot-btn-wrap">
+    <button ion-button *ngIf="firstBtn" [disabled]="submitbtn" [ngStyle]="{'background-color':submitbtn == true ? '#c1c1c1' : '' }"
+      (click)="NavtoPromiseOne()">提交</button>
+
+    
+    <p *ngIf="againBtn">
+      <button ion-button (click)="NavtoChange()" [disabled]="applyBtn">申请变更认定资料</button>
+    </p>
+
+    <p class="fn12" *ngIf="againBtn && applyBtn">每天只能提交一次变更</p>
+
+    <div *ngIf="removeWrap">
+      <button class="remove-css fn18" ion-button (click)="removeCan()">取消</button>
+      <span class="db change-css fn14" (click)="NavtoChange()">修改申请原因</span>
+    </div>
+    <input type="hidden" value="11111111">
+  </div>
+
+</ion-content>

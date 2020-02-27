@@ -1,0 +1,297 @@
+    page-collegeregist {
+        ion-list {
+            .item-ios {
+                h2 {
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    float: left;
+                }
+            }
+            .p {
+                color: red;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: 20px;
+            }
+            em {
+                color: red;
+                font-style: normal;
+            }
+        }
+        .tongji {
+            width: 100%;
+        }
+        .tongjileft {
+            float: left;
+            text-align: center;
+            width: 49%;
+            height: 25px;
+            // margin-top: 15px;
+            // border-right: 1px solid #ffffff;
+        }
+        .tongjiright {
+            float: left;
+            text-align: center;
+            width: 49%;
+            height: 25px;
+            // margin-top: 15px;
+        }
+        .line2 {
+            background-image: url("../assets/images/line_3@2x.png");
+            float: left;
+            width: 1px;
+            height: 25px;
+            margin-top: 4px;
+        }
+        .zhaoshengwen {
+            font-family: PingFangSC-Semibold;
+            font-size: 12px;
+            color: #ffffff;
+            letter-spacing: 0.29px;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+            text-align: center;
+        }
+        .zhaoshengshu {
+            font-family: PingFangSC-Semibold;
+            font-size: 24px;
+            color: #ffffff;
+            letter-spacing: 0.58px;
+            line-height: 35px;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+            text-align: left;
+        }
+        .tongjixia {
+            display: block;
+        }
+        .searchbar-ios .searchbar-search-icon {
+            background-image: url("../assets/images/group_3@2x.png");
+            top: 10px;
+        }
+        //校标校徽背景
+        .haiyan {
+            width: 100%;
+            height: 220px;
+            background-image: url("../assets/images/rectangle_4@2x.png");
+        }
+        .tuhezi {
+            width: 100%;
+            height: 66px;
+        }
+        //校标
+        .regiontop {
+            width: 50px;
+            height: 50px;
+            // border: 1px solid red;
+            margin-left: 15px;
+            margin-top: 16px;
+            float: left;
+            margin-right: 8px;
+        }
+        //校徽旁边的文字
+        .regintopleft {
+            margin-top: 28px;
+            float: left;
+            font-family: PingFangSC-Semibold;
+            font-size: 16px;
+            color: #ffffff;
+            letter-spacing: 0.38px;
+            line-height: 4px;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+        }
+        //搜索框去掉背景
+        .searchbar-ios {
+            border-bottom: none;
+            background: none;
+        }
+        //搜索框圆角化
+        .searchbar-ios .searchbar-input {
+            padding: 0 28px;
+            height: 3rem;
+            border-radius: 5px;
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: #000;
+            background-color: #f1f1f1;
+            border-radius: 100px;
+        }
+        //搜索框距离校徽
+        .searchbar-input-container {
+            margin-bottom: 5px;
+        }
+        //页面背景
+        .scroll-content {
+            background-color: white;
+        }
+        .baodaoshu {
+            width: 100%;
+            height: 80px;
+            margin-bottom: 35px;
+        }
+        /*适应小屏手机*/
+        @media (device-height: 480px) and (-webkit-min-device-pixel-ratio: 2),
+        (device-height: 568px) and (-webkit-min-device-pixel-ratio: 2) {
+            /* 兼容iphone4/4s5/5 */
+            .zhaoshengshu {
+                font-family: PingFangSC-Semibold;
+                font-size: 15px;
+                color: #ffffff;
+                letter-spacing: 0.58px;
+                line-height: 35px;
+                text-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+                text-align: left;
+            }
+        }
+        @media (device-height:736px) and (-webkit-min-device-pixel-ratio:2) {
+            /* 兼容iphone6 plus */
+            .zhaoshengshu {
+                font-family: PingFangSC-Semibold;
+                font-size: 24px;
+                color: #ffffff;
+                letter-spacing: 0.58px;
+                line-height: 35px;
+                text-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+                text-align: left;
+            }
+        }
+        .test {
+            width: 100%;
+            height: 80px;
+            margin-bottom: 35px;
+        }
+        .test1 {
+            font-size: 80px;
+            color: #ffffff;
+            letter-spacing: 1.92px;
+            text-shadow: 0 3px 4px rgba(0, 0, 0, 0.16);
+            text-align: center;
+            float: left;
+            width: 100%;
+        }
+        .test2 {
+            font-family: PingFangSC-Regular;
+            font-size: 12px;
+            color: #ffffff;
+            letter-spacing: 0.29px;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+            text-align: center;
+        }
+        //报到数字
+        .baodaoshus {
+            font-family: PingFangSC-Regular;
+            font-size: 80px;
+            color: #ffffff;
+            letter-spacing: 1.92px;
+            text-shadow: 0 3px 4px rgba(0, 0, 0, 0.16);
+            text-align: center;
+            width: 100%;
+            height: 80px;
+            float: left // width: 182px;
+        }
+        .shuzi {
+            padding-left: 10%;
+            padding-right: 10%;
+            height: 80px;
+        }
+        //文字
+        .baodaoshup {
+            font-family: PingFangSC-Semibold;
+            font-size: 12px;
+            color: #ffffff;
+            letter-spacing: 0.29px;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+            text-align: center;
+            // float: right;
+            // float: left;
+        }
+        .xueyuan {
+            font-family: PingFangSC-Regular;
+            font-size: 16px;
+            color: #3e3e3e;
+            letter-spacing: 0.38px;
+            line-height: 16px;
+            text-align: center;
+            margin-top: 17px;
+            margin-bottom: 18px;
+            width: 100%;
+        }
+        //各学院数据
+        .mwbor {
+            margin: 0;
+            width: 100%;
+            background: #ffb337;
+            border-radius: 17px;
+        }
+        .pwbor {
+            background: #ffb337;
+            border-radius: 17px;
+            width: 44%;
+            height: 171px;
+            margin-left: 4%;
+            float: left;
+            margin-bottom: 4%;
+        }
+        .card-ios {
+            box-shadow: none;
+        }
+        .xueyuanshu {
+            font-family: PingFangSC-Semibold;
+            font-size: 16px;
+            color: #ffffff;
+            letter-spacing: 0.38px;
+            text-align: center;
+            // height: 40px;
+            //  overflow: hidden;
+            // white-space: nowrap;
+            // text-overflow: ellipsis;
+            // display: -webkit-box;
+            // display: -moz-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .xueyuanshuzi {
+            font-fami: PingFangSC-Regular;
+            font-size: 24px;
+            color: #ffffff;
+            letter-spacing: 0.58px;
+            text-align: center;
+        }
+        .content-ios hr {
+            background-color: #ffffff;
+        }
+        .padding4 {
+            padding: 15px 16px 3px 16px;
+            font-size: 1.4rem;
+            line-height: 1.4;
+        }
+        .padding5 {
+            padding: 10px 16px 3px 16px;
+        }
+        .seachd {
+            background: #f1f1f1;
+            border-radius: 100px;
+            // width: 650px;
+            height: 26px;
+            margin-left: 24px;
+            margin-right: 24px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .myname {
+            float: left;
+            border: none;
+            background-repeat: no-repeat;
+            background-position: center left;
+            background-color: #f1f1f1;
+            display: inline-block;
+            border-radius: 100px;
+            padding-left: 30px;
+            background-image: url("../assets/images/group_3.png");
+            background-position-x: 8px;
+            background-position-y: 3px;
+            height: 25px;
+            background-size: inherit;
+        }
+    }

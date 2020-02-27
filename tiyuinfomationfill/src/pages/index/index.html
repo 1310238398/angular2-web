@@ -1,0 +1,291 @@
+<ion-content class="index-cont overh">
+    <div class="fixed dio-mego" *ngIf="megoDis"></div>
+    <div class="overh fn16" *ngIf="dataObj.status == '3'" style="padding:10px 15px 15px;background: #fff;margin-bottom: 10px;line-height: 22px;">
+        <p class="color66">审批不通过原因</p>
+        <p style="color: #FB5F2D;">{{dataObj.remarktxt}}</p>
+    </div>
+    <form name="f">
+        <div class="row-mar overh">
+            <div class="bgfff" style="padding: 12px 0;">
+                <P class="fn13 center" style="color: #FB5F2D;">所有数据均为学校要求采集的信息,请按要求认真填写</P>
+                <div class="upload overh mr center">
+                    <div class="container relative center mr" *ngIf="Headimgurl == ''">
+                        <input type="file" value="file" class="hiddenFile absolute db" (change)="handleFiles($event)" name="imgPath">
+                        <img src="assets/images/header.png" style="width: 100%;">
+                        <img class="absolute add-blue" src="assets/images/add_blue.png">
+                    </div>
+                    <div class="Certify relative center mr" *ngIf="Headimgurl != ''">
+                        <img class="delete-icon absolute" *ngIf="!forbidBt" src="assets/images/delete.png" (click)="deleteCertify($event,index)">
+                        <img class="file-img" [src]="DomSanitizer.bypassSecurityTrustUrl(Headimgurl)" onerror="this.src='assets/images/header.png'">
+                    </div>
+                </div>
+                <div class="header-wrap center">
+                    <p class="center">
+                        <i class="fn14" style="color: #FB5F2D;">* </i>
+                        <span class="fn16 color66"> 请上传本人一寸照片</span>
+                    </p>
+                    <p class="fn13 color66" style="margin-top:10px;">
+                        要求 : &nbsp;&nbsp;1.本人近期一寸照片 &nbsp;&nbsp;2.图片大小小于5M
+                    </p>
+                </div>
+            </div>
+            <div class="cont-form">
+                <ion-list inset>
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.qq != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.qq == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">QQ号</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="tel" maxlength="20" [(ngModel)]="FamilyAddress.qq" name="qq" (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.email != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.email == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">电子邮箱</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="text" maxlength="30" [(ngModel)]="FamilyAddress.email" (ionBlur)="blurInput()" name="email"></ion-input>
+                    </ion-item>
+
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.wechat != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.wechat == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">微信号</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="text" maxlength="30" [(ngModel)]="FamilyAddress.wechat" name="wechat" (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+
+
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.hobby != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.hobby == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">爱好特长</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="text" maxlength="50" [(ngModel)]="FamilyAddress.hobby" name="hobby" (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.StudentAreaName != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.StudentAreaName == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">家庭地址</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" placeholder=" " [(ngModel)]="FamilyAddress.StudentAreaName" (ionFocus)="navGetAdd()" type="text"
+                            name="famAddress" readonly=true (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.detailaddress != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.detailaddress == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">详细地址</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="text" maxlength="50" [(ngModel)]="FamilyAddress.detailaddress" name="detailaddress"
+                            (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+
+
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.postalcode != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.postalcode == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">邮政编码</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="tel" maxlength="6" [(ngModel)]="FamilyAddress.postalcode" name="postalcode" (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.homephone != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.homephone == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">家庭电话</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="tel" maxlength="15" [(ngModel)]="FamilyAddress.homephone" name="homephone" (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.height != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.height == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">身高(cm)</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="tel" maxlength="15" [(ngModel)]="FamilyAddress.height" name="height" (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.weight != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.weight == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">体重(kg)</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="tel" maxlength="15" [(ngModel)]="FamilyAddress.weight" name="weight" (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.clothsize != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.clothsize == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">衣服尺码</span>
+                        </ion-label>
+                        <ion-select [disabled]="forbidBt" [(ngModel)]="FamilyAddress.clothsize" (ionChange)="onSelect($event)" interface="action-sheet" [cancelText]="'取消'"
+                                    name="clothsize" (ionBlur)="blurInput()">
+                            <ion-option [value]='item.CodeName' *ngFor="let item of clothsizes">{{item.CodeName}}
+                            </ion-option>
+                        </ion-select>
+                    </ion-item>
+                    <p class="fn12 color66 hr-p" style="margin-left: 20px" *ngIf="indexSize">{{indexSize}}</p>
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.shoesize != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.shoesize == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">鞋码</span>
+                        </ion-label>
+                        <ion-select [disabled]="forbidBt" [(ngModel)]="FamilyAddress.shoesize" interface="action-sheet" [cancelText]="'取消'"
+                                    name="shoesize" (ionBlur)="blurInput()">
+                            <ion-option [value]='item' *ngFor="let item of shoesizes">{{item}}
+                            </ion-option>
+                        </ion-select>
+                    </ion-item>
+                    <p class="fn12 color66 hr-p" *ngIf="fieldRequird.firstguardianname != ''">监护人一</p>
+
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.firstguardianname != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.firstguardianname == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">姓名</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="text" maxlength="30" [(ngModel)]="FamilyAddress.firstguardianname" name="firstguardianname"
+                            (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.firstguardiantitle != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.firstguardiantitle == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">称谓</span>
+                        </ion-label>
+                        <ion-select [disabled]="forbidBt" [(ngModel)]="FamilyAddress.firstguardiantitle" interface="action-sheet" [cancelText]="'取消'"
+                            name="firstguardiantitle" (ionBlur)="blurInput()">
+                            <ion-option [value]='item.Code' *ngFor="let item of objTitle">{{item.CodeName}}
+                            </ion-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.firstguardianemployer != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.firstguardianemployer == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">工作单位</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="text" maxlength="30" [(ngModel)]="FamilyAddress.firstguardianemployer" name="firstguardianemployer"
+                            (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.firstguardianposition != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.firstguardianposition == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">职务</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="text" maxlength="30" [(ngModel)]="FamilyAddress.firstguardianposition" name="firstguardianposition"
+                            (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.firstguardiancontact != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.firstguardiancontact == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">联系方式</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="tel" maxlength="15" [(ngModel)]="FamilyAddress.firstguardiancontact" name="firstguardiancontact"
+                            (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+
+                    <p class="fn12 color66 hr-p" *ngIf="fieldRequird.secondguardianname != ''">监护人二</p>
+
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.secondguardianname != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.secondguardianname == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">姓名</span>
+                        </ion-label>
+
+                        <ion-input [disabled]="forbidBt" type="text" maxlength="30" [(ngModel)]="FamilyAddress.secondguardianname" name="secondguardianname"
+                            (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.secondguardiantitle != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.secondguardiantitle == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">称谓</span>
+                        </ion-label>
+                        <ion-select [disabled]="forbidBt" [(ngModel)]="FamilyAddress.secondguardiantitle" interface="action-sheet" [cancelText]="'取消'"
+                            name="secondguardiantitle" (ionBlur)="blurInput()">
+                            <ion-option [value]='item.Code' *ngFor="let item of objTitle">{{item.CodeName}}
+                            </ion-option>
+                        </ion-select>
+                    </ion-item>
+
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.secondguardianemployer != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.secondguardianemployer == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">工作单位</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="text" maxlength="30" [(ngModel)]="FamilyAddress.secondguardianemployer" name="secondguardianemployer"
+                            (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.secondguardianposition != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.secondguardianposition == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">职务</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="text" maxlength="30" [(ngModel)]="FamilyAddress.secondguardianposition" name="secondguardianposition"
+                            (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+
+                    <ion-item class="overh li-css fn16" *ngIf="fieldRequird.secondguardiancontact != ''">
+                        <ion-label fixed>
+                            <i>
+                                <span *ngIf="fieldRequird.secondguardiancontact == '1'">*</span>
+                            </i>
+                            <span [ngStyle]="{'color':forbidBt === false ? '#3E3E3E' : '#999' }">联系方式</span>
+                        </ion-label>
+                        <ion-input [disabled]="forbidBt" type="tel" maxlength="15" [(ngModel)]="FamilyAddress.secondguardiancontact" name="secondguardiancontact"
+                            (ionBlur)="blurInput()"></ion-input>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+    </form>
+    <div class="center" style="margin:20px;">
+        <button class="submit-tab mr fn16" ion-button *ngIf="!forbidBt" (click)="tabSubmit()" block>完成</button>
+
+        <p class="center fn16" *ngIf="FamilyAddress.status == '3' && forbidBt" (click)="changeStatus()" style="text-decoration: underline;color:#13A0FA;">
+            <span *ngIf="changeBtn">修改</span>
+        </p>
+
+
+        <p class="center fn16" *ngIf="forbidBt && flow_code == 'Process_New_Stu_Information'" (click)="changeStatus()" style="text-decoration: underline;color:#13A0FA;">修改</p>
+    </div>
+</ion-content>

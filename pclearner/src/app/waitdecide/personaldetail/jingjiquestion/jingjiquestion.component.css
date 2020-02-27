@@ -1,0 +1,18 @@
+.fl{float: left;}
+.fr{float: right;}
+.center{text-align: center;}
+.dib{display: inline-block;}
+.overh{overflow: hidden;}
+.fixed{position: fixed}
+
+.img-warp{padding:10px 20px;}
+.img-warp img{width: 300px;margin:15px 10px 0 0;}
+.comm-css{cursor: pointer;color: #108EE9;}
+.width491{width: 49%;}
+.width49{width: 49%;float: right;}
+.width100{width: 100%;}
+
+.medigo{position: fixed;overflow: auto;top: 0;right: 0;bottom: 0;left: 0;z-index: 1000;-webkit-overflow-scrolling: touch;outline: 0;background-color: rgba(55,55,55,.6);}
+
+.file-box{position: absolute;top:5%;width:90%;height:90%;left: 50%;margin-left:-45%;border-radius:10px;background: #fff;z-index: 1001;}
+.loading-w{top:200px;left:50%;}

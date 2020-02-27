@@ -1,0 +1,6 @@
+<div class="swiper-title">附件{{index}}/{{attach.length}}</div>
+<swiper [config]="swipeConfig" [(index)]="index">
+  <div *ngFor="let slide of attach" class="text-center">
+    <img src="{{slide.path}}" alt="">
+  </div>
+</swiper>

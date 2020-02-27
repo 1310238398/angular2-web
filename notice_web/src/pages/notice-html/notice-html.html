@@ -1,0 +1,14 @@
+<div *ngIf="notice">
+    <div class="page-back"><button (click)="goBack()">< 返回</button></div>
+    <div class="hei" [innerHTML]="content | sanitizeHtml"></div>
+    <!--<div>-->
+    <!--<label>TILE: </label>-->
+    <!--<input [(ngModel)]="notice.MUSTTITLE" placeholder="title" />-->
+    <!--</div>-->
+
+    <div class="button-div">
+        <button class="button1" (click)="goModify()" *ngIf="showModify">通知更正</button>
+        <button class="button2" (click)="goReply()" *ngIf="showReadUnread">回执详情</button>
+    </div>
+
+</div>

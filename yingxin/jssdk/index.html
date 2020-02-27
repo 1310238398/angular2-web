@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>新版jssdkdemo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <script src="lib/antlinker.1.0.4.js"></script>
+    <style type="text/css">
+        .t-center {
+            text-align: center;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+<h2 style="text-align: center">新版jssdkdemo</h2>
+<div class="t-center">
+    <button type="button" onclick="closeView()">点我主动关闭视图</button>
+</div>
+<div class="t-center">
+    <button type="button" onclick="sharePlatform()">点我打开分享平台</button>
+</div>
+
+</body>
+<script>
+    var obj = {};
+    antlinker.exeUserBasicInfoSdk(obj, function (obj, success) {
+        antlinker.configNavigationButton({
+            type: ['more', 'close'],
+            buttonTitle: '好',
+            moreOption: ["share", "refresh"],
+            sharePlatform: ['qq', 'qzone'],
+            shareContent: {
+                title: '分享标题标题标题', // 分享标题
+                desc: '分享描述描述描述', // 分享描述5
+                link: '', // 分享链接
+                id: '', // id
+                type: 'lottery', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '' // 如果type是music或video，则要提供数据链接，默认为空
+            },
+            success: function () {
+                alert('success被调用');
+                //设置右上角按钮成功
+            },
+            fail: function () {
+                alert('fail被调用');
+                // 设置右上角按钮失败
+            },
+            trigger: function () {
+                alert('trigger被调用');
+                //点击标题时调用
+            }
+        });
+    })
+    function closeView() {
+        console.log('closeView执行')
+        antlinker.closeView({
+            success: function () {
+                alert('success被调用');
+                //设置右上角按钮成功
+            },
+            fail: function () {
+                alert('fail被调用');
+                // 设置右上角按钮失败
+            }
+        });
+    }
+    function sharePlatform() {
+        console.log('sharePlatform进入')
+        antlinker.sharePlatform({
+            option: ['qq', 'qzone', 'wechat'],
+            shareContent: {
+                title: '分享标题标题标题', // 分享标题
+                desc: '分享描述描述描述', // 分享描述
+                link: '', // 分享链接
+                id: '', // id
+                type: 'cet46', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '' // 如果type是music或video，则要提供数据链接，默认为空
+            },
+            success: function () {
+                //设置右上角按钮成功
+            },
+            fail: function () {
+                // 设置右上角按钮失败
+            }
+        })
+    }
+</script>
+</html>

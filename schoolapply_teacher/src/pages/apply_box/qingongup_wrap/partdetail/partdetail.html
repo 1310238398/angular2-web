@@ -1,0 +1,32 @@
+<ion-content class="index-cont">
+    <div style="margin-bottom: 26px;">
+        <div class="head">
+            <p class="title">{{inputShe.PartWorkName}}</p>
+            <div style="margin: 12px 12px;padding-bottom: 10px;">
+                <span class="basic">所属部门：</span>
+                <span class="secondinfo">{{inputShe.DepartmentName ? inputShe.DepartmentName : inputShe.AcademyName}}</span>
+            </div>
+            <div style="margin: 12px 12px;padding-bottom: 10px;">
+                <span class="basic">工作时间：</span>
+                <span class="secondinfo">{{inputShe.worktime}}</span>
+            </div>
+        </div>
+        <div style="padding: 10px;margin:15px 0px;">
+            <p class="second-title">工资标准</p>
+            <p class="second-infomain">{{inputShe.Wage}}</p>
+        </div>
+        <div style="padding: 10px;margin:15px 0px;">
+            <p class="second-title">岗位数量</p>
+            <p class="second-infomain">{{inputShe.PostNum}}</p>
+        </div>
+        <div style="padding: 10px;margin:15px 0px;" id="des">
+            <p class="second-title">工作内容</p>
+            <!-- <p class="second-infomain">{{inputShe.Description}}</p> -->
+        </div>
+        <div style="padding: 10px;margin:15px 0px;" id="skill">
+            <p class="second-title">能力要求</p>
+            <!-- <p class="second-infomain">{{inputShe.Skill}}</p> -->
+        </div>
+
+    </div>
+</ion-content>

@@ -1,0 +1,124 @@
+<ion-content>
+    <div class="xinxi">
+        <p class="fontw">{{schoolName||'尚未配置学校名称参数'}}学籍登记表</p>
+        <p class="fontq">请认真填写学籍登记表，此表将会放入您的档案</p>
+
+    </div>
+
+    <div>
+
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiaoj">
+                <textarea [(ngModel)]="Familyeconmomy.EconomicSources" placeholder="家庭主要经济来源" rows="2" class="teat"></textarea>
+            </ion-item>
+        </ion-list>
+
+        <div *ngFor="let form of Learning ; let j = index">
+
+            <!-- <ion-list class="xiangxitop">学习经历及简介0{{j+1}}</ion-list> -->
+            <!-- <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">学习起止年月</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" [(ngModel)]="form.DadName" type="text"></ion-input>
+                    <ion-label class="xinximidle">至</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" [(ngModel)]="form.DadName" type="text"></ion-input>
+                </ion-item>
+            </ion-list> -->
+            <ion-list>
+                <div class="testtitle">学习经历及简介0{{j+1}}</div>
+                <div class="pageDele" *ngIf="j+1>=2" (click)="removePage()">
+                    <img src="assets/images/shanchu@2x.png">
+                </div>
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <span class="xinxileft">起止年月</span>
+                    <input placeholder="{{nowStartDate||''}}" class="riqist" onfocus="this.placeholder=''" onblur="this.placeholder='2018年12月'" [(ngModel)]="form.StartDate" type="text" class="riqist" />
+                    <span class="xinxileft">至</span>
+                    <input placeholder="{{nowEndDate||''}}" class="riqist" onfocus="this.placeholder=''" onblur="this.placeholder='2018年08月'" [(ngModel)]="form.EndDate" type="text" class="riqist" />
+
+                </ion-item>
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">学校(工作单位)</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="form.School" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+                </ion-item>
+
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">职务</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="form.Duties" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+                </ion-item>
+
+            </ion-list>
+            <!-- <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">证明人</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="form.Witness" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+                </ion-item>
+
+            </ion-list> -->
+
+        </div>
+        <div class="pageBtnh">
+            <button type='button' (click)="addPage() " class="addptn">
+                        添加
+                    </button>
+        </div>
+        <div *ngFor="let formr of RewardsAndPunishments ; let i= index">
+            <!-- <ion-list class="xiangxitop">奖惩登记0{{i+1}}</ion-list> -->
+            <!-- <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">奖惩时间</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" [(ngModel)]="form.DadName" type="text"></ion-input>
+                </ion-item>
+            </ion-list> -->
+            <ion-list>
+                <div class="testtitle">奖惩登记0{{i+1}}</div>
+                <div class="pageDele" *ngIf="i+1>=2" (click)="removeScoPage()">
+                    <img src="assets/images/shanchu@2x.png">
+                </div>
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <span class="xinxileft">起止时间</span>
+
+                    <input placeholder="{{nowStartDate||''}}" class="riqist" onfocus="this.placeholder=''" onblur="this.placeholder='2018年07月'" [(ngModel)]="formr.StartDate" type="text" />
+                    <span class="xinxileft">至</span>
+                    <input placeholder="{{nowEndDate||''}}" class="riqist" onfocus="this.placeholder=''" onblur="this.placeholder='2018年11月'" [(ngModel)]="formr.EndDate" type="text" />
+
+                </ion-item>
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">奖惩名称</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="formr.RewardsName" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+                </ion-item>
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiaoj">
+                    <textarea [(ngModel)]="formr.Details" placeholder="奖惩情况" rows="2" class="teat"></textarea>
+                </ion-item>
+            </ion-list>
+
+        </div>
+        <div class="pageBtnh">
+            <button type='button' (click)="addsoPage()" class="addptn">
+                        添加
+                    </button>
+        </div>
+    </div>
+    <div class="pageBtnDiv">
+        <button ion-button (click)="onTopPage() " class="pageBtnw">
+          上一步
+      </button>
+        <button ion-button (click)="onDetailPageTJ() " class="pageBtnq">
+            下一步
+        </button>
+    </div>
+    <div class="yeshu">
+        4/5
+    </div>
+</ion-content>

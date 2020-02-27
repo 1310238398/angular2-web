@@ -1,0 +1,55 @@
+<ion-content class="index-cont">
+
+    <!-- <div class="overh my-apply mr center" (click)="gotoMyapply()">
+        <img class="mr dib" src="assets/images/woyaoshenqing@2x.png" alt="">
+        <p class="center fn18">我要申请</p>
+    </div>
+
+    <div class="overh my-approve mr center" (click)="gotoMyapprove()">
+        <img class="mr dib" src="assets/images/woyaoshenpi@2x.png" alt="">
+        <p class="center fn18">我要审批</p>
+    </div> -->
+
+    <ion-card style="margin: 2px 0;width: 100%;box-shadow:0 2px 5px 0 #E3E3E3 !important;" (click)="DateSection()" *ngIf="student.name">
+        <ion-item style="width: 90%;margin:10px auto;border-bottom: 1px solid #E3E3E3;padding: 0;">
+            <img id="wechatBox" *ngIf="!ImgInfo.AttachmentCode" src="assets/images/zhaopian.png" item-start style="width:75px;height:85px;border: 0.5px solid #E3E3E3">
+            <img id="wechatBox" *ngIf="ImgInfo.AttachmentCode" [src]="DomS.bypassSecurityTrustUrl(ImgInfo.URL)" item-start style="width:75px;height:85px;border: 0.5px solid #E3E3E3">
+            <div class="studentbody fn13">
+                <span class="basic">姓名：
+                    <span class="honor-content">{{student.name}}</span>
+                    <span class="sexb fn13" *ngIf="student.CodeName=='男'"><img src="assets/images/nan@2x.png"></span>
+                    <span class="sexr fn13" *ngIf="student.CodeName=='女'"><img src="assets/images/nv@2x.png"></span>
+                </span>
+                <span class="basic">学院：<span>{{student.AcademyName}}</span></span>
+                <span class="basic">专业：<span>{{student.majorname}}</span></span>
+                <span class="basic">班级：<span>{{student.classname}}</span></span>
+            </div>
+            <!-- <ion-avatar item-end>
+                <img id="wechatBox" src="assets/images/call.png">
+            </ion-avatar> -->
+        </ion-item>
+        <div style="width: 90%;margin:10px auto;font-family: PingFangSC;color: #4A4A4A;letter-spacing: 0.38px;" class="fn14">
+            学号：<span style="color:red;">{{student.UserCode}}</span>
+        </div>
+    </ion-card>
+    <div *ngIf="!student.name" class="none">
+        <img class="noneimg" src="assets/images/kong.png">
+        <div class="noneFont">暂无更多内容</div>
+    </div>
+
+    <div class="photoalert" *ngIf="substatus">
+        <div class="alertback"></div>
+        <div class="alertwapper">
+            <div class="alert-content">
+                <div class="center fn14" style="color:green;"><span>确定要将"</span><span>{{student.name}}</span><span>({{student.UserCode}})“</span>
+                <span>移入</span><span>{{ClassName}}班吗?</span></div>
+                <div class="btn-wapper-line">
+                    <button ion-button class="btn-ghost" (click)="cancel()">取消</button>
+                    <button ion-button (click)="gosub()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</ion-content>

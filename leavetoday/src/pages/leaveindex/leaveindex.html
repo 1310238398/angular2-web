@@ -1,0 +1,87 @@
+<ion-content class="index-cont">
+    <ion-refresher (ionRefresh)='doRefresh($event)' *ngIf="!emptyData">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles"
+            refreshingText="刷新中...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <div *ngIf="!emptyData">
+        <div class="head-wrap center">
+            <p class="center head-title fn18">今日请假统计</p>
+            <div class="echarts-wrap">
+                <div id="EchartsContent" class="echarts-box" style="width:100%;height: 200px"></div>
+            </div>
+            <div class="center head-cont overh">
+                <ul>
+                    <li class="dib center" (click)="makeInfo(leaveInfoData.leaveNumCode,'leaveNum')">
+                        <p class="fn14" [ngClass]="{'colfc0':CateG == 'leaveNum'}">今日批准</p>
+                        <p class="fn24" [ngClass]="{'colfc0':CateG == 'leaveNum'}">{{leaveInfoData.leaveNum}}<span
+                                class="fn14">人</span></p>
+                    </li>
+                    <li class="dib center" (click)="makeInfo(leaveInfoData.notDisplayCode,'notDisplay')">
+                        <p class="fn14" [ngClass]="{'colfc0':CateG == 'notDisplay'}">未销假</p>
+                        <p class="fn24" [ngClass]="{'colfc0':CateG == 'notDisplay'}">{{leaveInfoData.notDisplay}}<span
+                                class="fn14">人</span></p>
+                    </li>
+                    <li class="dib center" (click)="makeInfo(leaveInfoData.notComeCode,'notCome')">
+                        <p class="fn14" [ngClass]="{'colfc0':CateG == 'notCome'}">今日请假</p>
+                        <p class="fn24" [ngClass]="{'colfc0':CateG == 'notCome'}">{{leaveInfoData.notCome}}<span class="fn14">人</span></p>
+                    </li>
+                    <li class="dib center" (click)="makeInfo(leaveInfoData.weekLeaveCode,'weekLeave')">
+                        <p class="fn14" [ngClass]="{'colfc0':CateG == 'weekLeave'}">当前请假中</p>
+                        <p class="fn24" [ngClass]="{'colfc0':CateG == 'weekLeave'}">{{leaveInfoData.weekLeave}}<span
+                                class="fn14">人</span></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cont-wrap">
+            <ion-list *ngFor="let item of schoolData;let indx=index" style="margin: 0px">
+                <ion-item class="relative">
+                    <span class="fn15 col666" style="margin-right:10px;">{{item.Name}}</span>
+                    <span class="fn15 colaca">{{item.c1}}人</span>
+
+                    <p class="absolute arrow-icon-wrap" *ngIf="item.c1 != '0'" (click)="accordion(item.Name,item.ids,item.checked)">
+                        <img class="absolute arrow-icon" *ngIf="!item.checked" src="assets/imgs/gengduo@2x.png" alt="">
+                        <img class="absolute down-icon" *ngIf="item.checked" src="assets/imgs/xiala@2x.png" alt="">
+                    </p>
+                </ion-item>
+                <div class="card-wrap" *ngIf="item.checked">
+                    <ion-card class="card-css relative" *ngFor="let info of item.data;">
+                        <ion-card-content>
+                            <p class="fn16 col666 bold">{{info.Name}}</p>
+                            <p class="fn14 col666">{{info.AcademyName}} - {{info.ClassName}}</p>
+                            <p class="fn14 colaca martop15">请假原因</p>
+                            <p class="fn14 col666">{{info.LeaveReason}}</p>
+                            <p class="fn14 colaca martop15">请假时间</p>
+                            <p class="fn14 col666">
+                                <span>开始:</span>
+                                <span>{{info.StartDate}} </span>
+                                <span style="margin-left:5px;"> {{info.StartCourse}}</span>
+                            </p>
+                            <p class="fn14 col666">
+                                <span>结束:</span>
+                                <span>{{info.EndDate}} </span>
+                                <span style="margin-left:5px;"> {{info.EndCourse}}</span>
+                            </p>
+                        </ion-card-content>
+                    </ion-card>
+                </div>
+            </ion-list>
+        </div>
+
+        <div class="loading-wrap" *ngIf="loading">
+            <div class="spinnerw" id="spinnerw">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="emptyData" class="center">
+        <img src="assets/imgs/kong.png" style="margin-top:50px;" alt="">
+        <p class="fn16" style="color:#ACACAC;margin-top:20px;">无访问数据权限</p>
+    </div>
+
+</ion-content>

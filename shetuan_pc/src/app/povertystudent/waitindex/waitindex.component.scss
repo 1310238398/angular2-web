@@ -1,0 +1,147 @@
+.home {
+    // border: 1px solid #ddd;
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    padding: 0 0;
+    margin: 0 0;
+    border: none;
+    // border-radius: 5px;
+    // margin-top: 5px;
+    // margin-left: 5px;
+    // margin-right: 50px;
+}
+
+.tblock {
+    display: inline-block;
+}
+
+.top {
+    background-color: white;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.zuzhicontent {
+    margin-top: 30px;
+    // overflow: hidden;
+    // width: 100%;
+    // height: 1300px;
+    background-color: white;
+
+}
+
+.huodongcontent {
+    background-color: #FFFFFF;
+    margin-top: 30px;
+    overflow: hidden;
+    .body {
+        font-family: PingFangSC-Regular;
+        color: #4A4A4A;
+        border: 1px solid #ddd;
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+.components-table-demo-control-bar {
+    margin-top: 5px;
+}
+
+.button {
+    margin: auto 5px;
+}
+
+a {
+    margin-left: 15px;
+    color: black;
+}
+
+.title {
+    font-size: 18px;
+}
+
+.titleright {
+    font-size: 16px;
+}
+
+.none {
+    text-align: center;
+    margin-top: 10%
+}
+
+.noneimg {
+    width: 200px !important;
+}
+
+.noneFont {
+    color: #666666;
+    font-size: 14px;
+}
+
+.title-content {
+    border-color: #108ee9;
+    color: #108ee9;
+}
+
+// :host ::ng-deep .ant-table  tr>th{
+//     background: #1890ff;
+//     opacity: 1;
+//     font-weight: 500;
+//     transition: background .3s ease;
+//     text-align: left;
+//     color: #ffffff;
+//     padding: 8px 8px;
+//     word-break: break-all;
+//   }
+//   :host ::ng-deep .ant-table-thead>tr>th {
+//     background: #1890ff;
+//     opacity: 1;
+//     font-weight: 500;
+//     transition: background .3s ease;
+//     text-align: left;
+//     color: #ffffff;
+//   }
+:host ::ng-deep .ant-table-thead>tr>th,
+:host ::ng-deep .ant-table-tbody>tr>td {
+    // padding: 8px 8px;
+    text-align: center;
+    word-break: break-all;
+    cursor: pointer;
+}
+
+//   :host ::ng-deep .ant-table-thead>tr>th {
+//     border-right: 1px solid #ffffff;
+//   }
+//   :host ::ng-deep .ant-table-tbody>tr>td {
+//     border-right: 1px solid #E3E3E3;
+//   }
+//   :host ::ng-deep .ant-table-tbody>tr>td {
+//     border-bottom: 1px solid #E3E3E3;
+//     transition: all .3s;
+//   }
+:host ::ng-deep .ant-table-body>table {
+    background: #FFFFFF;
+    box-shadow: 0 2px 5px 0 #E3E3E3;
+    border: none;
+    border-width: 0px;
+}
+
+.place-content {
+    width: 120px; // font-size: 14px; // margin: 5px 5px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis; // -webkit-line-clamp: 1;
+    white-space: nowrap;
+    color: #464c56; 
+    vertical-align: top;
+    // position: relative;
+    // border-bottom: 1px solid #ddd;
+}
+
+/* .fl{float: left;}
+.fr{float: right;}  
+.center{text-align: center;}
+.dib{display: inline-block;}
+
+.help-btn{margin-left: 20px;cursor: pointer;color:#108EE9;} */

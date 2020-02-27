@@ -1,0 +1,135 @@
+<div class="cont-page">
+    <div class="page-header overh relative">
+        <div class="overh absolute" style="z-index:1;">
+            <div class="award-head-txt overh fl">
+                <p class="overh">
+                    <span class="cir-icon dib marn-r10"></span>
+                    <span class="fn22 dib colfff marn-r10">{{titleName}}</span>
+                    <span class="fn14 dib colfff">所有数据均由您角色权限下的学生资助信息统计生成</span>
+                </p>
+                <p class="overh">
+                    <span class="fn14 coldde marn-r10 marn-l18">项目类别 :</span>
+                    <span class="fn18 colfff marn-r30">{{titleData.Nums}} 项</span>
+                    <span class="fn14 coldde marn-r10">资助学生 :</span>
+                    <span class="fn18 colfff marn-r30">{{titleData.Members}} 人</span>
+                    <span class="fn14 coldde marn-r10">资助金额 :</span>
+                    <span class="fn18 colfff">{{titleData.Amount/10000}} 万</span>
+                </p>
+                <p class="overh">
+                    <span class="cir-icon dib marn-r10"></span>
+                    <span class="fn14 colfff">共</span>
+                    <span class="fn18 colfff"> {{total}} </span>
+                    <span class="fn14 colfff"> 条结果 </span>
+                </p>
+            </div>
+        </div>
+        <a *ngIf="showTableBt == '1'" class="more-search dib absolute colfff fn18 center" [routerLink]="['/awardinfo/awarddetail',{awardType: awardType,betweenCode:''}]">多条件查询</a>
+        <a *ngIf="showTableBt == '3'" class="more-search dib absolute colfff fn18 center" [routerLink]="['/awardinfo/awarddetail',{awardType: '',betweenCode:''}]">多条件查询</a>
+        <img class="absolute header-floor" src="assets/images/small_m.png" alt="">
+    </div>
+
+    <div class="table-box overh">
+        <div class="table-wrap center">
+            <!-- 奖学金 助学金 助学贷款 困难补助 学费减免 -->
+            <nz-table *ngIf="showTableBt == '1'" class="table-center" #nzTable1 [nzData]="searchObj" [nzBordered]="true" [nzTotal]="total" [(nzPageIndex)]="Page" [nzPageSize]="PageSize" [nzFrontPagination]="false"
+            (nzPageIndexChange)="getAwardFive(false)">
+                <thead nz-thead>
+                    <tr>
+                        <th rowspan="2"><span>序号</span></th>
+                        <th rowspan="2"><span>学年</span></th>
+                        <th rowspan="2"><span>项目类别</span></th>
+                        <th colspan="2"><span>特殊困难</span></th>
+                        <th colspan="2"><span>困难</span></th>
+                        <th colspan="2"><span>一般困难</span></th>
+                        <th colspan="2"><span>无等级</span></th>
+                        <th rowspan="2"><span>合计学生</span><br><span>(人)</span></th>
+                        <th rowspan="2"><span>合计金额</span><br><span>(万)</span></th>
+                    </tr>
+                    <tr>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of nzTable1.data;let i=index;">
+                        <td>{{Page*PageSize-PageSize + i +1}}</td>
+                        <td>{{data.AcademicYearName}}</td>
+                        <td>{{data.ScholarshipAidName}}</td>
+                        <td><a [routerLink]="['/awardinfo/awarddetail',{carryYear: data.AcademicYearCode,poolType: '87000030',awardType:awardType,category:data.ScholarshipAidCode}]">{{data.SpecialMembers}}</a></td>
+                        <td>{{data.SpecialAmount}}</td>
+                        <td><a [routerLink]="['/awardinfo/awarddetail',{carryYear: data.AcademicYearCode,poolType: '87000020',awardType:awardType,category:data.ScholarshipAidCode}]">{{data.MiddleMembers}}</a></td>
+                        <td>{{data.MiddleAmount}}</td>
+                        <td><a [routerLink]="['/awardinfo/awarddetail',{carryYear: data.AcademicYearCode,poolType: '87000010',awardType:awardType,category:data.ScholarshipAidCode}]">{{data.NomalMembers}}</a></td>
+                        <td>{{data.NomalAmount}}</td>
+                        <td><a [routerLink]="['/awardinfo/awarddetail',{carryYear: data.AcademicYearCode,poolType: '87000040',awardType:awardType,category:data.ScholarshipAidCode}]">{{data.NoGradeMembers}}</a></td>
+                        <td>{{data.NoGradeAmount}}</td>
+                        <td><a [routerLink]="['/awardinfo/awarddetail',{carryYear: data.AcademicYearCode,poolType: '',awardType:awardType,category:data.ScholarshipAidCode}]">{{data.totalNum}}</a></td>
+                        <td>{{data.totalMon/10000}}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+            <!-- 困难等级 -->
+            <nz-table *ngIf="showTableBt == '3'" class="table-center" #nzTable3 [nzData]="PoolRankData" [nzBordered]="true"
+                [nzShowPagination]="false" [nzFrontPagination]="false">
+                <thead nz-thead>
+                    <tr>
+                        <th rowspan="2"><span>序号</span></th>
+                        <th rowspan="2"><span>学年</span></th>
+                        <th rowspan="2"><span>困难等级</span></th>
+                        <th colspan="2"><span>奖学金</span></th>
+                        <th colspan="2"><span>助学金</span></th>
+                        <th colspan="2"><span>助学贷款</span></th>
+                        <th colspan="2"><span>勤工助学</span></th>
+                        <th colspan="2"><span>困难补助</span></th>
+                        <th colspan="2"><span>学费减免</span></th>
+                        <th rowspan="2"><span>合计学生</span><br><span>(人)</span></th>
+                        <th rowspan="2"><span>合计金额</span><br><span>(万)</span></th>
+                    </tr>
+                    <tr>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of nzTable3.data;let i=index;">
+                        <td>{{i+1}}</td>
+                        <td>{{data.AcademicYearName}}</td>
+                        <td>{{data.RecognitionLevelName}}</td>
+                        <td><a [routerLink]="['/awardinfo/awarddetail',{carryYear: data.AcademicYearCode,awardType: awardData[0].TypeCode,poolType:data.RecognitionLevelCode}]">{{data.PrizeMembers}}</a></td>
+                        <td>{{data.PrizeAmount}}</td>
+                        <td><a [routerLink]="['/awardinfo/awarddetail',{carryYear: data.AcademicYearCode,awardType: awardData[1].TypeCode,poolType:data.RecognitionLevelCode}]">{{data.AidMembers}}</a></td>
+                        <td>{{data.AidAmount}}</td>
+                        <td><a [routerLink]="['/awardinfo/awarddetail',{carryYear: data.AcademicYearCode,awardType: awardData[2].TypeCode,poolType:data.RecognitionLevelCode}]">{{data.LoanMembers}}</a></td>
+                        <td>{{data.LoanAmount}}</td>
+                        <td><a [routerLink]="['/awardinfo/awardproject',{carryYear: data.AcademicYearCode,awardType: awardData[3].TypeCode,poolType:data.RecognitionLevelCode}]">{{data.WorkMembers}}</a></td>
+                        <td>{{data.WorkAmount}}</td>
+                        <td><a [routerLink]="['/awardinfo/awarddetail',{carryYear: data.AcademicYearCode,awardType: awardData[4].TypeCode,poolType:data.RecognitionLevelCode}]">{{data.SubsidyMembers}}</a></td>
+                        <td>{{data.SubsidyAmount}}</td>
+                        <td><a [routerLink]="['/awardinfo/awarddetail',{carryYear: data.AcademicYearCode,awardType: awardData[5].TypeCode,poolType:data.RecognitionLevelCode}]">{{data.FreeMembers}}</a></td>
+                        <td>{{data.FreeAmount}}</td>
+                        <td><a [routerLink]="['/awardinfo/awarddetail',{carryYear: data.AcademicYearCode,awardType: '',poolType:data.RecognitionLevelCode}]">{{data.totalNum}}</a></td>
+                        <td>{{data.totalMon/10000}}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+</div>
+
+<a (click)="goBack()"><img class="b-cancle fixed" src="assets/images/back.png"></a>

@@ -1,0 +1,111 @@
+<ion-content class="index-cont" forceOverscroll={true} [style.height]="bodyHeight">
+    <form name="f">
+        <!-- <span class="dib fn14 color9b absolute" style="top:5px;right:10px;" (click)="gotoHelp()">帮助</span> -->
+        <div class="row-mar overh">
+            <P class="fn18 color4a center" style="margin:15px 0;">第二课堂成绩上报</P>
+            <div class="cont-form">
+                <ul>
+                    <li class="overh">
+                        <p class="text-css"><i style="color: #ff0000;">*</i> 成绩类别</p>
+                        <ion-item class="select-search">
+                            <select-searchable [(ngModel)]="port" [items]="ports" itemValueField="Code" name="port"
+                                itemTextField="CodeName" [canSearch]="true" (onChange)="TypeChange($event)"
+                                [noItemsFoundText]="'未能匹配到该活动,请明确活动名称后重新匹配'" searchPlaceholder="搜索" closeButtonText="X">
+                                <ng-template selectSearchableLabelTemplate>
+                                </ng-template>
+                            </select-searchable>
+                        </ion-item>
+                    </li>
+                    <li>
+                        <p class="text-css"><i style="color: #ff0000;">*</i> 所属项目</p>
+                        <ion-item class="select-search">
+                            <select-searchable [(ngModel)]="main" [items]="mains" itemValueField="Code" name="main"
+                                itemTextField="CodeName" [canSearch]="true" (onChange)="MainChange($event)"
+                                [noItemsFoundText]="'未能匹配到该活动,请明确活动名称后重新匹配'" searchPlaceholder="搜索" closeButtonText="X">
+                                <ng-template selectSearchableLabelTemplate>
+                                </ng-template>
+                            </select-searchable>
+                        </ion-item>
+                    </li>
+                    <li>
+                        <p class="text-css"><i style="color: #ff0000;">*</i> 所属子项目</p>
+                        <ion-item class="select-search" (ngModelChange)="getbizinfo($event)">
+                            <select-searchable [(ngModel)]="sub" [items]="subs" itemValueField="Code" name="sub"
+                                itemTextField="CodeName" [canSearch]="true" (onChange)="SubChange($event)"
+                                [noItemsFoundText]="'未能匹配到该活动,请明确活动名称后重新匹配'" searchPlaceholder="搜索" closeButtonText="X">
+                                <ng-template selectSearchableLabelTemplate>
+                                </ng-template>
+                            </select-searchable>
+                        </ion-item>
+                    </li>
+                    <li *ngIf="JiBieTypes && JiBieTypes.length>0">
+                        <p class="text-css"><i style="color: #ff0000;">*</i> 名次</p>
+                        <ion-item style="height: 36px;">
+                            <ion-select [disabled]="selestFB" [(ngModel)]="LeaveApply.JiBie" interface="action-sheet"
+                                [cancelText]="displayTxt" name="JiBie">
+                                <ion-option [value]='item' *ngFor="let item of JiBieTypes">{{item.CodeName}}
+                                </ion-option>
+                            </ion-select>
+                        </ion-item>
+                    </li>
+                    <li *ngIf="JiBieTypes && JiBieTypes.length>0">
+                        <p class="text-css"><i style="color: #ff0000;">*</i> 活动名称</p>
+                        <ion-item style="height: 36px;color: #4A4A4A;font-size: 14px;">
+                            <ion-input [(ngModel)]="LeaveApply.ActivityName" name="ActivityName"></ion-input>
+                        </ion-item>
+                    </li>
+
+                    <li>
+                        <p class="text-css"><i style="color: #ff0000;">*</i> 参与时间</p>
+                        <ion-item>
+                            <ion-datetime id="StartDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MMM DD"
+                                monthShortNames="1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月" [(ngModel)]="LeaveApply.StartDate"
+                                doneText="完成" cancelText="取消" [max]="TaskTime" name="StartDate"></ion-datetime>
+                        </ion-item>
+                    </li>
+
+                    <li *ngIf="JiBieTypes.length<=0">
+                        <p class="text-css"><i style="color: #ff0000;">*</i> 详细描述</p>
+                        <ion-item>
+                            <ion-textarea [(ngModel)]="LeaveApply.Info" maxlength="80" max="80" name="Info">
+                            </ion-textarea>
+                        </ion-item>
+                    </li>
+                    <li *ngIf="JiBieTypes && JiBieTypes.length>0">
+                        <p class="text-css"><i style="color: #ff0000;">*</i> 获奖时间</p>
+                        <ion-item>
+                            <ion-datetime id="AwardDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MMM DD"
+                                monthShortNames="1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月" [(ngModel)]="LeaveApply.AwardDate"
+                                doneText="完成" cancelText="取消" [max]="TaskTime" name="AwardDate"></ion-datetime>
+                        </ion-item>
+                    </li>
+
+                    <li class="css-li" *ngIf="Info">
+                        <span class="color9b fn14 info-head"><i style="color: #ff0000;margin-right: 3px;">*</i> 认定依据</span>
+                        <span class="color4a fn14 info-span">{{Info}}</span>
+                    </li>
+
+                    <li>
+                        <p class="text-css"><i style="color: #ff0000;">*</i> 证明材料(证书等)</p>
+                        <div class="upload overh">
+                            <span class="container fl relative" *ngIf="CertifyImgs.length<9">
+                                <input type="file" value="file" class="hiddenFile" (change)="handleFiles($event)">
+                                <img src="assets/images/add.png" style="width: 100%;">
+                            </span>
+                            <div class="Certify fl relative center" *ngFor="let item of CertifyImgs;let index=index;"
+                                [ngClass]="{'underimg':index==4}">
+                                <img class="delete-icon absolute" src="assets/images/delete.png" (click)="deleteCertify($event,index)">
+                                <img class="file-img" (click)="navPreview({time:false,index:index,items:CertifyImgs})"
+                                    [src]="DomSanitizer.bypassSecurityTrustUrl(item.URL)">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+    <div class="center" style="margin:20px;">
+        <button class="submit-tab mr fn16" ion-button [disabled]="subStop" (click)="tabAlert()" block>提交</button>
+    </div>
+</ion-content>

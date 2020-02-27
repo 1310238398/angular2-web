@@ -1,0 +1,32 @@
+page-waiting{
+    .bgImg{
+         height: 100%;
+        width: 100%;
+       
+        background-image: url('../assets/images/huanchong@2x.png');
+        background-repeat: no-repeat;
+         background-size:cover;-moz-background-size:cover;-webkit-background-size:cover;
+    }
+    .cont{
+        height: 75px;
+        padding-top: 64%;
+    }
+    .cont span{
+        display: block;
+        font-family:PingFangSC-Semibold;
+        color:#ffffff;
+        letter-spacing:0;
+        line-height:25px;
+        text-shadow:0 2px 4px rgba(0,0,0,0.50);
+        text-align:center;
+        font-size:18px;
+    }
+    .time{
+        font-family:PingFangSC-Semibold;
+        font-size:72px;
+        color:#ffffff;
+        letter-spacing:0;
+        text-shadow:0 2px 4px rgba(0,0,0,0.50);
+        text-align:center;
+    }
+}

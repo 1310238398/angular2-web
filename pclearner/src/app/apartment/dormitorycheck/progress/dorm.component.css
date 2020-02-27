@@ -1,0 +1,63 @@
+
+:host ::ng-deep  .ant-modal-header{
+    border-bottom: none;
+}
+.mg30{
+    margin-bottom:30px
+}
+.topTitle{
+    font-size:14px;
+    color:#666666;
+    letter-spacing:0.18px;
+}
+.details{
+    padding-right:20px;
+    font-size:12px;
+    color:#666666;
+}
+.bar{
+    position: fixed;
+    bottom:30px;
+    left: 2%;
+    /* margin: auto; */
+    display: inline-block;
+    background:#ffffff;
+    border:2px solid rgba(219,223,227,0.30);
+    box-shadow:0 2px 12px 0 rgba(217,226,233,0.50);
+    width:96%;
+    height:46px;
+    line-height: 46px;
+    /* text-align: center; */
+}
+:host ::ng-deep  .ant-table{
+    font-family: "PingFangSC-Regular";
+}
+
+:host ::ng-deep .ant-progress-bg{
+    background-color: #00cf80;
+}
+:host ::ng-deep  .ant-modal-footer{
+    border-top: none;
+}
+.Placeholder{
+    height: 200px;
+}
+.return_index{
+    background:#ffc000;
+    border-radius:4px;
+    width:100px;
+    height:30px;
+    border: none;
+    /* margin-top: 120px; */
+    position: fixed;
+    bottom: 90px;
+    right: 45%;
+    font-family:PingFangSC-Regular;
+    font-size:16px;
+    color:#ffffff;
+    letter-spacing:0.20px;
+    text-align:center;
+}
+
+
+

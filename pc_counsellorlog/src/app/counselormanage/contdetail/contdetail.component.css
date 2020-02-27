@@ -1,0 +1,98 @@
+.fl{float: left;}
+.fr{float: right;}
+.mr{margin:0 auto}
+.cp{cursor: pointer;}
+.center{text-align: center;}
+.db{display: block;}
+.dib{display: inline-block;}
+.overh{overflow: hidden;}
+.relative{position: relative;}
+.absolute{position: absolute}
+.fixed{position: fixed}
+.fn12{font-size: 12px;}
+.fn14{font-size: 14px;}
+.fn16{font-size: 16px;}
+.fn18{font-size: 18px;}
+
+.top-title{line-height: 30px;height:30px;margin:20px 0 30px;}
+.bt-footer button{width: 120px;height:35px;margin:40px 40px 20px;}
+
+.medigo{position: fixed;overflow: auto;top: 0;right: 0;bottom: 0;left: 0;z-index: 1000;-webkit-overflow-scrolling: touch;outline: 0;background-color: rgba(55,55,55,.6);}
+.file-box{position: fixed;top:300px;width:350px;height:120px;left: 50%;margin-left:-200px;border-radius:10px;background: #fff;z-index: 1001;}
+
+.pass-cont{margin-top:20px;}
+.foot-btn{margin-top:25px;}
+.foot-btn button{width: 80px;height:25px;margin:0 10px;}
+
+.loading-wrap{top:50%;left:50%;margin-left:-30px;z-index: 1001;}
+.upload-cont{width: 750px;color: #4a4a4a;}
+.upload-wrap{margin:20px 0;}
+.add-wrap {width: 100px;height:32px;border:1px solid #999;border-radius: 4px;margin-left:20px;}
+.add-wrap .input-btn{width: 100px;height:32px;line-height: 30px;color: #999;}
+.add-wrap .input-btn img{width: 16px;margin-top:6px;}
+.add-wrap .hiddenFile {width: 100%;height: 100%;top: 0;left: 0;opacity: 0;-moz-opacity: 0;filter: alpha(opacity=0);}
+
+.upload {background: #fff;padding:20px 0 20px 20px;min-height: 180px;}
+.upload .Certify {margin:0 20px 15px 0;height: 200px;width: 160px;z-index: 3;}
+.upload .Certify .file-img {vertical-align: middle;max-height: 200px;width: 160px;}
+.upload .Certify .delete-icon {top: -6px;right: -6px;width: 16px;height: 16px;border-radius: 16px;color: #fff;line-height: 16px;background: #9d9d9d;}
+.upload .Certify:nth-child(4){margin:0 0 15px 0;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:host ::ng-deep table {
+    border-collapse:collapse;width: 100%;
+    text-align: center;
+    border:1px solid #E8E8E8;
+}
+
+:host ::ng-deep table td:nth-child(1) {
+    width: 12%;
+    height:30px;
+}
+:host ::ng-deep table td:nth-child(2) {
+    width: 12%;
+    height:30px;
+}
+:host ::ng-deep table td:nth-child(3) {
+    width: 12%;
+    height:30px;
+}
+:host ::ng-deep table td:nth-child(4) {
+    width: 52%;
+    height:30px;
+}
+
+:host ::ng-deep p {
+    line-height: 30px;
+}
+
+
+
+
+
+
+
+

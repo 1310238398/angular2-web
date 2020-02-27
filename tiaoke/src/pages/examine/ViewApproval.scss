@@ -1,0 +1,10 @@
+page-viewapproval {
+  .fontRed {
+    color: red;
+  }
+  input.inpre,textarea.inpre{
+    border: none;
+    margin-left: 16px;
+    width: calc(100% - (16px / 2) - 16px);
+  }
+}

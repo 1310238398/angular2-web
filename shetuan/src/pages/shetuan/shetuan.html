@@ -1,0 +1,139 @@
+<!-- <ion-header>
+    <ion-toolbar>
+        <ion-title>社团风采</ion-title>
+    </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="grid-basic-page">
+    <ion-card style="margin:2px 0;width:100%;box-shadow: 0 2px 5px 0 #E3E3E3 !important;">
+        <div padding>
+            <ion-segment [(ngModel)]="pet">
+                <ion-segment-button value="myshetuan">
+                    我的社团
+                </ion-segment-button>
+                <ion-segment-button value="allshetuan">
+                    全部社团
+                </ion-segment-button>
+            </ion-segment>
+        </div>
+        <div [ngSwitch]="pet">
+            <ion-list *ngSwitchCase="'allshetuan'">
+                <form style="width:90%;margin: 0 auto;">
+                    <ion-searchbar name="search" #searchbar [debounce]="350" (ionInput)="search(searchQuery)"
+                        placeholder="搜索" [(ngModel)]="searchQuery" type="search" #si></ion-searchbar>
+                </form>
+            </ion-list>
+        </div>
+
+    </ion-card>
+    <div style="height:3px;background-color: #fafafa;"></div>
+    <div [ngSwitch]="pet">
+        <ion-list *ngSwitchCase="'allshetuan'" class="shetuan">
+            <ion-card style="margin: 2px 0 !important;width: 100%;box-shadow:0 2px 5px 0 #E3E3E3 !important;">
+
+                <!-- <ion-item>
+                <ion-avatar item-start>
+                    <img src="assets/img/venkman.jpg">
+                </ion-avatar>
+                <h2>昵称</h2>
+            </ion-item>
+            <ion-card>
+                <ion-card-content>
+                    这是社团内容
+                </ion-card-content>
+            </ion-card> -->
+                <!-- <ion-searchbar (ionInput)="getItems($event)" style="width: 60%;margin-left: 50px;"></ion-searchbar> -->
+                <div *ngIf="Allshetuanlist && Allshetuanlist.length <= 0" class="none">
+                    <img class="noneimg" src="assets/images/kong.png">
+                    <div class="noneFont">暂无更多内容</div>
+                </div>
+
+                <button ion-item *ngFor="let item of Allshetuanlist" (click)="openashetuaninfoPage(item)" icon-start
+                    style="border-bottom:   1px solid #E3E3E3 ;">
+                    <ion-avatar item-start *ngIf="!item.RecordId">
+                        <img id="wechatBox" src="assets/images/社团默认头像.png">
+                    </ion-avatar>
+                    <ion-avatar item-start *ngIf="item.RecordId">
+                        <img id="wechatBox" [src]="DomS.bypassSecurityTrustUrl(item.AttachmentURL)">
+                    </ion-avatar>
+                    <div>
+                        <span class="fn16 color4a">{{item.UnionName}}</span>
+                    </div>
+                    <div>
+                        <p class="fn14 title-content">{{item.UnionInfo}}</p>
+                    </div>
+                    <!-- <ion-icon [name]="'logo-' + item.icon" [ngStyle]="{'color': item.color}" item-start></ion-icon>
+                            {{ item.title }} -->
+                </button>
+            </ion-card>
+
+            <ion-infinite-scroll *ngIf="moreData && Allshetuanlist.length > 0" (ionInfinite)="doInfinitea($event)">
+                <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+                </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+            <div style="text-align: center;color: #8e9093;margin-top: 5px;" *ngIf="!moreData">我是有底线的！</div>
+        </ion-list>
+
+
+        <ion-list *ngSwitchCase="'myshetuan'" class="shetuan">
+            <ion-card style="margin: 2px 0 !important;width: 100%;box-shadow:0 2px 5px 0 #E3E3E3 !important;">
+
+                <div *ngIf="shetuanlist && shetuanlist.length <= 0" class="none"><img class="noneimg" src="assets/images/kong.png">
+                    <div class="noneFont">暂无更多内容</div>
+                </div>
+
+                <button ion-item *ngFor="let item of shetuanlist" (click)="openshetuaninfoPage(item)" style="border-bottom:   1px solid #E3E3E3 ;">
+                    <ion-avatar item-start *ngIf="!item.RecordId">
+                        <img id="wechatBox" src="assets/images/社团默认头像.png">
+                    </ion-avatar>
+                    <ion-avatar item-start *ngIf="item.RecordId">
+                        <img id="wechatBox" [src]="DomS.bypassSecurityTrustUrl(item.AttachmentURLs)">
+                    </ion-avatar>
+                    <div>
+                        <span class="fn16 color4a">{{item.UnionName}}</span>
+                    </div>
+                    <div>
+                        <p class="fn14 title-content">{{item.UnionInfo}}</p>
+                    </div>
+                </button>
+            </ion-card>
+
+            <!-- <ion-item-sliding *ngFor="let item of shetuanlist" style="border-bottom:   1px solid #E3E3E3 ;">
+                <ion-item>
+
+                    <ion-avatar item-start *ngIf="!item.RecordId">
+                        <img src="assets/images/社团默认头像.png">
+                    </ion-avatar>
+                    <ion-avatar item-start *ngIf="item.RecordId">
+                        <img [src]="DomS.bypassSecurityTrustUrl(item.AttachmentURL)">
+                    </ion-avatar>
+                    <h2 class="fn16">{{item.UnionName}}</h2>
+                    <p class="title-content fn14">{{item.UnionInfo}}</p>
+                    <ion-note class="fn14" item-end>
+                        1111
+                    </ion-note>
+                </ion-item>
+
+                <ion-item-options *ngIf="!isdelete" style="width:60px;">
+                    <button ion-button expandable color="danger" (click)="delete(item)">
+                        <ion-icon name="trash"></ion-icon>
+                        Delete
+                    </button>
+                </ion-item-options>
+                <ion-item-options *ngIf="isdelete" style="width:80px;">
+                    <button ion-button expandable color="danger">
+                        <ion-icon name="trash"></ion-icon>
+                        确认删除
+                    </button>
+                </ion-item-options>
+
+            </ion-item-sliding> -->
+
+            <ion-infinite-scroll *ngIf="moreDatae && shetuanlist.length > 0" (ionInfinite)="doInfinite($event)">
+                <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+                </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+            <div style="text-align: center;color: #8e9093;margin-top: 5px;" *ngIf="!moreDatae">我是有底线的！</div>
+        </ion-list>
+    </div>
+</ion-content>

@@ -1,0 +1,82 @@
+<div class="distribution">
+    <div class="components-table-demo-control-bar">
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-left">
+            <div nz-form-item nz-col class="mgb20px">
+                <div nz-form-control class="h">
+                    <nz-select style="width: 162px;" [nzPlaceHolder]="'学院'" [nzShowSearch]="false" [(ngModel)]="searchObj.Academy" name="Academy"  (ngModelChange)="academyMajorLinkage(searchObj.Academy)">
+                        <nz-option *ngFor="let option of Academy" [nzLabel]="option.AcademyName" [nzValue]="option.AcademyCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-form-item nz-col class="mgb20px">
+                <div nz-form-control>
+                    <nz-select style="width: 142px;border:none;" [nzPlaceHolder]="'专业'" [nzShowSearch]="false" [(ngModel)]="searchObj.Major" (click)="majorCilck(searchObj.Academy)" name="Major">
+                        <nz-option *ngFor="let option of Major" [nzLabel]="option.MajorName" [nzValue]="option.MajorCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+
+            <div nz-form-item nz-col class="mgb20px">
+                <div nz-form-control>
+                    <nz-select style="width: 142px;border:none;"  [nzPlaceHolder]="'年级'" [nzShowSearch]="false" [(ngModel)]="searchObj.Grade" name="Grade" >
+                        <nz-option *ngFor="let option of Grade" [nzLabel]="option.GradeName" [nzValue]="option.GradeCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+
+            <button (click)="onSearch(true)" class="btn_search btn">查询</button>
+            <button (click)="resetForm(f)" class="btn_reset btn">重置</button>
+
+            <button (click)="getRoomData()" class="btn_distrbut btn">清退宿舍</button>
+        </form>
+    </div>
+
+
+    <div nz-row class="content">
+        <div nz-col [nzSpan]="11"  class="adjust-left">
+            <nz-table #nzTable [nzDataSource]="data" [nzLoading]="_loading" [nzIsPagination] ="false" [nzScroll]="false">
+                <!--<ng-template #nzFixedHeader>-->
+                    <thead nz-thead>
+                    <tr>
+                        <th nz-th [nzWidth]="'25%'">
+                            <label nz-checkbox [(ngModel)]="_allChecked"  [nzIndeterminate]="_indeterminate" (ngModelChange)="_checkAll($event)">
+                            </label>
+                        </th>
+                        <th nz-th [nzWidth]="'75%'"><span>宿舍名称</span></th>
+                    </tr>
+                    </thead>
+                <!--</ng-template>-->
+                <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                    <td nz-td nzCheckbox>
+                        <label nz-checkbox [(ngModel)]="data.checked">
+                        </label>
+                    </td>
+                    <td nz-td>{{data.RoomName}}</td>
+                </tr>
+                </tbody>
+            </nz-table>
+        </div>
+        <!--<div nz-col [nzSpan]="2"></div>-->
+        <!--<div nz-col [nzSpan]="11" class="distribut">-->
+            <!--<h3>待分配公寓信息</h3>-->
+            <!--<nz-spin *ngIf="_nodeloading" style="margin-top:20px;padding: 0 auto;"></nz-spin>-->
+            <!--<h4 *ngIf="_nodelnil">没有数据</h4>-->
+            <!--<div class="tres"  *ngIf="nodes.length> 0">-->
+                <!--<nz-tree [nzNodes]="nodes" [nzCheckable]="true" [nzAllowChildLinkage]="true" [nzAllowParentLinkage]="true" [nzShowLine]="true" [nzOptions]="options" (nzEvent)="onEvent($event)" (nzCheck)="onCheck($event)"></nz-tree>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+
+    <!--弹出显示班级宿舍对应分配信息-->
+
+    <div id="loading" *ngIf="_isVisible">
+        <div class="loading-spins">
+            <nz-spin nzTip="正在清退,请稍后" [nzSize]="'large'" *ngIf="_isVisible"></nz-spin>
+        </div>
+    </div>
+
+</div>

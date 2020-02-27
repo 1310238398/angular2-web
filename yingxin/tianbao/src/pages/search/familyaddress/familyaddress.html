@@ -1,0 +1,149 @@
+<ion-content>
+    <ion-list class="xinxi">
+        <ion-item>
+            <ion-thumbnail item-start item-left>
+                <img src={{CampusTypes.Logo}}>
+            </ion-thumbnail>
+            <h2>{{CampusTypes.Campus}}</h2>
+            <p>家庭信息填报</p>
+
+        </ion-item>
+    </ion-list>
+
+    <div>
+
+        <ion-list class="xiangxi">
+            <!--<ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileftble">
+                    <span class="qiunile">
+                        <img src="assets/images/blodd.png">
+                    </span> 家庭所在地
+                </ion-label>
+                <ion-input [(ngModel)]="FamilyAddress.HomeCity" (click)="nav()" autofocus readonly=true placeholder="请选择"></ion-input>
+            </ion-item>-->
+            <ion-item class="xinxiyuanjiao">
+
+                <label class="xinxileftble">
+                    <span class="qiunile">
+                        <img src="assets/images/blodd.png">
+                    </span> 家庭所在地
+                </label>
+                <div>
+                    <input [(ngModel)]="FamilyAddress.HomeCity" (click)="nav()" class="text-input text" readonly=true placeholder="请选择"></div>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">所在村（小区）路</ion-label>
+                <ion-input class="xinxiright" placeholder="如未找到市区请在此输入" [(ngModel)]="FamilyAddress.HomeRoad" onfocus="this.placeholder=''" onblur="this.placeholder='如未找到市区请在此输入'"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">家庭详细地址</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.HomeDetailAddress" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileftble">
+                    <span class="qiunile">
+                        <img src="assets/images/blodd.png">
+                    </span> 邮政编码
+                </ion-label>
+
+                <ion-input class="xinxiright" placeholder="请输入" type="number" [(ngModel)]="FamilyAddress.Postcode" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileftble">
+                    家庭电话
+                </ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.FamilyTel" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+        </ion-list>
+        <!--<ion-list class="xiangxi ">
+            <ion-item class="xinxiyuanjiao ">
+                <ion-label class="xinxileft ">性别</ion-label>
+                <ion-select [(ngModel)]="InformationFilling.Sex " interface="action-sheet " cancelText="取消 " placeholder="请选择 ">
+                    <ion-option [value]='item|json' *ngFor="let item of SexTypes ">{{item.CodeName}}
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>-->
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileftble">
+                    <span class="qiunile">
+                        <img src="assets/images/blodd.png">
+                    </span> 父亲姓名
+                </ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.DadName" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileftble">
+                    父亲工作单位
+                </ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.DadJobSpace" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileftble">
+                    父亲工作职务
+                </ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.DadJob" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileftble">
+                    父亲手机号码
+                </ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.DadTel" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+        </ion-list>
+
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileftble">
+                    <span class="qiunile ">
+                        <img src="assets/images/blodd.png">
+                    </span> 母亲姓名
+                </ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.MomName" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileftble">
+                    母亲工作单位
+                </ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.MomJobSpace" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileftble">
+                    母亲工作职务
+                </ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.MomJob" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileftble">
+                    母亲手机号码
+                </ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.MomTel" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+        </ion-list>
+    </div>
+
+    <button ion-button (click)="onDetailPageTJ() " class="btn-shaw ">
+          提交
+      </button>
+</ion-content>

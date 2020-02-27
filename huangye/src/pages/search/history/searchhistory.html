@@ -1,0 +1,101 @@
+<!--Create by hanzhendong on 2017/5/4.-->
+<ion-content class="outer-content">
+    <ion-row>
+        <ion-col col-10>
+            <ion-searchbar [(ngModel)]='searchQuery' (ionInput)="changeValue($event.target.value)"
+                           placeholder="搜索"></ion-searchbar>
+        </ion-col>
+        <ion-col col-2>
+            <button ion-button class="search-button" (click)="search()" margin-right>搜索</button>
+        </ion-col>
+    </ion-row>
+    <!--{{HisItems|json}}-->
+    <ion-list *ngIf="history">
+        <ion-list-header class="header-his">
+            搜索历史
+        </ion-list-header>
+        <ion-item *ngFor="let his of HisItems" (click)="setValue(his)">
+            <p>{{his.SearchValue}}</p>
+            <ion-icon item-right ios="ios-close" (click)="deleteHis(his);$event.stopPropagation()" color="primary"
+                      md="md-close"></ion-icon>
+        </ion-item>
+    </ion-list>
+
+    <div *ngIf="!history">
+        <ion-item-group *ngIf="(items.kuaidi||[]).length>0">
+            <ion-item-divider><p>快递</p></ion-item-divider>
+            <ion-item *ngFor="let ite of items.kuaidi" (click)="NavDetail({type:'kuaidi',item:ite},$event)">
+                <h2>{{ite.Name}}</h2>
+                <p>{{ite.Phone}}</p>
+                <ion-icon item-right name="ios-call" class="circle" color="primary"
+                          (click)="callPhone(ite);$event.stopPropagation()"></ion-icon>
+            </ion-item>
+        </ion-item-group>
+        <ion-item-group *ngIf="(items.chuxing||[]).length>0">
+            <ion-item-divider><p>出行</p></ion-item-divider>
+            <ion-item *ngFor="let ite of items.chuxing">
+                <h2>{{ite.Name}}</h2>
+                <p>{{ite.Phone}}</p>
+                <ion-icon item-right name="ios-call" class="circle" color="primary"
+                          (click)="callPhone(ite);$event.stopPropagation()"></ion-icon>
+            </ion-item>
+        </ion-item-group>
+        <ion-item-group *ngIf="(items.yinhang||[]).length>0">
+            <ion-item-divider><p>银行</p></ion-item-divider>
+            <ion-item *ngFor="let ite of items.yinhang">
+                <h2>{{ite.Name}}</h2>
+                <p>{{ite.Phone}}</p>
+                <ion-icon item-right name="ios-call" class="circle" color="primary"
+                          (click)="callPhone(ite);$event.stopPropagation()"></ion-icon>
+            </ion-item>
+        </ion-item-group>
+        <ion-item-group *ngIf="(items.ggfuwu||[]).length>0">
+            <ion-item-divider><p>公共服务</p></ion-item-divider>
+            <ion-item *ngFor="let ite of items.ggfuwu" (click)="NavDetail({type:'ggfuwu',item:ite},$event)">
+                <h2>{{ite.Name}}</h2>
+                <p>{{ite.Phone}}</p>
+                <ion-icon item-right name="ios-call" class="circle" color="primary"
+                          (click)="callPhone(ite);$event.stopPropagation()"></ion-icon>
+            </ion-item>
+        </ion-item-group>
+        <ion-item-group *ngIf="(items.bumen||[]).length>0">
+            <ion-item-divider><p>部门</p></ion-item-divider>
+            <ion-item *ngFor="let ite of items.bumen" (click)="NavDetail({type:'bumen',item:ite},$event)">
+                <h2>{{ite.Name}}</h2>
+                <p>{{ite.Phone}}</p>
+                <ion-icon item-right name="ios-call" class="circle" color="primary"
+                          (click)="callPhone(ite);$event.stopPropagation()"></ion-icon>
+            </ion-item>
+        </ion-item-group>
+        <!--<ion-item-group *ngIf="(items.teacher||[]).length>0">
+          <ion-item-divider><p>教职工</p></ion-item-divider>
+          <ion-item *ngFor="let ite of items.teacher" (click)="NavDetail({type:'teacher',item:ite},$event)">
+            <h2>{{ite.Name}}</h2>
+            <p>{{ite.Phone}}</p>
+            <ion-icon item-right name="ios-call" class="circle" color="primary" (click)="callPhone(ite);$event.stopPropagation()"></ion-icon>
+          </ion-item>
+        </ion-item-group>
+        <ion-item-group *ngIf="(items.student||[]).length>0">
+          <ion-item-divider><p>学生</p></ion-item-divider>
+          <ion-item *ngFor="let ite of items.student">
+            <h2>{{ite.Name}}</h2>
+            <p>{{ite.Phone}}</p>
+            <ion-icon item-right name="ios-call" class="circle" color="primary" (click)="callPhone(ite);$event.stopPropagation()"></ion-icon>
+          </ion-item>
+        </ion-item-group>-->
+    </div>
+    <div *ngIf="!emptyV&&(items.kuaidi||[]).length<=0 && (items.chuxing||[]).length<=0 &&(items.yinhang||[]).length<=0 && (items.ggfuwu||[]).length<=0 && (items.bumen||[]).length<=0 &&(this.HisItems||[]).length<=0"
+         class="none"><img class="noneimg" src="assets/images/kong.png">
+        <p class="noneFont">暂无更多内容</p></div>
+    <div *ngIf="emptyV" class="none"><img class="noneimg" src="assets/images/kong.png">
+        <p class="noneFont">暂无更多内容</p></div>
+    <!--<div *ngIf="items" style="text-align: center;margin-top: 30%"><img src="assets/images/1@2x_2.png">没有更多内容！
+ </div>-->
+    <!--<ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+     <ion-infinite-scroll-content
+       loadingSpinner="bubbles"
+       loadingText="正在加载更多。。。">
+     </ion-infinite-scroll-content>
+    </ion-infinite-scroll>-->
+    <!--<div style="text-align: center;color: #8e9093" *ngIf="!moreData">我是有底线的！</div>-->
+</ion-content>

@@ -1,0 +1,198 @@
+<div class="bg">
+    <div class="card_one">
+        <p class="djd no-line-break">报修登记单</p>
+        <p class="djdnum">报修单编号： {{task.SerialNumber}}</p>
+        <p>提交人：</p>
+        <table width="100%" border="0" cellspacing="1" cellpadding="0" style="text-align: center; line-height: 2.2em; margin-top: 5px; background:#979797;">
+            <tbody>
+                <tr>
+                    <td style="background: #FFFFFF;">{{task.StudentUserCode}}</td>
+                    <td style="background: #FFFFFF;">{{task.StudentName}}</td>
+                    <td style="background: #FFFFFF;">{{task.StudentAcadamyName}}</td>
+                    <td style="background: #FFFFFF;">联系方式： {{task.StudentPhone}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="bx">
+            <div class="bxqu">
+                <div class="bxname">报修区域：</div>
+                <div class="bxcontent">
+                    <span>{{task.AreaName}}</span>
+                </div>
+            </div>
+            <div class="bxadd">
+                <div class="bxname">具体地点：</div>
+                <div class="bxcontent">
+                    <span>{{task.SpecificSite}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="bx">
+            <div class="bxname">报修项目：</div>
+            <div class="bxcontent hover_no_cursor">
+                <a class="item_list hover_no_cursor" *ngFor="let data of task.Item; let i=index;">{{data.Name}}</a>
+            </div>
+        </div>
+        <div class="bx">
+            <div class="bxname bxtips" style="width:105px;">损坏情况说明：</div>
+            <div class="bxcontent">
+                <span>{{task.Caption}}</span>
+            </div>
+        </div>
+        <div class="bx">
+            <div class="bxname bxtips">损坏情况图片说明：</div>
+        </div>
+        <div class="imgshow">
+            <ul class="jq22">
+                <li *ngFor="let data of task.DamageAttachs; let i=index;">
+                    <img (click)="bangding()" src="{{data.URL}}">
+                </li>
+            </ul>
+        </div>
+        <div class="bx" *ngIf="task.RepairAttachs && task.RepairAttachs.length>0">
+            <div class="bxname bxtips">维修情况图片说明：</div>
+        </div>
+        <div class="imgshow" *ngIf="task.RepairAttachs && task.RepairAttachs.length>0">
+            <ul class="jq22">
+                <li *ngFor="let data of task.RepairAttachs; let i=index;">
+                    <img (click)="bangding()" src="{{data.URL}}">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card_one">
+        <div class="shuoming">
+            <span class="shuoming_name">进程说明：</span>
+        </div>
+        <div *ngFor="let data of flowsHistoryData; let i=index;">
+            <!-- 待处理 -->
+            <div *ngIf="data.out_data.Action==='Launch'">
+                <p class="process-list no-line-break">
+                    <i class="completed-circle"></i>
+                    <span class="shuoming_name">提出报修申请</span>
+                    <span class="shuoming_date">{{data.process_time}}</span>
+                </p>
+                <p class="process-list no-line-break" *ngIf="i+1===flowsHistoryData.length">
+                    <i class="processing-circle"></i>
+                    <span class="shuoming_name">维修人员接单中</span>
+                </p>
+            </div>
+            <!-- 无需处理 -->
+            <div *ngIf="data.out_data.Action==='NotNeed'">
+                <p class="process-list no-line-break">
+                    <i class="completed-circle"></i>
+                    <span class="shuoming_name">维修人员{{task.NotneedUserName}}意见为无需处理</span>
+                    <span class="shuoming_date">{{data.process_time}}</span>
+                </p>
+                <div class="reworkmark">{{task.NotneedExplanation}}</div>
+            </div>
+            <!-- 已接单 -->
+            <div *ngIf="data.out_data.Action==='Receive' || data.out_data.Action==='Designate'">
+                <p class="process-list no-line-break">
+                    <i class="completed-circle"></i>
+                    <span class="shuoming_name">维修人员{{task.RepairPersonnelName}}已接单</span>
+                    <span class="shuoming_date">{{data.process_time}}</span>
+                </p>
+                <p class="process-list no-line-break" *ngIf="i+1===flowsHistoryData.length">
+                    <i class="processing-circle"></i>
+                    <span class="shuoming_name">正在派工</span>
+                </p>
+            </div>
+            <!-- 维修人员已完成 -->
+            <p class="process-list no-line-break" *ngIf="data.out_data.Action==='Accomplish'">
+                <i class="completed-circle"></i>
+                <span class="shuoming_name">维修人员{{task.RepairPersonnelName}}已处理</span>
+                <span class="shuoming_date">{{data.process_time}}</span>
+            </p>
+            <!-- 返工 -->
+            <div *ngIf="data.out_data.Action==='Rework'">
+                <p class="process-list no-line-break">
+                    <i class="completed-circle"></i>
+                    <span class="shuoming_name">提出返工申请</span>
+                    <span class="shuoming_date">{{data.process_time}}</span>
+                </p>
+                <div class="reworkmark">{{data.ReworkReason}}</div>
+            </div>
+            <!-- 学生确认已完成 -->
+            <p class="process-list no-line-break" *ngIf="data.out_data.Action==='End'">
+                <i class="completed-circle"></i>
+                <span class="shuoming_name">维修任务已完成</span>
+                <span class="shuoming_date">{{data.process_time}}</span>
+            </p>
+        </div>
+        <div class="shuoming">
+            <span class="shuoming_name">备注说明：
+                <a class="addmark" (click)="AddRemarkIsShow=true"></a>
+            </span>
+        </div>
+        <p class="mark_list" *ngFor="let data of task.Remark; let i=index;">
+            <span class="mark_list_content">{{data.Content}}</span>
+            <span class="mark_list_time">{{data.UserName}}&nbsp;&nbsp;&nbsp;&nbsp;{{data.Created * 1|_date:'YYYY-MM-DD HH:mm'}}</span>
+        </p>
+    </div>
+    <div class="bottom_btn">
+        <div nz-row style="text-align: center;">
+            <!-- 待处理 -->
+            <button nz-button nzType="default" style="margin-right: 20px;" *ngIf="task.Status==='10'" (click)="notNeedIsShow=true;">无需处理</button>
+            <button nz-button nzType="primary" *ngIf="task.Status==='10'" (click)="designate();">派单</button>
+            <!-- 处理中 -->
+            <button nz-button nzType="primary" *ngIf="task.Status=='20' || task.Status=='21'" (click)="accomplishIsShow = true;">维修完成</button>
+        </div>
+
+        <div nz-row style="text-align: center; margin-top: 10px;">
+            <button nz-button nzType="default" onclick="window.history.go(-1);">返回</button>
+        </div>
+    </div>
+</div>
+
+<!-- 添加备注 -->
+<nz-modal [nzContent]="AddRemarkContent" [(nzVisible)]="AddRemarkIsShow" nzTitle="请输入备注" (nzOnCancel)="AddRemarkValue='';AddRemarkIsShow=false;"
+    (nzOnOk)="confirmAddRemark()">
+    <ng-template #AddRemarkContent>
+        <div class="surplus-num-box">
+            <textarea nz-input maxlength="30" [(ngModel)]="AddRemarkValue"></textarea>
+            <div class="surplus-num" *ngIf="AddRemarkValue.length<31">{{30 - AddRemarkValue.length}}</div>
+        </div>
+    </ng-template>
+</nz-modal>
+
+<!-- 派单 -->
+<nz-modal [nzContent]="designateContent" [(nzVisible)]="designateIsShow" nzTitle="派单" (nzOnCancel)="designateIsShow=false;designateValue='';"
+    (nzOnOk)="confirmDesignate()">
+    <ng-template #designateContent>
+        <nz-radio-group [(ngModel)]="designateValue">
+            <label nz-radio nzValue="{{data.IntelUserCode}}" *ngFor="let data of repairPersonnelList; let i=index;" style="margin-right: 20px;">{{data.Name}}</label>
+        </nz-radio-group>
+    </ng-template>
+</nz-modal>
+
+<!-- 无需处理 -->
+<nz-modal [nzContent]="notNeedContent" [(nzVisible)]="notNeedIsShow" nzTitle="请填写无需处理原因" (nzOnCancel)="notNeedValue='';notNeedIsShow=false;"
+    (nzOnOk)="confirmNotNeed()">
+    <ng-template #notNeedContent>
+        <div class="surplus-num-box">
+            <textarea nz-input maxlength="20" [(ngModel)]="notNeedValue"></textarea>
+            <div class="surplus-num" *ngIf="notNeedValue.length<21">{{20 - notNeedValue.length}}</div>
+        </div>
+    </ng-template>
+</nz-modal>
+
+<!-- 维修完成 -->
+<nz-modal [nzContent]="accomplishContent" [(nzVisible)]="accomplishIsShow" nzTitle="维修完成" (nzOnCancel)="accomplishIsShow=false;CertifyImgs=[];RecordIdArr=[];"
+    (nzOnOk)="confirmAccomplish()" nzCancelText="还未完成" nzOkText="已经完成">
+    <ng-template #accomplishContent>
+        <p>任务完成后，请拍照上传维修情况</p>
+        <div class="upload overh">
+            <p class="container fl relative" *ngIf="CertifyImgs.length<9">
+                <input type="file" value="file" class="hiddenFile" (change)="handleFiles($event)">
+                <img src="assets/images/add.png" style="width: 100%;">
+            </p>
+            <div class="Certify fl relative center" *ngFor="let item of CertifyImgs;let index=index;" [ngClass]="{'underimg':index==4}">
+                <img class="delete-icon absolute" src="assets/images/delete.png" (click)="deleteCertify($event,index)">
+                <img class="file-img" [src]="DomSanitizer.bypassSecurityTrustUrl(item.AttachmentURL)">
+            </div>
+            <div class="clear"></div>
+        </div>
+        <h2>确实已完成维修？</h2>
+    </ng-template>
+</nz-modal>

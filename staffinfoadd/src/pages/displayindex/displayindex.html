@@ -1,0 +1,48 @@
+<ion-content class="index-cont">
+    <div class="search-wrap fixed">
+        <form action="javascript:return true;">
+            <ion-input class="search-input" mode="ios" [(ngModel)]="searchTxt" type="search" placeholder="请输入姓名或学号"
+                [ngModelOptions]="{standalone: true}" (keyup)="onSearchKeyUp($event)"></ion-input>
+            <img class="absolute search-img" (click)="serachRoom()" src="assets/images/search.png" alt="">
+        </form>
+    </div>
+
+    <div *ngIf="!emptyData">
+        <div class="cont-wrap">
+            <ion-list *ngFor="let item of InfoData;let indx=index" style="margin: 0px">
+                <ion-item>
+                    <p class="txt-css overh">
+                        <span class="fn14 col666" style="margin-right:5px;">{{item.Name}}</span>
+                        <span class="fn14 col666">({{item.UserTypeName}})</span>
+                    </p>
+                    <p class="txt-css Phone-wrap">
+                        <span class="fn14 colaca">{{item.Phone}}</span>
+                        <span class="fn14 colaca">----  {{item.DepartmentName}}</span>
+                    </p>
+                    <button ion-button clear item-end (click)="showPrompt(item.IntelUserCode)">重置</button>
+                </ion-item>
+            </ion-list>
+        </div>
+
+        <div class="loading-wrap" *ngIf="loading">
+            <div class="spinnerw" id="spinnerw">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="emptyData" class="center">
+        <img src="assets/images/kong.png" style="margin-top:100px;" alt="">
+        <p class="fn16" style="color:#ACACAC;margin-top:20px;">请求数据为空</p>
+    </div>
+
+    <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <div style="text-align: center;color: #8e9093;margin-bottom:40px;" *ngIf="!moreData">我是有底线的！</div>
+
+
+</ion-content>

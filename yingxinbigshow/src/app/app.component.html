@@ -1,0 +1,99 @@
+<div class="main_cotent">
+  <div class="top_content">
+    <div class="campus">
+      <div>
+        <a class="logo">
+          <img src="{{campusLogo}}">
+        </a>
+        <div class="campus_p">
+          <p class="campus_name">{{campusName}}</p>
+          <p class="campus_time">
+            <span style="margin-right:25px">{{currentMonth}}-{{currentDate}}</span>{{currentHours}}:{{currentMinutes}}:{{currentSeconds}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="report">
+      <ul>
+        <li class="report1">
+          <p class="report-num">已报到人数</p>
+          <div class="report-num22 color-ff982b">
+            <span class="font-180">{{reportedNum}}</span>
+            <span class="font-70">人</span>
+          </div>
+        </li>
+        <li class="vertical-line"></li>
+        <li class="report2">
+          <p class="report-num">报到率</p>
+          <p class="font-100 color-ff982b">{{reportedRate}}%</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="line vary_width"></div>
+  <!-- <div class="roll_font">
+    <div *ngFor="let people of flysinit; let i=index">
+      <p *ngIf="people.Show" class="roll_bg roll{{i%2}}" [@shrinkOut]="people.State" (@shrinkOut.done)="showEnd(people)">
+        <span class="roll_title">{{people.Name}}-{{people.AcademyName}}</span>
+      </p>
+    </div>
+    <div style="clear: both"></div>
+
+  </div> -->
+  <div style="clear: both"></div>
+  <div class="bottom">
+    <div class="aca_roll">
+
+      <div class="academy aca_bg" *ngFor="let academy of pAcademys;">
+        <!-- <p class="academy_name academy_item">
+          <span class="academy_text" [@onechange]="academy.One.State" (@onechange.done)="academy.chgEnd()">{{academy.One.Elem.AcademyName}}</span>
+          <span [hidden]="academy.Two.State=='out'" class="academy_text" [@twochange]="academy.Two.State">{{academy.Two.Elem.AcademyName}}</span>
+        </p>
+        <p class="academy_number academy_item">
+          <span class="academy_text" [@onechange]="academy.One.State" (@onechange.done)="academy.chgEnd()">{{academy.One.Elem.ReportedNum}}/{{academy.One.Elem.RecruitNum}}</span>
+          <span class="academy_text" [hidden]="academy.Two.State=='out'" [@twochange]="academy.Two.State">{{academy.Two.Elem.ReportedNum}}/{{academy.Two.Elem.RecruitNum}}</span>
+        </p>
+        <div class="aca_line"></div>
+        <p class="academy_rate academy_item">
+          <span class="academy_text" [@onechange]="academy.One.State" (@onechange.done)="academy.chgEnd()">
+            学院报到率：{{academy.One.Elem.ReportedRate}}</span>
+          <span class="academy_text" [hidden]="academy.Two.State=='out'" [@twochange]="academy.Two.State">
+            学院报到率：{{academy.Two.Elem.ReportedRate}}</span>
+        </p> -->
+        <p class="academy_name">
+          <span class="academy_text no-break" [@onechange]="academy.One.State" (@onechange.done)="academy.chgEnd()">{{academy.One.Elem.AcademyName}}</span>
+           <span class="academy_text no-break" [style.display]="academy.Two.State=='out'?'none':inline-block" [@twochange]="academy.Two.State">{{academy.Two.Elem.AcademyName}}</span>
+        </p>
+        <div class="academy_show">
+          <div class="academy_show_left" [@onechange]="academy.One.State" (@onechange.done)="academy.chgEnd()">
+            <p class="academy_title_font">已报到人数/总人数</p>
+            <p class="academy_num_font">{{academy.One.Elem.ReportedNum}}/{{academy.One.Elem.RecruitNum}}</p>
+          </div>
+          <div class="academy_show_left academy_show_rate" [@onechange]="academy.One.State" (@onechange.done)="academy.chgEnd()">
+            <p class="academy_title_font">报到率</p>
+            <p class="academy_rate_font">{{academy.One.Elem.ReportedRate}}</p>
+          </div>
+        </div>
+        <!-- <div class="academy_show 2" [hidden]="academy.Two.State=='out'" [@twochange]="academy.Two.State"> -->
+        <div class="academy_show" [style.display]="academy.Two.State=='out'?'none':inline-block" [@twochange]="academy.Two.State">
+          <div class="academy_show_left">
+            <p class="academy_title_font">已报道人数/需报道人数{{academy.Two.State=='out'}}</p>
+            <p class="academy_num_font">{{academy.Two.Elem.ReportedNum}}/{{academy.Two.Elem.RecruitNum}}</p>
+          </div>
+          <div class="academy_show_left academy_show_rate">
+            <p class="academy_title_font">报到率</p>
+            <p class="academy_rate_font">{{academy.Two.Elem.ReportedRate}}</p>
+          </div>
+        </div>
+        <!-- <p class="academy_number academy_item">
+          <span class="academy_text">{{academy.One.Elem.ReportedNum}}/{{academy.One.Elem.RecruitNum}}</span>
+        </p>
+        <div class="aca_line"></div>
+        <p class="academy_rate academy_item">
+          <span class="academy_text">
+            学院报到率：{{academy.One.Elem.ReportedRate}}</span>
+        </p> -->
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+page-index {
+    ul,li{list-style: none;margin:0;padding:0;}
+    p,h1,h2,h3{margin:0;padding:0;}
+    .fl{float: left;}
+    .fr{float: right;}
+    .center{text-align: center;}
+    .dib{display: inline-block;}
+    .relative{position: relative;}
+    .absolute{position: absolute;}
+    .fixed{position: fixed}
+    .overh{overflow: hidden;}
+    .mr{margin:0 auto;}
+    .db{display: block;}
+    .fn9{font-size: 9px;}
+    .fn12{font-size: 12px;}
+    .fn13{font-size: 13px;}
+    .fn14{font-size: 14px;}
+    .fn16{font-size: 16px;}
+    .fn18{font-size: 18px;}
+
+    .bgfff{background: #fff;}
+    .color4a{color: #4A4A4A;}
+    .color9b{color: #9B9B9B;}
+    .color66{color: #666;}
+    .color3e{color: #3e3e3e;}
+    .color99{color: #999;}
+
+    .scroll-content{padding-bottom:0px!important}
+    .index-cont{background: #F5F5F5;color: #666;}
+    .search-wrap{width: 100%;height:40px;background: #ccc;padding: 3px 8px;top:0;left:0;z-index: 99;transform: translateZ(0);-webkit-transform: translateZ(0);}
+    .search-input{width: 100%;height: 34px;border-radius: 6px;border: 1px solid #ccc;padding:0 35px 0 8px;background: #fff;}
+    .search-img{width: 25px;right:15px;top:8px;z-index: 101;}
+    .text-input-ios{height:100%;margin: 0 6px 0 0;}
+
+    .add-txt{margin-top:60px;height:40px;line-height: 40px;background: #fff;border-bottom: 1px solid #c8c7cc;}
+
+    .cont-form{width: 100%;}
+    .cont-form .list-ios{margin:0;border-radius: 0px;}
+    .cont-form .item-block {min-height: 50px;}
+
+    .li-css{background: #fff;padding:0 15px;}
+    .li-css .label-ios{width: 100px!important;}
+    .li-css .label-ios i{color: #FB5F2D;width: 12px;display: inline-block;}
+    .li-css .text-input-ios{margin-left:0px;width:100%;color: #666;}
+
+    ion-select {
+        position: relative;
+        flex: 1;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        overflow: hidden;
+        max-width: 100%;
+        height: 33px;
+        line-height: 33px;
+        background: #FFFFFF;
+        padding:0px 0px 0px 0px!important;
+        .select-text {
+            font-size: 16px;
+            color: #666;
+            line-height: 33px;
+        }
+    }
+    .select-ios .select-icon {position: relative;width: 15px; height: 33px;}
+    .exit-tab{width: 90px;height:35px;color: #FFC000;border:1px solid #FFC000;margin:0 10px;}
+    .submit-tab{width: 90px;height:35px;background: #FFC000;margin:0 10px;}
+
+    .list-ios > .item-block:last-child{border-bottom:1px solid #c8c7cc!important;}
+
+
+
+
+
+
+
+}
+
+

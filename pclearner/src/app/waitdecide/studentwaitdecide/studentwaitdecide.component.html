@@ -1,0 +1,313 @@
+<div class="content">
+    <h2 class="center">{{TaskName}}</h2>
+    <p class="center" style="margin:10px 0">开放时间: {{StartDate}} 至 {{EndDate}}</p>
+
+    <div>
+        <a [routerLink]="['/waitdecide/waitdecidehomepage',{TaskName: TaskName,created:StartDate,EndDate:EndDate}]" class="fn14">全部范围</a>
+        <span> > </span>
+        <span class="fn14">{{teacherT}} ({{statusText}})</span>
+        <a *ngIf="smallBt && userJsonStr == 'Counselor'" [routerLink]="['/waitdecide/groupname',{ClassCode:ClassCode,TaskName:TaskName,Status:'0',RecognitionLevel:'0',StartDate:StartDate,EndDate:EndDate}]">
+            <button nz-button [nzType]="'default'" style="margin-left:10px;">
+                <span>公示小组评议成员</span>
+            </button>
+        </a>
+        <button *ngIf="tabBt && userJsonStr == 'Counselor'" nz-button [nzType]="'default'" style="margin-left:10px;">
+            <span>打印问卷及打分表</span>
+        </button>
+    </div>
+
+
+    <div *ngIf="this.Status == '0'">
+        <div style="margin-top:20px;">
+            <nz-table #nzTable [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [nzBordered]="true" [nzIsPagination]="false">
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th>
+                            <span>学号</span>
+                        </th>
+                        <th nz-th>
+                            <span>姓名</span>
+                        </th>
+                        <th nz-th>
+                            <span>班级</span>
+                        </th>
+                        <th nz-th>
+                            <span>申请所需资料</span>
+                        </th>
+                        <th nz-th>
+                            <span>经济情况调查问卷</span>
+                        </th>
+                        <th nz-th>
+                            <span>学生自评调查问卷</span>
+                        </th>
+                        <th nz-th>
+                            <span>辅导员认定意见</span>
+                        </th>
+                        <th nz-th>
+                            <span>小组评议</span>
+                        </th>
+                        <th nz-th>
+                            <span>合计</span>
+                        </th>
+                        <th nz-th>
+                            <span>民主评议结果</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let data of dataSet">
+                        <td nz-td>{{data.UserCode}}</td>
+                        <td nz-td>{{data.Name}}</td>
+                        <td nz-td>{{data.Class}}</td>
+                        <td nz-td>
+                            <a *ngIf="data.IsAttach == '1'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '1',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">
+                                <span>查看</span>
+                            </a>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.EnconomicScore != ''" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '2',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">
+                                <span>{{data.EnconomicScore}}</span>
+                            </a>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.SelfAssessmentScore != ''" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '3',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">
+                                <span>{{data.SelfAssessmentScore}}</span>
+                            </a>
+                        </td>
+
+                        <td nz-td>
+                            <span *ngIf="CounsellorOpinion == '0' && userJsonStr == 'Counselor'">
+                                <a [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode,categray: '4',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">点击认定</a>
+                            </span>
+                            <span *ngIf="CounsellorOpinion == ''">
+                                请先公示小组评议成员
+                            </span>
+                        </td>
+
+                        <td nz-td></td>
+                        <td nz-td></td>
+                        <td nz-td></td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+
+        <div style="margin-top:60px;">
+            <hr>
+            <p style="color:#FF0000;margin:20px 0">以下学生无认定数据，如若学生有特殊情况，可以对其进行直接认定并说明原因</p>
+            <nz-table #nzTable [nzAjaxData]="dataSet1" [nzLoading]="httpService.loading" [nzBordered]="true" [nzIsPagination]="false">
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th>
+                            <span>学号</span>
+                        </th>
+                        <th nz-th>
+                            <span>姓名</span>
+                        </th>
+                        <th nz-th>
+                            <span>班级</span>
+                        </th>
+                        <th nz-th>
+                            <span>申请所需资料</span>
+                        </th>
+                        <th nz-th>
+                            <span>经济情况调查问卷</span>
+                        </th>
+                        <th nz-th>
+                            <span>学生自评调查问卷</span>
+                        </th>
+                        <th nz-th>
+                            <span>辅导员认定意见</span>
+                        </th>
+                        <th nz-th>
+                            <span>小组评议</span>
+                        </th>
+                        <th nz-th>
+                            <span>合计</span>
+                        </th>
+                        <th nz-th>
+                            <span>民主评议结果</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let data of dataSet1;">
+                        <td nz-td>{{data.UserCode}}</td>
+                        <td nz-td>{{data.Name}}</td>
+                        <td nz-td>{{data.Class}}</td>
+                        <td nz-td>
+                            <a *ngIf="data.IsAttach == '1'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '1',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">
+                                <span>查看</span>
+                            </a>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.EnconomicScore != ''" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '2',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">
+                                <span>{{data.EnconomicScore}}</span>
+                            </a>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.SelfAssessmentScore != ''" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '3',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">
+                                <span>{{data.SelfAssessmentScore}}</span>
+                            </a>
+                        </td>
+
+                        <td nz-td>
+                            <span *ngIf="CounsellorOpinion == '0' && userJsonStr == 'Counselor'">
+                                <a [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode,categray: '4',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">点击认定</a>
+                            </span>
+                            <span *ngIf="CounsellorOpinion == ''">
+                                请先公示小组评议成员
+                            </span>
+                        </td>
+                        <td nz-td></td>
+                        <td nz-td></td>
+                        <td nz-td></td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+
+    <!-- 其他情况 -->
+
+    <div style="margin-top:20px;" *ngIf="this.Status != '0'">
+        <nz-table #nzTable [nzAjaxData]="dataSet2" [nzLoading]="httpService.loading" [nzBordered]="true" [nzIsPagination]="false">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>
+                        <span>学号</span>
+                    </th>
+                    <th nz-th>
+                        <span>姓名</span>
+                    </th>
+                    <th nz-th>
+                        <span>班级</span>
+                    </th>
+                    <th nz-th>
+                        <span>申请所需资料</span>
+                    </th>
+                    <th nz-th>
+                        <span>经济情况调查问卷</span>
+                    </th>
+                    <th nz-th>
+                        <span>学生自评调查问卷</span>
+                    </th>
+                    <th nz-th>
+                        <span>辅导员认定意见</span>
+                    </th>
+                    <th nz-th>
+                        <span>小组评议</span>
+                    </th>
+                    <th nz-th>
+                        <span>合计</span>
+                    </th>
+                    <th nz-th>
+                        <span>民主评议结果</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of dataSet2">
+                    <td nz-td>{{data.UserCode}}</td>
+                    <td nz-td>{{data.Name}}</td>
+                    <td nz-td>{{data.Class}}</td>
+                    <td nz-td>
+                        <a *ngIf="data.IsAttach == '1'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '1',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">
+                            <span>查看</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.EnconomicScore != ''" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '2',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">
+                            <span>{{data.EnconomicScore}}</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.SelfAssessmentScore != ''" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '3',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">
+                            <span>{{data.SelfAssessmentScore}}</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.Status == '41'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '4',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">
+                            <span>直接认定</span>
+                        </a>
+                        <a *ngIf="data.Status == '42'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '4',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">
+                            <span>一票否决</span>
+                        </a>
+                        <a *ngIf="data.Status == '43'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '4',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">
+                            <span>小组评议</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <span *ngIf="data.EliberateStatus == '1'">
+                            <a [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode,categray: '5',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">{{data.EliberateScore}}</a>
+                        </span>
+                        <span *ngIf="data.EliberateStatus == '2'"></span>
+                        <span *ngIf="data.EliberateStatus == '3' && userJsonStr == 'Counselor'">
+                            <a [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode,categray: '5',ClassCode: ClassCode,Status:Status,RecognitionLevel:RecognitionLevel,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">点击录入</a>
+                        </span>
+                    </td>
+                    <td nz-td>
+                        <span *ngIf="data.EnconomicScore != '' && data.SelfAssessmentScore != '' && data.EliberateStatus == '1'">
+                            {{((data.EnconomicScore*5 + data.SelfAssessmentScore*2 + data.EliberateScore*3)/10).toFixed(2)}}
+                        </span>
+                        <span *ngIf="data.EnconomicScore == '' && data.SelfAssessmentScore == '' && data.EliberateStatus == '1'">
+                            {{((data.EliberateScore*3)/10).toFixed(2)}}
+                        </span>
+                    </td>
+                    <td nz-td>
+                        <span *ngIf="data.RecognitionLevel == ''"></span>
+                        <span *ngIf="data.RecognitionLevel == '87000010'">
+                            <label *ngIf="statusJsonStr == '3' && userJsonStr == 'Counselor' && isSubmitJsonStr != '2'" (click)="tankbox(data.IntelUserCode,data.Status)" style="cursor: pointer;color:#108EE9;">一般困难</label>
+                            <label *ngIf="statusJsonStr != '3' || userJsonStr != 'Counselor' || isSubmitJsonStr == '2'">一般困难</label>
+                        </span>
+                        <span *ngIf="data.RecognitionLevel == '87000020'">
+                            <label *ngIf="statusJsonStr == '3' && userJsonStr == 'Counselor' && isSubmitJsonStr != '2'" (click)="tankbox(data.IntelUserCode,data.Status)" style="cursor: pointer;color:#108EE9;">困难</label>
+                            <label *ngIf="statusJsonStr != '3' || userJsonStr != 'Counselor' || isSubmitJsonStr == '2'">困难</label>
+                        </span>
+                        <span *ngIf="data.RecognitionLevel == '87000030'">
+                            <label *ngIf="statusJsonStr == '3' && userJsonStr == 'Counselor' && isSubmitJsonStr != '2'" (click)="tankbox(data.IntelUserCode,data.Status)" style="cursor: pointer;color:#108EE9;">特殊困难</label>
+                            <label *ngIf="statusJsonStr != '3' || userJsonStr != 'Counselor' || isSubmitJsonStr == '2'">特殊困难</label>
+                        </span>
+                        <span *ngIf="data.RecognitionLevel == '87000040'">
+                            <label *ngIf="statusJsonStr == '3' && userJsonStr == 'Counselor' && isSubmitJsonStr != '2'" (click)="tankbox(data.IntelUserCode,data.Status)" style="cursor: pointer;color:#108EE9;">不予评级</label>
+                            <label *ngIf="statusJsonStr != '3' || userJsonStr != 'Counselor' || isSubmitJsonStr == '2'">不予评级</label>
+                        </span>
+                        <span *ngIf="data.RecognitionLevel == '1'">
+                            <label *ngIf="statusJsonStr == '3' && userJsonStr == 'Counselor' && isSubmitJsonStr != '2'" (click)="tankbox(data.IntelUserCode,data.Status)" style="cursor: pointer;color:#108EE9;">点击评议</label>
+                            <label *ngIf="statusJsonStr != '3' || userJsonStr != 'Counselor' || isSubmitJsonStr == '2'">点击评议</label>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+    <div class="medigo" [hidden]="disdden" (click)="overbox()"></div>
+    <div class="file-box" [hidden]="disdden">
+        <div class="pass-cont center mr">
+            <div class="top-btn">
+                <button nz-button [nzType]="dataSet5.BgStyle1" (click)="onoff(87000030)">
+                    <span>特殊困难</span>
+                </button>
+                <button nz-button [nzType]="dataSet5.BgStyle2" (click)="onoff(87000020)">
+                    <span>困难</span>
+                </button>
+                <button nz-button [nzType]="dataSet5.BgStyle3" (click)="onoff(87000010)">
+                    <span>一般困难</span>
+                </button>
+                <button nz-button [nzType]="dataSet5.BgStyle4" (click)="onoff(87000040)">
+                    <span>不予评级</span>
+                </button>
+            </div>
+
+            <div class="foot-btn center">
+                <button nz-button [nzType]="'default'" (click)="overbox()">
+                    <span>返回</span>
+                </button>
+                <button nz-button [nzType]="'primary'" (click)="onPass()">
+                    <span>完成</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

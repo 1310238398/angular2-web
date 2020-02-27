@@ -1,0 +1,130 @@
+<ion-content class="outer-content">
+    <ion-list>
+
+        <ion-item>
+            <ion-label fixed>任课教师</ion-label>
+            <!--<ion-input type="text" value="{{name}}" class="inp" placeholder="任课教师" readonly="readonly"></ion-input>-->
+            <ion-label>
+                <input type="text" value="{{name}}" class="inpre" placeholder="任课教师" readonly="readonly">
+            </ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-label fixed>课程名称<label class="must">*</label></ion-label>
+            <!--<ion-input type="text" [(ngModel)]="info.CourseName" class="inp" placeholder="请填写" max="18"></ion-input>-->
+            <ion-label>
+                <input type="text" [(ngModel)]="info.CourseName" class="inpre" placeholder="请填写" maxlength="18">
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>课程性质<label class="must">*</label></ion-label>
+            <ion-select [(ngModel)]="info.CourseType" multiple="false" cancelText="取消" okText="确定">
+
+                <ion-option *ngFor="let item of qualitylist" value="{{item.Code}}">{{item.CodeName}}</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <!--<div>{{departmentlist | json}}</div>-->
+        <!--<ion-item *ngFor = "let item of departmentlist">
+            <input *ngIf="">
+
+        </ion-item>-->
+        <!--<ion-item>
+             <ion-label fixed>部门<label class="must">*</label></ion-label>
+            <ion-label >
+                <input type="text" *ngIf = "departmentlist.length === 1" value="{{departmentlist[0].Department}}" class="inpre" placeholder="任课教师" readonly="readonly">
+            </ion-label>
+        </ion-item>-->
+
+        <ion-item >
+            <ion-label fixed>部门<label class="must">*</label></ion-label>
+            <ion-label *ngIf = "departmentlist.length === 1">
+                <input type="text"  value="{{departmentlist[0].Department}}" class="inpre"  readonly="readonly">
+            </ion-label>
+            <!--<ion-label [(ngModel)]="info.DepartmentCode" class="must" *ngIf="departmentlist.length === 1" >{{departmentlist[0].Department}}</ion-label>-->
+            <ion-select *ngIf="departmentlist.length !== 1" [(ngModel)]="info.DepartmentCode" multiple="false" cancelText="取消" okText="确定">
+                <ion-option *ngFor="let item of departmentlist"   value="{{item.DepartmentCode}}">{{item.Department}}</ion-option>
+            </ion-select>
+
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>授课班级<label class="must">*</label></ion-label>
+            <!--<ion-input type="text" value="" class="inp" placeholder="请填写" max="18" [(ngModel)]="info.ClasName"></ion-input>-->
+            <ion-label>
+                <input type="text" [(ngModel)]="info.ClasName" class="inpre" placeholder="请填写" maxlength="18">
+            </ion-label>
+        </ion-item>
+        <ion-item style="margin-top: 10px">
+            <ion-label fixed>调课原因<label class="must">*</label></ion-label>
+            <!--<ion-textarea type="text" value="" class="inp" placeholder="请填写" max="100" [(ngModel)]="info.AdjustReason"></ion-textarea>-->
+            <ion-label>
+                <textarea class="inpre" [(ngModel)]="info.AdjustReason" maxlength="100" placeholder="请填写">{{info.AdjustReason}}</textarea>
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>原课程时间<label class="must">*</label></ion-label>
+            <!--<ion-input type="text" readonly="readonly" *ngIf="weekselect_1.name.length ==0 && dayselect_1.name.length ==0 && sectionselect_1.name.length ==0" value="" placeholder="请选择" class="inp" placeholder="" max="18"></ion-input>
+            <ion-input type="text" readonly="readonly" *ngIf="weekselect_1.name.length !=0 || dayselect_1.name.length !=0 || sectionselect_1.name.length !=0" value="第{{weekselect_1.name}}周,{{dayselect_1.name}},第{{sectionselect_1.name}}节" class="inp" placeholder="" max="18"></ion-input>
+-->
+            <ion-label (click)="openModal(1,{getweekselect: weekselect_1,getdayselect: dayselect_1,getsectionselect: sectionselect_1})">
+                <input type="text" readonly="readonly" *ngIf="weekselect_1.name.length ==0 && dayselect_1.name.length ==0 && sectionselect_1.name.length ==0" value="" placeholder="请选择" class="inpre" maxlength="100">
+                <input type="text" readonly="readonly" *ngIf="weekselect_1.name.length !=0 || dayselect_1.name.length !=0 || sectionselect_1.name.length !=0" value="第{{weekselect_1.name}}周,{{dayselect_1.name}},第{{sectionselect_1.name}}节" class="inpre" placeholder="" maxlength="100">
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>原课程地点<label class="must">*</label></ion-label>
+            <ion-input type="text" value="" class="inp" placeholder="3301" max="18" [(ngModel)]="BeforeAdjustAddress_1"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>调整后时间</ion-label>
+            <ion-label (click)="openModal(2,{getweekselect: weekselect_2,getdayselect: dayselect_2,getsectionselect: sectionselect_2})">
+                <input type="text" readonly="readonly" *ngIf="weekselect_2.name.length ==0 && dayselect_2.name.length ==0 && sectionselect_2.name.length ==0" value="" placeholder="请选择" class="inpre" maxlength="100">
+                <input type="text" readonly="readonly" *ngIf="weekselect_2.name.length !=0 || dayselect_2.name.length !=0 || sectionselect_2.name.length !=0" value="第{{weekselect_2.name}}周,{{dayselect_2.name}},第{{sectionselect_2.name}}节" class="inpre" placeholder="" maxlength="100">
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>调整后地点</ion-label>
+            <!--<ion-input type="text" value="" class="inp" placeholder="请选择(选填)" max="18" [(ngModel)]="AdjustAddress_1"></ion-input>-->
+            <ion-label>
+                <input type="text" [(ngModel)]="AdjustAddress_1" class="inpre" placeholder="请填写" maxlength="18">
+            </ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="shouInfo == 1" style="margin-top: 10px">
+            <ion-label fixed>原课程时间<label class="must">*</label></ion-label>
+            <ion-label (click)="openModal(3,{getweekselect: weekselect_3,getdayselect: dayselect_3,getsectionselect: sectionselect_3})">
+                <input type="text" readonly="readonly" *ngIf="weekselect_3.name.length ==0 && dayselect_3.name.length ==0 && sectionselect_3.name.length ==0" value="" placeholder="请选择" class="inpre" maxlength="100">
+                <input type="text" readonly="readonly" *ngIf="weekselect_3.name.length !=0 || dayselect_3.name.length !=0 || sectionselect_3.name.length !=0" value="第{{weekselect_3.name}}周,{{dayselect_3.name}},第{{sectionselect_3.name}}节" class="inpre" placeholder="" maxlength="100">
+            </ion-label>
+        </ion-item>
+        <ion-item *ngIf="shouInfo == 1">
+            <ion-label fixed>原课程地点<label class="must">*</label></ion-label>
+            <!--<ion-input type="text" value="" class="inp" placeholder="3301" max="18" [(ngModel)]="BeforeAdjustAddress_2"></ion-input>-->
+            <ion-label>
+                <input type="text" [(ngModel)]="BeforeAdjustAddress_2" class="inpre" placeholder="请填写" maxlength="18">
+            </ion-label>
+        </ion-item>
+        <ion-item *ngIf="shouInfo == 1">
+            <ion-label fixed>调整后时间</ion-label>
+            <ion-label (click)="openModal(4,{getweekselect: weekselect_4,getdayselect: dayselect_4,getsectionselect: sectionselect_4})">
+                <input type="text" readonly="readonly" *ngIf="weekselect_4.name.length ==0 && dayselect_4.name.length ==0 && sectionselect_4.name.length ==0" value="" placeholder="请选择" class="inpre" maxlength="100">
+                <input type="text" readonly="readonly" *ngIf="weekselect_4.name.length !=0 || dayselect_4.name.length !=0 || sectionselect_4.name.length !=0" value="第{{weekselect_4.name}}周,{{dayselect_4.name}},第{{sectionselect_4.name}}节" class="inpre" placeholder="" maxlength="100">
+            </ion-label>
+        </ion-item>
+        <ion-item *ngIf="shouInfo == 1">
+            <ion-label fixed>调整后地点</ion-label>
+            <!--<ion-input type="text" value="" class="inp" placeholder="请选择(选填)" max="18" [(ngModel)]="AdjustAddress_2"></ion-input>-->
+            <ion-label>
+                <input type="text" [(ngModel)]="AdjustAddress_2" class="inpre" placeholder="请填写" maxlength="18">
+            </ion-label>
+        </ion-item>
+
+        <button *ngIf="shouInfo == 0" ion-button block outline (click)="addLesInfo()">添加调课时间</button>
+        <button *ngIf="shouInfo == 1" ion-button block outline color="danger" (click)="delLesInfo()">删除调课时间</button>
+    </ion-list>
+</ion-content>
+<ion-footer>
+    <ion-toolbar color="light">
+        <button ion-button full class="yellow" (click)="addlessonBtn()">提交调课申请</button>
+    </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,23 @@
+<ion-content class="outer-content pageBgc">
+
+    <div *ngFor="let item of items">
+        <div class="imgstyle">
+            <span></span>
+            <img src="{{item.URL}}" >
+            <!-- onerror="./assets/" -->
+        </div>
+        <!-- <img src="{{item.URL}}"> -->
+        <span class="name">{{item.Name}}</span>
+        <span class="department">学院：{{item.DepartmentName}}</span>
+        <div style="margin: 10px 8px 0px 6px;border-top:1px dotted #C0C0C0;"></div>
+        <p class="jiyu">
+            {{item.Message}}
+            <!-- 作为辅导员，最幸福的事情莫过于能与你们共同度过大学这段美好时光。新学期，我将与你们一路同行！加油 -->
+        </p>
+        <button *ngIf="counselors.IsDone == '0'" type="button" (click)="NavigationTo(item)">进入测评</button>
+        <button *ngIf="counselors.IsDone == '1'" type="button" [disabled] = 'true'>测评已完成</button>
+
+        <!-- <button class="pNo" type="button">已测评</button> -->
+    </div>
+
+</ion-content>

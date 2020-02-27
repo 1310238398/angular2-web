@@ -1,0 +1,116 @@
+<div class="content">
+    <h2 class="center">{{TaskName}}</h2>
+    <p class="center" style="margin:10px 0">开放时间: {{StartDate}}  至  {{EndDate}}</p>
+    <div style="margin-top:20px;">
+        <nz-table #nzTable [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [nzBordered]="true" [nzIsPagination]="false">
+                <thead nz-thead>
+                    <tr>  
+                        <th nz-th rowspan="2"><span class="bold">班级</span></th>
+                        <th nz-th colspan="4"><span class="bold">辅导员认定意见</span></th>
+                        <th nz-th colspan="5"><span class="bold">民主评议结果</span></th>
+                        <th nz-th rowspan="2"><span>公示<br>并提交</span></th>
+                        <th nz-th rowspan="2"><span>审批进度</span></th>
+                        <th nz-th rowspan="2"><span>结果查看</span></th>
+                    </tr>
+                    <tr>  
+                        <th nz-th><span style="color: #0099FF;cursor: pointer;" (click)="info(contentTpl)">待认定学生</span></th>
+                        <th nz-th><span>直接认定</span></th>
+                        <th nz-th><span>一票否决</span></th>
+                        <th nz-th><span>小组评议</span></th>
+                        <th nz-th><span>待评议学生</span></th>
+                        <th nz-th><span>特殊困难</span></th>
+                        <th nz-th><span>困难</span></th>
+                        <th nz-th><span>一般困难</span></th>
+                        <th nz-th><span>不予评级</span></th>
+                    </tr>
+                </thead>
+                <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                        <td nz-td>{{data.ClassName}}</td>
+                        <td nz-td>
+                            <a [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'0',RecognitionLevel:'0',TaskName: TaskName,StartDate:StartDate,EndDate:EndDate,isSubmit:data.Status}]" (click)="isSubmit(data.Status)">{{data.UnConfirmCount}}</a>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.Count41 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'41',RecognitionLevel:'',TaskName: TaskName,StartDate:StartDate,EndDate:EndDate,isSubmit:data.Status}]" (click)="isSubmit(data.Status)">{{data.CountAppro41}}/{{data.Count41}}</a>
+                            <span *ngIf="data.Count41 == '0'">{{data.CountAppro41}}/{{data.Count41}}</span>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.Count42 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'42',RecognitionLevel:'',TaskName: TaskName,StartDate:StartDate,EndDate:EndDate,isSubmit:data.Status}]" (click)="isSubmit(data.Status)">{{data.CountAppro42}}/{{data.Count42}}</a>
+                            <span *ngIf="data.Count42 == '0'">{{data.CountAppro42}}/{{data.Count42}}</span>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.Count43 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'43',RecognitionLevel:'1',TaskName: TaskName,StartDate:StartDate,EndDate:EndDate,isSubmit:data.Status}]" (click)="isSubmit(data.Status)">{{data.CountAppro43}}/{{data.Count43}}</a>
+                            <span *ngIf="data.Count43 == '0'">{{data.CountAppro43}}/{{data.Count43}}</span>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.Count43Un != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'43',RecognitionLevel:'0',TaskName: TaskName,StartDate:StartDate,EndDate:EndDate,isSubmit:data.Status}]" (click)="isSubmit(data.Status)">{{data.Count43Un}}</a>
+                            <span *ngIf="data.Count43Un == '0'"> {{data.Count43Un}}</span>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.Count4330 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'43',RecognitionLevel:'87000030',TaskName: TaskName,StartDate:StartDate,EndDate:EndDate,isSubmit:data.Status}]" (click)="isSubmit(data.Status)">{{data.Count4330}}</a>
+                            <span *ngIf="data.Count4330 == '0'"> {{data.Count4330}}</span>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.Count4320 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'43',RecognitionLevel:'87000020',TaskName: TaskName,StartDate:StartDate,EndDate:EndDate,isSubmit:data.Status}]" (click)="isSubmit(data.Status)">{{data.Count4320}}</a>
+                            <span *ngIf="data.Count4320 == '0'"> {{data.Count4320}}</span>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.Count4310 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'43',RecognitionLevel:'87000010',TaskName: TaskName,StartDate:StartDate,EndDate:EndDate,isSubmit:data.Status}]" (click)="isSubmit(data.Status)">{{data.Count4310}}</a>
+                            <span *ngIf="data.Count4310 == '0'"> {{data.Count4310}}</span>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.Count4340 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'43',RecognitionLevel:'87000040',TaskName: TaskName,StartDate:StartDate,EndDate:EndDate,isSubmit:data.Status}]" (click)="isSubmit(data.Status)">{{data.Count4340}}</a>
+                            <span *ngIf="data.Count4340 == '0'"> {{data.Count4340}}</span>
+                        </td>
+
+                        <td nz-td>
+                            <span *ngIf="data.Count43Un == '0' && data.Status == ''"></span>
+                            <span *ngIf="data.Count43Un != '0' || data.PubTime == ''"></span>
+                            <span *ngIf="data.Count43Un == '0' && data.Status == '0' && data.PubTime == '0'" (click)="showModal()" style="color: #0099FF;cursor: pointer;"> 点击公示</span>
+                            <span *ngIf="data.PubTime == '1'"> 公示中</span>
+                            <span *ngIf="data.PubTime == '2'"> 点击提交</span>
+                            <span *ngIf="data.Status == '2'"> 已提交 </span>
+                        </td>
+
+                        <td nz-td>
+                            <span *ngIf="data.ApprovalStatus == '0' && data.Status == '2'"> 未审批 </span>
+                            <span *ngIf="data.ApprovalStatus == '11'"> 学院领导审批通过 </span>
+                            <span *ngIf="data.ApprovalStatus == '12'"> 学院领导审批不通过 </span>
+                            <span *ngIf="data.ApprovalStatus == '21'"> 资助中心审核通过 </span>
+                            <span *ngIf="data.ApprovalStatus == '22'"> 资助中心审核不通过 </span>
+                        </td>
+                        <td nz-td>
+                            <span *ngIf="data.Count4310 != '0' || data.Count4320 != '0' || data.Count4330 != '0'"> <a [routerLink]="['/waitdecide/resultsee',{ClassCode: data.ClassCode,TaskName: TaskName,StartDate:StartDate,EndDate:EndDate,isSubmit:data.Status}]" (click)="isSubmit(data.Status)">查看</a>  </span>
+                        </td>
+                    </tr>
+                </tbody>
+        </nz-table>
+    </div>
+
+    <div class="center" style="margin:50px 0;">
+        <a [routerLink]="['/waitdecide']">
+            <button nz-button [nzType]="'default'" (click)="goback()" style="width: 150px;height:40px;margin:0 10px;">
+                <span>返回</span>
+            </button>
+        </a>
+        <button nz-button [nzType]="'primary'" disabled style="width: 150px;height:40px;margin:0 10px;">
+            <span>批量提交</span>
+        </button>
+    </div>
+
+    <nz-modal [nzVisible]="isVisible" [nzTitle]="'点击公示'" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)"
+        (nzOnOk)="handleOk($event)">
+        <ng-template #modalContent>
+            <p>公示后，评议结果将推送给该班的各位学生，确定评议结果没有问题并公示评议结果吗？</p>
+            <br>
+        </ng-template>
+    </nz-modal>
+
+
+
+    <ng-template #contentTpl>
+        <div>
+          <p>待认定学生需要从【待审批】功能中同步过来学生及其认定资料。同步过来几个人，则这里显示几位待认定的学生</p>
+        </div>
+    </ng-template>
+</div>

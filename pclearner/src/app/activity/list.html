@@ -1,0 +1,92 @@
+<div class="content">
+    <div class="components-table-demo-control-bar">
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form">
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-input [(ngModel)]="condition" name="condition" [nzPlaceHolder]="'标题'"></nz-input>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [(ngModel)]="statuscode" [nzPlaceHolder]="'状态'" [nzShowSearch]="true" name="statuscode"
+                        nzAllowClear>
+                        <nz-option *ngFor="let option of statuslist" [nzLabel]="option.label" [nzValue]="option.value">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-col [nzSpan]="24" style="text-align: right;">
+                    <button nz-button [disabled]="httpService.loading" [nzType]="'primary'" (click)="onSearch()">查询</button>
+                    <button nz-button (click)="resetForm()">重置</button>
+                </div>
+            </div>
+            <div nz-row nz-form-item style="float:right;">
+                <button nz-button [nzType]="'primary'" [routerLink]="['/activity/add']">新增</button>
+            </div>
+        </form>
+    </div>
+    <nz-table #nzTable class="simple-table" [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [(nzTotal)]="total" [(nzPageIndex)]="pageIndex"
+        [(nzPageSize)]="pageSize" [nzBordered]="true" (nzPageIndexChange)="getInfoList()">
+        <thead nz-thead class="t-center">
+            <tr>
+                <th nz-th [nzWidth]="'100px'">
+                    <span>操作</span>
+                </th>
+                <th nz-th>
+                    <span>标题</span>
+                </th>
+                <th nz-th [nzWidth]="'100px'">
+                    <span>活动分类</span>
+                </th>
+                <th nz-th [nzWidth]="'120px'">
+                    <span>截止时间</span>
+                </th>
+                <th nz-th [nzWidth]="'80px'">
+                    <span>发布人</span>
+                </th>
+                <th nz-th [nzWidth]="'80px'">
+                    <span>状态</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody nz-tbody class="t-center">
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                <td nz-td>
+                    <a class="mr-sm" *ngIf="data.STATUS==='0'" [routerLink]="['/activity/audit']" [queryParams]="{id: data.ACTIVITYID,action:'audit'}">
+                        审核
+                    </a>
+                    <nz-popconfirm class="mr-sm" *ngIf="data.STATUS==='1'" [nzTitle]="'确定要关闭吗？'" (nzOnConfirm)="close(data.ACTIVITYID)" (nzOnCancel)="cancel()">
+                        <a nz-popconfirm>
+                            关闭
+                        </a>
+                    </nz-popconfirm>
+                    <nz-popconfirm class="mr-sm" *ngIf="data.STATUS==='0'||data.STATUS==='1'||data.STATUS==='3'" [nzTitle]="'确定要删除吗？'" (nzOnConfirm)="delete(data.ACTIVITYID)"
+                        (nzOnCancel)="cancel()">
+                        <a nz-popconfirm class="btndelete">
+                            删除
+                        </a>
+                    </nz-popconfirm>
+                </td>
+                <td nz-td style="text-align:left !important;">
+                    <a [routerLink]="['/activity/audit']" [queryParams]="{id: data.ACTIVITYID,action:'view'}">{{data.ACTIVITYTITLE}}</a>
+                </td>
+                <td nz-td>
+                    {{data.ACTIVITYTYPE}}
+                </td>
+                <td nz-td>
+                    {{data.ACTIVITYEND|_datestring:'YYYY-MM-DD HH:mm'}}
+                </td>
+                <td nz-td>
+                    {{data.ACTIVITYCREATER}}
+                </td>
+                <td nz-td>
+                    <span *ngIf="data.STATUS==='0'">待审核</span>
+                    <span *ngIf="data.STATUS==='1'">正常</span>
+                    <span *ngIf="data.STATUS==='2'">关闭</span>
+                    <span *ngIf="data.STATUS==='3'">审核未通过</span>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

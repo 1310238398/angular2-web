@@ -1,0 +1,71 @@
+<ion-content class="index-cont overh">
+    <div class="search-wrap fixed">
+        <form action="javascript:return true;">
+            <ion-input class="search-input" mode="ios" [(ngModel)]="searchTxt" type="search" placeholder="请输入学工姓名"
+                [ngModelOptions]="{standalone: true}" (keyup)="onSearchKeyUp($event)"></ion-input>
+            <img class="absolute search-img" (click)="serachRoom()" src="assets/images/search.png" alt="">
+        </form>
+    </div>
+    <form name="f">
+        <p class="fn18 center add-txt" >学工用户添加</p>
+        <div class="cont-form overh">
+            <ion-list inset>
+                <ion-item class="overh li-css fn16">
+                    <ion-label fixed>
+                        <i>*</i>
+                        <span class="color3e">工号</span>
+                    </ion-label>
+                    <ion-input type="tel" maxlength="20" [(ngModel)]="ajaxData.jobNum" name="jobNum"></ion-input>
+                </ion-item>
+                <ion-item class="overh li-css fn16">
+                    <ion-label fixed>
+                        <i>*</i>
+                        <span class="color3e">姓名</span>
+                    </ion-label>
+                    <ion-input type="text" maxlength="12" [(ngModel)]="ajaxData.userName" name="userName"></ion-input>
+                </ion-item>
+                <ion-item class="overh li-css fn16">
+                    <ion-label fixed>
+                        <i>*</i>
+                        <span class="color3e">行政单位</span>
+                    </ion-label>
+                    <ion-select [(ngModel)]="ajaxData.departName" interface="action-sheet" [cancelText]="'取消'" name="departName">
+                        <ion-option [value]='item.DepartmentCode' *ngFor="let item of Departments">{{item.DepartmentName}}
+                        </ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item class="overh li-css fn16">
+                    <ion-label fixed>
+                        <i>*</i>
+                        <span class="color3e">学工类型</span>
+                    </ion-label>
+                    <ion-select [(ngModel)]="ajaxData.staffType" interface="action-sheet" [cancelText]="'取消'" name="staffType">
+                        <ion-option [value]='item.ItemCode' *ngFor="let item of StaffTypes">{{item.ItemName}}
+                        </ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item class="overh li-css fn16">
+                    <ion-label fixed>
+                        <i>*</i>
+                        <span class="color3e">手机号</span>
+                    </ion-label>
+                    <ion-input type="tel" maxlength="11" [(ngModel)]="ajaxData.phoneNum" name="phoneNum"></ion-input>
+                </ion-item>
+                <ion-item class="overh li-css fn16">
+                    <ion-label fixed>
+                        <i>*</i>
+                        <span class="color3e">性别</span>
+                    </ion-label>
+                    <ion-select [(ngModel)]="ajaxData.sex" interface="action-sheet" [cancelText]="'取消'" name="sex">
+                        <ion-option [value]='item.ItemCode' *ngFor="let item of SexObj">{{item.ItemName}}
+                        </ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+        </div>
+    </form>
+    <div class="center" style="margin:50px 0 20px;">
+        <button class="exit-tab fn16" ion-button outline (click)="exitSubmit()">返回</button>
+        <button class="submit-tab fn16" ion-button (click)="tabSubmit()">确定</button>
+    </div>
+</ion-content>

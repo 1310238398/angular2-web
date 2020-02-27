@@ -1,0 +1,518 @@
+<div class="content student-waitdecide">
+    <h2 class="center">{{taskData.TaskName}}</h2>
+    <p class="center" style="margin:10px 0">开放时间: {{taskData.created}} 至 {{taskData.EndDate}}</p>
+
+    <div class="title-wrap">
+        <a [routerLink]="['/waitdecide/waitdecidehomepage']" class="fn14">全部范围</a>
+        <span> > </span>
+        <span class="fn14">{{pageDetail.teacherTxt}} ({{pageDetail.studentTxt}})</span>
+        <span *ngIf="pageDetail.Status == '0' || pageDetail.Status == '41' || pageDetail.Status == '42' || (pageDetail.Status == '43' && pageDetail.RecognitionLevel == '1')"
+            class="cp fn14" style="color: #108ee9;margin:0 10px;" (click)="showHelp()">帮助</span>
+        <button *ngIf="pageDetail.Status == '0' && userIdentity == 'Counselor'" nz-button [nzType]="'primary'" (click)="showModal()">
+            <span>批量认定为小组评议</span>
+        </button>
+        <button *ngIf="pageDetail.Status == '43' && pageDetail.RecognitionLevel == '0' && userIdentity == 'Counselor'"
+            nz-button [nzType]="'primary'" (click)="tankbox('1')" style="margin-left:20px;">
+            <span>批量评议</span>
+        </button>
+    </div>
+
+    <!-- =======================辅导员 学院 ========================================-->
+
+    <!-- 待认定 全班所有人员 包含提交资料与未提交资料 -->
+    <div *ngIf="pageDetail.Status == '0' && userIdentity != 'FundCenter'">
+        <!-- 提交资料学生 -->
+        <div style="margin-top:20px;">
+            <nz-table #nzTable [nzAjaxData]="hasDataList" [nzLoading]="httpService.loading" [nzBordered]="true"
+                [nzIsPagination]="false">
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th>
+                            <label nz-checkbox [(ngModel)]="allChecked" (ngModelChange)="updateAllChecked()"
+                                [nzIndeterminate]="indeterminate">
+                            </label>
+                        </th>
+                        <th nz-th>
+                            <span>学号</span>
+                        </th>
+                        <th nz-th>
+                            <span>姓名</span>
+                        </th>
+                        <th nz-th>
+                            <span>班级</span>
+                        </th>
+                        <th nz-th class="weight-txt">
+                            <span>重点关注信息</span>
+                        </th>
+                        <th nz-th>
+                            <span>申请所需资料</span>
+                        </th>
+                        <th nz-th>
+                            <span>家庭情况调查问卷(分)</span>
+                        </th>
+                        <th nz-th>
+                            <span>学生自评调查问卷(分)</span>
+                        </th>
+                        <th nz-th>
+                            <span>辅导员认定意见</span>
+                        </th>
+                        <th nz-th>
+                            <span>小组评议(分)</span>
+                        </th>
+                        <th nz-th>
+                            <span>合计(分)</span>
+                        </th>
+                        <th nz-th>
+                            <span>认定等级</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let data of hasDataList">
+                        <td nz-td>
+                            <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="updateSingleChecked()">
+                            </label>
+                        </td>
+                        <td nz-td>{{data.UserCode}}</td>
+                        <td nz-td>{{data.Name}}</td>
+                        <td nz-td>{{data.Class}}</td>
+                        <td nz-td>{{data.Focus}}</td>
+                        <td nz-td>
+                            <a *ngIf="data.IsAttach == '1'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '1',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:'1'}]">
+                                <span>查看</span>
+                            </a>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.EnconomicScore != ''" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '2',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:'1'}]">
+                                <span>{{data.EnconomicScore}}</span>
+                            </a>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.SelfAssessmentScore != ''" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '3',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:'1'}]">
+                                <span>{{data.SelfAssessmentScore}}</span>
+                            </a>
+                        </td>
+
+                        <td nz-td>
+                            <span *ngIf="isChange">
+                                <a [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode,categray: '4',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:'1'}]">点击认定</a>
+                            </span>
+                        </td>
+                        <td nz-td></td>
+                        <td nz-td></td>
+                        <td nz-td></td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+        <!-- 未提交资料学生 -->
+        <div style="margin-top:60px;">
+            <hr>
+            <p style="color:#FF0000;margin:20px 0">以下学生无认定数据，如若学生有特殊情况，可以对其进行直接认定并说明原因</p>
+            <nz-table #nzTable [nzAjaxData]="notDataList" [nzLoading]="httpService.loading" [nzBordered]="true"
+                [nzIsPagination]="false">
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th>
+                            <label nz-checkbox [(ngModel)]="NotallChecked" (ngModelChange)="NotupdateAllChecked()"
+                                [nzIndeterminate]="Notindeterminate">
+                            </label>
+                        </th>
+                        <th nz-th>
+                            <span>学号</span>
+                        </th>
+                        <th nz-th>
+                            <span>姓名</span>
+                        </th>
+                        <th nz-th>
+                            <span>班级</span>
+                        </th>
+                        <th nz-th class="weight-txt">
+                            <span>重点关注信息</span>
+                        </th>
+                        <th nz-th>
+                            <span>申请所需资料</span>
+                        </th>
+                        <th nz-th>
+                            <span>家庭情况调查问卷(分)</span>
+                        </th>
+                        <th nz-th>
+                            <span>学生自评调查问卷(分)</span>
+                        </th>
+                        <th nz-th>
+                            <span>辅导员认定意见</span>
+                        </th>
+                        <th nz-th>
+                            <span>小组评议(分)</span>
+                        </th>
+                        <th nz-th>
+                            <span>合计(分)</span>
+                        </th>
+                        <th nz-th>
+                            <span>认定等级</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let data of notDataList;">
+                        <td nz-td>
+                            <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="NotupdateSingleChecked()">
+                            </label>
+                        </td>
+                        <td nz-td>{{data.UserCode}}</td>
+                        <td nz-td>{{data.Name}}</td>
+                        <td nz-td>{{data.Class}}</td>
+                        <td nz-td>{{data.Focus}}</td>
+                        <td nz-td>
+                            <a *ngIf="data.IsAttach == '1'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '1',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:'0'}]">
+                                <span>查看</span>
+                            </a>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.EnconomicScore != ''" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '2',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:'0'}]">
+                                <span>{{data.EnconomicScore}}</span>
+                            </a>
+                        </td>
+                        <td nz-td>
+                            <a *ngIf="data.SelfAssessmentScore != ''" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '3',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:'0'}]">
+                                <span>{{data.SelfAssessmentScore}}</span>
+                            </a>
+                        </td>
+
+                        <td nz-td>
+                            <span *ngIf="isChange">
+                                <a [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode,categray: '4',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:'0'}]">点击认定</a>
+                            </span>
+                        </td>
+                        <td nz-td></td>
+                        <td nz-td></td>
+                        <td nz-td></td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+
+    <!-- 已认定 -->
+    <div style="margin-top:20px;" *ngIf="pageDetail.Status != '0' && userIdentity != 'FundCenter'">
+        <nz-table #nzTable [nzAjaxData]="overDataList" [nzLoading]="httpService.loading" [nzBordered]="true"
+            [nzIsPagination]="false">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th *ngIf="pageDetail.Status == '43' && pageDetail.RecognitionLevel == '0'">
+                        <label nz-checkbox [(ngModel)]="OtherallChecked" (ngModelChange)="OtherupdateAllChecked()"
+                            [nzIndeterminate]="Otherindeterminate">
+                        </label>
+                    </th>
+                    <th nz-th>
+                        <span>学号</span>
+                    </th>
+                    <th nz-th>
+                        <span>姓名</span>
+                    </th>
+                    <th nz-th>
+                        <span>班级</span>
+                    </th>
+                    <th nz-th class="weight-txt">
+                        <span>重点关注信息</span>
+                    </th>
+                    <th nz-th>
+                        <span>申请所需资料</span>
+                    </th>
+                    <th nz-th>
+                        <span>家庭情况调查问卷(分)</span>
+                    </th>
+                    <th nz-th>
+                        <span>学生自评调查问卷(分)</span>
+                    </th>
+                    <th nz-th>
+                        <span>辅导员认定意见</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span>小组评议(分)</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span>合计(分)</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status != '42'">
+                        <span>认定等级</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status == '41' || pageDetail.Status == '42'">
+                        <span>审批意见</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of overDataList">
+                    <td nz-td *ngIf="pageDetail.Status == '43' && pageDetail.RecognitionLevel == '0'">
+                        <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="OtherupdateSingleChecked()">
+                        </label>
+                    </td>
+                    <td nz-td>{{data.UserCode}}</td>
+                    <td nz-td>{{data.Name}}</td>
+                    <td nz-td>{{data.Class}}</td>
+                    <td nz-td>{{data.Focus}}</td>
+                    <td nz-td>
+                        <a *ngIf="data.IsAttach == '1'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '1',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">
+                            <span>查看</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.EnconomicScore != ''" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '2',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">
+                            <span>{{data.EnconomicScore}}</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.SelfAssessmentScore != ''" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '3',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">
+                            <span>{{data.SelfAssessmentScore}}</span>
+                        </a>
+                    </td>
+                    <!-- 辅导员认定意见 -->
+                    <td nz-td>
+                        <a *ngIf="data.Status == '41' && data.SchoolAttitude != '2'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '4',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">
+                            <span>直接认定</span>
+                        </a>
+                        <a *ngIf="data.Status == '42' && data.SchoolAttitude != '2'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '4',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">
+                            <span>一票否决</span>
+                        </a>
+                        <a *ngIf="data.Status == '43'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '4',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">
+                            <span>小组评议</span>
+                        </a>
+                        <a *ngIf="data.SchoolAttitude == '2'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '4',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">
+                            <span>点击重新认定</span>
+                        </a>
+                    </td>
+                    <!-- 小组评议 -->
+                    <td nz-td *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span *ngIf="data.EliberateScore != ''">
+                            <a [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode,categray: '5',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">{{data.EliberateScore}}</a>
+                        </span>
+                        <span *ngIf="data.EliberateScore == '' && isChange && data.Status == '43'">
+                            <a [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode,categray: '5',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">点击录入</a>
+                        </span>
+                    </td>
+                    <!-- 合计 -->
+                    <td nz-td *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span *ngIf="data.EnconomicScore != '' && data.SelfAssessmentScore != '' && data.EliberateScore != ''">
+                            {{((data.EnconomicScore*5 + data.SelfAssessmentScore*2 +
+                            data.EliberateScore*3)/10).toFixed(2)}}
+                        </span>
+                        <span *ngIf="data.EnconomicScore == '' && data.SelfAssessmentScore == '' && data.EliberateScore != ''">
+                            {{((data.EliberateScore*3)/10).toFixed(2)}}
+                        </span>
+                    </td>
+                    <!-- 认定等级 -->
+                    <td nz-td *ngIf="pageDetail.Status != '42'">
+                        <!-- 直接认定 -->
+                        <span *ngIf="data.Status == '41'">
+                            <label *ngIf="data.RecognitionLevel == '87000010'">一般困难</label>
+                            <label *ngIf="data.RecognitionLevel == '87000020'">困难</label>
+                            <label *ngIf="data.RecognitionLevel == '87000030'">特殊困难</label>
+                            <label *ngIf="data.RecognitionLevel == '87000040'">不予评级</label>
+                        </span>
+                        <!-- 小组评议 -->
+                        <span *ngIf="data.Status == '43'">
+                            <label *ngIf="isChange && data.RecognitionLevel == '1' && data.EliberateScore != ''"
+                                (click)="tankbox(data)" class="cp color10">点击认定</label>
+                            <label *ngIf="isChange && data.RecognitionLevel == '87000010'" (click)="tankbox(data)"
+                                class="cp color10">一般困难</label>
+                            <label *ngIf="!isChange && data.RecognitionLevel == '87000010'">一般困难</label>
+
+                            <label *ngIf="isChange && data.RecognitionLevel == '87000020'" (click)="tankbox(data)"
+                                class="cp color10">困难</label>
+                            <label *ngIf="!isChange && data.RecognitionLevel == '87000020'">困难</label>
+
+                            <label *ngIf="isChange && data.RecognitionLevel == '87000030'" (click)="tankbox(data)"
+                                class="cp color10">特殊困难</label>
+                            <label *ngIf="!isChange && data.RecognitionLevel == '87000030'">特殊困难</label>
+
+                            <label *ngIf="isChange && data.RecognitionLevel == '87000040'" (click)="tankbox(data)"
+                                class="cp color10">不予评级</label>
+                            <label *ngIf="!isChange && data.RecognitionLevel == '87000040'">不予评级</label>
+                        </span>
+                    </td>
+                    <!-- 审批意见 -->
+                    <td nz-td *ngIf="pageDetail.Status == '41' || pageDetail.Status == '42'">
+                        <span *ngIf="data.SchoolAttitude == '0'">审批中</span>
+                        <span *ngIf="data.SchoolAttitude == '1'" style="color: #008000;">审批已通过</span>
+                        <span *ngIf="data.SchoolAttitude == '2'" style="color: #FF0000;">审批不通过</span>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+    <!-- =======================资助中心========================================-->
+
+    <!--待认定 全学院提交资料 -->
+    <div *ngIf="userIdentity == 'FundCenter'" style="margin-top:20px;">
+        <nz-table #nzTable [nzAjaxData]="FundingDataList" [nzLoading]="httpService.loading" [nzBordered]="true"
+            [(nzTotal)]="page.total" [(nzPageIndex)]="page.Page" [(nzPageSize)]="page.PageSize" (nzPageIndexChange)="loadFundingList()">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>
+                        <span>学号</span>
+                    </th>
+                    <th nz-th>
+                        <span>姓名</span>
+                    </th>
+                    <th nz-th>
+                        <span>班级</span>
+                    </th>
+                    <th nz-th class="weight-txt">
+                        <span>重点关注信息</span>
+                    </th>
+                    <th nz-th>
+                        <span>申请所需资料</span>
+                    </th>
+                    <th nz-th>
+                        <span>家庭情况调查问卷(分)</span>
+                    </th>
+                    <th nz-th>
+                        <span>学生自评调查问卷(分)</span>
+                    </th>
+                    <th nz-th>
+                        <span>辅导员认定意见</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span>小组评议(分)</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span>合计(分)</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status != '42'">
+                        <span>认定等级</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status == '41' || pageDetail.Status == '42'">
+                        <span>审批意见</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of FundingDataList">
+                    <td nz-td>{{data.UserCode}}</td>
+                    <td nz-td>{{data.Name}}</td>
+                    <td nz-td>{{data.ClassName}}</td>
+                    <td nz-td>{{data.Focus}}</td>
+                    <td nz-td>
+                        <a *ngIf="data.IsAttach == '1'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '1',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">
+                            <span>查看</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.EnconomicScore != ''" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '2',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">
+                            <span>{{data.EnconomicScore}}</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.SelfAssessmentScore != ''" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '3',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">
+                            <span>{{data.SelfAssessmentScore}}</span>
+                        </a>
+                    </td>
+                    <!-- 辅导员认定意见 -->
+                    <td nz-td>
+                        <a *ngIf="data.Status == '41'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '4',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">
+                            <span>直接认定</span>
+                        </a>
+                        <a *ngIf="data.Status == '42'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '4',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">
+                            <span>一票否决</span>
+                        </a>
+                        <a *ngIf="data.Status == '43'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '4',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">
+                            <span>小组评议</span>
+                        </a>
+                    </td>
+                    <!-- 小组评议 -->
+                    <td nz-td *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span *ngIf="data.EliberateScore != ''">
+                            <a [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode,categray: '5',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">{{data.EliberateScore}}</a>
+                        </span>
+                    </td>
+                    <!-- 合计 -->
+                    <td nz-td *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span *ngIf="data.EnconomicScore != '' && data.SelfAssessmentScore != '' && data.EliberateScore != ''">
+                            {{((data.EnconomicScore*5 + data.SelfAssessmentScore*2 +
+                            data.EliberateScore*3)/10).toFixed(2)}}
+                        </span>
+                        <span *ngIf="data.EnconomicScore == '' && data.SelfAssessmentScore == '' && data.EliberateScore != ''">
+                            {{((data.EliberateScore*3)/10).toFixed(2)}}
+                        </span>
+                    </td>
+                    <!-- 认定等级 -->
+                    <td nz-td *ngIf="pageDetail.Status != '42'">
+                        <span>
+                            <label *ngIf="data.RecognitionLevel == ''"></label>
+                            <label *ngIf="data.RecognitionLevel == '87000010'">一般困难</label>
+                            <label *ngIf="data.RecognitionLevel == '87000020'">困难</label>
+                            <label *ngIf="data.RecognitionLevel == '87000030'">特殊困难</label>
+                            <label *ngIf="data.RecognitionLevel == '87000040'">不予评级</label>
+                        </span>
+                    </td>
+                    <!-- 审批意见 -->
+                    <td nz-td *ngIf="pageDetail.Status == '41' || pageDetail.Status == '42'">
+                        <a *ngIf="data.SchoolAttitude == '0'" [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '7',Status: pageDetail.Status, RecognitionLevel: pageDetail.RecognitionLevel,IsData:data.IsData}]">
+                            <span>点击审批</span>
+                        </a>
+                        <span *ngIf="data.SchoolAttitude == '1'" style="color: #008000;">审批已通过</span>
+                        <span *ngIf="data.SchoolAttitude == '2'" style="color: #FF0000;">审批不通过</span>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+    <!-- 帮助弹框  -->
+    <nz-modal class="help-css" [nzVisible]="isHelpBox" [nzTitle]="'帮助'" [nzContent]="helpmodalContent" (nzOnCancel)="helpCancel($event)"
+        (nzOnOk)="helpCancel($event)" [nzCancelText]="null" nzOkText="我知道了">
+        <ng-template #helpmodalContent>
+            <!-- 待认定学生 -->
+            <p *ngIf="pageDetail.Status == '0'" class="left">“待认定学生”中的数据是从【待审批】功能中同步过来的学生及认定资料。对于复核任务，还会自动同步上一年认定成功且这一年中没有申请变更资料的学生及其认定资料</p>
+            <!-- 直接认定学生 -->
+            <p *ngIf="pageDetail.Status == '41'" style="border-bottom:1px solid #e9e9e9;text-align: left;padding-bottom:10px;">
+                1. 被直接认定的学生需要经过资助中心的审批，审批通过后认定意见即可生效。</p>
+            <p *ngIf="pageDetail.Status == '41'" style="text-align: left;margin-top:10px;"> 2.
+                “直接认定”环节下显示的“x人/x人”的格式，后面的数字代表有几人的认定意见为直接认定，前面的数字代表有几人的认定意见被审批通过了。</p>
+            <!-- 一票否决学生 -->
+            <p *ngIf="pageDetail.Status == '42'" style="border-bottom:1px solid #e9e9e9;text-align: left;padding-bottom:10px;">
+                1. 被一票否决的学生需要经过资助中心的审批，审批通过后认定意见即可生效。</p>
+            <p *ngIf="pageDetail.Status == '42'" style="text-align: left;margin-top:10px;"> 2.
+                “一票否决”环节下显示的“x人/x人”的格式，后面的数字代表有几人的认定意见为一票否决，前面的数字代表有几人的认定意见被审批通过了。</p>
+            <!-- 小组评议学生 -->
+            <p *ngIf="pageDetail.Status == '43' && pageDetail.RecognitionLevel == '1'" style="border-bottom:1px solid #e9e9e9;text-align: left;padding-bottom:10px;">
+                1. 认定意见为“小组评议”的学生需要打印问卷及打分表进行线下的小组评议，并将小组评议的结果录入到系统中生成该生小组评议的分数。</p>
+            <p *ngIf="pageDetail.Status == '43' && pageDetail.RecognitionLevel == '1'" style="text-align: left;margin-top:10px;">
+                2. “小组评议”环节下显示的“x人/x人”的格式，后面的数字代表有几人的认定意见为小组评议，前面的数字代表有几人录入了小组评议结果。</p>
+        </ng-template>
+    </nz-modal>
+    <!-- 批量审批为小组评议 -->
+    <nz-modal class="much-apply" [nzVisible]="isVisible" [nzTitle]="'批量认定为小组评议'" [nzContent]="modalContent"
+        (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)" nzCancelText="取消" nzOkText="确定">
+        <ng-template #modalContent>
+            <p class="center">
+                确定要认定这些学生为小组评议吗？
+            </p>
+        </ng-template>
+    </nz-modal>
+    <!-- 评议等级弹框 -->
+    <nz-modal class="review-box" [nzVisible]="isReview" [nzTitle]="'请选择认定等级'" [nzContent]="reviewContent" (nzOnCancel)="reviewCancel($event)"
+        (nzOnOk)="reviewOk($event)" nzCancelText="取消" nzOkText="确定">
+        <ng-template #reviewContent>
+            <p class="center" *ngIf="pageDetail.Status == '43' && pageDetail.RecognitionLevel == '1'">评议完成后，该学生的申请记录将从“待评议学生”中移动到对应的评议结果中</p>
+            <p class="center" *ngIf="pageDetail.Status == '43' && pageDetail.RecognitionLevel == '0'">评议完成后，该学生的申请记录将从“待评议学生”中移动到对应的评议结果中</p>
+            <p class="pass-cont center mr">
+                <button nz-button [nzType]="dataReview.BgStyle1" (click)="onReviewoff(87000030)">
+                    <span>特殊困难</span>
+                </button>
+                <button nz-button [nzType]="dataReview.BgStyle2" (click)="onReviewoff(87000020)">
+                    <span>困难</span>
+                </button>
+                <button nz-button [nzType]="dataReview.BgStyle3" (click)="onReviewoff(87000010)">
+                    <span>一般困难</span>
+                </button>
+                <button nz-button [nzType]="dataReview.BgStyle4" (click)="onReviewoff(87000040)">
+                    <span>不予评级</span>
+                </button>
+            </p>
+        </ng-template>
+    </nz-modal>
+
+</div>

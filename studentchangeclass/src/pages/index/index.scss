@@ -1,0 +1,282 @@
+page-index {
+    font-family: PingFangSC-Regular;
+    .grid-basic-page {
+        background: #FFF;
+    }
+    ul,
+    li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    p,
+    h1,
+    h2,
+    h3 {
+        margin: 0;
+        padding: 0;
+    }
+    hr {
+        margin: 5px 0;
+    }
+    .fl {
+        float: left;
+    }
+    .fr {
+        float: right;
+    }
+    .center {
+        text-align: center;
+    }
+    .dib {
+        display: inline-block;
+    }
+    .relative {
+        position: relative;
+    }
+    .absolute {
+        position: absolute;
+    }
+    .fixed {
+        position: fixed
+    }
+    .overh {
+        overflow: hidden;
+    }
+    .mr {
+        margin: 0 auto;
+    }
+    .db {
+        display: block;
+    }
+    .fn12 {
+        font-size: 12px;
+    }
+    .fn14 {
+        font-size: 14px;
+    }
+    .fn16 {
+        font-size: 16px;
+    }
+    .fn17 {
+        font-size: 17px;
+    }
+    .fn18 {
+        font-size: 18px;
+    }
+    .fn24 {
+        font-size: 24px;
+    }
+    .color4a {
+        color: #4A4A4A;
+    }
+    .color9b {
+        color: #9B9B9B;
+    }
+    .index-cont {
+        background: #FFF;
+        color: #4A4A4A;
+    }
+    .head {
+        font-family: PingFangSC-Medium;
+        color: #4A4A4A;
+        font-size: 16px;
+        letter-spacing: 0.38px;
+    }
+    .head-2 {
+        font-family: PingFangSC-Medium;
+        color: #9B9B9B;
+        font-size: 14px;
+        letter-spacing: 0.38px;
+    }
+    .submitr-tab {
+        width: 100px;
+        height: 30px;
+        background: #FFC000;
+        color: #FFFFFF;
+        margin-left: 5px;
+    }
+    .teacher-see {
+        margin-top: 5px;
+        font-size: 12px;
+        font-family: PingFangSC;
+        color: #4A4A4A;
+        letter-spacing: 0.38px;
+    }
+    .shenpizhong-1 {
+        color: #9B9B9B;
+        font-family: PingFangSC;
+        border-bottom: 1px solid black;
+        letter-spacing: 0.38px;
+        line-height: 28px;
+        z-index: 3000;
+    }
+    .shenpizhong-2 {
+        color: #4A4A4A;
+        font-family: PingFangSC;
+        border-bottom: 1px solid black;
+        letter-spacing: 0.38px;
+        line-height: 28px;
+        z-index: 3000;
+    }
+    .my-apply {
+        width: 270px;
+        height: 150px;
+        background: #9BD65F;
+        border: 1px solid #5EB702;
+        box-shadow: 0 2px 5px 0 #E3E3E3;
+        border-radius: 8px;
+        margin: 50px auto 40px;
+    }
+    .my-apply img {
+        width: 60px;
+        margin: 25px 0 20px;
+    }
+    .my-apply p {
+        color: #fff;
+    }
+    .my-approve {
+        width: 270px;
+        height: 150px;
+        background: #63A6F5;
+        border: 1px solid #3489EE;
+        box-shadow: 0 2px 5px 0 #E3E3E3;
+        border-radius: 8px;
+    }
+    .my-approve img {
+        width: 60px;
+        margin: 25px 0 20px;
+    }
+    .my-approve p {
+        color: #fff;
+    }
+    .redcircle {
+        min-width: 7px;
+        height: 10px;
+        background: red;
+        box-sizing: border-box; //必须是border-box，自行体会
+        // color: white;
+        // font-size: 10px;
+        text-align: center; // line-height: 20px;
+        padding: 0 5px;
+        border-radius: 100%;
+        display: inline-block; //肯定是inline-block，因为行内元素宽度auto呀
+    }
+    .none {
+        text-align: center;
+        width: 100%;
+        height: 100%; // margin-top: 10%
+    }
+    .noneimg {
+        margin: 5px auto;
+        width: 200px;
+    }
+    .noneFont {
+        color: #666666;
+        font-size: 14px;
+    }
+    .title-content {
+        width: 180px;
+        font-size: 14px; // margin: 5px 5px;
+        // display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis; // -webkit-line-clamp: 1;
+        white-space: nowrap;
+        color: #9B9B9B;
+        position: relative; // border-bottom: 1px solid #ddd;
+    } // .myshetuan-qiangzhi {
+    //     width: 100% !important; // margin-top: 5px;
+    //     // margin: 0 0;
+    //     background: #FFFFFF !important; // box-shadow: 5px 0px 3px 2px #E3E3E3;
+    //     border-radius: 2px;
+    // }
+    // .allshetuan-qiangzhi {
+    //     width: 100% !important; // margin: 0 0;
+    //     // margin-top: 10px;
+    //     background: #FFFFFF !important; // box-shadow: 5px 0px 5px 3px #E3E3E3;
+    //     border-radius: 2px;
+    // }
+    .scroll-content {
+        // background: #FFF;
+        margin: 0px;
+        overflow-y: auto; // background-image: url('../assets/images/chaxue_img.png');
+        background-size: 100% 50%;
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-attachment: fixed;
+    }
+    .userinfo-box {
+        padding: 15px;
+    }
+    .userinfo-box .css-li {
+        height: 40px;
+        line-height: 40px;
+        border-bottom: 1px solid #E4E4E4;
+    }
+    .img-css {
+        // height: 15px;
+        position: absolute; // bottom: 15px;
+        right: 15px;
+        color: red;
+    }
+    .tags {
+        display: block;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 20px;
+        padding-bottom: 1px;
+        li {
+            color: #F40;
+            text-align: center;
+            float: left;
+            width: 36px;
+            height: 22px;
+            line-height: 22px;
+            margin-right: 4px;
+            cursor: pointer;
+        }
+    }
+    .tagshow {
+        color: #FFF !important;
+        font-weight: 700;
+        background-image: linear-gradient(to right, #ff9000 0, #ff5000 100%);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff9000', endColorstr='#ffff5000', GradientType=1);
+        border-top-right-radius: 6px;
+        border-top-left-radius: 6px;
+    }
+    .search-input {
+        border: 1px solid #FFC103 !important;
+        background: #fff !important;
+        height: 32px !important;
+    }
+    .li-css {
+        margin: 0 !important;
+        background: #fff;
+        padding: 0 !important;
+    }
+    // .li-css .label-ios {
+    //     width: 100px !important;
+    // }
+    // .li-css .label-ios i {
+    //     color: #FB5F2D;
+    //     width: 12px;
+    //     display: inline-block;
+    // }
+    .li-css .text-input-ios {
+        font-size: 15px;
+        margin: 5px 0 0 5px;        // width: 100%;
+        // color: #666;
+    }
+    .honor-content {
+        width: 65px; // font-size: 14px; // margin: 5px 5px;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis; // -webkit-line-clamp: 1;
+        white-space: nowrap;
+        vertical-align: text-bottom; // position: relative;
+    }
+
+}

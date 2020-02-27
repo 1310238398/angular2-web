@@ -1,0 +1,78 @@
+<ion-content class="outer-content" *ngIf="choice()">
+  <ion-card>
+
+
+    <ion-card-content>
+      <ion-item>
+        <h2>{{item.Name}}</h2>
+        <h2>{{item.Phone}}</h2>
+        <ion-icon item-right name="ios-call" color="primary" class="circle"
+                  (click)="callUp(item);$event.stopPropagation()"></ion-icon>
+      </ion-item>
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-list>
+    <ion-item text-wrap>
+      <p class="top-font-p">
+        <ion-icon item-right class="icon-place" color="primary"></ion-icon>
+        办公地点
+      </p>
+      <h2 class="mg">{{item.Place}}</h2>
+    </ion-item>
+
+
+    <ion-item>
+      <p>
+        <ion-icon item-right class="icon-time" color="primary"></ion-icon>
+        办公时间
+      </p>
+      <h2 class="mg">{{item.Duties}}</h2>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-content class="outer-content" *ngIf="type=='kuaidi'">
+  <ion-card>
+
+
+    <ion-card-content>
+      <ion-item>
+        <h2>{{item?.Name}}</h2>
+        <h2>{{item?.Phone}}</h2>
+        <ion-icon item-right name="ios-call" color="primary" class="circle"
+                  (click)="callUp(item);$event.stopPropagation()"></ion-icon>
+      </ion-item>
+    </ion-card-content>
+
+  </ion-card>
+  <ion-row padding>
+    <ion-col col-9>
+      <ion-item>
+        <ion-input placeholder="快递单号" [(ngModel)]="kuaidiInfo.kuaidiNum"></ion-input>
+      </ion-item>
+
+    </ion-col>
+    <ion-col col-3>
+      <button ion-button (click)="search()" margin-right>查询</button>
+    </ion-col>
+  </ion-row>
+  <div *ngIf="flagIframe" class="dif">
+    <iframe [src]="Url" frameborder="0" allowfullscreen></iframe>
+  </div>
+<!--  <ul class="timeline">
+    <li>
+      <div class="timeline-badge">
+        <div>到达</div>
+        <div>对对对</div>
+      </div>
+      <div class="timeline-panel">
+        <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris,
+          paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra
+          quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa
+          nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
+      </div>
+    </li>
+  </ul>-->
+</ion-content>

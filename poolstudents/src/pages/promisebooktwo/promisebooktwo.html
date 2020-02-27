@@ -1,0 +1,11 @@
+<ion-content>
+    <div class="sign">
+      <p class="tips" *ngIf="!isDrawing">请用正楷在此书写您的姓名，请尽量占满屏幕</p>
+      <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+      <div class="sign-btn">
+          <!-- <button type="button" class="btn" (click)="refresh()" >刷新</button> -->
+        <button type="button" class="btn" (click)="savePad()" [disabled]="!isDrawing">确定</button>
+        <button type="button" class="btn btn-cancle margin-t-35" [disabled]="!isDrawing" (click)="clearPad()">清空</button>
+      </div>
+    </div>
+  </ion-content>

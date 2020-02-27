@@ -1,0 +1,73 @@
+<ion-content class="index-cont">
+
+  <p *ngIf="itemObj.ReleaseStatus == '0'" class="my-process fixed center fn16" (click)="tankbox('发布')">发布</p>
+
+  <div class="top-header mr">
+    <p class="top-title col3e center fn16">{{contInfo.LogTitle}}</p>
+    <p class="time-box fn12 col9b center">
+      <span> 创建时间: {{contInfo.InsertDatetime}}</span>
+      <span *ngIf="contInfo.PublishDatetime" style="margin-left:10px;"> 发布时间: {{contInfo.PublishDatetime}}</span>
+      <span *ngIf="!contInfo.PublishDatetime" style="margin-left:10px;color: #FF0000;"> 未发布</span>
+    </p>
+  </div>
+
+  <div class="middle-cont relative mr">
+    <!-- 未发布 -->
+    <div *ngIf="itemObj.ReleaseStatus == '0'">
+      <!-- 富文本编辑 -->
+      <div class="overh" style="height:510px;">
+        <tinymce class="text-write" [(ngModel)]="itemObj.TemplateText" [config]="config" loading="加载中……" name="agreement"></tinymce>
+      </div>
+      <!-- 七牛云上传 -->
+      <div class="upload overh">
+        <span class="container fl relative" *ngIf="CertifyImgs.length<9">
+          <input class="hiddenFile db absolute" type="file" value="file" (change)="handleFiles($event)">
+          <img src="assets/images/add.png">
+        </span>
+
+        <div class="Certify fl relative center" *ngFor="let item of CertifyImgs;let index=index;">
+          <img class="delete-icon absolute" src="assets/images/delete.png" (click)="deleteCertify($event,index)">
+          <img class="file-img" [src]="DomSanitizer.bypassSecurityTrustUrl(item.AttachmentURL)">
+        </div>
+
+        <div class="clear"></div>
+      </div>
+      <!-- 底部按钮 -->
+      <div class="bt-footer center">
+        <button class="remove-css" ion-button color="" outline (click)="tankbox('返回')">返回</button>
+        <button class="submit-tab" ion-button color="secondary" (click)="saveRizhi()">保存</button>
+        <p class="dele-btn" (click)="tankbox('删除')">删除</p>
+      </div>
+    </div>
+
+    <!-- 已发布 -->
+    <div *ngIf="itemObj.ReleaseStatus == '1'">
+      <div class="over-text fn14" [innerHTML]="itemObj.TemplateText"></div>
+
+      <div class="upload overh" *ngIf="CertifyImgs.length>0">
+        <div class="Certify fl relative center" *ngFor="let item of CertifyImgs;let index=index;">
+          <img class="file-img" [src]="DomSanitizer.bypassSecurityTrustUrl(item.AttachmentURLThumb)" (click)="navPreview({time:false,index:index,items:CertifyImgs})">
+        </div>
+      </div>
+
+      <div class="bt-footer center">
+        <button class="remove-css" style="margin-bottom:20px;" ion-button color="" outline (click)="returnPage()">返回</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="medigo" *ngIf="disdden" (click)="overbox()"></div>
+  <div class="file-box" *ngIf="disdden">
+    <div class="pass-cont center mr">
+      <div class="top-btn">
+        <p>{{titleTxt}}</p>
+      </div>
+      <div class="foot-btn center">
+        <button ion-button color="" outline (click)="overbox()">取消</button>
+        <button ion-button color="secondary" (click)="onPass()">确定</button>
+      </div>
+    </div>
+  </div>
+
+
+</ion-content>

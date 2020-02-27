@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <div class="modal-title">班委列表</div>
+</div>
+<form nz-form [nzType]="'horizontal'">
+    <div nz-row *ngFor="let cadre of cadreData">
+        <div nz-form-label nz-col [nzSpan]="2">
+        </div>
+        <div nz-form-label nz-col [nzSpan]="4">
+            <h3 style="text-align:left">{{cadre.CodeName}}：</h3>
+        </div>
+        <div nz-form-control nz-col [nzSpan]="16">
+            {{cadre.Names}}
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button nz-button type="button" (click)="close()">关闭</button>
+    </div>
+</form>

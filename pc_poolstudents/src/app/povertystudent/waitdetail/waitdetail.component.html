@@ -1,0 +1,78 @@
+<div class="content">
+    <div>
+        <nz-table #nzTable [nzAjaxData]="dataSet" [nzBordered]="true" [nzIsPagination]="false">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>
+                        <span>学号</span>
+                    </th>
+                    <th nz-th>
+                        <span>姓名</span>
+                    </th>
+                    <th nz-th class="weight-txt">
+                        <span>重点关注信息</span>
+                    </th>
+                    <th nz-th>
+                        <span>申请所需资料</span>
+                    </th>
+                    <th nz-th>
+                        <span>家庭情况调查问卷</span>
+                    </th>
+                    <th nz-th>
+                        <span>学生自评调查问卷</span>
+                    </th>
+                    <th nz-th>
+                        <span>变更理由</span>
+                    </th>
+                    <th nz-th>
+                        <span>状态</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="center">
+                <tr nz-tbody-tr style="height:40px;">
+                    <td nz-td>{{dataSet.UserCode}}</td>
+                    <td nz-td>{{dataSet.Name}}</td>
+                    <td nz-td>{{dataSet.Focus}}</td>
+                    <td nz-td [ngClass]="categray == '1'?'bgc':''">
+                        <span class="comm-css" (click)="categrayChange(1)">
+                            查看
+                            <span *ngIf="dataSet.AttachIsChange == '1'">(新)</span>
+                        </span>
+                    </td>
+                    <td nz-td [ngClass]="categray == '2'?'bgc':''">
+                        <span class="comm-css" (click)="categrayChange(2)">
+                            {{dataSet.EnconomicScore}}分
+                            <span *ngIf="dataSet.EnconomicIsChange == '1'">(新)</span>
+                        </span>
+                    </td>
+                    <td nz-td [ngClass]="categray == '3'?'bgc':''">
+                        <span class="comm-css" (click)="categrayChange(3)">
+                            {{dataSet.SelfAssessmentScore}}分
+                            <span *ngIf="dataSet.SelfAssessmentIsChange == '1'">(新)</span>
+                        </span>
+                    </td>
+                    <td nz-td [ngClass]="categray == '4'?'bgc':''">
+                        <span *ngIf="dataSet.IsChange == '1'" class="comm-css" (click)="categrayChange(4)">查看</span>
+                        <span *ngIf="dataSet.IsChange == '0'">无</span>
+                    </td>
+                    <td nz-td [ngClass]="categray == '5'?'bgc':''">
+                        <span *ngIf="dataSet.Status == '0' && Tasking == '0'">认定任务创建后开放审批入口</span>
+                        <span *ngIf="dataSet.Status == '0' && Tasking == '1' && CounselorStatus == '10' && AcadamyStatus == '10'" class="comm-css" (click)="categrayChange(5)">点击审批</span>
+                        <span *ngIf="dataSet.Status == '2'">审批不通过</span>
+                        <span *ngIf="dataSet.Status == '0' && Tasking == '1' && CounselorStatus == '20' && AcadamyStatus == '10'">修改认定结果后方可审批</span>
+                        <span *ngIf="dataSet.Status == '0' && Tasking == '1' && AcadamyStatus == '20'">认定提交后不可审批</span>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+    <div>
+        <app-applybook *ngIf="categray == '1'" [IntelUid]="IntelUserCode"></app-applybook>
+        <app-jingjiquestion *ngIf="categray == '2'" [IntelUid]="IntelUserCode"></app-jingjiquestion>
+        <app-selfquestion *ngIf="categray == '3'" [IntelUid]="IntelUserCode"></app-selfquestion>
+        <app-whychange *ngIf="categray == '4'" [IntelUid]="IntelUserCode"></app-whychange>
+        <app-statuspass *ngIf="categray == '5'" [IntelUid]="IntelUserCode"></app-statuspass>
+    </div>
+</div>

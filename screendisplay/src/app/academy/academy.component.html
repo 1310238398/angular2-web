@@ -1,0 +1,49 @@
+<div class="content">
+    <div nz-row  [nzGutter]="16">
+        <div nz-col  [nzSpan]="12" *ngFor="let academy of Academys">
+            <div class="academy_item">
+                <div class="academy-title base-font font24 white text-center">
+                    {{academy.AcademyName||''}}
+                </div>
+                <div class="total text-center">
+                    <div class="a_list">
+                        <div class="a_item i_p base-font color-6f769e font24">
+                            已报到人数
+                        </div>
+                        <div class="a_item base-font b_r color_8ad321  font64">
+                            {{academy?.ReportedNum||0}}
+                        </div>
+                    </div>
+                    <div class="a_list">
+                        <div class="a_item i_p base-font color-6f769e font24">
+                            未报到人数
+                        </div>
+                        <div class="a_item base-font color_e32c42  font64">
+                            {{academy?.UnReportedNum||0}}
+                        </div>
+                    </div>
+                </div>
+                <div class="total text-center">
+                    <div class="a_list">
+                        <div class="a_item  base-font color-6f769e font24">
+                            总人数
+                        </div>
+                        <div class="a_item t-s font2 b_r color-ff982b  font36">
+                            {{academy?.RecruitNum||0}}
+                        </div>
+                    </div>
+                    <div class="a_list">
+                        <div class="a_item  base-font color-6f769e font24">
+                            报到率
+                        </div>
+                        <div class="a_item t-s font2 color-ff982b  font36">
+                            {{academy?.ReportedRate||0}}%
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<a   [routerLink]="['/']" [queryParams]='{academy:""}'><img class="b-cancle" src="assets/images/back.png" ></a>

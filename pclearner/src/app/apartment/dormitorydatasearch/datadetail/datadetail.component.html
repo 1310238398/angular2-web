@@ -1,0 +1,97 @@
+<div class="datadetail">
+    <p class="title" *ngIf="ddurname">{{ddurname}}</p>
+    <div nz-row [nzType]="'flex'" [nzJustify]="'space-around'" [nzAlign]="'middle'" class="academy">
+        <div nz-col [nzSpan]="18">
+            <span>所属学院:{{college}}</span>
+        </div>
+
+        <div nz-col [nzSpan]="2" style="text-align:right;padding-right:10px;">
+            <span>
+                <hr style="width:2px;height: 27px;background: #D5D5D5;vertical-align: middle;display:inline-block;border:#D5D5D5">&nbsp;&nbsp;&nbsp;&nbsp;
+                <span *ngIf = "sex" >{{sex}}</span>
+                </span>
+                <!-- <img src="./assets/images/man@2x.png" alt="" style="vertical-align: middle;width: 20px; height: 20px;">&nbsp;&nbsp;{{sex}}宿舍</span> -->
+        </div>
+    </div>
+    <div class="loadTab">
+        <nz-table #nzTable [nzDataSource]="_dataSet" [nzBordered]=true [nzLoading]=false [nzShowTitle]=true [nzIsPagination]='false'>
+            <span nz-table-title style="font-size:14px;color: #3E3E3E;">宿舍成员</span>
+            <ng-template #nzFixedHeader [ngIf]="_header&&!_fixHeader">
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th>
+                            <span>序号</span>
+                        </th>
+                        <th nz-th>
+                            <span>床位号</span>
+                        </th>
+                        <th nz-th>
+                            <span>学号</span>
+                        </th>
+                        <th nz-th>
+                            <span>成员姓名</span>
+                        </th>
+                        <th nz-th>
+                            <span>性别</span>
+                        </th>
+                        <th nz-th>
+                            <span>学院</span>
+                        </th>
+                        <th nz-th>
+                            <span>专业</span>
+                        </th>
+                        <th nz-th>
+                            <span>年级</span>
+                        </th>
+                        <th nz-th>
+                            <span>班级</span>
+                        </th>
+                        <th nz-th>
+                            <span>民族</span>
+                        </th>
+                        <th nz-th>
+                            <span>政治面貌</span>
+                        </th>
+                        <th nz-th>
+                            <span>生源地</span>
+                        </th>
+                        <th nz-th>
+                            <span>联系方式</span>
+                        </th>
+                        <th nz-th>
+                            <span>备注</span>
+                        </th>
+                    </tr>
+                </thead>
+            </ng-template>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data; let i = index">
+                    <td nz-td>{{i+1}}</td>
+                    <td nz-td>{{data.bedname}}</td>
+                    <td nz-td>{{data.usercode}}</td>
+                    <td nz-td>{{data.name}}</td>
+                    <td nz-td>{{data.sex}}</td>
+                    <td nz-td>{{data.academy}}</td>
+                    <td nz-td>{{data.major}}</td>
+                    <td nz-td>{{data.grade}}</td>
+                    <td nz-td>{{data.class}}</td>
+                    <td nz-td>{{data.nationality}}</td>
+                    <td nz-td>{{data.political}}</td>
+                    <td nz-td>{{data.geographyname}}</td>
+                    <td nz-td>{{data.phone}}</td>
+                    <td nz-td>{{data.bedremark}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+    <div class="dormNote" *ngIf="roomremark">
+        宿舍备注：{{roomremark}}
+    </div>
+    <div class="zhanwei">
+
+    </div>
+    <div class="button">
+        <button class="return_btn" (click)="return()">返回</button>
+    </div>
+
+</div>

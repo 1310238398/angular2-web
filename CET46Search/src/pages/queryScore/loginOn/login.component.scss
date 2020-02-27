@@ -1,0 +1,84 @@
+page-login{
+    .img{
+        width: 100%;
+    };
+    .welcome{
+        margin-top: 29px;
+        // background-color: #ffffff;
+
+    }
+    .welcome span{
+        font-family:PingFangSC-Regular;
+        font-size:18px;
+        color:#3e3e3e;
+        letter-spacing:0;
+        // margin-top: 29px;
+        text-align:center;
+         display: block;
+    }
+     
+    
+    .welcome .top{
+        line-height:25px;
+        margin-bottom: 8px;
+    }
+    .list-ios[inset] .item{
+        border: none;
+    }
+    .cont{
+        width: 85%;
+        margin-left: 10%;
+        // margin-right: 0.8%;
+    }
+    .one{
+        margin-top: 35px;
+
+        margin-bottom: 15px
+    }
+    label{
+        font-family:PingFangSC-Regular;
+        font-size:16px;
+        color:#3e3e3e;
+        width: 21%;
+        // letter-spacing:0.19px;
+        text-align:center;
+        padding-right: 2%;
+    }
+    .letter-spacing{
+        letter-spacing: 31px;
+    }
+    .ipt{
+        border:1px solid #acacac;
+        border-radius:3px;
+        width:70%;
+        height:29px;
+        font-size: 12px;
+        padding-left: 10px;
+    }
+    .submit-btn{
+        margin-top: 35px;
+        background:#ffc000;
+        border-radius:3px;
+         width:86%;
+         margin-left: 7%;
+        height:41px;
+        font-family:PingFangSC-Regular;
+        font-size:16px;
+        color:#ffffff;
+        letter-spacing:0.16px;
+        text-align:center;
+    }
+    .footer{
+        // position: fixed;
+        left: 25px;
+        right: 25px;
+        bottom:40px;
+        font-family:PingFangSC-Regular;
+        font-size:10px;
+        color:#acacac;
+        letter-spacing:0.12px;
+        text-align:center;
+        // margin-top: 75px;
+        // margin-bottom: 33px;
+    }
+}

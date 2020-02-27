@@ -1,0 +1,63 @@
+<div class="">
+  <div class="top-header relative" style="width: 800px;margin:0 auto">
+    <p class="top-title center fn18">{{itemObj.LogTitle}}</p>
+    <button *ngIf="itemObj.ReleaseStatus == '0'" class="absolute" style="top:20px;right:22px;" nz-button [nzType]="'primary'"
+            (click)="tankbox('发布')" [disabled]="forbbien">发布</button>
+  </div>
+
+  <div class="content relative" style="width: 800px;margin:0 auto">
+
+    <div *ngIf="itemObj.ReleaseStatus == '0'">
+      <form #f="ngForm" nz-form style="margin:0 auto;width: 750px;">
+        <div nz-form-item nz-row class="mr center">
+          <tinymce [(ngModel)]="itemObj.TemplateText" [config]="config" loading="加载中……" name="agreement"></tinymce>
+        </div>
+      </form>
+
+      <div class="upload overh">
+        <span *ngIf="CertifyImgs.length<9 && exChange == '1'" class="container fl relative">
+          <input type="file" value="file" class="hiddenFile" (change)="handleFiles($event)">
+          <img src="assets/images/add.png">
+        </span>
+        <div class="Certify fl relative center" *ngFor="let item of CertifyImgs;let index=index;">
+          <img class="delete-icon absolute" src="assets/images/delete.png" (click)="deleteCertify($event,index)">
+          <img class="file-img" [src]="DomSanitizer.bypassSecurityTrustUrl(item.AttachmentURL)">
+        </div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="bt-footer center">
+        <button nz-button type="button" (click)="tankbox('返回')">返回</button>
+        <button nz-button [nzType]="'primary'" (click)="saveRizhi()" [disabled]="forbbien">保存</button>
+      </div>
+      <div class="center">
+        <p style="text-decoration: underline;cursor: pointer;" (click)="tankbox('删除')">删除</p>
+      </div>
+    </div>
+
+    <div *ngIf="itemObj.ReleaseStatus == '1'">
+      <div class="over-text" [innerHTML]="itemObj.TemplateText"></div>
+
+      <div class="bt-footer center">
+        <button nz-button type="button" [nzType]="'primary'" (click)="returnPage()">返回</button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="medigo" *ngIf="disdden" (click)="overbox()"></div>
+  <div class="file-box" *ngIf="disdden">
+    <div class="pass-cont center mr">
+      <div class="top-btn">
+        <p>{{titleTxt}}</p>
+      </div>
+      <div class="foot-btn center">
+        <button nz-button [nzType]="'primary'" (click)="onPass()">确定</button>
+        <button nz-button [nzType]="'default'" (click)="overbox()">取消</button>
+      </div>
+    </div>
+  </div>
+
+
+</div>

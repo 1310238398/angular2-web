@@ -1,0 +1,43 @@
+<ion-content>
+  <div *ngIf="leaveApply&&leaveApply.ApproveStatus!=5">
+    <ion-card class="xiaojia">
+      <ion-card-content>
+        <div>
+          <span>请在到校后再提交销假申请</span>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <yd-Steps [Steps]="Steps"></yd-Steps>
+    <applyleave-detail *ngIf="leaveApply" [leaveApply]="leaveApply" [UserInfo]="UserInfo"
+                       [applyDate]="applyDate"></applyleave-detail>
+
+    <div padding>
+      <button ion-button color="zj-main-color" (click)="onReCall()" block>申请销假</button>
+    </div>
+  </div>
+  <!--正销假-->
+ <div *ngIf="leaveApply&&leaveApply.ApproveStatus==5">
+   <ion-card>
+     <ion-card-content>
+       <img src="assets/images/commitsuccess.png" class="img commit">
+       <div class="success">您已提交销假申请，请耐心等待老师审批。</div>
+     </ion-card-content>
+   </ion-card>
+   <yd-Steps [Steps]="Steps"></yd-Steps>
+   <ion-card>
+     <ion-card-content>
+       <div>尊敬的{{UserInfo.Name}}同学：</div>
+       <div class="zj-text-indent">您的请假申请符合学校有关规定，<span>已获批。</span>
+       </div>
+       <div class="zj-text-indent">请假期间，请特别注意安全，保持联系畅通，并按时回校销假。
+       </div>
+       <div style="float: right">
+         <div>请假人：{{UserInfo.Name}}</div>
+         <div>日期：{{applyDate|stringToDate }}</div>
+       </div>
+     </ion-card-content>
+   </ion-card>
+   <applyleave-detail style="background-color: #4d4d4d" [leaveApply]="leaveApply" [UserInfo]="UserInfo" [applyDate]="applyDate"></applyleave-detail>
+ </div>
+</ion-content>
+

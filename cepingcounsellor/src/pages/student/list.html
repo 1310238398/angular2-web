@@ -1,0 +1,28 @@
+<!--<ion-header>
+    <ion-navbar color="twitter">
+        <ion-title text-center>
+            {{Person.Name}}
+        </ion-title>
+    </ion-navbar>
+</ion-header>-->
+
+<ion-content class="outer-content" padding-top>
+    <div *ngIf="iscol == 1" class="test academy">
+        <p>学院测评(已评测完)</p>
+    </div>
+    <!-- <div class="test academy" *ngIf="iscol == 0" [navPush]="explainPage"> -->
+    <div class="test academy" *ngIf="iscol == 0" [navPush]="collegePage">
+        <p>学院测评</p>
+    </div>
+    <!-- {{counselors | json}} -->
+    <div *ngFor="let item of counselors">
+        <!-- {{item.IntelUserCode | json}} -->
+        <div class="test teacher" *ngIf="item.IsDone == 0" [navPush]="instructorList" [navParams]="{ intelUserCode:item.IntelUserCode}">
+            <p>辅导员{{item.Name}}测评</p>
+        </div>
+        <div *ngIf="item.IsDone == 1" class="test teacher">
+            <p>辅导员{{item.Name}}测评(已评测完)</p>
+        </div>
+       
+    </div>
+</ion-content>

@@ -1,0 +1,20 @@
+.fl{float: left;}
+.fr{float: right;}
+.center{text-align: center;}
+.dib{display: inline-block;}
+.over{overflow: hidden;}
+.relative{position: relative;}
+.absolute{position:absolute}
+.cp{cursor: pointer;}
+.bold{font-weight: bold}
+.fn12{font-size: 12px;}
+.fn14{font-size: 14px;}
+
+.pass-cont{width: 600px;margin-left:20px;}
+.top-btn button{width: 80px;height:30px;margin:30px 30px 0px;}
+.foot-btn button{width: 100px;height:35px;}
+
+.message-box{width: 600px;height:150px;padding:5px;border-radius: 5px;border:1px solid #d9d9d9;resize:none;}
+.file-num{bottom:7px;right:5px;}
+
+

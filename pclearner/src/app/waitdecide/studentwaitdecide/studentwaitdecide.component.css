@@ -1,0 +1,34 @@
+.fl{float: left;}
+.fr{float: right;}
+.center{text-align: center;}
+.dib{display: inline-block;}
+.relative{position: relative;}
+.absolute{position: absolute;}
+.overh{overflow: hidden;}
+.fn14{font-size: 14px;}
+.fn16{font-size: 16px;}
+.fn18{font-size: 18px;}
+
+.help-btn{margin-left: 20px;cursor: pointer;color:#108EE9;}
+
+.ant-btn{padding:0 5px;}
+
+
+.medigo{position: fixed;overflow: auto;top: 0;right: 0;bottom: 0;left: 0;z-index: 1000;-webkit-overflow-scrolling: touch;outline: 0;background-color: rgba(55,55,55,.6);}
+
+.file-box{position: fixed;top:100px;width:400px;height:200px;left: 50%;margin-left:-200px;border-radius:10px;background: #fff;z-index: 1001;}
+
+.pass-cont{width: 400px;margin-top:20px;}
+.top-btn button{width: 80px;height:40px;margin:5px;}
+
+.foot-btn{margin-top:70px;}
+.foot-btn button{width: 100px;height:30px;margin:0 10px;}
+
+
+
+
+
+
+
+
+

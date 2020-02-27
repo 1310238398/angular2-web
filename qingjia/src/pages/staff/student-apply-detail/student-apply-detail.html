@@ -1,0 +1,91 @@
+<!--待准假-->
+<ion-content *ngIf="leaveApply.ApproveStatus==1">
+  <!--学生信息-->
+  <stu-usernfo [UserInfo]="UserInfo"></stu-usernfo>
+
+  <!--请假详情-->
+  <div class="bg">
+    <applyleave-detail [leaveApply]="leaveApply" [UserInfo]="UserInfo" [applyDate]="applyDate"></applyleave-detail>
+    <!--提示-->
+    <div class="waring" *ngIf="AfterApply">
+      <ion-icon name="ios-alert-outline" class="font"></ion-icon>
+      此学生申请请假时间晚于请假时间，为事后假
+      请确定后再批准请假
+    </div>
+  </div>
+  <div class="button-padding">
+    <button ion-button color="zj-main-color" (click)="onUnApprove(true)" icon-left>不批准</button>
+    <button ion-button color="zj-main-color" (click)="onApprove()" icon-right>批准</button>
+  </div>
+
+</ion-content>
+
+<!--待销假-->
+<ion-content *ngIf="leaveApply.ApproveStatus==2">
+  <!--学生信息-->
+  <stu-usernfo [UserInfo]="UserInfo"></stu-usernfo>
+  <!--请假详情-->
+  <div class="bg">
+    <applyleave-detail [leaveApply]="leaveApply" [UserInfo]="UserInfo" [applyDate]="applyDate"></applyleave-detail>
+    <div class="unxiaojia">学生还未提出销假</div>
+    <div class="waringInfo" text-center *ngIf="isOver(leaveApply.EndDate)">
+      <ion-icon name="ios-alert-outline" class="font"></ion-icon>
+      此学生请假时间已结束{{haveFinishDay(leaveApply.EndDate)}}天，但仍未申请销假
+    </div>
+  </div>
+  <!--  <button text-center ion-button *ngIf="isOver(leaveApply.EndDate)" (click)="onInfo()" block>
+    提醒
+  </button>-->
+
+</ion-content>
+
+<!--待审批销假（正销假）-->
+<ion-content *ngIf="leaveApply.ApproveStatus==5">
+  <!--学生信息-->
+  <stu-usernfo [UserInfo]="UserInfo"></stu-usernfo>
+  <!--地图信息-->
+  <div *ngIf="" #xiaojiacontainerMap id="xiaojiacontainerMap" style="width: 100%; height: 37%;"></div>
+  <div class="upload" *ngIf="CertifyImgs.length>0">
+    <div class="zhengming">部分请假材料或到校证明照片，点击照片查看拍摄时间</div>
+
+    <div class="Certify">
+        <span  *ngFor="let item of CertifyImgs;let index=index;">
+  <img [src]="DomS.bypassSecurityTrustUrl(item.AttachmentUrl)"
+       (click)="navPreview({time:true,index:index,items:CertifyImgs})">
+</span>
+    </div>
+
+  </div>
+  <!--请假详情-->
+  <applyleave-detail [leaveApply]="leaveApply" [UserInfo]="UserInfo" [applyDate]="applyDate"></applyleave-detail>
+  <div class="button-padding">
+    <button ion-button color="zj-main-color" (click)="onUnApprove(false)" icon-left>不批准</button>
+    <button ion-button color="zj-main-color" (click)="onApprpveLeave()" icon-right>批准</button>
+  </div>
+</ion-content>
+
+<!--已销假-->
+<ion-content *ngIf="leaveApply.ApproveStatus==3">
+  <!--学生信息-->
+  <stu-usernfo [UserInfo]="UserInfo"></stu-usernfo>
+  <ion-card>
+    <ion-card-content>
+      <div><span>已销假</span></div>
+    </ion-card-content>
+  </ion-card>
+  <applyleave-detail style="background-color: #4d4d4d" [leaveApply]="leaveApply" [UserInfo]="UserInfo"
+                     [applyDate]="applyDate"></applyleave-detail>
+</ion-content>
+
+<!--未批准-->
+<ion-content *ngIf="leaveApply.ApproveStatus==4">
+  <!--学生信息-->
+  <stu-usernfo [UserInfo]="UserInfo"></stu-usernfo>
+  <ion-card>
+    <ion-card-content>
+      <div><span>{{AuthReason}}</span></div>
+    </ion-card-content>
+  </ion-card>
+  <applyleave-detail style="background-color: #4d4d4d" [leaveApply]="leaveApply" [UserInfo]="UserInfo"
+                     [applyDate]="applyDate"></applyleave-detail>
+</ion-content>

@@ -1,0 +1,51 @@
+<div class="content">
+    <div class="progress">
+        <img src="./assets/images/3@2x.png" alt="">
+    </div>
+    <div class="bgwhite">
+        <span class="tilte"> {{title.TaskName}}</span>
+        <!-- <span class="time">进行时间：{{title.StartDate}} 至 {{title.EndDate}}</span> -->
+        <span class="time">起止时间：{{title.StartDate | date:'yyyy-MM-dd'}} 至 {{title.EndDate | date:'yyyy-MM-dd'}}</span>
+    </div>
+
+    <nz-table #nzTable [nzDataSource]="dataSet" nzBordered [nzIsPagination]="false">
+        <thead nz-thead>
+            <tr style="height:30px;font-size:14px;color:#666666;background:rgba(124,202,255,0.09);">
+                <!-- <th nz-th [nzCheckbox]="true">
+                    选择
+                </th> -->
+                <th nz-th>
+                    <span>校区</span>
+                </th>
+                <th nz-th>
+                    <span>宿舍楼</span>
+                </th>
+                <th nz-th>
+                    <span>检查人</span>
+                </th>
+                <th nz-th>
+                    <span>宿舍数</span>
+                </th>
+
+            </tr>
+        </thead>
+
+        <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i = index">
+                <!-- <td nz-td [nzCheckbox]="true">
+                    <label nz-checkbox [(ngModel)]="data.checked" name="checked">
+                    </label>
+                </td> -->
+                <td nz-td>{{data.CampusName}}</td>
+                <td nz-td>{{data.DormitoryName}}</td>
+                <td nz-td>{{data.Checker}}</td>
+                <td nz-td>{{data.RoomCount}}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+    <div class="btn">
+        <button class="pre _btn" (click)="prePage()">上一步</button>
+        <button class="next _btn" (click)="created()">完成</button>
+    </div>
+
+</div>

@@ -1,0 +1,25 @@
+page-other-list {
+  .list-ios {
+    margin: 8px 0 32px 0;
+    .item-ios {
+      h2 {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  OtherListPage .searchbar-ios .searchbar-search-icon {
+    top: 14px;
+  }
+  .searchbar-ios {
+    padding: 8px 8px;
+    background: none;
+    .searchbar-input {
+      height: 4rem;
+    }
+    .searchbar-search-icon {
+      top: 17px;
+    }
+  }
+}

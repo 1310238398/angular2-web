@@ -1,0 +1,171 @@
+<div class="fun-body mt">
+    <div nz-row [nzType]="'flex'" [nzJustify]="'start'" [nzAlign]="'top'">
+        <div nz-col [nzSpan]="4" [nzOffset]="2">
+            <div class="left-icon">
+                <img src="{{funItem.Icon}}" alt="无">
+            </div>
+        </div>
+        <div nz-col [nzSpan]="18" class="fun-des">
+            <div>功能名称：{{funItem.Name}}</div>
+            <div *ngIf="funItem.ChannelGroup.length==2">平台：移动端、PC端</div>
+            <div *ngIf="funItem.ChannelGroup.length==1&&funItem.ChannelGroup[0]=='A'">平台：移动端</div>
+            <div *ngIf="funItem.ChannelGroup.length==1&&funItem.ChannelGroup[0]=='B'">平台：PC端</div>
+            <div *ngIf="funItem.UserType.length==2">功能所属人群：老师、学生</div>
+            <div *ngIf="funItem.UserType.length==1&&funItem.UserType[0]==2">功能所属人群：老师</div>
+            <div *ngIf="funItem.UserType.length==1&&funItem.UserType[0]==1">功能所属人群：学生</div>
+            <div>功能简介：{{funItem.Desc||"暂无简介"}}</div>
+        </div>
+
+
+    </div>
+</div>
+<div class="fun-conf mt" *ngIf="funItem.UserType.length">
+    <!--  <div nz-row [nzType]="'flex'" [nzAlign]="'top'">
+      <div nz-col [nzSpan]="4" [nzOffset]="2">
+        <div class="fun-tb">功能分配:</div>
+      </div>
+      <div nz-col [nzSpan]="18">
+        <nz-radio-group *ngIf="funItem.UserType.length==1&&funItem.UserType[0]==2" [(ngModel)]="UserType[0]">
+          <label nz-radio-button [nzValue]="'2'">
+            <span>老师</span>
+          </label>
+        </nz-radio-group>
+        <nz-radio-group *ngIf="funItem.UserType.length==1&&funItem.UserType[0]==1" [(ngModel)]="UserType[0]">
+          <label nz-radio-button [nzValue]="'1'">
+            <span>学生</span>
+          </label>
+        </nz-radio-group>
+        <nz-radio-group *ngIf="funItem.UserType.length==2" [(ngModel)]="UserType[0]">
+          <label nz-radio-button [nzValue]="'2'">
+            <span>老师</span>
+          </label>
+          <label nz-radio-button [nzValue]="'1'">
+            <span>学生</span>
+          </label>
+        </nz-radio-group>
+      </div>
+
+    </div>-->
+    <div class="left-bconf fun-tb">权限功能分配:
+        <div class="right-conf">
+            <nz-radio-group *ngIf="funItem.UserType.length==1&&funItem.UserType[0]==2" [(ngModel)]="UserType[0]">
+                <label nz-radio-button [nzValue]="'2'">
+          <span>老师</span>
+        </label>
+            </nz-radio-group>
+            <nz-radio-group *ngIf="funItem.UserType.length==1&&funItem.UserType[0]==1" [(ngModel)]="UserType[0]">
+                <label nz-radio-button [nzValue]="'1'">
+          <span>学生</span>
+        </label>
+            </nz-radio-group>
+            <nz-radio-group *ngIf="funItem.UserType.length==2" [(ngModel)]="UserType[0]">
+                <label nz-radio-button [nzValue]="'2'">
+          <span>老师</span>
+        </label>
+                <label nz-radio-button [nzValue]="'1'">
+          <span>学生</span>
+        </label>
+            </nz-radio-group>
+        </div>
+    </div>
+
+    <div *ngIf="UserType[0]==2" class="mlb">
+
+        <div class="left-bconf fun-tb">分配方式:
+            <div class="right-conf">
+                <nz-select style="width: 360px" [(ngModel)]="StaffSelectedConf" [nzPlaceHolder]="'choose option'">
+                    <nz-option *ngFor="let option of StaffConfs" [nzLabel]="option.name" [nzValue]="option.code">
+                    </nz-option>
+                </nz-select>
+            </div>
+        </div>
+
+        <div class="bg" *ngIf="StaffRoles.length&&StaffSelectedConf=='role'">
+            <div class="left-b fun-tb ">角色:
+
+                <div *ngFor="let role of StaffRoles;let index=index" class="btn-b sml" [ngClass]="{'selected':role.checked}" (click)="onStaffSelectRole(role)">
+                    <nz-tooltip [nzTitle]="role.RoleName">
+                        <span nz-tooltip>{{role.RoleName}}</span>
+                    </nz-tooltip>
+                </div>
+
+            </div>
+
+        </div>
+        <div *ngIf="StaffRoles.length&&StaffSelectedConf=='people'" class="p-sml fun-tb">人员:
+            <nz-select style="width: 395px;" nzAllowClear [nzPlaceHolder]="'输入姓名或手机号'" [nzFilter]="false" [(ngModel)]="selectedOption" (nzSearchChange)="queryStaff($event)" [nzNotFoundContent]="'无法找到'" nzShowSearch (ngModelChange)="selectStaff($event)">
+                <nz-option *ngFor="let option of StaffList" [nzLabel]="option.PhoneName" [nzValue]="option">
+                </nz-option>
+            </nz-select>
+        </div>
+        <div class="sml fun-tb" *ngIf="(SelectRoleOptions.concat(SelectStaffOptions)).length">已选:
+            <div class="b-select">
+                <span *ngFor="let op of (SelectRoleOptions.concat(SelectStaffOptions))">
+                <nz-tag [nzColor]="'#13A0FA'" *ngIf="!op.phone" nzClosable
+                        (nzClose)="onDeleteSelected(op)">{{op.name}}</nz-tag>
+                  <nz-tag [nzColor]="'#13A0FA'" *ngIf="op.phone" nzClosable
+                          (nzClose)="onDeleteSelected(op)">{{op.name}}({{op.phone}})</nz-tag>
+                </span>
+            </div>
+        </div>
+        <div class="b-config">
+            <!--          <button nz-button  (click)="staffConfigOk()">保存</button>-->
+            <nz-popconfirm [nzTitle]="'确定要保存当前配置吗?'" [nzCancelText]="'取消'" (nzOnConfirm)="staffConfirm()" (nzOnCancel)="cancel()">
+                <button nz-button nz-popconfirm>保存</button>
+            </nz-popconfirm>
+        </div>
+        <!--        <div class="b-config" *ngIf="staff_Config">
+              <button nz-button class="selected" (click)="staffConfig()">取消</button>
+              <button nz-button class="selected" (click)="staffConfigOk()">确定</button>
+            </div>-->
+    </div>
+    <div *ngIf="UserType[0]==1" class="mlb">
+        <div class="left-bconf fun-tb">分配方式:</div>
+        <div class="right-conf">
+            <nz-select style="width: 360px" [(ngModel)]="StudentSelectedConf" [nzPlaceHolder]="'请选择...'">
+                <nz-option *ngFor="let option of StudentConfs" [nzLabel]="option.name" [nzValue]="option.code">
+                </nz-option>
+            </nz-select>
+        </div>
+        <div *ngIf="StudentRoles.length&&StudentSelectedConf=='role'">
+            <div class="left-b fun-tb">职务:
+
+                <span *ngFor="let role of StudentRoles" class="btn-b sml" [ngClass]="{'selected':role.checked}" (click)="onStudentSelectRole(role)">
+              <nz-tooltip [nzTitle]="role.RoleName">
+          <span nz-tooltip>{{role.RoleName}}</span>
+                </nz-tooltip>
+                </span>
+            </div>
+
+        </div>
+        <div *ngIf="Grades.length&&StudentSelectedConf=='grade'">
+
+            <div class="left-b fun-tb">年级:
+                <span *ngFor="let grade of Grades" class="btn-b sml" [ngClass]="{'selected':grade.checked}" (click)="onStudentSelectGrade(grade)">
+              {{grade.name}}
+            </span>
+            </div>
+
+
+        </div>
+        <div class="sml fun-tb" *ngIf="(SelectStudentRoleOptions.concat(SelectGradeOptions)).length">已选:
+            <div class="b-select">
+                <span *ngFor="let op of (SelectStudentRoleOptions.concat(SelectGradeOptions))">
+                <nz-tag [nzColor]="'#13A0FA'" nzClosable
+                        (nzClose)="onDeleteStudentSelected(op)">{{op.name}}</nz-tag>
+                </span>
+            </div>
+        </div>
+        <div class="b-config">
+            <nz-popconfirm [nzTitle]="'确定要保存当前配置吗?'" [nzCancelText]="'取消'" (nzOnConfirm)="studentConfirm()" (nzOnCancel)="cancel()">
+                <button nz-button nz-popconfirm>保存</button>
+            </nz-popconfirm>
+        </div>
+        <!--   <div class="b-config" *ngIf="student_Config">
+         <button nz-button class="selected" (click)="studentConfig()">取消</button>
+         <button nz-button class="selected" (click)="studentConfigOk()">确定</button>
+       </div>-->
+
+    </div>
+
+</div>

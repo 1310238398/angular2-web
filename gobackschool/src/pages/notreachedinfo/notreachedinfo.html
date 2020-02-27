@@ -1,0 +1,84 @@
+<ion-content class="index-cont">
+  <div>
+    <div class="cont-box">
+      <div class="overh head-wrap">
+        <P class="head-title center fn17">未到人员统计明细</P>
+        <p class="head-cont fn14 center" *ngIf="NotCounttotal && PageAjax.class">
+          <button class="submit-tab mr" ion-button (click)="gotoNotTotal()">
+            还有<span class="fn17" style="color: #FF4E4E;"> {{NotCounttotal}} </span>人未统计, 点击查看
+          </button>
+        </p>
+        <p class="head-txt">
+          <a class="dib fn14 words" *ngFor="let items of reasonObj;" [class.seleced]='items.checked' (click)="checkWhyBtn(items.typecode)">{{items.typename}}
+            ({{items.nums}})</a>
+        </p>
+      </div>
+
+      <div class="list-cont" *ngIf="!haveClass">
+        <ul>
+          <li class="list-li" *ngFor="let data of dataSet;">
+            <p class="list-head overh">
+              <span class="fn15 dib" style="margin-right:10px;">{{data.name}}</span>
+              <span class="fn12 dib">——{{data.className}}</span>
+            </p>
+            <div class="cont-info">
+              <p class="mrbt8">
+                <span class="col9b">所属学院 : </span>
+                <span class="col4a">{{data.academyname}}</span>
+              </p>
+              <p class="mrbt8">
+                <span class="col9b">联系方式 : </span>
+                <span class="col4a">{{data.phone}}</span>
+              </p>
+              <p class="mrbt8">
+                <span class="col9b">未到原因 : </span>
+                <span class="col4a">{{data.reasonstatus}} - {{data.reason}}</span>
+              </p>
+              <p class="overh">
+                <span class="col9b db" style="width:100%;">图片说明 : </span>
+                <span class="db center img-wrap overh">
+                  <img *ngFor="let item of data.images;let index=index;" [src]="item.thumb" (click)="navPreview({time:true,index:index,items:data.images,type:PageAjax.type,academy:PageAjax.academy,class:PageAjax.class})">
+                </span>
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="haveClass" class="center">
+        <img src="assets/images/kong.png" style="margin-top:50px;" alt="">
+        <p style="color:#ACACAC;">无统计明细</p>
+      </div>
+    </div>
+
+    <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <div style="text-align: center;color: #8e9093; margin:20px 0;" *ngIf="!moreData">我是有底线的！</div>
+  </div>
+
+  <div class="ssc-ov fixed" *ngIf="mengGo"></div>
+  <div class="spinnerw fixed" *ngIf="mengGo" id="spinnerw">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</ion-content>
+<ion-footer>
+  <p class="absolute email-wrap" *ngIf="sendEmail" (click)="tankBox()"><img src="assets/images/youxiang@2x.png" alt=""></p>
+</ion-footer>
+
+<div class="medigo fixed" *ngIf="tapBoxSH" (click)="overbox()"></div>
+<div class="file-box center mr fixed" *ngIf="tapBoxSH">
+  <div class="top-btn center">
+    <h2 style="margin:0 0 10px;">导出未到人员统计明细</h2>
+    <ion-input class="input-box mr fn14" placeholder="请输入想要发送的邮箱地址" type="text" maxlength="30" [(ngModel)]="Email" name="Email"
+      (ngModelChange)="txtChange()"></ion-input>
+    <p class="fn12 col4a" style="padding:0 10px;text-align: left;margin-top:10px;">导出的结果5分钟内即可发送到指定邮箱,如果没有找到相关邮件,请在邮箱的垃圾箱中查找</p>
+  </div>
+  <div class="foot-btn center">
+    <button ion-button color="" outline (click)="overbox()">取消</button>
+    <button ion-button color="secondary" [disabled]="forbbien" (click)="onPassFun()">发送</button>
+  </div>
+</div>

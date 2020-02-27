@@ -1,0 +1,63 @@
+<ion-content class="index-cont">
+    <div *ngIf="!haveClass">
+        <ion-list no-lines>
+            <div class="overh" *ngFor="let data of dataSet" style="margin-bottom:5px;box-shadow: 0 2px 5px 0 #E3E3E3;">
+                <ion-item style="border-bottom:none!important;" (click)="NavigationTo(data)">
+                    <h2 class="class-title fn16">{{data.title}}</h2>
+                    <p class="fn14">
+                        <span class="gray-c">申请时间 : {{data.input_data.timestart}}</span>
+                        <span class="gray-c" style="margin-left:10px;">申请人 : </span>
+                        <span class="gray-4a">{{data.launcher_name}}</span>
+                    </p>
+                    <p item-end class="center">
+                        <img class="db mr" src="assets/images/gengduo.png">
+                    </p>
+                </ion-item>
+                <p class="detail-text" style="color: #4A90E2;">
+                    <span class="gray-c fn14">状态 : </span>
+                    <span class="fn14" style="color: #59B4F9;" *ngIf="data.input_data.status == '1'">{{data.input_data.statustxt}}</span>
+                    <span class="fn14" style="color: #FF4E4E;" *ngIf="data.input_data.status == '3'">{{data.input_data.statustxt}}</span>
+                    <span class="fn14" style="color: #69C701;" *ngIf="data.input_data.status == '2'">{{data.input_data.statustxt}}</span>
+                    <span class="fn12 fr" style="color: #FFC000;" (click)="openBox(data.record_id)">查看申请进度</span>
+                </p>
+            </div>
+        </ion-list>
+
+        <div class="ssc-ov fixed" *ngIf="hiddenBox" (click)="closeTab()"></div>
+        <div class="rili-box fixed overh attend-animat" *ngIf="hiddenBox">
+            <p class="rili-box-title fn17 center">申请进程</p>
+            <p class="process-close" (click)="closeTab()">
+                <img src="assets/images/close.png">
+            </p>
+            <div class="maxh" *ngFor="let data of dataPrecess">
+                <p class="process-p fn14">
+                    <span class="fl gray-4a">{{data.title}}</span>
+                    <span class="fr gray-c">{{data.process_time}}</span>
+                </p>
+                <p class="not-process overh" *ngIf="data.input_data.status == '3'">
+                    <span class="fl">拒绝原因 : {{data.input_data.remarktxt}}</span>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div *ngIf="haveClass" class="center">
+        <img src="assets/images/kong.png" style="margin-top:50px;" alt="">
+        <p style="color:#ACACAC;">无申请记录</p>
+    </div>
+
+    <p class="my-process fixed center fn12" (click)="NavigationToApplyList()">
+        <span class="db">我 要</span>
+        <span class="db">申 请</span>
+    </p>
+
+
+    <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <div style="text-align: center;color: #8e9093" *ngIf="!moreData">我是有底线的！</div>
+
+
+</ion-content>

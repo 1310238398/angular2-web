@@ -1,0 +1,112 @@
+<ion-content class="index-cont">
+    <div class="relative titlestatus-box overh">
+        <div class="" *ngIf="FamilyAddress.status == '3'" style="padding:20px 15px 15px;">
+            <p class="fn14" style="color:#FF0000">审批不通过原因</p>
+            <p class="fn14" style="color: #9B9B9B;text-indent:2em">{{FamilyAddress.remarktxt}}</p>
+        </div>
+        <P class="fn18 color4a center" style="margin:15px 0;">{{FamilyAddress.title}}</P>
+
+        <img class="absolute img-css" *ngIf="FamilyAddress.status == '2'" src="assets/images/yiwncheng@2x.png">
+        <img class="absolute img-css" *ngIf="appStatus == '1'" src="assets/images/shenpizhong@2x.png">
+        <img class="absolute img-css" *ngIf="FamilyAddress.status == '3'" src="assets/images/butongguo@2x.png">
+    </div>
+
+    <div class="info-cont overh" style="margin-bottom:30px;">
+        <div class="fl">
+            <img class="user-header" [src]="Headimgurl" onerror="this.src='assets/images/header.png'">
+        </div>
+        <div class="fl info-detail">
+            <span class="info-detail-name fn16 db">姓名 : {{FamilyAddress.Name}}</span>
+            <span class="db fn14">学号: {{FamilyAddress.UserCode}}</span>
+            <span class="db fn14">学院: {{FamilyAddress.AcademyName}}</span>
+        </div>
+    </div>
+
+    <div class="cont-form">
+        <ul>
+            <li class="min-ht43 bgfff lin-ht43 fn16" *ngIf="FamilyAddress.qq != ''">
+                <span class="dib title-css">QQ号</span>
+                <span class="dib cont-css">{{FamilyAddress.qq}}</span>
+            </li>
+            <li class="min-ht43 bgfff lin-ht43 fn16" *ngIf="FamilyAddress.email != ''">
+                <span class="dib title-css">电子邮箱</span>
+                <span class="dib cont-css">{{FamilyAddress.email}}</span>
+            </li>
+            <li class="min-ht43 bgfff lin-ht43 fn16" *ngIf="FamilyAddress.wechat != ''">
+                <span class="dib title-css">微信号</span>
+                <span class="dib cont-css">{{FamilyAddress.wechat}}</span>
+            </li>
+            <li class="min-ht43 bgfff fn16 padding10" *ngIf="FamilyAddress.hobby != ''">
+                <span class="dib title-css vertop">爱好特长</span>
+                <span class="dib cont-css lin-ht20">{{FamilyAddress.hobby}}</span>
+            </li>
+            <li class="min-ht43 bgfff fn16 padding10" *ngIf="FamilyAddress.StudentAreaName != ''">
+                <span class="dib title-css vertop">家庭地址</span>
+                <span class="dib cont-css lin-ht20">{{FamilyAddress.StudentAreaName}}</span>
+            </li>
+            <li class="min-ht43 bgfff fn16 padding10" *ngIf="FamilyAddress.detailaddress != ''">
+                <span class="dib title-css vertop">详细地址</span>
+                <span class="dib cont-css lin-ht20">{{FamilyAddress.detailaddress}}</span>
+            </li>
+            <li class="min-ht43 bgfff lin-ht43 fn16" *ngIf="FamilyAddress.postalcode != ''">
+                <span class="dib title-css">邮政编码</span>
+                <span class="dib cont-css">{{FamilyAddress.postalcode}}</span>
+            </li>
+            <li class="min-ht43 bgfff lin-ht43 fn16" *ngIf="FamilyAddress.homephone != ''">
+                <span class="dib title-css">家庭电话</span>
+                <span class="dib cont-css">{{FamilyAddress.homephone}}</span>
+            </li>
+            <li class="min-ht43 lin-ht43 fn16" *ngIf="FamilyAddress.firstguardianname != ''">
+                <span class="dib title-css">监护人一</span>
+            </li>
+            <li class="min-ht43 bgfff lin-ht43 fn16" *ngIf="FamilyAddress.firstguardianname != ''">
+                <span class="dib title-css">姓名</span>
+                <span class="dib cont-css">{{FamilyAddress.firstguardianname}}</span>
+            </li>
+            <li class="min-ht43 bgfff lin-ht43 fn16" *ngIf="FamilyAddress.firstguardiantitle != ''">
+                <span class="dib title-css">称谓</span>
+                <span class="dib cont-css">{{FamilyAddress.firstguardiantitle}}</span>
+            </li>
+            <li class="min-ht43 bgfff fn16 padding10" *ngIf="FamilyAddress.firstguardianemployer != ''">
+                <span class="dib title-css vertop">工作单位</span>
+                <span class="dib cont-css lin-ht20">{{FamilyAddress.firstguardianemployer}}</span>
+            </li>
+            <li class="min-ht43 bgfff lin-ht43 fn16" *ngIf="FamilyAddress.firstguardianposition != ''">
+                <span class="dib title-css">职务</span>
+                <span class="dib cont-css">{{FamilyAddress.firstguardianposition}}</span>
+            </li>
+            <li class="min-ht43 bgfff lin-ht43 fn16" *ngIf="FamilyAddress.firstguardiancontact != ''">
+                <span class="dib title-css">联系方式</span>
+                <span class="dib cont-css">{{FamilyAddress.firstguardiancontact}}</span>
+            </li>
+            <li class="min-ht43 lin-ht43 fn16" *ngIf="FamilyAddress.secondguardianname != '' || FamilyAddress.secondguardiantitle != '' || FamilyAddress.secondguardianemployer != '' || FamilyAddress.secondguardianposition != '' || FamilyAddress.secondguardiancontact != ''">
+                <span class="dib title-css">监护人二</span>
+            </li>
+            <li class="min-ht43 bgfff lin-ht43 fn16" *ngIf="FamilyAddress.secondguardianname != ''">
+                <span class="dib title-css">姓名</span>
+                <span class="dib cont-css">{{FamilyAddress.secondguardianname}}</span>
+            </li>
+            <li class="min-ht43 bgfff lin-ht43 fn16" *ngIf="FamilyAddress.secondguardiantitle != ''">
+                <span class="dib title-css">称谓</span>
+                <span class="dib cont-css">{{FamilyAddress.secondguardiantitle}}</span>
+            </li>
+            <li class="min-ht43 bgfff fn16 padding10" *ngIf="FamilyAddress.secondguardianemployer != ''">
+                <span class="dib title-css vertop">工作单位</span>
+                <span class="dib cont-css lin-ht20">{{FamilyAddress.secondguardianemployer}}</span>
+            </li>
+            <li class="min-ht43 bgfff lin-ht43 fn16" *ngIf="FamilyAddress.secondguardianposition != ''">
+                <span class="dib title-css">职务</span>
+                <span class="dib cont-css">{{FamilyAddress.secondguardianposition}}</span>
+            </li>
+            <li class="min-ht43 bgfff lin-ht43 fn16" *ngIf="FamilyAddress.secondguardiancontact != ''">
+                <span class="dib title-css">联系方式</span>
+                <span class="dib cont-css">{{FamilyAddress.secondguardiancontact}}</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="center" style="margin:30px 0;" *ngIf="appStatus == '1'">
+        <button ion-button class="not-css" outline (click)="notpassTab()">审批不通过</button>
+        <button ion-button class="yes-css" outline [disabled]="numdisb" (click)="passTabBtn()">审批通过</button>
+    </div>
+</ion-content>

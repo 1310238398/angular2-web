@@ -1,0 +1,32 @@
+<div nz-row nz-form-item>
+  <div nz-form-control>
+    <nz-select style="width: 120px;" [(ngModel)]="searchObj.Academy" [nzPlaceHolder]="'学院'" [nzShowSearch]="true" name="Academy" nzAllowClear>
+      <nz-option *ngFor="let option of Academys" [nzLabel]="option.AcademyName" [nzValue]="option.AcademyCode">
+      </nz-option>
+    </nz-select>
+  </div>
+</div>
+<div nz-row nz-form-item>
+  <div nz-form-control>
+    <nz-select style="width: 120px;" [(ngModel)]="searchObj.Major" (click)="onSelect('major')" [nzPlaceHolder]="'专业'" [nzShowSearch]="true" name="Major" nzAllowClear>
+      <nz-option *ngFor="let option of Majors" [nzLabel]="option.MajorName" [nzValue]="option.MajorCode">
+      </nz-option>
+    </nz-select>
+  </div>
+</div>
+<div nz-row nz-form-item>
+  <div nz-form-control>
+    <nz-select style="width: 120px;" [(ngModel)]="searchObj.Grade" (click)="onSelect(3)" [nzPlaceHolder]="'年级'" [nzShowSearch]="true" name="Grade" nzAllowClear>
+      <nz-option *ngFor="let option of Grades" [nzLabel]="option.GradeName" [nzValue]="option.GradeCode">
+      </nz-option>
+    </nz-select>
+  </div>
+</div>
+<div nz-row nz-form-item>
+  <div nz-form-control>
+    <nz-select style="width: 120px;" [(ngModel)]="searchObj.Class" (click)="onSelect('class')" [nzPlaceHolder]="'班级'" [nzShowSearch]="true" name="Class" nzAllowClear>
+      <nz-option *ngFor="let option of Classs" [nzLabel]="option.ClassName" [nzValue]="option.ClassCode">
+      </nz-option>
+    </nz-select>
+  </div>
+</div>

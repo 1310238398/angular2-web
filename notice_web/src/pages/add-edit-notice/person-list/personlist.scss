@@ -1,0 +1,240 @@
+page-personlist {
+  .content-md {
+    background-color: #f5f5f5;
+  }
+  .cuscol {
+    padding: 0px;
+  }
+  /*  .button-md:hover:not(.disable-hover){
+         background-color: white;
+    }*/
+  .btn-search {
+    background-color: white;
+    height: 23px;
+    margin-top: 10px;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0.14px;
+  }
+  .tab-button {
+    min-height: 36px !important;
+  }
+  .toolbar-title-md {
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #3e3e3e;
+    letter-spacing: 0.19px;
+    text-align: center;
+  }
+  .tabbar {
+    opacity: 1 !important;
+    height: 36px;
+  }
+  ion-tabs {
+    margin: 65px 0 0 0;
+    height: calc(100% - 75px);
+    border-radius: 2px;
+    //height: 500px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  .tabs-md .tab-button[aria-selected=true] {
+    background: #ffc000;
+    color: #ffffff
+  }
+  .searchbar-md {
+    background: none;
+    padding: 10px 5px 0 5px;
+    .searchbar-input {
+      height: 2rem;
+      padding-left: 38px;
+      padding-top: 10px;
+      font-size: 12px;
+    }
+    .searchbar-search-icon {
+      top: 2px;
+    }
+  }
+  .tab-button-text {
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+  }
+  background: #dedede;
+  .row {
+    overflow: auto;
+  }
+  .card-md,
+  .container {
+    overflow: auto;
+    height: 95%;
+  }
+  .lable {
+    display: inline-block;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .title {
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #3e3e3e;
+    letter-spacing: 0.19px;
+    text-align: center;
+  }
+  .btn {
+    background: #ffc000;
+    border-radius: 4px;
+    width: 100px;
+    height: 30px;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #ffffff;
+    letter-spacing: 0.19px;
+    text-align: center;
+  }
+  .w100pre {
+    width: 90%;
+  }
+  .checkbox-md .checkbox-icon {
+    border-radius: 50%;
+    border-color: #acacac;
+    border-width: 1px;
+  }
+  .item-md {
+    padding-left: 2px;
+    font-size: 14px;
+  }
+  .item.item-md .checkbox-md {
+    margin-right: 6px;
+  }
+  .checkbox-md .checkbox-checked {
+    border-color: #E89D33 !important;
+    background-color: #E89D33;
+  }
+  .card-md .item-md.item-block .item-inner {
+    border-bottom: 1px solid #dedede;
+    font-size: 16px;
+    padding-left: 8px;
+  }
+  .arrow-dropdown {
+    color: #ffc000;
+  }
+  .arrow-dropright {
+    transform: rotate(-90deg);
+    color: #acacac;
+  }
+  .checkbox-md .checkbox-icon {
+    border-radius: 50%;
+    /* border-color: #acacac; */
+  }
+  .breadcrumb {
+    padding: 8px 15px 4px 10px;
+    list-style: none;
+    font-size: 12px;
+    margin: 0;
+    border-radius: 4px;
+    letter-spacing: 0.14px;
+  }
+  .breadcrumb > li {
+    display: inline-block;
+    color: #67BFFD;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  /* .breadcrumb>li+li:before {
+       padding: 0 8px;
+       color: #ccc;
+       content: ">\00a0";
+   }*/
+  .breadcrumb > .active {
+    color: #666666;
+  }
+  .breadcrumb > li + .active:before {
+    content: ">\00a0";
+  }
+  .none {
+    visibility: hidden;
+  }
+  .downcheck {
+    /*  color: #D4D4D4; */
+    color: #67BFFD;
+  }
+  .downUncheck {
+    color: #D4D4D4;
+  }
+  .item-md .item-button {
+    font-size: 16px
+  }
+  .selected {
+    display: inline-block;
+    padding: 3px;
+    margin: 4px;
+    border: 1px solid #d5d5d5;
+    border-radius: 2px;
+  }
+  .box {
+    width: 116px;
+    height: 20px;
+    line-height: 20px;
+    vertical-align: middle;
+    display: inline-block;
+    overflow: hidden;
+    font-size: 16px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .roll {
+    border-color: #7ccaff;
+  }
+  .ml {
+    height: 20px;
+    vertical-align: sub;
+    padding-right: 3px;
+    line-height: 20px;
+  }
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .rengzheng {
+    margin-left: -15px;
+  }
+  .info {
+    display: inline-block;
+    margin: 5px 0 0 10px;
+  }
+  .label-md {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  .card-header-md {
+    font-size: 14px;
+    color: #666666;
+  }
+  .part > .checkbox-md .checkbox-checked .checkbox-inner {
+    left: 1px;
+    top: 1px;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-width: 1.5px;
+    border-radius: 50%;
+    border-style: solid;
+    background-color: #ffc000;
+  }
+  .nones {
+    text-align: center;
+    margin-top: 25%
+  }
+  .noneimg {
+    width: 200px;
+  }
+  .noneFont{
+    color: #666666;
+    font-size: 14px;
+  }
+
+}

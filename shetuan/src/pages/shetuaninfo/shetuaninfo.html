@@ -1,0 +1,241 @@
+<ion-content class="grid-basic-page">
+    <ion-card style="margin: 2px 0;width: 100%;box-shadow:0 2px 5px 0 #E3E3E3 !important;">
+        <ion-item style="width: 90%;margin:10px auto;border-bottom: 1px solid #E3E3E3;padding: 0;">
+            <ion-avatar item-start *ngIf="!ActivityOne.RecordId" (click)="showimage()">
+                <img id="wechatBox" src="assets/images/社团默认头像.png">
+            </ion-avatar>
+            <ion-avatar item-start *ngIf="ActivityOne.RecordId" (click)="showimage()">
+                <img id="wechatBox" [src]="DomS.bypassSecurityTrustUrl(CertifyImg.AttachmentURL)">
+            </ion-avatar>
+            <div class="fn16 h2-content color4a">{{ActivityOne.UnionName}}</div>
+            <span class="fn14" style="color:#9B9B9B;position: relative;line-height: 26px;" (click)="submemberpage()">成员{{ActivityOne.membernum}}
+                <span *ngIf="applymiss && applymiss.length && shetuanstatus==1" class="redcircle"></span></span>
+            <span class="fn14" style="color:#9B9B9B;margin-left: 10px;line-height: 26px;" (click)="subendpage()">活动{{ActivityOne.activitynum}}</span>
+            <!-- <ion-thumbnail item-end>
+                            <img src="img/thumbnail-totoro.png">
+                        </ion-thumbnail> -->
+            <button ion-button item-end *ngIf="ShetuanApply.status==0 || ShetuanApply.status==4" (click)="subapplication(ShetuanApply.status)"
+                style="background: #FFC000" class="shenqingbt">申请加入</button>
+            <span item-end *ngIf="ShetuanApply.status==1" style="color: #9B9B9B; font-size: 14px;">申请加入中</span>
+        </ion-item>
+
+        <div [ngClass]="{true: 'title-content-none', false: 'title-content'}[gengduo]" (click)="change()" style="width: 90%;margin:10px auto;">
+            <p class="fn14" style="line-height: 18px;" id="zigengduo">
+                简介：{{ActivityOne.UnionInfo}}
+            </p>
+        </div>
+
+    </ion-card>
+
+    <div class="photoalert" *ngIf="substatus">
+        <div class="alertback"></div>
+        <div class="alertwapper">
+            <div class="alert-content">
+                <!-- <div class="surplus-num-box"> -->
+                <ion-textarea maxlength="21" max="21" class="textarea" [(ngModel)]="shenqingapply" name="Info"
+                    [placeholder]="placeholder"></ion-textarea>
+                <!-- <p class="surplus-num" *ngIf="shenqingapply.length">{{21 - shenqingapply.length}}</p> -->
+                <!-- </div> -->
+                <div class="btn-wapper-line">
+                    <button ion-button class="btn-ghost" (click)="cancel()">取消</button>
+                    <button ion-button (click)="applicationsub()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="photoalert" *ngIf="deletestatus">
+        <div class="alertback"></div>
+        <div class="alertwapper">
+            <div class="alert-content">
+                <div class="center" style="color:green;">确认要删除该活动吗</div>
+                <div class="btn-wapper-line">
+                    <button ion-button class="btn-ghost" (click)="deletecancel()">取消</button>
+                    <button ion-button (click)="deletego()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="height:8px;background-color: #fafafa;"></div>
+
+    <ion-card style="margin:2px 0;width:100%;max-height: 70px;box-shadow:0 2px 5px 0 #E3E3E3 !important;">
+
+        <div padding style="max-height: 65px; padding: 5px 5px;margin: 0 10px;min-height: 45px;">
+            <ion-segment [(ngModel)]="pet">
+                <ion-segment-button value="activity">
+                    社团活动
+                </ion-segment-button>
+                <ion-segment-button value="honor">
+                    社团荣誉
+                </ion-segment-button>
+            </ion-segment>
+        </div>
+    </ion-card>
+
+
+    <div [ngSwitch]="pet">
+        <ion-list *ngSwitchCase="'honor'">
+            <div class="honor">
+                <div class="honortupiao center"> <img src="assets/images/rongyuqiang@2x.png"></div>
+                <div class="honorbody">
+                    <div style="height:30px;"></div>
+                    <div *ngFor=" let item of SheTuanHonor">
+                        <div style="margin-top:10px;width: 100%">
+                            <ion-item>
+                                <div class="fn16 center honor-content" style="width: 100%"><b>{{item.name}}</b></div>
+                                <div class="center " style="width: 100%;color: #9B9B9B">
+                                    <span class="fn12 ">{{item.insertdatetime.substr(0,10)}}</span>
+                                    <span class="fn12 " style="margin-left:20px;">由<span class="place-content">{{item.username}}</span>上传</span>
+                                </div>
+                            </ion-item>
+                            <ion-item class="honorphoto center">
+                                <ul *ngFor="let itam of item.attachmenturl;let index=index;">
+                                    <li>
+                                        <img #imgElement (click)="navPreview({time:false,index:index,items:item.attachmenturl})"
+                                            [src]='DomS.bypassSecurityTrustUrl(itam.attachmenturl)' alt="">
+
+                                    <li>
+                                </ul>
+                            </ion-item>
+                        </div>
+                    </div>
+                    <div *ngIf="SheTuanHonor.length > 0">
+                        <ion-infinite-scroll *ngIf="moreDatar" (ionInfinite)="doInfiniter($event)">
+                            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+                            </ion-infinite-scroll-content>
+                        </ion-infinite-scroll>
+                        <div style="text-align:center;color: #8e9093;margin-top: 5px;" *ngIf="!moreDatar">我是有底线的！</div>
+                    </div>
+                </div>
+                <!-- <div class="honor-bro">
+                    <img src="assets/images/rongyuqiang-bg2@2x.png">
+                </div> -->
+            </div>
+
+        </ion-list>
+
+        <ion-list *ngSwitchCase=" 'activity'">
+            <div *ngIf="shetuanstatus==1" style="background-color: #fafafa !important;margin-bottom: 26px;">
+                <div *ngFor="let item of Activity ">
+                    <ion-item class="fn14" style="background-color: #fafafa !important;">
+                        <ion-avatar item-start>
+                            <img src="assets/images/morentouxiang@2x.png">
+                        </ion-avatar>
+                        <span class="fn14 color4a">{{item.name}}</span>
+                        <span class="fn14" *ngIf="item.status==1" item-end style="color: red ">待审批</span>
+                        <span class="fn14" *ngIf="item.status==3" item-end style="color: red ">待发布</span>
+                        <span class="fn14" *ngIf="item.status==2" item-end style="color: red ">审批未通过</span>
+                        <span class="fn14" *ngIf="item.status==4 || item.status==5" class="color4a" item-end>{{item.UpdateDatetime.substr(0,10)}}</span>
+                    </ion-item>
+                    <ion-card style="margin:0px 12px;">
+                        <ion-card-content>
+                            <h2 class="fn18 center color4a" style="margin-bottom:10px;"><b>{{item.Activity}}</b><span
+                                    *ngIf="item.status==4" class="fr fn14" style="color: red;" (click)="deleteactivity(item) ">删除活动</span></h2>
+                            <p class="fn14 color4a">诚邀各位成员参加<span style="color: green;"><b>{{item.UnionName}}</b></span>举办的<span
+                                    style="color: green;"><b>{{item.Activity}}</b></span></p>
+                            <p class="fn14 color4a">活动内容为：<span>{{item.Info}}</span> </p>
+                            <p class="fn14 color4a">预计举办时间：<span style="color: green;"><b>{{item.Starttime}}</b></span></p>
+                            <p class="fn14 color4a">预计举办地点：<span style="color: green;"><b>{{item.Place}}</b></span></p>
+                            <p class="fn14 color4a">详细情况请咨询：<span style="color: green;"><b>{{item.Connect}}</b></span></p>
+                            <p class="fn14 color4a">联系方式：<span style="color: green;"><b>{{item.phone}}</b></span></p>
+                            <div *ngIf="item.status==3" class="fn14 center" style="color: #4A90E2;margin-top: 10px;"
+                                (click)="fabubefore(item) ">请点击发布该消息</div>
+                            <div *ngIf="item.status==4" class="fn14 center" style="color: red;margin-top: 10px;"
+                                (click)="zongjie(item) ">活动举办后请上传相关总结材料</div>
+                            <div *ngIf="item.status==2" class="fn14 center" style="color: red;margin-top: 10px;"
+                                (click)="retijiaobefore(item) ">活动未通过请重新提交</div>
+                        </ion-card-content>
+                    </ion-card>
+                </div>
+                <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinitea($event)">
+                    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+                    </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+                <div style="text-align: center;color: #8e9093;marker: 5px;" *ngIf="!moreData">我是有底线的！</div>
+
+            </div>
+            <div *ngIf="shetuanstatus==2 || shetuanstatus==3" style="background-color: #fafafa !important;margin-bottom: 26px;">
+                <div *ngFor="let item of Activityfz ">
+                    <ion-item class="fn14 " style="background-color: #fafafa !important;">
+                        <ion-avatar item-start>
+                            <img src="assets/images/morentouxiang@2x.png">
+                        </ion-avatar>
+                        <span class="fn14 color4a">{{item.name}}</span>
+                        <span *ngIf="item.status==4 || item.status==5 " class="color4a" item-end>{{item.UpdateDatetime.substr(0,10)}}</span>
+                    </ion-item>
+                    <ion-card style="margin:0px 12px;">
+                        <ion-card-content>
+                            <h2 class="fn18 center color4a" style="margin-bottom:10px;"><b>{{item.Activity}}</b></h2>
+                            <p class="fn14 color4a">诚邀各位成员参加<span style="color: green;"><b>{{item.UnionName}}</b></span>举办的<span
+                                    style="color: green;"><b>{{item.Activity}}</b></span></p>
+                            <p class="fn14 color4a">活动内容为：<span>{{item.Info}}</span> </p>
+                            <p class="fn14 color4a">预计举办时间：<span style="color: green;"><b>{{item.Starttime}}</b></span></p>
+                            <p class="fn14 color4a">预计举办地点：<span style="color: green;"><b>{{item.Place}}</b></span></p>
+                            <p class="fn14 color4a">详细情况请咨询：<span style="color: green;"><b>{{item.Connect}}</b></span></p>
+                            <p class="fn14 color4a">联系方式：<span style="color: green;"><b>{{item.phone}}</b></span></p>
+                        </ion-card-content>
+                    </ion-card>
+                </div>
+                <ion-infinite-scroll *ngIf="moreDatae" (ionInfinite)="doInfinite($event)">
+                    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+                    </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+                <div style="text-align: center;color: #8e9093;margin-top: 5px;" *ngIf="!moreDatae">我是有底线的！</div>
+            </div>
+
+        </ion-list>
+    </div>
+</ion-content>
+
+<ion-footer>
+
+    <ion-toolbar [ngSwitch]="pet" *ngIf="shetuanstatus==1" style="padding: 0 0 !important;height: 35px !important;">
+        <button *ngSwitchCase=" 'activity'" class="submit-tab mr fn16 " (click)="shenqing()">活动申请</button>
+        <button *ngSwitchCase=" 'honor'" class="submit-tab mr fn16 " (click)="subhonor()">上传荣誉</button>
+    </ion-toolbar>
+
+</ion-footer>
+
+<div *ngIf="touxiang" id="myModal" class="modal" (click)="popup()">
+</div>
+<div *ngIf="honorpicture" id="myModal" class="modal">
+</div>
+<img *ngIf="touxiang && !ActivityOne.RecordId" id="modalimg" class="modal-content" src="assets/images/社团默认头像.png"
+    (click)="popup()">
+<img *ngIf="touxiang && ActivityOne.RecordId" id="modalimg" class="modal-content" [src]="DomS.bypassSecurityTrustUrl(CertifyImg.AttachmentURL)"
+    (click)="popup()">
+<img *ngIf="honorpicture" id="modalimg" class="modalhonor-content" [src]="DomS.bypassSecurityTrustUrl(honorsrc)"
+    (click)="popupa()">
+
+<div *ngIf="showmage" class="backdrop" (click)="closesr()"></div>
+<div *ngIf="retijiao" class="backdrop" (click)="closere()"></div>
+<div *ngIf="fabus" class="backdrop" (click)="closefa()"></div>
+
+<div class="fixed tan-alert" *ngIf="showmage">
+    <div style="border-bottom: 0.8px solid #ddd;border-top: 0.5px solid #ddd;background: #fff;height: 35px !important;">
+        <span style="display: block;text-align: center;" class="touxiangalert" (click)="popup()">查看大图</span>
+    </div>
+    <div *ngIf="shetuanstatus==1" style="padding: 0 0 !important;height: 35px !important;background: #fff;position: relative;">
+        <input type="file" value="file" class="hiddenFile" (change)="handleFiles($event)">
+        <span style="display: block;text-align: center; " class="touxiangalert">更换头像</span>
+    </div>
+
+</div>
+<div class="fixed tan-alert" *ngIf="fabus && activitystatus==4">
+    <div style="border-bottom: 0.8px solid #ddd;border-top: 0.5px solid #ddd;background: #fff;min-height: 35px !important;">
+        <!-- <div class="bar bar-footer bar-balanced "> -->
+        <span style="display: block;text-align: center; " class="fabualert" (click)="fabu() ">发布活动</span>
+        <!-- </div> -->
+    </div>
+    <div style="padding: 0 0 !important;min-height: 35px !important;background: #fff">
+        <!-- <div class="bar bar-footer bar-balanced "> -->
+        <span style="display: block;text-align: center; " class="touxiangalert" (click)="activitychange() ">活动信息修改</span>
+        <!-- </div> -->
+    </div>
+</div>
+<div class="fixed tan-alert" *ngIf="retijiao">
+    <div style="border-bottom: 0.5px solid #ddd;border-top: 0.5px solid #ddd;background: #fff;min-height: 45px !important;">
+        <span style="display: block;text-align: center; " class="tijiaoalert" (click)="retijiaosub()">重新提交</span>
+    </div>
+</div>

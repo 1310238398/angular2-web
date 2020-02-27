@@ -1,0 +1,30 @@
+<ion-content class="outer-content">
+    <div class="navBg">
+        <p>
+            <label>{{coursename}}</label>
+            <span>第{{currentPageIndex + 1}}题/共{{questionListLength}}题</span>
+        </p>
+    </div>
+ <form (submit)="doSubmit($event)" [formGroup]="langForm">
+    <ion-list radio-group formControlName="langs">
+    <div class="pageContent">
+
+        <ion-item text-wrap>{{question.TitleContext}}</ion-item>
+
+            <ion-item  text-wrap *ngFor="let opt of question.Options" >
+                <ion-label >{{opt.OptionStandard}}</ion-label>
+                <ion-radio value={{opt.OptionDetailId}}  (click)="next(item)"></ion-radio>
+            </ion-item>
+    
+    </div>
+  </ion-list>
+  </form>
+    <div class="pageBtnDiv">
+        <button type="button" (click)="privious(item)"  *ngIf = "currentPageIndex >= 1">上一题</button>
+        <button type="button" (click)="privious(item)" *ngIf = "currentPageIndex == 0" >首页</button>
+        <button type="button" (click)="next(item)" *ngIf = "nextButtonAvaible == true">下一题</button>
+        <button type="button" (click)="finish()" *ngIf="nextButtonAvaible == false" [disabled]="buttonDisabled">提交</button>
+        <!--<button type="button" (click)="finish()" class="gray" *ngIf="finishButtonAvaible == false">{{finishButtonAvaible}}</button>-->
+    </div>
+
+</ion-content>

@@ -1,0 +1,33 @@
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.alert-ios .alert-button:first-child {
+  font-size: 16px;
+  color: #666666;
+}
+
+.alert-ios .alert-button:last-child {
+  border-right: 0;
+  font-weight: normal;
+}
+
+.zj-t-center{
+  text-align: center!important;
+}
+
+.alert-ios .alert-wrapper{max-width: 280px;}
+.alert-ios .alert-message{text-align: left;}
+.alert-message p{margin:10px 0;}
+.alert-message p:nth-child(1){font-size: 14px;color:#9b9b9b;}
+.alert-message p:nth-child(2){font-size: 16px;color:#4a4a4a;}
+.alert-message p:nth-child(3){font-size: 14px;color:#9b9b9b;}
+
+.refresher-pulling-text, .refresher-refreshing-text{color:#666;}
+.refresher-pulling-icon, .refresher-refreshing-icon{font-size: 22px;}
+
+
+
+

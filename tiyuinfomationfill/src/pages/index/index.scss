@@ -1,0 +1,87 @@
+page-index {
+    ul,li{list-style: none;margin:0;padding:0;}
+    p,h1,h2,h3{margin:0;padding:0;}
+    .fl{float: left;}
+    .fr{float: right;}
+    .center{text-align: center;}
+    .dib{display: inline-block;}
+    .relative{position: relative;}
+    .absolute{position: absolute;}
+    .fixed{position: fixed}
+    .overh{overflow: hidden;}
+    .mr{margin:0 auto;}
+    .db{display: block;}
+    .fn9{font-size: 9px;}
+    .fn12{font-size: 12px;}
+    .fn13{font-size: 13px;}
+    .fn14{font-size: 14px;}
+    .fn16{font-size: 16px;}
+    .fn18{font-size: 18px;}
+
+    .bgfff{background: #fff;}
+    .color4a{color: #4A4A4A;}
+    .color9b{color: #9B9B9B;}
+    .color66{color: #666;}
+
+    .scroll-content{padding-bottom:0px!important}
+
+    // 蒙层
+
+    .dio-mego{top:0;left:0;bottom:0;right:0;width: 100%;height:100%;z-index: 1;background: #fff;}
+
+    .index-cont{background: #F5F5F5;color: #666;}
+    .img-css{width: 50px;top:5px;right:10px;}
+
+    .cont-form{width: 100%;margin-top:15px;}
+    .cont-form .list-ios{margin:0;border-radius: 0px;}
+    .cont-form .item-block {min-height: 43px;}
+    .li-css{background: #fff;padding:0 15px;}
+    .li-css .label-ios{width: 100px!important;}
+    .li-css .label-ios i{color: #FB5F2D;width: 12px;display: inline-block;}
+    .li-css .text-input-ios{margin-left:0px;width:100%;color: #666;}
+    .hr-p{padding:0 15px;height:30px;line-height: 30px;}
+
+    .upload{padding:10px;}
+    .upload .container {width: 115px;height:160px;}
+    .upload .add-blue{width: 40px;bottom:5px;right:5px;z-index: 0;}
+
+    .upload .Certify {width: 115px;height: 160px;z-index: 3;}
+    .upload .Certify .file-img {vertical-align: middle;width: 115px;height: 160px;}
+    .upload .Certify .delete-icon {top: -6px;right: -6px;width: 12px;height: 12px;}
+
+    .hiddenFile {width: 100%;height: 100%;top: 0;left: 0;opacity: 0;-moz-opacity: 0;z-index: 1;}
+
+
+    ion-select {
+        position: relative;
+        flex: 1;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        overflow: hidden;
+        max-width: 100%;
+        height: 33px;
+        line-height: 33px;
+        background: #FFFFFF;
+        padding:0px 0px 0px 0px!important;
+        .select-text {
+            font-size: 16px;
+            color: #666;
+            line-height: 33px;
+        }
+    }
+    .select-ios .select-icon {position: relative;width: 15px; height: 33px;}
+
+    .submit-tab{width: 170px;height:40px;background: #FFC000;}
+
+
+
+
+
+
+
+
+
+}
+
+

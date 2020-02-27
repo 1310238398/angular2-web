@@ -1,0 +1,22 @@
+page-search {
+    ion-list {
+        .item-ios {
+            h2 {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+        .p {
+            color: red;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 20px;
+        }
+        em {
+            color: red;
+            font-style: normal;
+        }
+    }
+}

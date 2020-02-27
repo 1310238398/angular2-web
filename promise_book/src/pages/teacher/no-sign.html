@@ -1,0 +1,26 @@
+<ion-content>
+  <ion-list class="m-t-10">
+    <div class="list_arrow">
+      <div class="stu_list" *ngFor="let stu of stuList">
+        <div class="photo">
+          <img src="/api/static?url=/static/headpictures/{{stu.UserID}}.jpg-thumb">
+          <a class="auth" *ngIf="stu.IsAuth===1">V</a>
+        </div>
+        <div class="stu_info">
+            <div class="stu_info_content">
+                <span class="nickname">{{stu.Name}}</span>
+                <div class="status">
+                  <a class="remind" *ngIf='pro.Status===1' (click)="remind(stu.UserID)"><i class="iconfont icon-tixing tixing"></i></a>
+                  <span>未签署</span>
+                </div>
+            </div>
+            <div class="line"></div>
+        </div>
+      </div>
+    </div>
+  </ion-list>
+  <div class="empty" *ngIf="iSNull">
+    <a><img src="assets/img/kong@2x.png" width="210" height="150"></a>
+    <p class="tips">该承诺书已完成签署</p>
+  </div>
+</ion-content>

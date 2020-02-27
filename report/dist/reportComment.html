@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>举报评论</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/zepto.js"></script>
+    <script src="./js/antlinker.1.0.10.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="from-enter">
+            <p class="from-title">请选择(输入)举报该评论的原因：</p>
+            <div class="checkbox-wrapper">
+                <div class="checkbox-center">
+                    <div class="checkbox-center-flex">
+                        <div class="checkbox-center-col">
+                            <input type="checkbox" name="rubbish" id="rubbish" onchange="handelChangge(this, 'rubbish' )">
+                            <label for="rubbish">垃圾营销</label>
+                        </div>
+                        <div class="checkbox-center-col">
+                            <input type="checkbox" name="unrealistic" id="unrealistic" onchange="handelChangge(this, 'unrealistic' )">
+                            <label for="unrealistic">不实信息</label>
+                        </div>
+                    </div>
+                    <div class="checkbox-center-flex">
+                        <div class="checkbox-center-col">
+                            <input type="checkbox" name="harmful" id="harmful" onchange="handelChangge(this, 'harmful' )">
+                            <label for="harmful">有害信息</label>
+                        </div>
+                        <div class="checkbox-center-col">
+                            <input type="checkbox" name="Illegality" id="Illegality" onchange="handelChangge(this, 'Illegality' )">
+                            <label for="Illegality">违法信息</label>
+                        </div>
+                    </div>
+                    <div class="checkbox-center-flex">
+                        <div class="checkbox-center-col">
+                            <input type="checkbox" name="obscene" id="obscene" onchange="handelChangge(this, 'obscene' )">
+                            <label for="obscene">淫秽色情</label>
+                        </div>
+                        <div class="checkbox-center-col">
+                            <input type="checkbox" name="attack" id="attack" onchange="handelChangge(this, 'attack' )">
+                            <label for="attack">人身攻击我</label>
+                        </div>
+                    </div>
+                    <div class="checkbox-center-flex">
+                        <div class="checkbox-center-col">
+                            <input type="checkbox" name="plagiarism" id="plagiarism" onchange="handelChangge(this, 'plagiarism' )">
+                            <label for="plagiarism">抄袭我的内容</label>
+                        </div>
+                        <div class="checkbox-center-col">
+                            <input type="checkbox" name="other" id="other" onchange="handelChangge(this, 'other' )">
+                            <label for="other">其他</label>
+                        </div>
+                    </div>
+                </div>
+                <p class="from-title margin-top-20">需要补充举报说明(最多100字)</p>
+                <div>
+                    <textarea name="" id="detailedContent" placeholder="请详细填写，确保举报能够被受理" maxlength="100"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="submission">
+            <button id="button_submit">提交</button>
+            <p class="submission-desc" style="font-size: 12px;">注意：若举报有误或者恶意举报，平台会进行相关的惩罚封号或者禁言</p>
+        </div>
+    </div>
+    <!-- toast -->
+    <div class="toast-wrap">
+        <span class="toast-msg"></span>
+    </div>
+    <script src="./js/main_reply.js"></script>
+</body>
+
+</html>

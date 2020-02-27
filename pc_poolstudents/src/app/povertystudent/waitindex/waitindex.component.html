@@ -1,0 +1,199 @@
+<div class="content wait-check">
+    <div class="components-table-demo-control-bar">
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-center">
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>学号</label>
+                </div>
+                <div nz-form-control>
+                    <nz-input style="width: 120px;" [(ngModel)]="searchObj.UserCode" name="UserCode" [nzSize]="'middle'"></nz-input>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>姓名</label>
+                </div>
+                <div nz-form-control>
+                    <nz-input style="width: 120px;" [(ngModel)]="searchObj.Name" name="Name" [nzSize]="'middle'"></nz-input>
+                </div>
+            </div>
+
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>年级</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.Grade" name="Grade" nzAllowClear (ngModelChange)="loadClass()">
+                        <nz-option *ngFor="let option of optiongrade" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>班级</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" #class [nzPlaceHolder]="''" [(ngModel)]="searchObj.Class" name="Class" nzAllowClear>
+                        <nz-option *ngFor="let option of optionclass" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>状态</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.Status" name="Status" nzAllowClear>
+                        <nz-option *ngFor="let option of optionstatus" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-col [nzSpan]="24" style="text-align: right;">
+                    <button nz-button [disabled]="httpService.loading" [nzType]="'primary'" (click)="onSearch(true)">查询</button>
+                    <button nz-button (click)="resetForm(f)">重置</button>
+                    <span class="help-btn" (click)="showHelp()">帮助</span>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+
+    <div style="margin-top:20px;">
+        <button style="margin-bottom: 5px;" nz-button [nzType]="'primary'" (click)="showModal()">
+            <span>批量审批</span>
+        </button>
+
+        <nz-table #nzTable [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [(nzTotal)]="searchObj.total" [(nzPageIndex)]="searchObj.Page"
+            [(nzPageSize)]="searchObj.PageSize" [nzBordered]="true" (nzPageIndexChange)="onSearch()">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>
+                        <label nz-checkbox [(ngModel)]="allChecked" (ngModelChange)="updateAllChecked()" [nzIndeterminate]="indeterminate">
+                        </label>
+                    </th>
+                    <th nz-th>
+                        <span>学号</span>
+                    </th>
+                    <th nz-th>
+                        <span>姓名</span>
+                    </th>
+                    <th nz-th>
+                        <span>班级</span>
+                    </th>
+                    <th nz-th class="weight-txt">
+                        <span>重点关注信息</span>
+                    </th>
+                    <th nz-th>
+                        <span>申请所需资料</span>
+                    </th>
+                    <th nz-th>
+                        <span>家庭情况调查问卷</span>
+                    </th>
+                    <th nz-th>
+                        <span>学生自评调查问卷</span>
+                    </th>
+                    <th nz-th>
+                        <span>变更理由</span>
+                    </th>
+                    <th nz-th style="width: 120px;">
+                        <span>状态</span>
+                    </th>
+                    <th nz-th>
+                        <span>申请时间</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                    <td nz-td>
+                        <label nz-checkbox [disabled]="data.Status == '0' && data.Tasking == '1'?false:true" [(ngModel)]="data.checked" (ngModelChange)="updateSingleChecked()">
+                        </label>
+                    </td>
+                    <td nz-td>{{data.UserCode}}</td>
+                    <td nz-td>{{data.Name}}</td>
+                    <td nz-td>{{data.Class}}</td>
+                    <td nz-td>{{data.Focus}}</td>
+                    <td nz-td>
+                        <a [routerLink]="['waitdetail',{IntelUserCode: data.IntelUserCode,Tasking: data.Tasking,CounselorStatus: data.CounselorStatus,AcadamyStatus: data.AcadamyStatus, categray: '1'}]"
+                            (click)="sesstionCut(data)">
+                            <span>查看</span>
+                            <span *ngIf="data.AttachIsChange == '1'">(新)</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a [routerLink]="['waitdetail',{IntelUserCode: data.IntelUserCode,Tasking: data.Tasking,CounselorStatus: data.CounselorStatus,AcadamyStatus: data.AcadamyStatus, categray: '2'}]"
+                            (click)="sesstionCut(data)">
+                            <span>{{data.EnconomicScore}}分</span>
+                            <span *ngIf="data.EnconomicIsChange == '1'">(新)</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a [routerLink]="['waitdetail',{IntelUserCode: data.IntelUserCode,Tasking: data.Tasking,CounselorStatus: data.CounselorStatus,AcadamyStatus: data.AcadamyStatus, categray: '3'}]"
+                            (click)="sesstionCut(data)">
+                            <span>{{data.SelfAssessmentScore}}分</span>
+                            <span *ngIf="data.SelfAssessmentIsChange == '1'">(新)</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <span *ngIf="data.IsChange == '1'">
+                            <a [routerLink]="['waitdetail',{IntelUserCode: data.IntelUserCode,Tasking: data.Tasking,CounselorStatus: data.CounselorStatus,AcadamyStatus: data.AcadamyStatus, categray: '4'}]">查看</a>
+                        </span>
+                        <span *ngIf="data.IsChange == '0'">无</span>
+                    </td>
+                    <td nz-td>
+                        <span *ngIf="data.Status == '0' && data.Tasking == '1' && data.CounselorStatus == '10' && data.AcadamyStatus == '10'">
+                            <a [routerLink]="['waitdetail',{IntelUserCode: data.IntelUserCode,Tasking: data.Tasking,CounselorStatus: data.CounselorStatus,AcadamyStatus: data.AcadamyStatus, categray: '5'}]"
+                                (click)="sesstionCut(data)">点击审批</a>
+                        </span>
+                        <span *ngIf="data.Status == '0' && data.Tasking == '1' && data.CounselorStatus == '20' && data.AcadamyStatus == '10'">修改认定结果后方可审批</span>
+                        <span *ngIf="data.Status == '0' && data.Tasking == '1' && data.AcadamyStatus == '20'">认定提交后不可审批</span>
+                        <span *ngIf="data.Status == '0' && data.Tasking == '0'">认定任务创建后开放审批入口</span>
+                        <span *ngIf="data.Status == '2'">审批不通过</span>
+                    </td>
+                    <td nz-td>{{data.LastTime}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+    <!-- 帮助 -->
+    <nz-modal class="help-css" [nzVisible]="isHelpBox" [nzTitle]="'帮助'" [nzContent]="helpmodalContent" (nzOnCancel)="helpCancel($event)"
+        (nzOnOk)="helpCancel($event)" [nzCancelText]="null" nzOkText="我知道了">
+        <ng-template #helpmodalContent>
+            <p style="border-bottom:1px solid #e9e9e9;text-align: left;padding-bottom:10px;"> 1. 该功能中显示的学生是想要认定为家庭经济困难学生的同学或是已经认定成功但是想要修改认定资料的学生。</p>
+            <p style="border-bottom:1px solid #e9e9e9;text-align: left;padding-bottom:10px;margin-top:10px;"> 2. 学生提交的认定资料只有在相关认定任务时才可以审批，审批通过学生的认定资料会移动到【待认定】功能中，请在【待认定】中认定学生的困难情况。</p>
+            <p style="border-bottom:1px solid #e9e9e9;text-align: left;padding-bottom:10px;margin-top:10px;"> 3. 关于认定任务，认定未完成时，【待审批】中可以审批并生效；若认定已完成但未提交，修改认定结果后依然可以在【待审批】中审批并生效；若认定结果结果已提交，则无法进行审批。</p>
+            <p style="text-align: left;margin-top:10px;"> 4. 若【待认定】中同学A正在接受认定，同学A又提交了修改后的材料，如果审批通过了同学A修改的材料，则新材料生效，【待认定】中同学A之前的认定将会被取消，会根据新的材料重新接受认定。</p>
+        </ng-template>
+    </nz-modal>
+
+    <!-- 批量审批 -->
+    <nz-modal class="approve-wrap" [nzVisible]="isVisible" [nzTitle]="'批量审批'" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)"
+        (nzOnOk)="handleOk($event)" nzCancelText="取消" nzOkText="确定">
+        <ng-template #modalContent>
+            <p class="center" style="color: #FF0000;margin-bottom:20px;">请在查看过学生申请所需资料、家庭情况调查问卷、学生自评调查问卷后做出统一的审批</p>
+            <p class="center">
+                <nz-radio-group [(ngModel)]="approveObj.RefuseStatus">
+                    <label nz-radio [nzValue]="'1'">
+                        <span>审批通过</span>
+                    </label>
+                    <label nz-radio [nzValue]="'2'">
+                        <span>审批不通过</span>
+                    </label>
+                </nz-radio-group>
+            </p>
+            <div class="relative" style="margin:20px 0 0;">
+                <textarea class='message' #textarea name="fileNews" [(ngModel)]="approveObj.RefuseReason" (ngModelChange)="txtChange(textarea.value)"
+                    maxlength="50" cols="1" rows="1" placeholder="审批不通过时必填"></textarea>
+                <p class="file-num absolute">{{approveObj.values}}</p>
+            </div>
+            <p class="fn12 center" style="color: #999;">审批通过学生的认定资料会移动到【待认定】功能中，请在【待认定】中认定学生的困难情况</p>
+        </ng-template>
+    </nz-modal>
+
+</div>

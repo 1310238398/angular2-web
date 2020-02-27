@@ -1,0 +1,55 @@
+<ion-content>
+  <div class="page-tips">
+    重置密码针对于学生忘记了密码且更换了手机号的情况，重置密码后会将密码设置为123456，请通知学生尽快登录后修改密码
+  </div>
+  <div class="norz">
+    <a (click)="why()">学生登录后无法认证怎么办？</a>
+  </div>
+  <div class="info_list">
+    <ion-list *ngFor="let stu of studentData">
+      <ion-item>
+        <div class="class-info">
+          <p class="username no-line-break">
+            {{stu.Name}}</p>
+          <p class="usercode no-line-break">{{stu.UserCode}}</p>
+        </div>
+        <a item-end class="item-end edit" (click)="showReset(stu)">密码重置</a>
+      </ion-item>
+      <div class="line"></div>
+    </ion-list>
+  </div>
+  <div class="empty" *ngIf="isNull">
+    <a>
+      <img src="assets/imgs/kong.png" width="187" height="159">
+    </a>
+    <p class="tips">暂无数据</p>
+  </div>
+  <!-- 取消 -->
+  <div class="photoalert" *ngIf="rzAlert">
+    <div class="alertback"></div>
+    <div class="alertwapper">
+      <div class="alert-content">
+        <p class="tips">
+          无法认证可能是因为系统中的身份信息有误/没有身份信息/学生状态不为“正常在校”
+        </p>
+        <p class="tips">辅导员可通过PC端“学生账号”功能修改学生的身份信息，可通知系统管理员新增学生身份信息，可通过移动端“学生状态”修改学生状态</p>
+      </div>
+      <div class="acions">
+        <a class="one-btn" (click)="rzAlert=false">知道了</a>
+      </div>
+    </div>
+  </div>
+  <!-- 重置密码 -->
+  <div class="photoalert" *ngIf="resetAlert">
+    <div class="alertback"></div>
+    <div class="alertwapper">
+      <div class="alert-content">
+        <p class="tips">确定要重置&nbsp;&nbsp;{{currentStu.Name}}&nbsp;&nbsp;的账号密码吗？修改后将给该用户发送短信通知</p>
+      </div>
+      <div class="acions">
+        <a class="actions_a" (click)="resetAlert=false">取消</a>
+        <a class="actions_a save" (click)="resetPassWord()">确定</a>
+      </div>
+    </div>
+  </div>
+</ion-content>

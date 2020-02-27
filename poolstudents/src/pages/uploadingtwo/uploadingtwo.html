@@ -1,0 +1,80 @@
+<ion-content padding-top style="position: relative;">
+  <p class="center header-file fn12 relative">
+    <span>请于对应位置上传对应材料的图片</span>
+  </p>
+  <div class="file-cont">
+    <p class="info-title">
+      家庭经济情况调查表
+    </p>
+    <ion-card>
+      <div class="upload overh">
+
+        <span class="container fl relative" *ngIf="CertifyImgs1.length<9 && exChange == '1'">
+          <input type="file" value="file" class="hiddenFile" (change)="handleFiles($event,'1')">
+          <img src="assets/images/add.png">
+        </span>
+
+        <div class="Certify fl relative center" *ngFor="let item of CertifyImgs1;let index=index;" [ngClass]="{'underimg':index==4}">
+          <img *ngIf="exChange == '1'" class="delete-icon absolute" src="assets/images/delete.png" (click)="deleteCertify1($event,index)">
+          <img class="file-img" [src]="DomSanitizer.bypassSecurityTrustUrl(item.AttachmentURLThumb)" (click)="navPreview({time:true,index:index,items:CertifyImgs1})">
+        </div>
+        <div class="clear"></div>
+      </div>
+    </ion-card>
+  </div>
+  <div class="file-cont">
+    <p class="info-title">
+      家庭经济困难学生认定知情同意书
+    </p>
+    <ion-card>
+      <div class="upload overh">
+        <span class="container fl relative" *ngIf="CertifyImgs2.length<9 && exChange == '1'">
+          <input type="file" value="file" class="hiddenFile" (change)="handleFiles($event,'2')">
+          <img src="assets/images/add.png">
+        </span>
+        <div class="Certify fl relative center" *ngFor="let item of CertifyImgs2;let index=index;" [ngClass]="{'underimg':index==4}">
+          <img *ngIf="exChange == '1'" class="delete-icon absolute" src="assets/images/delete.png" (click)="deleteCertify2($event,index)">
+          <img class="file-img" [src]="DomSanitizer.bypassSecurityTrustUrl(item.AttachmentURLThumb )" (click)="navPreview({time:true,index:index,items:CertifyImgs2})">
+        </div>
+        <div class="clear"></div>
+      </div>
+    </ion-card>
+  </div>
+
+  <div class="file-cont">
+    <p class="info-title relative">
+      <span>家庭持有的相关困难材料</span> 
+      <span class="fn12 absolute" style="top:0;right:10px;color: #4A90E2;" (click)="showAlert()">材料清单</span>
+    </p>
+    <ion-card>
+      <div class="upload overh">
+        <span *ngIf="CertifyImgs3.length<9 && exChange == '1'" class="container fl relative">
+          <input type="file" value="file" class="hiddenFile" (change)="handleFiles($event,'3')">
+          <img src="assets/images/add.png">
+        </span>
+        <div class="Certify Certify3 fl relative center" *ngFor="let item of CertifyImgs3;let index=index;" [ngClass]="{'underimg':index==4}">
+          <img *ngIf="exChange == '1'" class="delete-icon absolute" src="assets/images/delete.png" (click)="deleteCertify3($event,index)">
+          <img class="file-img" [src]="DomSanitizer.bypassSecurityTrustUrl(item.AttachmentURLThumb )" (click)="navPreview({time:true,index:index,items:CertifyImgs3})">
+          <div class="text-wrap absolute">
+            <input class="fl center" type="text" [disabled]="exChange != '1'" [ngClass]="exChange == '1'?'textinput':'textnot'" placeholder="请输入说明"
+              [(ngModel)]="item.Caption" name="UserCode">
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </ion-card>
+  </div>
+
+  <div style="margin-bottom:20px;">
+    <p class="center fn18" *ngIf="exChange == '1'">
+      <button class="over-btn" ion-button (click)="overSave()">完成</button>
+    </p>
+  </div>
+
+  <div class="ssc-p fixed" *ngIf="mengGo"></div>
+  <div class="spinnerw fixed" *ngIf="mengGo" id="spinnerw">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</ion-content>

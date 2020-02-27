@@ -1,0 +1,122 @@
+<div class="content">
+    <form #f="ngForm" class="form" nz-form [nzLayout]="'inline'">
+        <nz-form-item>
+            <nz-form-control>
+                <input nz-input class="col-w" [(ngModel)]="searchObj.USERCODE" name="UserCode" placeholder="学号">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control>
+                <input nz-input class="col-w" [(ngModel)]="searchObj.REALNAME" name="Name" placeholder="姓名">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control>
+                <nz-select class="col-w" [nzPlaceHolder]="'题库标题'" [nzShowSearch]="true"
+                           [(ngModel)]="searchObj.QBID" name="QBIDxg" nzAllowClear>
+                    <nz-option *ngFor="let option of Titles" [nzLabel]="option.QBTITLE"
+                               [nzValue]="option.QBID"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control>
+                <nz-select class="col-w" [nzPlaceHolder]="'学院'" [nzShowSearch]="true"
+                           [(ngModel)]="searchObj.ACADEMYNAME" name="Academy" nzAllowClear>
+                    <nz-option *ngFor="let option of Academys" [nzLabel]="option.AcademyName"
+                               [nzValue]="option.AcademyName"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control>
+                <nz-select class="col-w" [nzPlaceHolder]="'年级'" [(ngModel)]="searchObj.GRADE" name="Grade"
+                           [nzShowSearch]="true" nzAllowClear>
+                    <nz-option *ngFor="let option of Grades" [nzLabel]="option.GradeName"
+                               [nzValue]="option.GradeName"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control>
+                <nz-select class="col-w" [nzPlaceHolder]="'班级'" [(ngModel)]="searchObj.CLASSNAME" name="Class"
+                           (click)="onSelect()" [nzShowSearch]="true" nzAllowClear>
+                    <nz-option *ngFor="let option of Classs" [nzLabel]="option.ClassName"
+                               [nzValue]="option.ClassName"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control>
+                <nz-select class="col-w" [nzPlaceHolder]="'状态'" [nzShowSearch]="true"
+                           [(ngModel)]="searchObj.Status" (ngModelChange)="changeStatus($event)"  name="Status" nzAllowClear>
+                    <nz-option *ngFor="let option of Statuss" [nzLabel]="option.ItemName"
+                               [nzValue]="option.ItemCode"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+<!--        <nz-form-item>
+            <nz-form-control>
+                <nz-input-number [disabled]="flag"  style="width: 140px" [(ngModel)]="searchObj.P1" [nzMin]="1" [nzMax]="100" name="P1" [nzPlaceHolder]="'正确率(%)'"></nz-input-number>
+            </nz-form-control>
+        </nz-form-item>
+        <span class="zhi">至</span>
+        <nz-form-item>
+            <nz-form-control>
+                <nz-input-number [disabled]="flag" style="width: 150px" [(ngModel)]="searchObj.P2" name="P2" [nzMin]="0" [nzMax]="100" [nzPlaceHolder]="'正确率(%)'"></nz-input-number>
+            </nz-form-control>
+        </nz-form-item>-->
+        <nz-form-item>
+            <nz-form-control>
+
+            <nz-input-group nzCompact>
+                <nz-input-number [disabled]="flag"  style="width: 90px;text-align: center" [(ngModel)]="searchObj.P1" (ngModelChange)="changeP1($event)" [nzMin]="0" [nzMax]="100" name="P1" [nzPlaceHolder]="'正确率(%)'"></nz-input-number>
+                <input type="text" disabled nz-input placeholder="至" style="width: 40px; border-left: 0px; pointer-events: none; background-color: rgb(255, 255, 255);">
+                <nz-input-number [disabled]="flag" style="width: 90px;;text-align: center;border-left: 0px" [(ngModel)]="searchObj.P2" name="P2" [nzMin]="0" [nzMax]="100" [nzPlaceHolder]="'正确率(%)'"></nz-input-number>
+            </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control>
+                <nz-select class="col-w" [nzPlaceHolder]="'结果统计'" [nzShowSearch]="true"
+                           [(ngModel)]="searchObj.Which"  name="Which " nzAllowClear>
+                    <nz-option *ngFor="let option of Results" [nzLabel]="option.ItemName"
+                               [nzValue]="option.ItemCode"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <div class="b_group">
+            <button nz-button class="btn-zj-color" (click)="onSearch(true)">查询</button>
+            <button nz-button style="margin-left:8px" (click)="resetForm(f)">重置</button>
+            <button [disabled]="isDisabled" nz-popconfirm nzTitle="确定要导出吗？" (nzOnConfirm)="export()" nz-button style="margin-left:8px">导出</button>
+        </div>
+    </form>
+<div class="base font20">共{{page.total||0}}条结果</div>
+    <div class="outer table-center">
+        <nz-table class="table-center" #nzTable [nzLoading]="loading" [nzData]="dataSet||[]" [nzFrontPagination]="false" [nzTotal]="page.total" [(nzPageIndex)]="page.PAGE" [(nzPageSize)]="page.COUNT"
+                  (nzPageIndexChange)="onSearch(false)"
+                   [nzBordered]="true">
+            <thead nz-thead>
+            <tr>
+                <th><span>学号</span></th>
+                <th><span>姓名</span></th>
+                <th><span>班级</span></th>
+                <th><span>状态</span></th>
+                <th><span>正确率</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of nzTable.data">
+                <td>{{data.USERCODE}}</td>
+                <td>{{data.REALNAME}}</td>
+                <td>{{data.CLASSNAME}}</td>
+                <td *ngIf="data.Status==1">已完成</td>
+                <td *ngIf="data.Status==0">未完成</td>
+                <td *ngIf="!data.CorrectRate">{{data.CorrectRate}}</td>
+                <td *ngIf="data.CorrectRate">{{data.CorrectRate}}</td>
+            </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>
+<a onclick="javascript:history.back()"><img class="b-cancle" src="assets/images/back.png"></a>

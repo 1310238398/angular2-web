@@ -1,0 +1,87 @@
+<ion-content class="index-cont">
+
+    <div class="info-cont overh">
+        <div class="fl">
+            <img class="user-header" [src]="dataSet.AvatarUrl" onerror="this.src='assets/images/header.png'">
+        </div>
+        <div class="fl info-detail">
+            <span class="info-detail-name fn16 db">姓名 : {{dataSet.Name}}</span>
+            <span class="db fn14">学号: {{dataSet.UserCode}}</span>
+            <span class="db fn14">学院: {{dataSet.AcademyName}}</span>
+        </div>
+    </div>
+
+
+    <div class="relative titlestatus-box overh">
+        <div class="" *ngIf="dataSet.status == '3'" style="padding:20px 15px 15px;">
+            <p class="fn14" style="color:#FF0000">审批不通过原因</p>
+            <p class="fn14" style="color: #9B9B9B;text-indent:2em">{{dataSet.remarktxt}}</p>
+        </div>
+        <P class="fn18 color4a center" style="margin:15px 0;">{{dataSet.title}}</P>
+
+        <img class="absolute img-css" *ngIf="dataSet.status == '2' && appStatus == '2'" src="assets/images/yiwncheng@2x.png">
+        <img class="absolute img-css" *ngIf="appStatus == '1'" src="assets/images/shenpizhong@2x.png">
+        <img class="absolute img-css" *ngIf="dataSet.status == '3' && appStatus == '2'" src="assets/images/butongguo@2x.png">
+    </div>
+
+    <div class="cont-form">
+        <ul>
+            <li class="overh">
+                <p class="text-css">
+                    <i style="color: #ff0000;">*</i> 活动名称</p>
+                <ion-item>
+                    <ion-input type="text" maxlength="30" [(ngModel)]="dataSet.ActivityName" name="ActivityName" [readonly]="true"></ion-input>
+                </ion-item>
+            </li>
+            <li class="overh">
+                <p class="text-css">
+                    <i style="color: #ff0000;">*</i> 活动内容</p>
+                <ion-item>
+                    <ion-textarea maxlength="50" max="50" class="textarea" [(ngModel)]="dataSet.Info" name="Info"
+                        [readonly]="true" style="height:90px;"></ion-textarea>
+                </ion-item>
+                <!-- <p class="surplus-num" *ngIf="dataSet.Info.length">{{50 - dataSet.Info.length}}</p> -->
+            </li>
+            <li class="overh">
+                <p class="text-css">
+                    <i style="color: #ff0000;">*</i> 举办时间</p>
+                <ion-item>
+                    <ion-input type="text" maxlength="30" [(ngModel)]="dataSet.Time" name="Time" [readonly]="true"></ion-input>
+                </ion-item>
+            </li>
+            <li class="overh">
+                <p class="text-css">
+                    <i style="color: #ff0000;">*</i> 举办地点</p>
+                <ion-item>
+                    <ion-input type="text" maxlength="30" [(ngModel)]="dataSet.Place" name="Place" [readonly]="true"></ion-input>
+                </ion-item>
+            </li>
+            <li class="overh">
+                <p class="text-css">
+                    <i style="color: #ff0000;">*</i> 活动联络人</p>
+                <ion-item>
+                    <ion-input type="text" maxlength="30" [(ngModel)]="dataSet.Connect" name="Connect" [readonly]="true"></ion-input>
+                </ion-item>
+            </li>
+            <li class="overh">
+                <p class="text-css">
+                    <i style="color: #ff0000;">*</i> 手机号码</p>
+                <ion-item>
+                    <ion-input type="number" maxlength="30" [(ngModel)]="dataSet.Phone" name="Phone" [readonly]="true"></ion-input>
+                </ion-item>
+            </li>
+            <li class="overh">
+                <p class="text-css">
+                    <i style="color: #ff0000;">*</i> 预计参加人数</p>
+                <ion-item>
+                    <ion-input type="number" maxlength="30" [(ngModel)]="dataSet.Num" name="Num" [readonly]="true"></ion-input>
+                </ion-item>
+            </li>
+        </ul>
+    </div>
+
+    <div class="center" style="margin:50px 0" *ngIf="appStatus == '1'">
+        <button ion-button class="not-css" outline (click)="notpassTab()">审批不通过</button>
+        <button ion-button class="yes-css" outline [disabled]="numdisb" (click)="passTabBtn()">审批通过</button>
+    </div>
+</ion-content>

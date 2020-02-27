@@ -1,0 +1,51 @@
+<ion-content>
+  <div class="page-tips">
+    重置密码针对于学工忘记了密码且更换了手机号的情况，重置密码后会将密码设置为123456，请通知学工尽快登录后修改密码
+  </div>
+  <div class="line"></div>
+  <div style="margin-top:15px;">
+    <div class="line"></div>
+    <p class="search-name no-line-break">“{{this.name}}”</p>
+    <div class="line"></div>
+  </div>
+  <div class="info_list">
+    <ion-list *ngFor="let staff of staffData">
+      <ion-item>
+        <div class="class-info">
+          <p class="username no-line-break">
+            {{staff.Name}}
+            <span class="sex" *ngIf="staff.SexName==='男'"><img src="assets/imgs/boy.png"></span>
+            <span class="sex" *ngIf="staff.SexName==='女'"><img src="assets/imgs/girl.png"></span>
+          </p>
+          <p class="usercode no-line-break">{{staff.DepartmentName}}</p>
+        </div>
+        <a item-end class="item-end edit" (click)="showReset(staff)">密码重置</a>
+      </ion-item>
+      <div class="line"></div>
+    </ion-list>
+  </div>
+  <div class="empty" *ngIf="isNull">
+    <a>
+      <img src="assets/imgs/kong.png" width="187" height="159">
+    </a>
+    <p class="tips">查无结果</p>
+    <p class="tips">可前往PC端“学工用户”功能为学工用户添加账号</p>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载数据...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <!-- 重置密码 -->
+  <div class="photoalert" *ngIf="resetAlert">
+    <div class="alertback"></div>
+    <div class="alertwapper">
+      <div class="alert-content">
+        <p class="tips">确定要重置&nbsp;&nbsp;{{currentStaff.Name}}&nbsp;&nbsp;的账号密码吗？修改后将给该用户发送短信通知</p>
+      </div>
+      <div class="acions">
+        <a class="actions_a" (click)="resetAlert=false">取消</a>
+        <a class="actions_a save" (click)="resetPassWord()">确定</a>
+      </div>
+    </div>
+  </div>
+</ion-content>

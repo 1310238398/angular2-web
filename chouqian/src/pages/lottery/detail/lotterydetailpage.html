@@ -1,0 +1,11 @@
+<!--Create by hanzhendong on 2017/3/17.-->
+<ion-content class="bg" padding>
+  <h4 *ngIf="Status!=2" class="t-left white mb" style="margin-top: 80px">您抽取的号码为:</h4>
+  <h4 *ngIf="Status==2" class="t-left white mb" style="margin-top: 80px">由于您未在规定时间抽签，<br>已被自动分配号码:</h4>
+  <p class="t-center yg"> {{Lottery.Category}}</p>
+  <div class="t-center bfont bl"> {{Lottery.Number}}</div>
+  <ion-footer class="mb">
+    <p class="des mlr">对应参赛时间和地点将在校园集结号第一时间发布，敬请留意。</p>
+    <a href="http://www.antlinker.com/download/index.html"><img src="assets/images/xiazai@2x_2.png"></a>
+  </ion-footer>
+</ion-content>

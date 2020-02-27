@@ -1,0 +1,134 @@
+<ion-content>
+    <div class="xinxi">
+        <p class="fontw">{{title}}</p>
+        <p class="fontq">个人信息</p>
+
+    </div>
+
+    <div>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft" fixed>
+                    <span style="color:red">* </span>姓名</ion-label>
+                <ion-input class="xinxiright" [(ngModel)]="InformationFilling.Name" type="text" disabled></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft" fixed> <span style="color:red">* </span>学号</ion-label>
+                <ion-input class="xinxiright" [(ngModel)]="InformationFilling.UserCode" type="text" disabled></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">
+                    <!-- <span class="qiunile ">
+                        <img src="assets/images/blodd.png">
+                    </span>  --><span style="color:red">* </span>民族
+                </ion-label>
+                <!--<ion-input class="xinxiright " placeholder="请选择 "></ion-input>-->
+                <ion-select [(ngModel)]="InformationFilling.NationalityCode" interface="action-sheet " cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-option [value]='item.Code' *ngFor="let item of NationTypes">{{item.CodeName}}
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"> <span style="color:red">* </span>籍贯</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="InformationFilling.OriginAreaCodeName" (ionFocus)="nav()" type="text" readonly=true placeholder="请选择"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi" *ngIf="!InfoSets.has('OriginAreaName')">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft" fixed> <span style="color:red">* </span>详细</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="InformationFilling.OriginAreaName" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+
+        </ion-list>
+
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiaow">
+                <div class="input-file">
+                    <div class="xinxileftble">
+                        <p class="photoq">上传照片</p>
+
+                        <p class="photow">1、上传本人证件照</p>
+                        <p class="photowr">2、照片不大于2M</p>
+                        <p class="photowr">3、上传的照片必须为竖向</p>
+                        <!-- <span class="photoww">3、上传的照片必须为竖向</span> -->
+
+                    </div>
+
+
+                    <input class="file" type="file" (change)="handleFiles($event)" />
+                    <!-- <span class="xujia">{{fileDefaultName}}</span> -->
+                    <div class="xujia">
+                        <img *ngIf="filesrc" [src]="filesrc" class="img-card" onerror="this.src='assets/images/tianjiazhaopian@1x.png'"></div>
+
+                </div>
+            </ion-item>
+        </ion-list>
+
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"> <span style="color:red">* </span>政治面貌</ion-label>
+                <ion-select [(ngModel)]="InformationFilling.PoliticalCode" interface="action-sheet" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-option [value]='item.Code' *ngFor="let item of LookTypes ">{{item.CodeName}}
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+
+        </ion-list>
+
+    <!--    <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"> <span style="color:red">* </span>宿舍</ion-label>
+                <ion-select [(ngModel)]="InformationFilling.CampusCode" interface="action-sheet" cancelText="取消" okText="确定" placeholder="请选择校区" (ngModelChange)="change($event)">
+                    <ion-option [value]='item.CampusCode' *ngFor="let item of campus">{{item.CampusName}}
+                        &lt;!&ndash; (ionSelect)="dirstor(item)" &ndash;&gt;
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"></ion-label>
+
+                <ion-select [(ngModel)]="InformationFilling.DistrictCode" interface="action-sheet" cancelText="取消" okText="确定" placeholder="请选择园区" (click)="dirstor(InformationFilling.CampusCode)" (ngModelChange)="changeyuanqu($event)">
+                    <ion-option [value]='item.DistrictCode' *ngFor="let item of dormitory">{{item.DistrictName}}
+                        &lt;!&ndash; (ionSelect)="dirstors(item)" &ndash;&gt;
+                    </ion-option>
+
+                </ion-select>
+
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"></ion-label>
+
+                <ion-select [(ngModel)]="InformationFilling.DormitoryCode" interface="action-sheet" cancelText="取消" okText="确定" placeholder="请选择宿舍楼" (click)="dirstors(InformationFilling.DistrictCode)">
+
+                    <ion-option [value]='item.DormitoryCode' *ngFor="let item of dormitorym">{{item.DormitoryName}}
+                    </ion-option>
+                </ion-select>
+
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"><span>&nbsp;&nbsp; </span>宿舍号</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="InformationFilling.RoomName" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入宿舍号'"></ion-input>
+            </ion-item>
+
+        </ion-list>-->
+    </div>
+
+    <button ion-button (click)="onDetailPage() " class="btn-shaw">
+              下一步
+          </button>
+
+</ion-content>

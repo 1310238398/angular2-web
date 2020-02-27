@@ -1,0 +1,94 @@
+<div class="content">
+    <div class="components-table-demo-control-bar">
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-center">
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>工号</label>
+                </div>
+                <div nz-form-control>
+                    <nz-input [(ngModel)]="searchObj.UserCode" name="UserCode" [nzSize]="'middle'"></nz-input>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>姓名</label>
+                </div>
+                <div nz-form-control>
+                    <nz-input [(ngModel)]="searchObj.Name" name="Name" [nzSize]="'middle'"></nz-input>
+                </div>
+            </div>
+
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>学工类型</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.UserType" name="UserType"
+                        nzAllowClear>
+                        <nz-option *ngFor="let option of StaffTypes" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>工作单位</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.Department" name="Department"
+                        nzAllowClear>
+                        <nz-option *ngFor="let option of Departments" [nzLabel]="option.DepartmentName" [nzValue]="option.DepartmentCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-col [nzSpan]="24" style="text-align: right;">
+                    <button nz-button [disabled]="httpService.loading" [nzType]="'primary'" (click)="onSearch(true)">查询</button>
+                    <button nz-button (click)="resetForm(f)">重置</button>
+                    <button nz-button (click)="edit()" [nzType]="'primary'">添加</button>
+                </div>
+            </div>
+        </form>
+        <!-- <div class="text-right">
+            
+        </div> -->
+    </div>
+    <nz-table #nzTable [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [(nzTotal)]="total" [(nzPageIndex)]="page.Page"
+        [(nzPageSize)]="page.PageSize" [nzBordered]="true" (nzPageIndexChange)="onSearch()">
+        <thead nz-thead>
+            <tr>
+                <th nz-th [nzWidth]="'150px'"><span>操作</span></th>
+                <th nz-th><span>工号</span></th>
+                <th nz-th><span>姓名</span></th>
+                <th nz-th><span>性别</span></th>
+                <th nz-th><span>工作单位</span></th>
+                <th nz-th><span>学工类型</span></th>
+            </tr>
+        </thead>
+        <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                <td nz-td>
+                    <a (click)="edit(data)">编辑</a>
+                    <span nz-table-divider></span>
+                    <nz-popconfirm [nzTitle]="'确定要删除吗？'" (nzOnConfirm)="deleteStaff(data.IntelUserCode)">
+                        <nz-tooltip [nzTitle]="'删除'">
+                            <a nz-tooltip nz-popconfirm>删除</a>
+                        </nz-tooltip>
+                    </nz-popconfirm>
+                    <span nz-table-divider></span>
+                    <nz-popconfirm [nzTitle]="'确定要重置密码吗？重置后密码为123456,并给该用户发送短信通知'" (nzOnConfirm)="resetPassWord(data.IntelUserCode)">
+                        <nz-tooltip [nzTitle]="'重置密码'">
+                            <a nz-tooltip nz-popconfirm>重置</a>
+                        </nz-tooltip>
+                    </nz-popconfirm>
+                </td>
+                <td nz-td>{{data.UserCode}}</td>
+                <td nz-td>{{data.Name}}</td>
+                <td nz-td>{{data.SexName}}</td>
+                <td nz-td>{{data.DepartmentName}}</td>
+                <td nz-td>{{data.UserTypeName}}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

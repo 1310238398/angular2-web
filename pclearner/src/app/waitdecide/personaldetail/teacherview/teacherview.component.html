@@ -1,0 +1,146 @@
+<div class="content overh" style="margin-top: 30px;">
+
+    <p *ngIf="menDataObj.IsAttach == '0'" style="color: #FF0000;margin-bottom:10px;">该学生无认定数据，如若学生有特殊情况，可以对其进行直接认定并说明原因</p>
+
+    <div *ngIf="disdden == '0'">
+        <nz-radio-group [(ngModel)]="radioValue" style="width: 100%;" (ngModelChange)="radio($event)">
+            <div>
+                <nz-table style="width: 100%;" [nzBordered]="true" [nzDataSource]="dataSet" [nzIsPagination]="false">
+                    <tbody nz-tbody>
+                        <tr nz-tbody-tr>
+                            <td nz-td>
+                                <label nz-radio [nzValue]="'41'">
+                                    <span>直接认定</span>
+                                </label>
+                            </td>
+                            <td nz-td>
+                                <p style="text-align: left;padding-left:20px;" *ngFor="let data of arrY1;">
+                                    <label nz-checkbox [nzDisabled]="arrDis1" [(ngModel)]="data.checked" (ngModelChange)="checkprint(1)">
+                                        <span>{{data.label}}</span>
+                                    </label>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr nz-tbody-tr>
+                            <td nz-td>
+                                <label nz-radio [nzValue]="'42'">
+                                    <span>一票否决</span>
+                                </label>
+                            </td>
+                            <td nz-td>
+                                <p style="text-align: left;padding-left:20px;" *ngFor="let data of arrY2;">
+                                    <label nz-checkbox [nzDisabled]="arrDis2" [(ngModel)]="data.checked" (ngModelChange)="checkprint(2)">
+                                        <span>{{data.label}}</span>
+                                    </label>
+                                </p>
+                    
+                            </td>
+                        </tr>
+                        <tr nz-tbody-tr>
+                            <td nz-td>
+                                <label nz-radio [nzValue]="'43'">
+                                    <span>小组评议</span>
+                                </label>
+                            </td>
+                            <td nz-td>
+                                <p style="text-align: left;padding-left:20px;" *ngFor="let data of arrY3;">
+                                    <label nz-checkbox [nzDisabled]="arrDis3" [(ngModel)]="data.checked" (ngModelChange)="checkprint(3)">
+                                        <span>{{data.label}}</span>
+                                    </label>
+                                </p>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </nz-table>
+            </div>
+        </nz-radio-group>
+
+        <div *ngIf="kunnanBox">
+            <p class="fn16 bold center" style="margin:20px 0;">请选择困难等级</p>
+            <p class="center mr">
+                <nz-select style="width: 600px;" [nzPlaceHolder]="'请选择困难等级'" [(ngModel)]="optionDgtext" name="Grades">
+                    <nz-option *ngFor="let option of optionDg" [nzLabel]="option.Name" [nzValue]="option.Code">
+                    </nz-option>
+                </nz-select>
+            </p>
+        </div>
+
+        <p class="fn16 bold center" style="margin:20px 0;">请填写详细原因</p>
+
+        <div class="relative center" style="width: 600px;margin:0 auto;">
+            <textarea class='speak-message' #textarea name="Note" placeholder="直接认定或一票否定时必须填写认定原因" [(ngModel)]="writeText" (ngModelChange)="txtChange2(textarea.value)"
+                maxlength="500" cols="1" rows="1"></textarea>
+            <p class="file-num2 absolute">{{values2}}</p>
+        </div>
+
+        <div class="center" style="margin:30px 0 0;" *ngIf="statusJsonStr == '3' && userJsonStr == 'Counselor' && isSubmitJsonStr != '2'">
+            <button nz-button [nzType]="'primary'" style="width: 150px;height:40px;" (click)="overbox()">
+                <span>完成</span>
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="disdden == '1'">
+        <p class="fn16 bold center" style="margin:20px 0;">辅导员认定意见</p>
+        <div>
+            <nz-table style="width: 100%;" [nzBordered]="true" [nzDataSource]="dataSet" [nzIsPagination]="false">
+                <tbody nz-tbody>
+                    <tr nz-tbody-tr>
+                        <td nz-td>
+                            <span>认定意见</span>
+                        </td>
+                        <td nz-td>
+                            <p style="text-align: left;padding-left:20px;" *ngIf="dataSet1.Status == '41'">直接认定</p>
+                            <p style="text-align: left;padding-left:20px;" *ngIf="dataSet1.Status == '42'">一票否定</p>
+                            <p style="text-align: left;padding-left:20px;" *ngIf="dataSet1.Status == '43'">小组评议</p>
+                        </td>
+                    </tr>
+                    <tr nz-tbody-tr>
+                        <td nz-td>
+                            <span>原因</span>
+                        </td>
+                        <td nz-td>
+                            <p style="text-align: left;padding-left:20px;" *ngFor="let data of dataArr;let i = index">{{i+1}} {{data}}</p>
+                        </td>
+                    </tr>
+                    <tr nz-tbody-tr>
+                        <td nz-td>
+                            <span>认定等级</span>
+                        </td>
+                        <td nz-td>
+                            <p style="text-align: left;padding-left:20px;" *ngIf="dataSet1.RecognitionLevel == '87000010'">一般困难</p>
+                            <p style="text-align: left;padding-left:20px;" *ngIf="dataSet1.RecognitionLevel == '87000020'">困难</p>
+                            <p style="text-align: left;padding-left:20px;" *ngIf="dataSet1.RecognitionLevel == '87000030'">特殊困难</p>
+                            <p style="text-align: left;padding-left:20px;" *ngIf="dataSet1.RecognitionLevel == '87000040'">不予评级</p>
+                        </td>
+                    </tr>
+                    <tr nz-tbody-tr>
+                        <td nz-td>
+                            <span>详细说明</span>
+                        </td>
+                        <td nz-td>
+                            <p style="text-align: left;padding-left:20px;">{{dataSet1.ConfirmReason}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+        <div class="center" style="margin:30px 0 0;" *ngIf="statusJsonStr == '3' && userJsonStr == 'Counselor' && isSubmitJsonStr != '2'">
+            <button nz-button [nzType]="'primary'" style="width: 150px;height:40px;" (click)="changebox()">
+                <span>修改</span>
+            </button>
+        </div>
+
+    </div>
+
+
+    <p class="center" style="margin-top:20px;">
+        <span *ngIf="userJsonStr == 'Counselor'" class="dib" (click)="historyBack()" style="text-decoration: underline;cursor: pointer;color: #0099FF;">取消</span>
+        <span *ngIf="userJsonStr != 'Counselor'" class="dib" (click)="historyBack()" style="text-decoration: underline;cursor: pointer;color: #0099FF;">返回</span>
+    </p>
+
+
+
+
+</div>

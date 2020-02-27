@@ -1,0 +1,39 @@
+<ion-content class="index-cont">
+  <div class="cont-box">
+    <ion-list>
+      <ion-item *ngFor="let data of dataSet" style="margin-bottom:5px;box-shadow: 0 2px 5px 0 #E3E3E3;" (click)="NavigationTo(data)">
+        <h2 class="class-title">{{data.LogTitle}}</h2>
+        <p class="fn12 ">
+          <span class="gray-c">创建时间 : </span>
+          <span class="color4a">{{data.InsertDatetime}}</span>
+          <span class="gray-c" style="margin-left:10px;">发布时间 : </span>
+          <span class="color4a">{{data.PublishDatetime}}</span>
+        </p>
+
+        <p item-end class="center" *ngIf="data.ReleaseStatus == '0'">
+          <img class="db mr" style="width: 18px;" src="assets/images/dianming2x.png">
+          <span class="db fn9" style="margin-top:2px;">未发布</span>
+        </p>
+
+        <p item-end class="center" *ngIf="data.ReleaseStatus == '1'">
+          <img class="db mr" style="width: 18px;" src="assets/images/dianming2x_no.png">
+          <span class="db fn9" style="margin-top:2px;">已发布</span>
+        </p>
+      </ion-item>
+    </ion-list>
+  </div>
+  <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <div style="text-align: center;color: #8e9093;margin-bottom:10px;" *ngIf="!moreData">我是有底线的！</div>
+
+  <div *ngIf="!dataSet.length" class="center">
+    <img src="assets/images/kong.png" style="margin-top:50px;" alt="">
+    <p style="color:#ACACAC;">暂无日志记录</p>
+  </div>
+</ion-content>
+
+<ion-footer class="center">
+  <p class="creat-btn fn14" (click)="creatLog()">创建工作日志</p>
+</ion-footer>

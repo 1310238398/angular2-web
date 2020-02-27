@@ -1,0 +1,246 @@
+page-shetuanmember {
+    ul,
+    li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    p,
+    h1,
+    h2,
+    h3 {
+        margin: 0;
+        padding: 0;
+    }
+    hr {
+        margin: 5px 0;
+    }
+    .fl {
+        float: left;
+    }
+    .fr {
+        float: right;
+    }
+    .center {
+        text-align: center;
+    }
+    .dib {
+        display: inline-block;
+    }
+    .relative {
+        position: relative;
+    }
+    .absolute {
+        position: absolute;
+    }
+    .fixed {
+        position: fixed
+    }
+    .overh {
+        overflow: hidden;
+    }
+    .mr {
+        margin: 0 auto;
+    }
+    .db {
+        display: block;
+    }
+    .fn10 {
+        font-size: 10px;
+    }
+    .fn12 {
+        font-size: 12px;
+    }
+    .fn14 {
+        font-size: 14px;
+    }
+    .fn16 {
+        font-size: 16px;
+    }
+    .fn17 {
+        font-size: 17px;
+    }
+    .fn18 {
+        font-size: 18px;
+    }
+    .color4a {
+        color: #4A4A4A;
+    }
+    grid-basic-page {
+        background: #FAFAFA;
+    }
+    .index-cont {
+        background: #FAFAFA;
+        color: #4A4A4A;
+    }
+    .my-apply {
+        width: 270px;
+        height: 150px;
+        background: #9BD65F;
+        border: 1px solid #5EB702;
+        box-shadow: 0 2px 5px 0 #E3E3E3;
+        border-radius: 8px;
+        margin: 50px auto 40px;
+    }
+    .my-apply img {
+        width: 60px;
+        margin: 25px 0 20px;
+    }
+    .my-apply p {
+        color: #fff;
+    }
+    .my-approve {
+        width: 270px;
+        height: 150px;
+        background: #63A6F5;
+        border: 1px solid #3489EE;
+        box-shadow: 0 2px 5px 0 #E3E3E3;
+        border-radius: 8px;
+    }
+    .my-approve img {
+        width: 60px;
+        margin: 25px 0 20px;
+    }
+    .my-approve p {
+        color: #fff;
+    }
+    .redcircle {
+        min-width: 7px;
+        height: 10px;
+        background: red;
+        box-sizing: border-box; //必须是border-box，自行体会
+        // color: white;
+        // font-size: 10px;
+        text-align: center; // line-height: 20px;
+        padding: 0 5px;
+        border-radius: 100%;
+        display: inline-block; //肯定是inline-block，因为行内元素宽度auto呀
+    }
+    .sexr {
+        position: relative;
+        overflow: hidden;
+        min-width: 20px;
+        height: 22px;
+        background: #F5F5F5; // top: 5px;
+        // left: 5px;
+        box-sizing: border-box; //必须是border-box，自行体会
+        // color: white;
+        // font-size: 10px;
+        // text-align: center;
+        // line-height: 20px;
+        // margin: -7px 3px;
+        margin-left: 2px;
+        padding: -3px 5px;
+        border-radius: 100%;
+        display: inline-block; //肯定是inline-block，因为行内元素宽度auto呀
+        vertical-align: bottom;
+        img {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            bottom: 2px;
+            left: 1.2px;
+        }
+    }
+    .sexb {
+        position: relative;
+        overflow: hidden;
+        min-width: 20px;
+        margin-left: 2px;
+        height: 22px;
+        background: #F5F5F5; // top: 5px;
+        // left: 5px;
+        box-sizing: border-box; //必须是border-box，自行体会
+        // color: white;
+        // font-size: 10px;
+        // text-align: center;
+        // line-height: 20px;
+        // margin: -7px 3px;
+        padding: -3px 5px;
+        border-radius: 100%;
+        display: inline-block; //肯定是inline-block，因为行内元素宽度auto呀
+        vertical-align: bottom;
+        img {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            bottom: 2px;
+            left: 1.9px;
+        }
+    }
+    .redcircle {
+        min-width: 7px;
+        height: 10px;
+        background: red;
+        box-sizing: border-box; //必须是border-box，自行体会
+        // color: white;
+        // font-size: 10px;
+        text-align: center; // line-height: 20px;
+        padding: 0 5px;
+        border-radius: 100%;
+        display: inline-block; //肯定是inline-block，因为行内元素宽度auto呀
+    }
+    .pbutton {
+        margin-top: 7px;
+        margin-right: 20px;
+        margin-bottom: 7px;
+        width: 75px;
+        height: 45px;
+        font-family: PingFangSC-Regular;
+        // font-size: 36px;
+        color: #FFC000;
+        letter-spacing: 0.49px;
+        background: #FFFFFF;
+        border: 1px solid #FFC000;
+        border-radius: 4px;
+        // line-height: 36px;
+        // :active {
+        //   position:relative;
+        //   top:1px;
+        // }
+    }
+    // .pbutton :hover {
+    //   background-color:#5cbf2a;
+    // }
+    .abutton {
+        margin-top: 7px;
+        margin-right: 15px;
+        margin-bottom: 7px;
+        width: 75px;
+        height: 45px;
+        font-family: PingFangSC-Regular;
+        // font-size: 36px;
+        color: #FFC000;
+        letter-spacing: 0.49px;
+        background: #FFC000;
+        border-radius: 4px;
+        // border: 2px solid #FFC000;
+        color: #FFFFFF;
+        // line-height: 36px;
+    }
+    .none {
+        text-align: center;
+        margin-top: 10%
+    }
+    .noneimg {
+        width: 200px;
+    }
+    .noneFont {
+        color: #666666;
+        font-size: 14px;
+    }
+    .people {
+        height: 32px;
+    }
+    .mainname {
+        display: inline-block;
+        vertical-align: bottom;
+        margin-left: 2px;
+    }
+
+    .applyname {
+      display: inline-block;
+      vertical-align: bottom;
+  }
+
+}

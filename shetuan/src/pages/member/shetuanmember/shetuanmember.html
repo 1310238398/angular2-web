@@ -1,0 +1,121 @@
+<ion-content class="grid-basic-page">
+
+
+    <ion-card style="margin:2px 0;width:100%;box-shadow:0 2px 5px 0 #E3E3E3 !important;" *ngIf="shetuanstatus==1">
+
+        <div padding>
+            <ion-segment [(ngModel)]="pet">
+                <ion-segment-button value="member">
+                    社团成员
+                </ion-segment-button>
+
+                <ion-segment-button value="apply">
+                    加入申请 <span *ngIf=" applymiss && applymiss.length " class="redcircle"></span>
+                </ion-segment-button>
+            </ion-segment>
+        </div>
+    </ion-card>
+    <div *ngIf="shetuanstatus==1" style="height:15px;background-color: #fafafa;"> </div>
+
+    <div [ngSwitch]="pet">
+        <div *ngSwitchCase="'member'">
+
+            <ion-card style="width: 100%;margin: 2px 0;box-shadow:0 2px 5px 0 #E3E3E3 !important;" *ngIf="ShetuanMemberOne">
+                <ion-item>
+                    <ion-avatar item-start>
+                        <img id="wechatBox" src="assets/images/morentouxiang@2x.png">
+                    </ion-avatar>
+                    <!-- <div style="line-height: 24px;"> -->
+                    <span *ngIf="(ShetuanMemberOne.Role == '33330006' || ShetuanMemberOne.Role == '33330007') && ShetuanMemberOne.Day <=0"
+                        class="pepplemain">负责人</span>
+                    <span class="fn16 mainname">{{ShetuanMemberOne.name}}</span>
+                    <span class="sexb fn16" *ngIf="ShetuanMemberOne.CodeName=='男'"> <img src="assets/images/nan@2x.png">
+                    </span>
+                    <span class="sexr fn16" *ngIf="ShetuanMemberOne.CodeName=='女'"><img src="assets/images/nv@2x.png"></span>
+                    <!-- </div> -->
+                    <div style="color:gray;margin-top: 3px;">
+                        <span class="fn14" style="margin-right: 20px;">加入时间：{{ShetuanMemberOne.InsertDatetime.substr(0,10)}}</span>
+                        <span class="fn14">已加入{{ShetuanMemberOne.days}}天</span>
+                    </div>
+                </ion-item>
+            </ion-card>
+            <div *ngIf="ShetuanMemberOne && ShetuanMember.length" style="height:15px;background-color: #fafafa;"></div>
+            <ion-list>
+                <ion-card style="width: 100%;margin: 2px 0;box-shadow:0 2px 5px 0 #E3E3E3 !important;" *ngIf="ShetuanMember.length">
+                    <button ion-item *ngFor="let item of ShetuanMember " style="border-bottom:   1px solid #E3E3E3;"
+                        (click)="gomemberdetail(item)">
+                        <ion-avatar item-start>
+                            <img id="wechatBox" src="assets/images/morentouxiang@2x.png">
+                        </ion-avatar>
+                        <!-- <div class="fn16 people"> -->
+                        <span *ngIf="(item.Role == '33330006' || item.Role == '33330007') && item.Day <=0" class="pepplemain">负责人</span>
+                        <span class="fn16 mainname">{{item.name}}</span>
+                        <span class="sexb fn16" *ngIf="item.CodeName=='男'"><img src="assets/images/nan@2x.png"></span>
+                        <span class="sexr fn16" *ngIf="item.CodeName=='女'"><img src="assets/images/nv@2x.png"></span>
+                        <!-- </div> -->
+                    </button>
+                </ion-card>
+                <ion-infinite-scroll *ngIf="moreDatae" (ionInfinite)="doInfinitea($event)">
+                    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+                    </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+                <div style="text-align: center;color: #8e9093" *ngIf="!moreDatae">我是有底线的！</div>
+            </ion-list>
+        </div>
+
+        <div *ngSwitchCase="'apply'">
+
+            <div *ngIf="ApplyMembers.length <= 0" class="none"><img class="noneimg" src="assets/images/kong.png">
+                <div class="noneFont">暂无更多内容</div>
+            </div>
+
+            <ion-list *ngFor=" let item of ApplyMembers">
+                <ion-card style="width: 100%;margin: 2px 0;box-shadow:0 2px 5px 0 #E3E3E3 !important;">
+                    <button ion-item (click)="gomemberdetails(item)" style="width: 90%;margin:0px auto;border-bottom: 1px solid #E3E3E3;border-top: none;padding: 0;">
+                        <ion-avatar item-start>
+                            <img id="wechatBox" src="assets/images/morentouxiang@2x.png">
+                        </ion-avatar>
+                        <div class="fn16">
+                            <span class="applyname">{{item.name}}</span>
+                            <span class="sexb" *ngIf="item.CodeName=='男'"><img src="assets/images/nan@2x.png"></span>
+                            <span class="sexr" *ngIf="item.CodeName=='女'"><img src="assets/images/nv@2x.png"></span>
+                        </div>
+                        <div style="height:20px;">
+                            <span class="fn12 peopleinfo">{{item.Info}}</span>
+                        </div>
+                    </button>
+                    <div style="height:25px;">
+                        <button *ngIf="item.status==1" class="fn14 fr abutton" style="width: 60px;height: 25px;" color="default"
+                            [disabled]="subStop" (click)="agree(item)">同意</button>
+                        <button *ngIf="item.status==1" class="fn14 fr pbutton" style="width: 60px;height: 25px;" color="light"
+                            [disabled]="subStop" (click)="pass(item)">拒绝</button>
+                        <span *ngIf="item.status==3 || item.status==5" class="fn16 fr" style="color: #FFC000 ;margin: 8px 15px">已同意该申请</span>
+                        <span *ngIf="item.status==2 || item.status==4" class="fn16 fr" style="color: #9B9B9B ;margin: 8px 15px">已拒绝该申请</span>
+                    </div>
+                </ion-card>
+                <div *ngIf="shetuanstatus==1" style="height:10px;background-color: #fafafa;"></div>
+            </ion-list>
+            <div class="photoalert" *ngIf="substatus">
+                <div class="alertback"></div>
+                <div class="alertwapper">
+                    <div class="alert-content">
+                        <div class="surplus-num-box">
+                            <ion-textarea maxlength="21" max="21" class="textarea" [(ngModel)]="shenqingapply" name="Info"
+                                [placeholder]="'请输入拒绝原因'"></ion-textarea>
+                            <!-- <p class="surplus-num" *ngIf="shenqingapply.length">{{21 - shenqingapply.length}}</p> -->
+                        </div>
+                        <div class="btn-wapper-line">
+                            <button ion-button class="btn-ghost" (click)="cancel()">取消</button>
+                            <button ion-button (click)="applicationsub()">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+                <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+                </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+            <div style="text-align: center;color: #8e9093" *ngIf="!moreData">我是有底线的！</div>
+        </div>
+    </div>
+</ion-content>

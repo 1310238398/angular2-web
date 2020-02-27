@@ -1,0 +1,89 @@
+<ion-content>
+    <div class="xinxi">
+        <p class="fontw">{{title}}</p>
+        <p class="fontq">个人信息</p>
+    </div>
+
+    <div>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"> <span style="color:red">* </span>生源地</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.StudentAreaName" (ionFocus)="nav('StudentAreaName')" type="text" readonly=true placeholder="请选择"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft" fixed> <span style="color:red">* </span>电子邮箱</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" [(ngModel)]="FamilyAddress.Email" type="text"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi"  *ngIf="!InfoSets.has('AccountBank')">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">
+                    <!-- <span class="qiunile ">
+                        <img src="assets/images/blodd.png">
+                    </span>  --><span style="color:red">* </span>开户行
+                </ion-label>
+                <ion-select [(ngModel)]="FamilyAddress.AccountBankCode" interface="action-sheet" cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-option [value]='item.Code' *ngFor="let item of Ruerybank ">{{item.CodeName}}
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi" *ngIf="!InfoSets.has('BankCardNumber')">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"> <span style="color:red">* </span>银行卡号</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.BankCardNumber" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='需与财务系统卡号保持一致'" (keyup)="test($event)"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"> <span style="color:red">* </span>QQ号</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.QQAcct" type="number" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" maxlength="20"></ion-input>
+            </ion-item>
+
+        </ion-list>
+
+
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"><span>&nbsp;&nbsp;</span>邮政编码</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.PostCode" type="number" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" maxlength="6"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"> <span style="color:red">* </span>家庭地址</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.FamilyAddressName" (ionFocus)="nav('FamilyAddressName')" type="text" readonly=true placeholder="请选择"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"> <span style="color:red">* </span>家庭详细地址</ion-label>
+                <ion-input class="xinxiright" placeholder="请具体到门牌号" [(ngModel)]="FamilyAddress.DetailAddress" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请具体到门牌号'" maxlength="100"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"> <span>&nbsp;&nbsp;</span>家庭电话</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.HomePhone" type="number" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" maxlength="50"></ion-input>
+            </ion-item>
+
+        </ion-list>
+    </div>
+    <div class="pageBtnDiv">
+        <button ion-button (click)="onTopPage() " class="pageBtnw">
+          上一步
+      </button>
+        <button ion-button (click)="onDetailPageTJ() " class="pageBtnq">
+            下一步
+        </button>
+    </div>
+
+</ion-content>

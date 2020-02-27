@@ -1,0 +1,248 @@
+.icon {
+    // width: 400px;
+    margin-left: 8px;
+    margin-top: 30px;
+    overflow-x: auto;
+    .back {
+        width: 136px;
+        height: 136px;
+        border-radius: 100%;
+        background-color: white;
+        margin: 12px 8px;
+        span {
+            margin: 55px;
+        }
+    }
+    img {
+        width: 136px;
+        height: 136px;
+        border-radius: 100%;
+    }
+    .icon-body {
+        font-family: PingFangSC-Regular;
+        color: #4A4A4A;
+        margin-top: 12px;
+        h2 {
+            margin: 8px 8px;
+        }
+        div {
+            margin: 8px 8px;
+            font-size: 14px;
+        }
+    }
+}
+
+.mm {
+    // margin: 5px;
+    // border: 1px solid #ddd;
+    // border-radius: 5px;
+    background-color: #fafafa;
+    height: 100%;
+    width: 100%;
+}
+
+.card {
+    // width: 1000px;
+    height: 900px;
+    // overflow: auto;
+    min-height: 500px;
+    border: 1px solid #EEEEEE;
+    background-color: #ffffff;
+    border-radius: 5px;
+    position: relative;
+    margin-top: 30px;
+}
+
+.mb {
+    margin: 18px 12px;
+}
+
+.m-mb {
+    margin: 18px 0;
+}
+
+.col-w {
+    width: 165px;
+}
+
+.more-w {
+    width: 70px;
+}
+
+.ls2::first-letter {
+    letter-spacing: 28px
+}
+
+.fixedall {
+    position: fixed;
+    top: 30%;
+    right: 0%;
+}
+
+.fixedBar {
+    // position: fixed;
+    width: 120px;
+    text-align: center;
+    // top: 30%;
+    right: 0%;
+    height: 30px;
+    z-index: 3000;
+    /*    top: 416px;
+       left: 611px; */
+}
+.fixedMenu {
+    width: 120px;
+    // position: fixed;
+    // top: 34%;
+    z-index: 3000;
+    right: 0%;
+}
+
+.menu {
+    border: 1px solid #EEEEEE;
+    border-radius: 5px;
+    background-color: #ffffff;
+    .item {
+        text-align: center;
+        font-size: 14px;
+        padding: 2px;
+        border-bottom: 1px solid #EEEEEE
+    }
+}
+
+.check {
+    background-color: #67BFFD;
+    a {
+        color: #ffffff !important;
+    }
+}
+
+.b-cancle {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 60px;
+    height: 60px;
+    z-index: 3000;
+    cursor: pointer;
+}
+
+.right {
+    display: inline-block;
+    text-align: right;
+    width: 90px;
+}
+
+.wd100 {
+    width: 100px;
+}
+
+.table {
+    margin: 4px;
+}
+
+.eye-off {
+    width: 20px;
+    margin-left: 4px;
+}
+
+.eye-o {
+    font-size: 16px;
+    margin-left: 4px;
+}
+
+.btn {
+    width: 100px;
+    margin: 8px 0;
+}
+
+.add {
+    font-size: 20px;
+    width: 40px;
+    margin-right: 8px;
+}
+
+.body {
+    border: 1px solid #ddd;
+    width: 100%;
+    margin-top: 20px;
+    a {
+        margin-left: 15px;
+        color: black;
+    }
+}
+
+.huodong_body {
+    font-family: PingFangSC-Regular;
+    color: #4A4A4A;
+    width: 100%;
+    height: 100%;
+    // min-height: 300px;
+    // overflow: auto;
+    .title {
+        color: gray;
+        font-size: 18px;
+    }
+    .bb {
+        color: #4A4A4A;
+        font-size: 18px;
+    }
+    ul {
+        color: gray;
+        li {
+            margin: 10px auto;
+            font-size: 14px;
+            list-style: disc;
+        }
+        span {
+            color: #4A4A4A;
+        }
+        .toku {
+            color: black !important;
+        }
+    }
+    .button {
+        width: 120px;
+        margin-left: 25px;
+    }
+}
+
+.tips {
+    color: red;
+    margin-top: 8px;
+}
+
+.zongjie_body {
+    font-family: PingFangSC-Regular;
+    color: #4A4A4A;
+    width: 100%;
+    height: 100%;
+    // overflow: auto;
+    // min-height: 300px;
+    .title {
+        color: gray;
+        font-size: 18px;
+    }
+    .bb {
+        color: #4A4A4A;
+        font-size: 18px;
+    }
+    .huodongzhaopian {
+        img {
+            margin: 5px 35px 5px 0;
+            width: 150px !important;
+            height: 150px !important;
+        } //   ul {width: 100%;}
+        li {
+            list-style: none !important;
+            width: auto;
+            height: auto;
+            clear: none;
+            float: left;
+        }
+    }
+}
+
+::ng-deep .ant-modal-body textarea.ant-input {
+    resize: none;
+}

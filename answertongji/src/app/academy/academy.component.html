@@ -1,0 +1,24 @@
+<div class="content">
+    <div class="title base text-center font26">各学院{{GRADE||''}}级学生“{{QBTITLE||''}}”完成进度查看</div>
+    <div class="outer table-center">
+        <nz-table class="table-center" #nzTable [nzLoading]="loading" [nzData]="dataSet" [nzFrontPagination]="false" [nzShowPagination]="false"  [nzBordered]="true">
+            <thead nz-thead>
+                <tr>
+                    <th><span>学院</span></th>
+                    <th><span>完成进度</span></th>
+                    <th><span>完成人数</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of nzTable.data">
+                    <td>{{data.Academy}}</td>
+
+                    <td *ngIf="data.Done<=0">0</td>
+                    <td *ngIf="data.Done>0">{{((data.Done/data.All)*100).toFixed(2)}}%</td>
+                    <td><a (click)="navStaff(data.Academy)">{{data.Done}}/{{data.All}}</a></td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>
+<a [routerLink]="['/']"><img class="b-cancle" src="assets/images/back.png"></a>

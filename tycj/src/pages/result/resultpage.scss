@@ -1,0 +1,36 @@
+page-result {
+  .overflow-hidden {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .pt{
+    padding: 5px;
+  }
+  .auto{
+    overflow: auto;
+    max-height: 17rem;
+  }
+  .overflow{
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .publish{
+    margin: 10px 45px 0 45px
+  }
+  .fix{
+    margin-top: 20px;
+    text-align: center;
+  }
+  .layer {
+    margin: 65% auto 0 auto;
+    border-radius: 5px;
+    width: 90%;
+    height: 18rem;
+    background-color: #20305F;
+    opacity: 0.85;
+  }
+}

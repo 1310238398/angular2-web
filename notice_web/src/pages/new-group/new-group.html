@@ -1,0 +1,136 @@
+<ion-header no-border no-shadow style="height: 40px;">
+  <div class="page-back">
+    <button (click)="goBack()">< 返回</button>
+  </div>
+</ion-header>
+<ion-content>
+  <div class="group-name">
+    <ion-input [(ngModel)]="groupToAddName" placeholder="请输入组名" (input)="verifyNameEmpty()"></ion-input>*必填
+  </div>
+  <div style="display: flex;">
+    <div style="flex: 1; border: 1px solid #e5e5e5;">
+      <ion-scroll scrollY="true" style="height:80vh;">
+
+        <ion-item style="background-color: #e5e5e5;">
+          <ion-label>好友列表</ion-label>
+          <ion-checkbox [(ngModel)]="isChatFriendListChecked" (ionChange)="chatFriendListCheckChanged(isChatFriendListChecked)"></ion-checkbox>
+          <button ion-button clear item-right icon-left (click)="tiggerShowChatFriendList()">
+            <ion-icon [name]="showChatFriendList ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+          </button>
+        </ion-item>
+        <ion-list *ngIf="showChatFriendList" style="margin-left: 10px;">
+          <ion-item *ngFor="let chatFriend of chatFriendList | stateFilter:[0, 1]">
+            <ion-label>{{ chatFriend.REALNAME }} <br>
+              <p>{{chatFriend.DEPTNAME }}</p>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="chatFriend.CHECKED" (ionChange)="leftMemberCheckedChanged(chatFriend)"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+
+        <ion-item style="background-color: #e5e5e5;">
+          <ion-label>从群组中选取</ion-label>
+          <ion-checkbox [(ngModel)]="isChatGroupListChecked" (ionChange)="chatGroupListCheckChanged(isChatGroupListChecked)"></ion-checkbox>
+          <button ion-button clear item-right icon-left (click)="tiggerShowChatGroupList()">
+              <ion-icon [name]="showChatGroupList ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+          </button>
+        </ion-item>
+        <ion-list *ngIf="showChatGroupList">
+          <ion-item-group *ngFor="let chatGroup of chatGroupList">
+            <ion-item-divider style="padding-left: 10px; background-color: #e5e5e5;">
+              <ion-checkbox style="margin-left: 20px;" [(ngModel)]="chatGroup.CHECKED" (ionChange)="chatGroupMemberListCheckChanged(chatGroup)"></ion-checkbox>
+              <ion-label>{{ chatGroup.GroupName }}</ion-label>
+              <button id={{chatGroup.GroupID}} ion-button clear item-right icon-left (click)="tiggerShowChatGroupMemberList(chatGroup)">
+                  <ion-icon [name]="chatGroup.SPREADED ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+              </button>
+            </ion-item-divider>
+            <ion-list *ngIf="chatGroup.SPREADED" item-content style="margin-left: 20px;">
+              <ion-item *ngFor="let groupMember of chatGroupMemberMap.get(chatGroup.GroupID) | stateFilter:[0, 1]">
+                <ion-checkbox [(ngModel)]="groupMember.CHECKED" (ionChange)="leftMemberCheckedChanged(groupMember)"></ion-checkbox>
+                <ion-label>{{groupMember.REALNAME}} <br>
+                  <p>{{ groupMember.DEPTNAME }}</p>
+                </ion-label>
+              </ion-item>
+
+            </ion-list>
+          </ion-item-group>
+        </ion-list>
+
+
+
+        <ion-item style="background-color: #e5e5e5;">
+          <ion-label>从组织机构中选取</ion-label>
+          <ion-checkbox [(ngModel)]="isDepartmentListChecked" (ionChange)="departmentListCheckChanged(isDepartmentListChecked)"></ion-checkbox>
+          <button ion-button clear item-right icon-left (click)="tiggerShowDepartmentList()">
+              <ion-icon [name]="showDepartmentList ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+            </button>
+        </ion-item>
+        <ion-list *ngIf="showDepartmentList">
+          <ion-item-group *ngFor="let department of departmentList">
+            <ion-item-divider style="padding-left: 10px; background-color: #e5e5e5;">
+              <ion-checkbox style="margin-left: 20px;" [(ngModel)]="department.CHECKED" (ionChange)="departmentClassListCheckChanged(department.DEPTCODE)"></ion-checkbox>
+              <ion-label>{{ department.DEPTNAME }}</ion-label>
+              <button ion-button clear item-right icon-left (click)="tiggerShowDepartmentClassList(department)">
+                    <ion-icon [name]="department.SPREADED ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+                </button>
+            </ion-item-divider>
+            <ion-list *ngIf="department.SPREADED" item-content style="margin-left: 20px;">
+              <ion-item-group *ngFor="let departmentClass of departmentClassMap.get(department.DEPTCODE)">
+                <ion-item-divider style="padding-left: 30px; background-color: #e5e5e5;">
+                  <ion-checkbox [(ngModel)]="departmentClass.CHECKED" (ionChange)="departmentClassMemberListCheckedChanged(departmentClass)"></ion-checkbox>
+                  <ion-label> {{ departmentClass.DEPTNAME }} </ion-label>
+                  <button ion-button clear item-right icon-left (click)="tiggerShowClassMemberList(departmentClass)">
+                    <ion-icon [name]="departmentClass.SPREADED ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+                </button>
+                </ion-item-divider>
+                <ion-list *ngIf="departmentClass.SPREADED" item-content style="margin-left: 20px;">
+                  <ion-item *ngFor="let departmentMember of departmentClassMemberMap.get(departmentClass.DEPTCODE)  | stateFilter:[0, 1]">
+                    <ion-checkbox [(ngModel)]="departmentMember.CHECKED" (ionChange)="leftMemberCheckedChanged(departmentMember)"></ion-checkbox>
+                    <ion-label>{{departmentMember.REALNAME}} <br>
+                      <p>{{ departmentMember.DEPTNAME }}</p>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-item-group>
+
+            </ion-list>
+          </ion-item-group>
+        </ion-list>
+      </ion-scroll>
+    </div>
+    <div class="middle_box">
+      <div class="button_box">
+        <div>
+          <button class="middle_button left_to_right" (click)="syncLeftToRightData()">添加</button>
+
+          <button class="middle_button right_to_left" (click)="syncRightToLeftData()">删除</button>
+        </div>
+      </div>
+    </div>
+    <!--</div>-->
+    <!--</div>-->
+    <div style="flex: 1; border: 1px solid #e5e5e5;">
+      <ion-scroll scrollY="true" style="height:80vh;">
+        <ion-label style="margin-left: 10px;">已选择联系人</ion-label>
+        <div style="background-color: #e5e5e5; height: 5px; width: 100%;"></div>
+
+        <ion-list>
+          <ion-item *ngFor="let groupMember of groupMemberToAddList  | stateFilter:[2, 3]">
+            <ion-checkbox [(ngModel)]="groupMember.CHECKED" (ionChange)="rightMemberCheckedChanged(groupMember)"></ion-checkbox>
+            <ion-label>{{ groupMember.REALNAME }} <br>
+              <p>{{ groupMember.DEPTNAME }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-scroll>
+    </div>
+  </div>
+
+</ion-content>
+
+<ion-footer style="height: 50px;">
+  <p style="display:inline-block; margin-left: 10px;">请勾选需要添加的联系人</p>
+  <div class="button-div">
+    <button class="button1" *ngIf="oldGroup" (click)="deleteGroup()">删除</button>
+    <button class="button2" (click)="goBack()">取消</button>
+    <button class="button2" [style.background-color]="createAvaliable ? '#E89D33' : '#e5e5e5'" (click)="saveGroup()">保存</button>
+  </div>
+</ion-footer>

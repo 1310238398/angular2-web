@@ -1,0 +1,87 @@
+// http://ionicframework.com/docs/v2/theming/
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+.orange {
+  border: solid 1px #da7c0c;
+  background: -webkit-linear-gradient(left, #d88662, #d9616f); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, #d88662, #d9616f); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, #d88662, #d9616f); /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, #d88662, #d9616f); /* 标准的语法（必须放在最后） */
+}
+
+.orange:hover {
+  background: #d9666d;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
+  background: -moz-linear-gradient(top, #f88e11, #f06015);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
+}
+
+.orange:active {
+  color: #d9666d;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
+  background: -moz-linear-gradient(top, #f47a20, #faa51a);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
+}
+
+.btn-mb {
+  margin: 0 14px;
+}
+
+.btn-radius {
+  border-radius: 5px;
+}
+
+.yg {
+  color: #D78365;
+}
+
+.bl {
+  color: #1B738D;
+}
+
+a {
+  text-decoration: none;
+}
+
+.t-center {
+  text-align: center;
+}
+
+.t-left {
+  text-align: left;
+}
+
+.mb {
+  margin-bottom: 20px;
+}
+
+.bg {
+  background: url("../assets/images/bg@2x.png") no-repeat;
+  background-size: cover;
+}
+
+.white {
+  color: #ffffff;
+}
+.des{
+  color:#177790;
+}
+.bfont {
+  font-size: 12rem;
+}
+.mlr{
+  margin: 0 45px 30px 45px;
+}

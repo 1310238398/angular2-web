@@ -1,0 +1,31 @@
+page-Apply {
+  .card-ios {
+    p {
+      margin: 10px 0;
+    }
+    .card-content-ios {
+    padding: 0 16px 0 16px;
+      div {
+        font-size: 2.0rem;
+        span {
+          color: color($colors, zj-main-color);
+        }
+      }
+      .image-area {
+        width: 120px;
+        height: auto;
+        //max-height: 160px;
+        img {
+          background-size: cover;
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+  }
+  div.button-padding {
+    padding: 0 0 16px 16px;
+    .button-ios {
+      width: 46%;
+    }
+  }
+}

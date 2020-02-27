@@ -1,0 +1,20 @@
+.fl{float: left;}
+.fr{float: right;}
+.center{text-align: center;}
+.dib{display: inline-block;}
+.over{overflow: hidden;}
+.relative{position: relative;}
+.absolute{position:absolute}
+.cp{cursor: pointer;}
+.bold{font-weight: bold}
+.fn12{font-size: 12px;}
+.fn14{font-size: 14px;}
+
+.help-btn{margin-left: 20px;cursor: pointer;color:#108EE9;}
+.ant-modal-footer{text-align: center;}
+
+.message{width: 550px;height:90px;border-radius: 5px;border:1px solid #d9d9d9;resize:none;padding:5px;}
+.file-num{bottom:7px;right:5px;}
+
+.weight-txt{width:150px;}
+

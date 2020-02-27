@@ -1,0 +1,46 @@
+<div class="modal-header">
+    <div class="modal-title">{{params.RecordId? '编辑' : '添加'}}-家庭成员</div>
+</div>
+<form #f="ngForm" nz-form>
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="4">称谓</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <ant-bizcode [bizObj]="params" [BizType]="'MemberType'" [ModelName]="'MemberTypeCode'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="4">姓名</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input name="MemberName" [(ngModel)]="params.MemberName" placeholder="姓名" maxlength="18" required>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="4">工作单位</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input name="MemberWorkUnit" placeholder="工作单位" [(ngModel)]="params.MemberWorkUnit" maxlength="18" required>
+            </nz-form-control>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="4">职务</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input name="Duty" placeholder="职务" [(ngModel)]="params.Duty" maxlength="18" required>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="4">联系电话</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input name="MobilePhone" [(ngModel)]="params.MobilePhone" placeholder="联系电话" maxlength="18" required>
+            </nz-form-control>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button nz-button type="button" (click)="close()">关闭</button>
+        <button nz-button class="btn-zj-color" [disabled]="!f.form.valid" [nzType]="'primary'" (click)="save()">保存</button>
+    </div>
+</form>

@@ -1,0 +1,10 @@
+<ion-content>
+  <ion-list class="m-t-10">
+    <div class="list_arrow">
+      <div class="list" *ngFor="let class of classList">
+        <a (click)="goToStudents(class)"><span class="title">{{class.DeptName}}（{{class.SignCount}}/{{class.TotalCount}}）</span></a>
+        <div class="line"></div> 
+      </div>
+    </div>
+  </ion-list>
+</ion-content>

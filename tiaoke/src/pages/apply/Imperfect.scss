@@ -1,0 +1,18 @@
+page-imperfect{
+  .must {
+    color: red;
+  }
+  .yellow {
+    background-color: #efb262;
+  }
+  .yellow:focus,.yellow:active {
+    background-color: #efb262;
+  }
+  #def{
+    background-color: #FFF;
+  }
+  .cancel{
+    background-color: #c2c2c2;
+    color: #FFF;
+  }
+}

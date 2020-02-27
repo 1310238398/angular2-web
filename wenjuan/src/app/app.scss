@@ -1,0 +1,155 @@
+/* over custom style
+ hanzhendong
+*/
+/************
+list
+*******/
+-webkit-overflow-scrolling:touch
+list-ios > .item-block:first-child {
+  border-top: $hairlines-width solid $list-ios-border-color;
+}
+
+.list-ios {
+  margin: -1px 0 8px!important;
+}
+.list-ios .item-block:not(.alert-danger) {
+  border-bottom: 1px solid $list-md-border-color !important;
+  .item-inner {
+    border-bottom: 0 !important;
+  }
+  background-color: #fff;
+  textarea {
+    height: 56px;
+  }
+  &:first-child {
+    border-top: 0;
+  }
+  .label-ios, h2 {
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #3e3e3e;
+    letter-spacing: 0.38px;
+    text-align: left;
+  }
+  .label-ios, p {
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0.29px;
+    text-align: left;
+  }
+  input {
+    text-align: right;
+  }
+}
+
+.card-ios {
+  box-shadow: none;
+  .card-content {
+    .h2 {
+      font-family: PingFangSC-Regular;
+      font-size: 16px;
+      margin-right: 18px;
+      color: #3e3e3e;
+      letter-spacing: 0.38px;
+      text-align: left;
+      max-width: 85%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .p {
+      font-family: PingFangSC-Regular;
+      font-size: 12px;
+      margin: 2px 0 15px 0;
+      color: #666666;
+      letter-spacing: 0.29px;
+      text-align: left;
+    }
+    .num{
+      font-family:PingFangSC-Regular;
+      font-size:14px;
+      color:#666666;
+      letter-spacing:0.34px;
+      line-height:23px;
+      text-align:left;
+    }
+  }
+
+}
+.fiximg{
+  width: 35px;
+  position: fixed;
+  right: 15px;
+  top: 18px;
+}
+
+/*按钮*/
+.button-ios {
+  color: #fff;
+}
+
+//*************************************************
+.zj-label-textOverflow-initial {
+  text-overflow: initial;
+}
+
+.zj-text-indent {
+  text-indent: 2em
+}
+
+.font {
+  font-size: 12px;
+  margin-right: 3px;
+}
+
+.zj-t-center {
+  text-align: center;
+}
+
+.waring {
+  margin-left: 15px;
+  margin-top: 2px;
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #fb5f2d;
+  letter-spacing: -0.01px;
+  line-height: 15px;
+  text-align: left;
+}
+
+.inblock {
+  display: inline-block;
+}
+
+.checkbox .checkbox-checked {
+  border-color: #ffc000 !important;
+  background-color: #ffc000 !important;
+}
+
+.checkbox-ios .checkbox-icon {
+  background-color: transparent;
+}
+
+.checkbox-md .checkbox-icon {
+  margin-left: 4px;
+  margin-right: 20px;
+  border: 1px solid #acacac;
+  border-radius: 3px;
+  background-color: transparent;
+}
+
+.pb8 {
+  padding-bottom: 8px;
+}
+.none {
+  text-align: center;
+  margin-top: 25%
+}
+.noneimg {
+  width: 200px;
+}
+.noneFont{
+  color: #666666;
+  font-size: 14px;
+}

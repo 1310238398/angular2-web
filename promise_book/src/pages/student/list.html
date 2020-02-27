@@ -1,0 +1,40 @@
+<ion-content>
+  <div *ngFor="let list of proList;let i=index" style="margin-bottom:10px;">
+    <div class="pre_year" *ngIf="compareA(i)">
+      <div class="line line_left"></div>
+      <div class="year">{{list.CreateTime.substring(0,4)}}</div>
+      <div class="line line_right"></div>
+    </div>
+    <div class="list" (click)="goToDetail(list.CommitmentID)">
+      <div class="line1" [style.color]="list.Status===2 ? '#3e3e3e' : '#666666'">
+        <div class="date">{{list.CreateTime|dateformat:list.CreateTime}}</div>
+        <div class="title">{{list.Title}}</div>
+        <!-- 0未签署 1已签署 2待签署 -->
+        <!-- <div class="status" (click)="goToDetail(list.CommitmentID)" *ngIf="list.Status===0">待签署</div> -->
+        <div class="status" *ngIf="list.Status===1">已签署</div>
+        <div class="status" *ngIf="list.Status===0">未签署</div>
+        <div class="status_wait" *ngIf="list.Status===2">待签署</div>
+      </div>
+      <div class="line"></div>
+      <div class="line2" [style.color]="list.Status===2 ? '#666666' : '#acacac'" [innerHTML]="list.Content.trim()">
+      </div>
+    </div>
+  </div>
+  <div class="empty" *ngIf="iSNull">
+    <a><img src="assets/img/kong@2x.png" width="210" height="150"></a>
+    <p class="tips">暂无更多</p>
+  </div>
+  <!-- <div class="bottom" *ngIf="reachBottom&&!iSNull">
+    <div class="line"></div>
+    <div class="tips">我们是有底线的</div>
+    <div class="line"></div>
+  </div> -->
+
+  <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+
+
+
+</ion-content>

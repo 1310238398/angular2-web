@@ -1,0 +1,16 @@
+<div class="content">
+    <div class="questions">
+        <div class="titleOne">
+            <p>{{title}}——问卷分析</p>
+        </div>
+
+        <hr style="height:0px;border:none;border-top:2px solid #eeeeee;" />
+        <p class="titleTwo">{{questionId}}、{{questionTitle}}</p>
+        <div class="daan" *ngFor="let item of dataItems let i=index">
+
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;({{i+1}})&nbsp;&nbsp;{{item}}</p>
+
+        </div>
+    </div>
+
+</div>

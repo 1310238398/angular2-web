@@ -1,0 +1,31 @@
+<ion-content class="index-cont">
+  <p class="wain-txt">重置密码针对于学工忘记了密码且更换了手机号的情况,重置密码后会将密码设置为123456,请通知用户尽快登录后修改密码。</p>
+  <form name="f">
+    <div class="cont-form">
+      <ul>
+
+        <li>
+          <p class="text-css fn14 color9b"><i style="color: #ff0000;">*</i> 用户姓名</p>
+          <ion-item>
+            <ion-input class="input-box" type="text" maxlength="20" [(ngModel)]="staffName" name="staffName"></ion-input>
+          </ion-item>
+        </li>
+        <li class="overh">
+            <p class="text-css fn14 color9b">所属部门</p>
+            <ion-item class="select-search">
+              <select-searchable [(ngModel)]="port" [items]="ports" itemValueField="code" name="port" itemTextField="name" [canSearch]="true" (onChange)="portChange($event)" [noItemsFoundText]="'未能匹配到该部门,请明确部门名称后重新匹配'"
+                searchPlaceholder="搜索" closeButtonText="X">
+                <ng-template selectSearchableLabelTemplate>
+                </ng-template>
+              </select-searchable>
+            </ion-item>
+          </li>
+      </ul>
+    </div>
+  </form>
+  <div class="center foot-btn-wrap" style="margin:60px 0;">
+    <button class="submit-tab fn16" ion-button (click)="searchUser()">查询</button>
+  </div>
+
+
+</ion-content>

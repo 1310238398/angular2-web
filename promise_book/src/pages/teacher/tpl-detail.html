@@ -1,0 +1,24 @@
+<ion-content class="detail">
+  <p class="title">{{detail.Title}}</p>
+  <div class="content" [innerHTML]="detail.Content">
+
+  </div>
+  <div class="sign">
+    <div class="sign_list">
+      <p class="sign2">承诺人：</p>
+      <p class="sign1"></p>
+    </div>
+    <div class="sign_list">
+      <p class="sign2">时&nbsp;&nbsp;&nbsp;&nbsp;间：</p>
+      <p class="sign1"></p>
+    </div>
+  </div>
+  <!-- <div class="fixed_bottom">
+    <div class="bottom_bar"><button class="btn" (click)="use()">使用</button></div>
+  </div> -->
+</ion-content>
+<ion-footer (click)="use()">
+  <ion-toolbar>
+    <ion-title>使用</ion-title>
+  </ion-toolbar>
+</ion-footer>

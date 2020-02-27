@@ -1,0 +1,29 @@
+
+<ion-content class="outer-content">
+    <div class="inslistall">
+        <div class="swiper-container" style="height:90%">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" *ngFor="let item of items">
+                    <div class="swdiv">
+                        <img src="{{item.URL}}">
+                        <h2>{{item.Name}}</h2>
+                        <div class="hr"></div>
+                        <p>{{item.DepartmentName}}</p>
+                        <p>{{item.UserCode}}</p>
+                        <button *ngIf="item.IsDone == '0'" type="button" (click)="NavigationTo(item)">测评</button>
+                        <button *ngIf="item.IsDone == '1'" class="pNo" type="button">已测评</button>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <!-- 分页器 -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+</ion-content>
+
+

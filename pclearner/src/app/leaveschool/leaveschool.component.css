@@ -1,0 +1,16 @@
+.c_lass{
+    margin-left: 20px;
+    font-size: 20px;
+    display: inline-block;
+
+}
+.grade{
+    font-size: 20px;
+    margin-left: 40px;
+    display: inline-block;
+}
+a:hover, a:visited, a:link, a:active {
+  color: #49a9ee;
+  text-decoration: none
+  
+}

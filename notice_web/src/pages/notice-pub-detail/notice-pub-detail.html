@@ -1,0 +1,44 @@
+<div *ngIf="notice">
+    <div class="page-back"><button (click)="goBack()">< 返回</button></div>
+    <p class="noticeTitle">{{notice.MUSTTITLE}}</p>
+    <p class="creator">发布人：{{notice.MUSTCREATOR}}</p>
+    <p class="time">{{fomateTime(notice.MUSTTIME)}}</p>
+
+    <HR class="separate">
+    <p class="content">{{notice.MUSTDESC}}</p>
+        <HR class="separate">
+
+    <div class="default-div-border">
+        <ion-list>
+            <ion-item *ngFor="let attachment of notice.ATTACHMENTS">
+                <img width="40" height="40" [src]="attachment.FileName | fileNameToTypeImageUrl" style="float: left;margin-right: 10px;"
+                />
+                <h2>{{attachment.FileName}}</h2>
+                <p>{{attachment.FileSize | toReadableSize}}</p>
+                <ion-avatar item-right>
+                    <a href='/{{attachment.FileLink}}' download><img src="assets/image/下载.png"></a>
+                </ion-avatar>
+            </ion-item>
+        </ion-list>
+    </div>
+    <div>
+        <HR class="separate">
+
+        <div class="users"><span class="tip1">通知对象：</span><span class="user" *ngFor="let user of notice.RECEIVEOBJECTS">{{user.NAME}}</span></div>
+        <div class="margin-div">
+            <p class="time2"><span class="tip1">有效期至: </span >{{notice.VALIDTIME}}</p>
+
+            <p class="time2"><span class="tip1">特定的提醒时间: </span>{{notice.REMINDTIME}}</p>
+        </div>
+
+    </div>
+    <!--<div>-->
+    <!--<label>TILE: </label>-->
+    <!--<input [(ngModel)]="notice.MUSTTITLE" placeholder="title" />-->
+    <!--</div>-->
+    <div class="button-div">
+        <button class="button1" (click)="goModify()">通知更正</button>
+        <button class="button2" (click)="goReply()">回执详情</button>
+    </div>
+    
+</div>

@@ -1,0 +1,26 @@
+<ion-content padding-top class="grid-basic-page">
+  <div class="pro-ctn center">
+    <button ion-button (click)="gopartwork()" class="msbutton">查看勤工助学岗位></button>
+  </div>
+  <div class="content">
+    <div class="overh" style="margin:10px;">
+      <p class="change-title color4a center" style="margin:15px 0;"><b>勤工助学岗位申请表</b></p>
+
+      <div class="pro-text overh relative">
+        <p class="left color4a fn14">
+          <span style="color: red;">*</span>
+          <span>申请理由</span>
+        </p>
+        <textarea class='file-message mr' #textarea name="filetext" [(ngModel)]="filetext" (ngModelChange)="txtChange(textarea.value)"
+          maxlength="200" rows="2"></textarea>
+        <p class="file-num absolute">{{values}}</p>
+      </div>
+    </div>
+    <div class="center" style="padding: 10px;">
+      <button ion-button (click)="cancle()" style="width: 100px;height: 40px;background: #FFFFFF;border: 1px solid #FFC000;
+      border-radius: 6px;font-family: PingFangSC-Regular;font-size: 16px;color: #FFC000;letter-spacing: 0.49px;line-height: 16px;margin-right: 15px;">取消</button>
+      <button ion-button [disabled]="numdisb" (click)="setcokie()" style="width: 100px;height: 40px;background: #FFC000;border: 1px solid #FFC000;
+      border-radius: 6px;font-family: PingFangSC-Regular;font-size: 16px;color: #FFFFFF;letter-spacing: 0.49px;line-height: 16px;">确定</button>
+    </div>
+  </div>
+</ion-content>

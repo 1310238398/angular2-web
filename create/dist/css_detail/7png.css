@@ -1,0 +1,38 @@
+/*简介样式*/
+/*body:before {*/
+    /*content: ' ';*/
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    /*background: url('./../img/7.png');*/
+    /*background-size: cover;*/
+    /*z-index: -1;*/
+/*}*/
+
+.introduce {
+    margin: 10px 15px;
+    max-height: 66px;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #FFFFFF;
+    letter-spacing: 0.15px;
+    text-align: left;
+}
+
+/*文章样式*/
+.json_article {
+    font-family: PingFangSC-Regular;
+    color: #FFFFFF;
+    line-height: 20px;
+    text-align: left;
+}
+
+.json_pic_text{
+    color: #FFFFFF;
+}
+
+body{
+    background-image: url("./../img/7-big.png");
+}

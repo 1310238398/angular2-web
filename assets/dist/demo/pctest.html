@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>新版jssdkdemo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <script src="../jssdk/antlinker.1.0.9.js"></script>
+    <style type="text/css">
+        .t-center {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .div1 {
+            background-color: yellowgreen;
+            height: 200%;
+        }
+
+        .img {
+            width: 80px;
+            height: 80px;
+        }
+    </style>
+
+</head>
+
+<body>
+<h2 style="text-align: center">文件上传测试</h2>
+<div style="border: 1px salmon solid">
+    <div> capture="camera" accept='maxsize/5,num/5,image/gif,image/jpeg,image/png'</div>
+    <input type="file" id="file" accept="maxsize/5,num/5,image/jpeg,image/png" capture="camera" value="上传文件" placeholder="文件上传">
+    <img src="" alt="" id="img" class="img">
+</div>
+
+<div style="border: 1px salmon solid;margin-top: 30px">
+    <div> accept='maxsize/6,num/6,image/gif,image/jpeg,image/png'</div>
+    <input type="file" id="file1" accept="maxsize/6,num/6,image/gif,image/jpeg,image/png"
+           value="上传文件" placeholder="文件上传">
+    <img src="" alt="" id="img1" class="img">
+</div>
+
+<div style="border: 1px salmon solid;margin-top: 30px">
+    <div></div>
+    <button onclick="onJsdk()">调用上传sdk</button>
+    <img src="" alt="" id="sdkimg" class="img">
+</div>
+
+</body>
+<script>
+    function onJsdk() {
+        console.log('gggg');
+        antlinker.uploadFile({
+                type: 'img',//参数:img,或者file//上传类型
+                mode: ['photo', 'album'],//(拍照||相册)任意组合
+                mimeType: ["image/png", "image/jpeg", "image/jpg", "image/gif"],//文件类型限制
+                maxSize: 5,//文件最大限制//单位:M
+                maxNum: 9,//文件数量限制//,
+                thumbnailRule: "/34/34",//缩略图规则(暂无意义)
+                success: function () {
+                    console.info('调用成功')
+                },
+                complete: function (arr) {
+                    console.log('此处为客户端返回文件对象数组:', arr);
+                    //文件上传完成
+                },
+                fail: function () {
+                    console.warn('调用失败')
+                    //文件上传失败
+                }
+
+            }
+        )
+    }
+
+    var file = document.getElementById('file');
+    var img = document.getElementById('img');
+    file.onchange = function () {
+        console.dir(this.files[0])
+        var reader = new FileReader();
+        reader.readAsDataURL(this.files[0]);
+
+        reader.onload = function () {
+            img.src = this.result;
+        }
+
+    }
+    var sdkfile = document.getElementById('sdkfile');
+    var sdkimg = document.getElementById('sdkimg');
+    sdkfile.onchange = function () {
+        console.dir(this.files[0])
+        var reader = new FileReader();
+        reader.readAsDataURL(this.files[0]);
+
+        reader.onload = function () {
+            img1.src = this.result;
+        }
+
+    };
+    var filesdk = document.getElementById('file1');
+    var img1 = document.getElementById('img1');
+    file1.onchange = function () {
+        console.dir(this.files[0])
+        var reader = new FileReader();
+        reader.readAsDataURL(this.files[0]);
+
+        reader.onload = function () {
+            img1.src = this.result;
+        }
+
+    };
+    window.addEventListener('message', (msg) => {
+        console.log(msg);
+        //alert(data);
+        window['__AppWebkey'] = msg.data;
+    });
+    setTimeout(() => {
+        console.log('window[\'__AppWebkey\']', window['__AppWebkey']);
+    }, 3000);
+    var obj = {UID: 1};
+    antlinker.exeUserBasicInfoSdk(obj, function (obj, success) {
+        console.log("sdk返回内容:", obj);
+        s = document.createElement("script");
+        s.setAttribute("src", "main.js");
+        document.body.appendChild(s);
+    })
+
+</script>
+
+</html>

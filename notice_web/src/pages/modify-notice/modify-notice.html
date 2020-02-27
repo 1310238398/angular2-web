@@ -1,0 +1,47 @@
+<ion-header no-border no-shadow style="height: 40px;">
+    <div class="page-back">
+        <button (click)="goBack()">< 返回</button>
+    </div>
+</ion-header>
+<ion-content>
+
+    <div class="tip">通知更正</div>
+    <div class="contentDiv">
+        <div id="editor">
+          <!--   <p class="contentTitle"><strong>{{notice.MUSTTITLE}}</strong>
+             &lt;!&ndash;<br>&ndash;&gt;
+            <span  [innerHTML]="notice.MUSTDESC | sanitizeHtml"></span>
+             </p>-->
+        </div>
+    </div>
+    <!--<p class="contentTitle"><strong>{{notice.MUSTTITLE}}</strong>{{notice.MUSTDESC}}</p>-->
+    <!--<HR class="separate"/>-->
+
+    <div class="date-div">
+        <span>有效期至:</span>
+        <app-ant-date-picker [(dateString)]="validtime" [dateStyle]="'yyyyMMdd'"></app-ant-date-picker>
+    </div>
+
+            <!--<input [disabled]="!(bb.checked)" type="datetime-local" [(ngModel)]="notice.REMINDTIME" />-->
+
+    <div class="tip2">* 到达有效期后，将会从通知列表中删除</div>
+
+    <div class="time-check"><input #bb type="checkbox" [checked]="isRemind"/><label>&nbsp;&nbsp;特定时间提醒我</label></div>
+    <div class="datetime-div">
+        <label>提醒时间:</label>
+        <app-ant-date-picker [(dateString)]="remindtime" [dateStyle]="'yyyyMMddhhmm'"></app-ant-date-picker>
+    </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</ion-content>
+<ion-footer  style="height: 50px;">
+    <div class="button-div">
+        <button class="button1" (click)="saveNotice()" >保存</button>
+        <button class="button2" (click)="gotoPreview()">预览</button>
+    </div>
+</ion-footer>

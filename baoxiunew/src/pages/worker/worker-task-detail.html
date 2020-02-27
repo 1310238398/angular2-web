@@ -1,0 +1,230 @@
+<ion-content class="task-detail">
+  <div class="header">
+    <div class="photo">
+      <img src="{{task.StudentAvatarURL}}" onerror="this.src='assets/imgs/touxiang.png'">
+    </div>
+    <div class="stu-info">
+      <p class="no-line-break" style="position:relative">姓名：{{task.StudentName}}
+        <a class="sex">
+          <img src="assets/imgs/man.png" *ngIf="task.StudentSex==='男'">
+          <img src="assets/imgs/girl.png" *ngIf="task.StudentSex==='女'">
+        </a>
+      </p>
+      <p class="no-line-break">学号：{{task.StudentUserCode}}</p>
+      <p class="no-line-break">学院：{{task.StudentAcadamyName}}</p>
+    </div>
+    <div class="phone">
+      <a (click)="call(task.StudentPhone)">
+        <img src="assets/imgs/phone.png">
+      </a>
+    </div>
+  </div>
+  <div class="task-number no-line-break">报修单编号：{{task.SerialNumber}}</div>
+  <div class="task-info">
+    <p>
+      <span class="task-item">报修区域：</span>
+      <span class="task-item-info">{{task.AreaName}}</span>
+    </p>
+    <p>
+      <span class="task-item">具体地点：</span>
+      <span class="task-item-info">{{task.SpecificSite}}</span>
+    </p>
+    <div class="width:100%;overflow: hidden;">
+      <span class="task-item-pro">报修项目：</span>
+      <div class="pro-list">
+        <a class="item-list item-select" *ngFor="let item of task.Item">
+          <span>{{item.Name}}</span>
+        </a>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+    <p>
+      <span class="task-item">损坏情况具体说明：</span>
+    </p>
+    <p>
+      <span class="task-item-info">{{task.Caption}}</span>
+    </p>
+    <div *ngIf="task.DamageAttachs && task.DamageAttachs.length>0">
+      <p>
+        <span class="task-item">损坏情况图片说明：</span>
+      </p>
+      <div>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4 *ngFor="let imgurl of task.DamageAttachs;let i=index">
+              <a class="task-item-img">
+                <img src="{{imgurl.ThumbnailURL}}" (click)="navPreview({time:false,index:i,items:task.DamageAttachs})">
+              </a>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+    <div class="process">
+      <p class="process-title">进程说明：</p>
+      <div *ngFor="let data of flowsHistoryData; let i=index;">
+        <!-- 待处理 -->
+        <div *ngIf="data && data.out_data && data.out_data.Action==='Launch'">
+          <p class="process-list no-line-break">
+            <i class="completed-circle"></i>
+            <span class="process-list-title">提出报修申请</span>
+            <span class="process-list-info">{{data.process_time}}</span>
+          </p>
+          <p class="process-list no-line-break" *ngIf="i+1===flowsHistoryData.length">
+            <i class="processing-circle"></i>
+            <span class="process-list-title">维修人员接单中</span>
+          </p>
+        </div>
+        <!-- 无需处理 -->
+        <div *ngIf="data && data.out_data && data.out_data.Action==='NotNeed'">
+          <p class="process-list no-line-break">
+            <i class="completed-circle"></i>
+            <span class="process-list-title">维修人员{{task.NotneedUserName}}意见为无需处理</span>
+            <span class="process-list-info">{{data.process_time}}</span>
+          </p>
+          <div class="reworkmark">{{task.NotneedExplanation}}</div>
+        </div>
+        <!-- 已接单 -->
+        <div *ngIf="data && data.out_data && data.out_data.Action==='Receive' || data && data.out_data && data.out_data.Action==='Designate'">
+          <p class="process-list no-line-break">
+            <i class="completed-circle"></i>
+            <span class="process-list-title">维修人员{{task.RepairPersonnelName}}已接单</span>
+            <span class="process-list-info">{{data.process_time}}</span>
+          </p>
+          <p class="process-list no-line-break" *ngIf="i+1===flowsHistoryData.length">
+            <i class="processing-circle"></i>
+            <span class="process-list-title">正在派工</span>
+          </p>
+        </div>
+        <!-- 维修人员已完成 -->
+        <p class="process-list no-line-break" *ngIf="data && data.out_data && data.out_data.Action==='Accomplish'">
+          <i class="completed-circle"></i>
+          <span class="process-list-title">维修人员{{task.RepairPersonnelName}}已处理</span>
+          <span class="process-list-info">{{data.process_time}}</span>
+        </p>
+        <!-- 返工 -->
+        <div *ngIf="data && data.out_data && data.out_data.Action==='Rework'">
+          <p class="process-list no-line-break">
+            <i class="completed-circle"></i>
+            <span class="process-list-title">提出返工申请</span>
+            <span class="process-list-info">{{data.process_time}}</span>
+          </p>
+          <div class="reworkmark">{{data.ReworkReason}}</div>
+        </div>
+        <!-- 学生确认已完成 -->
+        <p class="process-list no-line-break" *ngIf="data && data.out_data && data.out_data.Action==='End'">
+          <i class="completed-circle"></i>
+          <span class="process-list-title">维修任务已完成</span>
+          <span class="process-list-info">{{data.process_time}}</span>
+        </p>
+      </div>
+
+    </div>
+    <div class="mark">
+      <p>
+        <span class="mark-title">备注说明：</span>
+        <a class="add" (click)="addMark()">+添加</a>
+      </p>
+      <div *ngFor="let mark of task.Remark">
+        <p class="process-list no-line-break">
+          <i class="completed-circle"></i>
+          <span class="process-list-title">{{mark.UserName}}</span>
+          <span class="process-list-info">{{mark.Created|_date:'YYYY-MM-DD HH:mm'}}</span>
+        </p>
+        <p class="reworkmark">{{mark.Content}}</p>
+      </div>
+    </div>
+    <div *ngIf="task.RepairAttachs && task.RepairAttachs.length>0">
+      <p>
+        <span class="task-item">维修情况图片说明：</span>
+      </p>
+      <div>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4 *ngFor="let imgurl of task.RepairAttachs;let i=index">
+              <a class="task-item-img">
+                <img src="{{imgurl.ThumbnailURL}}" (click)="navPreview({time:false,index:i,items:task.RepairAttachs})">
+              </a>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+  <div class="btn-wapper" *ngIf="task.Status==='10'">
+    <button ion-button class="btn-ghost" (click)="notNeed()">无需处理</button>
+  </div>
+  <div class="btn-wapper" *ngIf="task.Status==='10'">
+    <button ion-button (click)="receive()">接单</button>
+  </div>
+  <div class="btn-wapper" *ngIf="task.Status==='20' || task.Status==='21'">
+    <button ion-button (click)="accomplish()">维修完成</button>
+  </div>
+  <!-- 无需处理 -->
+  <div class="photoalert" *ngIf="notNeedShow">
+    <div class="alertback"></div>
+    <div class="alertwapper">
+      <div class="alert-content">
+        <div class="surplus-num-box">
+          <ion-textarea maxlength="20" max="20" placeholder="请输入原因（必填）" class="textarea" [(ngModel)]="notNeedExplanation" (ngModelChange)="notNeedExplanationOnChange($event)"></ion-textarea>
+          <p class="surplus-num" *ngIf="notNeedExplanation.length<21">{{20 - notNeedExplanation.length}}</p>
+        </div>
+        <p class="tips" *ngIf="notNeedExplanationValid">原因必填</p>
+        <p class="tips" *ngIf="!notNeedExplanationValid && notNeedExplanation.length>20">最多只能输入20个字</p>
+        <div class="btn-wapper-line">
+          <button ion-button class="btn-ghost" (click)="cancleNotNeed()">取消</button>
+          <button ion-button (click)="confirmNotNeed()">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 添加备注 -->
+  <div class="photoalert" *ngIf="showRemark">
+    <div class="alertback"></div>
+    <div class="alertwapper">
+      <div class="alert-content">
+        <div class="surplus-num-box">
+          <ion-textarea maxlength="50" max="50" placeholder="请输入（必填）" class="textarea" [(ngModel)]="remark" (ngModelChange)="remarkOnChange($event)"></ion-textarea>
+          <p class="surplus-num" *ngIf="remark.length<51">{{50 - remark.length}}</p>
+        </div>
+        <p class="tips" *ngIf="remarkValid">备注必填</p>
+        <p class="tips" *ngIf="!remarkValid && remark.length>50">最多只能输入50个字</p>
+        <div class="btn-wapper-line">
+          <button ion-button class="btn-ghost" (click)="cancleAddMark()">取消</button>
+          <button ion-button [disabled]="disabledRemark" (click)="confirmAddMark()">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 维修完成的操作 -->
+  <div class="photoalert" *ngIf="accomplishShow">
+    <div class="alertback"></div>
+    <div class="alertwapper">
+      <div class="alert-content" style="padding-bottom: 140px;">
+        <p class="alert-title no-line-break">任务完成后，请拍照上传维修情况</p>
+        <div class="upload" #b_button>
+          <div class="add" *ngIf="certifyImgs.length < 9 ">
+            <input type="file" value="file" class="hiddenFile" (change)="handleFiles($event)">
+            <img src="assets/imgs/add.png">
+          </div>
+          <div class="Certify" *ngFor="let item of certifyImgs;let index=index;" [ngClass]="{'mtimg':index==0 && certifyImgs.length<9}">
+            <span class="delete">
+              <ion-icon ios="ios-close-outline" md="close" (click)="deleteCertify($event,index)" class="delete-icon"></ion-icon>
+            </span>
+            <img [src]="DomSanitization.bypassSecurityTrustUrl(item.url)">
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div style="position: fixed; bottom: 20px; background:#fff;">
+          <p class="alert-confirm">确定已经维修完成？</p>
+          <div class="btn-wapper-line">
+            <button ion-button class="btn-ghost" (click)="notAccomplish()">还未完成</button>
+            <button ion-button (click)="confirmAccomplish()">已经完成</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,51 @@
+<div class="content" style="padding: 20px">
+  <a [routerLink]="['/poolstudent',pid]"><i class="anticon anticon-left"></i>返回</a>
+
+  <div>
+    <nz-table nzDataSource="[1]" [nzIsPagination]="false"  [nzBordered]="true">
+      <thead nz-thead>
+      <tr>
+        <th nz-th><span>姓名</span></th>
+        <th nz-th><span>学号</span></th>
+        <th nz-th><span>申请所需资料</span></th>
+        <th nz-th><span>经济情况（占50%）</span></th>
+        <th nz-th><span>学生自评（占20%）</span></th>
+      </tr>
+      </thead>
+      <tbody nz-tbody>
+      <tr nz-tbody-tr>
+        <td nz-td>{{detail.name}}</td>
+        <td nz-td>{{detail.user_code}}</td>
+        <td nz-td><a
+          [routerLink]="['/poolstudent/EconomyDetailSummary',detail.intelUserCode]">查看</a>
+        </td>
+        <td nz-td><a [routerLink]="['ecostatus',detail]">{{detail.economic_situation}}</a></td>
+        <td nz-td>
+          {{detail.self_assessment}}
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+    <nz-table nzDataSource="[2]" [nzIsPagination]="false" [nzBordered]="true">
+      <thead nz-thead>
+      <tr>
+        <th nz-th><span>辅导员认定意见</span></th>
+        <th nz-th><span>小组评议（占30%）</span></th>
+        <th nz-th><span>合计分数</span></th>
+        <th nz-th><span>认定等级</span></th>
+        <th nz-th><span>认定申请表</span></th>
+      </tr>
+      </thead>
+      <tbody nz-tbody>
+      <tr nz-tbody-tr>
+        <td nz-td>{{detail.approval_situation}}</td>
+        <td nz-td>{{detail.group_comment}}</td>
+        <td nz-td><a [routerLink]="['ecostatus',detail]">{{detail.sum||0}}</a></td>
+        <td nz-td>{{detail.RecognitionLevel}}</td>
+        <td nz-td>打印</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <router-outlet></router-outlet>
+</div>

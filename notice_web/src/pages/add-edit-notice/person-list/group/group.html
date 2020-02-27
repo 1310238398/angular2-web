@@ -1,0 +1,46 @@
+<!--Create by hanzhendong on 2017/7/24.-->
+<ion-content>
+    <ol class="breadcrumb">
+        <li [ngClass]="{'active': !showMemberList}" (click)="setState()">我的群组</li>
+        <li [ngClass]="{'active': showMemberList}" text-nowrap *ngIf="showMemberList">
+            {{Groups[currentIndex]?.GroupName}}
+        </li>
+    </ol>
+    <ion-list *ngIf="!showMemberList">
+        <ion-item [ngClass]="{'part': partCheck}">
+            <ion-label>全选
+            </ion-label>
+            <ion-checkbox (click)='onAll($event)' [(ngModel)]='allCheck'></ion-checkbox>
+        </ion-item>
+        <ion-item *ngFor="let group of Groups; let i = index">
+            <ion-label>
+                <span class="lable">{{group.GroupName}}</span>
+                <span class='lable' *ngIf="!group.memNum">（{{group.UserCount||0}}人）</span>
+                <span class='lable' *ngIf="group.memNum">（{{group.memNum||0}}/{{group.UserCount||0}}人）</span>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="group.check" (click)="setContacts(group)"></ion-checkbox>
+            <button ion-button item-end clear [ngClass]="{'downcheck': !group.check, 'downUncheck': group.check}"
+                    (click)="tiggerShowMemberList(group,i)">下级
+            </button>
+        </ion-item>
+    </ion-list>
+    <ion-list *ngIf="showMemberList">
+        <ion-item [ngClass]="{'part': partMemberCheck}">
+            <ion-label>全选
+            </ion-label>
+            <ion-checkbox (click)='onMemberAll($event)'
+                          [(ngModel)]='Groups[currentIndex].allMemberCheck'></ion-checkbox>
+        </ion-item>
+        <!--      {{Groups[currentIndex]|json}}
+              {{currentIndex|json}}-->
+        <ion-item *ngFor="let member of Groups[currentIndex].members">
+            <ion-label>
+                <img class='avatar' src="/static/headpictures/{{member.UID}}.jpg-thumb" alt="">
+                <img class='rengzheng' *ngIf='member.isAuth' src="assets/image/icon_renzheng_20.png">
+                <p item-end class="lable">{{member.Name}}</p>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="member.check" (click)="setMemberContacts(member)"></ion-checkbox>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

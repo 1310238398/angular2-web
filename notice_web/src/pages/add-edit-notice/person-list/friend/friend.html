@@ -1,0 +1,22 @@
+<!--Create by hanzhendong on 2017/7/24.-->
+<ion-content>
+    <ol class="breadcrumb">
+        <li class='active'>我的好友</li>
+    </ol>
+    <ion-list>
+        <ion-item [ngClass]="{'part': partCheck}">
+            <ion-label>全选
+            </ion-label>
+            <ion-checkbox (click)='onAll($event)' [(ngModel)]='allCheck'></ion-checkbox>
+        </ion-item>
+        <ion-item *ngFor="let friend of friends; let i = index">
+            <ion-label>
+                <img class='avatar' src="/static/headpictures/{{friend.UID}}.jpg-thumb" alt="">
+                <img class='rengzheng' *ngIf='friend.IsAuth' src="assets/image/icon_renzheng_20.png">
+                <p item-end class="lable">{{friend.Name}}</p>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="friend.check" (click)="setContacts(friend)"></ion-checkbox>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

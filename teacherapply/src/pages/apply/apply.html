@@ -1,0 +1,81 @@
+<ion-content class="index-cont">
+
+  <div *ngIf="haveClass == '1'">
+      <P class="head-title center" style="margin-bottom:5px;box-shadow: 0 2px 5px 0 #E3E3E3;">我要申请</P>
+
+      <ion-list no-lines>
+          <!--<div class="overh ion-item-list" *ngFor="let data of dataSet" style="margin-bottom:5px;box-shadow: 0 2px 5px 0 #E3E3E3;">-->
+          <div class="overh ion-item-list" style="margin-bottom:5px;box-shadow: 0 2px 5px 0 #E3E3E3;">
+              <!--<ion-item class="" style="border-bottom:none!important;" (click)="NavigationTo()">-->
+              <ion-item class="" style="border-bottom:none!important;">
+                  <p class="ion-item-list-title">我的申请业务</p>
+                  <p class="ion-item-list-time">申请时间：2018-03-09<span class="ion-item-list-user">申请人：<span style="color: #4A4A4A;">李某某</span></span></p>
+                  <p item-end class="center">
+                      <img class="db mr" src="assets/images/gengduo.png">
+                  </p>
+              </ion-item>
+              <p class="ion-item-list-lines"></p>
+              <p class="ion-item-list-bottom" >
+                  <span class="left" (click)="NavigationToUp()">状态：<span style="color:#59B4F9">辅导员审批进行中</span></span>
+                  <span class="right" (click)="openBox()">查看申请进程</span>
+              </p>
+          </div>
+
+          <div class="overh ion-item-list" style="margin-bottom:5px;box-shadow: 0 2px 5px 0 #E3E3E3;">
+              <!--<ion-item class="" style="border-bottom:none!important;" (click)="NavigationTo()">-->
+              <ion-item class="" style="border-bottom:none!important;">
+                  <p class="ion-item-list-title">我的申请业务</p>
+                  <p class="ion-item-list-time">申请时间：2018-03-09<span class="ion-item-list-user">申请人：<span style="color: #4A4A4A;">李某某</span></span></p>
+                  <p item-end class="center">
+                      <img class="db mr" src="assets/images/gengduo.png">
+                  </p>
+              </ion-item>
+              <p class="ion-item-list-lines"></p>
+              <p class="ion-item-list-bottom" >
+                  <span class="left" (click)="NavigationToUp()">状态：<span style="color:#FF4E4E">辅导员审批不通过</span></span>
+                  <span class="right" (click)="openBox()">查看申请进程</span>
+              </p>
+          </div>
+
+
+          <div class="overh ion-item-list" style="margin-bottom:5px;box-shadow: 0 2px 5px 0 #E3E3E3;">
+              <!--<ion-item class="" style="border-bottom:none!important;" (click)="NavigationTo()">-->
+              <ion-item class="" style="border-bottom:none!important;">
+                  <p class="ion-item-list-title">我的申请业务</p>
+                  <p class="ion-item-list-time">申请时间：2018-03-09<span class="ion-item-list-user">申请人：<span style="color: #4A4A4A;">李某某</span></span></p>
+                  <p item-end class="center">
+                      <img class="db mr" src="assets/images/gengduo.png">
+                  </p>
+              </ion-item>
+              <p class="ion-item-list-lines"></p>
+              <p class="ion-item-list-bottom" >
+                  <span class="left" (click)="NavigationToUp()">状态：<span style="color:#69C701;">审批已完成</span></span>
+                  <span class="right" (click)="openBox()">查看申请进程</span>
+              </p>
+          </div>
+      </ion-list>
+
+      <div class="process-ov fixed" *ngIf="hiddenBox" (click)="closeTab()"></div>
+      <div class="process-box absolute overh" *ngIf="hiddenBox">
+          <p class="process-close" (click)="closeTab()"><img src="assets/images/close.png"></p>
+          <p class="center process-title">申请进程</p>
+          <div class="process-div">
+              <p class="process-p"><span class="left">提出申请</span><span class="right">2018-03-08 14:00</span></p>
+              <p class="process-p"><span class="left">班主任审批通过</span><span class="right">2018-03-10 14:00</span></p>
+              <p class="process-p"><span class="left">辅导员审批不通过</span><span class="right">2018-03-11 14:00</span></p>
+              <p class="process-p" style="margin-bottom: 5px;background-color: #FFE28A;"><span class="left">内容有问题</span><span class="right"></span></p>
+          </div>
+      </div>
+  </div>
+
+
+
+  <p class="my-process fixed">
+    <span class="my-process-title" (click)="NavigationToApplyList()">我要<br>申请</span>
+  </p>
+
+
+
+
+
+</ion-content>

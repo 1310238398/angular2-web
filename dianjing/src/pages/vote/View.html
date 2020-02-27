@@ -1,0 +1,28 @@
+<ion-content class="outer-content">
+  <ion-row>
+    <ion-slides pager *ngIf="voteInfo.Video" autoplay="3000" loop=true>
+      <ion-slide *ngFor="let item of items;let index=index;">
+        <img class="mwimg" src="{{item}}?imageView2/2/h/250/q/75" (click)="navDetail({index:index,items:items})"/>
+      </ion-slide>
+    </ion-slides>
+  </ion-row>
+  <ion-card class="mwbor">
+    <ion-card-header>
+      <h1>选手姓名:{{voteInfo.Principal}}</h1>
+      <!--  <h2>项目负责人:{{voteInfo.Principal}}</h2>-->
+      <h2>专业年级:{{voteInfo.Academy}}</h2>
+    </ion-card-header>
+    <ion-card-content>
+      个人简介:{{voteInfo.Introduction}}
+    </ion-card-content>
+  </ion-card>
+  <ion-fab center bottom>
+    <button *ngIf="!voteStatus" ion-fab mini color="light" (click)="onVoteOn()">
+      <ion-icon name="thumbs-up"></ion-icon>
+    </button>
+    <button *ngIf="voteStatus" ion-fab mini color="danger" (click)="onVoteOff()">
+      <ion-icon name="thumbs-up"></ion-icon>
+    </button>
+    <p class="ps">{{voteInfo.Vote}}票</p>
+  </ion-fab>
+</ion-content>

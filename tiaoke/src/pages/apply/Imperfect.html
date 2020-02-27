@@ -1,0 +1,67 @@
+<ion-content class="outer-content">
+    <ion-list>
+
+        <ion-item>
+            <ion-label fixed>任课教师</ion-label>
+            <ion-input type="text" value="李老师" class="inp" placeholder="任课教师" readonly="readonly"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label fixed>课程名称</ion-label>
+            <ion-input type="text" value="" class="inp" placeholder="请填写" max="18" readonly="readonly"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>课程性质</ion-label>
+            <ion-input type="text" value="" class="inp" placeholder="请填写" max="18" readonly="readonly"></ion-input>
+
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>授课班级</ion-label>
+            <ion-input type="text" value="" class="inp" placeholder="请填写" max="18" readonly="readonly"></ion-input>
+        </ion-item>
+        <ion-item style="margin-top: 10px">
+            <ion-label fixed>调课原因</ion-label>
+            <ion-textarea type="text" value="" class="inp" placeholder="请填写" max="100" readonly="readonly"></ion-textarea>
+
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>原课程时间</ion-label>
+            <ion-input type="text" value="" class="inp" placeholder="第1周 星期一 第1节" max="18" readonly="readonly"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>原课程地点</ion-label>
+            <ion-input type="text" value="" class="inp" placeholder="3301" max="18" readonly="readonly"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>调整后时间</ion-label>
+            <ion-input type="text" value="" class="inp" placeholder="请选择(选填)" max="18"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>调整后地点</ion-label>
+            <ion-input type="text" value="" class="inp" placeholder="请选择(选填)" max="18"></ion-input>
+        </ion-item>
+
+        <ion-item style="margin-top: 10px">
+            <ion-label fixed>原课程时间</ion-label>
+            <ion-input type="text" value="" class="inp" placeholder="第1周 星期一 第1节" max="18" readonly="readonly"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>原课程地点</ion-label>
+            <ion-input type="text" value="" class="inp" placeholder="3301" max="18" readonly="readonly"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>调整后时间</ion-label>
+            <ion-input type="text" value="" class="inp" placeholder="请选择(选填)" max="18"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>调整后地点</ion-label>
+            <ion-input type="text" value="" class="inp" placeholder="请选择(选填)" max="18"></ion-input>
+        </ion-item>
+
+    </ion-list>
+</ion-content>
+<ion-footer>
+    <ion-toolbar color="light">
+        <button ion-button full class="yellow" (click)="addImperfectBtn()">提交调课申请</button>
+    </ion-toolbar>
+</ion-footer>

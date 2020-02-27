@@ -1,0 +1,17 @@
+<ion-content>
+  <div #containerMap id="containerMap" style="width: 100%; height: 225px"></div>
+  <div class="waring" *ngIf="isWaring"><ion-icon name="ios-alert-outline" class="font"></ion-icon>定位未在学校范围内，请重新定位（请点击地图右下角图标）
+    或上传照片证明本人已到校</div>
+<div class="upload">
+  <div class="zhengming">（可选）请上传照片：（部分请假材料或到校证明照片）</div>
+    <img src="assets/images/add.png" id="pickfilesImg">
+  <span class="info zhengming" *ngIf="!CertifyImgs.length">最多可以上传三种，每张限制大小为3M</span>
+<span class="Certify" *ngFor="let item of CertifyImgs;let index=index;">
+  <ion-icon ios="ios-close-outline" md="md-close" (click)="deleteCertify($event,index)" class="delete"></ion-icon>
+  <img [src]="DomSanitization.bypassSecurityTrustUrl(item.url)" (click)="navPreview({time:false,index:index,items:CertifyImgs})">
+</span>
+</div>
+  <div padding>
+    <button ion-button color="zj-main-color"  (click)="onConfirmSubmit()" block>确认位置并提交申请</button>
+  </div>
+</ion-content>

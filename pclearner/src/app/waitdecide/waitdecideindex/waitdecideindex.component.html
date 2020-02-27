@@ -1,0 +1,83 @@
+<div class="content">
+    <div class="components-table-demo-control-bar">
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-center">
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>任务标题</label>
+                </div>
+                <div nz-form-control>
+                    <nz-input style="width: 120px;" [(ngModel)]="searchObj.TaskName" name="TaskName" [nzSize]="'middle'"></nz-input>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>任务类型</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.TaskType" name="TaskType" nzAllowClear>
+                        <nz-option *ngFor="let option of optioncatgray" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>任务时间</label>
+                </div>
+                <nz-select style="width: 120px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.TaskTime" name="TaskTime" nzAllowClear>
+                    <nz-option *ngFor="let option of optionyear" [nzLabel]="option.CreatedYear" [nzValue]="option.CreatedYear">
+                    </nz-option>
+                </nz-select>
+            </div>
+
+            <div nz-row nz-form-item>
+                <div nz-col [nzSpan]="24" style="text-align: right;">
+                    <button nz-button [disabled]="httpService.loading" [nzType]="'primary'" (click)="onSearch()">查询</button>
+                    <button nz-button (click)="resetForm(f)">重置</button>
+
+                    <a *ngIf="userStatus == 'FundCenter'" [routerLink]="['publishtask']"><button style="margin-left:20px;" nz-button  [nzType]="'primary'">创建认定任务</button></a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div style="margin-top:20px;">
+        <nz-table #nzTable [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [nzBordered]="true" [nzIsPagination]="false">
+                <thead nz-thead>
+                    <tr>  
+                        <th nz-th><span>任务标题</span></th>
+                        <th nz-th><span>任务类型</span></th>
+                        <th nz-th><span>学院上报截止时间</span></th>
+                        <th nz-th><span>受众范围</span></th>
+                        <th nz-th><span>状态</span></th>
+                    </tr>
+                </thead>
+                <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                        <td nz-td><a (click)="setSesstion(data.Status,data.TaskId)" [routerLink]="['waitdecidehomepage',{TaskName: data.TaskName,created:data.created,EndDate:data.EndDate,TaskId:data.TaskId}]">{{data.TaskName}}</a></td>
+
+                        <td nz-td>
+                            <a (click)="setSesstion(data.Status,data.TaskId)" *ngIf="data.TaskType=='9800002'" [routerLink]="['waitdecidehomepage',{TaskName: data.TaskName,created:data.created,EndDate:data.EndDate,TaskId:data.TaskId}]">复核认定</a>
+                            <a (click)="setSesstion(data.Status,data.TaskId)" *ngIf="data.TaskType=='9800001'" [routerLink]="['waitdecidehomepage',{TaskName: data.TaskName,created:data.created,EndDate:data.EndDate,TaskId:data.TaskId}]">初次认定</a>
+                        </td>
+
+                        <td nz-td><a (click)="setSesstion(data.Status,data.TaskId)" [routerLink]="['waitdecidehomepage',{TaskName: data.TaskName,created:data.created,EndDate:data.EndDate,TaskId:data.TaskId}]">{{data.EndDate}}</a></td>
+                        <td nz-td><a (click)="setSesstion(data.Status,data.TaskId)" [routerLink]="['waitdecidehomepage',{TaskName: data.TaskName,created:data.created,EndDate:data.EndDate,TaskId:data.TaskId}]">{{data.Grades}}</a></td>
+
+                        <td nz-td>
+                            <a (click)="setSesstion(data.Status,data.TaskId)" [routerLink]="['waitdecidehomepage',{TaskName: data.TaskName,created:data.created,EndDate:data.EndDate,TaskId:data.TaskId}]">
+                                <span *ngIf="data.Status == '2'">已关闭</span>
+                                <span *ngIf="data.Status == '3'">进行中</span>
+                                <span *ngIf="data.Status == '4'">已结束</span>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+        </nz-table>
+
+    </div>
+
+
+
+</div>
+

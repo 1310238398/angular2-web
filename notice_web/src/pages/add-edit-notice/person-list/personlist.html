@@ -1,0 +1,110 @@
+<!--Create by hanzhendong on 2017/7/24.-->
+
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            手动选择
+        </ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+                <!--<span ion-text>关闭</span>-->
+                <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content no-padding>
+    <ion-row>
+        <ion-col col-7 no-padding>
+            <ion-card>
+                <ion-card-header>
+                    已选择：<span *ngIf='selectedDept'>{{selectedNum||'0'}}人</span><span *ngIf='selectedDept'>，其中有{{selectedDept||''}}个机构（含子机构）</span>
+                </ion-card-header>
+                <!--  {{Contacts|json}} -->
+                <span *ngFor="let Contact of Contacts; let i = index" class="selected" [ngClass]="{roll:Contact.roll}">
+            <span class="box" *ngIf='Contact.dept'>{{Contact.DeptName}}</span>
+                <span class="box" *ngIf='Contact.DeptMember'>{{Contact.Name}}</span>
+                <span class="box" *ngIf='Contact.group'>{{Contact.GroupName}}</span>
+                <span class="box" *ngIf='Contact.groupMember'>{{Contact.Name}}</span>
+                <span class="box" *ngIf='Contact.friend'>{{Contact.Name}}</span>
+                <span class="box" *ngIf='Contact.search'>{{Contact.Name}}</span>
+                <span class="box" *ngIf='Contact.roll'>{{Contact.Name}}</span>
+                <ion-icon class="ml" name="close" (click)='removeContact(Contact)'></ion-icon>
+                </span>
+            </ion-card>
+        </ion-col>
+        <ion-col col-5 no-padding>
+            <div class="container">
+                <ion-row>
+                    <ion-col col-9 class="cuscol">
+                        <ion-searchbar  placeholder="搜索"
+                                       (click)='search($event)' [(ngModel)]="searchValue"></ion-searchbar>
+                    </ion-col>
+                    <ion-col col-3 class="cuscol"><button ion-button class="btn-search" (click)="search($event)">搜索</button></ion-col>
+                </ion-row>
+
+
+                <ol class="breadcrumb" text-right>
+                    <li><a href="#" (click)='back()'>返回到我的名单</a></li>
+                </ol>
+                <ion-tabs *ngIf="!searchFlag" tabsPlacement="top" #contactTabs>
+                    <ion-tab [root]="tab1Root" tabTitle="我的群组"></ion-tab>
+                    <ion-tab [root]="tab2Root" tabTitle="组织机构"></ion-tab>
+                    <ion-tab [root]="tab3Root" tabTitle="我的好友"></ion-tab>
+                </ion-tabs>
+                <div *ngIf="searchFlag">
+                    <ion-item-group *ngIf="(searchItems[0]&&searchItems[0].GroupDatas||[]).length>0">
+                        <ion-item-divider>
+                            <p>我的好友</p>
+                        </ion-item-divider>
+                        <ion-item *ngFor="let item of searchItems[0].GroupDatas" (click)="setContacts(item)">
+                            <img class='avatar' src="/static/headpictures/{{item.BuID}}.jpg-thumb" alt="">
+                            <img class='rengzheng' *ngIf='item.IsAuth' src="assets/image/icon_renzheng_20.png">
+                            <div class="info">
+                                <h2 [innerHTML]="item.Name | keyword:searchValue"></h2>
+                                <p *ngIf="item.SourceDesc">来自：{{item.SourceDesc}}</p>
+                            </div>
+                        </ion-item>
+                    </ion-item-group>
+                    <ion-item-group *ngIf="(searchItems[1]&&searchItems[1].GroupDatas||[]).length>0">
+                        <ion-item-divider>
+                            <p>我的群组</p>
+                        </ion-item-divider>
+                        <ion-item *ngFor="let item of searchItems[1].GroupDatas" (click)="setContacts(item)">
+                            <img class='avatar' src="/static/headpictures/{{item.BuID}}.jpg-thumb" alt="">
+                            <img class='rengzheng' *ngIf='item.IsAuth' src="assets/image/icon_renzheng_20.png">
+                            <div class="info">
+                                <h2 [innerHTML]="item.Name | keyword:searchValue"></h2>
+                                <p *ngIf="item.SourceDesc">来自：{{item.SourceDesc}}</p>
+                            </div>
+                        </ion-item>
+                    </ion-item-group>
+                    <ion-item-group *ngIf="(searchItems[2]&&searchItems[2].GroupDatas||[]).length>0">
+                        <ion-item-divider>
+                            <p>组织机构</p>
+                        </ion-item-divider>
+                        <ion-item *ngFor="let item of searchItems[2].GroupDatas" (click)="setContacts(item)">
+                            <img class='avatar' src="/static/headpictures/{{item.BuID}}.jpg-thumb" alt="">
+                            <img class='rengzheng' *ngIf='item.IsAuth' src="assets/image/icon_renzheng_20.png">
+                            <div class="info">
+                                <h2 [innerHTML]="item.Name | keyword:searchValue"></h2>
+                                <p *ngIf="item.SourceDesc">来自：{{item.SourceDesc}}</p>
+                            </div>
+                        </ion-item>
+                    </ion-item-group>
+                    <div class="nones" *ngIf="searchItems[0].GroupDatas.length <= 0&&searchItems[1].GroupDatas.length <= 0&&searchItems[2].GroupDatas.length <= 0"><img class="noneimg" src="assets/image/kong.png">
+                        <div class="noneFont">暂无更多内容</div>
+                    </div>
+                </div>
+            </div>
+
+        </ion-col>
+    </ion-row>
+</ion-content>
+<ion-footer>
+    <ion-toolbar text-center>
+        <button ion-button class="btn" (click)="onFinish()">确定</button>
+    </ion-toolbar>
+</ion-footer>

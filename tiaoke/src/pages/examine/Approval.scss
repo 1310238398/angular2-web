@@ -1,0 +1,16 @@
+page-approval {
+  .yellow {
+    background-color: #efb262;
+  }
+  .yellow:focus, .yellow:active {
+    background-color: #efb262;
+  }
+  .fontRed,.must{
+    color: red;
+  }
+  input.inpre,textarea.inpre{
+    border: none;
+    margin-left: 16px;
+    width: calc(100% - (16px / 2) - 16px);
+  }
+}

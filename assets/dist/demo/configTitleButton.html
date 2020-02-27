@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>新版configTitleButton</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <script src="../jssdk/antlinker.1.0.9.js"></script>
+    <style type="text/css">
+        .t-center {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .div1 {
+            background-color: yellowgreen;
+            height: 200%;
+        }
+    </style>
+</head>
+
+<body>
+<h2 style="text-align: center">新版configTitleButton</h2>
+<div class="t-center">
+    <button type="button" onclick="showClose(true)">（显示关闭）向下兼容</button>
+</div>
+<div class="t-center">
+    <button type="button" onclick="showClose(false)">（不显示关闭）向下兼容</button>
+</div>
+<div class="t-center">
+    <button type="button" onclick="share()">type设置为分享（share）</button>
+</div>
+<div class="t-center">
+    <button type="button" onclick="getUser()">获取个人信息</button>
+</div>
+<div class="t-center">
+    <button type="button" onclick='icon({
+                name: "功能A",
+    iconUrl: "http://bpic.588ku.com/element_pic/01/51/12/7657457bc514873.jpg"
+    })'>type设置为icon（图标）
+    </button>
+</div>
+<div class="t-center">
+    <button type="button" onclick='icon({name: "分享", icon: "share"})'>type设置为icon（分享）</button>
+</div>
+<div class="t-center">
+    <button type="button" onclick="menu()">type设置为菜单（menu）</button>
+</div>
+<div class="t-center">
+    <button type="button" onclick="empty()">type设置为右上角为空（empty）</button>
+</div>
+
+</body>
+<script>
+
+    function showClose(flag) {
+        antlinker.configTitleButton({
+                showClose: flag,
+                type: 'label', // 可设置的类型为label或者camera或者share或者menu或者empty或icon
+                text: "下一步",
+                success: function () {
+                    console.log('成功调用，showClose：true');
+                    //设置右上角按钮成功
+                },
+                fail: function () {
+                    console.log('调用失败');
+                    // 设置右上角按钮失败
+                },
+                trigger: function () {
+                    console.log('trigger调用');
+                    //点击标题时调用
+                }
+            }
+        );
+    }
+function getUser() {
+   alert(antlinker.universityCode());
+
+}
+    function share() {
+        antlinker.configTitleButton({
+            showClose: true,
+            option:[ 'qq', 'qzone', 'wechat'],
+            type: "share",// 可设置的类型为label或者camera或者share或者menu或者empty或icon
+            shareContent:{
+                title: '标题', // 分享标题
+                desc: '描述', // 分享描述
+                link: '', // 分享链接
+                id: '', // id
+                type: 'lottery', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '' // 如果type是music或video，则要提供数据链接，默认为空
+            },
+            success: function () {
+                console.log('成功调用，type：share');
+                // 设置右上角按钮成功
+            },
+            fail: function () {
+                console.log('调用失败');
+                // 设置右上角按钮失败
+            },
+            trigger: function (option) {
+                antlinker.sharePlatform({
+                    option: ['qq', 'qzone', 'wechat'],
+                    shareContent: {
+                        title: '分享标题标题标题', // 分享标题
+                        desc: '分享描述描述描述', // 分享描述
+                        link: '', // 分享链接
+                        id: '', // id
+                        type: 'cet46query', // 分享类型 cet46query（四六级分享）,music、video或link，不填默认为link
+                        dataUrl: '' // 如果type是music或video，则要提供数据链接，默认为空
+                    },
+                    success: function () {
+                        //设置右上角按钮成功
+                    },
+                    fail: function () {
+                        // 设置右上角按钮失败
+                    }
+                })
+            }
+        });
+    }
+
+    function icon(params) {
+        antlinker.configTitleButton({
+            showClose: true,
+            type: "icon",// 可设置的类型为label或者camera或者share或者menu或者empty或icon
+            content: params, // 这是一组最大值，原生可以根据用户的不同减小这一组值，系统默认的icon依据sdk版本不同变化，目前版本只支持refresh和share
+            success: function () {
+                console.log('成功调用，type：icon');
+                // 设置右上角按钮成功
+            },
+            fail: function () {
+                console.log('调用失败');
+                // 设置右上角按钮失败
+            },
+            trigger: function (option) {
+                alert("点击了", JSON.stringify(option));
+                if (params.icon == 'share') {
+                    antlinker.sharePlatform({
+                        option: ['qq', 'qzone', 'wechat'],
+                        shareContent: {
+                            title: '分享标题标题标题', // 分享标题
+                            desc: '分享描述描述描述', // 分享描述
+                            link: '', // 分享链接
+                            id: '', // id
+                            type: 'cet46query', // 分享类型 cet46query（四六级分享）,music、video或link，不填默认为link
+                            dataUrl: '' // 如果type是music或video，则要提供数据链接，默认为空
+                        },
+                        success: function () {
+                            //设置右上角按钮成功
+                        },
+                        fail: function () {
+                            // 设置右上角按钮失败
+                        }
+                    })
+                }
+            }
+        });
+    }
+
+    function menu() {
+        console.log('menu进入');
+        antlinker.configTitleButton({
+            showClose: true,
+            type: "menu",// 可设置的类型为label或者camera或者share或者menu或者empty或icon
+            menuList: [{
+                name: "功能A",
+                iconUrl: "http://bpic.588ku.com/element_pic/01/51/12/7657457bc514873.jpg"
+            }, {name: "功能B", iconUrl: "http://bpic.588ku.com/element_pic/01/51/11/3157457a865ee10.jpg"}, {
+                name: "分享",
+                iconUrl: "share"
+            }, {name: "刷新", icon: "refresh"}], // 这是一组最大值，原生可以根据用户的不同减小这一组值，系统默认的icon依据sdk版本不同变化，目前版本只支持refresh和share
+            success: function () {
+                console.log('成功调用，type：menu');
+                // 设置右上角按钮成功
+            },
+            fail: function () {
+                console.log('失败调用，type：menu');
+                // 设置右上角按钮失败
+            },
+            trigger: function (option) {
+                console.log('成功调用trigger，type：menu');
+                // 点击调用哪个函数
+                console.log(option.name);
+                alert(option.name);
+                alert(JSON.stringify(option))
+                // 例如点击了“功能A”，传入的option就是功能A
+            }
+        });
+    }
+
+    function empty() {
+        console.log('empty进入');
+        antlinker.configTitleButton({
+            showClose: false,
+            type: "empty",// 可设置的类型为label或者camera或者share或者menu或者empty
+            success: function () {
+                console.log('成功调用，type：empty');
+                // 设置右上角按钮成功
+            },
+            fail: function () {
+                console.log('失败调用，type：empty');
+                // 设置右上角按钮失败
+            }
+        });
+    }
+</script>
+
+</html>

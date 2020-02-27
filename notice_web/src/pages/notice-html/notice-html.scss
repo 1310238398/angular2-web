@@ -1,0 +1,76 @@
+page-notice-html {
+
+      .button-div {
+    //position:relative;
+    //
+    //margin-right: 30px;
+    //width: 225px;
+    //height: 40px;
+    //
+    //
+    //text-align: center;
+    //vertical-align: middle;
+    //float: right;
+
+
+    position:absolute;
+    bottom:0;
+    right:30px;
+    height:60px;
+    // width:170px;
+    //background-color:orange
+
+  }
+
+    .button1 {
+    font-size: 14px;
+    color: #ea9e21;
+    height: 30px;
+    border: solid #ea9e21 1px;
+    border-radius: 4px;
+    margin-right: 20px;
+     width: 120px;
+
+
+  }
+  // .button1:hover {
+  //   color: white;
+  // }
+  .button2 {
+    font-size: 14px;
+    background-color: #ea9e21 !important;
+    color: white;
+    height: 30px;
+    width: 120px;
+
+    border: solid #ea9e21 1px;
+    border-radius: 4px;
+
+  }
+  .hei{
+    max-height: 79%;
+    overflow: auto;
+    .content{
+      margin-left: 10px;
+      margin-bottom: 10px;
+    }
+  }
+    .page-back {
+    position:relative;
+    background-color: #e5e5e5;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+    color: #666666;
+    height: 40px;
+    line-height: 40px; // 能够实现div中的元素垂直剧中
+    width:100%;
+  }
+    button {
+    background-color: transparent;
+    margin-left: 2px;
+    font-size: 14px;
+    color: #666666;
+  }
+}

@@ -1,0 +1,7 @@
+<ion-nav #myNav [root]="rootPage"></ion-nav>
+
+<div class="medigo" *ngIf="disdden" (click)="gotoOrigin()"></div>
+<div class="file-box" *ngIf="disdden">
+    <p class="cont-txt">该宿舍不在您的检查范围内</p>
+    <p class="foot-btn" (click)="gotoOrigin()">确定</p>
+</div>

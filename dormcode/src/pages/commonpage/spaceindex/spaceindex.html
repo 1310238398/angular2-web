@@ -1,0 +1,89 @@
+<ion-content class="index-cont">
+    <div class="head-wrap center">
+        <p class="wain-txt center">
+            <span class="db fn18">{{titleInfo.roomName}}</span>
+            <span class="db fn14">(已住{{titleInfo.OccupiedBedNum}}人 / {{titleInfo.BedNum}}人间)</span>
+        </p>
+    </div>
+    <div *ngIf="userType == 'Staff'" class="center btn-wrap">
+        <ul>
+            <li class="dib head-li center" (click)="memberFunc()">
+                <p><img [src]="memberSrc" alt=""></p>
+                <p class="fn14" [ngStyle]="{'color':pitchType == '1' ? '#FFC103' : '#acacac' }">宿舍成员</p>
+                <p class="mr head-li-h" [ngStyle]="{'background':pitchType == '1' ? '#FFC103' : '' }"></p>
+            </li>
+            <li class="dib head-li head-li-s"></li>
+            <li class="dib head-li center" (click)="healthFunc()">
+                <p><img [src]="healthSrc" alt=""></p>
+                <p class="fn14" [ngStyle]="{'color':pitchType == '2' ? '#FFC103' : '#acacac' }">宿舍卫生</p>
+                <p class="mr head-li-h" [ngStyle]="{'background':pitchType == '2' ? '#FFC103' : '' }"></p>
+            </li>
+            <li class="dib head-li head-li-s"></li>
+            <li class="dib head-li center" (click)="deciplineFunc()">
+                <p><img [src]="deciplineSrc" alt=""></p>
+                <p class="fn14" [ngStyle]="{'color':pitchType == '3' ? '#FFC103' : '#acacac' }">宿舍违纪</p>
+                <p class="mr head-li-h" [ngStyle]="{'background':pitchType == '3' ? '#FFC103' : '' }"></p>
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="userType == 'Staff'">
+        <!-- 宿舍成员 -->
+        <ul *ngIf="pitchType == '1'">
+            <li class="info-cont overh" *ngFor="let items of itemsObj1">
+                <div class="fl">
+                    <img class="user-header" [src]="items.UserIconURL" onerror="this.src='assets/imgs/zhaopian.png'">
+                </div>
+                <div class="fl info-detail">
+                    <span class="db fn14">姓名 : {{items.Name}}</span>
+                    <span class="db fn14">学号 : {{items.UserCode}}</span>
+                    <span class="db fn14">学院 : {{items.AcademyName}}</span>
+                    <span class="db fn14">班级 : {{items.ClassName}}</span>
+                    <span class="db fn14">辅导员 : {{items.Counselor}}</span>
+                </div>
+            </li>
+        </ul>
+        <!-- 宿舍卫生 -->
+        <ul *ngIf="pitchType == '2'">
+            <li class="health-wrap overh" *ngFor="let items of itemsObj2">
+                <span class="dib fn15 fl">{{items.Day}}</span>
+                <span class="dib fn17 fr bold">{{items.CheckResult}}分</span>
+            </li>
+        </ul>
+        <!-- 宿舍违纪 -->
+        <ul *ngIf="pitchType == '3'">
+            <li class="decipline-wrap overh" *ngFor="let items of itemsObj3">
+                <p class="dec-txt fn16 center">{{items.discipline}}</p>
+                <p class="dec-time overh">
+                    <span class="fn14 dib col9b">检查时间 : </span>
+                    <span class="fn14 dib col4a">{{items.day}}</span>
+                </p>
+                <p class="dec-prod overh">
+                    <span class="fn14 dib col9b">没收物品 : </span>
+                    <span class="fn14 dib col4a">{{items.contraband}}</span>
+                </p>
+                <p class="img-wrap overh" *ngIf="items.image.length">
+                    <img [src]="data.path" alt="" *ngFor="let data of items.image;let index=index;" (click)="navPreview({time:false,index:index,items:items.image})">
+                </p>
+            </li>
+        </ul>
+
+        <div class="center" *ngIf="!dataEmpty">
+            <img src="assets/imgs/kong.png" style="margin-top:50px;" alt="">
+            <p style="color:#ACACAC;">记录为空</p>
+        </div>
+
+        <div *ngIf="pitchType != '1'">
+            <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+                <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+                </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+            <div style="text-align: center;color: #8e9093;margin-bottom:15px;" *ngIf="!moreData">我是有底线的！</div>
+        </div>
+    </div>
+</ion-content>
+
+<ion-footer class="footer center" *ngIf="userType == 'Staff' || userType == 'StudentCadres'">
+    <span class="dib fn14" (click)="unBindCode()">二维码解绑</span>
+    <span class="dib fn14" (click)="gotoHistoryRecord()">绑定记录</span>
+</ion-footer>

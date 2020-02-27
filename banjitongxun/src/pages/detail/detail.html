@@ -1,0 +1,29 @@
+<ion-content class="outer-content">
+    <ion-item-group>
+        <ion-list *ngFor="let outter of listitems">
+            <ion-item-divider color="light" class="topa"><span>{{outter.Tag}}</span></ion-item-divider>
+            <ion-list *ngFor="let inner of outter.List">
+                <ion-item class="test" *ngIf="inner.Phone">
+                    <span class="xingm">{{inner.Name}}</span>
+                    <p class="tels">{{inner.Phone}}</p>
+                    <ion-icon item-right class="telll" (click)="callPhone(inner)"></ion-icon>
+                    <!-- <ion-icon item-right name="ios-call" class="circle" color="primary" (click)="callPhone(item);$event.stopPropagation()"></ion-icon> -->
+
+
+                </ion-item>
+                <ion-item *ngIf="!inner.Phone">
+                    <span class="xingming">{{inner.Name}}</span>
+                    <p class="ntel">未认证用户</p>
+                    <ion-icon item-right class="tess"></ion-icon>
+                    <!-- <ion-icon item-right name="ios-call" class="circle" color="nprimary"></ion-icon> -->
+
+                </ion-item>
+            </ion-list>
+        </ion-list>
+    </ion-item-group>
+    <div class="foot" *ngIf="listitems.length > 0">
+        <p (click)="onDetailPage()">
+            如何修改？
+        </p>
+    </div>
+</ion-content>

@@ -1,0 +1,27 @@
+<ion-content padding>
+    <ion-list>
+        <ion-item *ngFor="let notice of notices" >
+
+            <div class = "listitem" (click)="gotoDetail(notice)">
+
+                <div class="listtitle">
+                    <span  *ngIf="notice.STATUS === '0'" class="savetip">
+                         <img src="assets/image/编辑.png"/>
+                    </span>
+                    {{notice.MUSTTITLE}}
+                    <img src="assets/image/附件.png" style="margin-left: 10px;"
+                    [hidden]="notice.ATTACHMENTS.length === 0 ? true : false"/>
+                </div>
+                <div >
+                    <!--<span  *ngIf="notice.STATUS === '0'" class="savetip">已保存</span>
+                    <span *ngIf="notice.STATUS === '1'" class="pubtip">已发布</span>-->
+                    <span class = "listtime">{{fomateDate(notice.MUSTTIME)}}</span>
+                </div>
+            </div>
+        </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>

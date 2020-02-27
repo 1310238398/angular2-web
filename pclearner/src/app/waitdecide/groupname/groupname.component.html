@@ -1,0 +1,50 @@
+<div class="content">
+
+    <!-- <p class="fn14 center">公示说明：各班小组评议成员将在学生的班级空间/群聊的班级公告/群公告中公示，公示2天后方可进行辅导员认定工作，公示后若进行修改需要在原公示时间上增加一天。</p> -->
+
+    <p class="fn16 center bold" style="margin:20px 0;">{{TaskName}}</p>
+    <div class="form-cont overh mr">
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="overh">
+
+            <div class="relative" style="width: 540px;">
+                <textarea class='file-message' [disabled]="trueOrf" #text name="NoticeTitle" [(ngModel)]="searchObj.NoticeTitle" (ngModelChange)="txtChange1(text.value)"
+                    maxlength="30" cols="1" rows="1" (keydown)="checkEnter($event)" PlaceHolder="请输入群公告标题"></textarea>
+                <p class="file-num absolute">{{values}}</p>
+            </div>
+
+            <div style="margin-top:15px;">
+                <div class="relative" style="width: 540px;">
+                    <textarea class='speak-message' [disabled]="trueOrf" #textarea name="Note" placeholder="拟进行小组评议的成员名单为:" [(ngModel)]="searchObj.Personnel" (ngModelChange)="txtChange2(textarea.value)"
+                        maxlength="100" cols="1" rows="1"></textarea>
+                    <p class="file-num2 absolute">{{values2}}</p>
+                </div>
+            </div>
+
+            <div style="width: 540px;" class="center footer-btn">
+                <a [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: ClassCode,Status:'0',RecognitionLevel:'0',TaskName: TaskName,StartDate:StartDate,EndDate:EndDate}]">
+                    <button nz-button [nzType]="'default'">
+                        <span>返回</span>
+                    </button>
+                </a>
+
+                <button *ngIf="!trueOrf" nz-button [nzType]="'primary'" (click)="showModal()">
+                    <span>公示</span>
+                </button>
+                
+                <button *ngIf="trueOrf" [disabled]="bandChange" nz-button [nzType]="'primary'" (click)="changeModal()">
+                    <span>修改</span>
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+
+    <nz-modal [nzVisible]="isVisible" [nzTitle]="'公示小组评议成员'" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)">
+        <ng-template #modalContent>
+            <p>点击公示后，会将公示信息推送给班级内的所有学生，公示后方可对学生进行公示，确定要进行公示吗？</p>
+        </ng-template>
+    </nz-modal>
+
+
+</div>

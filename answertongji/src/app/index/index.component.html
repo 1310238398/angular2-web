@@ -1,0 +1,33 @@
+<div class="content">
+    <div class="title base text-center font26">答题闯关</div>
+    <div class="outer table-center">
+        <nz-table class="table-center" #nzTable  [nzLoading]="loading" [nzShowPagination]="false" [nzData]="dataSet" [nzBordered]="true">
+            <thead nz-thead>
+                <tr>
+                    <th rowspan="2"><span>题目编号</span></th>
+                    <th rowspan="2"><span>发布时间</span></th>
+                    <th rowspan="2"><span>题库标题</span></th>
+                    <th rowspan="2"><span>抽取题目数量</span></th>
+                    <th [attr.colspan]="gradeArr.length"><span>完成进度</span></th>
+                </tr>
+                <tr>
+                    <th *ngFor="let gr of gradeArr"><span>{{gr}}级</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of nzTable.data">
+                    <td>{{data.QBID}}</td>
+                    <td>{{data.PUBLISHTIME|stringTime}}</td>
+                    <td>{{data.QBTITLE}}</td>
+                    <td>{{data.RANDOMCOUNT}}</td>
+                    <td *ngFor="let grade of gradeArr;let index=index">
+                        <a (click)="navAcademy(data.QBID,gradeArr[index],data.QBTITLE)">
+                            <div>{{data.GradeList[grade]||0|gradePercent:gradeAllCount[gradeArr[index]]}}%</div>
+                            <div>({{data.GradeList[grade]||0}}/{{gradeAllCount[gradeArr[index]]}})</div>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>

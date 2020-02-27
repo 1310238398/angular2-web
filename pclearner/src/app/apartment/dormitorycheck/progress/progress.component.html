@@ -1,0 +1,20 @@
+<div class="content">
+  <div class="title">
+    <span class="heading"> {{title.TaskName}}</span>
+    <span class="time">起止时间:{{ title.StartDate | date :'yyyy-MM-dd' }}至{{ title.EndDate | date :'yyyy-MM-dd' }}</span>
+  </div>
+  <div class="condition_btn">
+    <ul nz-menu [nzMode]="'horizontal'">
+      <li nz-menu-item nzDisabled class="ant-menu-item ant-menu-item-selected">
+        <a class="dorm" [routerLink]="['/dormitorycheck/progress',{taskId:taskId}]" routerLinkActive="active">按人员</a>
+      </li>
+      <li nz-menu-item>
+        <a class="dorm" [routerLink]="['/dormitorycheck/progress/dorm',{params:taskId}]" routerLinkActive="active">按宿舍</a>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

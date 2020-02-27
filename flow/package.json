@@ -1,0 +1,22 @@
+{
+  "name": "flow-app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "工作流平台移动端",
+  "scripts": {
+    "build": "stencil build",
+    "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\" ",
+    "serve": "stencil-dev-server",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "@ionic/core": "^4.0.0-alpha.7",
+    "@stencil/core": "^0.9.7",
+    "@stencil/router": "^0.2.1"
+  },
+  "devDependencies": {
+    "@stencil/dev-server": "^0.0.18",
+    "@stencil/utils": "^0.0.4",
+    "tslint": "^5.10.0"
+  }
+}

@@ -1,0 +1,329 @@
+{
+  "title": {
+    "FeedbackCode": 0,
+    "FeedbackText": "成功",
+    "Data": {
+      "agreement": "",
+      "code": "123",
+      "created": "1517394576",
+      "creator": "f9bad7e7-e7f6-11e5-b997-0242c0a80002",
+      "deleted": "0",
+      "deletor": "",
+      "id": "12",
+      "memo": "",
+      "name": "22",
+      "record_id": "9ce29bea-1e6e-401b-897e-ab276621ce5f",
+      "status": "1",
+      "updated": "0",
+      "updator": "",
+      "version": "12"
+    }
+  },
+  "question": [
+    {
+      "name": "你家穷么?",
+      "type": 1,
+      "record_id": "q1",
+      "is_reason": 1,
+      "is_attach": 2,
+      "attach_memo": "",
+      "memo": "备注",
+      "constraints": [
+        {
+          "name": "题目约束名称",
+          "config": "题目约束配置"
+        }
+      ],
+      "options": [
+        {
+          "name": "A 很穷",
+          "record_id": "A",
+          "is_other": 2,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        },
+        {
+          "name": "B 一般穷",
+          "record_id": "B",
+          "is_other": 2,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        },
+        {
+          "name": "C 略穷",
+          "record_id": "C",
+          "is_other": 2,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        },
+        {
+          "name": "D 其他",
+          "record_id": "D",
+          "is_other": 1,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "你家好么?",
+      "type": 2,
+      "is_reason": 1,
+      "is_attach": 1,
+      "record_id": "q2",
+      "attach_memo": "",
+      "memo": "备注",
+      "constraints": [
+        {
+          "name": "题目约束名称",
+          "config": "题目约束配置"
+        }
+      ],
+      "options": [
+        {
+          "name": "A 很好",
+          "record_id": "A",
+          "is_other": 2,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        },
+        {
+          "name": "B 一般好",
+          "record_id": "B",
+          "is_other": 1,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        },
+        {
+          "name": "C 略好",
+          "record_id": "C",
+          "is_other": 1,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        },
+        {
+          "name": "D 不好",
+          "record_id": "D",
+          "is_other": 1,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "你家好么?",
+      "type": 3,
+      "is_reason": 1,
+      "is_attach": 2,
+      "record_id": "q3",
+      "attach_memo": "",
+      "memo": "备注",
+      "constraints": [
+        {
+          "name": "题目约束名称",
+          "config": "题目约束配置"
+        }
+      ],
+      "options": [
+        {
+          "name": "A 很好",
+          "record_id": "A",
+          "is_other": 2,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        },
+        {
+          "name": "B 一般好",
+          "record_id": "B",
+          "is_other": 1,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        },
+        {
+          "name": "C 略好",
+          "record_id": "C",
+          "is_other": 1,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        },
+        {
+          "name": "D 不好",
+          "record_id": "D",
+          "is_other": 1,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "你家好么?",
+      "type": 4,
+      "is_reason": 1,
+      "is_attach": 2,
+      "record_id": "q3",
+      "attach_memo": "",
+      "memo": "备注",
+      "constraints": [
+        {
+          "name": "题目约束名称",
+          "config": "题目约束配置"
+        }
+      ],
+      "options": [
+        {
+          "name": "A 很好",
+          "record_id": "A",
+          "is_other": 2,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        },
+        {
+          "name": "B 一般好",
+          "record_id": "B",
+          "is_other": 1,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        },
+        {
+          "name": "C 略好",
+          "record_id": "C",
+          "is_other": 1,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        },
+        {
+          "name": "D 不好",
+          "record_id": "D",
+          "is_other": 1,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "你家好么?",
+      "type": 5,
+      "is_reason": 1,
+      "is_attach": 2,
+      "record_id": "q3",
+      "attach_memo": "",
+      "memo": "备注",
+      "constraints": [
+        {
+          "name": "题目约束名称",
+          "config": "题目约束配置"
+        }
+      ],
+      "options": [
+        {
+          "name": "A 很好",
+          "record_id": "A",
+          "is_other": 2,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        },
+        {
+          "name": "B 一般好",
+          "record_id": "B",
+          "is_other": 1,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        },
+        {
+          "name": "C 略好",
+          "record_id": "C",
+          "is_other": 1,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        },
+        {
+          "name": "D 不好",
+          "record_id": "D",
+          "is_other": 1,
+          "constraints": [
+            {
+              "name": "选项约束名称",
+              "config": "选项约束配置"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

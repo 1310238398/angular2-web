@@ -1,0 +1,96 @@
+page-OptPage{
+  p{
+    padding: 0;
+    margin: 0;
+    font-size: 20px;
+    line-height: 25px;
+  }
+  .optMod{
+    background-color: #FFF;
+    width: 96%;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .optMod p span{
+    width: 12.5px;
+    height: 25px;
+    display: block;
+    float: left;
+  }
+  .optMod p.depict{
+    font-size: 16px;
+    line-height: 20px;
+    color: #666666;
+    margin-bottom: 15px;
+  }
+  .optMod p.result{
+    width: 100%;
+    margin: 0 auto;
+  }
+  .optMod p.result span:nth-child(1),
+  .optMod p.result span:nth-child(3),
+  .optMod p.result span:nth-child(5),
+  .optMod p.result span:nth-child(7),
+  .optMod p.result span:nth-child(9)
+  {
+    border-right: none;
+    background: url('../assets/images/x_left@2x.png') no-repeat center;
+    background-size:  12.5px  25px;
+  }
+  .optMod p.result span:nth-child(2n){
+    margin-right: 10px;
+    background: url('../assets/images/x_right@2x.png') no-repeat center;
+    border-left: none;
+    background-size: 12.5px 25px;
+  }
+  .optMod p.result span.active{
+    background-color: #ccc;
+  }
+  .optMod p.result span.active:nth-child(1),
+  .optMod p.result span.active:nth-child(3),
+  .optMod p.result span.active:nth-child(5),
+  .optMod p.result span.active:nth-child(7),
+  .optMod p.result span.active:nth-child(9)
+  {
+    background: url('../assets/images/s_left@2x.png') no-repeat center;
+    background-size: 12.5px 25px;
+  }
+  .optMod p.result span.active:nth-child(2n){
+    background: url('../assets/images/s_right@2x.png') no-repeat center;
+    background-size:  12.5px  25px;
+  }
+  .optMod p.result label{
+    float: right;
+    margin-top: 2px;
+    font-size:16px;
+    // color: #f8c067;
+    color:#666666;
+  }
+  .pageBtnDiv {
+    height: 50px;
+    width: 92%;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .pageBtnDiv button {
+    border: none;
+    // background: #e99c34;
+    background:#ffc000;
+    color: #FFF;
+    font-size: 16px;
+    display: block;
+    width: 100%;
+    height: 35px;
+    border-radius: 3px;
+  }
+
+
+
+  .button-inner{
+    color: #ffc000 !important;
+  }
+
+}

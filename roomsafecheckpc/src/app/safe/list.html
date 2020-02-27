@@ -1,0 +1,224 @@
+<div class="room">
+  <nz-card class="mr-20 ml-20 mt-20">
+    <form nz-form>
+      <div nz-row>
+        <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="6">
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">所属学院</nz-form-label>
+            <nz-form-control [nzSm]="18" [nzXs]="24">
+              <nz-select style="width: 100%;" [(ngModel)]="search.academy" name="academy" nzShowSearch nzAllowClear
+                nzPlaceHolder="请选择">
+                <nz-option *ngFor="let academy of academyData" [nzLabel]="academy.Name" [nzValue]="academy.Code"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="6">
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">宿舍楼</nz-form-label>
+            <nz-form-control [nzSm]="18" [nzXs]="24">
+              <nz-select style="width: 100%;" [(ngModel)]="search.dormitory" name="dormitory" (ngModelChange)="dormitoryOnChange($event)"
+                nzShowSearch nzAllowClear nzPlaceHolder="请选择">
+                <nz-option *ngFor="let dorm of dormRoomData" [nzLabel]="dorm.DormitoryName" [nzValue]="dorm.DormitoryCode"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="6">
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">宿舍号</nz-form-label>
+            <nz-form-control [nzSm]="18" [nzXs]="24">
+              <nz-select style="width: 100%;" [(ngModel)]="search.room" name="room" nzShowSearch nzAllowClear
+                nzPlaceHolder="请选择">
+                <nz-option *ngFor="let room of roomData" [nzLabel]="room.RoomName" [nzValue]="room.RoomCode"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="6">
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">检查时间</nz-form-label>
+            <nz-form-control [nzSm]="18" [nzXs]="24">
+              <nz-date-picker style="width:45%;" [nzDisabledDate]="disabledStartDate" nzFormat="yyyy-MM-dd" [(ngModel)]="startDate"
+                name="startDate" nzPlaceHolder="">
+              </nz-date-picker>至
+              <nz-date-picker style="width:45%;" [nzDisabledDate]="disabledEndDate" nzFormat="yyyy-MM-dd" [(ngModel)]="endDate"
+                name="endDate" nzPlaceHolder="">
+              </nz-date-picker>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="6">
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">违纪情况</nz-form-label>
+            <nz-form-control [nzSm]="18" [nzXs]="24">
+              <p class="multiple_select" (click)="showViolationModal()">{{selecedViolationName.join(',')}}</p>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="6">
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">没收物品</nz-form-label>
+            <nz-form-control [nzSm]="18" [nzXs]="24">
+              <p class="multiple_select" (click)="showArticleModal()">{{selecedArticleName.join(',')}}</p>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="24" nzMd="16" nzLg="12">
+          <nz-form-control class="ml-20">
+            <button nz-button nzType="primary" [nzSize]="'small'" style="margin-right: 8px" (click)="searchFunc()">查询</button>
+            <button nz-button nzType="default" [nzSize]="'small'" style="margin-right: 8px" (click)="reset()">重置</button>
+            <button nz-button nzType="primary" [nzSize]="'small'" style="margin-right: 8px" (click)="showViolationManageModal()">违纪关键词管理</button>
+            <button nz-button nzType="primary" [nzSize]="'small'" style="margin-right: 8px" (click)="showAricleManageModal()">没收关键词管理</button>
+          </nz-form-control>
+        </div>
+      </div>
+    </form>
+  </nz-card>
+  <div class="biaoge">
+    <div class="statis_table">
+      <h3>共{{total}}条结果</h3>
+      <nz-table #basicTable [nzData]="dataSet" [nzFrontPagination]="false" [nzTotal]="total" [nzPageIndex]="pageIndex"
+        [nzPageSize]="pageSize" [nzShowPagination]="true" (nzPageIndexChange)="getUnSafeListPageChange($event)"
+        [nzLoading]='loading'>
+        <!-- <nz-table #basicTable [nzData]="dataSet" [nzTotal]="total" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" > -->
+        <thead>
+          <tr>
+            <th></th>
+            <th>序号</th>
+            <th>所属学院</th>
+            <th>宿舍/区域</th>
+            <th>检查时间</th>
+            <th>检查人</th>
+            <th nzWidth="20%">违纪情况说明</th>
+            <th nzWidth="20%">没收物品</th>
+            <th>附件</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data;let i=index;">
+            <td style="text-align: center">
+              <a nz-popconfirm nzTitle="确定删除?" (nzOnConfirm)="confirm(data.type,data.RecordId)" (nzOnCancel)="cancel()"
+                nzPlacement="topRight">删除</a>
+            </td>
+            <td>{{i+1}}</td>
+            <td>{{data.AcademyName}}</td>
+            <td>
+              <span *ngIf="data.Type==='1'">{{data.RoomName}}</span>
+              <span *ngIf="data.Type==='2'">{{data.PublicArea}}</span>
+            </td>
+            <td>{{data.Time}}</td>
+            <td>
+              {{data.Operator}}
+            </td>
+            <td>{{data.Discipline}}</td>
+            <td>{{data.ContraBand}}</td>
+            <td>
+              <span *ngIf="data.Enclosure==='noexist'">无附件</span>
+              <a *ngIf="data.Enclosure==='exist'" (click)="showImgs(data,i)">点击查看</a>
+              <ul *ngIf="data.Enclosure==='exist'" class="jq22{{i}}" style="display: none;">
+                <li *ngFor="let url of data.annexData; let ii=index;">
+                  <img id="a{{i}}{{ii}}" (click)="viewBigImg(i)" src="{{url}}">
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+  <nz-modal [(nzVisible)]="isViolationManageVisible" nzTitle="违纪关键词管理" (nzOnCancel)="keyWodsHandleCancel()" [nzFooter]="modalFooters"
+    [nzMaskClosable]="false">
+    <div nz-row>
+      <div nz-col nzMd="4">
+      </div>
+      <div nz-col nzMd="12">
+        <input nz-input placeholder="请输入关键词" maxlength="15" [(ngModel)]="violationKeyWords" name="violationKeyWords"
+          (ngModelChange)="violationKeyWordsOnChange($event)">
+        <p class="error-tips" *ngIf="violationKeyWodsInValid">关键词必填</p>
+        <p class="error-tips" *ngIf="!violationKeyWodsInValid&&violationKeyWords.trim().length>15">最多可输入15个字</p>
+      </div>
+      <div nz-col nzMd="8">
+        <button nz-button nzType="primary" [nzSize]="'small'" class="ml-20" style="margin-top:2px;" (click)="addViolation()">添加</button>
+      </div>
+    </div>
+    <p class="line mt-20"></p>
+    <p class="mt-10">已有关键词：</p>
+    <div class="mt-10 keywords_conent">
+      <span *ngFor="let words of violationData;let i=index;">
+        <a *ngIf="words.Status==='1'" class="keywords2 ghost">{{words.KeyName}}
+          <span (click)="deleteKeyWods('discipline',words.KeyCode,i)" class="close">x</span>
+        </a>
+        <a *ngIf="words.Status==='3'" class="keywords3 ghost3">{{words.KeyName}}
+          <span (click)="relivekKeyWods('discipline',words.KeyCode,i)" class="close">+</span>
+        </a>
+      </span>
+      <ng-template #modalFooters>
+        <!-- <button nz-button nzType="default" (click)="isViolationManageVisible = false">关闭</button> -->
+        <button nz-button nzType="default" (click)="isViolationManageVisible=false">关闭</button>
+      </ng-template>
+    </div>
+  </nz-modal>
+  <nz-modal [(nzVisible)]="isViolationVisible" nzTitle="违纪情况" (nzOnCancel)="violationHandleCancel()" (nzOnOk)="violationleHandleOk()"
+    [nzMaskClosable]="false">
+    <p class="seleced">已选：
+      <a class="keywords2" *ngFor="let words of selecedViolation;let i=index;" (click)="cancleSelectedViolationFunc(i)">{{words.KeyName}}
+        <span class="close">x</span>
+      </a>
+      <a class="ml-10" *ngIf="selecedViolation.length>0" (click)="resetViolation()">重置</a>
+    </p>
+    <p class="line mt-10"></p>
+    <div class="mt-20 keywords_conent">
+      <!-- <a class="keywords2" *ngFor="let words of violationData;let i=index;" (click)="selectedViolationFunc(words,i)">
+      </a> -->
+      <button nz-button nzType="primary" nzGhost *ngFor="let words of violationData;let i=index;" (click)="selectedViolationFunc(words,i)"
+        class="mb-10 mr-10">{{words.KeyName}}</button>
+    </div>
+  </nz-modal>
+  <nz-modal [(nzVisible)]="isArticleManageVisible" nzTitle="没收关键词管理" (nzOnCancel)="isArticleManageVisible=false"
+    [nzFooter]="modalFooter" [nzMaskClosable]="false">
+    <div nz-row>
+      <div nz-col nzMd="4">
+      </div>
+      <div nz-col nzMd="12">
+        <input nz-input placeholder="请输入关键词" maxlength="15" [(ngModel)]="articleKeyWords" name="articleKeyWords"
+          (ngModelChange)="articleKeyWordsOnChange($event)">
+        <p class="error-tips" *ngIf="articleKeyWodsInValid">关键词必填</p>
+        <p class="error-tips" *ngIf="!articleKeyWodsInValid&&articleKeyWords.trim().length>15">最多可输入15个字</p>
+      </div>
+      <div nz-col nzMd="8">
+        <button nz-button nzType="primary" [nzSize]="'small'" class="ml-20" style="margin-top:2px;" (click)="addArticle()">添加</button>
+      </div>
+    </div>
+    <p class="line mt-20"></p>
+    <p class="mt-10">已有关键词：</p>
+    <div class="mt-10 keywords_conent">
+      <span *ngFor="let words of articleData;let i=index;">
+        <a *ngIf="words.Status==='1'" class="keywords2 ghost">{{words.KeyName}}
+          <span (click)="deleteKeyWods('contraband',words.KeyCode,i)" class="close">x</span>
+        </a>
+        <a *ngIf="words.Status==='3'" class="keywords3 ghost3">{{words.KeyName}}
+          <span (click)="relivekKeyWods('contraband',words.KeyCode,i)" class="close">+</span>
+        </a>
+      </span>
+    </div>
+    <ng-template #modalFooter>
+      <button nz-button nzType="default" (click)="isArticleManageVisible=false">关闭</button>
+    </ng-template>
+  </nz-modal>
+  <nz-modal [(nzVisible)]="isArticleVisible" nzTitle="没收物品" (nzOnCancel)="articleHandleCancel()" (nzOnOk)="articleHandleOk()"
+    [nzMaskClosable]="false">
+    <p class="seleced">已选：
+      <a class="keywords2" *ngFor="let words of selecedArticle;let i=index;" (click)="cancleSelectedArticleFunc(i)">{{words.KeyName}}
+        <span class="close">x</span>
+      </a>
+      <a class="ml-10" *ngIf="selecedArticle.length>0" (click)="resetArticle()">重置</a>
+    </p>
+    <p class="line mt-10"></p>
+    <div class="mt-20 keywords_conent">
+      <!-- <a class="keywords2" *ngFor="let words of articleData" (click)="selectedArticleFunc(words)">{{words.KeyName}}
+      </a> -->
+      <button nz-button nzType="primary" nzGhost *ngFor="let words of articleData;let i=index;" (click)="selectedArticleFunc(words,i)"
+        class="mb-10 mr-10">{{words.KeyName}}</button>
+    </div>
+  </nz-modal>

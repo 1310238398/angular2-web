@@ -1,0 +1,184 @@
+:host ::ng-deep html, body {
+  width: 100%;
+  /* height: 100%; */
+  background-color: #fafafa;
+}
+.content{
+    background-color:#fafafa;
+    margin: 0;
+    padding: 16px;
+    /* height: 100%; */
+  }
+  .search-form{
+    background: #ffffff;
+    padding-bottom: 60px;
+  }
+
+:host ::ng-deep .ant-btn-primary {
+    color: #fff;
+    background-color: #ffc000;
+    border-color: #ffc000;
+}
+:host ::ng-deep .ant-select-selection{
+    background-color: #f5f5f5;
+  }
+:host ::ng-deep .ant-input{
+    background-color: #f5f5f5;
+    }
+.btn{
+  background:#ffc000;
+  border-radius:4px;
+  margin-right: 6px;
+
+}
+.btn_reset,.search{
+  width: 60px;
+}
+.btn_new{
+  width: 126px;
+}
+:host ::ng-deep .ant-btn{
+  height: 24px;
+}
+:host ::ng-deep .ant-btn-primary {
+  color: #fff;
+  background-color: #ffc000;
+  border-color: #ffc000;
+}
+
+:host ::ng-deep .ant-btn:hover, .ant-btn:focus, .ant-btn:active, .ant-btn.active {
+  color: #fff;
+  background-color: #ffc000;
+  border-color: #ffc000;
+}
+
+/* 内容 */
+.cont_simple{
+  margin-top: 10px;
+  background: #ffffff;
+}
+.cont_simple .title{
+  font-family:PingFangSC-Regular;
+  font-size:14px;
+  color:#3e3e3e;
+  letter-spacing:0;
+  text-align:left;
+  padding-left: 10px;
+  height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+}
+.cont_simple .jindu{
+  font-family:PingFangSC-Regular;
+  font-size:12px;
+  color:#666666;
+  letter-spacing:0;
+  text-align:left;
+  padding-left: 10px;
+}
+.null{
+  /* height: 100%; */
+}
+.null_img{
+  margin-top: 10%;
+  text-align: center;
+}
+.null_img img{
+  width: 230px;
+  height: 205px;
+}
+.null p{
+  font-family:PingFangSC-Regular;
+  font-size:14px;
+  color:#666666;
+  letter-spacing:0.18px;
+  text-align:center;
+}
+.time{
+  height: 30px;
+  line-height: 30px;
+}
+.time{
+
+  font-family:PingFangSC-Regular;
+  font-size: 12px;
+  color:#acacac;
+  letter-spacing:0;
+}
+.time > span.sub{
+  vertical-align: sub;
+}
+.time > .right{padding-left: 8px;}
+.time > span > img{
+  display: inline-block;
+  padding-top: 2px;
+  width: 14px;
+  height: 16px;
+}
+.cont_simple ._btn{
+  border:1px solid #d5d5d5;
+  border-radius:2px;
+  width:66px;
+  background: white;
+  height:22px;
+  font-family:PingFangSC-Regular;
+  font-size:12px;
+  color:#666666;
+  letter-spacing:0;
+  text-align:center;
+}
+.Btn_More{
+
+   width: 2000px;
+   text-align: center;
+   display: table-cell;
+   vertical-align: middle;
+ }
+.moreBtn{
+  /* display: block; */
+  border: none;
+  border-radius: 2px;
+  width: 114px;
+  height: 26px;
+  font-family: PingFangSC-Regular;
+  letter-spacing: 0;
+  text-align: center;
+  background-color: #fafafa;
+
+  font-family:PingFangSC-Regular;
+  font-size:16px;
+  color:#13a0fa;
+  letter-spacing:0;
+  margin-top: 20px;
+  margin-bottom: 30px;
+
+}
+.endBtn {
+  display: -webkit-inline-box;
+  width: 114px;
+  height: 26px;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #666666;
+  letter-spacing: 0;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+:host ::ng-deep  .ant-progress-status-success .ant-progress-bg {
+  background-color:#fb5f2d;;
+}
+:host ::ng-deep  .ant-progress-bg {
+  background-color: #00cf80;
+}
+:host ::ng-deep .anticon-check-circle:before {
+  /* content: "\e630"; */
+  content: '100%';
+  color: #fb5f2d;
+}
+
+:host ::ng-deep .ant-spin-nested-loading > div > .ant-spin{
+  position: relative;
+}

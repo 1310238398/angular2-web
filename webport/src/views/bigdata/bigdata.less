@@ -1,0 +1,42 @@
+@import "../variable.less";
+html {
+    overflow: hidden;
+}
+
+iframe {
+    overflow: auto;
+}
+
+.pr {
+    background-color: @primary;
+    border: @primary;
+    margin-right: 4px;
+    color:#fff;
+}
+
+.title_card {
+    position: relative;
+    .person {
+        margin-right: 10px;
+        .icon {
+            text-align: left;
+            width: 106px;
+            height: 134px;
+        }
+        .right {
+            text-align: left;
+            margin-left: 8px;
+            div {
+                margin: 2px 0;
+            }
+        }
+    }
+}
+
+.inline_block {
+    display: inline-block;
+    vertical-align: top;
+    .ivu-card {
+        height: 160px;
+    }
+}

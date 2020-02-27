@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>举报用户</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div id="img_modal" class="img_modal" onclick="hidden_modal()">
+            <span>
+                <img id="show_img_big" class="show_img_big" src="" alt="">
+            </span>
+    </div>
+
+    <div class="wrapper">
+        <div class="from-enter">
+            <p class="from-title">请选择(输入)举报该用户的原因：</p>
+            <div class="checkbox-wrapper">
+                <div class="checkbox-center">
+                    <div class="checkbox-center-flex">
+                        <div class="checkbox-center-col">
+                            <input type="checkbox" name="rubbish" id="rubbish" onchange="handelChangge(this, 'rubbish' )">
+                            <label for="rubbish">
+                                <span style="position: relative;">垃圾营销</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-center-col">
+                            <input type="checkbox" name="unrealistic" id="unrealistic" onchange="handelChangge(this, 'unrealistic' )">
+                            <label for="unrealistic">
+                                <span style="position: relative;">不实信息</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="checkbox-center-flex">
+                        <div class="checkbox-center-col">
+                            <input type="checkbox" name="harmful" id="harmful" onchange="handelChangge(this, 'harmful' )">
+                            <label for="harmful">
+                                <span style="position: relative;">有害信息</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-center-col">
+                            <input type="checkbox" name="Illegality" id="Illegality" onchange="handelChangge(this, 'Illegality' )">
+                            <label for="Illegality">
+                                <span style="position: relative;">违法信息</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="checkbox-center-flex">
+                        <div class="checkbox-center-col">
+                            <input type="checkbox" name="obscene" id="obscene" onchange="handelChangge(this, 'obscene' )">
+                            <label for="obscene">
+                                <span style="position: relative;">淫秽色情</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-center-col">
+                            <input type="checkbox" name="attack" id="attack" onchange="handelChangge(this, 'attack' )">
+                            <label for="attack">
+                                <span style="position: relative;">人身攻击我</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="checkbox-center-flex">
+                        <div class="checkbox-center-col">
+                            <input type="checkbox" name="other" id="other" onchange="handelChangge(this, 'other' )">
+                            <label for="other">
+                                <span style="position: relative;">其他</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-center-col">
+                            <!--<input type="checkbox" name="plagiarism" id="plagiarism" onchange="handelChangge(this, 'plagiarism' )">-->
+                            <!--<label for="plagiarism">-->
+                                <!--<span style="position: relative;">抄袭我的内容</span>-->
+                            <!--</label>-->
+                        </div>
+                    </div>
+                </div>
+                <p class="from-title margin-top-20">需要补充举报说明(最多100字)</p>
+                <div>
+                    <textarea name="" id="detailedContent" placeholder="请详细填写，确保举报能够被受理" maxlength="100"></textarea>
+                </div>
+                <p class="from-title margin-top-20">请在此上传相关截图</p>
+                <div class="pic-container" id="pic_wrapper">
+                    <div id="file_add">+</div>
+                    <input type="file" id="file_input" accept="image/png, image/jpeg"/>
+                </div>
+            </div>
+        </div>
+        <div class="submission">
+            <button id="button_submit">提交</button>
+            <p class="submission-desc" style="font-size: 12px;">注意：若举报有误或者恶意举报，平台会进行相关的惩罚封号或者禁言</p>
+        </div>
+    </div>
+    <!-- toast -->
+    <div class="toast-wrap">
+        <span class="toast-msg"></span>
+    </div>
+    <script src="./js/zepto.js"></script>
+    <script src="./js/antlinker.1.0.10.js"></script>
+    <script></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/picUpload.js"></script>
+
+
+</body>
+
+</html>

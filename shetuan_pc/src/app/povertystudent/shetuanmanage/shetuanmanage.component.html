@@ -1,0 +1,400 @@
+<div class="mm">
+    <div nz-row style="height: 100%;">
+        <div nz-col nzXs="24" nzSm="24" nzMd="4" nzLg="4">
+            <div class="icon">
+                <div class="back">
+                    <img *ngIf="!ActivityOne.RecordId" src="assets/images/社团默认头像.png" alt="社团LOGO">
+                    <img *ngIf="ActivityOne.RecordId" [src]="DomS.bypassSecurityTrustUrl(CertifyImg.AttachmentURL)" alt="社团LOGO">
+                </div>
+                <div class="icon-body base font-16">
+                    <h2>{{union.UnionName}}</h2>
+                    <div>属性：{{union.CodeName}}</div>
+
+                    <div>人数：{{Totar}}人</div>
+
+                    <div>指导教师：{{union.StaffName}}<span *ngIf="mtotal > 1">等{{mtotal}}人</span></div>
+
+                    <div>负责人：{{union.StudentName}}<span *ngIf="stotal > 1">等{{stotal}}人</span></div>
+
+                    <div>联系方式：{{union.phone}}</div>
+
+                    <div>创建时间：{{union.Createtime}}</div>
+
+                    <div>社团简介：{{union.UnionInfo}}</div>
+                </div>
+            </div>
+        </div>
+        <!-- 社团成员 -->
+        <div nz-col nzXs="24" nzSm="24" nzMd="18" nzLg="18">
+            <div class="card">
+                <div class="card-chart">
+                    <div class="card-bar">
+                        <span>社团成员</span>
+                        <span>({{Totar}})人</span>
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="IsTeacher != 'Teacher'">
+                    <div class="body-title" style="margin: 20px;">
+                        <button nz-button [nzType]="'primary'" class="button" (click)="showModal()">添加社团负责人</button>
+                    </div>
+                    <nz-modal [nzVisible]="isVisible" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)"
+                        style="height: 300px;">
+                        <ng-template #modalContent>
+                            <form nz-form [formGroup]="validateForm">
+                                <div nz-form-item nz-row>
+                                    <div nz-form-label nz-col [nzSpan]="7">
+                                        <label nz-form-item>学号</label>
+                                    </div>
+                                    <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+                                        <nz-input formControlName="xuehao" [nzType]="'text'" [nzPlaceHolder]="''"
+                                            [nzSize]="'large'" [(ngModel)]="inputShe.xuehao" (ngModelChange)="check($event)">
+                                        </nz-input>
+                                        <div nz-form-explain *ngIf="getFormControl('xuehao').dirty&&getFormControl('xuehao').hasError('required')">请输入学号!</div>
+                                        <div nz-form-explain *ngIf="getFormControl('xuehao').dirty&&getFormControl('xuehao').hasError('expired')">请输入汉字以外!</div>
+                                    </div>
+                                </div>
+                                <div nz-form-item nz-row>
+                                    <div nz-form-label nz-col [nzSpan]="7">
+                                        <label nz-form-item>姓名</label>
+                                    </div>
+                                    <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+                                        <nz-input formControlName="xname" [nzType]="'text'" [nzPlaceHolder]="''"
+                                            [nzSize]="'large'" [(ngModel)]="inputShe.xname">
+                                        </nz-input>
+                                        <div nz-form-explain *ngIf="getFormControl('xname').dirty&&getFormControl('xname').hasError('required')">请输入姓名!</div>
+                                        <div nz-form-explain *ngIf="getFormControl('xname').dirty&&getFormControl('xname').hasError('expired')">名称最多输入10个字符!</div>
+                                    </div>
+                                </div>
+                                <div nz-form-item nz-row>
+                                    <div nz-form-label nz-col [nzSpan]="7">
+                                        <label nz-form-item>角色</label>
+                                    </div>
+                                    <div nz-form-control nz-col [nzSpan]="12">
+                                        <nz-select formControlName="role" [nzSize]="'large'" [nzPlaceHolder]="''"
+                                            [(ngModel)]="inputShe.role">
+                                            <nz-option *ngFor="let option of optionrole" [nzLabel]="option.CodeName"
+                                                [nzValue]="option.Code">
+                                            </nz-option>
+                                        </nz-select>
+                                    </div>
+                                </div>
+                                <div nz-form-item nz-row>
+                                    <div nz-form-label nz-col [nzSpan]="7">
+                                        <label nz-form-item>任职开始时间</label>
+                                    </div>
+                                    <div nz-col [nzSpan]="12" nz-form-control>
+                                        <nz-datepicker formControlName="Start" [nzSize]="'large'" [nzPlaceHolder]="''"
+                                            style="width: 100%;" [(ngModel)]="inputShe.Start" [nzDisabledDate]="_disabledDate"></nz-datepicker>
+                                        <div nz-form-explain *ngIf="getFormControl('Start').dirty&&getFormControl('Start').hasError('required')">请选择时间!</div>
+                                    </div>
+                                </div>
+                                <div nz-form-item nz-row>
+                                    <div nz-form-label nz-col [nzSpan]="7">
+                                        <label nz-form-item>任职结束时间</label>
+                                    </div>
+                                    <div nz-col [nzSpan]="12" nz-form-control>
+                                        <nz-datepicker formControlName="End" [nzSize]="'large'" [nzPlaceHolder]="''"
+                                            style="width: 100%;" [(ngModel)]="inputShe.End" [nzDisabledDate]="_disabledEndDate"></nz-datepicker>
+                                        <div nz-form-explain *ngIf="getFormControl('End').dirty&&getFormControl('End').hasError('required')">请选择时间!</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </ng-template>
+                        <ng-template #modalFooter>
+                            <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="handleCancel($event)">
+                                取消
+                            </button>
+                            <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOk($event)"
+                                [nzLoading]="isConfirmLoading">
+                                确定
+                            </button>
+                        </ng-template>
+                    </nz-modal>
+                    <div style="margin: 20px;">
+                        <nz-table #nzTabler [nzAjaxData]="dataSetr" [nzLoading]="httpService.loading" [nzBordered]="true"
+                            [nzIsPagination]="false">
+                            <thead nz-thead>
+                                <tr>
+                                    <th>
+                                        <span>操作</span>
+                                    </th>
+                                    <th>
+                                        <span>学号</span>
+                                    </th>
+                                    <th>
+                                        <span>姓名</span>
+                                    </th>
+                                    <th>
+                                        <span>性别</span>
+                                    </th>
+                                    <th>
+                                        <span>学院</span>
+                                    </th>
+                                    <th>
+                                        <span>专业</span>
+                                    </th>
+                                    <th>
+                                        <span>年级</span>
+                                    </th>
+                                    <th>
+                                        <span>班级</span>
+                                    </th>
+                                    <th>
+                                        <span>联系方式</span>
+                                    </th>
+                                    <th>
+                                        <span>角色</span>
+                                    </th>
+                                    <th>
+                                        <span>状态</span>
+                                    </th>
+
+                                    <th>
+                                        <span>任职开始时间</span>
+                                    </th>
+
+                                    <th>
+                                        <span>任职结束时间</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody nz-tbody>
+                                <tr nz-tbody-tr *ngFor="let data of nzTabler.data;let i=index;">
+                                    <td nz-td>
+                                        <span *ngIf="editRow!==data.MemberCode">
+                                            <a (click)="edit(data)">编辑</a>
+                                        </span>
+                                        <span *ngIf="editRow!==data.MemberCode">
+                                            <nz-popconfirm [nzTitle]="'确定要删除吗？'" (nzOnConfirm)="delete(data,i)">
+                                                <a nz-popconfirm>删除</a>
+                                            </nz-popconfirm>
+                                            <!-- <a (click)="delete(data,i)">删除</a> -->
+                                        </span>
+                                        <span *ngIf="editRow===data.MemberCode">
+                                            <a (click)="save(data)">保存</a>
+                                            <!-- <span nz-table-divider></span> -->
+                                            <!-- <nz-popconfirm [nzTitle]="'确定要关闭吗？'" (nzOnConfirm)="cancel(data)"> -->
+                                            <a (click)="cancel(data)">取消</a>
+                                            <!-- </nz-popconfirm> -->
+                                        </span>
+                                    </td>
+                                    <td nz-td>{{data.usercode}}</td>
+                                    <td nz-td>{{data.name}}</td>
+                                    <td nz-td>{{data.CodeName}}</td>
+                                    <td nz-td>{{data.AcademyName}}</td>
+                                    <td nz-td>{{data.majorname}}</td>
+                                    <td nz-td>{{data.Grade}}级</td>
+                                    <td nz-td>{{data.classname}}</td>
+                                    <td nz-td>{{data.phone}}</td>
+                                    <td nz-td>
+                                        <span *ngIf="editRow!==data.MemberCode">{{data.role}}</span>
+                                        <span *ngIf="editRow===data.MemberCode">
+                                            <!-- <nz-input [(ngModel)]="tempEditObject[data.MemberCode].role"></nz-input> -->
+                                            <nz-select [nzSize]="'large'" [nzPlaceHolder]="''" [(ngModel)]="tempEditObject[data.MemberCode].code"
+                                                style="width: 100%;">
+                                                <nz-option *ngFor="let option of optionrole" [nzLabel]="option.CodeName"
+                                                    [nzValue]="option.Code">
+                                                </nz-option>
+                                            </nz-select>
+                                        </span>
+                                    </td>
+                                    <td nz-td>
+                                        <span *ngIf="data.Days <= 0">在任</span>
+                                        <span *ngIf="data.Days > 0">已离任</span>
+                                    </td>
+                                    <td nz-td>
+                                        <span *ngIf="editRow!==data.MemberCode">{{data.Starttime}}</span>
+                                        <span *ngIf="editRow===data.MemberCode">
+                                            <!-- <nz-input [(ngModel)]="tempEditObject[data.MemberCode].Starttime"></nz-input> -->
+                                            <nz-datepicker [nzSize]="'large'" [nzPlaceHolder]="''" style="width: 100%;"
+                                                [(ngModel)]="tempEditObject[data.MemberCode].Starttime"></nz-datepicker>
+                                        </span>
+                                    </td>
+                                    <td nz-td>
+                                        <span *ngIf="editRow!==data.MemberCode">{{data.Endtime}}</span>
+                                        <span *ngIf="editRow===data.MemberCode">
+                                            <!-- <nz-input [(ngModel)]="tempEditObject[data.MemberCode].Endtime"></nz-input> -->
+                                            <nz-datepicker [nzSize]="'large'" [nzPlaceHolder]="''" style="width: 100%;"
+                                                [(ngModel)]="tempEditObject[data.MemberCode].Endtime"></nz-datepicker>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </nz-table>
+                    </div>
+                </div>
+
+                <div class="card-body" *ngIf="IsTeacher == 'Teacher'">
+                    <div class="body-title" style="margin: 20px;">
+                        <button nz-button [nzType]="'primary'" class="button" (click)="tshowModal()">添加指导教师</button>
+                    </div>
+                    <nz-modal [nzVisible]="isShow" [nzContent]="modalContent1" [nzFooter]="modalFooter1" (nzOnCancel)="thandleCancel($event)"
+                        style="height: 300px;">
+                        <ng-template #modalContent1>
+                            <form nz-form [formGroup]="validateForm">
+                                <div nz-form-item nz-row>
+                                    <div nz-form-label nz-col [nzSpan]="7">
+                                        <label nz-form-item>姓名</label>
+                                    </div>
+                                    <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+                                        <nz-input formControlName="xname" [nzType]="'text'" [nzPlaceHolder]="''"
+                                            [nzSize]="'large'" [(ngModel)]="inputShe.xname">
+                                        </nz-input>
+                                        <div nz-form-explain *ngIf="getFormControl('xname').dirty&&getFormControl('xname').hasError('required')">请输入姓名!</div>
+                                        <div nz-form-explain *ngIf="getFormControl('xname').dirty&&getFormControl('xname').hasError('expired')">名称最多输入10个字符!</div>
+                                    </div>
+                                </div>
+                                <div nz-form-item nz-row>
+                                    <div nz-form-label nz-col [nzSpan]="7">
+                                        <label nz-form-item>工作单位</label>
+                                    </div>
+                                    <div nz-form-control nz-col [nzSpan]="12">
+                                        <nz-select formControlName="teacherwork" [nzSize]="'large'" [nzPlaceHolder]="''"
+                                            [(ngModel)]="inputShe.teacherwork" (ngModelChange)="tcheck($event)">
+                                            <nz-option *ngFor="let option of optionteacherwork" [nzLabel]="option.DepartmentName"
+                                                [nzValue]="option.DepartmentCode">
+                                            </nz-option>
+                                        </nz-select>
+                                    </div>
+                                </div>
+                                <div nz-form-item nz-row>
+                                    <div nz-form-label nz-col [nzSpan]="7">
+                                        <label nz-form-item>任职开始时间</label>
+                                    </div>
+                                    <div nz-col [nzSpan]="12" nz-form-control>
+                                        <nz-datepicker formControlName="Start" [nzSize]="'large'" [nzPlaceHolder]="''"
+                                            style="width: 100%;" [(ngModel)]="inputShe.Start" [nzDisabledDate]="_disabledDate"></nz-datepicker>
+                                        <div nz-form-explain *ngIf="getFormControl('Start').dirty&&getFormControl('Start').hasError('required')">请选择时间!</div>
+                                    </div>
+                                </div>
+                                <div nz-form-item nz-row>
+                                    <div nz-form-label nz-col [nzSpan]="7">
+                                        <label nz-form-item>任职结束时间</label>
+                                    </div>
+                                    <div nz-col [nzSpan]="12" nz-form-control>
+                                        <nz-datepicker formControlName="End" [nzSize]="'large'" [nzPlaceHolder]="''"
+                                            style="width: 100%;" [(ngModel)]="inputShe.End" [nzDisabledDate]="_disabledEndDate"></nz-datepicker>
+                                        <div nz-form-explain *ngIf="getFormControl('End').dirty&&getFormControl('End').hasError('required')">请选择时间!</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </ng-template>
+                        <ng-template #modalFooter1>
+                            <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="thandleCancel($event)">
+                                取消
+                            </button>
+                            <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="thandleOk($event)"
+                                [nzLoading]="isConfirmLoading">
+                                确定
+                            </button>
+                        </ng-template>
+                    </nz-modal>
+                    <div style="margin: 20px;">
+                        <nz-table #nzTablet [nzAjaxData]="dataSetTeacher" [nzLoading]="httpService.loading"
+                            [nzBordered]="true" [nzIsPagination]="false">
+                            <thead nz-thead>
+                                <tr>
+                                    <th>
+                                        <span>操作</span>
+                                    </th>
+                                    <th>
+                                        <span>校内工号</span>
+                                    </th>
+                                    <th>
+                                        <span>姓名</span>
+                                    </th>
+                                    <th>
+                                        <span>性别</span>
+                                    </th>
+                                    <th>
+                                        <span>工作单位</span>
+                                    </th>
+                                    <th>
+                                        <span>学工类型</span>
+                                    </th>
+                                    <th>
+                                        <span>联系方式</span>
+                                    </th>
+                                    <th>
+                                        <span>状态</span>
+                                    </th>
+
+                                    <th>
+                                        <span>任职开始时间</span>
+                                    </th>
+
+                                    <th>
+                                        <span>任职结束时间</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody nz-tbody>
+                                <tr nz-tbody-tr *ngFor="let data of nzTablet.data;let i=index;">
+                                    <td nz-td>
+                                        <span *ngIf="editRow!==data.MemberCode">
+                                            <a (click)="edit(data)">编辑</a>
+                                        </span>
+                                        <span *ngIf="editRow!==data.MemberCode">
+                                            <nz-popconfirm [nzTitle]="'确定要删除吗？'" (nzOnConfirm)="delete(data,i)">
+                                                <a nz-popconfirm>删除</a>
+                                            </nz-popconfirm>
+                                            <!-- <a (click)="delete(data,i)">删除</a> -->
+                                        </span>
+                                        <span *ngIf="editRow===data.MemberCode">
+                                            <a (click)="save(data)">保存</a>
+                                            <!-- <span nz-table-divider></span> -->
+                                            <!-- <nz-popconfirm [nzTitle]="'确定要关闭吗？'" (nzOnConfirm)="cancel(data)"> -->
+                                            <a (click)="cancel(data)">取消</a>
+                                            <!-- </nz-popconfirm> -->
+                                        </span>
+                                    </td>
+                                    <td nz-td>{{data.UserCode}}</td>
+                                    <td nz-td>{{data.Name}}</td>
+                                    <td nz-td>{{data.SexName}}</td>
+                                    <td nz-td>{{data.DepartmentName}}</td>
+                                    <td nz-td>{{data.StaffTyepName}}</td>
+                                    <td nz-td>{{data.Phone}}</td>
+                                    <td nz-td>
+                                        <span *ngIf="data.Days <= 0">在任</span>
+                                        <span *ngIf="data.Days > 0">已离任</span>
+                                    </td>
+                                    <td nz-td>
+                                        <span *ngIf="editRow!==data.MemberCode">{{data.Starttime}}</span>
+                                        <span *ngIf="editRow===data.MemberCode">
+                                            <!-- <nz-input [(ngModel)]="tempEditObject[data.MemberCode].Starttime"></nz-input> -->
+                                            <nz-datepicker [nzSize]="'large'" [nzPlaceHolder]="''" style="width: 100%;"
+                                                [(ngModel)]="tempEditObject[data.MemberCode].Starttime"></nz-datepicker>
+                                        </span>
+                                    </td>
+                                    <td nz-td>
+                                        <span *ngIf="editRow!==data.MemberCode">{{data.Endtime}}</span>
+                                        <span *ngIf="editRow===data.MemberCode">
+                                            <!-- <nz-input [(ngModel)]="tempEditObject[data.MemberCode].Endtime"></nz-input> -->
+                                            <nz-datepicker [nzSize]="'large'" [nzPlaceHolder]="''" style="width: 100%;"
+                                                [(ngModel)]="tempEditObject[data.MemberCode].Endtime"></nz-datepicker>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </nz-table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<img class="b-cancle" src="assets/images/back.png" (click)="goback()">
+<div class="fixedall">
+    <button nz-button class="fixedBar" (click)="expand()">
+        <i *ngIf="!expand_f" class="anticon anticon-left"></i>
+        <i *ngIf="expand_f" class="anticon anticon-right"></i>
+    </button>
+    <div class="fixedMenu" *ngIf="expand_f">
+        <div class="menu">
+            <div [ngClass]="{'check': item.checked}" class='item base font-12' *ngFor="let item of menus">
+                <a (click)="changeMenu(item)">{{item.name}}</a>
+            </div>
+        </div>
+    </div>
+</div>

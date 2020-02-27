@@ -1,0 +1,57 @@
+<div class="content overh" style="margin-bottom: 30px;">
+    <div class="center" style="margin:20px 0">
+        <h2>家庭情况调查问卷</h2>
+    </div>
+    <div class="overh">
+        <div class="table-left fl overh width100" *ngIf="dataSet1.length">
+            <div style="margin:5px 0">
+                <h3>正式数据</h3>
+            </div>
+            <nz-table #nzTable [nzAjaxData]="dataSet1" [nzLoading]="httpService.loading" [nzBordered]="true" [nzIsPagination]="false">
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th>
+                            <span>题号</span>
+                        </th>
+                        <th nz-th>
+                            <span>题目</span>
+                        </th>
+                        <th nz-th>
+                            <span>答案</span>
+                        </th>
+                        <th nz-th>
+                            <span>权重</span>
+                        </th>
+                        <th nz-th>
+                            <span>附件</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i=index">
+                        <td nz-td>{{i+1}}</td>
+                        <td nz-td>{{data.Topic}}</td>
+                        <td nz-td>
+                            <p style="text-align: left;padding-left:20px;" *ngFor="let dataitem of data.OptionArr;">{{dataitem}}</p>
+                        </td>
+                        <td nz-td>{{data.Weight}}</td>
+                        <td nz-td class="center">
+                            <span *ngIf="data.IsAttach == '1'" class="comm-css" (click)="loadImgYes(data.ResultId,i)">点击查看</span>
+                            <ul *ngIf="data.IsAttach == '1'" class="jqimg{{i}}" style="display: none;">
+                                <li *ngFor="let data of AttachImgYes[i]; let ii=index;">
+                                    <img id="ye{{i}}{{ii}}" (click)="viewBigImgYes(i)" src="{{data.path}}">
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+
+    <p class="center" style="margin-top:20px;">
+        <button nz-button [nzType]="'primary'" (click)="historyBack()" style="width:150px;height:40px;">
+            <span>返回</span>
+        </button>
+    </p>
+</div>

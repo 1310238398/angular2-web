@@ -1,0 +1,29 @@
+.history-item {
+  position: relative;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-bottom: 1px solid rgb(170, 168, 168);
+}
+
+.history-item-title {
+  height: 35px;
+  line-height: 35px;
+  font-size: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.history-item-title-left {
+  float: left;
+}
+
+.history-item-title-right {
+  float: right;
+  font-size: 10px;
+}
+
+.history-item-comment {
+  background-color: #D7D7D7;
+  font-size: 10px;
+  padding: 5px;
+}

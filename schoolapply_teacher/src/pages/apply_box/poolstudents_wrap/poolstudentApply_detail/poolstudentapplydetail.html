@@ -1,0 +1,93 @@
+<ion-content class="index-cont">
+    <div class="head-title-wrap overh">
+        <p class="center fn20">贫困生认定结果审批</p>
+        <p class="center fn12 color60" *ngIf="appStatus == '1'">请在阅览后对该认定结果进行审批</p>
+        <p class="center fn12 color9b">【认定明细信息可在PC端集结号-待认定功能中查看】</p>
+    </div>
+    <!-- 比例统计 -->
+    <div class="head-cont-wrap">
+        <p class="center fn15">{{dataSet.AcademyName}}</p>
+        <p class="center fn15">本次对{{dataSet.GradeNames}}进行的认定</p>
+        <p class="center fn16">总共拟认定<span class="fn24 color60">{{dataSet.NeedSupportStudentTotal}}</span>名贫困生</p>
+        <p class="center fn16">特殊困难<span class="fn24 color60">{{dataSet.HardSeries}}</span>人、困难<span class="fn24 color60">{{dataSet.HardNormal}}</span>人、一般困难<span
+                class="fn24 color60">{{dataSet.HardCommon}}</span>人</p>
+    </div>
+    <!-- 饼图 -->
+    <div class="center echarts-wrap">
+        <p class="center fn15">本次认定范围内各困难等级学生人数及占比如下</p>
+        <div #EchartsContent class="EchartsDiv center mr"></div>
+    </div>
+    <!-- 按年级,教师统计 -->
+    <div class="data-total-wrap" *ngIf="GradeNum || TeacherNum">
+        <!-- 按年级 -->
+        <div class="class-teacher-wrap" *ngIf="GradeNum">
+            <div class="class-title center">
+                <span class="dib fl css-t"></span>
+                <span class="dib fn20 bold">按年级统计</span>
+                <span class="dib fr css-t"></span>
+            </div>
+            <div class="class-cont" *ngFor="let data of dataSet.GradesData;">
+                <p class="center fn15">{{data.GradeName}}级(学生{{data.StudentTotal}}人)</p>
+                <div class="table-wrap">
+                    <p class="center fn14 grade-static">{{data.GradeName}}级拟认定{{data.NeedSupportStudentTotal}}人,占本年级学生的{{data.HardTotal}}%</p>
+                    <p class="table-cont center">
+                        <span class="fn14 dib fl">特殊困难:{{data.HardSeries}}人</span>
+                        <span class="fn14 dib fl">困难:{{data.HardNormal}}人</span>
+                        <span class="fn14 dib fr">一般困难:{{data.HardCommon}}人</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- 教师 -->
+        <div class="class-teacher-wrap" *ngIf="TeacherNum" style="margin-top:25px;">
+            <div class="class-title center">
+                <span class="dib fl css-t"></span>
+                <span class="dib fn20 bold">按教师统计</span>
+                <span class="dib fr css-t"></span>
+            </div>
+            <div class="class-cont" *ngFor="let item of dataSet.CounselorData;">
+                <p class="center fn15">{{item.CounselorName}}老师(带班{{item.StudentTotal}}人)</p>
+                <div class="table-wrap">
+                    <p class="center fn14 grade-static">{{item.CounselorName}}老师拟认定{{item.NeedSupportStudentTotal}}人，占本年级学生的{{item.HardTotal}}%</p>
+                    <p class="table-cont center">
+                        <span class="fn14 dib fl">特殊困难:{{item.HardSeries}}人</span>
+                        <span class="fn14 dib fl">困难:{{item.HardNormal}}人</span>
+                        <span class="fn14 dib fr">一般困难:{{item.HardCommon}}人</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 重点关注信息 -->
+    <div class="weight-info-wrap">
+        <p class="fn18 bold center" style="margin-bottom:20px;">重点关注信息统计</p>
+        <div>
+            <p class="weight-list" *ngFor="let list of dataSet.FocusData;">
+                <span class="dib fl"></span>
+                <span class="dib fl fn15">{{list.FoucsName}}</span>
+                <span class="dib fr fn15">{{list.SutdentNum}}人</span>
+            </p>
+        </div>
+    </div>
+
+    <div class="approve-txt-wrap">
+        <!-- <p class="fn18 color9b" *ngIf="appStatus == '1'">已阅览结束,请进行审批或继续翻看</p> -->
+        <p class="fn16">
+            <span>您的审批意见为 : </span>
+            <span *ngIf="dataSet.status == '2' && dataObj.status == 9" class="fn20 bold" style="margin-left:20px;">审批通过</span>
+            <span *ngIf="dataSet.status == '3' " class="fn20 bold" style="margin-left:20px;">审批不通过</span>
+        </p>
+        <p *ngIf="dataSet.status == '2' && dataObj.status == 9" class="sign-name">
+            <span class="fn14">签字 : </span>
+            <img *ngIf="itemsSrc != ''" style="vertical-align: middle;" [src]="itemsSrc" width="100" height="35">
+        </p>
+        <p *ngIf="dataSet.status == '2' && dataObj.status == 9" class="sign-time">
+            <span class="fn14">时间 : </span>
+            <span class="fn14" style="margin-left:20px;">{{itemsTime}}</span>
+        </p>
+        <p *ngIf="dataSet.status == '3' " style="margin-bottom:40px;">
+            <span class="fn14">原因 : </span>
+            <span class="fn14">{{dataSet.remarktxt}}</span>
+        </p>
+    </div>
+</ion-content>

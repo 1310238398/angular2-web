@@ -1,0 +1,13 @@
+<ion-content class="index-cont">
+    <div class="row-mar overh mr">
+        <div class="row-mar-list left overh">
+            <img class="row-mar-list-img dib fl" [src]="item.src" (click)="NavigationToApplyFrom(item)" *ngFor="let item of dataSet;let i=index;">
+            <div class="row-mar-list more-add fn12 dib fl">
+                <p>&nbsp; 更多申请事务</p>
+                <p>&nbsp; 正在梳理中，</p>
+                <p>&nbsp; 敬请期待... </p>
+            </div>
+        </div>
+    </div>
+</ion-content>
+

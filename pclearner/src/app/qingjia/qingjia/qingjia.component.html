@@ -1,0 +1,113 @@
+<div class="content">
+    <div class="components-table-demo-control-bar">
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-center">
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-input style="width: 120px;" [(ngModel)]="searchObj.UserCode" name="UserCode" [nzPlaceHolder]="'学号'"></nz-input>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-input style="width: 120px;" [(ngModel)]="searchObj.Name" name="Name" [nzPlaceHolder]="'姓名'"></nz-input>
+                </div>
+            </div>
+            <ant-datascope #antScope [(searchObj)]="this.searchObj"></ant-datascope>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [(ngModel)]="searchObj.LeaveType" [nzPlaceHolder]="'请假类型'" [nzShowSearch]="true" name="LeaveType" nzAllowClear>
+                        <nz-option *ngFor="let option of LeaveTypes" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-datepicker style="width: 120px;" [(ngModel)]="searchObj.antStartDate" [nzPlaceHolder]="'请假开始时间'" name="antStartDate"></nz-datepicker>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-datepicker style="width: 120px;" [(ngModel)]="searchObj.antEndDate" [nzPlaceHolder]="'请假结束时间'" name="antEndDate"></nz-datepicker>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [(ngModel)]="searchObj.ApproveStatus" [nzPlaceHolder]="'审批状态'" [nzShowSearch]="true" name="StudentType" nzAllowClear>
+                        <nz-option *ngFor="let option of ApproveStatuss" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-col [nzSpan]="24" style="text-align: right;">
+                    <button nz-button [disabled]="httpService.loading" [nzType]="'primary'" (click)="onSearch(true)">查询</button>
+                    <button nz-button (click)="resetForm(f)">重置</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="text-right">
+            <nz-popconfirm [nzTitle]="'目前只能导出辅导员所管辖的全部学生请假数据，确定要导出吗？'" (nzOnConfirm)="export()">
+                <button [disabled]="isDisabled" nz-popconfirm nz-button [nzType]="'primary'">导出</button>
+            </nz-popconfirm>
+
+        </div>
+    </div>
+    <div class="outer">
+        <nz-table #nzTable class="ab" [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [(nzTotal)]="total" [(nzPageIndex)]="page.Page" [(nzPageSize)]="page.PageSize" [nzBordered]="true" (nzPageIndexChange)="onSearch()">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th class="min90"><span>学号</span></th>
+                    <th nz-th class="min90"><span>姓名</span></th>
+                    <!-- <th nz-th><span>校区</span></th>
+                <th nz-th><span>学院</span></th>
+                <th nz-th><span>专业</span></th>
+                <th nz-th [nzWidth]="'50px'"><span>年级</span></th> -->
+                    <th nz-th class="min100"><span>班级</span></th>
+                    <th nz-th class="min90"><span>请假类型</span></th>
+                    <th nz-th class="min120"><span>开始时间</span></th>
+                    <th nz-th class="min90"><span>开始课次</span></th>
+                    <th nz-th class="min120"><span>结束时间</span></th>
+                    <th nz-th class="min90"><span>结束课次</span></th>
+                    <th nz-th class="min90"><span>共计节次</span></th>
+                    <th nz-th class="min90"><span>外出地点</span></th>
+                    <th nz-th class="min120"><span>详细地址</span></th>
+                    <th nz-th class="min160"><span>紧急联系人</span></th>
+                    <th nz-th class="min90"><span>审批人</span></th>
+                    <th nz-th class="min90"><span>审批状态</span></th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                    <td nz-td>{{data.UserCode}}</td>
+                    <td nz-td>{{data.Name}}</td>
+                    <!-- <td nz-td>{{data.CampusName}}</td>
+                <td nz-td>{{data.AcademyName}}</td>
+                <td nz-td>{{data.MajorName}}</td>
+                <td nz-td>{{data.GradeName}}</td> -->
+                    <td nz-td>{{data.ClassName}}</td>
+                    <td nz-td>{{data.LeaveTypeName}}</td>
+                    <td nz-td>{{data.StartDate}}</td>
+                    <td nz-td>{{data.StartCourse>0?data.StartCourse:''}}</td>
+                    <td nz-td>{{data.EndDate}}</td>
+                    <td nz-td>{{data.EndCourse>0?data.EndCourse:''}}</td>
+                    <td nz-td>{{data.ClassNum}}</td>
+                    <td nz-td>{{data.OutPlaceName}}</td>
+                    <td nz-td>{{data.DetailAddress}}</td>
+                    <td nz-td>{{data.EmergencyPerson}}<span *ngIf="data.EmergencyNumber">（{{data.EmergencyNumber}}</span></td>
+                    <td nz-td>{{data.CounselorName}}</td>
+                    <td nz-td [ngSwitch]="data.ApproveStatus">
+                        <span *ngSwitchCase="'0'" style="color: #0025ff">已取消请假</span>
+                        <span *ngSwitchCase="'1'" style="color: red">待审核</span>
+                        <span *ngSwitchCase="'2'" style="color: red">待销假</span>
+                        <span *ngSwitchCase="'3'" style="color: #0025ff">已销假</span>
+                        <span *ngSwitchCase="'4'" style="color: #0025ff">请假未批准</span>
+                        <span *ngSwitchCase="'5'" style="color: #0025ff">正销假</span>
+                        <span *ngSwitchCase="'6'" style="color: #0025ff">销假未批准</span>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+</div>

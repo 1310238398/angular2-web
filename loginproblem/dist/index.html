@@ -1,0 +1,60 @@
+<!DOCTYPE html><html dir="ltr" lang="en"><head>
+  <meta charset="utf-8">
+  <title>登录遇到问题</title>
+  <meta name="Description" content="Welcome to the Stencil App Starter. You can use this starter to build entire apps all with web components using Stencil!">
+  <meta content="width=device-width, initial-scale=1,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  <meta name="theme-color" content="#16161d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="x-ua-compatible" content="IE=Edge">
+  <script src="assets/js/antlinker.1.0.10.js"></script>
+  <script src="assets/js/md5.min.js"></script>
+  <!-- <script src="assets/js/toast.js"></script> -->
+  <link href="build/app.css" rel="stylesheet">
+  <script src="build/app.js"></script>
+
+
+
+  <link rel="apple-touch-icon" href="assets/icon/icon.png">
+  <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+  <!-- <app-root></app-root> -->
+
+
+  <script>
+    if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+      // auto-unregister service worker during dev mode
+      navigator.serviceWorker.getRegistration().then(function(registration) {
+        if (registration) {
+          registration.unregister().then(function() { location.reload(true) });
+        }
+      });
+    }
+  </script>
+
+
+<script>
+  window.addEventListener('ionToastDidDismiss', function(e){console.log('didDismiss', e)})
+  window.addEventListener('ionToastWillDismiss', function(e){console.log('willDismiss', e)})
+  async function presentToast(position) {
+    const toastController = document.querySelector('ion-toast-controller');
+    await toastController.componentOnReady();
+    const toastElement = await toastController.create({
+      message: 'Hellooo',
+      position,
+      duration: 2000
+    });
+    return await toastElement.present();
+  }
+  async function presentToastWithOptions(opts) {
+    const toastController = document.querySelector('ion-toast-controller');
+    await toastController.componentOnReady();
+    const toastElement = await toastController.create(opts);
+    return await toastElement.present();
+  }
+</script>
+
+
+</body></html>

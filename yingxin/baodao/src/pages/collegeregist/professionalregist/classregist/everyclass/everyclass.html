@@ -1,0 +1,59 @@
+<!--<ion-header>
+    <ion-navbar color="twitter">
+        <ion-title text-center>
+            {{Person.Name}}
+        </ion-title>
+    </ion-navbar>
+</ion-header>-->
+<!-- <ion-header>
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="pet">
+            <ion-segment-button value="puppies">
+                已报到（24）
+            </ion-segment-button>
+            <ion-segment-button value="kittens">
+                未报到（30）
+            </ion-segment-button>
+
+        </ion-segment>
+    </ion-toolbar>
+</ion-header> -->
+<ion-content class="outer-content">
+    <!-- <ion-searchbar (click)="navToSearch();$event.stopPropagation()" placeholder="可搜索新生姓名"></ion-searchbar> -->
+    <div class="seachd">
+        <input readonly="readonly" class="myname" placeholder="可搜索新生姓名" (click)="navToSearch();$event.stopPropagation()" />
+    </div>
+
+    <div style="margin-top: 16px">
+        <div class="classtime">
+            <div>
+                <span>{{class.Class}}报到情况统计</span>
+            </div>
+        </div>
+    </div>
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="pet" class="bg">
+            <ion-segment-button value="puppies">
+                已报到（{{class.CheckInNum}}）
+            </ion-segment-button>
+            <ion-segment-button value="kittens">
+                未报到（{{class.UnCheckInNum}}）
+            </ion-segment-button>
+
+        </ion-segment>
+    </ion-toolbar>
+    <div [ngSwitch]="pet">
+        <div class="manping"><span class="laizi">姓名</span><span class="line6">|</span><span class="laizi1">性别</span><span class="line6">|</span><span class="laizi2">身份证后6位</span><span class="line6">|</span><span class="liazi4">报到时间</span></div>
+        <ion-list *ngSwitchCase="'puppies'">
+            <ion-item *ngFor="let chat of listitems" (click)="NavigationTo(chat)" style="height:40px;">
+                <div class="manpig"><span class="laizi">{{chat.Name}}</span><span class="laizi1">{{chat.Sex}}</span><span class="laizi2">{{chat.IdCard2}}</span><span class="liazi4">{{chat.CheckinTime}}</span></div>
+            </ion-item>
+        </ion-list>
+        <ion-list *ngSwitchCase="'kittens'">
+            <ion-item *ngFor="let chat of items" (click)="NavigationTo(chat)" style="height:40px;">
+                <div class="manpig"><span class="laizi">{{chat.Name}}</span><span class="laizi1">{{chat.Sex}}</span><span class="laizi2">{{chat.IdCard2}}</span><span class="liazi4">--</span></div>
+            </ion-item>
+        </ion-list>
+    </div>
+
+</ion-content>

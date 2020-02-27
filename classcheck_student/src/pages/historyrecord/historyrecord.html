@@ -1,0 +1,52 @@
+<ion-content class="index-cont">
+
+  <div *ngIf="haveClassHis == '1'">
+    <P class="head-title center fn14 overh relative">
+      <span>{{dataPass.dataNowTime}} {{dataPass.weekNowChina}} (第{{dataPass.weekCi}}周)</span>
+      <img class="absolute" (click)="openBox()" style="top:4px;right:15px;" src="assets/images/rili.png" alt="">
+    </P>
+
+    <ion-list no-lines>
+      <div class="overh" *ngFor="let data of dataSet" style="margin-bottom:5px;box-shadow: 0 2px 5px 0 #E3E3E3;">
+        <ion-item style="border-bottom:none!important;" (click)="NavigationTo(data.RecordID,data.IntelUserCode,data.Remark1)">
+          <h2 class="class-title">{{data.CourseName}}</h2>
+          <p>
+            <span class="gray-c">上课时间 : </span>
+            <span class="color4a">{{data.Sections}}</span>
+            <span class="gray-c" style="margin-left:10px;">上课地点 : </span>
+            <span class="color4a">{{data.ClassRoom}}</span>
+          </p>
+          <p item-end class="center">
+            <img class="db mr" src="assets/images/gengduo.png">
+          </p>
+        </ion-item>
+        <p class="fn12 detail-text" style="color: #4A90E2;">{{data.Attendance}}</p>
+      </div>
+
+    </ion-list>
+
+
+    <div class="ssc-ov fixed" *ngIf="hiddenBox" (click)="closeTab()"></div>
+    <div class="rili-box fixed overh" *ngIf="hiddenBox">
+      <p class="rili-box-title fn17 center">本学期考勤日期</p>
+      <div class="maxh">
+        <p class="relative center cont-li" *ngFor="let data of dataArr" (click)="loadToday(data.WeekTime,data.Week,data.Dates,data.WeekChina)">
+          <i *ngIf="data.checkIs == '1'" class="absolute"></i>
+          <span class="fn16">{{data.Dates}} {{data.WeekChina}} (第{{data.WeekTime}}周)</span>
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div *ngIf="haveClassHis == '2'" class="center">
+    <img src="assets/images/kong.png" style="margin-top:50px;" alt="">
+    <p style="color:#ACACAC;">暂无已考勤记录,请先进行考勤</p>
+  </div>
+
+
+
+
+
+</ion-content>

@@ -1,0 +1,75 @@
+<div class="content overh" style="margin-top: 50px;">
+    <!-- 题目 -->
+    <div *ngIf="showCataBox" class="question-box">
+        <nz-table style="width: 100%;" [nzBordered]="true" [nzDataSource]="DataSet" [nzIsPagination]="false">
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of DataSet;let i=index">
+                    <td nz-td *ngIf="data.type == '1' || data.type == '2'">
+                        <span>{{data.name}}</span>
+                    </td>
+                    <td nz-td *ngIf="data.type == '1'">
+                        <nz-radio-group [(ngModel)]="data.topicRadio" style="width: 100%;" (ngModelChange)="changeStyle(data)">
+                            <p class="left padd-left20" *ngFor="let dataitem of data.topicArrow;">
+                                <label nz-radio [nzValue]="dataitem.code" [ngClass]="dataitem.fontCss">
+                                    <span>{{dataitem.title}}</span>
+                                </label>
+                            </p>
+                        </nz-radio-group>
+                    </td>
+                    <td nz-td *ngIf="data.type == '2'" style="width:50%;">
+                        <p class="left padd-left20" *ngFor="let dataitem of data.topicArrow;">
+                            <label nz-checkbox [(ngModel)]="dataitem.checked" (ngModelChange)="changeStyle(data)" [ngClass]="dataitem.fontCss">
+                                <span>{{dataitem.title}}</span>
+                            </label>
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+        <div class="center" style="margin:30px 0 0;">
+            <button nz-button [nzType]="'default'" (click)="historyBack()">
+                <span>返回</span>
+            </button>
+            <button nz-button [nzType]="'primary'" *ngIf="isChange" (click)="overbox()">
+                <span>完成</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 答案 -->
+    <div *ngIf="!showCataBox" class="answer-box">
+        <nz-table #nzTable [nzAjaxData]="DataSet" [nzLoading]="httpService.loading" [nzBordered]="true" [nzIsPagination]="false">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>
+                        <span>题目</span>
+                    </th>
+                    <th nz-th>
+                        <span>答案</span>
+                    </th>
+                    <th nz-th>
+                        <span>权重</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data;">
+                    <td nz-td>{{data.name}}</td>
+                    <td nz-td>
+                        <p style="text-align: left;padding-left:20px;" *ngFor="let dataitem of data.topicArrow2;">{{dataitem}}</p>
+                    </td>
+                    <td nz-td>{{data.option_score}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+        <div class="center" style="margin:30px 0 0;">
+            <button nz-button [nzType]="'default'" (click)="historyBack()">
+                <span>返回</span>
+            </button>
+            <button nz-button *ngIf="isChange" [nzType]="'primary'" (click)="changeStatus()">
+                <span>修改</span>
+            </button>
+        </div>
+    </div>
+
+</div>

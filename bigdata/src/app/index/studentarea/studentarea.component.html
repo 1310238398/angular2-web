@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <div class="modal-title">生源地</div>
+</div>
+<form nz-form class="text-center">
+    <nz-form-item>
+        <nz-form-control>
+            <nz-select class="col-w" [nzPlaceHolder]="'省份'" [nzShowSearch]="true" [(ngModel)]="Geography.province" name="province" nzAllowClear (ngModelChange)="cityList(Geography.province)">
+                <nz-option *ngFor="let option of Province" [nzLabel]="option.GeographyName" [nzValue]="option">
+                </nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-control>
+            <nz-select class="col-w" [nzPlaceHolder]="'城市'" [nzShowSearch]="true" [(ngModel)]="Geography.city" name="city" nzAllowClear (ngModelChange)="countryList(Geography.city)">
+                <nz-option *ngFor="let option of City" [nzLabel]="option.GeographyName" [nzValue]="option">
+                </nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-control>
+            <nz-select class="col-w" [nzPlaceHolder]="'县区'" [nzShowSearch]="true" [(ngModel)]="Geography.country" name="country" nzAllowClear>
+                <nz-option *ngFor="let option of County" [nzLabel]="option.GeographyName" [nzValue]="option">
+                </nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <button nz-button (click)='save()'>确定</button>
+
+
+</form>

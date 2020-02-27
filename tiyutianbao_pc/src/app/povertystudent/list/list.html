@@ -1,0 +1,380 @@
+<div class="room">
+  <nz-card class="mr-20 ml-20 mt-20">
+    <ng-template #title>
+      <!-- <button [ngClass]="{'title-content':isshow == 'renshe'}" nz-button (click)="change()">人社厅信息填报</button> -->
+      <span>人社厅信息填报</span>
+      <!-- <button nz-button (click)="cardbodychange()" class="button">教育厅信息填报</button> -->
+    </ng-template>
+    <ng-template #extra>
+      <a [routerLink]="['/guanli']">码表管理</a>
+    </ng-template>
+    <ng-template #body>
+      <form [nzLayout]="'inline'" nz-form>
+        <!-- <div nz-row nzGutter="16">
+        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" [nzLg]="6">
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24">学院</nz-form-label>
+          <nz-form-control [nzSm]="18" [nzXs]="24">
+            <nz-select style="width: 100%;" [(ngModel)]="search.Academy" name="Academy" nzShowSearch nzAllowClear
+              nzPlaceHolder="请选择">
+              <nz-option *ngFor="let academy of academyData" [nzLabel]="academy.AcademyName" [nzValue]="academy"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        </div> -->
+        <div nz-row nz-form-item>
+          <div nz-form-label>
+            <label>填写情况</label>
+          </div>
+          <div nz-form-control>
+            <nz-select style="width: 120px;" [(ngModel)]="search.Daima" name="Daima" nzShowSearch nzAllowClear
+              nzPlaceHolder="请选择">
+              <nz-option *ngFor="let daima of daimaData" [nzLabel]="daima.daimaName" [nzValue]="daima.daimaCode"></nz-option>
+            </nz-select>
+          </div>
+        </div>
+        <!-- <div nz-row nz-form-item>
+          <div nz-form-label>
+            <label>年级</label>
+          </div>
+          <div nz-form-control>
+            <nz-select style="width: 120px;" [(ngModel)]="search.GradeName" name="GradeName" nzShowSearch nzAllowClear
+              nzPlaceHolder="请选择">
+              <nz-option *ngFor="let grade of gradeData" [nzLabel]="grade.GradeName" [nzValue]="grade.GradeName"></nz-option>
+            </nz-select>
+          </div>
+        </div> -->
+        <!-- <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" [nzLg]="6">
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24">年级</nz-form-label>
+          <nz-form-control [nzSm]="18" [nzXs]="24">
+            <nz-select style="width: 100%;" [(ngModel)]="search.GradeName" name="GradeName" nzShowSearch nzAllowClear
+              nzPlaceHolder="请选择">
+              <nz-option *ngFor="let grade of gradeData" [nzLabel]="grade.GradeName" [nzValue]="grade.GradeName"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        </div> -->
+        <!-- <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" [nzLg]="6"> -->
+        <!-- <nz-form-item>
+        <button nz-button nzType="primary" (click)="searchFunc()">查询</button>
+        <button nz-button nzType="primary" (click)="down()" style="margin-left:10px;">导出</button>
+        <button nz-button nzType="primary" (click)="showModal()" style="margin-left:10px;">统计</button>
+      </nz-form-item> -->
+        <div nz-row nz-form-item>
+          <div nz-col [nzSpan]="24" style="text-align: right;">
+            <button nz-button nzType="primary" (click)="searchFunc(true)">查询</button>
+            <button nz-button nzType="primary" (click)="down()" style="margin-left:10px;">导出</button>
+            <!-- <button nz-button nzType="primary" (click)="showModal()" style="margin-left:10px;">统计</button> -->
+          </div>
+        </div>
+      </form>
+
+
+    </ng-template>
+  </nz-card>
+
+  <div class="biaoge" *ngIf="isshow =='renshe'">
+    <div class="statis_table">
+      <nz-table #nzTable [nzAjaxData]="dataSet" [nzLoading]="loading" [(nzTotal)]="total" [(nzPageIndex)]="page.pageIndex"
+        [(nzPageSize)]="page.PageSize" [nzBordered]="true" (nzPageIndexChange)="searchFunc(false)" [nzScroll]="{ x: 11220, y: 340 }">
+        <thead nz-thead>
+          <tr>
+            <th nz-th [nzWidth]="'50px'"><span>操作</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>学号</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>考生号</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>姓名</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>性别</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>性别代码</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>民族</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>民族代码</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>身份证号</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>学历代码</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>专业</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>专业代码</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>培养方式代码</span></th>
+            <th nz-th [nzWidth]="'70px'"><span>生源所在地</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>生源所在地代码</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>学制</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>辅修专业代码</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>出生日期</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>学位</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>主修外语语种</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>外语水平</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>计算机水平</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>入学年份</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>毕业时间</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>委培定向单位</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>委培单位所在地代码</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>学校代码</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>入学方式</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>院系</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>院系代码</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>班级</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>班级代码</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>扩展项1</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>户籍性质</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>职业资格</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>政治面貌</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>政治面貌代码</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>扩展项2</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>扩展项3</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>扩展项4</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>扩展项5</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>扩展项6</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>备注</span></th>
+            <th nz-th [nzWidth]="'70px'"><span>常住详细地址</span></th>
+            <th nz-th [nzWidth]="'70px'"><span>现户籍所在地市区县</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>现户籍所在地市区县代码</span></th>
+            <th nz-th [nzWidth]="'170px'"><span>现户籍所在地乡镇街道办事处</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>现户籍所在地乡镇街道办事处代码</span></th>
+            <th nz-th [nzWidth]="'70px'"><span>现户籍所在地乡镇街道办事处描述</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>现户籍所在地详细（街道门牌号）</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>户籍登记日期</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>家庭常用联系电话</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>专业方向</span></th>
+            <th nz-th [nzWidth]="'50px'"><span>常用微信号</span></th>
+          </tr>
+        </thead>
+        <tbody nz-tbody>
+          <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i=index;">
+            <td nz-td>
+              <span *ngIf="editRow!==data.IntelUserCode">
+                <a (click)="edit(data)">编辑</a>
+              </span>
+              <!-- <span *ngIf="editRow!==data.IntelUserCode">
+                <nz-popconfirm [nzTitle]="'确定要删除吗？'" (nzOnConfirm)="delete(data,i)">
+                  <a nz-popconfirm>删除</a>
+                </nz-popconfirm>
+              </span> -->
+              <span *ngIf="editRow===data.IntelUserCode">
+                <a (click)="save(data)">保存</a>
+                <a (click)="cancel(data)">取消</a>
+              </span>
+            </td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.UserCode}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].UserCode"></nz-input>
+              </span>
+            </td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.CandidateCode}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].CandidateCode"></nz-input>
+              </span>
+            </td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Name}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Name"></nz-input>
+              </span></td>
+            <td nz-td><span>{{data.SexName}}</span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Sex}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Sex"></nz-input>
+              </span></td>
+            <td nz-td><span>{{data.NationalityName}}</span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Nationality}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Nationality"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.IdentityNum}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].IdentityNum"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Education}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Education"></nz-input>
+              </span></td>
+            <td nz-td><span>{{data.MajorName}}</span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Major}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Major"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.TrainingMethod}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].TrainingMethod"></nz-input>
+              </span></td>
+            <td nz-td><span>{{data.SourceLocation}}</span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.SourceLocationCode}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].SourceLocationCode"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.SchoolSystem}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].SchoolSystem"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Minor}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Minor"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Birthday}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-datepicker [nzSize]="'large'" [nzPlaceHolder]="''" style="width: 100%;" [nzFormat]="'YYYY-MM-DD'" [nzAllowClear]="false" [(ngModel)]="tempEditObject[data.IntelUserCode].Birthday">
+                </nz-datepicker>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Bachelor}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Bachelor"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.MajorForeignLanguage}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].MajorForeignLanguage"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.ForeignLanguageLevel}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].ForeignLanguageLevel"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.ComputerLevel}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].ComputerLevel"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.AdmissionTime.slice(0,4)}}{{data.AdmissionTime.slice(5,7)}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-datepicker [nzSize]="'large'" [nzPlaceHolder]="''" style="width: 100%;" [nzFormat]="'YYYYMM'" [nzMode]="'month'" 
+                [nzAllowClear]="false" [(ngModel)]="tempEditObject[data.IntelUserCode].AdmissionTime">
+                </nz-datepicker>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.GraduationTime}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-datepicker [nzSize]="'large'" [nzPlaceHolder]="''" style="width: 100%;" [nzAllowClear]="false" [(ngModel)]="tempEditObject[data.IntelUserCode].GraduationTime">
+                </nz-datepicker>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.CommissioningUnit}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].CommissioningUnit"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.CommissioningLocation}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].CommissioningLocation"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.UniversityCode}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].UniversityCode"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.AdmissionMethod}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].AdmissionMethod"></nz-input>
+              </span></td>
+            <td nz-td><span>{{data.AcademyName}}</span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Academy}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Academy"></nz-input>
+              </span></td>
+            <td nz-td><span>{{data.ClassName}}</span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Class}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Class"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Extension1}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Extension1"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.HouseholdRegistration}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].HouseholdRegistration"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.ProfessionalQualification}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].ProfessionalQualification"></nz-input>
+              </span></td>
+            <td nz-td><span>{{data.PoliticalFaceName}}</span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.PoliticalFace}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].PoliticalFace"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Extension2}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Extension2"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Extension3}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Extension3"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Extension4}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Extension4"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Extension5}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Extension5"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Extension6}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Extension6"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Remarks}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Remarks"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.ResidentAddress}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].ResidentAddress"></nz-input>
+              </span></td>
+            <td nz-td><span>{{data.HouseholdCity}}</span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.HouseholdCityCode}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].HouseholdCityCode"></nz-input>
+              </span></td>
+            <td nz-td><span>{{data.HouseholdCountry}}</span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.HouseholdCountryCode}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].HouseholdCountryCode"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.HouseholdDescription}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].HouseholdDescription"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.HouseholdHouseNumber}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].HouseholdHouseNumber"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.HouseholdRegistrationDate}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-datepicker [nzSize]="'large'" [nzPlaceHolder]="''" style="width: 100%;" [nzAllowClear]="false" [(ngModel)]="tempEditObject[data.IntelUserCode].HouseholdRegistrationDate">
+                </nz-datepicker>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.Phone}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].Phone"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.ProfessionalDirection}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].ProfessionalDirection"></nz-input>
+              </span></td>
+            <td nz-td><span *ngIf="editRow!==data.IntelUserCode">{{data.WeChat}}</span>
+              <span *ngIf="editRow===data.IntelUserCode">
+                <nz-input [(ngModel)]="tempEditObject[data.IntelUserCode].WeChat"></nz-input>
+              </span></td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+
+</div>
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel()">
+  <ng-template #modalTitle>
+    军训服统计
+  </ng-template>
+  <ng-template #modalContent>
+    <div class="modal-conent">
+      <h3><span *ngIf="this.search.Academy">{{this.search.Academy.AcademyName}}</span><span *ngIf="search.GradeName">{{search.GradeName}}年级</span>共有学生{{total}}人，其中男生{{boy}}人，女生{{girl}}人</h3>
+      <p class="color-1890ff">男生服装尺寸统计如下：</p>
+      <p *ngFor="let boys of boycloth"><span class="important-font">{{boys.ClothSize===''?'未知':boys.ClothSize}}</span>：<span
+          class="important-font">{{boys.C}}</span>件</p>
+      <p class="color-1890ff">男生鞋尺寸统计如下：</p>
+      <p *ngFor="let boys of boyfoot"><span class="important-font">{{boys.FootSize==='0'?'未知':boys.FootSize}}</span>：<span
+          class="important-font">{{boys.C}}</span>双</p>
+      <p style="height:10px;"></p>
+      <p class="color-1890ff">女生服装尺寸统计如下：</p>
+      <p *ngFor="let girls of girlcloth"><span class="important-font">{{girls.ClothSize===''?'未知':girls.ClothSize}}</span>：<span
+          class="important-font">{{girls.C}}</span>件</p>
+      <p class="color-1890ff">女生鞋尺寸统计如下：</p>
+      <p *ngFor="let girls of girlfoot"><span class="important-font">{{girls.FootSize==='0'?'未知':girls.FootSize}}</span>：<span
+          class="important-font">{{girls.C}}</span>双</p>
+    </div>
+  </ng-template>
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">关闭</button>
+  </ng-template>
+</nz-modal>

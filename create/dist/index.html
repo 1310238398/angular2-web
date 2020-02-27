@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <meta content="width=device-width, initial-scale=1,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <!--<link href="https://vjs.zencdn.net/7.0.3/video-js.css" rel="stylesheet">-->
+  <link rel="stylesheet" href="./css/main.css">
+  <link id="theme" href="./css/moren.css" rel="stylesheet" type="text/css">
+  <script src="./js/zepto.js"></script>
+  <script src="lib/antlinker.1.0.10.js"></script>
+  <script src="lib/main.js"></script>
+  <script src="./js/necessary.js"></script>
+  <!--<script src="./js/zepto.picLazyLoad.min.js"></script>-->
+  <!--<script src="lib/mock.js"></script>-->
+  <!--<script src="https://vjs.zencdn.net/7.0.3/video.js"></script>-->
+
+</head>
+<body>
+
+<!--<div style="margin: 0px 15px;background-color: red;">-->
+  <!--<video class="video-js vjs-big-play-centered video_test" height="200" playsinline controls preload="auto"-->
+          <!--poster="https://pubdev.xiaoyuanjijiehao.com/attach/article/f34db7ec-c19d-4802-894f-252c7dc41d19/1528438826712127.jpg-thumb" data-setup="{}" onplay="video_play(this)">-->
+    <!--<source src='https://pubdev.xiaoyuanjijiehao.com/attach/article/dc0fe8ab-f9a3-4936-a45e-c4d79fae97a1/1528438826709820.mp4' type='video/mp4'>-->
+    <!--&lt;!&ndash;src="'+ url_head +'/'+ result.Data.Sections[sec_id].VideoURL + '"&ndash;&gt;-->
+    <!--&lt;!&ndash;src="'+ url_head +'/'&ndash;&gt;-->
+    <!--&lt;!&ndash;+ result.Data.Sections[sec_id].VideoURL + '"&ndash;&gt;-->
+  <!--</video>-->
+  <!--<div>sdjaldjaklsdjklsdkldjakldjklasdj</div>-->
+<!--</div>-->
+
+<!--<div style="width: 100%;">-->
+  <div id="body_div" style="" class="all_container">
+
+
+
+    <!--封面容器-->
+    <div id="top_container">
+
+      <div id="topic">
+      </div>
+
+    </div>
+    <!--封面容器部署结束-->
+
+    <!--中间分隔区域-->
+    <!--<div class="middle_container" id="middle_container">-->
+    <!--</div>-->
+    <!--中间分隔区域结束-->
+
+    <!--底部主要内容部分-->
+    <div class="bottom_container">
+      <!--简介内容-->
+      <div id="introduce" class="introduce">
+      </div>
+      <!--分割线-->
+      <div class="fenge" id="fenge">
+      </div>
+
+      <div class="json_content" id="json_content">
+
+      </div>
+      <!--主题背景按钮-->
+        <div class="button_div" id="button_div" onclick="bg_func()">
+          背景
+        </div>
+
+
+    </div>
+    <!--底部主要内容部分结束-->
+
+    <div style="" class="end"><img class="fl xian"  src="./img/zuo.png" alt=""> end <img class="fr xian" src="./img/you.png" alt=""></div>
+
+
+  </div>
+<!--</div>-->
+
+
+<!--横向滑块-->
+<div id="swipe_div_container">
+  <div id="swipe_div">
+    <!--风格控制区域-->
+    <div class="zhuti_bg">主题背景</div>
+    <div class="bg_close" onclick="guanbi()">×</div>
+    <!--风格控制区域结束-->
+    <ul class="flex-layout category-head" id="category-head" style="">
+      <li class="" id="moren.css"><img src="img/bai.png" alt=""></li>
+      <!--<li class="" id="25jpg.css"><img src="img/25.jpg" alt=""></li>-->
+      <!--<li class="" id="26jpg.css"><img src="img/26.jpg" alt=""></li>-->
+      <!--<li class="" id="27jpg.css"><img src="img/27.jpg" alt=""></li>-->
+      <!--<li class="" id="28jpg.css"><img src="img/28.jpg" alt=""></li>-->
+      <!--<li class="" id="29jpg.css"><img src="img/29.jpg" alt=""></li>-->
+      <!--<li class="" id="30jpg.css"><img src="img/30.jpg" alt=""></li>-->
+      <!--<li class="" id="31jpg.css"><img src="img/31.jpg" alt=""></li>-->
+      <!--<li class="" id="32jpg.css"><img src="img/32.jpg" alt=""></li>-->
+      <!--<li class="" id="2png.css"><img src="img/2.png" alt=""></li>-->
+      <li class="" id="6png.css"><img src="./img/6.png" alt=""></li>
+      <li class="" id="7png.css"><img src="./img/7.png" alt=""></li>
+      <!--<li class="" id="10png.css"><img src="./img/10.png" alt=""></li>-->
+      <li class="" id="12png.css"><img src="./img/12.png" alt=""></li>
+      <li class="" id="15png.css"><img src="./img/15.png" alt=""></li>
+      <!--<li class="" id="16png.css"><img src="./img/16.png" alt=""></li>-->
+      <li class="" id="17png.css"><img src="./img/17.png" alt=""></li>
+      <li class="" id="19png.css"><img src="./img/19.png" alt=""></li>
+      <li class="" id="21png.css"><img src="./img/21.png" alt=""></li>
+      <!--新增-->
+      <li class="" id="22png.css"><img src="./img/22.png" alt=""></li>
+      <li class="" id="23png.css"><img src="./img/23.png" alt=""></li>
+      <li class="" id="24png.css"><img src="./img/24.png" alt=""></li>
+    </ul>
+  </div>
+
+</div>
+<!--横向滑块结束-->
+
+<!--<script id="videojs"></script>-->
+<script>
+  var invironment_string = 'ios';
+  var url_head = "https://pstore.xiaoyuanjijiehao.com";
+  var img_SDK_Array = [];
+  $(function() {
+//    获取配置文件
+    antlinker.getInitConfig({
+      success: function(config){
+        //config为初始化的配置参数
+        if(!!config&&config.length>0){
+          console.log("antlinker.getInitConfig ok!");
+          //config为初始化的配置参数
+          for(var i = 0;i< config.length;i++){
+            if (config[i].Key == "Store.Public.Host"){
+              url_head = config[i].Value;
+              break;
+            }
+          }
+        }
+
+        if (antlinker.isiOS) {
+          invironment_string = 'ios';
+        } else{
+          invironment_string = 'android';
+        }
+        console.log(url_head);
+        //请求内容
+        var obj = {};
+//        alert(url_head);
+        setTimeout(function(){
+          antlinker.exeUserBasicInfoSdk(obj,function(obj,success){
+            req_body();
+            bg_func();
+          });
+        },100)
+
+
+      },
+      fail: function(){
+        alert("SDK读取配置文件失败")
+      }
+    })
+  })
+  //    alert("test当前屏幕宽:"+document.body.clientWidth);
+</script>
+
+
+
+
+
+</body>
+
+
+</html>

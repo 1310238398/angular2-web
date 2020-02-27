@@ -1,0 +1,70 @@
+<div class="shetuanform">
+    <form nz-form [formGroup]="validateForm">
+        <div nz-form-item nz-row class="title">
+            <div nz-form-label nz-col [nzSpan]="7">
+                <h1>社团创建（2/2）</h1>
+            </div>
+            <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="7">
+                <label nz-form-item>社长学号</label>
+            </div>
+            <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+                <nz-input formControlName="StudentCode" [nzType]="'text'" [nzPlaceHolder]="''" [nzSize]="'large'"
+                    [(ngModel)]="inputShe.StudentCode" (ngModelChange)="check($event)">
+                </nz-input>
+                <div nz-form-explain *ngIf="getFormControl('StudentCode').dirty&&getFormControl('StudentCode').hasError('required')">请输入负责人学号!</div>
+                <div nz-form-explain *ngIf="getFormControl('StudentCode').dirty&&getFormControl('StudentCode').hasError('expired')">只能输入字母或数字!</div>
+
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="7">
+                <label nz-form-item>社长姓名</label>
+            </div>
+            <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+                <nz-input formControlName="StudentName" [nzType]="'text'" [nzPlaceHolder]="''" [nzSize]="'large'"
+                    [(ngModel)]="outshe.StudentName">
+                </nz-input>
+                <div nz-form-explain *ngIf="getFormControl('StudentName').dirty&&getFormControl('StudentName').hasError('required')">请输入负责人姓名!</div>
+                <div nz-form-explain *ngIf="getFormControl('StudentName').dirty&&getFormControl('StudentName').hasError('expired')">负责人学号与姓名不符!</div>
+
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="7">
+                <label nz-form-item>指导老师</label>
+            </div>
+            <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+                <nz-input formControlName="xname" [nzType]="'text'" [nzPlaceHolder]="''" [nzSize]="'large'" [(ngModel)]="inputShe.xname"
+                    (ngModelChange)="tcheck($event)">
+                </nz-input>
+                <div nz-form-explain *ngIf="getFormControl('xname').dirty&&getFormControl('xname').hasError('required')">请输入姓名!</div>
+                <div nz-form-explain *ngIf="getFormControl('xname').dirty&&getFormControl('xname').hasError('expired')">名称最多输入10个字符!</div>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="7">
+                <label nz-form-item>工作单位</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="12">
+                <nz-select formControlName="teacherwork" [nzSize]="'large'" [nzPlaceHolder]="''" [(ngModel)]="inputShe.teacherwork"
+                    [nzFilter]="true" [nzNotFoundContent]="'无法找到'" nzShowSearch (ngModelChange)="tcheck($event)">
+                    <nz-option *ngFor="let option of optionteacherwork" [nzLabel]="option.DepartmentName" [nzValue]="option.DepartmentCode">
+                    </nz-option>
+                </nz-select>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-col [nzOffset]="7" [nzSpan]="12" nz-form-control>
+                <a>
+                    <button nz-button [nzSize]="'large'" type="button" (click)="gocreate()">上一步</button>
+                </a>
+                <button nz-button [nzType]="'primary'" type="button" [disabled]="subStop" (click)="submitForm($event,validateForm.value)"
+                    [nzSize]="'large'">创建</button>
+            </div>
+        </div>
+    </form>
+</div>

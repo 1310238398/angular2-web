@@ -1,0 +1,131 @@
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {HttpErrorResponse} from '@angular/common/http';
+import {catchError} from 'rxjs/operators';
+import {HttpHeaders} from '@angular/common/http';
+
+@Injectable()
+export class HttpService {
+    private baseUrl = '/api/staff/interface';
+
+    private AccessToken = 'KYEMCV7LN7OFIU8L3RFB4A';
+
+    private _loading = false;
+
+    /** 是否正在加载中 */
+    get loading() {
+        return this._loading;
+    }
+
+    constructor(private httpClient: HttpClient) {
+    }
+
+    responseToJson(resp) {
+        if (resp.type === 'cors') {
+            console.warn('cors请求');
+        }
+        if (resp.ok) {
+            return resp.json() || undefined;
+        } else {
+            this.catchAuthError(resp);
+        }
+    }
+
+    catchAuthError(res) {
+        switch (res.status) {
+            case 200:
+                console.log('200');
+                break;
+            case 401: // 未登录状态码
+                console.warn('401:认证中心错误');
+                break;
+            case 403:
+            case 404:
+            case 500:
+            case 502:
+                console.warn('服务器错误:请检查h5api或后端服务');
+                break;
+            default:
+                if (res instanceof Response) {
+                    const errMsg = `${res.status}:${res.statusText || ''} ${res}`;
+                    console.warn('未可知错误，大部分是由于后端不支持CORS或无效配置引起', errMsg,);
+                }
+                break;
+        }
+        /*    if (res.status === 401 || res.status === 403) {
+          let errMsg;
+          if (res instanceof Response) {
+            let err;
+            try {
+              const body = res.json();
+              err = body;
+            } catch (e) {
+              err = '';
+            }
+            errMsg = `${res.status}:${res.statusText || ''} ${err}`;
+          }
+          console.log(errMsg);
+        } */
+        return Promise.reject(res);
+    }
+
+    private handleError(error: HttpErrorResponse) {
+        if (error.error instanceof ErrorEvent) {
+            console.error('出错了:', error.error.message);
+        } else {
+            console.error(`Backend returned code ${error.status}, ` + `body was: ${error.message}`);
+        }
+        return throwError('Something bad happened; please try again later.');
+    }
+
+    Fetch(params, method = 'POST', url = this.baseUrl) {
+        params.Body = JSON.stringify(params.Body);
+        const init = {
+            method: method,
+            headers: new Headers({
+                'AccessToken': window['__AppWebkey'] || this.AccessToken
+            }),
+            body: JSON.stringify(params)
+        };
+        return fetch(url, init)
+            .then(r => this.responseToJson(r))
+            .catch(this.catchAuthError);
+    }
+
+    POST(url,params): Observable<any> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+            })
+        };
+        return this.httpClient.post <any>(url, params, httpOptions).pipe(catchError(this.handleError));
+    }
+    GET(url,params={}): Observable<any> {
+        return this.httpClient.get <any>(url,params).pipe(catchError(this.handleError));
+    }
+
+    format(time, format) {
+        var date = {
+            "M+": time.getMonth() + 1,
+            "d+": time.getDate(),
+            "h+": time.getHours(),
+            "m+": time.getMinutes(),
+            "s+": time.getSeconds(),
+            "q+": Math.floor((time.getMonth() + 3) / 3),
+            "S+": time.getMilliseconds()
+        };
+        if (/(y+)/i.test(format)) {
+            format = format.replace(RegExp.$1, (time.getFullYear() + '').substr(4 - RegExp.$1.length));
+        }
+        for (var k in date) {
+            if (new RegExp("(" + k + ")").test(format)) {
+                format = format.replace(RegExp.$1, RegExp.$1.length == 1
+                    ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+            }
+        }
+        return format;
+
+    }
+
+}

@@ -1,0 +1,223 @@
+ul,
+li,
+p {
+  margin: 0px;
+  padding: 0px;
+}
+
+.color_4A90E2 {
+  color: #4A90E2;
+}
+.color-1890ff{
+  color: #1890ff
+}
+.colo-13c2c2{
+  color: #13c2c2;
+}
+.room {
+  background: #f8f8f8;
+  width: 100%;
+  height: 100%;
+}
+
+.mr-20 {
+  margin-right: 20px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.ml-20 {
+  margin-left: 20px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+.important-font{
+  font-weight: bold;
+}
+.error-tips {
+  font-size: 12px;
+  color: red;
+}
+.modal-conent{
+  max-height: 300px;
+  overflow-y: auto;
+}
+@media (max-width: 992px) {
+  .un_name {
+    line-height: 20px;
+    padding: 15px 0px;
+    width: 80px;
+  }
+
+  .num_tongji {
+    right: 5px;
+  }
+}
+
+@media (min-width: 992px) and (max-width:1200px) {
+  .num_tongji {
+    right: 70px;
+  }
+}
+
+.biaoge {
+  margin: 20px 20px;
+}
+
+.statis_table {
+  margin-top: 0px;
+  box-shadow: 0 2px 5px 0 #E3E3E3;
+}
+
+:host ::ng-deep .ant-table-body>table {
+  background: #FFFFFF;
+  box-shadow: 0 2px 5px 0 #E3E3E3;
+  border: none;
+  border-width: 0px;
+}
+
+:host ::ng-deep .ant-table {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.65);
+  overflow: hidden;
+  position: relative;
+  border-radius: 0px 4px 0 0;
+}
+
+:host ::ng-deep .ant-table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+  border-radius: 0px 4px 0 0;
+  overflow: hidden;
+}
+
+:host ::ng-deep .ant-table-thead>tr>th {
+  background: #1890ff;
+  opacity: 1;
+  font-weight: 500;
+  transition: background .3s ease;
+  text-align: left;
+  color: #ffffff;
+}
+
+:host ::ng-deep .ant-table-thead>tr>th,
+:host ::ng-deep .ant-table-tbody>tr>td {
+  padding: 8px 8px;
+  word-break: break-all;
+}
+
+:host ::ng-deep .ant-table-thead>tr>th {
+  border-right: 1px solid #ffffff;
+}
+
+:host ::ng-deep .ant-table-tbody>tr>td {
+  border-right: 1px solid #E3E3E3;
+}
+
+:host ::ng-deep .ant-table-tbody>tr>td {
+  border-bottom: 1px solid #E3E3E3;
+  transition: all .3s;
+}
+
+.statis_table .xuhao {
+  background: #4972F0;
+  opacity: 0.4;
+  color: #fff;
+}
+
+:host ::ng-deep .ant-card-body {
+  padding: 10px;
+  zoom: 1;
+}
+
+:host ::ng-deep .ant-form-item {
+  margin: 0 0 8px;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #cccccc;
+}
+
+.seleced {
+  padding-top: 8px;
+  max-height: 130px;
+  overflow: auto;
+}
+
+.keywords {
+  position: relative;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #F5F5F5;
+  font-size: 12px;
+  color: #666666;
+  display: inline-block;
+  margin: 0px 8px 8px 0px;
+}
+
+.keywords2 {
+  position: relative;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #1890ff;
+  font-size: 12px;
+  color: #FFFFFF;
+  display: inline-block;
+  margin: 0px 8px 8px 0px;
+}
+
+.keywords_conent {
+  padding-top: 10px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.close {
+  font-size: 11px;
+  text-align: center;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  border-radius: 50%;
+  background-color: #FB5F2D;
+  color: #fff;
+  top: -5px;
+  right: -5px;
+}
+
+.multiple_select {
+  width: 100%;
+  height: 32px;
+  border-radius: 4px;
+  border: 1px solid #d9d9d9;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 32px;
+  padding: 0px 5px;
+}

@@ -1,0 +1,200 @@
+{
+  "namespace": "App",
+  "fsNamespace": "app",
+  "loader": "../app.js",
+  "global": "app.global.js",
+  "core": "app.xmpglr5v.js",
+  "corePolyfilled": "app.w2uwcw9t.js",
+  "components": {
+    "app-apply-audit": {
+      "$": "izywipki"
+    },
+    "app-apply-back": {
+      "$": "ovnmw1zo"
+    },
+    "app-apply-card": {
+      "$": "zxhzcvd3"
+    },
+    "app-apply-launch": {
+      "$": "nfw5wygk"
+    },
+    "app-done-list": {
+      "ios": "umsspznd",
+      "md": "jj1zoc8w"
+    },
+    "app-flow-list": {
+      "$": "fibboa0v"
+    },
+    "app-history-list": {
+      "$": "4nvx1ljz"
+    },
+    "app-home": {
+      "ios": "umsspznd",
+      "md": "jj1zoc8w"
+    },
+    "app-main": {
+      "md": "d052ndhb",
+      "ios": "lm7qp31v"
+    },
+    "app-scholarship-audit": {
+      "$": "xrz5jp9j"
+    },
+    "app-scholarship-back": {
+      "$": "rhby00gn"
+    },
+    "app-scholarship-launch": {
+      "$": "nmjla2za"
+    },
+    "app-todo-list": {
+      "ios": "umsspznd",
+      "md": "jj1zoc8w"
+    },
+    "ion-alert": {
+      "md": "d052ndhb",
+      "ios": "lm7qp31v"
+    },
+    "ion-alert-controller": {
+      "md": "d052ndhb",
+      "ios": "lm7qp31v"
+    },
+    "ion-animation-controller": {
+      "md": "mny1cykc",
+      "ios": "qobbug2b"
+    },
+    "ion-app": {
+      "md": "y26fydl8",
+      "ios": "huif6zju"
+    },
+    "ion-backdrop": {
+      "md": "mny1cykc",
+      "ios": "qobbug2b"
+    },
+    "ion-badge": {
+      "ios": "umsspznd",
+      "md": "jj1zoc8w"
+    },
+    "ion-button": {
+      "ios": "0hlqac1d",
+      "md": "cn9mg1ch"
+    },
+    "ion-content": {
+      "ios": "umsspznd",
+      "md": "jj1zoc8w"
+    },
+    "ion-datetime": {
+      "ios": "0hlqac1d",
+      "md": "cn9mg1ch"
+    },
+    "ion-fab-button": {
+      "ios": "umsspznd",
+      "md": "jj1zoc8w"
+    },
+    "ion-gesture": {
+      "ios": "0hlqac1d",
+      "md": "cn9mg1ch"
+    },
+    "ion-gesture-controller": {
+      "ios": "0hlqac1d",
+      "md": "cn9mg1ch"
+    },
+    "ion-icon": {
+      "ios": "umsspznd",
+      "md": "jj1zoc8w"
+    },
+    "ion-infinite-scroll": {
+      "ios": "umsspznd",
+      "md": "jj1zoc8w"
+    },
+    "ion-infinite-scroll-content": {
+      "ios": "umsspznd",
+      "md": "jj1zoc8w"
+    },
+    "ion-input": {
+      "ios": "0hlqac1d",
+      "md": "cn9mg1ch"
+    },
+    "ion-item": {
+      "ios": "0hlqac1d",
+      "md": "cn9mg1ch"
+    },
+    "ion-label": {
+      "ios": "0hlqac1d",
+      "md": "cn9mg1ch"
+    },
+    "ion-list": {
+      "ios": "0hlqac1d",
+      "md": "cn9mg1ch"
+    },
+    "ion-list-header": {
+      "ios": "0hlqac1d",
+      "md": "cn9mg1ch"
+    },
+    "ion-loading": {
+      "md": "d052ndhb",
+      "ios": "lm7qp31v"
+    },
+    "ion-loading-controller": {
+      "md": "d052ndhb",
+      "ios": "lm7qp31v"
+    },
+    "ion-picker": {
+      "ios": "0hlqac1d",
+      "md": "cn9mg1ch"
+    },
+    "ion-picker-column": {
+      "ios": "0hlqac1d",
+      "md": "cn9mg1ch"
+    },
+    "ion-picker-controller": {
+      "ios": "0hlqac1d",
+      "md": "cn9mg1ch"
+    },
+    "ion-ripple-effect": {
+      "$": "vkwqagaj"
+    },
+    "ion-scroll": {
+      "ios": "umsspznd",
+      "md": "jj1zoc8w"
+    },
+    "ion-segment": {
+      "ios": "umsspznd",
+      "md": "jj1zoc8w"
+    },
+    "ion-segment-button": {
+      "ios": "umsspznd",
+      "md": "jj1zoc8w"
+    },
+    "ion-spinner": {
+      "ios": "ezqkzzmj",
+      "md": "ozblu3yt"
+    },
+    "ion-status-tap": {
+      "md": "y26fydl8",
+      "ios": "huif6zju"
+    },
+    "ion-tap-click": {
+      "md": "y26fydl8",
+      "ios": "huif6zju"
+    },
+    "ion-textarea": {
+      "ios": "0hlqac1d",
+      "md": "cn9mg1ch"
+    },
+    "ion-title": {
+      "ios": "0hlqac1d",
+      "md": "cn9mg1ch"
+    },
+    "stencil-route": {
+      "md": "d052ndhb",
+      "ios": "lm7qp31v"
+    },
+    "stencil-route-link": {
+      "ios": "umsspznd",
+      "md": "jj1zoc8w"
+    },
+    "stencil-router": {
+      "md": "d052ndhb",
+      "ios": "lm7qp31v"
+    }
+  }
+}

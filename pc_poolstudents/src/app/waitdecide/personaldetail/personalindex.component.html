@@ -1,0 +1,258 @@
+<div class="content personal-one">
+    <div *ngIf="userIdentity != 'FundCenter'">
+        <nz-table #nzTable [nzAjaxData]="dataSet" [nzBordered]="true" [nzIsPagination]="false">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>
+                        <span>学号</span>
+                    </th>
+                    <th nz-th>
+                        <span>姓名</span>
+                    </th>
+                    <th nz-th class="weight-txt">
+                        <span>重点关注信息</span>
+                    </th>
+                    <th nz-th>
+                        <span>申请所需资料</span>
+                    </th>
+                    <th nz-th>
+                        <span>家庭情况调查问卷</span>
+                    </th>
+                    <th nz-th>
+                        <span>学生自评调查问卷</span>
+                    </th>
+                    <th nz-th>
+                        <span>辅导员认定意见</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span>小组评议</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span>合计分数</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status != '42'">
+                        <span>认定等级</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status == '41' || pageDetail.Status == '42'">
+                        <span>审批意见</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="center table-one">
+                <tr nz-tbody-tr style="height:40px;">
+                    <td nz-td>{{dataSet.UserCode}}</td>
+                    <td nz-td>{{dataSet.Name}}</td>
+                    <td nz-td>{{dataSet.Focus}}</td>
+                    <td nz-td [ngClass]="pageDetail.categray == '1'?'bgc':''">
+                        <span *ngIf="dataSet.IsAttach == '1'" class="comm-css" (click)="categrayChange(1)">
+                            查看
+                        </span>
+                    </td>
+                    <td nz-td [ngClass]="pageDetail.categray == '2'?'bgc':''">
+                        <span *ngIf="dataSet.EnconomicScore != ''" class="comm-css" (click)="categrayChange(2)">
+                            {{dataSet.EnconomicScore}}分
+                        </span>
+                    </td>
+                    <td nz-td [ngClass]="pageDetail.categray == '3'?'bgc':''">
+                        <span *ngIf="dataSet.SelfAssessmentScore != ''" class="comm-css" (click)="categrayChange(3)">
+                            {{dataSet.SelfAssessmentScore}}分
+                        </span>
+                    </td>
+                    <!-- 辅导员认定意见 -->
+                    <td nz-td [ngClass]="pageDetail.categray == '4'?'bgc':''">
+                        <span *ngIf="dataSet.Status == '41' && dataSet.SchoolAttitude != '2'" class="comm-css" (click)="categrayChange(4)">直接认定</span>
+                        <span *ngIf="dataSet.Status == '42' && dataSet.SchoolAttitude != '2'" class="comm-css" (click)="categrayChange(4)">一票否决</span>
+                        <span *ngIf="dataSet.Status == '43'" class="comm-css" (click)="categrayChange(4)">小组评议</span>
+                        <span *ngIf="dataSet.Status != '41' && dataSet.Status != '42' && dataSet.Status != '43' && isChange" class="comm-css" (click)="categrayChange(4)">点击认定</span>
+                        <span *ngIf="dataSet.SchoolAttitude == '2'" class="comm-css" (click)="categrayChange(4)">点击重新认定</span>
+                    </td>
+                    <!-- 小组评议 -->
+                    <td nz-td [ngClass]="pageDetail.categray == '5'?'bgc':''" *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span *ngIf="dataSet.EliberateScore != ''" (click)="categrayChange(5)" class="comm-css">
+                            {{dataSet.EliberateScore}}分
+                        </span>
+                        <span *ngIf="dataSet.EliberateScore == '' && isChange && (dataSet.Status == '41' || dataSet.Status == '42' || dataSet.Status == '43')" (click)="categrayChange(5)" class="comm-css">
+                            点击录入
+                        </span>
+                    </td>
+                    <!-- 合计分数 -->
+                    <td nz-td *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span *ngIf="dataSet.EnconomicScore != '' && dataSet.SelfAssessmentScore != '' && dataSet.EliberateScore != ''">
+                            {{((dataSet.EnconomicScore*5 + dataSet.SelfAssessmentScore*2 + dataSet.EliberateScore*3)/10).toFixed(2)}}分
+                        </span>
+                        <span *ngIf="dataSet.EnconomicScore == '' && dataSet.SelfAssessmentScore == '' && dataSet.EliberateScore != ''">
+                            {{((dataSet.EliberateScore*3)/10).toFixed(2)}}分
+                        </span>
+                    </td>
+                    <!-- 认定等级 -->
+                    <td nz-td [ngClass]="pageDetail.categray == '6'?'bgc':''" *ngIf="pageDetail.Status != '42'">
+
+                        <!-- 直接认定 -->
+                        <span *ngIf="pageDetail.Status == '41' && pageDetail.RecognitionLevel == ''">
+                            <label *ngIf="dataSet.RecognitionLevel == '87000010'">一般困难</label>
+                            <label *ngIf="dataSet.RecognitionLevel == '87000020'">困难</label>
+                            <label *ngIf="dataSet.RecognitionLevel == '87000030'">特殊困难</label>
+                            <label *ngIf="dataSet.RecognitionLevel == '87000040'">不予评级</label>
+                        </span>
+                        <!-- 小组评议 -->
+                        <span *ngIf="pageDetail.Status == '43'">
+                            <label *ngIf="isChange && dataSet.RecognitionLevel == '1' && dataSet.EliberateScore != ''" (click)="tankbox(dataSet)" class="cp color10">点击认定</label>
+                            <label *ngIf="isChange && dataSet.RecognitionLevel == '87000010'" (click)="tankbox(dataSet)" class="cp color10">一般困难</label>
+                            <label *ngIf="!isChange && dataSet.RecognitionLevel == '87000010'">一般困难</label>
+
+                            <label *ngIf="isChange && dataSet.RecognitionLevel == '87000020'" (click)="tankbox(dataSet)" class="cp color10">困难</label>
+                            <label *ngIf="!isChange && dataSet.RecognitionLevel == '87000020'">困难</label>
+
+                            <label *ngIf="isChange && dataSet.RecognitionLevel == '87000030'" (click)="tankbox(dataSet)" class="cp color10">特殊困难</label>
+                            <label *ngIf="!isChange && dataSet.RecognitionLevel == '87000030'">特殊困难</label>
+
+                            <label *ngIf="isChange && dataSet.RecognitionLevel == '87000040'" (click)="tankbox(dataSet)" class="cp color10">不予评级</label>
+                            <label *ngIf="!isChange && dataSet.RecognitionLevel == '87000040'">不予评级</label>
+                        </span>
+
+                    </td>
+                    <!-- 审批意见 -->
+                    <td nz-td *ngIf="pageDetail.Status == '41' || pageDetail.Status == '42'">
+                        <span *ngIf="dataSet.SchoolAttitude == '0'">审批中</span>
+                        <span *ngIf="dataSet.SchoolAttitude == '1'" style="color: #008000;">审批已通过</span>
+                        <span *ngIf="dataSet.SchoolAttitude == '2'" style="color: #FF0000;">审批不通过</span>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+    <div *ngIf="userIdentity == 'FundCenter'">
+        <nz-table #nzTable [nzAjaxData]="dataSet" [nzBordered]="true" [nzIsPagination]="false">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>
+                        <span>学号</span>
+                    </th>
+                    <th nz-th>
+                        <span>姓名</span>
+                    </th>
+                    <th nz-th class="weight-txt">
+                        <span>重点关注信息</span>
+                    </th>
+                    <th nz-th>
+                        <span>申请所需资料</span>
+                    </th>
+                    <th nz-th>
+                        <span>家庭情况调查问卷</span>
+                    </th>
+                    <th nz-th>
+                        <span>学生自评调查问卷</span>
+                    </th>
+                    <th nz-th>
+                        <span>辅导员认定意见</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span>小组评议</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span>合计分数</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status != '42'">
+                        <span>认定等级</span>
+                    </th>
+                    <th nz-th *ngIf="pageDetail.Status == '41' || pageDetail.Status == '42'">
+                        <span>审批意见</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="center table-one">
+                <tr nz-tbody-tr style="height:40px;">
+                    <td nz-td>{{dataSet.UserCode}}</td>
+                    <td nz-td>{{dataSet.Name}}</td>
+                    <td nz-td>{{dataSet.Focus}}</td>
+                    <td nz-td [ngClass]="pageDetail.categray == '1'?'bgc':''">
+                        <span *ngIf="dataSet.IsAttach == '1'" class="comm-css" (click)="categrayChange(1)">
+                            查看
+                        </span>
+                    </td>
+                    <td nz-td [ngClass]="pageDetail.categray == '2'?'bgc':''">
+                        <span *ngIf="dataSet.EnconomicScore != ''" class="comm-css" (click)="categrayChange(2)">
+                            {{dataSet.EnconomicScore}}分
+                        </span>
+                    </td>
+                    <td nz-td [ngClass]="pageDetail.categray == '3'?'bgc':''">
+                        <span *ngIf="dataSet.SelfAssessmentScore != ''" class="comm-css" (click)="categrayChange(3)">
+                            {{dataSet.SelfAssessmentScore}}分
+                        </span>
+                    </td>
+                    <!-- 辅导员认定意见 -->
+                    <td nz-td [ngClass]="pageDetail.categray == '4'?'bgc':''">
+                        <span *ngIf="dataSet.Status == '41'" class="comm-css" (click)="categrayChange(4)">直接认定</span>
+                        <span *ngIf="dataSet.Status == '42'" class="comm-css" (click)="categrayChange(4)">一票否决</span>
+                        <span *ngIf="dataSet.Status == '43'" class="comm-css" (click)="categrayChange(4)">小组评议</span>
+                    </td>
+                    <!-- 小组评议 -->
+                    <td nz-td [ngClass]="pageDetail.categray == '5'?'bgc':''" *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span *ngIf="dataSet.EliberateScore != ''" (click)="categrayChange(5)" class="comm-css">
+                            {{dataSet.EliberateScore}}分
+                        </span>
+                    </td>
+                    <!-- 合计分数 -->
+                    <td nz-td *ngIf="pageDetail.Status != '41' && pageDetail.Status != '42'">
+                        <span *ngIf="dataSet.EnconomicScore != '' && dataSet.SelfAssessmentScore != '' && dataSet.EliberateScore != ''">
+                            {{((dataSet.EnconomicScore*5 + dataSet.SelfAssessmentScore*2 + dataSet.EliberateScore*3)/10).toFixed(2)}}分
+                        </span>
+                        <span *ngIf="dataSet.EnconomicScore == '' && dataSet.SelfAssessmentScore == '' && dataSet.EliberateScore != ''">
+                            {{((dataSet.EliberateScore*3)/10).toFixed(2)}}分
+                        </span>
+                    </td>
+                    <!-- 认定等级 -->
+                    <td nz-td [ngClass]="pageDetail.categray == '6'?'bgc':''" *ngIf="pageDetail.Status != '42'">
+                        <span>
+                            <label *ngIf="dataSet.RecognitionLevel == '87000010'">一般困难</label>
+                            <label *ngIf="dataSet.RecognitionLevel == '87000020'">困难</label>
+                            <label *ngIf="dataSet.RecognitionLevel == '87000030'">特殊困难</label>
+                            <label *ngIf="dataSet.RecognitionLevel == '87000040'">不予评级</label>
+                        </span>
+                    </td>
+                    <!-- 审批意见 -->
+                    <td nz-td *ngIf="pageDetail.Status == '41' || pageDetail.Status == '42'" [ngClass]="pageDetail.categray == '7'?'bgc':''">
+                        <span *ngIf="dataSet.SchoolAttitude == '0'" class="comm-css" (click)="categrayChange(7)">点击审批</span>
+                        <span *ngIf="dataSet.SchoolAttitude == '1'" style="color: #008000;">审批已通过</span>
+                        <span *ngIf="dataSet.SchoolAttitude == '2'" style="color: #FF0000;">审批不通过</span>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+
+    <div>
+        <app-applybook *ngIf="pageDetail.categray == '1'"></app-applybook>
+        <app-jingjiquestion *ngIf="pageDetail.categray == '2'"></app-jingjiquestion>
+        <app-selfquestion *ngIf="pageDetail.categray == '3'"></app-selfquestion>
+        <app-teacherview *ngIf="pageDetail.categray == '4'"></app-teacherview>
+        <app-studentview *ngIf="pageDetail.categray == '5'"></app-studentview>
+        <app-foundcenter *ngIf="pageDetail.categray == '7'"></app-foundcenter>
+    </div>
+
+    <!-- 评议等级弹框 -->
+    <nz-modal class="review-box" [nzVisible]="isReview" [nzTitle]="'请选择认定等级'" [nzContent]="reviewContent" (nzOnCancel)="reviewCancel($event)"
+        (nzOnOk)="reviewOk($event)" nzCancelText="取消" nzOkText="确定">
+        <ng-template #reviewContent>
+            <p class="center" *ngIf="pageDetail.Status == '43' && pageDetail.RecognitionLevel == '1'">评议完成后，该学生的申请记录将从“待评议学生”中移动到对应的评议结果中</p>
+            <p class="center" *ngIf="pageDetail.Status == '43' && pageDetail.RecognitionLevel == '0'">评议完成后，该学生的申请记录将从“待评议学生”中移动到对应的评议结果中</p>
+            <p class="pass-cont center mr">
+                <button nz-button [nzType]="dataReview.BgStyle1" (click)="onReviewoff(87000030)">
+                    <span>特殊困难</span>
+                </button>
+                <button nz-button [nzType]="dataReview.BgStyle2" (click)="onReviewoff(87000020)">
+                    <span>困难</span>
+                </button>
+                <button nz-button [nzType]="dataReview.BgStyle3" (click)="onReviewoff(87000010)">
+                    <span>一般困难</span>
+                </button>
+                <button nz-button [nzType]="dataReview.BgStyle4" (click)="onReviewoff(87000040)">
+                    <span>不予评级</span>
+                </button>
+            </p>
+        </ng-template>
+    </nz-modal>
+
+</div>

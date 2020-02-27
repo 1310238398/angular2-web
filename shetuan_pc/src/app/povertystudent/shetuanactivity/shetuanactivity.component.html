@@ -1,0 +1,211 @@
+<div class="mm">
+    <div nz-row style="height: 100%;">
+        <div nz-col nzXs="24" nzSm="24" nzMd="4" nzLg="4">
+            <div class="icon">
+                <div class="back">
+                    <img *ngIf="!ActivitytT.RecordId" src="assets/images/社团默认头像.png" alt="社团LOGO">
+                    <img *ngIf="ActivitytT.RecordId" [src]="DomS.bypassSecurityTrustUrl(CertifyImg.AttachmentURL)" alt="社团LOGO">
+                </div>
+                <div class="icon-body base font-16">
+                    <h2>{{union.UnionName}}</h2>
+                    <div>属性：{{union.CodeName}}</div>
+
+                    <div>人数：{{Totar}}人</div>
+
+                    <div>指导教师：{{union.StaffName}}<span *ngIf="mtotal > 1">等{{mtotal}}人</span></div>
+
+                    <div>负责人：{{union.StudentName}}<span *ngIf="stotal > 1">等{{stotal}}人</span></div>
+
+                    <div>联系方式：{{union.phone}}</div>
+
+                    <div>创建时间：{{union.Createtime}}</div>
+
+                    <div>社团简介：{{union.UnionInfo}}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 社团活动 -->
+        <div nz-col nzXs="24" nzSm="24" nzMd="18" nzLg="18">
+            <div class="card">
+                <div *ngIf="shenpiStatus==2" class="huodong_body">
+                    <div style="margin-top: 50px;"></div>
+                    <div nz-row nz-form-item>
+                        <div nz-col style="text-align: left; margin: 5px 15%;">
+                            <span class="title">活动名称：</span>
+                            <span class="bb">
+                                <b>{{ActivityOne.Activity}}</b>
+                            </span>
+                        </div>
+                    </div>
+                    <div nz-row nz-form-item>
+                        <div nz-col style="text-align: left; margin: 5px 15%;">
+                            <span class="title">活动内容：</span>
+                            <span class="bb">
+                                <b>{{ActivityOne.Info}}</b>
+                            </span>
+                        </div>
+                    </div>
+                    <div nz-row nz-form-item>
+                        <div nz-col style="text-align: left; margin: 5px 15%;">
+                            <span class="title">举办时间：</span>
+                            <span class="bb">
+                                <b>{{ActivityOne.Starttime}}</b>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div nz-row nz-form-item>
+                        <div nz-col style="text-align: left; margin: 5px 15%;">
+                            <span class="title">举办地点：</span>
+                            <span class="bb">
+                                <b>{{ActivityOne.Place}}</b>
+                            </span>
+                        </div>
+                    </div>
+                    <div nz-row nz-form-item>
+                        <div nz-col style="text-align: left; margin: 5px 15%;">
+                            <span class="title">活动联络人：</span>
+                            <span class="bb">
+                                <b>{{ActivityOne.Connect}}</b>
+                            </span>
+                        </div>
+                    </div>
+                    <div nz-row nz-form-item>
+                        <div nz-col style="text-align: left; margin: 5px 15%;">
+                            <span class="title">联系方式：</span>
+                            <span class="bb">
+                                <b>{{ActivityOne.phone}}</b>
+                            </span>
+                        </div>
+                    </div>
+                    <div nz-row nz-form-item>
+                        <div nz-col style="text-align: left; margin: 5px 15%;">
+                            <span class="title">活动负责人：</span>
+                            <span class="bb">
+                                <b>{{ActivityOne.name}}</b>
+                            </span>
+                        </div>
+                    </div>
+                    <div nz-row nz-form-item>
+                        <div nz-col style="text-align: left; margin: 5px 15%;">
+                            <span class="title">预计参加人数：</span>
+                            <span class="bb">
+                                <b>{{ActivityOne.peoplenum}}</b>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div nz-row nz-form-item>
+                        <div nz-col style="text-align: left; margin: 50px 15%;">
+                            <span style="color: black;font-size: 14px;">进程说明：</span>
+                            <ul>
+                                <li><span>{{ActivityOne.name}}提交社团活动申请</span><span style="margin-left:30px;">{{ActivityOne.InsertDatetime}}</span></li>
+                                <li *ngIf="ActivityOne.status == 1"><span>指导老师审批中</span></li>
+                                <li *ngIf="ActivityOne.status == 2"><span>指导老师审批未通过</span><span style="margin-left:17px;">{{ActivityOne.UpdateDatetime}}</span></li>
+                                <li *ngIf="ActivityOne.status > 2"><span>指导老师审批通过</span><span style="margin-left:30px;">{{ActivityOne.UpdateDatetime}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 60px;"></div>
+                    <!-- <div nz-row nz-form-item>
+                        <div nz-col style="text-align: center;">
+                            <button nz-button class="button" [nzSize]="'large'" (click)="shenpifail(ActivityOne)" *ngIf="TeacherInfo&&TeacherInfo.IsThis">审批不通过</button>
+                            <button nz-button [nzType]="'primary'" class="button" [nzSize]="'large'" (click)="tshenpisuccess(ActivityOne)"
+                                *ngIf="TeacherInfo&&TeacherInfo.IsThis">审批通过</button>
+                        </div>
+                    </div> -->
+
+                    <nz-modal [nzVisible]="isAVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+                        (nzOnCancel)="shenpihandleCancel($event)" [nzWidth]="400">
+                        <ng-template #modalTitle>
+                            审批不通过
+                        </ng-template>
+                        <ng-template #modalContent>
+                            <nz-input nzType="textarea" [nzAutosize]="{ minRows: 5, maxRows: 6 }" [nzPlaceHolder]="'请输入原因'"
+                                [nzSize]="'large'" [(ngModel)]="inputShe.ActivityInfo" (ngModelChange)="notNeedExplanationOnChange($event)"></nz-input>
+                            <p class="tips" *ngIf="notNeedExplanationValid">原因必填</p>
+                            <p class="tips" *ngIf="!notNeedExplanationValid&&(inputShe.ActivityInfo).length>50">最多只能输入50个字</p>
+                        </ng-template>
+                        <ng-template #modalFooter>
+                            <button nz-button [nzType]="'default'" [nzSize]="'large'" (click)="shenpihandleCancel($event)">
+                                取 消
+                            </button>
+                            <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="shenpihandleOk($event)">
+                                确 定
+                            </button>
+                        </ng-template>
+                    </nz-modal>
+
+                </div>
+
+                <div style="margin: 40px auto" *ngIf="shenpiStatus==3" class="zongjie_body">
+                    <div *ngFor=" let item of ActivityEnd;let i = index " style="width:100%;height: 100%;">
+                        <div nz-row nz-form-item>
+                            <div nz-col style="text-align: center;">
+                                <span class="bb" style="font-size:22px;">
+                                    <b>{{item.name}}</b>
+                                </span>
+                            </div>
+                        </div>
+                        <div nz-row nz-form-item>
+                            <div nz-col style="text-align: left; margin: 1% 10%;">
+                                <span class="title">活动内容：</span>
+                                <span class="bb">
+                                    <b>{{item.info}}</b>
+                                </span>
+                            </div>
+                        </div>
+                        <div nz-row nz-form-item>
+                            <div nz-col style="text-align: left; margin: 1% 10%;">
+                                <span class="title">活动总结：</span>
+                                <span class="bb">
+                                    <b>{{item.endinfo}}</b>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div nz-row nz-form-item class="huodongzhaopian">
+                            <div nz-col style="text-align: left; margin: 1% 10%;">
+                                <span class="title">现场照片：</span>
+                            </div>
+                            <div style="text-align: left;margin: 1% 10%;">
+                                <!-- <ul *ngFor="let item of item.attachmenturl ">
+                                    <li>
+                                        <img [src]='DomS.bypassSecurityTrustUrl(item.attachmenturl)'>
+                                    </li>
+                                </ul> -->
+                                <ul id="jq33{{i}}">
+                                    <li *ngFor="let itam of item.attachmenturl;">
+                                        <img [src]="DomS.bypassSecurityTrustUrl(itam.attachmenturl)" alt="" (click)="viewBigImg(i)">
+                                    </li>
+                                </ul>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<img class="b-cancle" src="assets/images/back.png" (click)="goback()">
+<div class="fixedall">
+    <button nz-button class="fixedBar" (click)="expand()">
+        <i *ngIf="!expand_f" class="anticon anticon-left"></i>
+        <i *ngIf="expand_f" class="anticon anticon-right"></i>
+    </button>
+    <div class="fixedMenu" *ngIf="expand_f">
+        <div class="menu">
+            <div [ngClass]="{'check': item.checked}" class='item base font-12' *ngFor="let item of menus">
+                <a (click)="changeMenu(item)">{{item.name}}</a>
+            </div>
+        </div>
+    </div>
+</div>

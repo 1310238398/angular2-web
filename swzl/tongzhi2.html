@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的丢失记录</title>
+    <meta content="width=device-width, initial-scale=1,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <link rel="stylesheet" href="css/tongzhi2.css">
+    <script src="./js/zepto.js"></script>
+    <script src="./lib/antlinker.1.0.9.js"></script>
+    <script src="js/tongzhi2.js"></script>
+    <script>
+        antlinker.configTitle({
+            type: "label",
+            title: "我的丢失记录",
+            success: function () {
+            }
+        });
+
+    </script>
+</head>
+<body>
+<div class="container" style="" id="main_container">
+
+    <!--<div class="tongzhi">-->
+        <!--<div class="tongzhi_top">-->
+            <!--你丢失的xxxxx已经被其他同学捡到，他也在着急找你哦，不要拖太久，快联系他取回吧~-->
+        <!--</div>-->
+
+        <!--<div class="fenge">-->
+        <!--</div>-->
+
+        <!--<div class="bottombar_container">-->
+
+            <!--<div class="time">2018年3月20日</div>-->
+
+            <!--<div class="lianxi">-->
+                <!--<div class="lianxi_inner">已联系</div>-->
+                <!--<img src="img/icon_call@2x.png" alt="">-->
+            <!--</div>-->
+
+            <!--<div class="hul" id="hulve" onclick="cannot_see()">-->
+                <!--忽略-->
+            <!--</div>-->
+            <!--<div class="hul none" id="hulve_ok">-->
+                <!--已忽略-->
+            <!--</div>-->
+
+        <!--</div>-->
+
+    <!--</div>-->
+
+
+</div>
+
+<div class="mengban" id="mengban">
+
+</div>
+
+<div class="hulve_func" id="hulve_func">
+    <div class="hulve_func_title">选择忽略原因</div>
+    <div class="radio_container" id="radio_container">
+        <div>
+            <input type="radio" id="wds" name="radio_chose" value="未丢失">
+            <label for="wds">未丢失</label>
+        </div>
+
+        <div>
+            <input type="radio" id="yzh" name="radio_chose" value="已找回">
+            <label for="yzh">已找回</label>
+        </div>
+
+        <div>
+            <input type="radio" id="ybb" name="radio_chose" value="已补办">
+            <label for="ybb">已补办</label>
+        </div>
+
+        <div>
+            <input type="radio" id="byl" name="radio_chose" value="不要啦">
+            <label for="byl">不要啦</label>
+        </div>
+
+        <div>
+            <input type="radio" id="qt" name="radio_chose" value="其它">
+            <label for="qt">其它</label>
+        </div>
+
+    </div>
+</div>
+</body>
+<script>
+    $(function(){
+        var obj = {};
+        antlinker.exeUserBasicInfoSdk(obj,function(obj,success){
+            req();
+        });
+    });
+</script>
+</html>

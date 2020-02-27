@@ -1,0 +1,100 @@
+<div class="title base font20 text-center">学生工作考核</div>
+
+<div class="mm">
+    <form #f="ngForm" class="form" nz-form [nzLayout]="'inline'">
+        <nz-form-item>
+            <nz-form-control>
+                <nz-select style="width: 120px;" [nzPlaceHolder]="'学年'" [nzShowSearch]="true" [(ngModel)]="searchObj.year" name="year">
+                    <nz-option *ngFor="let option of AcdemyYears" [nzLabel]="option.CodeName" [nzValue]="option.Code">
+                    </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-select style="width: 120px;" [nzPlaceHolder]="'学院'" [nzShowSearch]="true" [(ngModel)]="searchObj.academyCode" name="AcademyCode" nzAllowClear>
+            <nz-option *ngFor="let option of Academys" [nzLabel]="option.AcademyName" [nzValue]="option.AcademyCode">
+            </nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+        <div class="btn-g">
+            <button nz-button (click)="onSearch(true)" class="search-btn">查询</button>
+            <button nz-button style="margin-left:8px" (click)="resetForm(f)">重置</button>
+        </div>
+    </form>
+    <nz-table #editRowTable nzBordered [nzData]="dataSet"  [(nzPageIndex)]="page.page" [nzLoading]="loading" [nzPageSize]="page.count" [nzFrontPagination]="false" (nzPageIndexChange)="onSearch()" [(nzTotal)]="total">
+        <thead>
+            <tr>
+                <th nzWidth="80px">操作</th>
+                <th>学院</th>
+                <th>日常考核</th>
+                <th>质量提升加分</th>
+                <th>总分</th>
+                <th>考核结果</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of editRowTable.data">
+                <td>
+                    <div class="editable-row-operations">
+                        <ng-container *ngIf="!editCache[data.key].edit">
+                            <a (click)="startEdit(data.key)" nz-tooltip nzTitle="编辑">
+                                <i class="anticon anticon-edit"></i>
+                            </a>
+                        </ng-container>
+                        <ng-container *ngIf="editCache[data.key].edit">
+                            <a (click)="saveEdit(data.key)" nz-tooltip nzTitle="保存">
+                                <i class="anticon anticon-save"></i>
+                            </a>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <nz-popconfirm [nzTitle]="'确定要取消么?'" (nzOnConfirm)="cancelEdit(data.key)">
+                                <a nz-popconfirm nz-tooltip nzTitle="取消">
+                                    <i class="anticon anticon-rollback"></i>
+                                </a>
+                            </nz-popconfirm>
+                        </ng-container>
+                    </div>
+                </td>
+                <td>
+                    {{data.AcademyName}}
+                </td>
+                <td>
+                    <div class="editable-cell">
+                        <div class="editable-cell-text-wrapper">
+                            <ng-container *ngIf="!editCache[data.key].edit">
+                              <span *ngIf="data.A1>0">{{data.A1}}分</span>
+                              <span *ngIf="data.A1==0">0</span>
+                            </ng-container>
+                            <ng-container *ngIf="editCache[data.key].edit">
+                              <nz-input-number [(ngModel)]="editCache[data.key].data.A1" (ngModelChange)="onChange($event,data)" [nzMin]="0" [nzMax]="19" [nzStep]="1"></nz-input-number>
+                            </ng-container>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <a (click)="onModal(data)">
+                      <span *ngIf="data.A2>0">{{data.A2}}分</span>
+                      <span *ngIf="data.A2==0">0</span>
+                    </a>
+                </td>
+                <td>
+                  <span>{{data.sum|sumTotal:data}}</span>
+                </td>
+                <td>
+                    <ng-container *ngIf="!editCache[data.key].edit">
+                        {{data.Result}}
+                    </ng-container>
+                    <ng-container *ngIf="editCache[data.key].edit">
+                      <!--{{editCache[data.key].data|json}}-->
+                        <nz-select class='col-w' [nzPlaceHolder]="'结果'" [nzShowSearch]="true" [(ngModel)]="editCache[data.key].data.ResultCode" name="ResultType">
+                            <nz-option *ngFor="let option of ResultTypes" [nzLabel]="option.CodeName" [nzValue]="option.Code">
+                            </nz-option>
+                        </nz-select>
+                    </ng-container>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

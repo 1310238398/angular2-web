@@ -1,0 +1,83 @@
+
+.datadetail{
+    background: #FAFAFA;
+    /* height: 100%; */
+}
+.title{
+    font-family: PingFangSC-Regular;
+    font-size: 18px;
+    color: #3E3E3E;
+    letter-spacing: 0.22px;
+    text-align: center;
+    padding-top: 20px;
+    margin-bottom: 30px;
+}
+.academy{
+    margin: 0 auto;
+    background: #ffffff;
+    /* width: 98%; */
+    margin-left: 20px;
+    margin-right: 20px;
+    /* height: 40px; */
+    font-size: 14px;
+    text-align: left;
+    line-height: 30px;
+    color: #3E3E3E;
+    letter-spacing: 0.18px;
+    font-family: PingFangSC-Regular;
+    padding-left: 20px;
+}
+.loadTab{
+    margin: 20px 20px 0 20px;
+
+}
+/* tr背景色 */
+:host ::ng-deep  .ant-table-thead > tr > th{
+    background: rgba(124,202,255,0.09);
+}
+/* table标题样式 */
+:host ::ng-deep .ant-table.ant-table-bordered .ant-table-title {
+    height: 34px;
+    line-height: 34px;
+    padding: 0;
+    padding-left: 10px;
+}
+/* 宿舍备注 */
+.dormNote{
+    margin-top: 20px;
+    background: #FFFFFF;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #3E3E3E;
+    letter-spacing: 0;
+    padding: 8px 26px;
+}
+/* 返回按钮 */
+/* .zhanwei{
+    width: 100px;
+    height: 100px;
+} */
+ .button{
+    margin-top: 20px;
+    padding-bottom: 20px;
+} 
+.return_btn{
+    display: block;
+    margin: 0 auto;
+    border: none;
+    background: #FFC000;
+    border-radius: 4px;
+    width: 100px;
+    height: 30px;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: 0.20px;
+}
+:host ::ng-deep .ant-table table {
+
+    font-family: PingFangSC-Regula;
+    font-size: 14px;
+}

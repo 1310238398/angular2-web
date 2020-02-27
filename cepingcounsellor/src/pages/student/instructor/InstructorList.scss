@@ -1,0 +1,93 @@
+page-resumeleavedetail {
+
+.fixed-content{
+    background: #ffffff;
+    }
+.imgstyle{
+    // display: block;
+    height: 320px;
+    width: 245px; 
+    text-align: center;
+    margin: 0 auto;
+    margin-top:10px; 
+    // margin: 10px 10px 0 0;
+    // vertical-align: middle;
+    // display:block;
+    // position:relative; 
+    background:#f5f5f5;
+
+    span{
+        display: inline-block;/*将行内元素改变为行内块元素显示*/ 
+        width: 1px;/*实现ＩＥ下可读效果*/
+         height: 100%;/*使用元素高度和图片容器高度一样*/
+          vertical-align: middle;/*垂直对齐*/
+     
+    }
+    
+    img{
+        max-height: 320px;
+        max-width:240px;
+        vertical-align: middle;
+    }
+    }
+
+
+    // .main{ width:600px; height:400px; margin:100px auto;text-align:center;vertical-align:middle;display:block;position:relative; background:#ddd;}
+    // .main a{display:table-cell;vertical-align:middle;width:600px; height:400px; }
+    // .main a img{max-width:600px;max-height:400px; }
+
+
+.name{
+    font-family:PingFangSC-Medium;
+    font-size:18px;
+    color:#3e3e3e;
+    font-weight: 600;
+    letter-spacing:0.22px;
+    text-align:center;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+.department{
+    display: block;
+
+    font-family:PingFangSC-Regular;
+    font-size:14px;
+    color:#666666;
+    letter-spacing:0.17px;
+    text-align:center;
+}
+.jiyu{
+    font-family:PingFangSC-Regular;
+    font-size:14px;
+    color:#666666;
+    letter-spacing:0.17px;
+    text-align:left;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+ button{
+    background:#ffc000;
+    border-radius:8px;
+    width:34%;
+    height:36px;
+    margin:0 auto;
+    margin-top:10px;
+    margin-bottom: 20px;
+    border:none;
+      
+    font-family:PingFangSC-Regular;
+    font-size:16px;
+    color:#ffffff;
+    letter-spacing:0.19px;
+    text-align:center;
+   
+    display:block;
+    border-radius:3px;
+    }
+     button.pNo{
+        background-color: #bbb;
+    }
+
+
+}

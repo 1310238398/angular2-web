@@ -1,0 +1,90 @@
+<div class="content">
+    <div class="mr" style="width:550px;">
+        <h2 class="center">创建认定任务</h2>
+        <div class="form-cont">
+            <form #f="ngForm" nz-form [nzLayout]="'inline'" class="">
+                <div style="margin-top:20px;">
+                    <p style="margin-bottom:5px;">
+                        <span style="color: #FF0031;">*</span>
+                        <label>任务标题:</label>
+                    </p>
+                    <div class="relative" style="width: 540px;">
+                        <textarea class='file-message' #text name="TaskName" [disabled]="onlyRead" placeholder="请输入标题" [(ngModel)]="searchObj.TaskName"
+                            (ngModelChange)="txtChange(text.value)" maxlength="30" cols="1" rows="1" (keydown)="checkEnter($event)"></textarea>
+                        <p class="file-num absolute">{{values}}</p>
+                    </div>
+                </div>
+
+                <div style="margin-top:15px;">
+                    <p style="margin-bottom:5px;">
+                        <span style="color: #FF0031;">*</span>
+                        <label>任务类型:</label>
+                    </p>
+                    <nz-select style="width: 540px;" [nzPlaceHolder]="'请选择类型'" [disabled]="onlyRead" [(ngModel)]="searchObj.TaskType" name="TaskType"
+                        (ngModelChange)="keephid()">
+                        <nz-option *ngFor="let option of optioncatgray" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+                <div style="margin-top:15px;" *ngIf="wraphidden">
+                    <p style="margin-bottom:5px;">
+                        <span style="color: #FF0031;">*</span>
+                        <label>学生自评调查问卷填报开启时间:</label>
+                        <span style="color: #999;">（只有任务类型为初次认定时需要设置该项）</span>
+                    </p>
+                    <nz-datepicker style="width: 540px;" [disabled]="onlyRead" (ngModelChange)="_startDate=$event;_startValueChange()" [ngModel]="_startDate"
+                        [nzDisabledDate]="_disabledStartDate" nzShowTime [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="" name="_startDate"></nz-datepicker>
+                </div>
+                <div style="margin-top:15px;">
+                    <p style="margin-bottom:5px;">
+                        <span style="color: #FF0031;">*</span>
+                        <label>学院上报截止时间:</label>
+                    </p>
+                    <nz-datepicker style="width: 540px;" (ngModelChange)="_endDate=$event;_endValueChange()" [ngModel]="_endDate" [nzDisabledDate]="_disabledEndDate"
+                        [nzShowTime]="_endTime" [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="" name="_endDate"></nz-datepicker>
+                </div>
+                <div style="margin-top:15px;">
+                    <p style="margin-bottom:5px;">
+                        <span style="color: #FF0031;">*</span>
+                        <label>受众范围:</label>
+                    </p>
+                    <nz-select style="width: 540px;" nzTags [nzPlaceHolder]="'请选择人员'" [disabled]="onlyRead" [(ngModel)]="searchObj.Grades" name="Grades"
+                        nzShowSearch>
+                        <nz-option *ngFor="let option of optiongrade" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+
+                <div style="margin-top:15px;">
+                    <p style="margin-bottom:5px;">
+                        <label>认定说明:</label>
+                        <span style="color: #999;">（任务创建成功后会在APP上推送给受众范围的学生）</span>
+                    </p>
+                    <div class="relative" style="width: 540px;">
+                        <textarea class='speak-message' placeholder="请输入认定说明" #textarea name="Note" [disabled]="onlyRead" [(ngModel)]="searchObj.Note"
+                            (ngModelChange)="txtChange2(textarea.value)" maxlength="100" cols="1" rows="1" (keydown)="checkEnter($event)"></textarea>
+                        <p class="file-num2 absolute">{{values2}}</p>
+                    </div>
+                </div>
+
+                <div style="width: 540px;" class="center footer-btn">
+                    <a [routerLink]="['/waitdecide']">
+                        <button nz-button [nzType]="'default'">
+                            <span>取消</span>
+                        </button>
+                    </a>
+                    <button nz-button [nzType]="'primary'" (click)="submit()">
+                        <span>{{btnTxt}}</span>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+</div>

@@ -1,0 +1,184 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, select, img {
+    margin: 0;
+    padding: 0;
+    /* [disabled]padding:0; */
+}
+
+body {
+    /*控制背景图固定*/
+    background-attachment: fixed;
+    /*背景图大小自适应*/
+    background-size: 100% 100%;
+    background-color: #F5F5F5;
+}
+.container{
+    width:100%;
+    magin:0 auto;
+}
+.tongzhi{
+    width: 375px;
+    height: 96px;
+    background-color: #FFFFFF;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+.tongzhi_top{
+    /*width: 345px;*/
+    height: 38px;
+    padding: 14px 15px;
+    font-family: PingFangSC-Regular;
+    font-size: 13px;
+    color: #666666;
+    letter-spacing: 0.10px;
+    line-height: 19px;
+}
+
+.time{
+    float: left;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #ACACAC;
+    letter-spacing: 0.10px;
+    margin-left: 15px;
+    /*width: 100px;*/
+    height: 16px;
+    line-height: 16px;
+
+    /*background-color: #007aff;*/
+}
+.hul{
+    /*width: 37px;*/
+    height: 16px;
+    line-height: 16px;
+    float: right;
+    text-align: right;
+    margin-right: 20px;
+
+    /*background-color: red;*/
+
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0.10px;
+}
+.lianxi{
+    /*width: 58px;*/
+    height: 16px;
+    line-height: 16px;
+    float: right;
+    margin-right: 15px;
+    text-align: right;
+
+    /*background-color: green;*/
+
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #13A0FA;
+    letter-spacing: 0.10px;
+}
+.lianxi_inner{
+    float: right;
+    text-align: right;
+}
+.lianxi_inner a{
+    color: #13A0FA;
+    text-decoration: none;
+}
+.lianxi img{
+    width: 16px;
+    height: 16px;
+    margin-right:5px;
+    float: right;
+}
+
+
+
+/*借用chose*/
+.none{
+    display: none;
+}
+
+
+.hulve_func_title {
+    height: 40px;
+    line-height: 40px;
+    width: 190px;
+    text-align: center;
+    border-bottom: 1px solid #D5D5D5;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #666666;
+    letter-spacing: 0.19px;
+}
+
+.radio_container {
+    width: 190px;
+    height: 210px;
+}
+
+.radio_container div {
+    width: 100px;
+    height: 23px;
+    margin: 15px 45px 17px 45px;
+    /*font-family: PingFangSC-Regular;*/
+    /*font-size: 16px;*/
+    /*color: #3E3E3E;*/
+    /*letter-spacing: 0.19px;*/
+}
+
+.radio_container label {
+    padding-left: 25px;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #3E3E3E;
+    letter-spacing: 0.19px;
+}
+
+.mengban {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: #666666;
+    opacity: 0.3;
+    top: 0;
+    z-index: 1000;
+}
+
+.fenge{
+    /*width: 290px;*/
+    height: 1px;
+    border-bottom:1px solid #D5D5D5;
+    margin: 0 15px;
+}
+
+.tongzhi{
+    /*width: 320px;*/
+    width: 100%;
+    height: 96px;
+    background-color: #FFFFFF;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+.bottombar_container{
+    width: 100%;
+    height: 16px;
+    margin: 6px 0;
+
+    /*background-color: #8ad459;*/
+}
+.hulve_func {
+    position: fixed;
+    display: none;
+    width: 190px;
+    height: 250px;
+    margin: auto;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    z-index: 9999;
+    background-color: #FFFFFF;
+}
+

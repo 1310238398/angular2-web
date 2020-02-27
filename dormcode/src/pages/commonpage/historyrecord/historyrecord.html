@@ -1,0 +1,22 @@
+<ion-content class="index-cont">
+    <ion-list no-lines>
+        <div class="overh" *ngFor="let data of dataSet" style="margin-top:6px;">
+            <ion-item style="border-bottom:none!important;">
+                <h2 class="class-title fn15">【{{data.bindTxt}}】 {{data.RoomName}}</h2>
+                <p class="fn14 info-wrap">
+                    <span class="gray-c">申请时间 : </span>
+                    <span class="gray-4a">{{data.Time}}</span>
+                    <span class="gray-c" style="margin-left:10px;">申请人 : </span>
+                    <span class="gray-4a">{{data.Operator}}</span>
+                </p>
+            </ion-item>
+        </div>
+    </ion-list>
+
+    <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <div style="text-align: center;color: #8e9093;margin-bottom:15px;" *ngIf="!moreData">我是有底线的！</div>
+
+</ion-content>

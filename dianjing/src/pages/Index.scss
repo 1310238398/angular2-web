@@ -1,0 +1,27 @@
+page-index {
+  .back{
+    background: url("../assets/images/bg.png") no-repeat center;
+    background-size: cover;
+  }
+  .overflow-hidden {
+    display: inline-block;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .overflow{
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .publish{
+    margin: -10px 45px 0 45px
+  }
+  .fix{
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+  }
+}

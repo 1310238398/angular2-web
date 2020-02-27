@@ -1,0 +1,202 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+p{
+    margin: 0;
+    padding: 0;
+}
+.margin-top-20{
+    margin-top: .4rem;
+}
+.wrapper{
+    height: auto;
+    background: #FAFAFA;
+    padding-top: 0.2rem;
+    overflow: hidden;
+}
+.from-enter{
+    background: #fff;
+    padding: 0.2rem;
+    padding-bottom: 0;
+}
+.from-title{
+    font-size: 0.28rem;
+    color: #3E3E3E;
+}
+.checkbox-wrapper{
+    margin-top: .3rem;
+}
+.checkbox-center{
+    font-size: 0.28rem;
+}
+.checkbox-center-flex{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0.2rem;
+}
+.checkbox-center-col{
+    width: 2.6rem;
+    color:#666666;
+}
+/* checkout */
+/*input[type="checkbox"] + label::before {*/
+    /*content: "\a0";  !*不换行空格*!*/
+    /*display: inline-block;*/
+    /*width: 15px;*/
+    /*height: 15px;*/
+    /*border-radius: 4px;*/
+    /*font-size: 1px;*/
+    /*background: #fff;*/
+    /*border: 1px solid #ccc;*/
+    /*margin-right: 10px;*/
+/*}*/
+input[type="checkbox"]:checked + label{
+    color: black;
+}
+input[type="file"]{
+    position: static !important;
+}
+/*input[type="checkbox"]:checked + label::before {*/
+    /*border: 1px solid #fff;*/
+    /*display: inline-block;*/
+    /*content: "\2713";*/
+    /*background-color: #59C4FF;*/
+    /*color: #fff;*/
+    /*text-align: center;*/
+    /*font-size: 1px;*/
+/*}*/
+input {
+    /*position: absolute;*/
+    /*clip: rect(0, 0, 0, 0);*/
+}
+textarea{
+    width: 100%;
+    border: 1px solid #ACACAC;
+    resize: none;
+    box-sizing: border-box;
+    height: 1.5rem;
+    /*text-indent: .2rem;*/
+    margin-top: .2rem;
+    border-radius: 5px;
+    padding-top: .1rem;
+    outline: none;
+}
+.submission{
+    /*margin-top: 1rem;*/
+    display: flex;
+    flex-direction:column;
+    padding: .2rem;
+}
+.submission button {
+    width: 90%;
+    height: .9rem;
+    background: #FFC000;
+    color: #fff;
+    line-height: .9rem;
+    margin: 0 auto;
+    outline-style: none;
+    border: none;
+    font-size: .3rem;
+    border-radius: .1rem;
+    letter-spacing: .1rem;
+}
+.submission-desc{
+    font-size: .1rem;
+    color: #4A90E2;
+    margin-top: .3rem;
+}
+/* toast */
+.toast-wrap{
+    opacity: 0;
+    position: fixed;
+    bottom: 10%;
+    color: #fff;
+    width: 90%;
+    text-align: center;
+    font-size: .3rem;
+    padding: .5rem;
+    z-index: -1;
+ }
+ .toast-msg{
+    z-index: 9999;
+    background-color: rgba(0,0,0,0.7);
+    padding: 2px 15px;
+    border-radius: 5px;
+ }
+.toastAnimate{
+    animation: toastKF 2s;
+}
+@keyframes toastKF{
+    0% {opacity: 0;}
+   25% {opacity: 1; z-index: 9999}
+   50% {opacity: 1; z-index: 9999}
+   75% {opacity: 1; z-index: 9999}
+   100% {opacity: 0; z-index: 0}
+}
+/* 上传图片 */
+.pic-container{
+    padding-bottom: 5px;
+    display: flex;
+}
+#file_input{
+    display: none
+}
+#file_add{
+    width: 80px;
+    height: 80px;
+    border: 1px dashed #ACACAC;
+    margin: 10px;
+    color: #ACACAC; 
+    font-size: 50px;
+    text-align: center;
+    line-height: 80px;
+}
+.pic-float{
+    width: 80px;
+    height: 80px;
+    border: 1px dashed #ACACAC;
+    margin: 10px;
+    color: #ACACAC; 
+    font-size: 50px;
+    text-align: center;
+    font-size: 10px;
+    position: relative;
+}
+.delete{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #FB5F2D;
+    border-radius: 50%;
+    color: #fff;
+    top: -7px;
+    right: -7px;
+    line-height: 17px;
+    font-size: 10px;
+}
+
+.img_modal{
+    display: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9998;
+    background-color: black;
+    box-sizing: border-box;
+    overflow: scroll;
+}
+.img_modal span{
+    display: table-cell;
+    vertical-align: middle;
+}
+.img_modal img{
+    width: 100%;
+    height:auto;
+}

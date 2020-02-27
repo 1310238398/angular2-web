@@ -1,0 +1,309 @@
+ul,
+li,
+p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.color_4A90E2 {
+    color: #4A90E2;
+}
+
+.room {
+    background: #f8f8f8;
+    width: 100%;
+    min-width: 1024px;
+    overflow-x: auto;
+}
+
+.top {
+    width: 100%;
+    height: 220px;
+    position: relative;
+    background: -webkit-linear-gradient(to bottom left, #7998F0, #7FB4FF), url("assets/images/sushe.png") no-repeat 25px 100%;
+    /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(to top right, #7998F0, #7FB4FF), url("assets/images/sushe.png") no-repeat 25px 100%;
+    /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(to top right, #7998F0, #7FB4FF), url("assets/images/sushe.png") no-repeat 25px 100%;
+    /* Firefox 3.6 - 15 */
+    background: url("assets/images/sushe.png") no-repeat 100% 25px, linear-gradient(to top right, #7998F0, #7FB4FF);
+    /* 标准的语法 */
+}
+
+.university {
+    position: absolute;
+    top: 45px;
+    left: 32px;
+    overflow: hidden;
+}
+
+.un_logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    background: #ffffff;
+    float: left;
+}
+
+.un_logo img {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.un_name {
+    font-size: 18px;
+    color: #FFFFFF;
+    line-height: 80px;
+    margin: 0px 0px 0px 10px;
+    padding: 0px;
+    float: left;
+}
+
+.num_tongji {
+    height: 100px;
+    overflow: hidden;
+    position: absolute;
+    top: 35px;
+    left: 20%;
+    /* background-image: linear-gradient(to top right, #7B69C5, #5282F6); */
+    background: #5B80F1;
+    /* box-shadow: 1px 2px 6px 0 rgba(63, 76, 153, 0.40), inset 1px 1px 4px 0 rgba(152, 142, 231, 0.50); */
+    box-shadow: 1px 2px 6px 0 rgba(49, 83, 190, 0.40);
+    border-radius: 5px;
+}
+
+/* @media (max-width: 992px) {
+    .un_name {
+        line-height: 20px;
+        padding: 15px 0px;
+        width: 80px;
+    }
+    .num_tongji {
+        right: 5px;
+    }
+}
+
+@media (min-width: 992px) and (max-width:1200px) {
+    .num_tongji {
+        right: 70px;
+    }
+} */
+
+.num_tongji ul {
+    width: 100%;
+    padding-top: 20px;
+    overflow: hidden;
+}
+
+.num_tongji_list {
+    float: left;
+    padding: 5px 20px 5px 20px;
+    border-right: 1px solid #3D5BB6;
+    border-left: 1px solid #87A4FF;
+}
+
+.num_tongji_list:first-child {
+    border-left: 0px;
+}
+
+.num_tongji_list:last-child {
+    border-right: 0px;
+    padding-right: 50px;
+}
+
+.num_tongji_name {
+    font-size: 14px;
+    color: #FFFFFF;
+    line-height: 12px;
+}
+
+.num_tongji_shuzi {
+    margin-top: 16px;
+    font-size: 22px;
+    color: #FFFFFF;
+    line-height: 18px;
+}
+
+.num_tongji_shuzi a {
+    color: #FFFFFF;
+}
+
+.num_tongji_shuzi a:hover {
+    color: #4A90E2;
+}
+
+.pie {
+    margin: -44px 30px 0px;
+    z-index: 99px;
+}
+
+.pie_list {
+    height: 200px;
+    background: #FFFFFF;
+    box-shadow: 0 5px 4px 0 rgba(216, 216, 216, 0.30);
+    border-radius: 4px;
+}
+
+.piechart {
+    width: 100%;
+    height: 0;
+}
+
+@media (min-width: 1250px) {
+    .pie_list {
+        height: 200px;
+    }
+
+    .piechart {
+        height: 170px;
+    }
+}
+
+@media (max-width: 1250px) {
+    .pie_list {
+        height: 140px;
+    }
+
+    .piechart {
+        height: 110px;
+    }
+}
+
+.pie_title {
+    font-size: 12px;
+    color: #4A4A4A;
+    line-height: 30px;
+    padding-left: 10px;
+    border-bottom: 1px solid #E3E3E3;
+}
+
+.biaoge {
+    margin: 20px 20px 40px;
+}
+
+.statis_type_list {
+    font-size: 0px;
+}
+
+.statis_type {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    background: #ffffff;
+    border-radius: 4px 0 0 0;
+    border: 1px solid #4972F0;
+    border-bottom-width: 0px;
+    text-align: center;
+    font-size: 12px;
+    color: #4972F0;
+    display: inline-block;
+}
+
+.statis_type_aca {
+    border-radius: 0px 4px 0 0;
+}
+
+.statisTypeSelected {
+    background: #4972F0;
+    color: #FFFFFF;
+}
+
+.statis_table {
+    margin-top: 0px;
+    box-shadow: 0 2px 5px 0 #E3E3E3;
+}
+
+:host ::ng-deep .ant-table-bordered .ant-table-body>table {
+    background: #FFFFFF;
+    box-shadow: 0 2px 5px 0 #E3E3E3;
+    border: none;
+    border-width: 0px;
+}
+
+:host ::ng-deep .ant-table {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.65);
+    overflow: hidden;
+    position: relative;
+    border-radius: 0px 4px 0 0;
+}
+
+:host ::ng-deep .ant-table table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: left;
+    border-radius: 0px 4px 0 0;
+    overflow: hidden;
+}
+
+.ant-table-thead>tr>th {
+    background: #4972F0;
+    opacity: 0.9;
+    font-weight: 500;
+    transition: background .3s ease;
+    text-align: left;
+    color: #ffffff;
+}
+
+.ant-table-thead>tr>th,
+.ant-table-tbody>tr>td {
+    padding: 8px 8px;
+    word-break: break-all;
+}
+
+:host ::ng-deep .ant-table-bordered .ant-table-thead>tr>th {
+    border-right: 1px solid #ffffff;
+}
+
+:host ::ng-deep .ant-table-bordered .ant-table-tbody>tr>td {
+    border-right: 1px solid #E3E3E3;
+}
+
+:host ::ng-deep .ant-table-tbody>tr>td {
+    border-bottom: 1px solid #E3E3E3;
+    transition: all .3s;
+}
+
+.statis_table .xuhao {
+    background: #4972F0;
+    opacity: 0.4;
+    color: #fff;
+}
+
+:host ::ng-deep .ant-table-column-sorter .anticon-caret-down,
+:host ::ng-deep .ant-table-column-sorter .anticon-caret-up {
+    color: #fff;
+}
+
+:host ::ng-deep .ant-table-column-sorter-up.on .anticon-caret-up,
+:host ::ng-deep .ant-table-column-sorter-down.on .anticon-caret-up,
+:host ::ng-deep .ant-table-column-sorter-up.on .anticon-caret-down,
+:host ::ng-deep .ant-table-column-sorter-down.on .anticon-caret-down {
+    color: #f7a935;
+}
+
+.loadmore {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 12px;
+    color: #4A90E2;
+}
+
+.loadmore a {
+    color: #4A90E2;
+}
+
+:host ::ng-deep .loadmore .ant-spin-nested-loading>div>.ant-spin {
+    position: absolute;
+    height: 100%;
+    max-height: 320px;
+    width: 100px;
+    z-index: 4;
+}
+
+:host ::ng-deep .ant-checkbox+span {
+    padding-left: 0px;
+    padding-right: 8px;
+}

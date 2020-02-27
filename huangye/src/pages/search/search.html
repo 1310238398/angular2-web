@@ -1,0 +1,32 @@
+<ion-content class="outer-content">
+    <ion-searchbar (click)="navToSearch();$event.stopPropagation()"  placeholder="搜索"></ion-searchbar>
+    <ion-row text-center align-items-center>
+        <ion-col>
+          <img src="assets/images/icon_kuaidi.png" (click)="nav('KuaidiPage')">
+            <div>快递</div>
+        </ion-col>
+      <ion-col>
+        <a><img src="assets/images/icon_chuxing.png" alt="" (click)="nav('ChuxingPage')"></a>
+        <div>出行</div>
+      </ion-col>
+        <ion-col>
+            <img src="assets/images/icon_yinhang.png" (click)="nav('YinhangPage')">
+            <div>银行</div>
+        </ion-col>
+        <ion-col>
+            <img src="assets/images/icon_gonggongfuwu.png" (click)="nav('GgfuwuPage')">
+            <div>公共服务</div>
+        </ion-col>
+    </ion-row>
+    <ion-item-group>
+        <ion-item-divider *ngIf="items.length > 0" color="light">职能部门</ion-item-divider>
+        <ion-item detail-push *ngFor="let chat of items" (click)="NavigationTo(chat)">
+            <h2>{{chat.Name }}</h2>
+            <p>{{chat.Phone}}</p>
+            <ion-icon item-right name="ios-call" class="circle" color="primary" (click)="callPhone(chat);$event.stopPropagation()"></ion-icon>
+        </ion-item>
+    </ion-item-group>
+
+    <div *ngIf="items.length <= 0" class="none"><img class="noneimg" src="assets/images/kong.png">
+      <div class="noneFont">暂无更多内容</div></div>
+</ion-content>

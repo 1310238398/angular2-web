@@ -1,0 +1,117 @@
+<div class="content">
+    <p class="center fn18" style="margin:20px 0;">辅导员(班主任)工作日志</p>
+    <div class="components-table-demo-control-bar">
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-center">
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>日志标题</label>
+                </div>
+                <div nz-form-control>
+                    <textarea class='file-message' #text name="LogTitle" [(ngModel)]="searchObj.LogTitle" (ngModelChange)="txtChange(text.value)"
+                        maxlength="10" cols="1" rows="1" (keydown)="checkEnter($event)"></textarea>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>记录类型</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 140px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.CateGray" name="CateGray" nzAllowClear>
+                        <nz-option *ngFor="let option of optioncategray" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>创建时间</label>
+                </div>
+                <nz-datepicker style="width: 120px;" (ngModelChange)="_startDate=$event;_startValueChange()" [ngModel]="_startDate" [nzDisabledDate]="_disabledStartDate"
+                    nzShowTime [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="" name="_startDate"></nz-datepicker>
+                <span>至</span>
+                <nz-datepicker style="width: 120px;" (ngModelChange)="_endDate=$event;_endValueChange()" [ngModel]="_endDate" [nzDisabledDate]="_disabledEndDate"
+                    [nzShowTime]="_endTime" [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="" name="_endDate"></nz-datepicker>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>发布状态</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.PublishStatus" name="PublishStatus" nzAllowClear>
+                        <nz-option *ngFor="let option of optionspubstatus" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>发布时间</label>
+                </div>
+                <nz-datepicker style="width: 120px;" (ngModelChange)="PubstartDate=$event;_startValueChange1()" [ngModel]="PubstartDate"
+                    [nzDisabledDate]="_disabledStartDate1" nzShowTime [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="" name="PubstartDate"></nz-datepicker>
+                <span>至</span>
+                <nz-datepicker style="width: 120px;" (ngModelChange)="PubendDate=$event;_endValueChange1()" [ngModel]="PubendDate" [nzDisabledDate]="_disabledEndDate1"
+                    [nzShowTime]="_endTime1" [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="" name="PubendDate"></nz-datepicker>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-col [nzSpan]="24" style="text-align: right;">
+                    <button nz-button [disabled]="httpService.loading" [nzType]="'primary'" (click)="onSearch(true)">查询</button>
+                    <button style="margin-right:20px;" nz-button (click)="resetForm(f)">重置</button>
+                    <a [routerLink]="['createtask']">
+                        <button nz-button [nzType]="'primary'">创建工作日志</button>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div style="margin-top:20px;">
+        <nz-table #nzTable [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [(nzTotal)]="total" [(nzPageIndex)]="page.Page"
+            [(nzPageSize)]="page.PageSize" [nzBordered]="true" (nzPageIndexChange)="onSearch()">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>序号</th>
+                    <th nz-th>日志标题</th>
+                    <th nz-th>记录类型</th>
+                    <th nz-th>创建时间</th>
+                    <th nz-th>发布时间</th>
+                    <th nz-th>发布状态</th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i = index;">
+                    <td nz-td>{{(page.Page)*(page.PageSize)-(page.PageSize) + i +1}}</td>
+                    <td nz-td>
+                        <a [routerLink]="['contdetail',{RecordID: data.RecordID,fabStatus:data.ReleaseStatus}]">
+                            <span>{{data.LogTitle}}</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a [routerLink]="['contdetail',{RecordID: data.RecordID,fabStatus:data.ReleaseStatus}]">
+                            <span>{{data.RecordName}}</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a [routerLink]="['contdetail',{RecordID: data.RecordID,fabStatus:data.ReleaseStatus}]">
+                            <span>{{data.InsertDatetime}}</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a [routerLink]="['contdetail',{RecordID: data.RecordID,fabStatus:data.ReleaseStatus}]">
+                            <span>{{data.PublishDatetime}}</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a [routerLink]="['contdetail',{RecordID: data.RecordID,fabStatus:data.ReleaseStatus}]">
+                            <span *ngIf="data.ReleaseStatus == '0'">未发布</span>
+                            <span *ngIf="data.ReleaseStatus == '1'">已发布</span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+
+    </div>
+
+</div>

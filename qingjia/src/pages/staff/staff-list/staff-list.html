@@ -1,0 +1,124 @@
+<ion-content class="outer-content">
+  <ion-segment [(ngModel)]="ApproveStatus">
+    <ion-segment-button value="1">
+      待准假
+    </ion-segment-button>
+    <ion-segment-button value="2,5">
+      待销假
+    </ion-segment-button>
+    <ion-segment-button value="3">
+      已销假
+    </ion-segment-button>
+    <ion-segment-button value="4">
+      未准假
+    </ion-segment-button>
+  </ion-segment>
+  <div [ngSwitch]="ApproveStatus" style="margin-top: 8px">
+    <div *ngSwitchCase="'1'">
+      <ion-searchbar [debounce]="350" (ionInput)='search($event,"1")' placeholder="搜索"></ion-searchbar>
+      <ion-refresher (ionRefresh)='doRefresh($event,"1")'>
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="下拉刷新"
+          refreshingSpinner="circles"
+          refreshingText="刷新中...">
+        </ion-refresher-content>
+
+      </ion-refresher>
+      <ion-list>
+        <ion-item detail-push *ngFor="let item of PendingApplyitems" (click)="NavigationTo(item)">
+          <h2 *ngIf="item.ApproveStatus==1">{{item.ClassName }} {{item.Name }}</h2>
+          <!--<h2 *ngIf="item.ApproveStatus==0">{{item.ClassName }} {{item.Name }} (已取消申请)</h2>-->
+          <p>提交时间：{{item.ApplyDate| stringToDate }}</p>
+          <!-- <p>{{item.ApplyDate |date:'yyyy-MM-dd'}}</p>-->
+        </ion-item>
+      </ion-list>
+      <div *ngIf="PendingApplyitems.length <= 0" style="text-align: center;margin-top: 30%"><img
+        src="assets/images/1@2x_2.png">没有更多内容！
+      </div>
+      <ion-infinite-scroll *ngIf="moreData" (ionInfinite)='doInfinite($event,"1")'>
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      <div style="text-align: center;color: #8e9093" *ngIf="!moreData">我是有底线的！</div>
+    </div>
+    <div *ngSwitchCase="'2,5'">
+      <ion-searchbar [debounce]="350" (ionInput)='search($event,"2,5")' placeholder="搜索"></ion-searchbar>
+      <ion-refresher (ionRefresh)='doRefresh($event,"2,5")'>
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="下拉刷新"
+          refreshingSpinner="circles"
+          refreshingText="刷新中...">
+        </ion-refresher-content>
+      </ion-refresher>
+      <ion-list>
+        <ion-item  *ngFor="let item of Pendingxiaojiaitems" (click)="NavigationTo(item)">
+          <h2>{{item.ClassName }} {{item.Name }}</h2>
+
+          <div *ngIf="item.ApproveStatus == 5" item-right class="daishenpi"><img src="assets/images/待审批.png" alt=""></div>
+
+          <p [ngClass]="{'finish':isOver(item.EndDate)&&item.ApproveStatus==2}">结束时间：{{item.EndDate| stringToDate}}<span *ngIf="item.EndCourse>0">第{{item.EndCourse||''}}节课</span> <span *ngIf="!isOver(item.EndDate)&&haveDay(item.EndDate)>0">距结束还有{{haveDay(item.EndDate)}}天</span></p>
+        </ion-item>
+      </ion-list>
+      <div *ngIf="Pendingxiaojiaitems.length <= 0" style="text-align: center;margin-top: 30%"><img
+        src="assets/images/1@2x_2.png">没有更多内容！
+      </div>
+      <ion-infinite-scroll *ngIf="moreData" (ionInfinite)='doInfinite($event,"2,5")'>
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      <div style="text-align: center;color: #8e9093" *ngIf="!moreData">我是有底线的！</div>
+    </div>
+    <div *ngSwitchCase="'3'">
+      <ion-searchbar [debounce]="350" (ionInput)='search($event,"3")' placeholder="搜索"></ion-searchbar>
+      <ion-refresher (ionRefresh)='doRefresh($event,"3")'>
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="下拉刷新"
+          refreshingSpinner="circles"
+          refreshingText="刷新中...">
+        </ion-refresher-content>
+      </ion-refresher>
+      <ion-list>
+        <ion-item detail-push *ngFor="let item of Finishxiaojiaitems" (click)="NavigationTo(item)">
+          <h2>{{item.ClassName }} {{item.Name }}</h2>
+          <p>提交时间：{{item.ApplyDate| stringToDate}}</p>
+        </ion-item>
+      </ion-list>
+      <div *ngIf="Finishxiaojiaitems.length <= 0" style="text-align: center;margin-top: 30%"><img
+        src="assets/images/1@2x_2.png">没有更多内容！
+      </div>
+      <ion-infinite-scroll *ngIf="moreData" (ionInfinite)='doInfinite($event,"3")'>
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      <div style="text-align: center;color: #8e9093" *ngIf="!moreData">我是有底线的！</div>
+    </div>
+    <div *ngSwitchCase="'4'">
+      <ion-searchbar [debounce]="350" (ionInput)='search($event,"4")' placeholder="搜索"></ion-searchbar>
+      <ion-refresher (ionRefresh)='doRefresh($event,"4")'>
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="下拉刷新"
+          refreshingSpinner="circles"
+          refreshingText="刷新中...">
+        </ion-refresher-content>
+      </ion-refresher>
+      <ion-list>
+        <ion-item detail-push *ngFor="let item of Refuseitems" (click)="NavigationTo(item)">
+          <h2>{{item.ClassName }} {{item.Name }}</h2>
+          <p>提交时间：{{item.ApplyDate| stringToDate}}</p>
+        </ion-item>
+      </ion-list>
+      <div *ngIf="Refuseitems.length <= 0" style="text-align: center;margin-top: 30%"><img
+        src="assets/images/1@2x_2.png">没有更多内容！
+      </div>
+      <ion-infinite-scroll *ngIf="moreData" (ionInfinite)='doInfinite($event,"4")'>
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      <div style="text-align: center;color: #8e9093" *ngIf="!moreData">我是有底线的！</div>
+    </div>
+  </div>
+</ion-content>

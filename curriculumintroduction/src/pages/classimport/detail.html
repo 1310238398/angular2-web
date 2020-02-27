@@ -1,0 +1,84 @@
+<ion-content class="outer-content">
+    <div class="xiangxi">
+        <ion-list>
+            <ion-item>
+                <ion-label>
+                    <span class="qiunile">
+                            <img src="assets/images/zhanghao@2x.png">
+                        </span>
+                </ion-label>
+                <ion-input placeholder="教务账号" onfocus="this.placeholder=''" onblur="this.placeholder='教务账号'" type="text"
+                           [(ngModel)]="name" required></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list>
+
+            <ion-item>
+                <ion-label>
+                    <span class="qiunilee">
+                                        <img src="assets/images/mima@2x.png">
+                                    </span>
+                </ion-label>
+                <ion-input placeholder="教务密码" onfocus="this.placeholder=''" onblur="this.placeholder='教务密码'"
+                           type="password" [(ngModel)]="password" required></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <!-- <ion-list>
+
+            <ion-item>
+                <ion-label>
+                    <span class="qiunilee">
+                                                    <img src="assets/images/yanzheng@2x.png">
+                                                </span>
+                </ion-label>
+                <ion-input placeholder="请输入验证码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入验证码'" type="text"></ion-input>
+                <button ion-button outline item-end icon-left>
+                    Left Icon
+                  </button>
+
+            </ion-item>
+
+        </ion-list> -->
+        <div class="test3">
+            <div class="test1">
+                <span class="qiunilee">
+                                                <img src="assets/images/yanzheng@2x.png">
+                                            </span>
+            </div>
+
+            <div class="test2">
+                <ion-input placeholder="请输入验证码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入验证码'"
+                           type="text" [(ngModel)]="captchaa"></ion-input>
+                <div class="test4">
+                    <!-- <img *ngIf="filesrc" [src]="filesrc" class="test4"> -->
+                    <button ion-button class="test8">
+
+                        <img [src]="DomSanitization.bypassSecurityTrustUrl(captaid.captchaUrl)" (click)="catpat()">
+                    </button>
+                    <!-- <img src='{{captaid.captchaUrl}}' (click)="catpat()"> -->
+                </div>
+                <!-- <button ion-button class="test4">
+
+                    <img src='{{captaid.captchaUrl}}' (click)="catpat()">
+              </button> -->
+                <!-- <div class="test5">
+                    验证码输入有误，请重新输入
+                </div> -->
+            </div>
+
+        </div>
+
+    </div>
+    <div class="agress">
+        <ion-item>
+            <ion-label style="color: #666666;">同意 </ion-label>
+            <ion-checkbox [(ngModel)]="agree" name="agree"></ion-checkbox>
+        </ion-item>
+        <div class="desc" href="#" (click)="desc($event)">《课程表用户使用协议》</div>
+    </div>
+    <button [disabled]="!agree" ion-button class="btn-shaw" (click)="query()">
+        导入
+    </button>
+</ion-content>

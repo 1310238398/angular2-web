@@ -1,0 +1,41 @@
+<ion-content class="index-cont">
+  <p class="wain-txt center" *ngIf="titleShow">
+    <span class="db">可在班级空间中设置班委后,由班委负责</span>
+    <span class="db">将学生目前的宿舍信息登记在集结号系统中</span>
+  </p>
+  <div class="info_list">
+    <ion-list>
+      <p *ngIf="loadingYes && studentDataMale.length" class="img-wrap"><img src="assets/imgs/boy.png" alt=""></p>
+      <div *ngFor="let stu of studentDataMale">
+        <ion-item>
+          <ion-checkbox [(ngModel)]="stu.checked" (ngModelChange)="checkprint()"></ion-checkbox>
+          <ion-label item-start>
+            <p class="username no-line-break">{{stu.name}}</p>
+          </ion-label>
+          <ion-label item-end>
+            <p class="useraddress no-line-break" style="text-align:right;">{{stu.roomname}}</p>
+          </ion-label>
+        </ion-item>
+        <div class="line"></div>
+      </div>
+      <p *ngIf="loadingYes && studentDataFemale.length" class="img-wrap"><img src="assets/imgs/girl.png" alt=""></p>
+      <div *ngFor="let stu of studentDataFemale">
+        <ion-item>
+          <ion-checkbox [(ngModel)]="stu.checked" (ngModelChange)="checkprint()"></ion-checkbox>
+          <ion-label item-start>
+            <p class="username no-line-break">{{stu.name}}</p>
+          </ion-label>
+          <ion-label item-end>
+            <p class="useraddress no-line-break" style="text-align:right;">{{stu.roomname}}</p>
+          </ion-label>
+        </ion-item>
+        <div class="line"></div>
+      </div>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button (click)="setDormInfo()" [disabled]="submitIng">设置宿舍信息</button>
+  </ion-toolbar>
+</ion-footer>

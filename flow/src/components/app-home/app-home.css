@@ -1,0 +1,21 @@
+.home-badge {
+  margin-left: 5px;
+}
+
+.home-list {
+  position: relative;
+  margin-top: 5px;
+  padding-bottom: 10px;
+  height: 300px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.home-add-button {
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  float: right;
+  line-height: 16px;
+  font-size: 12px;
+}

@@ -1,0 +1,37 @@
+<!-- <div class="modal-header">
+  <div class="modal-title">{{params? '编辑' : '添加'}}-用户管理</div>
+</div>
+<form #f="ngForm"  nz-form >
+  <div nz-row [nzGutter]="8">
+    <div nz-col nzSpan="12">
+      <nz-form-label [nzSpan]="4">称谓</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <ant-bizcode [bizObj]="params" [nameType]="'MemberType'"></ant-bizcode>
+      </nz-form-control>
+    </div>
+    <div nz-col nzSpan="12">
+      <nz-form-label [nzSpan]="4">姓名</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input  name="name" placeholder="姓名" maxlength="18" required>
+      </nz-form-control>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="8">
+    <div nz-col nzSpan="12">
+      <nz-form-label [nzSpan]="4">国籍</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <ant-bizcode [bizObj]="params" [nameType]="'Country'"></ant-bizcode>
+      </nz-form-control>
+    </div>
+    <div nz-col nzSpan="12">
+      <nz-form-label [nzSpan]="4">姓名</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input  name="name" placeholder="姓名" maxlength="18" required>
+      </nz-form-control>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button nz-button type="button" (click)="close()">关闭</button>
+    <button nz-button [disabled]="!f.form.valid || !f.form.dirty" [nzType]="'primary'" (click)="save()">保存</button>
+  </div>
+</form> -->

@@ -1,0 +1,16 @@
+<ion-content class="outer-content" padding-top>
+  <ion-searchbar ion-fixed [debounce]="350" (ionInput)="search($event)" placeholder="搜索"></ion-searchbar>
+  <ion-list style="margin-top: 40px">
+    <ion-item detail-push *ngFor="let item of items" (click)="NavigationTo(item)">
+      <h2>{{item.ClassName }} {{item.Name }}</h2>
+      <p>{{item.ApplyDate|stringToDate}}</p>
+    </ion-item>
+  </ion-list>
+  <div *ngIf="items.length <= 0" style="text-align: center;margin-top: 30%"><img src="assets/images/1@2x_2.png">没有更多内容！
+  </div>
+  <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <div style="text-align: center;color: #8e9093" *ngIf="!moreData">我是有底线的！</div>
+</ion-content>

@@ -1,0 +1,196 @@
+ul,
+li,
+p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.room {
+    background: #f8f8f8;
+    width: 100%;
+    overflow: hidden;
+}
+
+.top {
+    width: 100%;
+    height: 130px;
+    position: relative;
+    background: -webkit-linear-gradient(to bottom left, #7998F0, #7FB4FF), url("assets/images/sushe3.png") no-repeat 7px 100%;
+    /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(to top right, #7998F0, #7FB4FF), url("assets/images/sushe3.png") no-repeat 7px 100%;
+    /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(to top right, #7998F0, #7FB4FF), url("assets/images/sushe3.png") no-repeat 7px 100%;
+    /* Firefox 3.6 - 15 */
+    background: url("assets/images/sushe3.png") no-repeat 98% 7px, linear-gradient(to top right, #7998F0, #7FB4FF);
+    /* 标准的语法 */
+}
+
+.room_info1 {
+    height: 100%;
+    float: left;
+    padding-top: 30px;
+    margin:0px 50px 0px 40px;
+}
+
+.room_info2 {
+    /* float: left; */
+    height: 100%;
+    padding-top: 30px;
+}
+
+.room_name {
+    font-size: 16px;
+    color: #FFFFFF;
+}
+
+.room_sex {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.room_sex span {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    display: inline-block;
+}
+
+.room_sex span img {
+    width: 100%;
+    height: 100%;
+}
+
+.room_sex .ml-20 {
+    margin-left: 20px;
+}
+
+.room_info_p {
+    font-size: 14px;
+    color: #FFFFFF;
+    line-height: 25px;
+}
+
+.detail {
+    margin: 10px 40px 40px;
+}
+
+.stu {
+    margin: 8px;
+    display: inline-block;
+    vertical-align: bottom;
+    width: 190px;
+    height: 228px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.stu_sex {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-left: 3px;
+}
+
+.icon {
+    margin: 10px 0;
+    width: 106px;
+    height: 134px;
+}
+
+.font14 {
+    font-size: 14px;
+}
+
+.font12 {
+    font-size: 12px;
+}
+
+.color-3E3E3E {
+    color: #3E3E3E
+}
+
+.color-FB5F2D {
+    color: #FB5F2D;
+}
+
+.color-666 {
+    color: #666666
+}
+
+.mark {
+    margin-top: 12px;
+}
+
+.mark div {
+    line-height: 28px;
+    font-size: 14px;
+    color: #4A4A4A;
+    margin: 0px;
+    padding: 0px;
+}
+
+.mark div .mark_tips {
+    font-weight: bold;
+}
+
+.linechart {
+    height: 260px;
+    width: 100%;
+    background: #ffffff;
+}
+
+.page_back {
+    display: block;
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    position: fixed;
+    right: 5px;
+    bottom: 10px;
+}
+
+.page_back img {
+    width: 100%;
+    height: 100%;
+    border: 0px;
+}
+
+:host ::ng-deep .ant-table-bordered .ant-table-body>table {
+    background: #FFFFFF;
+    box-shadow: 0 2px 5px 0 #E3E3E3;
+    border: none;
+    border-width: 0px;
+}
+
+:host ::ng-deep .ant-table {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.65);
+    overflow: hidden;
+    position: relative;
+    border-radius: 0px 4px 0 0;
+}
+
+:host ::ng-deep .ant-table table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: left;
+    border-radius: 0px 4px 0 0;
+    overflow: hidden;
+}
+
+.ant-table-thead>tr>th {
+    background: #4972F0;
+    opacity: 0.9;
+    font-weight: 500;
+    transition: background .3s ease;
+    text-align: left;
+    color: #ffffff;
+}
+
+.ant-table-thead>tr>th,
+.ant-table-tbody>tr>td {
+    padding: 8px 8px;
+    word-break: break-all;
+}

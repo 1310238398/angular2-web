@@ -1,0 +1,46 @@
+<ion-content class="absolute">
+  <p class="wain-txt center" *ngIf="Type == '1'">
+    <span class="db">可在班级空间中设置班委后,由班委负责</span>  
+    <span class="db">班委调整后需要经过辅导员审批才可生效</span> 
+  </p>
+  <div class="info_list">
+    <ion-list radio-group [(ngModel)]="redioStu" (ngModelChange)="checkprint()">
+      <ion-item *ngFor="let stu of studentData">
+        <ion-radio [value]="stu.IntelUserCode" checked></ion-radio>
+        <ion-label item-start class="username">{{stu.Name}}</ion-label>
+        <ion-label item-end class="useraddress" *ngIf="stu.status == ''">
+          {{stu.StatusSortName}}
+        </ion-label>
+        <ion-label item-end class="useraddress" *ngIf="stu.status == '0'">
+          <img class="status-img" src="assets/imgs/shenpizhong.png" alt="">{{stu.StatusSortName}}
+        </ion-label>
+        <ion-label item-end class="useraddress" *ngIf="stu.status == '2'">
+          <span class="dib middle">{{stu.StatusSortName}}</span>
+        </ion-label>
+      </ion-item>
+      <div class="line"></div>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer class="ion-footer" *ngIf="submitIng">
+  <ion-toolbar>
+    <button ion-button (click)="setDormInfo()">设置学生状态</button>
+  </ion-toolbar>
+</ion-footer>
+
+<!-- 学生状态弹框 -->
+<div class="ssc-ov fixed" *ngIf="mengGo"></div>
+<div class="absolute tabStatus" *ngIf="mengGo">
+  <p class="center fn16 tabStatus-title">请设置学生状态</p>
+  <ion-list radio-group [(ngModel)]="relationship">
+    <ion-item class="tabStatus-li" *ngFor="let data of studentStatus">
+      <ion-label>{{data.Name}}</ion-label>
+      <ion-radio [value]="data.Code" checked></ion-radio>
+    </ion-item>
+  </ion-list>
+
+  <p class="center tabStatus-btn-wrap">
+    <button ion-button outline (click)="cannelBtn()">取消</button>
+    <button ion-button color="light" (click)="presentConfirm()">确定</button>
+  </p>
+</div>

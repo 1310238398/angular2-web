@@ -1,0 +1,58 @@
+page-informationfilling {
+    .item-ios ion-thumbnail img {
+        width: 86px;
+        height: 113px;
+        padding-left: 10px;
+    }
+    .topbtn {
+        width: 30%;
+        background: none;
+        color: blue;
+    }
+    .toolbar-background-ios {
+        background: #ffffff;
+    }
+    .list {
+        margin-bottom: 10px;
+    }
+    .toolbar-ios .segment-button {
+        max-width: 50%;
+        height: 3.0rem;
+        font-size: 1.2rem;
+        line-height: 2.9rem;
+    }
+    .xiangxi {
+        margin: 0 17px 5px 17px;
+    }
+    .xinxiyuanjiao {
+        height: 30px;
+        background-color: #f1f1f1;
+        margin-bottom: 5px;
+        border-radius: 10px;
+    }
+    .xinxileft {
+        font-size: 12pt;
+        color: #808080;
+        padding-left: 17px;
+    }
+    .text-input {
+        text-align: right;
+        float: right;
+        font-size: 12pt;
+        color: #4d4d4d;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        //margin: 0px 0px 0px 17px;
+    }
+    .text {
+        float: right;
+        // font-size: 12pt;
+        // color: #4d4d4d;
+        // margin: -22px 0px 0px 17px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        // max-width: 77%;
+    }
+}

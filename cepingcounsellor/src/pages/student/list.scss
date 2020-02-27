@@ -1,0 +1,54 @@
+page-list {
+  // .explain {
+  //   margin: 20px;
+  //   color: #999;
+  //   font-size: 16px;
+  // }
+  // .explain p{
+  //   margin: 0;
+  //   padding: 0;
+  //   line-height: 20px;
+  //   margin-top: 5px;
+  // }
+  // .gray{
+  //   background-color: #e2e2e2;
+  // }
+  .fixed-content{
+    background: #ffffff;
+    }
+  .test p{
+    font-family:PingFangSC-Medium;
+    font-size:18px;
+    color:#ffffff;
+    letter-spacing:0.22px;
+    text-align:center;
+    // padding: 0 0;
+  }
+  .academy{
+    // display: table;
+
+    background-image:linear-gradient(-53deg, #2cd1ff  0%, #41bcff 100%);
+    border-radius:16px;
+    width:83%;
+    height:75px;
+    line-height: 75px;
+    
+    margin:auto;
+    margin-bottom: 25px;
+    box-shadow: 0px 10px 20px  #c5e8f3;
+    
+    
+  }
+  .teacher{
+    // display: table;
+    background-image:linear-gradient(64deg,#1fc863 6%, #86e57c 92%);
+    border-radius:16px;
+    width:83%;
+    height:75px;
+    line-height: 75px;
+   
+    margin:auto;
+    margin-bottom:25px;
+    box-shadow: 0px 10px 20px  #d3f8cf;
+  }
+}

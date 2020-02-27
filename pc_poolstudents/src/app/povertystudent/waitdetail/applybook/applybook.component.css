@@ -1,0 +1,45 @@
+.fl{float: left;}
+.fr{float: right;}
+.cp{cursor: pointer;}
+.center{text-align: center;}
+.dib{display: inline-block;}
+.overh{overflow: hidden;}
+.relative{position: relative;}
+.absolute{position: absolute}
+.fixed{position: fixed}
+.loading-w{top:200px;left:50%;}
+.mr{margin:0 auto}
+
+.img-warp-box{width: 150px;margin:15px 10px 0 0;}
+
+.comb-css .img-warp li{width: 150px;height:150px;margin:15px 10px 0 0;}
+.comb-css .img-warp li img{width: 150px;cursor: pointer;}
+
+.combtm-css .img-warp li{width: 150px;height:170px;margin:15px 10px 0 0;}
+.combtm-css .img-warp li p{width: 150px;height:150px;}
+.combtm-css .img-warp li img{width: 150px;}
+.combtm-css .img-warp li .img-name{width: 150px;height:20px;line-height: 20px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+<ion-content class="index-cont">
+    <P class="fn18 color4a center" style="margin:20px 0;">{{dataSet.title}}</P>
+    <img class="absolute" style="width: 50px;top:5px;right:10px;" *ngIf="dataObj.status == 9" src="assets/images/yiwncheng@2x.png"
+        alt="">
+    <img class="absolute" style="width: 50px;top:5px;right:10px;" *ngIf="dataSet.status == '2' && dataObj.status == 1"
+        src="assets/images/shenpizhong@2x.png" alt="">
+    <img class="absolute" style="width: 50px;top:5px;right:10px;" *ngIf="dataSet.status == '1' && dataObj.status == 1"
+        src="assets/images/shenpizhong@2x.png" alt="">
+    <img class="absolute" style="width: 50px;top:5px;right:10px;" *ngIf="dataSet.status == '3'" src="assets/images/butongguo@2x.png"
+        alt="">
+
+    <div class="info-box overh">
+        <ul>
+            <li class="css-li">
+                <span class="color9b fn14 fl" style="width: 21%;">奖项名称 : </span>
+                <span class="color4a fn14 fr overh" style="width: 79%;text-align: right;">{{dataSet.WinningName}}</span>
+            </li>
+            <li class="css-li">
+                <span class="color9b fn14 fl">级别 : </span>
+                <span class="color4a fn14 fr">{{dataSet.RewardLevelsName}}</span>
+            </li>
+            <li class="css-li">
+                <span class="color9b fn14 fl">名次 : </span>
+                <span class="color4a fn14 fr">{{dataSet.WinningOrderName}}</span>
+            </li>
+            <li class="css-li">
+                <span class="color9b fn14 fl">获奖时间 : </span>
+                <span class="color4a fn14 fr">{{dataSet.AwardDate}}</span>
+            </li>
+            <li style="margin-top:10px;">
+                <p class="color9b fn14">获奖证书 : </p>
+                <div class="img-box overh">
+                    <img *ngFor="let item of imagepath;let index=index;" (click)="navPreview({time:false,index:index,items:imagepath})"
+                        [src]="item.ThumbnailURL" alt="">
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="remark-wrap" *ngIf="dataSet.status == '3'">
+        <p class="colorf4 fn14">不通过原因</p>
+        <p class="color4a fn14" style="margin-top:10px;">{{dataSet.remarktxt}}</p>
+    </div>
+
+</ion-content>

@@ -1,0 +1,15 @@
+<ion-content padding-top>
+  <div class="cover">
+    <div class="content overh" style="padding:0 15px;">
+      <span class="change-title">申请变更原因</span>
+      <div class="pro-text overh center relative">
+        <textarea class='file-message mr' #textarea name="filetext" [(ngModel)]="filetext" (ngModelChange)="txtChange(textarea.value)"
+          style="resize:none" maxlength="300" cols="1" rows="3"></textarea>
+        <p class="file-num absolute">{{values}}</p>
+      </div>
+    </div>
+    <div class="pro-btn center">
+      <button ion-button color="secondary" [disabled]="numdisb" (click)="setcokie()">确定</button>
+    </div>
+  </div>
+</ion-content>

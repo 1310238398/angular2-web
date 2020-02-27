@@ -1,0 +1,23 @@
+<div class="title base font20 text-center">班级的未完成人数可通过"辅导员测评"功能查看</div>
+<div class="mm exam-counsellor">
+    <nz-table #editRowTable nzBordered [nzData]="dataSet" [nzShowPagination]="false" [nzLoading]="loading" [nzFrontPagination]="false">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>班级</th>
+                <th>评议进度</th>
+                <th>评议情况</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of editRowTable.data;let i=index;">
+                <td>{{i +1}}</td>
+                <td>{{data.ClassName}}</td>
+                <td>{{data.rate}}</td>
+                <td>{{data.Score}}分</td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
+
+<a (click)="goBack()"><img class="b-cancle fixed" src="assets/images/back.png"></a>

@@ -1,0 +1,64 @@
+<ion-content class="index-cont">
+    <form name="f">
+        <div class="row-mar overh">
+            <P class="fn18 color4a center" style="margin:15px 0;">辅导员(班主任){{item.name}}</P>
+            <div class="cont-form">
+                <ul>
+                    <li class="overh">
+                        <p class="text-css">
+                            <i style="color: #ff0000;">*</i> 奖项名称</p>
+                        <ion-item>
+                            <ion-input type="text" maxlength="18" [(ngModel)]="LeaveApply.Name" name="Name"></ion-input>
+                        </ion-item>
+                    </li>
+                    <li>
+                        <p class="text-css">
+                            <i style="color: #ff0000;">*</i> 所获奖项级别</p>
+                        <ion-item>
+                            <ion-select [disabled]="selestFB" [(ngModel)]="LeaveApply.JiBie" interface="action-sheet" [cancelText]="displayTxt" name="JiBie">
+                                <ion-option [value]='item' *ngFor="let item of JiBieTypes">{{item.CodeName}}
+                                </ion-option>
+                            </ion-select>
+                        </ion-item>
+                    </li>
+                    <li>
+                        <p class="text-css">
+                            <i style="color: #ff0000;">*</i> 名次</p>
+                        <ion-item>
+                            <ion-select [disabled]="selestMC" [(ngModel)]="LeaveApply.MingCi" interface="action-sheet" [cancelText]="displayTxt" name="MingCi">
+                                <ion-option [value]='item' *ngFor="let item of MingCiTypes">{{item.CodeName}}
+                                </ion-option>
+                            </ion-select>
+                        </ion-item>
+                    </li>
+                    <li>
+                        <p class="text-css">
+                            <i style="color: #ff0000;">*</i> 获奖时间</p>
+                        <ion-item>
+                            <ion-datetime id="StartDate" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MMM DD" monthShortNames="1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月"
+                                [(ngModel)]="LeaveApply.StartDate" doneText="完成" cancelText="取消" [max]="TaskTime" name="StartDate"></ion-datetime>
+                        </ion-item>
+                    </li>
+                    <li>
+                        <p class="text-css">
+                            <i style="color: #ff0000;">*</i> 证明材料(证书)</p>
+                        <div class="upload overh">
+                            <span class="container fl relative" *ngIf="CertifyImgs.length<1">
+                                <input type="file" value="file" class="hiddenFile" (change)="handleFiles($event)">
+                                <img src="assets/images/add.png" style="width: 100%;">
+                            </span>
+                            <div class="Certify fl relative center" *ngFor="let item of CertifyImgs;let index=index;" [ngClass]="{'underimg':index==4}">
+                                <img class="delete-icon absolute" src="assets/images/delete.png" (click)="deleteCertify($event,index)">
+                                <img class="file-img" [src]="DomSanitizer.bypassSecurityTrustUrl(item.AttachmentURL)">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+    <div class="center" style="margin:20px;">
+        <button class="submit-tab mr fn16" ion-button [disabled]="subStop" (click)="tabAlert()" block>提交</button>
+    </div>
+</ion-content>

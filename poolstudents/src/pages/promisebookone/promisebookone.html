@@ -1,0 +1,35 @@
+<ion-content padding-top>
+
+  <div class="cover">
+    <div class="content">
+      <span class="db fn18">我承诺</span>
+      <p class="pro-text fn16">所填写指标信息真实、准确，无虚假行为。否则，将自愿取消认定资格，以及由此带来的其它相关责任。</p>
+    </div>
+    <div class="sign-wrap overh">
+      <div class="sign fr">
+        <p class="sign1">
+          <span>承诺人：</span>
+          <span>
+            <img *ngIf="itemsSrc != ''" style="vertical-align: middle;" [src]="itemsSrc" width="100" height="35">
+          </span>
+        </p>
+        <p class="sign2">时&nbsp;&nbsp;&nbsp;&nbsp;间：
+          <span>{{nowTime}}</span>
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="pro-btn center">
+      <button ion-button color="dark" outline (click)="NavtoIndex()">取消</button>
+      <button *ngIf="dataBt == underfine" ion-button color="secondary" (click)="goSign()">签署</button>
+      <button *ngIf="dataBt == '1'" [disabled]="btnNotCan" ion-button color="secondary" (click)="subThree()">提交</button>
+    </div>
+
+
+
+  </div>
+
+
+</ion-content>

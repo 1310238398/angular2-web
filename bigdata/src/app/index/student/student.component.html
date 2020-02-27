@@ -1,0 +1,188 @@
+<div class="card bg-total" style="height:auto">
+    <img class="icon-right" src="assets/images/img1.png" alt="">
+    <div class="base-font font20 d-ib white">学生查询</div>
+    <div class="p-ab-r base-font font14 d-ib" *ngIf="!Advanced">
+        <a class="white" (click)="onAdvanced()">高级查询</a>
+    </div>
+    <div class="p-ab-r base-font font14 d-ib white" *ngIf="Advanced"><a class="white" (click)="onAdvanced()">全文搜索</a></div>
+
+    <div class="p20" *ngIf="!Advanced">
+        <nz-input-group nzSuffixIcon="anticon anticon-search">
+            <input nz-input placeholder=" 请输入（多个关键词请使用空格分隔或使用高级查询)" [(ngModel)]="searchValue">
+        </nz-input-group>
+        <button nz-button (click)="AllesSearch()">查询</button>
+    </div>
+    <div *ngIf="Advanced">
+        <form #f="ngForm" nz-form>
+            <nz-row nzGutter="16">
+                <nz-col nzSm='4' nzXs="8">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input nz-input class="col-w-important" [(ngModel)]="searchObj.UserCode" name="UserCode" placeholder="学号">
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-col>
+                <nz-col nzSm='4' nzXs="8">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input nz-input class="col-w-important" [(ngModel)]="searchObj.Name" name="Name" placeholder="姓名">
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-col>
+                <nz-col nzSm='4' nzXs="8">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input nz-input class="col-w-important" [(ngModel)]="searchObj.Phone" name="Phone" placeholder="手机号">
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-col>
+                <nz-col nzSm='4' nzXs="8">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-select class="col-w-important" [(ngModel)]="searchObj.Sex" name="Sex" [nzPlaceHolder]="'性别'" [nzShowSearch]="true">
+                                <nz-option *ngFor="let item of Sexs" [nzLabel]="item.ItemName" [nzValue]="item.ItemCode"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-col>
+                <nz-col nzSm='4' nzXs="8">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-select class='col-w-important' [nzPlaceHolder]="'校区'" [nzShowSearch]="true" [(ngModel)]="searchObj.Campus" name="Campus" nzAllowClear>
+                                <nz-option *ngFor="let option of Campuss" [nzLabel]="option.CampusName" [nzValue]="option.CampusCode">
+                                </nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-col>
+                <nz-col nzSm='4' nzXs="8">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-select class="col-w-important" [nzPlaceHolder]="'学院'" [nzShowSearch]="true" [(ngModel)]="searchObj.Academy" name="Academy" nzAllowClear>
+                                <nz-option *ngFor="let option of Academys" [nzLabel]="option.AcademyName" [nzValue]="option.AcademyCode"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-col>
+            </nz-row>
+            <nz-row nzGutter="16">
+                <nz-col nzSm='4' nzXs="8">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-select class='col-w-important' [nzPlaceHolder]="'专业'" [nzShowSearch]="true" [(ngModel)]="searchObj.Major" name="Major" (click)="onSelect('major')" nzAllowClear>
+                                <nz-option *ngFor="let option of Majors" [nzLabel]="option.MajorName" [nzValue]="option.MajorCode">
+                                </nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-col>
+                <nz-col nzSm='4' nzXs="8">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-select class="col-w-important" [nzPlaceHolder]="'年级'" [(ngModel)]="searchObj.Grade" name="Grade" [nzShowSearch]="true" nzAllowClear>
+                                <nz-option *ngFor="let option of Grades" [nzLabel]="option.GradeName" [nzValue]="option.GradeName"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-col>
+                <nz-col nzSm='4' nzXs="8">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-select class="col-w-important" [nzPlaceHolder]="'班级'" [(ngModel)]="searchObj.Class" name="Class" (click)="onSelect('class')" [nzShowSearch]="true" nzAllowClear>
+                                <nz-option *ngFor="let option of Classs" [nzLabel]="option.ClassName" [nzValue]="option.ClassCode"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-col>
+                <nz-col nzSm='4' nzXs="8">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input nz-input class="col-w-important" readonly [(ngModel)]="StudentAreaName" name="StudentAreaName" (click)="onStudentAreaCode()" placeholder="生源地">
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-col>
+                <nz-col nzSm='4' nzXs="8">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-select class="col-w-important" [nzPlaceHolder]="'政治面貌'" [(ngModel)]="searchObj.Political" name="Political" [nzShowSearch]="true" nzAllowClear>
+                                <nz-option *ngFor="let option of Politicals" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-col>
+                <nz-col nzSm='4' nzXs="8">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-select class="col-w-important" [nzPlaceHolder]="'民族'" [(ngModel)]="searchObj.Nationality" name="Nationality" [nzShowSearch]="true" nzAllowClear>
+                                <nz-option *ngFor="let option of Nationalitys" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-col>
+            </nz-row>
+            <nz-row nzGutter="16">
+                <nz-col nzSm='4' nzXs="8">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-select class="col-w-important" [nzPlaceHolder]="'学生类型'" [(ngModel)]="searchObj.StudentType" name="StudentType" [nzShowSearch]="true" nzAllowClear>
+                                <nz-option *ngFor="let option of StudentTypes" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-col>
+                <nz-col nzOffset="12" nzSm='5' nzXs="8" style="text-align: right;">
+                    <button nz-button (click)="onEsHightSearch(true)">查询</button>
+                    <button nz-button style="margin-left:8px" (click)="resetForm(f)">重置</button>
+                </nz-col>
+            </nz-row>
+        </form>
+    </div>
+
+</div>
+<div *ngIf="!loading">
+    <div class="title base font12 color-666" *ngIf="studentLists.length>0">
+        共{{total}}条查询结果   （一次查询最多展示50条结果）
+    </div>
+
+    <div class="student">
+        <div class="body base" *ngFor="let stu of studentLists">
+            <div [routerLink]="['/info']" [queryParams]="{uid:stu.IntelUserCode}">
+                <img class="icon" onerror='this.src="assets/images/default.png"' [src]="stu.PhotoURL||'assets/images/default.png'" alt="">
+                <div class="font14  color-3E3E3E">{{stu.Name}}</div>
+                <div class="font12  color-FB5F2D">{{stu.UserCode}}</div>
+                <div class="font12  color-666 b-bottom-dash">学院:{{stu.Academy}}</div>
+            </div>
+            <div class="p-relative mr">
+                <div class="font12 m2 hw" *ngFor="let light of stu.Highlight.slice(0,2);let index=index">
+                    <span>{{light.Key}}:</span>
+                    <span class="color-FB5F2D">{{light.Value}}
+            <!--<span class="color-666" *ngIf="index<1&&stu.Highlight.length>1">/</span>-->
+                    </span>
+                    <i *ngIf="stu.Highlight.length>1&&!stu.More" (click)="expandMore(stu)" class="p-absolute icon-expand color-D5D5D5  anticon anticon-caret-down"></i>
+                    <i *ngIf="stu.Highlight.length>1&&stu.More" (click)="expandMore(stu)" class="p-absolute icon-expand color-D5D5D5  anticon anticon-caret-up"></i>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="pagination text-center" *ngIf="studentLists.length">
+        <nz-pagination [(nzPageIndex)]="page.Page" [nzTotal]="total>50?50:total" (nzPageIndexChange)="onSearch(false)" [nzSize]="'large'"></nz-pagination>
+    </div>
+    <div *ngIf="studentLists.length==0">
+        <div class="kong">
+            <img src="assets/images/null.png" alt="">
+            <div *ngIf="!errText" class="base color-666 texr">没有查询到相关学生信息</div>
+            <div *ngIf="errText&&!studentLists.length&&Advanced" class="text-center base font16 color-FB5F2D">{{errText}}</div>
+        </div>
+
+    </div>
+</div>
+
+
+<div *ngIf="loading" class="loaing">
+    <nz-spin nzTip='正在加载...'>
+    </nz-spin>
+</div>
+
+<a [routerLink]="['/']"><img class="b-cancle" src="assets/images/back.png"></a>

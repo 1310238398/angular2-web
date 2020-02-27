@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <div class="modal-title">{{data.SscRecordId? '编辑' : '添加'}}-特殊群体</div>
+</div>
+<form #f="ngForm" nz-form>
+
+    <div nz-row nzType="flex" nzJustify="center" [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">项目类型</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'CharacterProjectType'" [PlaceHolder]="'项目类型'" [ModelName]="'projectType'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row nzType="flex" nzJustify="center" [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">选项</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'StudSpecial'" [PlaceHolder]="'选项'" [ModelName]="'specialCharacterCode'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row nzType="flex" nzJustify="center" [nzGutter]="8">
+
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">情况说明</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <textarea nz-input name="description" placeholder="情况说明" [(ngModel)]="params.description" maxlength="100" required [nzAutosize]="{ minRows: 2, maxRows: 6 }"></textarea>
+            </nz-form-control>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button nz-button type="button" (click)="close()">关闭</button>
+        <button nz-button class="btn-zj-color" [disabled]="!f.form.valid||!params.projectType||!params.specialCharacterCode" [nzType]="'primary'" (click)="save()">保存</button>
+    </div>
+</form>.

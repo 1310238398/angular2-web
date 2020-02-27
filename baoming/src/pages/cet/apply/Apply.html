@@ -1,0 +1,23 @@
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <p>报名科目：{{CetApply.ExamSubject?.CodeName}}</p>
+      <div class="image-area"><img [src]="imgsrc||''"></div>
+      <p>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：{{UserInfo?.Name}}</p>
+      <p>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：{{UserInfo?.SexName}}</p>
+      <p>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：{{UserInfo?.UserCode}}</p>
+      <p>证件类型：{{UserInfo?.IdentityType}}</p>
+      <p>证件号码：{{UserInfo?.IdentityNum}}</p>
+      <p>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历：{{UserInfo?.CredentialsType}}</p>
+      <p>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;制：{{UserInfo?.ProgramLength}}</p>
+      <p>入学年份：{{UserInfo?.EntranceDate}}</p>
+      <p>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：{{UserInfo?.Grade}}</p>
+      <p>院（系）：{{UserInfo?.AcademyName}}</p>
+      <p>专&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：{{UserInfo?.Major}}</p>
+    </ion-card-content>
+  </ion-card>
+  <div class="button-padding">
+    <button ion-button color="zj-main-color" (click)="onInfoEorr()" icon-left>信息有误</button>
+    <button ion-button color="zj-main-color" (click)="onSign()" icon-right>确认报名</button>
+  </div>
+</ion-content>

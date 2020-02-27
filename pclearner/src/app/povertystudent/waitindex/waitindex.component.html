@@ -1,0 +1,144 @@
+<div class="content">
+    <div class="components-table-demo-control-bar">
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-center">
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>学号</label>
+                </div>
+                <div nz-form-control>
+                    <nz-input style="width: 120px;" [(ngModel)]="searchObj.UserCode" name="UserCode" [nzSize]="'middle'"></nz-input>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>姓名</label>
+                </div>
+                <div nz-form-control>
+                    <nz-input style="width: 120px;" [(ngModel)]="searchObj.Name" name="Name" [nzSize]="'middle'"></nz-input>
+                </div>
+            </div>
+
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>年级</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.Grade" name="Grade" nzAllowClear (ngModelChange)="loadClass()">
+                        <nz-option *ngFor="let option of optiongrade" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>班级</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" #class [nzPlaceHolder]="''" [(ngModel)]="searchObj.Class" name="Class" nzAllowClear>
+                        <nz-option *ngFor="let option of optionclass" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>状态</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.Status" name="Status" nzAllowClear>
+                        <nz-option *ngFor="let option of optionstatus" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-col [nzSpan]="24" style="text-align: right;">
+                    <button nz-button [disabled]="httpService.loading" [nzType]="'primary'" (click)="onSearch(true)">查询</button>
+                    <button nz-button (click)="resetForm(f)">重置</button>
+                    <span class="help-btn" (click)="info(contentTpl)">帮助</span>
+                </div>
+            </div>
+
+            
+            <ng-template #contentTpl>
+                    <div>
+                      <p>该功能中显示的数据是所有提交过资料的学生及其最新申请认定资料。学生提交/修改的信息都会先上传到该功能，任何提交/修改必须通过您的审批后才能更新，更新的数据在最近的复核中将参与认定</p>
+                    </div>
+            </ng-template>
+        </form>
+    </div>
+
+
+    <div style="margin-top:20px;">
+        <button style="margin-bottom: 5px;" nz-button [nzType]="'primary'" (click)="showModal()">
+            <span>同步学生资料进行认定</span>
+        </button>
+        <nz-modal [nzVisible]="isVisible" [nzTitle]="'同步学生资料进行认定'" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)"
+            (nzOnOk)="handleOk($event)">
+            <ng-template #modalContent>
+                <p>该步操作将会把满足初次认定/复核的学生的认定申请信息进行同步，同步到待认定功能的相关任务中，同步的数据是学生最新的通过审批的信息。请点击开始同步后等待同步完成。</p>
+                <br>
+            </ng-template>
+        </nz-modal>
+        <nz-table #nzTable [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [(nzTotal)]="total" [(nzPageIndex)]="page.Page" [(nzPageSize)]="page.PageSize" [nzBordered]="true" (nzPageIndexChange)="onSearch()">
+                <thead nz-thead>
+                    <tr>  
+                        <th nz-th><label nz-checkbox [(ngModel)]="allChecked" (ngModelChange)="updateAllChecked()" [nzIndeterminate]="indeterminate">
+                            </label></th>
+                        <th nz-th><span>学号</span></th>
+                        <th nz-th><span>姓名</span></th>
+                        <th nz-th><span>班级</span></th>
+                        <th nz-th><span>申请所需资料</span></th>
+                        <th nz-th><span>经济情况调查问卷</span></th>
+                        <th nz-th><span>学生自评调查问卷</span></th>
+                        <th nz-th><span>变更理由</span></th>
+                        <th nz-th><span>状态</span></th>
+                        <th nz-th><span>申请时间</span></th>
+                    </tr>
+                </thead>
+                <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                        <td nz-td>
+                            <label nz-checkbox [disabled]="data.Status != '1' || data.Tasking == '0'?true:false" [(ngModel)]="data.checked" (ngModelChange)="updateSingleChecked()">
+                            </label>
+                        </td>
+                        <td nz-td>{{data.UserCode}}</td>
+                        <td nz-td>{{data.Name}}</td>
+                        <td nz-td>{{data.Class}}</td>
+                        <td nz-td>
+                            <a [routerLink]="['waitdetail',{IntelUserCode: data.IntelUserCode, categray: '1'}]" (click)="sesstionCut()">
+                                <span>查看</span>
+                                <span *ngIf="data.AttachIsChange == '1'">(新)</span>
+                            </a>
+                        </td>
+                        <td nz-td>
+                            <a [routerLink]="['waitdetail',{IntelUserCode: data.IntelUserCode, categray: '2'}]" (click)="sesstionCut()">
+                                <span>{{data.EnconomicScore}}</span>
+                                <span *ngIf="data.EnconomicIsChange == '1'">(新)</span>
+                            </a>
+                        </td>
+                        <td nz-td>
+                            <a [routerLink]="['waitdetail',{IntelUserCode: data.IntelUserCode, categray: '3'}]" (click)="sesstionCut()">
+                                <span>{{data.SelfAssessmentScore}}</span>
+                                <span *ngIf="data.SelfAssessmentIsChange == '1'">(新)</span>
+                            </a>
+                        </td>
+                        <td nz-td>
+                            <span *ngIf="data.IsChange == '1'">
+                                <a [routerLink]="['waitdetail',{IntelUserCode: data.IntelUserCode, categray: '4'}]">查看</a>
+                            </span>
+                        </td>
+                        <td nz-td>
+                            <span *ngIf="data.Status == '0'"><a [routerLink]="['waitdetail',{IntelUserCode: data.IntelUserCode, categray: '5'}]" (click)="sesstionCut()">点击审批</a></span>
+                            <span *ngIf="data.Status == '1' && data.Tasking == '1'">未同步</span>
+                            <span *ngIf="data.Status == '1' && data.Tasking == '0'">未同步(无认定任务)</span>
+                            <span *ngIf="data.Status == '2'">已拒绝</span>
+                        </td>
+                        <td nz-td>{{data.LastTime}}</td>
+                    </tr>
+                </tbody>
+        </nz-table>
+
+    </div>
+
+</div>

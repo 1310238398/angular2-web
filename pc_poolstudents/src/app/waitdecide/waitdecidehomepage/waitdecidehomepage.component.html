@@ -1,0 +1,361 @@
+<div class="content wait-homepage">
+    <h2 class="center">{{taskData.TaskName}}</h2>
+    <p class="center" style="margin:10px 0">开放时间: {{taskData.created}} 至 {{taskData.EndDate}}</p>
+
+    <!-- 辅导员 学院领导展示页面 -->
+    <div style="margin-top:20px;" *ngIf="userIdentity != 'FundCenter'">
+        <nz-spin *ngIf="loadingBt" class="loading-box fixed" [nzSize]="'large'"></nz-spin>
+        <nz-table #nzTable [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [nzBordered]="true"
+            [nzIsPagination]="false">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th colspan="11" class="bgf7">
+                        <span *ngIf="CounselorStatus=='10' && AcadamyStatus=='10' && ApprovalStatus=='0'" class="fn16">认定未完成</span>
+                        <span *ngIf="CounselorStatus=='20' && AcadamyStatus=='10' && ApprovalStatus=='0'" class="fn16"
+                            style="color: green;">认定已完成、未提交</span>
+                        <span *ngIf="CounselorStatus=='20' && AcadamyStatus=='20' && ApprovalStatus=='0'" class="fn16">学院领导审批中</span>
+                        <span *ngIf="ApprovalStatus=='11'" class="fn16">学院领导审批通过,资助中心审批中</span>
+                        <span *ngIf="ApprovalStatus=='12'" class="fn16 cp" style="color: #ff0000;" (click)="refuseFunc(RefuseReason)">学院领导审批不通过、点击查看原因</span>
+                        <span *ngIf="ApprovalStatus=='21'" class="fn16">资助中心审核通过</span>
+                        <span *ngIf="ApprovalStatus=='22'" class="fn16 cp" style="color: #ff0000;" (click)="refuseFunc(RefuseReason)">资助中心审核不通过、点击查看原因</span>
+                    </th>
+                </tr>
+                <tr>
+                    <th nz-th rowspan="2">
+                        <span class="bold">班级</span>
+                    </th>
+                    <th nz-th colspan="4">
+                        <span class="bold">辅导员认定意见</span>
+                    </th>
+                    <th nz-th colspan="5">
+                        <span class="bold">评议结果</span>
+                    </th>
+                    <th nz-th rowspan="2">
+                        <span>结果查看</span>
+                    </th>
+                </tr>
+                <tr>
+                    <th nz-th>
+                        <span>待认定学生(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>直接认定(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>一票否决(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>小组评议(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>待评议学生(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>特殊困难(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>困难(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>一般困难(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>不予评级(人)</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                    <td nz-td>{{data.ClassName}}</td>
+                    <td nz-td>
+                        <a [ngStyle]="{'color':data.UnConfirmCount == '0' ? '' : 'red' }" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'0',RecognitionLevel:'0'}]">{{data.UnConfirmCount}}</a>
+                    </td>
+                    <td nz-td>
+                        <a [ngStyle]="{'color':data.CountAppro41 == data.Count41 ? '' : 'red' }" *ngIf="data.Count41 != '0'"
+                            [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'41',RecognitionLevel:''}]">{{data.CountAppro41}}/{{data.Count41}}</a>
+                        <span *ngIf="data.Count41 == '0'">{{data.CountAppro41}}/{{data.Count41}}</span>
+                    </td>
+                    <td nz-td>
+                        <a [ngStyle]="{'color':data.CountAppro42 == data.Count42 ? '' : 'red' }" *ngIf="data.Count42 != '0'"
+                            [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'42',RecognitionLevel:''}]">{{data.CountAppro42}}/{{data.Count42}}</a>
+                        <span *ngIf="data.Count42 == '0'">{{data.CountAppro42}}/{{data.Count42}}</span>
+                    </td>
+                    <td nz-td>
+                        <a [ngStyle]="{'color':data.CountAppro43 == data.Count43 ? '' : 'red' }" *ngIf="data.Count43 != '0'"
+                            [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'43',RecognitionLevel:'1'}]">{{data.CountAppro43}}/{{data.Count43}}</a>
+                        <span *ngIf="data.Count43 == '0'">{{data.CountAppro43}}/{{data.Count43}}</span>
+                    </td>
+                    <td nz-td>
+                        <a style="color:red;" *ngIf="data.Count43Un != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'43',RecognitionLevel:'0'}]">{{data.Count43Un}}</a>
+                        <span *ngIf="data.Count43Un == '0'"> {{data.Count43Un}}</span>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.Count4330 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'43',RecognitionLevel:'87000030'}]">{{data.Count4330}}</a>
+                        <span *ngIf="data.Count4330 == '0'"> {{data.Count4330}}</span>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.Count4320 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'43',RecognitionLevel:'87000020'}]">{{data.Count4320}}</a>
+                        <span *ngIf="data.Count4320 == '0'"> {{data.Count4320}}</span>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.Count4310 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'43',RecognitionLevel:'87000010'}]">{{data.Count4310}}</a>
+                        <span *ngIf="data.Count4310 == '0'"> {{data.Count4310}}</span>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.Count4340 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.ClassCode,Status:'43',RecognitionLevel:'87000040'}]">{{data.Count4340}}</a>
+                        <span *ngIf="data.Count4340 == '0'"> {{data.Count4340}}</span>
+                    </td>
+                    <td nz-td>
+                        <span *ngIf="data.Count4310 != '0' || data.Count4320 != '0' || data.Count4330 != '0'">
+                            <a [routerLink]="['/waitdecide/resultsee',{ClassCode: data.ClassCode}]">查看</a>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+        <div class="center footer-wrap" style="margin:50px 0 50px;">
+            <p class="center" style="margin:0 0 20px;" *ngIf="userIdentity=='Counselor'">
+                <button *ngIf="CounselorStatus == '20' && AcadamyStatus == '10' && taskStatus == '3'" nz-button
+                    [nzType]="'primary'" (click)="changeComplete()">
+                    <span>修改认定结果</span>
+                </button>
+                <button *ngIf="CounselorStatus == '10' && AcadamyStatus == '10' && taskStatus == '3'" nz-button
+                    [nzType]="'primary'" (click)="completeOk()">
+                    <span>完成</span>
+                </button>
+                <button *ngIf="CounselorStatus == '20' && AcadamyStatus == '10' && taskStatus == '3'" nz-button
+                    [nzType]="'primary'" (click)="SubmitAcademic()">
+                    <span>提交</span>
+                </button>
+                <span class="center dib" style="margin:0 0 20px;" *ngIf="ApprovalStatus != '21'">
+                    <button nz-button [nzType]="'primary'" *ngFor="let item of DownloadURLNot" (click)="toastTxt()">
+                        <span>{{item}}级结果导出</span>
+                    </button>
+                </span>
+            </p>
+
+
+            <p class="center" style="margin:0 0 20px;" *ngIf="ApprovalStatus == '21'">
+                <a class="overh" *ngFor="let item of DownloadURL" [href]="item.filename" download="贫困生认定结果">
+                    <button nz-button [nzType]="'primary'">
+                        <span>{{item.grade}}级结果导出</span>
+                    </button>
+                </a>
+            </p>
+
+            <a [routerLink]="['/waitdecide']" *ngIf="(CounselorStatus == '10' || AcadamyStatus == '10') && userIdentity=='Counselor'">返回</a>
+
+            <a [routerLink]="['/waitdecide']" *ngIf="CounselorStatus == '20' && AcadamyStatus == '20' && userIdentity=='Counselor'">
+                <button nz-button [nzType]="'default'">
+                    <span>返回</span>
+                </button>
+            </a>
+            <a [routerLink]="['/waitdecide']" *ngIf="userIdentity=='Leadership'">
+                <button nz-button [nzType]="'default'">
+                    <span>返回</span>
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <!-- 资助中心展示页面 -->
+    <div style="margin-top:20px;" *ngIf="userIdentity=='FundCenter'">
+        <nz-table #nzTable [nzAjaxData]="dataFunding" [nzLoading]="httpService.loading" [nzBordered]="true"
+            [nzIsPagination]="false">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th rowspan="2">
+                        <span class="bold">学院</span>
+                    </th>
+                    <th nz-th colspan="4">
+                        <span class="bold">辅导员认定意见</span>
+                    </th>
+                    <th nz-th colspan="5">
+                        <span class="bold">评议结果</span>
+                    </th>
+                    <th nz-th rowspan="2" style="width: 10%;">
+                        <span>审批进度</span>
+                    </th>
+                    <th nz-th rowspan="2">
+                        <span>认定总人数</span>
+                    </th>
+                    <th nz-th rowspan="2">
+                        <span>认定比例</span>
+                    </th>
+                    <th nz-th rowspan="2">
+                        <span>结果查看</span>
+                    </th>
+                </tr>
+                <tr>
+                    <th nz-th>
+                        <span>待认定学生(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>直接认定(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>一票否决(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>小组评议(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>待评议学生(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>特殊困难(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>困难(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>一般困难(人)</span>
+                    </th>
+                    <th nz-th>
+                        <span>不予评级(人)</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                    <td nz-td>{{data.AcademyName}}</td>
+                    <td nz-td>
+                        <a *ngIf="data.UnConfirmCount != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.AcademyCode,Status:'0',RecognitionLevel:'0'}]">{{data.UnConfirmCount}}</a>
+                        <span *ngIf="data.UnConfirmCount == '0'">{{data.UnConfirmCount}}</span>
+                    </td>
+                    <td nz-td>
+                        <a [ngStyle]="{'color':data.CountAppro41 == data.Count41 ? '' : 'red' }" *ngIf="data.Count41 != '0'"
+                            [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.AcademyCode,Status:'41',RecognitionLevel:''}]">{{data.CountAppro41}}/{{data.Count41}}</a>
+                        <span *ngIf="data.Count41 == '0'">{{data.CountAppro41}}/{{data.Count41}}</span>
+                    </td>
+                    <td nz-td>
+                        <a [ngStyle]="{'color':data.CountAppro42 == data.Count42 ? '' : 'red' }" *ngIf="data.Count42 != '0'"
+                            [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.AcademyCode,Status:'42',RecognitionLevel:''}]">{{data.CountAppro42}}/{{data.Count42}}</a>
+                        <span *ngIf="data.Count42 == '0'">{{data.CountAppro42}}/{{data.Count42}}</span>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.Count43 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.AcademyCode,Status:'43',RecognitionLevel:'1'}]">{{data.CountAppro43}}/{{data.Count43}}</a>
+                        <span *ngIf="data.Count43 == '0'">{{data.CountAppro43}}/{{data.Count43}}</span>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.Count43Un != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.AcademyCode,Status:'43',RecognitionLevel:'0'}]">{{data.Count43Un}}</a>
+                        <span *ngIf="data.Count43Un == '0'"> {{data.Count43Un}}</span>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.Count4330 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.AcademyCode,Status:'43',RecognitionLevel:'87000030'}]">{{data.Count4330}}</a>
+                        <span *ngIf="data.Count4330 == '0'"> {{data.Count4330}}</span>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.Count4320 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.AcademyCode,Status:'43',RecognitionLevel:'87000020'}]">{{data.Count4320}}</a>
+                        <span *ngIf="data.Count4320 == '0'"> {{data.Count4320}}</span>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.Count4310 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.AcademyCode,Status:'43',RecognitionLevel:'87000010'}]">{{data.Count4310}}</a>
+                        <span *ngIf="data.Count4310 == '0'"> {{data.Count4310}}</span>
+                    </td>
+                    <td nz-td>
+                        <a *ngIf="data.Count4340 != '0'" [routerLink]="['/waitdecide/studentwaitdecide',{ClassCode: data.AcademyCode,Status:'43',RecognitionLevel:'87000040'}]">{{data.Count4340}}</a>
+                        <span *ngIf="data.Count4340 == '0'"> {{data.Count4340}}</span>
+                    </td>
+                    <td nz-td>
+                        <span *ngIf="data.ApprovalStatus==''"></span>
+                        <span *ngIf="data.ApprovalStatus=='0'">学院分管领导审批中</span>
+                        <span *ngIf="data.ApprovalStatus=='11'" style="color: #ff0000;">请您前往校园集结号移动端-校园申请中审批</span>
+                        <span *ngIf="data.ApprovalStatus=='12'" class="cp" style="color: #ff0000;" (click)="refuseFunc(data.RefuseReason)">学院领导审批不通过、点击查看原因</span>
+                        <span *ngIf="data.ApprovalStatus=='21'" style="color: #008000;">资助中心审核通过</span>
+                        <span *ngIf="data.ApprovalStatus=='22'" class="cp" style="color: #ff0000;" (click)="refuseFunc(data.RefuseReason)">资助中心审核不通过、点击查看原因</span>
+                    </td>
+                    <td nz-td>
+                        <span> {{data.Members}}</span>
+                    </td>
+                    <td nz-td>
+                        <span> {{data.academicTotal}}%</span>
+                    </td>
+                    <td nz-td>
+                        <span *ngIf="data.Count4310 != '0' || data.Count4320 != '0' || data.Count4330 != '0'">
+                            <a [routerLink]="['/waitdecide/resultsee',{ClassCode: data.AcademyCode}]">查看</a>
+                        </span>
+                    </td>
+                </tr>
+                <!-- 合计 -->
+                <tr nz-tbody-tr *ngIf="isTotal">
+                    <td nz-td>合计</td>
+                    <td nz-td>{{totalAcademic.UnConfirmCount}}</td>
+                    <td nz-td></td>
+                    <td nz-td></td>
+                    <td nz-td></td>
+                    <td nz-td>{{totalAcademic.Count43Un}}</td>
+                    <td nz-td>{{totalAcademic.Count4330}}</td>
+                    <td nz-td>{{totalAcademic.Count4320}}</td>
+                    <td nz-td>{{totalAcademic.Count4310}}</td>
+                    <td nz-td>{{totalAcademic.Count4340}}</td>
+                    <td nz-td></td>
+                    <td nz-td></td>
+                    <td nz-td></td>
+                    <td nz-td></td>
+                </tr>
+            </tbody>
+        </nz-table>
+        <div class="center footer-wrap" style="margin:20px 0 50px;">
+
+            <a [routerLink]="['/waitdecide']">
+                <button nz-button [nzType]="'default'">
+                    <span>返回</span>
+                </button>
+            </a>
+
+            <span class="center dib" style="margin:0 0 20px;" *ngIf="!academicAllStatus">
+                <button nz-button [nzType]="'primary'" (click)="toastFunderTxt()">
+                    <span>导出可上报表格</span>
+                </button>
+            </span>
+
+            <a class="overh" [href]="loadFunderUrl" download="贫困生认定结果" *ngIf="academicAllStatus">
+                <button nz-button [nzType]="'primary'">
+                    <span>导出可上报表格</span>
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <!-- 完成弹框  -->
+    <nz-modal class="complete-css" [nzVisible]="isCompleteBox" [nzTitle]="''" [nzContent]="completeContent"
+        (nzOnCancel)="completeCancel($event)" (nzOnOk)="allRightFunc($event)" [nzCancelText]="null" nzOkText="好的">
+        <ng-template #completeContent>
+            <p class="center" [ngStyle]="{'color':classNotCom.length == 0 ? 'green' : 'red' }">{{comTitle}}</p>
+            <p class="left" style="margin:15px 0;" *ngIf="!classNotCom.length">提交将会上报整个学院的数据，请线下各辅导员沟通确定都已满足提交条件后，由一位辅导员点击提交。提交后，认定结果将被审批。</p>
+            <p class="left" style="margin:15px 0;" *ngIf="classNotCom.length">{{classNotComJson}}</p>
+            <p class="left" *ngIf="classNotCom.length">提交条件为:</p>
+            <p class="left" *ngIf="classNotCom.length">①待认定学生人数为0</p>
+            <p class="left" *ngIf="classNotCom.length">②直接认定、一票否定、小组评议人数为n/n，且直接认定、一票否决记录均被审批通过</p>
+            <p class="left" *ngIf="classNotCom.length">③待评议学生人数为0</p>
+        </ng-template>
+    </nz-modal>
+
+    <!-- 提交弹框=====满足提交  -->
+    <nz-modal class="submit-yes" [nzVisible]="isSubmitYes" [nzTitle]="''" [nzContent]="submitYesContent" (nzOnCancel)="submitYesCancel($event)"
+        (nzOnOk)="submitYesOk($event)" [nzCancelText]="'取消'" nzOkText="确定">
+        <ng-template #submitYesContent>
+            <p class="left" style="margin:15px 0;">其他辅导员均已满足提交条件，确定要提交整个学院的数据吗？</p>
+        </ng-template>
+    </nz-modal>
+
+    <!-- 提交弹框=====不满足提交  -->
+    <nz-modal class="submit-no" [nzVisible]="isSubmitNo" [nzTitle]="''" [nzContent]="submitNoContent" (nzOnCancel)="submitNo($event)"
+        (nzOnOk)="submitNo($event)" [nzCancelText]="null" nzOkText="好的">
+        <ng-template #submitNoContent>
+            <p class="left" style="margin:15px 0;">学院内其他部分辅导员尚不满足提交条件，暂时无法提交认定结果。请线下沟通确定均已满足提交条件后，再进行提交。若进需要修改，请修改后重新点击“完成”</p>
+        </ng-template>
+    </nz-modal>
+
+    <!-- 查看拒绝原因弹框  -->
+    <nz-modal class="refuse-why" [nzVisible]="isRefuse" [nzTitle]="''" [nzContent]="RefuseContent" (nzOnCancel)="RefuseCancel($event)"
+        (nzOnOk)="RefuseCancel($event)" [nzCancelText]="null" nzOkText="确定">
+        <ng-template #RefuseContent>
+            <p class="center" *ngIf="ApprovalStatus=='12'" style="color: #ff0000;">学院领导审批不通过</p>
+            <p class="center" *ngIf="ApprovalStatus=='22'" style="color: #ff0000;">资助中心审批不通过</p>
+            <p class="left" style="margin:15px 0;">{{RefuseTxt}}</p>
+        </ng-template>
+    </nz-modal>
+
+</div>

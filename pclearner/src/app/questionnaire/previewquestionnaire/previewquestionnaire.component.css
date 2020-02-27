@@ -1,0 +1,134 @@
+.content{
+    background-color: #fafafa;
+    margin: 0;
+    padding: 16px;
+    height: 100%;
+}
+.questionnaire_content{
+    background:#ffffff;
+}
+:host ::ng-deep .ant-btn-primary {
+    color: #fff;
+    background-color: #ffc000;
+    border-color: #ffc000;
+}
+.ant-btn-primary:hover, .ant-btn-primary:focus {
+    color: #fff;
+    background-color: #ffc000;
+    border-color: #ffc000;
+}
+.title{
+    font-family:PingFangSC-Regular;
+    font-size:14px;
+    color:#3e3e3e;
+    letter-spacing:0;
+    text-align:center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.title span{
+    font-family:PingFangSC-Regular;
+    font-size:12px;
+    color:#666666;
+    letter-spacing:0;
+    text-align:right;
+}
+.labelSize{
+    font-family:PingFangSC-Regular;
+    font-size:16px;
+    color:#3e3e3e;
+    letter-spacing:0.20px;
+    text-align:left;
+}
+
+.tubiao{
+    width: 54px;
+    height: 40px;
+}
+.tubiao img{
+    display: inline-block;
+    width: 54px;
+    height: 40px;
+}
+.heigh{
+    height: 50px;
+    padding-top: 5px;
+}
+ul{
+    margin-top: 10px;
+}
+.que_title{
+    font-family:PingFangSC-Regular;
+    font-size:14px;
+    color:#666666;
+    letter-spacing:0;
+    text-align:left;
+    padding-left: 10px;
+    /* height: 20px; */
+    line-height: 20px;
+}
+.opt{
+    font-family:PingFangSC-Regular;
+    font-size:12px;
+    color:#666666;
+    letter-spacing:0;
+    text-align:left;
+    /* height: 30px; */
+    line-height: 30px;
+    padding-left: 34px;
+}
+
+ul.scope{
+    margin-left: 15px;
+}
+ul.scope li{
+    margin-bottom: 10px;
+}
+ul.scope li label{
+    font-family:PingFangSC-Regular;
+    font-size:14px;
+    color:#3e3e3e;
+    letter-spacing:0.17px;
+    text-align:right;
+}
+
+:host ::ng-deep .ant-modal-content{
+    width: 370px;
+}
+:host ::ng-deep .placeholderStyle .ant-select-selection__placeholder, .ant-select-search__field__placeholder{
+    color: #666666;
+}
+
+:host ::ng-deep .ant-modal-header {
+    padding: 5px 16px;
+    border-bottom: 0px solid #e9e9e9;
+}
+
+
+:host ::ng-deep .ant-input-affix-wrapper .ant-input-prefix {
+    right: 10px;
+    left: auto;
+}
+:host ::ng-deep  .ant-input-affix-wrapper .ant-input:not(:first-child) {
+    padding-left: 8px;
+}
+
+@media (max-width: 768px){
+    :host ::ng-deep  .ant-modal {
+        width: 372px !important;
+        transform-origin: 71px 96px 0 !important;
+        position: relative;
+        margin: 0 auto;
+    }
+}
+
+:host ::ng-deep  .ant-modal {
+    width: 372px !important;
+    transform-origin: 71px 96px 0 !important;
+    position: relative;
+    width: auto;
+    margin: 0 auto;
+    top: 100px;
+    padding-bottom: 24px;
+}

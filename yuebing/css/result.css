@@ -1,0 +1,81 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+/*对iphoneX做适配*/
+@media screen and (min-height: 740px) and (max-height: 823px) {
+    body:before {
+        margin-top: 34px;
+        height: 700px;
+    }
+    body{
+        background-color: black;
+    }
+    .question_container{
+        margin: 85% 30px 0 30px;
+    }
+    .button{
+        margin-top: 20%;
+    }
+}
+
+/*对pixel2XL做适配*/
+@media screen and (min-height: 813px) and (max-height: 823px) {
+    body:before {
+        margin-top: 12px;
+        height: 750px;
+    }
+    body{
+        background-color: black;
+    }
+    .question_container{
+        margin: 85% 30px 0 30px;
+    }
+    .button{
+        margin-top: 20%;
+    }
+}
+
+/*主要是给ipad做适配*/
+@media screen and (min-width: 700px) and (max-width:800px) {
+    body{
+        width: 548px;
+        margin: 0 auto;
+        background-color: black;
+    }
+    body:before {
+        width: 548px;
+        height: 1024px;
+        /*top: 0;*/
+        /*margin-left: auto;*/
+        /*margin-right: auto;*/
+        margin: auto;
+    }
+    .button{
+        margin-top: 15%;
+    }
+}
+/*主要给pro做适配*/
+@media screen and (min-width: 1023px) and (max-width:2000px) {
+    body{
+        background-color: black;
+        width: 730px;
+        margin: 0 auto;
+    }
+    body:before {
+        width: 730px;
+        top: 0;
+        /*height: 1024px;*/
+        /*margin-left: auto;*/
+        /*margin-right: auto;*/
+        margin: auto;
+    }
+    .button{
+        margin-top: 15%;
+    }
+}
+p{
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+}

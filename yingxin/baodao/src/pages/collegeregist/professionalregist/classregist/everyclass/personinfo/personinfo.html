@@ -1,0 +1,53 @@
+<ion-content class="outer-content">
+    <ion-card class="personxing">
+        <ion-card-content class="shezhi">
+
+            <!-- <div class="personphoto"><img src={{item.HeadURL}}></div> -->
+            <div class="personphoto" *ngIf="item.HeadURL">
+                <img src={{item.HeadURL}}>
+            </div>
+
+            <div class="personphoto" *ngIf="!item.HeadURL">
+                <img src="./assets/images/as@2x.png">
+            </div>
+            <div class="personxiangq">
+                <p class="xingm">姓名：<span class="zi">{{item.Name}}</span><span class="xingb" *ngIf="item.Sex=='男'"></span><span class="xingb1" *ngIf="item.Sex=='女'"></span></p>
+                <p class="xuehao">学号：<span *ngIf="item.UserCode">{{item.UserCode}}</span><span *ngIf="!item.UserCode">暂无资料</span></p>
+                <p class="xuehao">学制：<span *ngIf="item.SchoolSystem">{{item.SchoolSystem}}</span><span *ngIf="!item.SchoolSystem">暂无资料</span></p>
+                <div class="baodaoqingk" *ngIf="item.Status==0"></div>
+                <div class="baodaoqingk1" *ngIf="item.Status==1"></div>
+            </div>
+            <!-- <div class="baodaoqingk" *ngIf="item.Status==0"></div>
+                <div class="baodaoqingk1" *ngIf="item.Status==1"></div> -->
+
+        </ion-card-content>
+    </ion-card>
+    <ion-card class="personsch">
+        <ion-card-content class="shezhi">
+            <div>
+                <div class="scl">报到院校：{{item.University}}</div>
+            </div>
+        </ion-card-content>
+    </ion-card>
+    <ion-card class="personmar">
+        <ion-card-content class="shezhi">
+            <div>
+                <div class="scl">报到学院：{{item.Academy}}</div>
+            </div>
+        </ion-card-content>
+    </ion-card>
+    <ion-card class="personmar">
+        <ion-card-content class="shezhi">
+            <div>
+                <div class="scl">班级：{{item.Class}}</div>
+            </div>
+        </ion-card-content>
+    </ion-card>
+    <ion-card class="personmar">
+        <ion-card-content class="shezhi">
+            <div>
+                <div class="scl">身份证号：{{item.IDCard}}</div>
+            </div>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-content class="index-cont">
+  <p class="wain-txt center">
+    <span class="db fn12" style="color:#ff0000;">该二维码暂未与宿舍绑定</span>
+    <span class="db fn14">需要先与宿舍绑定后才可以使用</span>
+  </p>
+
+  <ion-list *ngIf="isPark">
+    <p class="title-txt fn14">请选择园区</p>
+    <button ion-item *ngFor="let item of itemsObj" (click)="gotoFloor(item.DistrictCode,item.DistrictName)">
+      {{ item.DistrictName }}
+    </button>
+  </ion-list>
+
+  <ion-list *ngIf="!isPark">
+    <p class="center park-name fn16">{{parkName}}</p>
+    <p class="title-txt fn14">请选择宿舍楼</p>
+    <button ion-item *ngFor="let item of itemsObj" (click)="gotoUnit(item.DormitoryCode)">
+      {{ item.DormitoryName }}
+    </button>
+  </ion-list>
+
+  <div *ngIf="!isPark">
+    <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <div style="text-align: center;color: #8e9093;margin-bottom:10px;" *ngIf="!moreData">我是有底线的！</div>
+  </div>
+
+
+
+
+</ion-content>

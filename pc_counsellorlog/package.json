@@ -1,0 +1,52 @@
+{
+  "name": "student-info",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "prod": "ng build --prod  --output-hashing none --build-optimizer false",
+    "analyze": "ng build --prod --stats-json && webpack-bundle-analyzer dist/stats.json"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^5.1.2",
+    "@angular/common": "^5.1.2",
+    "@angular/compiler": "^5.1.2",
+    "@angular/core": "^5.1.2",
+    "@angular/forms": "^5.1.2",
+    "@angular/http": "^5.1.2",
+    "@angular/platform-browser": "^5.1.2",
+    "@angular/platform-browser-dynamic": "^5.1.2",
+    "@angular/router": "^5.1.2",
+    "@delon/abc": "^0.6.5",
+    "@tinymce/tinymce-angular": "^2.0.0",
+    "angular-tree-component": "^5.2.1",
+    "core-js": "^2.4.1",
+    "echarts": "^4.1.0",
+    "ng-tree-antd": "^2.2.3",
+    "ng-zorro-antd": "^0.6.15",
+    "ng2-file-upload": "^1.3.0",
+    "ngx-echarts": "^2.1.0",
+    "ngx-swiper-wrapper": "^5.3.8",
+    "ngx-tinymce": "^1.0.1",
+    "rxjs": "^5.5.2",
+    "ts-md5": "^1.2.4",
+    "zone.js": "^0.8.14"
+  },
+  "devDependencies": {
+    "@angular/cli": "^1.6.3",
+    "@angular/compiler-cli": "^5.1.2",
+    "@angular/language-service": "^5.1.2",
+    "@types/node": "~6.0.60",
+    "codelyzer": "~3.2.0",
+    "ts-node": "~3.2.0",
+    "tslint": "~5.7.0",
+    "typescript": "^2.4.2",
+    "webpack-bundle-analyzer": "^2.9.1"
+  }
+}

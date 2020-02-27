@@ -1,0 +1,114 @@
+<ion-content>
+  <div class="info_list">
+    <div *ngIf="classData.myClass&&classData.myClass.length>0">
+      <p class="title">我管理的班级（{{classData.myClass.length}}）</p>
+      <div class="line"></div>
+      <ion-list class="myclass" *ngFor="let class of classData.myClass">
+        <ion-item>
+          <div class="class-info">
+            <p class="username">
+              <span class="mr-10">{{class.ClassName}}</span>
+              <i class="fu-icon mr-5" *ngIf="class.IsCounselor==='1'">辅</i>
+              <i class="fu-icon" *ngIf="class.IsAdviser==='1'">班</i></p>
+          </div>
+          <a item-end class="item-end edit" (click)="cancleRole(class)">设置</a>
+        </ion-item>
+        <div class="line"></div>
+      </ion-list>
+    </div>
+    <div *ngIf="classData.otherClass&&classData.otherClass.length>0" style="margin-bottom:32px">
+      <p class="title">本学院其他班级（{{classData.otherClass.length}}）</p>
+      <div class="line"></div>
+      <ion-list *ngFor="let class of classData.otherClass">
+        <ion-item>
+          <div class="class-info">
+            <p class="username no-line-break">
+              {{class.ClassName}}</p>
+            <p class="usercode no-line-break">
+              <span class="mr-10" *ngIf="class.Counselor"><i class="fu-icon mr-5">辅</i>{{class.Counselor}}</span>
+              <span *ngIf="class.Adviser"><i class="fu-icon mr-5">班</i>{{class.Adviser}}</span></p>
+          </div>
+          <a item-end class="item-end edit" (click)="setRole(class)">设置</a>
+        </ion-item>
+        <div class="line"></div>
+      </ion-list>
+    </div>
+  </div>
+  <div class="empty" *ngIf="isNull">
+    <a>
+      <img src="assets/imgs/kong.png" width="187" height="159">
+    </a>
+    <p class="tips">暂无班级</p>
+  </div>
+  <div class="photoalert" *ngIf="cancleClassRole">
+    <div class="alertback"></div>
+    <div class="alertwapper">
+      <div class="alert-content">
+        <p class="class-title no-line-break">{{currentClass.ClassName}}</p>
+        <ion-list>
+          <ion-item>
+            <ion-label>辅导员</ion-label>
+            <ion-checkbox [(ngModel)]="currentClass.selectedCounselor" name="selectedCounselor"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>班主任</ion-label>
+            <ion-checkbox [(ngModel)]="currentClass.selectedAdviser" name="selectedAdviser"></ion-checkbox>
+            <!-- <ion-radio value="12"></ion-radio> -->
+          </ion-item>
+        </ion-list>
+      </div>
+      <div class="acions">
+        <a class="actions_a" (click)="cancleClassRole=false">取消</a>
+        <!-- <a class="actions_a save" (click)="saveCancleRole()">确定</a> -->
+        <a class="actions_a save" (click)="confirmCancleRole()">确定</a>
+      </div>
+    </div>
+  </div>
+  <div class="photoalert" *ngIf="confirmCancleClassRole">
+    <div class="alertback"></div>
+    <div class="alertwapper">
+      <div class="alert-content">
+        <p class="class-title">确定要将“{{currentClass.ClassName}}”从您的名下移除吗？移除后，该班的请假等业务将不再为您推送</p>
+      </div>
+      <div class="acions">
+        <a class="actions_a" (click)="confirmCancleClassRole=false">取消</a>
+        <a class="actions_a save" (click)="saveCancleRole()">确定</a>
+      </div>
+    </div>
+  </div>
+  <div class="photoalert" *ngIf="setClassRole">
+    <div class="alertback"></div>
+    <div class="alertwapper">
+      <div class="alert-content">
+        <p class="class-title no-line-break">{{currentClass.ClassName}}</p>
+        <ion-list>
+          <ion-item>
+            <ion-label>辅导员</ion-label>
+            <ion-checkbox [(ngModel)]="currentClass.selectedCounselor" name="selectedCounselor"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>班主任</ion-label>
+            <ion-checkbox [(ngModel)]="currentClass.selectedAdviser" name="selectedAdviser"></ion-checkbox>
+            <!-- <ion-radio value="12"></ion-radio> -->
+          </ion-item>
+        </ion-list>
+      </div>
+      <div class="acions">
+        <a class="actions_a" (click)="setClassRole=false">取消</a>
+        <a class="actions_a save" (click)="saveSetRole()">确定</a>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="photoalert" *ngIf="confirmSetClassRole">
+    <div class="alertback"></div>
+    <div class="alertwapper">
+      <div class="alert-content">
+        <p class="class-title">确定要将“{{currentClass.ClassName}}”设置为您名下的班级吗？</p>
+      </div>
+      <div class="acions">
+        <a class="actions_a" (click)="confirmSetClassRole=false">取消</a>
+        <a class="actions_a save" (click)="saveSetRole()">确定</a>
+      </div>
+    </div>
+  </div> -->
+</ion-content>

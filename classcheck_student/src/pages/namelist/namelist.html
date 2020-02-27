@@ -1,0 +1,133 @@
+<ion-content class="cont-box">
+
+  <p class="center sp-text fixed">
+    <span class="fn12 dib" style="margin-bottom:5px;">本堂课应到{{totalNum}}人,实到{{trueNum}}人</span>
+    <br>
+    <span>
+      请假
+      <label class="fn17">{{leaveNum}}</label>人，迟到
+      <label class="fn17">{{lateNum}}</label>人，旷课
+      <label class="fn17">{{cutNum}}</label>人
+    </span>
+  </p>
+
+  <div class="one-page mr">
+    <p class="fn14" style="color: #ACACAC;margin:10px 0;">花名册</p>
+    <div class="name-list">
+      <p class="name-list-head">
+        <span class="center dib fl fn14">序号</span>
+        <span class="center dib fl fn14">学号</span>
+        <span class="center dib fl fn14">姓名</span>
+        <span class="center dib fl fn14">状态</span>
+      </p>
+
+      <div class="name-list-detail" *ngFor="let data of dataSet;let i = index;">
+        <p class="center fl fn14 css-c1">{{i+1}}</p>
+        <p class="center fl fn14 css-c2">{{data.UserCode}}</p>
+        <p class="left fl fn14 css-c3 relative" [ngClass]="{'long-wrap':data.Name.length >= 5}">
+          <label class="dib" style="margin-left:20%;" [ngClass]="{'long-name':data.Name.length >= 5}">
+            {{data.Name}}
+          </label>
+          <img style="width: 16px;"  [ngClass]="{'long-img':data.Name.length >= 5}" *ngIf="data.Sex == '男'" src="assets/images/icon_male2x.png" alt="">
+          <img style="width: 16px;"  [ngClass]="{'long-img':data.Name.length >= 5}" *ngIf="data.Sex == '女'" src="assets/images/icon_female2x.png" alt="">
+        </p>
+        <div class="left fl fn14 relative css-c4">
+
+          <div class="dib" style="padding-left:25%;" (click)="tabBox(data.IntelUserCode)">
+            <label>
+              <span *ngIf="data.Status == '0'" style="color: #4A90E2;">出勤</span>
+              <span *ngIf="data.Status == '1'" style="color: #69C701;">请假</span>
+              <span *ngIf="data.Status == '2'" style="color: #FD9520;">迟到</span>
+              <span *ngIf="data.Status == '3'" style="color: #FF4E4E;">旷课</span>
+            </label>
+            <img style="width: 6px;" *ngIf="dataPassArr.readName == '1'" src="assets/images/xiala2x.png" alt="">
+          </div>
+
+          <img style="width: 12px;" *ngIf="data.RecordId != ''" (click)="lookLeaveList(data.RecordId)" src="assets/images/jiatiao2x.png"
+            alt="">
+
+          <div class="absolute tab-box" *ngIf="data.IntelUserCode == isvilible">
+            <span class="dib fn10 center attend-btn absolute attend-animat" (click)="changeStatus(data.IntelUserCode,'0')">出勤</span>
+            <span class="dib fn10 center leave-btn absolute leave-animat" (click)="changeStatus(data.IntelUserCode,'1')">请假</span>
+            <span class="dib fn10 center cut-btn absolute cut-animat" (click)="changeStatus(data.IntelUserCode,'3')">旷课</span>
+            <span class="dib fn10 center late-btn absolute late-animat" (click)="changeStatus(data.IntelUserCode,'2')">迟到</span>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div *ngIf="markDn">
+      <p class="center" *ngIf="dataPassArr.readName == '1'" (click)="submitInfo()">
+        <button class="over-btn" ion-button>完成</button>
+      </p>
+  
+      <p class="center" *ngIf="dataPassArr.readName != '1'" (click)="changeInfo()">
+        <button class="over-btn" ion-button>修改</button>
+      </p>
+
+    </div>
+
+
+    <div class="ssc-ov fixed" *ngIf="sscBox" (click)="closeTab()"></div>
+
+  </div>
+
+
+
+  <div class="ssc-ov fixed" *ngIf="mengGo"></div>
+  <div class="spinnerw fixed" *ngIf="mengGo" id="spinnerw">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <ion-content>
+
+
+    <ion-fab center middle>
+      <button ion-fab color="light">
+        <ion-icon name="md-share"></ion-icon>
+      </button>
+
+      <span ion-fab>测试</span>
+      <ion-fab-list side="top">
+        <button ion-fab>
+          <ion-icon name="logo-facebook"></ion-icon>
+        </button>
+      </ion-fab-list>
+      <ion-fab-list side="left">
+        <button ion-fab>
+          <ion-icon name="logo-twitter"></ion-icon>
+        </button>
+      </ion-fab-list>
+      <ion-fab-list side="right">
+        <button ion-fab>
+          <ion-icon name="logo-vimeo"></ion-icon>
+        </button>
+      </ion-fab-list>
+      <ion-fab-list side="bottom">
+        <button ion-fab>
+          <ion-icon name="logo-googleplus"></ion-icon>
+        </button>
+      </ion-fab-list>
+    </ion-fab>
+
+
+
+  </ion-content> -->
+
+
+</ion-content>

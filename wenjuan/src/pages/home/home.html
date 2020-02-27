@@ -1,0 +1,15 @@
+<ion-content>
+  <div padding class="ab-inner" [innerHTML]="wenjuan.agreement"></div>
+  <div class="btn-w">
+    <ion-item class="none">
+      <ion-label class="pi" text-wrap>我已阅读以上填写须知，因为没有上传资料或是调查问卷内容不属实而造成不能认定成功，责任我自己承担！</ion-label>
+      <ion-checkbox  mode="md" [(ngModel)]="aggree" ></ion-checkbox>
+    </ion-item>
+    <div text-center>
+      <button  class="bt" [disabled]="!aggree" ion-button  (click)="onStart()">填写调查问卷
+      </button>
+    </div>
+  </div>
+
+
+</ion-content>

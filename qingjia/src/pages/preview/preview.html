@@ -1,0 +1,23 @@
+<!--
+  Generated template for the PreviewPage page.
+
+-->
+<!--水印-->
+<ion-content class="outer-content" *ngIf="time">
+  <ion-slides pager loop=true
+              initialSlide={{indexInit}} (click)="navView($event)">
+    <ion-slide *ngFor="let item of items">
+      <div class="time">拍摄时间：{{item.AttachmentTime}}</div>
+      <img [src]='DomS.bypassSecurityTrustUrl(item.AttachmentUrl)'/>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+<ion-content class="outer-content" *ngIf="!time">
+  <ion-slides pager loop=true
+              initialSlide={{indexInit}} (click)="navView($event)">
+    <ion-slide *ngFor="let item of items">
+      <img [src]='DomS.bypassSecurityTrustUrl(item.url)'/>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+

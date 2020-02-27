@@ -1,0 +1,61 @@
+page-notice-pub-list {
+  font-family: "PingFang SC";
+  .listtitle {
+    margin-left: 15px;
+    // margin-top: 10px;
+    // margin-bottom: 5px;
+    // font-weight:500;
+    font-size: 16px;
+    color: #3e3e3e;
+    font-family: "Microsoft YaHei";
+
+    //padding: 5px;
+  }
+  .listtitle  img{
+    position: relative;
+    top: 3px;
+  }
+  .listtime {
+    margin-top: 10px;
+    margin-left: 15px;
+    font-size : 14px;
+    font-family: "Microsoft YaHei";
+
+    color:#acacac;
+
+  }
+  // .savetip {
+  //   // background-color: #fb6057;
+  //   background-color: green;
+  //   margin-left: 15px;
+  //   margin-right: 10px;
+  //   height: 15px;
+  //   width: 40px;
+  //   border-radius: 4px;
+  //   font-size: 12px ;
+  //   padding-left: 2px;
+  //   padding-right: 2px;
+  //   color: white;
+  // }
+    .input-wrapper{
+    border: 1px solid #d5d5d5;
+    border-radius: 4px;
+    margin-bottom: 20px;
+
+  }
+  .item-md.item-block .item-inner{
+    border-bottom: none;
+  }
+  .pubtip {
+    background-color: #e99e21;
+    margin-left: 15px;
+    margin-right: 10px;
+    height: 15px;
+    width: 40px;
+    border-radius: 4px;
+    font-size: 12px ;
+    padding-left: 2px;
+    padding-right: 2px;
+    color: white;
+  }
+}

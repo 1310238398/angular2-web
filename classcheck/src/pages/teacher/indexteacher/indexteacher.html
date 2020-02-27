@@ -1,0 +1,41 @@
+<ion-content class="index-cont">
+
+  <div *ngIf="haveClass == '1'">
+    <P class="head-title center fn14">{{dataNowTime}} {{weekNow}}  (第{{dataLenObj.Weeks}}周)</P>
+
+    <ion-list>
+      <ion-item *ngFor="let data of dataSet" style="margin-bottom:5px;box-shadow: 0 2px 5px 0 #E3E3E3;" (click)="NavigationTo(data)">
+        <h2 class="class-title">{{data.CourseName}}</h2>
+        <p class="fn12 ">
+          <span class="gray-c">上课时间 : </span> 
+          <span class="color4a">{{data.Sections}}</span>
+          <span class="gray-c" style="margin-left:10px;">上课地点 : </span> 
+          <span class="color4a">{{data.ClassRoom}}</span>
+        </p>
+  
+        <p item-end class="center" *ngIf="data.Attendance == ''">
+            <img class="db mr" style="width: 18px;" src="assets/images/dianming2x.png">
+            <span class="db fn9" style="margin-top:2px;">未点名</span>
+        </p>
+  
+        <p item-end class="center" *ngIf="data.Attendance != ''">
+            <img class="db mr" style="width: 18px;" src="assets/images/dianming2x_no.png">
+            <span class="db fn9" style="margin-top:2px;">已点名</span>
+        </p>
+      </ion-item>
+    </ion-list>
+  </div>
+
+
+  <div *ngIf="haveClass == '2'" class="center">
+    <img src="assets/images/kong.png" style="margin-top:50px;" alt="">
+    <p style="color:#ACACAC;">今日无课程信息</p>
+  </div>
+
+
+
+  <p class="history-look center fixed">
+    <span class="fn14" (click)="NavtoChange()">查看历史记录</span>
+  </p>
+
+</ion-content>

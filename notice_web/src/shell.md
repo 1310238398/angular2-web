@@ -1,0 +1,1 @@
+scp -P 60001 index.html ant@60.205.59.139:/home/ant/antServer/views/pc_notice 

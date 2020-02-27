@@ -1,0 +1,41 @@
+<!-- <ion-header>
+    <ion-toolbar>
+        <ion-title>社团成员</ion-title>
+    </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+        <div *ngIf="ApplyMember.length <= 0" class="none"><img class="noneimg" src="assets/images/kong.png">
+            <div class="noneFont">暂无更多内容</div>
+        </div>
+    
+        <ion-card style="width: 100%;margin: 15px 0" *ngFor=" let item of ApplyMember">
+            <ion-list>
+                <button ion-item (click)="gomemberdetail(item)">
+                    <ion-avatar item-start>
+                        <img id="wechatBox" src="assets/images/header.png">
+                    </ion-avatar>
+                    <div class="fn12">
+                        <span>{{item.name}}</span>
+                        <span class="sex" *ngIf="item.CodeName=='男'"><img  src="assets/images/nan.png"></span>
+                        <span class="sex" *ngIf="item.CodeName=='女'"><img  src="assets/images/nv.png"></span>
+                    </div>
+                    <span class="fn10">{{item.Info}}</span>
+                </button>
+                <div>
+                    <button *ngIf="item.status==1"  class="fn10 fr abutton" style="width: 50px;height: 25px;" color="default" [disabled]="subStop"
+                        (click)="agree(item)">同意</button>
+                    <button *ngIf="item.status==1"  class="fn10 fr pbutton" style="width: 50px;height: 25px;" color="light" [disabled]="subStop"
+                        (click)="pass(item)">拒绝</button>
+                    <span *ngIf="item.status==3 || item.status==5" class="fn12 fr" style="color: #FFC000 ;margin-right: 5px">已同意该申请</span>
+                    <span *ngIf="item.status==2 || item.status==4" class="fn12 fr" style="color: #9B9B9B ;margin-right: 5px">已拒绝该申请</span>
+                </div>
+            </ion-list>
+        </ion-card>
+    <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <div style="text-align: center;color: #8e9093" *ngIf="!moreData">我是有底线的！</div>
+
+</ion-content>

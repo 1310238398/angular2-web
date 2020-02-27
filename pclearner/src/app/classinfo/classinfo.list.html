@@ -1,0 +1,151 @@
+<div class="content">
+    <div class="components-table-demo-control-bar">
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-center">
+            <!--   <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" (ngModelChange)="onChange(f,1)" [(ngModel)]="searchObj.Campus" [nzPlaceHolder]="'校区'" [nzShowSearch]="true" name="Campus" nzAllowClear>
+                        <nz-option *ngFor="let option of Campuss" [nzLabel]="option.CampusName" [nzValue]="option.CampusCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>-->
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [(ngModel)]="searchObj.Academy" [nzPlaceHolder]="'学院'"
+                        [nzShowSearch]="true" name="Academy" nzAllowClear>
+                        <nz-option *ngFor="let option of Academys" [nzLabel]="option.AcademyName" [nzValue]="option.AcademyCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [(ngModel)]="searchObj.Major" (click)="onSelect('major')"
+                        [nzPlaceHolder]="'专业'" [nzShowSearch]="true" name="Major" nzAllowClear>
+                        <nz-option *ngFor="let option of Majors" [nzLabel]="option.MajorName" [nzValue]="option.MajorCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [(ngModel)]="searchObj.Grade" (click)="onSelect(3)"
+                        [nzPlaceHolder]="'年级'" [nzShowSearch]="true" name="Grade" nzAllowClear>
+                        <nz-option *ngFor="let option of Grades" [nzLabel]="option.GradeName" [nzValue]="option.GradeCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [(ngModel)]="searchObj.Class" (click)="onSelect('class')"
+                        [nzPlaceHolder]="'班级'" [nzShowSearch]="true" name="Class" nzAllowClear>
+                        <nz-option *ngFor="let option of Classs" [nzLabel]="option.ClassName" [nzValue]="option.ClassCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <!--  <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [(ngModel)]="searchObj.StudentType" [nzPlaceHolder]="'学生类型'" [nzShowSearch]="true" name="StudentType" nzAllowClear>
+                        <nz-option *ngFor="let option of StudentTypes" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>-->
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [(ngModel)]="searchObj.Counselor" [nzPlaceHolder]="'辅导员'" (click)="loadStaff('Counselor')"
+                        [nzShowSearch]="true" name="Counselor" nzAllowClear>
+                        <nz-option *ngFor="let option of Counselors" [nzLabel]="option.Name" [nzValue]="option.IntelUserCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [(ngModel)]="searchObj.Adviser" [nzPlaceHolder]="'班主任'" (click)="loadStaff('Adviser')"
+                        [nzShowSearch]="true" name="Adviser" nzAllowClear>
+                        <nz-option *ngFor="let option of Advisers" [nzLabel]="option.Name" [nzValue]="option.IntelUserCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [(ngModel)]="searchObj.ClassCadre" [nzPlaceHolder]="'有无班委'"
+                        [nzShowSearch]="true" name="ClassCadre" nzAllowClear>
+                        <nz-option *ngFor="let cadre of classCadre" [nzLabel]="cadre.Name" [nzValue]="cadre.value">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [(ngModel)]="searchObj.IsGraduate" [nzPlaceHolder]="'班级状态'"
+                        [nzShowSearch]="true" name="IsGraduate" nzAllowClear>
+                        <nz-option *ngFor="let status of classStatus" [nzLabel]="status.Name" [nzValue]="status.value">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-col [nzSpan]="24" style="text-align: right;">
+                    <button nz-button [disabled]="searching" [nzType]="'primary'" (click)="onSearch(true)">查询</button>
+                    <button nz-button [disabled]="exporting" [nzType]="'primary'" (click)="export()">导出</button>
+                    <button nz-button (click)="resetForm(f)">重置</button>
+                </div>
+            </div>
+        </form>
+
+        <!--<div class="text-right">
+      <button nz-button (click)="edit({id:0})" [nzType]="'primary'">添加</button>
+    </div>-->
+    </div>
+    <nz-table #nzTable class="simple-table" [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [(nzTotal)]="total"
+        [(nzPageIndex)]="page.Page" [(nzPageSize)]="page.PageSize" [nzBordered]="true" (nzPageIndexChange)="onSearch()"
+        [nzShowTotal]="true">
+        <thead nz-thead class="t-center">
+            <tr>
+                <th nz-th [nzWidth]="'50px'">序号</th>
+                <th nz-th [nzWidth]="'50px'"><span>操作</span></th>
+                <th nz-th><span>校区</span></th>
+                <th nz-th><span>学院</span></th>
+                <th nz-th><span>专业</span></th>
+                <th nz-th [nzWidth]="'50px'"><span>年级</span></th>
+                <th nz-th><span>班级</span></th>
+                <!-- <th nz-th><span>分管领导</span></th> -->
+                <th nz-th><span>带班辅导员</span></th>
+                <th nz-th><span>带班班主任</span></th>
+                <th nz-th><span>班委人数</span></th>
+                <th nz-th><span>班级状态</span></th>
+            </tr>
+        </thead>
+        <tbody nz-tbody class="t-center">
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i=index;">
+                <td nz-td>{{i+1}}</td>
+                <td nz-td>
+                    <nz-tooltip [nzTitle]="'修改'">
+                        <a nz-tooltip (click)="edit(data)"><i class="anticon anticon-edit"></i></a>
+                    </nz-tooltip>
+                </td>
+                <td nz-td>{{data.CampusDistrictName}}</td>
+                <td nz-td>{{data.AcademyName}}</td>
+                <td nz-td>{{data.MajorName}}</td>
+                <td nz-td>{{data.GradeName}}</td>
+                <td nz-td>{{data.ClassName}}</td>
+                <!-- <td nz-td>{{data.LeadershipName}}<span *ngIf="data.LeadershipPhone">（{{data.LeadershipPhone}}）</span></td> -->
+                <td nz-td>{{data.CounselorName}}<span *ngIf="data.CounselorPhone">（{{data.CounselorPhone}}）</span></td>
+                <td nz-td>{{data.AdviserName}}<span *ngIf="data.AdviserPhone">（{{data.AdviserPhone}}）</span></td>
+                <td nz-td>
+                    <a (click)="showClassCadre(data.ClassCode)" *ngIf="data.ClassCadreNum!='0'">{{data.ClassCadreNum}}</a>
+                    <span *ngIf="data.ClassCadreNum==='0'">{{data.ClassCadreNum}}</span>
+                </td>
+                <td nz-td>
+                    <span *ngIf="data.Status==='1'">正常</span>
+                    <span *ngIf="data.Status==='4'">已毕业</span>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

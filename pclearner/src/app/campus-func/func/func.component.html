@@ -1,0 +1,152 @@
+<div class="top">
+  <div nz-row [nzType]="'flex'" [nzJustify]="'space-around'" [nzAlign]="'middle'">
+    <div nz-col [nzSpan]="6">
+      <h3 class="base-font font14" style="margin-left: 20px;">功能列表</h3>
+    </div>
+    <div nz-col [nzSpan]="10" [nzOffset]="8">
+      <span class="base-font font14">平台:</span>
+      <div class="btn-b tp8" [ngClass]="{'selected':fun.pc}" (click)="onDevice('B')">
+        <span><i class="anticon anticon-desktop"></i>PC端</span>
+      </div>
+      <div class="btn-b tp8" [ngClass]="{'selected':fun.mobile}" (click)="onDevice('A')">
+        <span><i class="anticon anticon-mobile"></i>移动端</span>
+      </div>
+    </div>
+  </div>
+  <hr class="hr">
+  <div class="fun mt">
+    <div class="fun-list" *ngFor="let item of funsList"
+         (click)="selectFun(item)">
+      <div  [ngClass]="{'fun-selected':item.checked}">
+         <span class="fun-item">
+        <img src="{{item.Icon}}" alt="">
+        </span>
+      </div>
+      <div class="base-font font14 mlt">{{item.Name}}</div>
+      <div *ngIf="item.DefaultIcon==0" class="no-way">未配置</div>
+
+
+    </div>
+  </div>
+  <!--  <div class="fun-body mt" *ngIf="funItem.checked&&funsList.length">
+      <div nz-row [nzType]="'flex'" [nzJustify]="'start'" [nzAlign]="'top'">
+        <div nz-col [nzSpan]="4" [nzOffset]="2">
+          <div class="left-icon">
+            <img src="/{{funItem.Icon}}" alt="222">
+          </div>
+        </div>
+        <div nz-col [nzSpan]="18">
+          <div>功能名称：{{funItem.Name}} 上线时间：{{funItem.Name}}</div>
+          <div *ngIf="funItem.ChannelGroup.length==2">平台：移动端、PC端</div>
+          <div *ngIf="funItem.ChannelGroup.length==1&&funItem.ChannelGroup[0]=='A'">平台：移动端</div>
+          <div *ngIf="funItem.ChannelGroup.length==1&&funItem.ChannelGroup[0]=='B'">平台：PC端</div>
+          <div *ngIf="funItem.UserType.length==2">功能所属人群：老师、学生</div>
+          <div *ngIf="funItem.UserType.length==1&&funItem.UserType[0]==1">功能所属人群：老师</div>
+          <div *ngIf="funItem.UserType.length==1&&funItem.UserType[0]==2">功能所属人群：学生</div>
+        </div>
+
+
+      </div>
+      <div class="mt ml">
+        功能简介：{{funItem.Desc}}
+      </div>
+    </div>
+    <div class="fun-conf mt" *ngIf="funItem.UserType.length">
+      <div nz-row [nzType]="'flex'" [nzAlign]="'top'">
+        <div nz-col [nzSpan]="4" [nzOffset]="2">
+          <div class="mt">功能权限分配:</div>
+        </div>
+        <div nz-col [nzSpan]="18">
+          <nz-tabset #tabset>
+            <nz-tab *ngIf="funItem.UserType.includes('1')">
+              <ng-template #nzTabHeading>
+                <i class="anticon anticon-user"></i>
+                老师
+              </ng-template>
+              <div class="left-b" *ngIf="StaffRoles.length">角色:</div>
+              <div class="right-c">
+                <div *ngFor="let role of StaffRoles" class="btn-b sml" [ngClass]="{'selected':role.checked}"
+                     (click)="onStaffSelectRole(role)">
+                  {{role.RoleName}}
+                </div>
+              </div>
+              <div class="p-sml">人员:
+                <nz-select
+                  style="width: 250px;"
+                  nzAllowClear
+                  [nzPlaceHolder]="'输入姓名或手机号'"
+                  [nzFilter]="false"
+                  [(ngModel)]="selectedOption"
+                  (nzSearchChange)="queryStaff($event)"
+                  [nzNotFoundContent]="'无法找到'"
+                  nzShowSearch (ngModelChange)="selectStaff($event)">
+                  <nz-option
+                    *ngFor="let option of StaffList"
+                    [nzLabel]="option.Name"
+                    [nzValue]="option">
+                  </nz-option>
+                </nz-select>
+              </div>
+              <div class="sml" *ngIf="(SelectRoleOptions.concat(SelectStaffOptions)).length">已选:
+                <div class="b-select">
+                  <span *ngFor="let op of (SelectRoleOptions.concat(SelectStaffOptions))">
+                  <nz-tag [nzColor]="'#2db7f5'" *ngIf="!op.phone" nzClosable
+                          (nzClose)="onDeleteSelected(op)">{{op.name}}</nz-tag>
+                    <nz-tag [nzColor]="'#87d068'" *ngIf="op.phone" nzClosable
+                            (nzClose)="onDeleteSelected(op)">{{op.name}}({{op.phone}})</nz-tag>
+                  </span>
+                </div>
+              </div>
+              <div class="b-config" *ngIf="!staff_Config">
+                <button nz-button class="selected" (click)="staffConfig()">配置</button>
+              </div>
+              <div class="b-config" *ngIf="staff_Config">
+                <button nz-button class="selected" (click)="staffConfig()">取消</button>
+                <button nz-button class="selected" (click)="staffConfigOk()">确定</button>
+              </div>
+            </nz-tab>
+            <nz-tab (nzClick)="tabSelected()" *ngIf="funItem.UserType.includes('2')">
+              <ng-template #nzTabHeading>
+                <i class="anticon anticon-user"></i>
+                学生
+              </ng-template>
+              <div class="left-b" *ngIf="StudentRoles.length">职务:</div>
+              <div class="right-c">
+              <span *ngFor="let role of StudentRoles" class="btn-b sml" [ngClass]="{'selected':role.checked}"
+                    (click)="onStudentSelectRole(role)">
+                {{role.RoleName}}
+              </span>
+              </div>
+              <div class="left-b" *ngIf="Grades.length">年级:</div>
+              <div class="right-c">
+              <span *ngFor="let grade of Grades" class="btn-b sml" [ngClass]="{'selected':grade.checked}"
+                    (click)="onStudentSelectGrade(grade)">
+                {{grade.name}}
+              </span>
+              </div>
+              <div class="sml" *ngIf="(SelectStudentRoleOptions.concat(SelectGradeOptions)).length">已选:
+                <div class="b-select">
+                  <span *ngFor="let op of (SelectStudentRoleOptions.concat(SelectGradeOptions))">
+                  <nz-tag [nzColor]="'#2db7f5'" *ngIf="!op.phone" nzClosable
+                          (nzClose)="onDeleteStudentSelected(op)">{{op.name}}</nz-tag>
+                    <nz-tag [nzColor]="'#87d068'" *ngIf="op.phone" nzClosable
+                            (nzClose)="onDeleteStudentSelected(op)">{{op.name}}({{op.phone}})</nz-tag>
+                  </span>
+                </div>
+              </div>
+              <div class="b-config" *ngIf="!student_Config">
+                <button nz-button class="selected" (click)="studentConfig()">配置</button>
+              </div>
+              <div class="b-config" *ngIf="student_Config">
+                <button nz-button class="selected" (click)="studentConfig()">取消</button>
+                <button nz-button class="selected" (click)="studentConfigOk()">确定</button>
+              </div>
+            </nz-tab>
+          </nz-tabset>
+        </div>
+
+      </div>
+
+    </div>-->
+
+</div>

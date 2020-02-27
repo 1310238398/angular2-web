@@ -1,0 +1,190 @@
+<div class="content">
+    <form nz-form [formGroup]="valForm">
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="4">
+                <label nz-form-item-required>活动标题</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="20" [nzValidateStatus]="valForm.controls.ACTIVITYTITLE">
+                <nz-input [nzSize]="'default'" formControlName="ACTIVITYTITLE" [nzPlaceHolder]="''"></nz-input>
+                <div nz-form-explain *ngIf="valForm.get('ACTIVITYTITLE').dirty && valForm.controls.ACTIVITYTITLE.hasError('maxlength')">活动标题30字以内</div>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="4">
+                <label nz-form-item-required>活动分类</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="20" [nzValidateStatus]="valForm.controls.ACTIVITYTYPE">
+                <nz-select style="width: 200px;" formControlName="ACTIVITYTYPE" nzAllowClear nzPlaceHolder="请选择">
+                    <nz-option nzValue="{{type.value}}" nzLabel="{{type.name}}" *ngFor="let type of typeList"></nz-option>
+                </nz-select>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="4">
+                <label nz-form-item-required>报名截止</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="20" [nzValidateStatus]="valForm.controls.ACTIVITYEND">
+                <nz-datepicker style="width: 200px;" [nzDisabledDate]="disabledStartDate" formControlName="ACTIVITYEND" nzShowTime [nzFormat]="'YYYY-MM-DD HH:mm'"></nz-datepicker>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="4">
+                <label>活动时间</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="20" [nzValidateStatus]="valForm.controls.ACTIVITYSTART">
+                <nz-datepicker style="width: 200px;" [nzDisabledDate]="disabledEndDate" formControlName="ACTIVITYSTART" nzShowTime [nzFormat]="'YYYY-MM-DD HH:mm'"></nz-datepicker>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="4">
+                <label>主办单位</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="20">
+                <nz-input [nzSize]="'default'" formControlName="ACTIVITYSPONSOR" [nzPlaceHolder]="''"></nz-input>
+            </div>
+        </div>
+
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="4">
+                <label>活动地点</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="20">
+                <nz-input [nzSize]="'default'" formControlName="ACTIVITYADD" [nzPlaceHolder]="''"></nz-input>
+
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="4">
+                <label>活动人数</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="20">
+                <nz-input-number style="width: 200px;" formControlName="ACTIVITYLOWER" [nzMin]="1" [nzMax]="100000" [nzStep]="1"></nz-input-number>
+            </div>
+        </div>
+
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="4">
+                <label nz-form-item-required>活动详情</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="20" [nzValidateStatus]="valForm.controls.ACTIVITYDESC">
+                <nz-input [nzType]="'textarea'" formControlName="ACTIVITYDESC" [nzRows]="'4'" [nzPlaceHolder]="'请输入活动详情、注意事项等内容'"></nz-input>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="4">
+                <label>宣传图片</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="20">
+                <nz-upload [nzBeforeUpload]="beforeUpload" nzAccept="image/*">
+                    <button nz-button>
+                        <i class="anticon anticon-upload"></i>
+                        <span>图片上传</span>
+                    </button>
+                    <p>只能上传jpg、jpeg格式图片</p>
+                </nz-upload>
+                <div class="ant-upload-list-item" *ngFor="let img of uploadimgs;let i=index;">
+                    <div class="ant-upload-list-item-info">
+                        <span>
+                            <a class="delete_img" (click)="delete(i)">X</a>
+                            <a class="ant-upload-list-item-name">{{img.name}}</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="4">
+                <label>受众范围</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="20">
+                <button nz-button [nzType]="'default'" (click)="isVisible=!isVisible">
+                    <span>选择受众范围</span>
+                </button>
+                <p>
+                    <span class="text-blue mr-sm">已选择受众范围：</span>
+                    <span *ngFor="let campus of valForm.value.CAMPUS" class="mr-sm">{{campus}}</span>
+                    <span *ngFor="let academy of valForm.value.ACADEMYNAME" class="mr-sm">{{academy}}</span>
+                    <span *ngFor="let major of valForm.value.MAJORNAME" class="mr-sm">{{major}}</span>
+                    <span *ngFor="let grade of valForm.value.GRADE" class="mr-sm">{{grade}}</span>
+                    <span *ngFor="let class of valForm.value.CLASSNAME" class="mr-sm">{{class}}</span>
+                </p>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="4">
+            </div>
+            <div nz-form-control nz-col [nzSpan]="20">
+                <button nz-button [nzType]="'primary'" [nzLoading]="saveLoading" (click)="save()">
+                    <span>保存</span>
+                </button>
+                <button nz-button [nzType]="'default'" (click)="cancle()">
+                    <span>返回</span>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<nz-modal [nzVisible]="isVisible" [nzTitle]="'受众范围'" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)">
+    <ng-template #modalContent>
+        <div nz-row nz-form-item>
+            <div nz-form-label nz-col [nzSpan]="4">
+                <label>校区</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="18">
+                <nz-select style="width: 100%;" [nzMode]="'multiple'" [(ngModel)]="scope.campus" [nzPlaceHolder]="'校区'" [nzShowSearch]="true"
+                    name="campus" nzAllowClear>
+                    <nz-option *ngFor="let option of campusList" [nzLabel]="option.CampusName" [nzValue]="option.CampusID">
+                    </nz-option>
+                </nz-select>
+            </div>
+        </div>
+        <div nz-row nz-form-item>
+            <div nz-form-label nz-col [nzSpan]="4">
+                <label>学院</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="18">
+                <nz-select style="width: 100%;" [nzMode]="'multiple'" [(ngModel)]="scope.academy" (ngModelChange)="academyChange($event,'select')"
+                    [nzPlaceHolder]="'学院'" [nzShowSearch]="true" name="academy" nzAllowClear>
+                    <nz-option *ngFor="let option of academyList" [nzLabel]="option.deptname" [nzValue]="option.deptcode">
+                    </nz-option>
+                </nz-select>
+            </div>
+        </div>
+        <div nz-row nz-form-item>
+            <div nz-form-label nz-col [nzSpan]="4">
+                <label>专业</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="18">
+                <nz-select style="width: 100%;" [nzMode]="'multiple'" [(ngModel)]="scope.major" (ngModelChange)="majorChange($event,'select')"
+                    [nzPlaceHolder]="'专业'" [nzShowSearch]="true" name="major" nzAllowClear>
+                    <nz-option *ngFor="let option of majorList" [nzLabel]="option.deptname" [nzValue]="option.deptcode">
+                    </nz-option>
+                </nz-select>
+            </div>
+        </div>
+        <div nz-row nz-form-item>
+            <div nz-form-label nz-col [nzSpan]="4">
+                <label>年级</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="18">
+                <nz-select style="width:100%;" [nzMode]="'multiple'" [(ngModel)]="scope.grade" (ngModelChange)="gradeChange($event,'select')"
+                    [nzPlaceHolder]="'年级'" [nzShowSearch]="true" name="grade" nzAllowClear>
+                    <nz-option *ngFor="let option of gradeList" [nzLabel]="option.deptname" [nzValue]="option.deptcode">
+                    </nz-option>
+                </nz-select>
+            </div>
+        </div>
+        <div nz-row nz-form-item>
+            <div nz-form-label nz-col [nzSpan]="4">
+                <label>班级</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="18">
+                <nz-select style="width: 100%;" [nzMode]="'multiple'" [(ngModel)]="scope.class" [nzPlaceHolder]="'班级'" [nzShowSearch]="true"
+                    name="class" nzAllowClear>
+                    <nz-option *ngFor="let option of classList" [nzLabel]="option.deptname" [nzValue]="option.deptcode">
+                    </nz-option>
+                </nz-select>
+            </div>
+        </div>
+    </ng-template>
+</nz-modal>

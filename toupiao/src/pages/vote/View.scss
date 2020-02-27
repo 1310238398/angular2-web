@@ -1,0 +1,29 @@
+view-page{
+  .content-ios.outer-content{
+    background-color: #FFF;
+  }
+  .mwbor{
+    margin: 0;
+    width: 100%;
+  }
+  .ps{
+    margin: 0;
+    text-align: center;
+  }
+  .card-ios{
+    box-shadow: none;
+  }
+  .mwimg{
+    height: 250px;
+  }
+  .card-header h1,.card-header h2{
+    text-align: left;
+    word-break: break-all;
+    work-wrap: break-word;
+    white-space: normal;
+  }
+  video{
+    width: 100%;
+    max-height: 250px;
+  }
+}

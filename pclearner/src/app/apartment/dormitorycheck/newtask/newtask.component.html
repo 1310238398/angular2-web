@@ -1,0 +1,101 @@
+<div class="content">
+  <div class="progress">
+
+    <img src="./assets/images/1@2x.png" alt="">
+
+  </div>
+
+  <form #f="ngForm" nz-form class="search-form text-left">
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col [nzXs]="4" [nzSm]="3" [nzMd]="2" [nzXs]="2" style="text-align:left">
+        <label class="labelSize">&nbsp;&nbsp;&nbsp;校区&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </label>
+      </div>
+      <div nz-form-control>
+        <nz-select style="width:300px" [nzPlaceHolder]="'不做选择默认范围为全部'" (ngModelChange)="taskTitle($event,'campus')" [nzShowSearch]="true"
+          [nzMode]="'multiple'" [(ngModel)]="createdObj.Campus" name="Campus" nzAllowClear>
+          <nz-option *ngFor="let option of Campus" [nzLabel]="option.CampusName" [nzValue]="option.CampusCode">
+          </nz-option>
+        </nz-select>
+      </div>
+
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col [nzXs]="4" [nzSm]="3" [nzMd]="2" [nzXs]="2" style="text-align:left">
+        <label class="labelSize" nz-form-item-required>类型&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+      </div>
+      <div nz-form-control nz-col [nzSm]="14" [nzXs]="14" [nzMd]="14" [nzLg]="8" [nzXl]="6">
+        <div nz-form-control>
+          <nz-select style="width: 300px;" [nzPlaceHolder]="'请选择'" [nzShowSearch]="true" name="Type" [(ngModel)]="createdObj.Type"
+            (ngModelChange)="taskTitle($event,'type')" nzAllowClear>
+            <nz-option *ngFor="let option of type" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode">
+            </nz-option>
+          </nz-select>
+        </div>
+
+      </div>
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col [nzXs]="4" [nzSm]="3" [nzMd]="2" [nzXs]="2" style="text-align:left">
+        <label class="labelSize" nz-form-item-required>周次&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+      </div>
+      <div nz-form-control nz-col [nzSm]="14" [nzXs]="14" [nzMd]="14" [nzLg]="8" [nzXl]="6">
+        <div nz-form-control>
+          <nz-select style="width: 300px;" [nzPlaceHolder]="'请选择'" [nzShowSearch]="true" name="Weeks" [(ngModel)]="createdObj.Weeks"
+            (ngModelChange)="date($event,'week')" (ngModelChange)="taskTitle($event,'week')" name="weeks" nzAllowClear>
+            <nz-option *ngFor="let option of weeks" [nzLabel]="option" [nzValue]="option">
+            </nz-option>
+          </nz-select>
+        </div>
+
+      </div>
+    </div>
+
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col [nzXs]="4" [nzSm]="3" [nzMd]="2" [nzXs]="2" style="text-align:left">
+        <label class="labelSize" nz-form-item-required>起始时间</label>
+      </div>
+      <div nz-form-control nz-col [nzSpan]="18">
+        <nz-datepicker style="width: 300px;" [(ngModel)]="createdObj.StartTime" name="StartTime" [nzPlaceHolder]="'请选择'"></nz-datepicker>
+
+      </div>
+    </div>
+
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col [nzXs]="4" [nzSm]="3" [nzMd]="2" [nzXs]="2" style="text-align:left">
+        <label class="labelSize" nz-form-item-required>截止时间</label>
+      </div>
+      <div nz-form-control nz-col [nzSpan]="18">
+        <nz-datepicker style="width: 300px;" [(ngModel)]="createdObj.EndTime" name="EndTime" [nzPlaceHolder]="'请选择'"></nz-datepicker>
+      </div>
+    </div>
+    <div nz-form-item nz-row>
+      <div nz-form-label nz-col [nzXs]="4" [nzSm]="3" [nzMd]="2" [nzXs]="2" style="text-align:left">
+        <label class="labelSize" nz-form-item-required>任务标题</label>
+      </div>
+      <div nz-form-control nz-col [nzSpan]="18">
+        <div>
+
+          <nz-input [nzRows]="2" nzType="textarea" maxlength='50' style="border: none;" class="width:498px;" [nzRows]="'2'" [(ngModel)]="createdObj.TaskTitle"
+            name="TaskTitle" [nzPlaceHolder]="''" [nzSize]="'large'">
+          </nz-input>
+          <span style="width:498px;text-align:right;display:inline-block">{{createdObj.TaskTitle.length}}/50</span>
+
+        </div>
+      </div>
+    </div>
+    <div nz-row nz-form-item class="btn_two">
+      <div nz-col [nzSpan]="24">
+        <!-- <button nz-button [nzType]="'primary'" (click)="cancel()">取消</button>
+        <button nz-button [nzType]="'primary'" (click)="nextPage()" style="margin-left:90px;" [ngClass]="{'gray':isGray}" >下一步</button> -->
+        <button class="btn_cancle" (click)="cancel()">取消</button>
+
+        <button (click)="nextPage()" style="margin-left:90px;" [ngClass]="{'gray': isGray,'yellow':isYellow}">下一步</button>
+      </div>
+    </div>
+  </form>
+
+
+
+
+</div>

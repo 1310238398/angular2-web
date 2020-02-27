@@ -1,0 +1,134 @@
+body,p{
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: #fafafa;
+}
+.comment-desc-h{
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    line-clamp: 4;
+    -webkit-line-clamp:4;
+    -webkit-box-orient:vertical;
+    overflow: hidden;
+    color: #666666;
+    font-size: 15px;
+    margin-bottom: .2rem;
+}
+.comment-wrap{
+    padding: .2rem;
+    font-size: .2rem;
+    background: #fff;
+    margin-top: .2rem;
+}
+.comment-title{
+    font-size: .3rem;
+    padding: .1rem .2rem;
+    color: #666666;
+    letter-spacing: .03rem;
+}
+.comment-color{
+    background: #FFF9E5;
+}
+.comment-color-post{
+    background: #EDFFED;
+}
+.comment-user-list{
+    margin-top: .2rem;
+}
+.comment-user-list div:nth-child(1){
+    display: flex;
+    justify-content: space-between;
+    padding: 0 .1rem;
+}
+.username{
+    color: #FB5F2D;
+    font-size: 14px;
+}
+.time{
+    color: #ACACAC;
+    font-size: .2rem;
+}
+.comment-desc{
+    margin-top: .2rem;
+    font-size: .28rem;
+    color: #666666;
+    border-bottom: 1px solid #E3E3E3;
+    padding-bottom: .2rem;
+}
+.border-no{
+    border: none
+}
+.box-shadow-1px{
+    box-shadow: 3px 1px 3px #ccc
+}
+
+.div_img_container{
+    display: block !important;
+    float: left;
+    width: 30%;
+    margin-right: 2%;
+    height: auto;
+}
+
+.div_img_container img{
+    width: 100%;
+    height: auto;
+}
+
+.img_modal{
+    display: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9998;
+    background-color: black;
+    box-sizing: border-box;
+    overflow: scroll;
+}
+.img_modal span{
+    display: table-cell;
+    vertical-align: middle;
+}
+.img_modal img{
+    width: 100%;
+    height:auto;
+}
+.user-title{
+    background: #FFE7E0;
+}
+.content-list-desc-type{
+    padding: 2px 4px;
+    display: inline-table;
+    border-radius: 4px;
+    float: left;
+    font-size: 14px;
+    margin: 4px 0;
+}
+.user-type{
+    color: #FB5F2D;
+    border: 1px solid #FB5F2D; 
+}
+.post-type{
+    color: #FFC103;
+    border: 1px solid  #FFC103; 
+}
+.comment-type{
+    color: #50BB50;
+    border: 1px solid #50BB50; 
+    margin-left: 8px;
+}
+.tz {
+    width: 30px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    margin-top: 8px;
+    text-align: center;
+}

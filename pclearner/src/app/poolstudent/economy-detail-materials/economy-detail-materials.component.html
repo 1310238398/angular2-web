@@ -1,0 +1,44 @@
+<div style="padding-top: 20px">
+  <div *ngFor="let item of attachs">
+    <div [ngSwitch]="item.category" class="box">
+      <div *ngSwitchCase="'ecostatus'">
+        <h2>
+          青岛大学家庭经济情况调查表
+        </h2>
+        <hr>
+        <div style="height: 200px">
+          <img src="{{img.path}}" *ngFor="let img of item.attachs" (click)="preview(item.attachs)">
+        </div>
+      </div>
+      <div *ngSwitchCase="'book'">
+        <h2>
+          青岛大学家庭经济困难学生认定知情同意书
+        </h2>
+        <hr>
+        <div style="height: 200px">
+          <img src="{{img.path}}" *ngFor="let img of item.attachs" (click)="preview(item.attachs)">
+        </div>
+      </div>
+      <div *ngSwitchCase="'attach'">
+        <h2>
+          附件
+        </h2>
+        <hr>
+        <div style="height: 200px">
+          <img src="{{img.path}}" *ngFor="let img of item.attachs;let index=index" (click)="preview(item.attachs,index)">
+        </div>
+      </div>
+    </div>
+  </div>
+<!--  <h2>
+    青岛大学家庭经济情况调查表
+  </h2>
+  <hr>
+  <div style="height: 200px"></div>
+  <h2>
+    青岛大学家庭经济困难学生认定知情同意书
+  </h2>
+  <hr>
+  <div style="height: 200px"></div>-->
+</div>
+

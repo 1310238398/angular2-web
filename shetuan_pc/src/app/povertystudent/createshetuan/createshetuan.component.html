@@ -1,0 +1,75 @@
+<div class="shetuanform">
+    <form nz-form [formGroup]="validateForm">
+        <div nz-form-item nz-row class="title">
+            <div nz-form-label nz-col [nzSpan]="7">
+                <h1>社团创建（1/2）</h1>
+            </div>
+            <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="7">
+                <label nz-form-item>社团名称</label>
+            </div>
+            <div nz-col [nzSpan]="12" nz-form-control nzHasFeedback>
+                <nz-input formControlName="UnionName" [nzType]="'text'" [nzPlaceHolder]="''" [nzSize]="'large'"
+                    [(ngModel)]="inputShe.UnionName">
+                </nz-input>
+                <div nz-form-explain *ngIf="getFormControl('UnionName').dirty&&getFormControl('UnionName').hasError('required')">请输入社团名称!</div>
+                <div nz-form-explain *ngIf="getFormControl('UnionName').dirty&&getFormControl('UnionName').hasError('expired')">名称最多输入30个字符!</div>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="7">
+                <label nz-form-item>社团类别</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="12">
+                <nz-select formControlName="UnionType" [nzSize]="'large'" [nzPlaceHolder]="''" [(ngModel)]="inputShe.UnionType">
+                    <nz-option *ngFor="let option of optiontype" [nzLabel]="option.CodeName" [nzValue]="option.Code">
+                    </nz-option>
+                </nz-select>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="7">
+                <label nz-form-item>创建时间</label>
+            </div>
+            <div nz-col [nzSpan]="12" nz-form-control>
+                <nz-datepicker formControlName="InsertDatetime" [nzSize]="'large'" [nzPlaceHolder]="''" style="width: 100%;"
+                    [(ngModel)]="inputShe.InsertDatetime" [nzDisabledDate]="_disabledDate"></nz-datepicker>
+                <div nz-form-explain *ngIf="getFormControl('InsertDatetime').dirty&&getFormControl('InsertDatetime').hasError('required')">请选择创建时间!</div>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSpan]="7">
+                <label nz-form-item>挂靠单位</label>
+            </div>
+            <div nz-form-control nz-col [nzSpan]="12">
+                <nz-select nzAllowClear formControlName="Department" [nzSize]="'large'" [nzPlaceHolder]="''"
+                    [(ngModel)]="inputShe.Department" [nzFilter]="true" [nzNotFoundContent]="'无法找到'" nzShowSearch>
+                    <nz-option *ngFor="let option of optiondepart" [nzLabel]="option.AcademyName" [nzValue]="option.AcademyCode">
+                    </nz-option>
+                </nz-select>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-col [nzSpan]="7" nz-form-label>
+                <label nz-form-item>社团简介</label>
+            </div>
+            <div nz-col [nzSpan]="12" nz-form-control>
+                <nz-input formControlName="UnionInfo" [nzRows]="12" [nzType]="'textarea'"
+                    [nzPlaceHolder]="''" [nzSize]="'large'" [(ngModel)]="inputShe.UnionInfo" style="resize:none !important;">
+                </nz-input>
+            </div>
+        </div>
+        <div nz-form-item nz-row>
+            <div nz-col [nzOffset]="7" [nzSpan]="12" nz-form-control>
+                <a routerLink="">
+                    <button nz-button [nzSize]="'large'" type="button">取消</button>
+                </a>
+                <button nz-button [nzType]="'primary'" type="button" [disabled]="subStop" (click)="submitForm($event,validateForm.value)"
+                    [nzSize]="'large'">下一步</button>
+            </div>
+        </div>
+    </form>
+</div>

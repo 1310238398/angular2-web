@@ -1,0 +1,47 @@
+<ion-content class="outer-content">
+    <div class="seachd">
+
+        <input type="text" class="myname" placeholder="可搜索新生姓名" [(ngModel)]="searchQuery" value='{{searchQuery}}' />
+
+        <button class="search-button" (click)="search()">搜索</button>
+    </div>
+    <!-- *ngFor="let his of items" -->
+    <!-- <ion-list>
+
+        <ion-item (click)="NavDetail(his)" class="personliat">
+
+            <ion-thumbnail item-start>
+                <img src="img/thumbnail-totoro.png">
+            </ion-thumbnail>
+            <span>姓名：</span><span>计算机</span><span>男</span>
+            <p><span>身份证号：</span><span>12313123****</span></p>
+            <p><span>报到学院：</span><span>计算机学院</span></p>
+
+            <button ion-button clear item-end>已报到</button>
+        </ion-item>
+    </ion-list> -->
+    <div class="personliat" (click)="NavDetail(his)" *ngFor="let his of items">
+        <ion-card class="personmwbor">
+
+            <div class="personto" *ngIf="his.HeadURL">
+                <img src={{his.HeadURL}}>
+            </div>
+
+            <div class="personto" *ngIf="!his.HeadURL">
+                <img src="./assets/images/as@2x.png">
+            </div>
+            <div class="xingm"><span>姓名：</span><span>{{his.Name}}</span>
+                <p class="xingbie"><span>性别：</span><span>{{his.Sex}}</span></p>
+
+            </div>
+            <div class="baodaoqingk" *ngIf="his.Status==1"></div>
+            <div class="baodaoqingk1" *ngIf="his.Status==0"></div>
+
+            <div class="padding5">
+                <p><span>身份证号：</span><span>{{his.IdCard}}</span></p>
+                <p><span>报到学院：</span><span>{{his.Academy}}</span></p>
+            </div>
+        </ion-card>
+    </div>
+
+</ion-content>

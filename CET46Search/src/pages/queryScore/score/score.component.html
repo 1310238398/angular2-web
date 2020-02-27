@@ -1,0 +1,139 @@
+<ion-content>
+    <div class="img" *ngIf='allData.IsSuccess == 1'><img src="assets/images/shengli@2x.png"></div>
+    <div class="img" *ngIf='allData.IsSuccess == 2'><img src="assets/images/shibai@2x.png"></div>
+    <!--山体成功-->
+    <div class="middle_st" *ngIf='allData.IsOutside=="0" && allData.IsSuccess==1'>
+        <p class="wenzi">
+            {{allData.Name}}的大学英语{{allData.CetType}}级总成绩为
+        </p>
+
+        <div class="xiangqing">
+            <span class="score">
+                {{allData.RealScore}}分
+                </span>
+            <span class="details" (click)="detail()"><img src="assets/images/group_3copy@2x.png"></span>
+            <div class="detailScore" *ngIf='showDetail' (click)="hideBigImage()">
+                <ul>
+                    <li>您的成绩总分数：{{allData.RealScore}}</li>
+                    <li>听力：{{allData.HearScore}}</li>
+                    <li>阅读：{{allData.ReadScore}}</li>
+                    <li>写作与翻译：{{allData.WriteScore}}</li>
+                </ul>
+            </div>
+        </div>
+        <span class="yugu" *ngIf='allData.EstimateScore != 0 '>你的四六级预估成绩为{{allData.EstimateScore}}</span>
+        <div class="shanti"><span>{{allData.RankText}}</span></div>
+        <!--<div class="br"></div>-->
+        <hr/>
+        <P class="duanwei">本赛季,你在王者荣耀版四六级的段位是</P>
+        <span class="duanwei2">{{rank}}{{rankNum}}</span>
+        <!--</div>-->
+    </div>
+
+    <!--山体失败-->
+    <div class="middle_stfailure" *ngIf='allData.IsOutside=="0" && allData.IsSuccess==2'>
+        <p class="wenzi">
+            {{allData.Name}}的大学英语{{allData.CetType}}级总成绩为
+        </p>
+        <div class="xiangqing">
+            <span class="score">
+                {{allData.RealScore}}分
+                </span>
+            <span class="details" (click)="detail()"><img src="assets/images/group_3copy@2x.png"></span>
+            <div class="detailScore" *ngIf='showDetail' (click)="hideBigImage()">
+                <ul>
+                    <li>您的成绩总分数：{{allData.RealScore}}</li>
+                    <li>听力：{{allData.HearScore}}</li>
+                    <li>阅读：{{allData.ReadScore}}</li>
+                    <li>写作与翻译：{{allData.WriteScore}}</li>
+                </ul>
+            </div>
+        </div>
+        <span class="yugu" *ngIf='allData.EstimateScore != 0 '>你的四六级预估成绩为{{allData.EstimateScore}}</span>
+        <div class="shanti"><span>{{allData.RankText}}</span></div>
+        <!--<div class="br"></div>-->
+        <hr/>
+        <P class="duanwei">本赛季,你在王者荣耀版四六级的段位是</P>
+        <span class="duanwei2">{{rank}}{{rankNum}}</span>
+        <!--</div>-->
+    </div>
+
+
+    <!--其他学校成功-->
+    <div class="middle_notshanti" *ngIf='allData.IsOutside=="1" && allData.IsSuccess == 1' >
+        <p class="wenzi">
+            {{allData.Name}}的大学英语{{allData.CetType}}级总成绩为
+        </p>
+        <div class="xiangqing">
+            <span class="score">
+                {{allData.RealScore}}分
+                </span>
+            <span class="details" (click)="detail()"><img src="assets/images/group_3copy@2x.png"></span>
+            <div class="detailScore" *ngIf='showDetail' (click)="hideBigImage()">
+                <ul>
+                    <li>您的成绩总分数：{{allData.RealScore}}</li>
+                    <li>听力：{{allData.HearScore}}</li>
+                    <li>阅读：{{allData.ReadScore}}</li>
+                    <li>写作与翻译：{{allData.WriteScore}}</li>
+                </ul>
+            </div>
+        </div>
+        <span class="yugu" *ngIf='allData.EstimateScore != 0 '>你的四六级预估成绩为{{allData.EstimateScore}}</span>
+        <!--<div class="shanti" *ngIf="IsOutside==0"><span>{{allData.RankText}}</span></div>-->
+        <hr/>
+
+        <P class="duanwei">本赛季,你在王者荣耀版四六级的段位是</P>
+        <span class="duanwei2">{{rank}}{{rankNum}}</span>
+        <!--</div>-->
+    </div>
+
+    <!--其他学校失败-->
+    <div class="middle_fail" *ngIf='allData.IsOutside=="1" && allData.IsSuccess==2' >
+        <p class="wenzi">
+            {{allData.Name}}的大学英语{{allData.CetType}}级总成绩为
+        </p>
+        <div class="xiangqing">
+            <span class="score">
+                {{allData.RealScore}}分
+                </span>
+            <span class="details" (click)="detail()"><img src="assets/images/group_3copy@2x.png"></span>
+            <div class="detailScore" *ngIf='showDetail' (click)="hideBigImage()">
+                <ul>
+                    <li>您的成绩总分数：{{allData.RealScore}}</li>
+                    <li>听力：{{allData.HearScore}}</li>
+                    <li>阅读：{{allData.ReadScore}}</li>
+                    <li>写作与翻译：{{allData.WriteScore}}</li>
+                </ul>
+            </div>
+        </div>
+        <span class="yugu" *ngIf='allData.EstimateScore != 0 '>你的四六级预估成绩为{{allData.EstimateScore}}</span>
+        <hr/>
+
+        <P class="duanwei">本赛季,你在王者荣耀版四六级的段位是</P>
+        <span class="duanwei2">{{rank}}{{rankNum}}</span>
+        <!--</div>-->
+    </div>
+
+    <div *ngIf='allData.IsSuccess==2' class="Artboard2"></div>
+    <div *ngIf='allData.IsSuccess==1' class="Artboard"></div>
+    <!--山体 失败-->
+    <div *ngIf="allData.IsSuccess==2">
+        <button type="submit" class="share-btn" ><a href="http://m.sparke.cn/#/index/level/lesson/cet4">进入到学习游戏</a></button>
+    </div>
+    <!--成功-->
+    <div *ngIf="allData.IsSuccess==1" >
+        <button type="submit" class="success-btn" (click)="share()" >分享给好友</button>
+    </div>
+    <!--失败-->
+    <div *ngIf="allData.IsSuccess==2">
+        <button type="submit" class="failure-btn" (click)="share()" >分享给好友</button>
+    </div>
+    <!-- <p class="photo" (click)="savePhoto()" *ngIf = 'this.isShare == 0&&this.isSave == false'>保存到相册</p> -->
+    <div class="mengceng" *ngIf="allData.IsWin == 1&&cloak">
+        <div class="zhongjiang" *ngIf="allData.IsWin == 1&&zhongjiang">
+            <p class="title">恭喜你中奖啦!</p>
+            <span>{{allData.WinText}}</span>
+            <button allData="" class="ok" (click)="ok()">好的</button>
+        </div>
+    </div>
+</ion-content>

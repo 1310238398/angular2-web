@@ -1,0 +1,126 @@
+<ion-content>
+    <ion-list class="list">
+        <ion-item>
+            <ion-thumbnail item-start>
+                <img *ngIf="InformationFilling.photoUrl" src="{{InformationFilling.photoUrl}}" class="touxiangimg" onerror="this.src='assets/images/moren@2x.png'">
+                <img *ngIf="!InformationFilling.photoUrl" src="assets/images/moren@2x.png" class="touxiangimg">
+            </ion-thumbnail>
+            <h2>姓名：{{InformationFilling.Name}}</h2>
+            <p>学号：{{InformationFilling.UserCode}}</p>
+            <button clear item-end class="topbtn" (click)="firstpage()">修改信息</button>
+        </ion-item>
+    </ion-list>
+
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="pet">
+            <ion-segment-button value="puppies">
+                个人信息
+            </ion-segment-button>
+            <ion-segment-button value="kittens">
+                家庭成员信息
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+    <div [ngSwitch]="pet">
+
+        <ion-list *ngSwitchCase="'puppies'">
+            <ion-list>
+                <ion-item>
+                    <ion-label class="xinxileft" fixed>民族</ion-label>
+                    <ion-input [(ngModel)]="InformationFilling.Nationality" disabled></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label class="xinxileft" fixed>籍贯</ion-label>
+                    <ion-input  [value]='InformationFilling.OriginAreaCodeName+InformationFilling.OriginAreaName||""' (click)="detail(InformationFilling['OriginAreaCodeName']+InformationFilling.OriginAreaName||'')" disabled></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label class="xinxileft" fixed>政治面貌</ion-label>
+                    <ion-input [(ngModel)]="InformationFilling.Political" disabled></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label class="xinxileft">宿舍</ion-label>
+
+                    <ion-input [(ngModel)]="InformationFilling.Dormitory" disabled></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label class="xinxileft">电子邮箱</ion-label>
+                    <ion-input [(ngModel)]="InformationFilling.Email" disabled></ion-input>
+                </ion-item>
+                <ion-item *ngIf="!InfoSets.has('AccountBank')">
+                    <ion-label class="xinxileft">开户行</ion-label>
+                    <ion-input [(ngModel)]="InformationFilling.AccountBank" disabled></ion-input>
+                </ion-item>
+                <ion-item *ngIf="!InfoSets.has('BankCardNumber')">
+                    <ion-label class="xinxileft">银行卡号</ion-label>
+                    <ion-input [(ngModel)]="InformationFilling.BankCardNumber" disabled></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label class="xinxileft" fixed>QQ号</ion-label>
+                    <ion-input [(ngModel)]="InformationFilling.QQAcct" disabled></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label class="xinxileft">生源地</ion-label>
+                    <ion-input [(ngModel)]="InformationFilling.StudentAreaName" (click)="detail(InformationFilling.StudentAreaName||'')" disabled></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label class="xinxileft" fixed>邮政编码</ion-label>
+                    <ion-input [(ngModel)]="InformationFilling.PostCode" disabled></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label class="xinxileft">家庭住址</ion-label>
+                    <ion-input [(ngModel)]="InformationFilling.DetailAddress" disabled></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label class="xinxileft">家庭电话</ion-label>
+
+                    <ion-input [(ngModel)]="InformationFilling.HomePhone" disabled></ion-input>
+                    <!-- <div *ngIf="InformationFilling.HomePhone"> -->
+                    <ion-icon *ngIf="InformationFilling.HomePhone" item-right name="ios-call" class="circle" color="primary" (click)="callPhone(InformationFilling.HomePhone);$event.stopPropagation()"></ion-icon>
+                    <!-- </div> -->
+                </ion-item>
+            </ion-list>
+        </ion-list>
+        <ion-list *ngSwitchCase="'kittens'">
+
+            <ion-item>
+                <ion-label class="xinxileft">监护人一姓名</ion-label>
+                <ion-input [(ngModel)]="InformationFilling.MemberName1" disabled></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label class="xinxileft">本人与监护人一关系</ion-label>
+                <ion-input [(ngModel)]="InformationFilling.MemberType1" disabled></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label class="xinxileft">监护人一工作单位</ion-label>
+                <ion-input [(ngModel)]="InformationFilling.MemberWorkUnit1" disabled></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label class="xinxileft">监护人一联系电话</ion-label>
+                <ion-input [(ngModel)]="InformationFilling.MobilePhone1" disabled></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label class="xinxileft">监护人二姓名</ion-label>
+                <ion-input [(ngModel)]="InformationFilling.MemberName2" disabled></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label class="xinxileft">本人与监护人二关系</ion-label>
+                <ion-input [(ngModel)]="InformationFilling.MemberType2" disabled></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label class="xinxileft">监护人二工作单位</ion-label>
+                <ion-input [(ngModel)]="InformationFilling.MemberWorkUnit2" disabled></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label class="xinxileft">监护人二联系电话</ion-label>
+                <ion-input [(ngModel)]="InformationFilling.MobilePhone2" disabled></ion-input>
+            </ion-item>
+
+        </ion-list>
+    </div>
+
+
+
+</ion-content>

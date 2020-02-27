@@ -1,0 +1,45 @@
+page-resume-leave-detail {
+  .card-ios {
+    margin-top: 15px;
+  }
+  .img {
+    position: absolute;
+    display: inline-block;
+  }
+  .top120 {
+    top: 120px;
+  }
+  .left40 {
+    left: 40px;
+  }
+  .right40 {
+    right: 40px
+  }
+  .commit {
+    width: 32px;
+    top: 0;
+    left: 50%;
+    margin-left: -16px;
+  }
+  .success {
+    margin-top: 3px;
+    font-size: 14px;
+    text-align: center;
+  }
+  .xiaojia{
+    background-image:linear-gradient(-90deg, #32c6fe 0%, #0183fd 98%);
+    border-radius:6px;
+    height:43px;
+    div{
+      text-align: center;
+    }
+    span{
+      display: inline-block;
+      font-family:PingFangSC-Regular;
+      font-size:16px;
+      color:#ffffff;
+      letter-spacing:0.38px;
+      text-align:center;
+    }
+  }
+}

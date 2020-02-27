@@ -1,0 +1,64 @@
+<div class="content">
+  <div class="components-table-demo-control-bar">
+    <form #f="ngForm" nz-form [nzLayout]="'inline'" style="margin-bottom:8px" class="text-center">
+      <div nz-row nz-form-item>
+        <div nz-form-control>
+          <nz-input style="width: 120px" [(ngModel)]="search.UserCode" name="UserCode"
+                    [nzPlaceHolder]="'学号'"></nz-input>
+        </div>
+      </div>
+      <div nz-row nz-form-item>
+        <div nz-form-control>
+          <nz-input style="width: 120px" [(ngModel)]="search.Name" name="Name"
+                    [nzPlaceHolder]="'姓名'"></nz-input>
+        </div>
+      </div>
+      <div nz-row nz-form-item>
+        <div nz-col [nzSpan]="24">
+          <button nz-button [disabled]="httpService.loading" [nzType]="'primary'" (click)="onSearch(true)">
+            查询
+          </button>
+          <button nz-button (click)="resetForm(f)">重置</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <nz-table #nzTable [nzAjaxData]="Users"  [(nzPageIndex)]="page.Page" [nzLoading]="httpService.loading" [(nzTotal)]="page.Total"
+            [(nzPageSize)]="page.PageSize" [nzBordered]="true" (nzPageIndexChange)="onSearch()">
+    <thead nz-thead>
+    <tr>
+      <th nz-th><span>操作</span></th>
+      <th nz-th [nzWidth]="'100px'"><span>学号</span></th>
+      <th nz-th [nzWidth]="'70px'"><span>姓名</span></th>
+      <th nz-th><span>校区</span></th>
+      <th nz-th><span>学院</span></th>
+      <th nz-th><span>专业</span></th>
+      <th nz-th [nzWidth]="'50px'"><span>年级</span></th>
+      <th nz-th><span>班级</span></th>
+    </tr>
+    </thead>
+    <tbody nz-tbody>
+    <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+      <td nz-td>
+          <nz-tooltip [nzTitle]="'移入'"  *ngIf="data.Purview==2||data.Default==1">
+            <a nz-tooltip><i class="anticon anticon-plus" (click)="edit(data)"></i></a>
+          </nz-tooltip>
+        <span nz-table-divider *ngIf="(data.Purview==0||data.Purview==1)&&data.Default!=1"></span>
+        <nz-popconfirm [nzTitle]="'确定要移出该学生吗？'" *ngIf="(data.Purview==0||data.Purview==1)&&data.Default!=1" (nzOnConfirm)="onShitout(data.IntelUserCode)">
+          <nz-tooltip [nzTitle]="'移出'">
+            <a nz-tooltip nz-popconfirm><i class="anticon anticon-minus"></i></a>
+          </nz-tooltip>
+        </nz-popconfirm>
+      </td>
+      <td nz-td>{{data.UserCode}}</td>
+      <td nz-td>{{data.Name}}</td>
+      <td nz-td>{{data.CampusName}}</td>
+      <td nz-td>{{data.AcademyName}}</td>
+      <td nz-td>{{data.MajorName}}</td>
+      <td nz-td>{{data.GradeName}}</td>
+      <td nz-td>{{data.ClassName}}</td>
+    </tr>
+
+    </tbody>
+  </nz-table>
+</div>

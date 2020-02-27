@@ -1,0 +1,72 @@
+<div class="modal-header">
+    <div class="modal-title">{{item.ClassName||''}}-信息变更</div>
+</div>
+<form #f="ngForm" (ngSubmit)="save()" nz-form [nzType]="'horizontal'">
+    <!-- <div nz-form-item nz-row class="mb-sm">
+        <div nz-form-label nz-col [nzSpan]="6">
+            <label>分管领导</label>
+        </div>
+        <div nz-form-control nz-col [nzSpan]="16">
+            <nz-select [(ngModel)]="item.Leadership" name="Leadership" [nzPlaceHolder]="''" required>
+                <nz-option *ngFor="let opt of Leaderships" [nzLabel]="opt.Name" [nzValue]="opt.IntelUserCode">
+                </nz-option>
+            </nz-select>
+        </div>
+    </div> -->
+    <div nz-form-item nz-row class="mb-sm">
+        <div nz-form-label nz-col [nzSpan]="6">
+            <label>校区</label>
+        </div>
+        <div nz-form-control nz-col [nzSpan]="16">
+            <nz-select [(ngModel)]="item.Campus" name="Campus" [nzPlaceHolder]="''" nzShowSearch nzAllowClear>
+                <nz-option *ngFor="let campus of campusData" [nzLabel]="campus.CampusName" [nzValue]="campus.CampusCode">
+                </nz-option>
+            </nz-select>
+        </div>
+    </div>
+    <div nz-form-item nz-row class="mb-sm">
+        <div nz-form-label nz-col [nzSpan]="6">
+            <label>辅导员</label>
+        </div>
+        <div nz-form-control nz-col [nzSpan]="16">
+            <nz-select [(ngModel)]="item.Counselor" name="Counselor" [nzPlaceHolder]="''" nzShowSearch nzAllowClear>
+                <nz-option *ngFor="let opt of Counselors" [nzLabel]="opt.Name" [nzValue]="opt.IntelUserCode">
+                </nz-option>
+            </nz-select>
+        </div>
+    </div>
+    <div nz-form-item nz-row class="mb-sm">
+        <div nz-form-label nz-col [nzSpan]="6">
+            <label>班主任</label>
+        </div>
+        <div nz-form-control nz-col [nzSpan]="16">
+            <nz-select [(ngModel)]="item.Adviser" name="Adviser" [nzPlaceHolder]="''" nzShowSearch nzAllowClear>
+                <nz-option *ngFor="let opt of Advisers" [nzLabel]="opt.Name" [nzValue]="opt.IntelUserCode">
+                </nz-option>
+            </nz-select>
+        </div>
+    </div>
+    <div nz-form-item nz-row class="mb-sm">
+        <div nz-form-label nz-col [nzSpan]="6">
+            <label>班级状态</label>
+        </div>
+        <div nz-form-control nz-col [nzSpan]="16">
+            <!-- <label nz-checkbox [(ngModel)]="item.Graduate" name="graduate">
+                <span>毕业</span>
+            </label> -->
+            <nz-radio-group [(ngModel)]="item.Graduate" name="graduate">
+                <label nz-radio [nzValue]="'no'">
+                    <span>正常</span>
+                </label>
+                <label nz-radio [nzValue]="'yes'">
+                    <span>毕业</span>
+                </label>
+            </nz-radio-group>
+            <!-- <p style="color:red;" *ngIf="item.Graduate">班级状态改为毕业后将无法更改，请确认班级信息后慎重选择</p> -->
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button nz-button type="button" (click)="close()">关闭</button>
+        <button nz-button [nzType]="'primary'" [nzLoading]="isSaveIng">保存</button>
+    </div>
+</form>

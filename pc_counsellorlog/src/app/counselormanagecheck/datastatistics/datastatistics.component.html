@@ -1,0 +1,56 @@
+<div class="content">
+    <p class="center fn18" style="margin:20px 0;">辅导员(班主任)工作日志</p>
+    <div class="components-table-demo-control-bar">
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-center">
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>学年学期</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 180px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.CateYear" name="CateYear">
+                        <nz-option *ngFor="let option of optionyear" [nzLabel]="option.AcademicNameTerm" [nzValue]="option.indexNum">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>学院</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 180px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.CateCollege" name="CateCollege" (ngModelChange)="onSearchTeacher()">
+                        <nz-option *ngFor="let option of optioncollege" [nzLabel]="option.AcademyName" [nzValue]="option.AcademyCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>辅导员(班主任)</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 140px;" [nzPlaceHolder]="''" nzShowSearch [(ngModel)]="searchObj.Teacher" name="Teacher">
+                        <nz-option *ngFor="let option of optionteacher" [nzLabel]="option.name" [nzValue]="option.IntelUserCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+
+            <div nz-row nz-form-item>
+                <div nz-col [nzSpan]="24" style="text-align: right;">
+                    <button nz-button [nzType]="'primary'" (click)="loadTuxData()">查询</button>
+                    <button style="margin-right:20px;" nz-button (click)="resetForm(f)">重置</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div style="margin-top:20px;">
+        <div echarts [options]="chartOption" class="demo-chart" (chartClick)="onChartClick($event)"></div>
+    </div>
+
+
+</div>

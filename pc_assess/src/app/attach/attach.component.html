@@ -1,0 +1,11 @@
+<div class="bb">
+  <div *ngIf="dataSet.length>0">
+    <img *ngFor="let attach of dataSet" class="icon" [src]="attach.AttachmentUrl"
+         onerror="this.src='assets/images/kong.png'" alt="">
+  </div>
+
+  <div class="noneattach base" *ngIf="dataSet.length==0">
+    暂无附件
+  </div>
+</div>
+<a (click)="back()"><img class="b-cancle" src="assets/images/back.png"></a>

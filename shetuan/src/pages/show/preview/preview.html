@@ -1,0 +1,38 @@
+<!--
+  Generated template for the PreviewPage page.
+
+-->
+<!--水印-->
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>社团活动</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="grid-basic-page">
+  <div *ngIf="SheTuanEND.length <= 0" class="none">
+    <img class="noneimg" src="assets/images/kong.png">
+    <div class="noneFont">暂无更多内容</div>
+  </div>
+  <ion-list *ngFor=" let item of SheTuanEND " style="background-color:#fafafa">
+    <div style="height:15px;"></div>
+    <div class="fn14" style="text-align: center;height: 15px;color:#9B9B9B;">{{item.starttime}}</div>
+    <div style="height:15px;"></div>
+    <ion-card style="margin:2px 0;width:100%;box-shadow:0 2px 5px 0 #E3E3E3 !important;" (click)="godetail(item)">
+        <h2 class="fn18 honor-content" style="text-align: center;margin: 10px 0;color:#4A4A4A;">{{item.name}}</h2>
+          <button ion-item>
+            <ul *ngFor="let item of item.attachmenturl.slice(0,3) ">
+              <li>
+                <img [src]='DomS.bypassSecurityTrustUrl(item.attachmenturl)'>
+              </li>
+            </ul>
+          </button>
+    </ion-card>
+  </ion-list>
+    <ion-infinite-scroll *ngIf="moreDatar" (ionInfinite)="doInfiniter($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <div style="text-align: center;color: #8e9093" *ngIf="!moreDatar">我是有底线的！</div>
+
+</ion-content>

@@ -1,0 +1,18 @@
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <div>
+        <div>尊敬的老师：</div>
+        <div class="zj-text-indent">
+          {{leaveApply.AcademyName}}{{leaveApply.ClassName}}{{leaveApply.UserCode}}学号{{leaveApply.Name}}姓名同学因{{leaveApply.LeaveTypeName}}请假
+          {{Days}}天，不能参加课程的学习。其请假申请符合学校有关规定，已批准，特此通告。
+        </div>
+        <div style="float: right">
+          <div>辅导员姓名：{{leaveApply.CounselorName}}</div>
+          <div>日期：{{applyDate|stringToDate }}</div>
+
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

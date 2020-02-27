@@ -1,0 +1,107 @@
+<!--
+  Generated template for the MyapplydetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!--待审批-->
+<ion-content *ngIf="leaveApply.ApproveStatus==1">
+  <ion-card>
+    <ion-card-content>
+      <img src="assets/images/commitsuccess.png" class="img commit">
+      <div>
+        <div class="success">您已提交请假申请，请耐心等待老师审批。</div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <applyleave-detail style="background-color: #4d4d4d" [leaveApply]="leaveApply" [UserInfo]="UserInfo" [applyDate]="applyDate"></applyleave-detail>
+  <div padding>
+    <button ion-button color="zj-main-color" (click)="onReCall()" block>取消申请</button>
+  </div>
+</ion-content>
+<!--待销假-->
+<ion-content *ngIf="leaveApply.ApproveStatus==2">
+  <ion-card>
+    <ion-card-content>
+      <div>
+        <div>您提交的请假申请如下：</div>
+      </div>
+      <applyleave-detail style="background-color: #4d4d4d" [leaveApply]="leaveApply" [UserInfo]="UserInfo" [applyDate]="applyDate"></applyleave-detail>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<!--已销假-->
+<ion-content *ngIf="leaveApply.ApproveStatus==3">
+  <ion-card>
+    <ion-card-content>
+      <div>尊敬的{{UserInfo.Name}}同学：</div>
+      <div class="zj-text-indent">您于{{applyDate|stringToDate }}提出的{{leaveApply.LeaveType.CodeName}}申请，从{{leaveApply.StartDate|stringToDate}}至{{leaveApply.EndDate|stringToDate}} 销假申请
+        <span>已通过</span>申请销假日期为：{{leaveApply.LeaveDate|stringToDate}}。
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <applyleave-detail style="background-color: #4d4d4d" [leaveApply]="leaveApply" [UserInfo]="UserInfo" [applyDate]="applyDate"></applyleave-detail>
+  <!--  <div padding>
+      <button ion-button color="zj-main-color" (click)="onReCall()" block>申请撤回</button>
+  </div>-->
+</ion-content>
+<ion-content *ngIf="leaveApply.ApproveStatus==3">
+  <ion-card>
+    <ion-card-content>
+      <div>尊敬的{{UserInfo.Name}}同学：</div>
+      <div class="zj-text-indent">您于{{applyDate|stringToDate }}提出的{{leaveApply.LeaveType.CodeName}}申请，从{{leaveApply.StartDate|stringToDate}}至{{leaveApply.EndDate|stringToDate}} 销假申请
+        <span>已通过</span>申请销假日期为：{{leaveApply.LeaveDate|stringToDate}}。
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <applyleave-detail style="background-color: #4d4d4d" [leaveApply]="leaveApply" [UserInfo]="UserInfo" [applyDate]="applyDate"></applyleave-detail>
+  <!--  <div padding>
+      <button ion-button color="zj-main-color" (click)="onReCall()" block>申请撤回</button>
+  </div>-->
+</ion-content>
+<!--未批准-->
+<ion-content *ngIf="leaveApply.ApproveStatus==4">
+  <ion-card>
+    <ion-card-content>
+      <div>尊敬的{{UserInfo.Name}}同学：</div>
+      <div class="zj-text-indent">您于{{applyDate|stringToDate }}提出的{{leaveApply.LeaveType.CodeName}}申请，从{{leaveApply.StartDate|stringToDate}}至{{leaveApply.EndDate|stringToDate}} 请假申请
+        <span>未被通过</span>，原因如下：
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <img src="assets/images/connet.png" class="img top120 left40">
+  <img src="assets/images/connet.png" class="img top120 right40">
+  <ion-card>
+    <ion-card-content>
+      <div class="zj-text-indent mt" style="color: red">{{AuthReason}}</div>
+    </ion-card-content>
+  </ion-card>
+  <applyleave-detail  [leaveApply]="leaveApply" [UserInfo]="UserInfo" [applyDate]="applyDate"></applyleave-detail>
+
+    <div padding>
+      <button ion-button color="zj-main-color" (click)="updateApply()" block>修改申请</button>
+  </div>
+</ion-content>
+<!--销假未批准-->
+<ion-content *ngIf="leaveApply.ApproveStatus==6">
+  <ion-card>
+    <ion-card-content>
+      <div>尊敬的{{UserInfo.Name}}同学：</div>
+      <div class="zj-text-indent">您提出的销假申请
+        <span>未被通过</span>，原因如下：
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <div class="zj-text-indent mt" style="color: red">{{leaveApply.RecallRefuseReason||'未填写原因'}}</div>
+    </ion-card-content>
+  </ion-card>
+  <applyleave-detail  [leaveApply]="leaveApply" [UserInfo]="UserInfo" [applyDate]="applyDate"></applyleave-detail>
+
+  <div padding>
+    <button ion-button color="zj-main-color" (click)="updateXiaojiaApply()" block>修改申请</button>
+  </div>
+</ion-content>
+

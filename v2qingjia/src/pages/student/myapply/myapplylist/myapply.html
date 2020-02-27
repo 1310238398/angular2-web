@@ -1,0 +1,37 @@
+<!--
+  Generated template for the MyapplyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content class="outer-content">
+  <ion-refresher (ionRefresh)='initializeItems($event)'>
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="下拉刷新"
+      refreshingSpinner="circles"
+      refreshingText="刷新中...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list padding-top>
+
+    <ion-item detail-push *ngFor="let item of items" (click)="NavigationTo(item)">
+      <h2 *ngIf="item.ApproveStatus==0">{{item.LeaveTypeName }}(可撤回)</h2>
+      <h2 *ngIf="item.ApproveStatus==1">{{item.LeaveTypeName }}(待审批)</h2>
+      <h2 *ngIf="item.ApproveStatus==3">{{item.LeaveTypeName }}(已销假)</h2>
+      <h2 *ngIf="item.ApproveStatus==4">{{item.LeaveTypeName }}(未批准)</h2>
+      <h2 *ngIf="item.ApproveStatus==6">{{item.LeaveTypeName }}(销假未批准)</h2>
+      <p>{{item.StartDate|stringToDate }}至{{item.EndDate|stringToDate }}</p>
+    </ion-item>
+
+  </ion-list>
+  <div *ngIf="items.length <= 0" style="text-align: center;margin-top: 30%"><img src="assets/images/1@2x_2.png">没有更多内容！
+  </div>
+  <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="正在加载更多。。。">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <div style="text-align: center;color: #8e9093" *ngIf="!moreData">我是有底线的！</div>
+</ion-content>

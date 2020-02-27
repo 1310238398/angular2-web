@@ -1,0 +1,233 @@
+<div class="content">
+    <div style="margin-bottom: 10px;">
+        <h1 style="margin-bottom: 10px;">网上报修</h1>
+        <button nz-button nzType="primary">报修工单管理</button>
+        <button nz-button nzType="default" (click)="goToStatistics();">维修数据统计</button>
+    </div>
+    <div class="components-table-demo-control-bar" style="margin-bottom: 20px;">
+        <form [formGroup]="searchForm" nz-form [nzLayout]="'inline'" style="margin-bottom:8px" class="text-center">
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <div nz-form-label>
+                        <label>报修编号</label>
+                    </div>
+                    <nz-input style="width: 120px;" [nzSize]="'default'" formControlName="SerialNumber" [nzPlaceHolder]="'请输入'"></nz-input>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <div nz-form-label>
+                        <label>报修区域</label>
+                    </div>
+                    <nz-select style="width: auto; min-width: 120px;" formControlName="AreaRecordID" [nzPlaceHolder]="'请选择'" [nzMode]="'multiple'"
+                        nzAllowClear>
+                        <nz-option *ngFor="let option of areaList" [nzLabel]="option.Name" [nzValue]="option.RecordID
+">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <div nz-form-label>
+                        <label>报修项目</label>
+                    </div>
+                    <nz-select style="width: auto; min-width: 120px;" formControlName="ItemCode" [nzPlaceHolder]="'请选择'" [nzMode]="'multiple'"
+                        nzAllowClear>
+                        <nz-option *ngFor="let option of RepairItemList" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <div nz-form-label>
+                        <label>处理人</label>
+                    </div>
+                    <nz-select style="width: auto; min-width: 120px;" formControlName="RepairPersonnelUID" [nzPlaceHolder]="'请选择'" [nzMode]="'multiple'"
+                        nzAllowClear>
+                        <nz-option *ngFor="let option of RepairPersonnelList2" [nzLabel]="option.Name" [nzValue]="option.IntelUserCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <div nz-form-label>
+                        <label>申报时间</label>
+                    </div>
+
+                    <nz-datepicker style="width: 120px;" formControlName="CreateTime1" (ngModelChange)="_startDate1=$event;_startValueChange1()"
+                        [ngModel]="_startDate1" [nzDisabledDate]="_disabledStartDate1" [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="'开始日期'"
+                        name="_startDate1"></nz-datepicker>
+                    <span>至</span>
+                    <nz-datepicker style="width: 120px;" formControlName="CreateTime2" (ngModelChange)="_endDate1=$event;_endValueChange1()"
+                        [ngModel]="_endDate1" [nzDisabledDate]="_disabledEndDate1" [nzShowTime]="_endTime1" [nzFormat]="'YYYY-MM-DD'"
+                        [nzPlaceHolder]="'结束日期'" name="_endDate1"></nz-datepicker>
+
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <div nz-form-label>
+                        <label>报修状态</label>
+                    </div>
+                    <nz-select style="width: auto; min-width: 120px;" formControlName="Status" [nzPlaceHolder]="'请选择'" [nzMode]="'multiple'"
+                        nzAllowClear>
+                        <nz-option *ngFor="let option of statuslist" [nzLabel]="option.label" [nzValue]="option.value">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <div nz-form-label>
+                        <label>完成时间</label>
+                    </div>
+
+                    <nz-datepicker style="width: 120px;" formControlName="EndTime1" (ngModelChange)="_startDate=$event;_startValueChange()" [ngModel]="_startDate"
+                        [nzDisabledDate]="_disabledStartDate" [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="'开始日期'" name="_startDate"></nz-datepicker>
+                    <span>至</span>
+                    <nz-datepicker style="width: 120px;" formControlName="EndTime2" (ngModelChange)="_endDate=$event;_endValueChange()" [ngModel]="_endDate"
+                        [nzDisabledDate]="_disabledEndDate" [nzShowTime]="_endTime" [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="'结束日期'"
+                        name="_endDate"></nz-datepicker>
+
+                </div>
+            </div>
+
+            <div nz-row nz-form-item class="mt">
+                <div nz-col [nzSpan]="24">
+                    <button nz-button [nzType]="'primary'" (click)="search()">
+                        <span>查询</span>
+                    </button>
+                    <button nz-button [nzType]="'default'" (click)="reset()">
+                        <span>重置</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <nz-table #nzTable [nzAjaxData]="dataSet" [(nzTotal)]="total" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzBordered]="true"
+            (nzPageIndexChange)="getRepairList()">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>
+                        <span>序号</span>
+                    </th>
+                    <th nz-th>
+                        <span>报修单编号</span>
+                    </th>
+                    <th nz-th>
+                        <span>报修区域</span>
+                    </th>
+                    <th nz-th>
+                        <span>报修项目</span>
+                    </th>
+                    <th nz-th>
+                        <span>申报时间</span>
+                    </th>
+                    <th nz-th>
+                        <span>处理人</span>
+                    </th>
+                    <th nz-th>
+                        <span>完成时间</span>
+                    </th>
+                    <th nz-th>
+                        <span>状态</span>
+                    </th>
+                    <th nz-th>
+                        <span>操作</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody nz-tbody class="my-tbody">
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data; let i=index;">
+                    <td nz-td (click)="goToDetail(data.FlowInstanceRecordID)">
+                        {{i+1}}
+                    </td>
+                    <td nz-td (click)="goToDetail(data.FlowInstanceRecordID)">
+                        {{data.SerialNumber}}
+                    </td>
+                    <td nz-td (click)="goToDetail(data.FlowInstanceRecordID)">
+                        {{data.AreaName}}
+                    </td>
+                    <td nz-td (click)="goToDetail(data.FlowInstanceRecordID)">
+                        {{data.Item[0].Name}}
+                    </td>
+                    <td nz-td (click)="goToDetail(data.FlowInstanceRecordID)">
+                        <span *ngIf="data.CreateTime != 0">{{data.CreateTime * 1000 | date:'yyy-MM-dd HH:mm'}}</span>
+                    </td>
+                    <td nz-td (click)="goToDetail(data.FlowInstanceRecordID)">
+                        {{data.RepairPersonnelName}}
+                    </td>
+                    <td nz-td (click)="goToDetail(data.FlowInstanceRecordID)">
+                        <span *ngIf="data.EndTime != 0">{{data.EndTime * 1000 | date:'yyy-MM-dd HH:mm'}}</span>
+                    </td>
+                    <td nz-td (click)="goToDetail(data.FlowInstanceRecordID)">
+                        <span *ngIf="data.Status==='10'">待处理</span>
+                        <span *ngIf="data.Status==='20'">处理中</span>
+                        <span *ngIf="data.Status==='21'">正在返工中</span>
+                        <span *ngIf="data.Status==='30'">维修完成</span>
+                        <span *ngIf="data.Status==='31'">无需处理</span>
+                        <span *ngIf="data.Status==='40'">已关闭</span>
+                    </td>
+                    <td nz-td>
+                        <!-- 待处理 -->
+                        <a class="mr-sm" *ngIf="data.Status==='10'" style="margin-right: 8px;" (click)="notNeedData=data;notNeedIsShow=true;">
+                            无需处理
+                        </a>
+                        <a class="mr-sm" *ngIf="data.Status==='10'" (click)="designate(data);">
+                            派单
+                        </a>
+                        <!-- 处理中 -->
+                        <a class="mr-sm" *ngIf="data.Status==='20' || data.Status==='21'" (click)="accomplish(data);">
+                            维修完成
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+</div>
+
+<!-- 派单 -->
+<nz-modal [nzContent]="designateContent" [(nzVisible)]="designateIsShow" nzTitle="派单" (nzOnCancel)="designateIsShow=false;designateValue='';"
+    (nzOnOk)="confirmDesignate()">
+    <ng-template #designateContent>
+        <nz-radio-group [(ngModel)]="designateValue">
+            <label nz-radio nzValue="{{data.IntelUserCode}}" *ngFor="let data of repairPersonnelList; let i=index;" style="margin-right: 20px;">{{data.Name}}</label>
+        </nz-radio-group>
+    </ng-template>
+</nz-modal>
+
+<!-- 无需处理 -->
+<nz-modal [nzContent]="notNeedContent" [(nzVisible)]="notNeedIsShow" nzTitle="请填写无需处理原因" (nzOnCancel)="notNeedValue='';notNeedIsShow=false;"
+    (nzOnOk)="confirmNotNeed()">
+    <ng-template #notNeedContent>
+        <div class="surplus-num-box">
+            <textarea nz-input maxlength="20" [(ngModel)]="notNeedValue"></textarea>
+            <div class="surplus-num" *ngIf="notNeedValue.length<21">{{20 - notNeedValue.length}}</div>
+        </div>
+    </ng-template>
+</nz-modal>
+
+<!-- 维修完成 -->
+<nz-modal [nzContent]="accomplishContent" [(nzVisible)]="accomplishIsShow" nzTitle="维修完成" (nzOnCancel)="accomplishIsShow=false;CertifyImgs=[];RecordIdArr=[];"
+    (nzOnOk)="confirmAccomplish()" nzCancelText="还未完成" nzOkText="已经完成">
+    <ng-template #accomplishContent>
+        <p>任务完成后，请拍照上传维修情况</p>
+        <div class="upload overh">
+            <p class="container fl relative" *ngIf="CertifyImgs.length<9">
+                <input type="file" value="file" class="hiddenFile" (change)="handleFiles($event)">
+                <img src="assets/images/add.png" style="width: 100%;">
+            </p>
+            <div class="Certify fl relative center" *ngFor="let item of CertifyImgs;let index=index;" [ngClass]="{'underimg':index==4}">
+                <img class="delete-icon absolute" src="assets/images/delete.png" (click)="deleteCertify($event,index)">
+                <img class="file-img" [src]="DomSanitizer.bypassSecurityTrustUrl(item.AttachmentURL)">
+            </div>
+            <div class="clear"></div>
+        </div>
+        <h2>确实已完成维修？</h2>
+    </ng-template>
+</nz-modal>

@@ -1,0 +1,25 @@
+<ion-content class="index-cont">
+    <div *ngIf="partwork && partwork.length <= 0" class="none"><img class="noneimg" src="assets/images/kong.png">
+        <div class="noneFont">暂无更多内容</div>
+    </div>
+    <div class="showboard" *ngIf="partwork && partwork.length > 0">
+        <p class="title">岗位列表</p>
+        <div *ngFor="let item of partwork ">
+            <ion-card style="margin:12px 12px;border: 1px solid #E3E3E3 !important;box-shadow: 0 2px 5px 0 #E3E3E3 !important;"
+                (click)="godetail(item)" *ngIf="item.sptotal != item.PostNum">
+                <ion-card-content>
+                    <h2 class="second-title" style="margin-bottom:10px;">{{item.PartWorkName}}</h2>
+                    <p class="infohead">所属部门：<span class="infomain">{{item.DepartmentName ? item.DepartmentName :
+                            item.AcademyName}}</span> <img src="assets/images/gengduo@2x.png" class="right-arrow fn14"></p>
+                    <p class="infohead">工作时间：<span class="infomain">{{item.worktime}}</span></p>
+                </ion-card-content>
+            </ion-card>
+        </div>
+    </div>
+    <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <div style="text-align: center;color: #8e9093;margin-top: 5px;" *ngIf="!moreData">我是有底线的！</div>
+
+</ion-content>

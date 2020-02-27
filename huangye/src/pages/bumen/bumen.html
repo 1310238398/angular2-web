@@ -1,0 +1,34 @@
+<ion-content class="outer-content">
+  <ion-card>
+
+
+    <ion-card-content>
+      <ion-item>
+        <h2>{{item.Name}}</h2>
+        <h2>{{item.Phone}}</h2>
+        <ion-icon item-right name="ios-call" color="primary" class="circle"
+                  (click)="callUp(item);$event.stopPropagation()"></ion-icon>
+      </ion-item>
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-list>
+    <ion-item>
+      <p class="top-font-p">
+        <ion-icon item-right class="icon-place" color="primary"></ion-icon>
+        办公地点
+      </p>
+      <h2 class="mg">{{item.Place}}</h2>
+    </ion-item>
+
+
+    <ion-item >
+      <p>
+        <ion-icon item-right class="icon-time" color="primary"></ion-icon>
+        办公时间
+      </p>
+      <h2 class="mg" >{{item.Duties}}</h2>
+    </ion-item>
+  </ion-list>
+</ion-content>

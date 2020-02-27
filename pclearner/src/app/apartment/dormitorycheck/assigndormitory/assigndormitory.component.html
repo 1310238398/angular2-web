@@ -1,0 +1,115 @@
+<div class="content">
+    <div class="progress">
+        <img src="./assets/images/2@2x.png" alt="">
+
+    </div>
+    <div class="tab_content">
+        <div class="piliang">
+            <a (click)="plChoose()">
+                <span style="vertical-align:sub;">
+                    <img src="./assets/images/xuanze@2x.png" alt="">
+                </span> 批量选择分配检查人</a>
+        </div>
+        <nz-table #nzTable [nzDataSource]="dataSet" nzBordered [nzIsPagination]="false" [nzLoading]="_loading">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th [nzCheckbox]="true">
+                        <label nz-checkbox [(ngModel)]="allDormChecked" name="allDormChecked" (ngModelChange)='chooseAllDorm($event)'>
+                        </label>
+                    </th>
+                    <th nz-th>
+                        <span>序号</span>
+                    </th>
+
+                    <th nz-th>
+                        <span>校区</span>
+                    </th>
+                    <th nz-th>
+                        <span>宿舍楼</span>
+                    </th>
+                    <th nz-th>
+                        <span>检查人</span>
+                    </th>
+                    <th nz-th>
+                        <span>宿舍数</span>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i = index">
+                    <td nz-td [nzCheckbox]="true">
+                        <label nz-checkbox [(ngModel)]="data.checked" name="checked" (ngModelChange)='chooseDorm($event)'>
+                        </label>
+                    </td>
+                    <td nz-td>
+                        {{i+1}}
+                    </td>
+                    <td nz-td>{{data.CampusName}}</td>
+                    <td nz-td>{{data.DormitoryName}}</td>
+                    <td nz-td *ngIf="data.Checker!=''">{{data.Checker}}<a style="color:#009efd;cursor: pointer;margin-left: 8px;"
+                            (click)="checker(data)">修改</a></td>
+                    <td nz-td *ngIf="data.Checker===''" style="color:#009efd;cursor: pointer;" (click)="checker(data)">点击分配检查人</td>
+                    <td nz-td>{{data.RoomCount}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+
+    </div>
+    <div class="btn">
+        <button class="pre _btn" (click)="prePage()">上一步</button>
+        <button [ngClass]="{'gray':isgray,'yellow':isYellow}" (click)="nextPage()" [disabled]="isgray">下一步</button>
+    </div>
+
+    <nz-modal [nzVisible]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+        (nzOnCancel)="handleCancel($event)">
+        <ng-template #modalTitle class="title">
+            宿舍分配
+        </ng-template>
+
+        <ng-template #modalContent>
+            <nz-table #nzTable [nzDataSource]="checkerListData" nzBordered [nzIsPagination]="false">
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th [nzCheckbox]="true">
+                            <label nz-checkbox [(ngModel)]="allCheckedChecked" name="allCheckedChecked" (ngModelChange)='chooseAllChecker($event)'>
+                            </label>
+                        </th>
+                        <th nz-th>
+                            <span>检查人员</span>
+                        </th>
+                        <th nz-th>
+                            <span>已分配公寓楼数</span>
+                        </th>
+                        <th nz-th>
+                            <span>已分配宿舍数</span>
+                        </th>
+
+                    </tr>
+                </thead>
+
+                <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i = index">
+                        <td nz-td [nzCheckbox]="true">
+                            <label nz-checkbox [(ngModel)]="data.checked" name="checked" (ngModelChange)='chooseChecker($event)'>
+                            </label>
+                        </td>
+                        <td nz-td>{{data.Name}}</td>
+                        <td nz-td>{{data.DormitoryName}}</td>
+                        <td nz-td>{{data.RoomCount}}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </ng-template>
+        <ng-template #modalFooter>
+            <button nz-button [nzType]="'default'" [nzSize]="'large'" style="margin-top:0px" (click)="handleCancel($event)">
+                取消
+            </button>
+            <button nz-button [nzType]="'primary'" [nzSize]="'large'" style="margin-top:0px" (click)="handleOk()"
+                [nzLoading]="isConfirmLoading">
+                确定
+            </button>
+        </ng-template>
+    </nz-modal>
+
+</div>

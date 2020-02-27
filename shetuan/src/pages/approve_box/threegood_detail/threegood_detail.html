@@ -1,0 +1,73 @@
+<ion-content class="index-cont">
+
+    <div class="info-cont overh">
+        <div class="fl">
+            <img class="user-header" [src]="dataSet.AvatarUrl" onerror="this.src='assets/images/header.png'">
+        </div>
+        <div class="fl info-detail">
+            <span class="info-detail-name fn16 db">姓名 : {{dataSet.Name}}</span>
+            <span class="db fn14">学号: {{dataSet.UserCode}}</span>
+            <span class="db fn14">学院: {{dataSet.AcademyName}}</span>
+        </div>
+    </div>
+
+
+    <div class="relative titlestatus-box overh">
+        <div class="" *ngIf="dataSet.status == '3'" style="padding:20px 15px 15px;">
+            <p class="fn14" style="color:#FF0000">审批不通过原因</p>
+            <p class="fn14" style="color: #9B9B9B;text-indent:2em">{{dataSet.remarktxt}}</p>
+        </div>
+        <P class="fn18 color4a center" style="margin:15px 0;">{{dataSet.title}}</P>
+
+        <img class="absolute img-css" *ngIf="dataSet.status == '2' && appStatus == '2'" src="assets/images/yiwncheng@2x.png">
+        <img class="absolute img-css" *ngIf="appStatus == '1'" src="assets/images/shenpizhong@2x.png">
+        <img class="absolute img-css" *ngIf="dataSet.status == '3' && appStatus == '2'" src="assets/images/butongguo@2x.png">
+    </div>
+
+
+    <div class="userinfo-box overh">
+        <ul>
+            <li class="css-li" *ngIf="dataSet.title != '院级先进班集体评选'">
+                <span class="color9b fn14 fl">年龄 : </span>
+                <span class="color4a fn14 fr">{{dataSet.Age}}</span>
+            </li>
+            <li class="css-li" *ngIf="dataSet.title != '院级先进班集体评选'">
+                <span class="color9b fn14 fl">政治面貌 : </span>
+                <span class="color4a fn14 fr">{{dataSet.PoliticalName}}</span>
+            </li>
+            <li class="css-li">
+                <span class="color9b fn14 fl">专业 : </span>
+                <span class="color4a fn14 fr">{{dataSet.MajorName}}</span>
+            </li>
+            <li class="css-li">
+                <span class="color9b fn14 fl">班级 : </span>
+                <span class="color4a fn14 fr">{{dataSet.ClassName}}</span>
+            </li>
+            <li class="css-li">
+                <span class="color9b fn14 fl">入学时间 : </span>
+                <span class="color4a fn14 fr">{{dataSet.EnrollmentDate}}</span>
+            </li>
+            <li class="css-li" *ngIf="dataSet.title == '院级先进班集体评选'">
+                <span class="color9b fn14 fl">人数 : </span>
+                <span class="color4a fn14 fr">{{dataSet.ClassStudentNum}}</span>
+            </li>
+            <li class="css-li" *ngIf="dataSet.title != '院级先进班集体评选'">
+                <span class="color9b fn14 fl">职务 : </span>
+                <span class="color4a fn14 fr">{{dataSet.PositionNames}}</span>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="info-box overh">
+        <p class="color4a">主要事迹</p>
+        <p class="color9b" style="line-height: 18px;text-indent:2em;" *ngIf="dataSet.title != '院级先进班集体评选'">
+            (主要事迹应包括：思想政治素质情况，各学期学业成绩及获得奖学金情况，所受表彰奖励情况，参加文体社会活动情况，是否获得校级优秀学生称号等，内容填写要客观、翔实。)</p>
+        <pre class="fn14 color4a">{{dataSet.filetext}}</pre>
+    </div>
+
+    <div class="center" style="margin:50px 0" *ngIf="appStatus == '1'">
+        <button ion-button class="not-css" outline (click)="notpassTab()">审批不通过</button>
+        <button ion-button class="yes-css" outline [disabled]="numdisb" (click)="passTabBtn()">审批通过</button>
+    </div>
+</ion-content>

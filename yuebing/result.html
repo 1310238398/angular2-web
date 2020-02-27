@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>中秋测试</title>
+    <link rel="stylesheet" id="result" href="">
+    <script src="./js/zepto.js"></script>
+    <script>
+        var point = window.location.href.split("?")[1];
+        var bg = document.getElementById("result");
+        if(point == "1"){
+            bg.href = "./css/result_20.css"
+        }else if(point == "2"){
+            bg.href = "./css/result_40.css"
+        }else if(point == "3"){
+            bg.href = "./css/result_60.css"
+        }else if(point == "4"){
+            bg.href = "./css/result_80.css"
+        }else{
+            bg.href = "./css/result_100.css"
+        }
+
+        window.onload = function(){
+            var point = window.location.href.split("?")[1];
+            var img = document.getElementById("img");
+            var height = document.documentElement.clientHeight;
+            document.getElementById("body").style.height = height+"px";
+            if(point == "1"){
+                img.src = "./img/20.jpg"
+            }else if(point == "2"){
+                img.src = "./img/40.jpg"
+            }else if(point == "3"){
+                img.src = "./img/60.jpg"
+            }else if(point == "4"){
+                img.src = "./img/80.jpg"
+            }else{
+                img.src = "./img/100.jpg"
+            }
+        }
+
+        function share(){
+//            debugger;
+            console.log("chufa")
+//                    ['qq','qzone'] 规定可以分享到哪些平台
+//                      square：广场 u2u：个人聊天 u2g：群组聊天 wechat：微信好友 weshare：微信朋友圈
+//                      weibo：微博 qq：qq好友 qzone：qq空间
+            antlinker.sharePlatform({
+                option: ['qq','qzone', 'wechat','weshare','weibo'],
+                shareContent: {
+                    title: '分享标题标题标题', // 分享标题
+                    desc: '分享描述描述描述', // 分享描述
+                    link: 'www.baidu.com', // 分享链接
+                    id: 'default', // id //此参数必须-2018.03.21
+                    type: '', // 分享类型 cet46score（四六级分享）,music、video或link，不填默认为link
+                    dataUrl: '' // 如果type是music或video，则要提供数据链接，默认为空
+                },
+                success: function () {
+                    //设置右上角按钮成功
+                    console.log("yes")
+                },
+                fail: function () {
+                    // 设置右上角按钮失败
+                    console.log("no")
+                }
+            })
+        }
+    </script>
+    <script src="./js/questionArray.js"></script>
+    <script src="./js/antlinker.1.0.10.js"></script>
+    <link rel="stylesheet" href="./css/result.css">
+</head>
+<body>
+<div id="body" style="overflow: hidden;">
+    <img id="img" src="" style="width: 100%;opacity: 0;" alt="">
+</div>
+<script>
+    $("#img").on({
+        touchstart: function(e) {
+            // 长按事件触发
+            timeOutEvent = setTimeout(function() {
+                timeOutEvent = 0;
+//                alert('你长按了');
+//                savephoto();
+                antlinker.savePhoto({
+                    success: function () {
+                        alert("保存相册成功")
+                    },
+                    fail: function () {
+                        alert("保存相册失败")
+                    }
+                });
+            }, 400);
+
+        },
+        touchmove: function() {
+            clearTimeout(timeOutEvent);
+            timeOutEvent = 0;
+        },
+        touchend: function() {
+            clearTimeout(timeOutEvent);
+            if (timeOutEvent != 0) {
+                // 点击事件
+                // location.href = '/a/live-rooms.html';
+//                alert('你点击了');
+            }
+            return false;
+        }
+    })
+</script>
+<!--<div style="height: 200px;width: 200px;background-color: red" onclick="share()">aklsdjakldjklasdjkl</div>-->
+</body>
+</html>

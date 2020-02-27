@@ -1,0 +1,57 @@
+<div class="content">
+    <div class="form-cont mr">
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="">
+            <div style="margin-top:15px;">
+                <p style="margin-bottom:5px;">
+                    <span style="color: #FF0031;">*</span>
+                    <label>记录类型:</label>
+                </p>
+                <nz-select style="width: 540px;" #code [nzPlaceHolder]="''" [(ngModel)]="searchObj.TaskType" name="TaskType" (ngModelChange)="changeText()">
+                    <nz-option *ngFor="let option of optioncatgray" [nzLabel]="option.Name" [nzValue]="option.Code">
+                    </nz-option>
+                </nz-select>
+            </div>
+
+            <div style="margin-top:20px;">
+                <p style="margin-bottom:5px;">
+                    <span style="color: #FF0031;">*</span>
+                    <label>日志标题:</label>
+                    <span style="color: #999;margin-left:20px;">{{wainTxt}}</span>
+                </p>
+                <div class="relative" style="width: 540px;">
+                    <textarea class='file-message' #text name="TaskName" [(ngModel)]="searchObj.TaskName" (ngModelChange)="txtChange(text.value)"
+                        maxlength="30" cols="1" rows="1" (keydown)="checkEnter($event)"></textarea>
+                    <p class="file-num absolute">{{values}}</p>
+                </div>
+            </div>
+
+
+            <div style="margin-top:20px;">
+                <p style="margin-bottom:5px;">
+                    <span style="color: #FF0031;">*</span>
+                    <label>创建时间:</label>
+                </p>
+                <div class="relative" style="width: 540px;">
+                    <nz-input disabled style="width: 540px;" [(ngModel)]="searchObj.TaskTime" name="TaskTime" [nzSize]="'middle'"></nz-input>
+                </div>
+            </div>
+
+            <div style="width: 540px;" class="center footer-btn">
+                <a [routerLink]="['/counselormanage']">
+                    <button nz-button [nzType]="'default'">
+                        <span>取消</span>
+                    </button>
+                </a>
+                <button nz-button [nzType]="'primary'" (click)="submit()" [disabled]="forbbien">
+                    <span>创建</span>
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+
+
+
+
+</div>

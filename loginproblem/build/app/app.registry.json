@@ -1,0 +1,52 @@
+{
+  "namespace": "App",
+  "fsNamespace": "app",
+  "loader": "../app.js",
+  "global": "app.global.js",
+  "core": "app.core.js",
+  "corePolyfilled": "app.core.pf.js",
+  "components": {
+    "app-home": {
+      "$": "app-home"
+    },
+    "app-profile": {
+      "ios": "app-profile.ios",
+      "md": "app-profile.md"
+    },
+    "app-profile-new": {
+      "$": "app-profile-new"
+    },
+    "app-root": {
+      "$": "app-root"
+    },
+    "ion-animation-controller": {
+      "ios": "app-profile.ios",
+      "md": "app-profile.md"
+    },
+    "ion-button": {
+      "ios": "app-profile.ios",
+      "md": "app-profile.md"
+    },
+    "ion-ripple-effect": {
+      "ios": "app-profile.ios",
+      "md": "app-profile.md"
+    },
+    "ion-toast": {
+      "ios": "app-profile.ios",
+      "md": "app-profile.md"
+    },
+    "ion-toast-controller": {
+      "ios": "app-profile.ios",
+      "md": "app-profile.md"
+    },
+    "stencil-route": {
+      "$": "app-root"
+    },
+    "stencil-route-link": {
+      "$": "app-home"
+    },
+    "stencil-router": {
+      "$": "app-root"
+    }
+  }
+}

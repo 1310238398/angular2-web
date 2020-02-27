@@ -1,0 +1,114 @@
+<div class="content" style="margin-bottom: 30px;">
+
+    <div class="center" style="margin:20px 0">
+        <h2>经济情况调查问卷</h2>
+    </div>
+
+    <div class="overh">
+        <div class="table-left fl overh" *ngIf="dataSet1.length != 0" [ngClass]="dataSet2.length != 0?'width491':'width100'">
+            <div style="margin:5px 0">
+                <h3>正式数据</h3>
+            </div>
+            <nz-table #nzTable [nzAjaxData]="dataSet1" [nzLoading]="httpService.loading" [nzBordered]="true" [nzIsPagination]="false">
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th>
+                            <span>题号</span>
+                        </th>
+                        <th nz-th>
+                            <span>题目</span>
+                        </th>
+                        <th nz-th>
+                            <span>答案</span>
+                        </th>
+                        <th nz-th>
+                            <span>权重</span>
+                        </th>
+                        <th nz-th>
+                            <span>附件</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i=index">
+                        <td nz-td>{{i+1}}</td>
+                        <td nz-td>{{data.Topic}}</td>
+                        <td nz-td>
+                            <p style="text-align: left;padding-left:20px;" *ngFor="let dataitem of data.OptionArr;">{{dataitem}}</p>
+                        </td>
+                        <td nz-td>{{data.Weight}}</td>
+                        <td nz-td>
+                            <span *ngIf="data.IsAttach == '1'" class="comm-css" (click)="tankbox(data.ResultId)">点击查看</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+
+        <div class="table-left overh" *ngIf="dataSet2.length != 0" [ngClass]="dataSet1.length != 0?'width49':'width100'">
+            <div style="margin:5px 0">
+                <h3>待审批数据</h3>
+            </div>
+            <nz-table #nzTable [nzAjaxData]="dataSet2" [nzLoading]="httpService.loading" [nzBordered]="true" [nzIsPagination]="false">
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th>
+                            <span>题号</span>
+                        </th>
+                        <th nz-th>
+                            <span>题目</span>
+                        </th>
+                        <th nz-th>
+                            <span>答案</span>
+                        </th>
+                        <th nz-th>
+                            <span>权重</span>
+                        </th>
+                        <th nz-th>
+                            <span>附件</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i=index">
+                        <td nz-td>{{i+1}}</td>
+                        <td nz-td>{{data.Topic}}</td>
+
+                        <td nz-td>
+                            <p style="text-align: left;padding-left:20px;" *ngFor="let dataitem of data.OptionArr;">{{dataitem}}</p>
+                        </td>
+
+                        <td nz-td>{{data.Weight}}</td>
+                        <td nz-td>
+                            <span *ngIf="data.IsAttach == '1'" class="comm-css" (click)="tankbox(data.ResultId)">点击查看</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+
+    <div class="medigo" [hidden]="disdden" (click)="overbox()"></div>
+    <div class="file-box" [hidden]="disdden">
+        <div class="center">
+            <h2>附件</h2>
+        </div>
+
+        <div class="img-warp" style="height:90%;overflow: auto;">
+            <img *ngFor="let data of imgArr1" [src]="data.path" alt="">
+        </div>
+        <div class="center" style="height:40px;line-height: 40px;">
+            <button nz-button [nzType]="'primary'" style="width: 100px;height:30px;" (click)="overbox()">
+                <span>返回</span>
+            </button>
+        </div>
+        <button *ngIf="loadingHidden" class="fixed loading-w" nz-button nzLoading nzType="primary" nzShape="circle"></button>
+    </div>
+    <p class="center" style="margin-top:20px;height:150px;">
+        <a [routerLink]="['/poverty']">
+            <button nz-button [nzType]="'primary'" style="width: 150px;height:40px;">
+                <span>返回</span>
+            </button>
+        </a>
+    </p>
+</div>

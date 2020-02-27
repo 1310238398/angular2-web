@@ -1,0 +1,104 @@
+<!--已报名待审批-->
+<ion-content *ngIf="ApproveStatus==0">
+    <ion-refresher (ionRefresh)='doRefresh($event)'>
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="下拉刷新"
+                refreshingSpinner="circles"
+                refreshingText="刷新中...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-card>
+        <ion-card-content>
+            <div><span>您已报名考试，请等待审核。</span></div>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-content>
+            <p>报名科目：{{UserInfo?.ExamSubject}}</p>
+            <div class="image-area"><img [src]="UserInfo?.URL||''"></div>
+            <p>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：{{UserInfo?.Name}}</p>
+            <p>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：{{UserInfo?.SexName}}</p>
+            <p>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：{{UserInfo?.UserCode}}</p>
+            <p>证件类型：{{UserInfo?.IdentityType}}</p>
+            <p>证件号码：{{UserInfo?.IdentityNum}}</p>
+            <p>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历：{{UserInfo?.CredentialsType}}</p>
+            <p>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;制：{{UserInfo?.ProgramLength}}</p>
+            <p>入学年份：{{UserInfo?.EntranceDate}}</p>
+            <p>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：{{UserInfo?.Grade}}</p>
+            <p>院（系）：{{UserInfo?.AcademyName}}</p>
+            <p>专&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：{{UserInfo?.Major}}</p>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
+<!--报名成功-->
+<ion-content *ngIf="ApproveStatus==2">
+    <ion-refresher (ionRefresh)='doRefresh($event)'>
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="下拉刷新"
+                refreshingSpinner="circles"
+                refreshingText="刷新中...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-card>
+        <ion-card-content>
+            <div><span>照片审核通过。</span></div>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-content>
+            <p>报名科目：{{UserInfo?.ExamSubject}}</p>
+            <div class="image-area"><img [src]="UserInfo?.URL||''"></div>
+            <p>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：{{UserInfo?.Name}}</p>
+            <p>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：{{UserInfo?.SexName}}</p>
+            <p>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：{{UserInfo?.UserCode}}</p>
+            <p>证件类型：{{UserInfo?.IdentityType}}</p>
+            <p>证件号码：{{UserInfo?.IdentityNum}}</p>
+            <p>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历：{{UserInfo?.CredentialsType}}</p>
+            <p>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;制：{{UserInfo?.ProgramLength}}</p>
+            <p>入学年份：{{UserInfo?.EntranceDate}}</p>
+            <p>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：{{UserInfo?.Grade}}</p>
+            <p>院（系）：{{UserInfo?.AcademyName}}</p>
+            <p>专&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：{{UserInfo?.Major}}</p>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
+<!--未通过-->
+<ion-content *ngIf="ApproveStatus==1">
+    <ion-refresher (ionRefresh)='doRefresh($event)'>
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="下拉刷新"
+                refreshingSpinner="circles"
+                refreshingText="刷新中...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-card>
+        <ion-card-content>
+            <div><span>照片审核未通过，请上传符合要求的照片。</span></div>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-content>
+            <p>报名科目：{{UserInfo?.ExamSubject}}</p>
+            <div class="image-area"><img [src]="UserInfo?.URL||''"></div>
+            <p>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：{{UserInfo?.Name}}</p>
+            <p>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：{{UserInfo?.SexName}}</p>
+            <p>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：{{UserInfo?.UserCode}}</p>
+            <p>证件类型：{{UserInfo?.IdentityType}}</p>
+            <p>证件号码：{{UserInfo?.IdentityNum}}</p>
+            <p>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历：{{UserInfo?.CredentialsType}}</p>
+            <p>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;制：{{UserInfo?.ProgramLength}}</p>
+            <p>入学年份：{{UserInfo?.EntranceDate}}</p>
+            <p>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：{{UserInfo?.Grade}}</p>
+            <p>院（系）：{{UserInfo?.AcademyName}}</p>
+            <p>专&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业：{{UserInfo?.Major}}</p>
+        </ion-card-content>
+    </ion-card>
+
+    <button ion-button color="zj-main-color" block>点击上传照片<input class="file" type="file"
+                                                                name="file"
+                                                                (change)="uploadFile($event)"/>
+    </button>
+</ion-content>

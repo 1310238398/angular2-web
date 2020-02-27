@@ -1,0 +1,17 @@
+
+<!--<ion-item>-->
+<ion-tabs no-border tabsPlacement="top" #antTabs>
+    <ion-tab  [root]="tab1Root" tabTitle="通知列表" tabIcon="" ></ion-tab>
+    <ion-tab  [root]="tab2Root" tabTitle="我发布的" tabIcon=""></ion-tab>
+</ion-tabs>
+    <!--<button item-right color="primary" (click)="goAddEditNotice()"><ion-icon name="add"></ion-icon></button>-->
+<!--</ion-item>-->
+ <!--<img src="assets/image/新建通知.png"/>-->
+
+<ion-fab right bottom>
+    <!--<button ion-fab color="primary" (click)="goAddEditNotice()"><ion-icon name="add"></ion-icon></button>-->
+    <button  (click)="goAddEditNotice()"><img src="assets/image/新建通知.png"/></button>
+</ion-fab>
+        <!--<ion-icon name="add-circle" color="primary" ></ion-icon>-->
+        <!--(ionSelect)="goAddEditNotice()" -->
+

@@ -1,0 +1,131 @@
+<div class="modal-header">
+    <div class="modal-title">{{data? '编辑' : '添加'}}-安全事故</div>
+</div>
+<form #f="ngForm" nz-form>
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">事故日期</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <nz-date-picker [nzFormat]="'yyyy-MM-dd'" name="incidentDate" [(ngModel)]="params.incidentDate" placeholder="事故日期"></nz-date-picker>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8" nzType="flex" nzJustify="center">
+        <nz-form-label [nzSpan]="3">事故地点</nz-form-label>
+        <nz-form-control [nzSpan]="21">
+            <ant-geography [geoObj]="incidentAreaCodeObj" [areaCode]="params.incidentAreaCode"></ant-geography>
+        </nz-form-control>
+    </div>
+    <div nz-row [nzGutter]="8" nzType="flex" nzJustify="center">
+        <nz-form-label [nzSpan]="3">具体地址</nz-form-label>
+        <nz-form-control [nzSpan]="21">
+            <input nz-input name="incidentDetailAddress" placeholder="具体地址" [(ngModel)]="params.incidentDetailAddress" maxlength="50" required>
+        </nz-form-control>
+    </div>
+    <div nz-row [nzGutter]="8" nzType="flex" nzJustify="center">
+
+        <div nz-col nzSpan="24">
+            <nz-form-label [nzSpan]="3">事故详情</nz-form-label>
+            <nz-form-control [nzSpan]="21">
+                <textarea nz-input name="incidentDetail" placeholder="事故详情" [(ngModel)]="params.incidentDetail" maxlength="100" required [nzAutosize]="{ minRows: 2, maxRows: 6 }"></textarea>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8" nzType="flex" nzJustify="center">
+
+        <div nz-col nzSpan="24">
+            <nz-form-label [nzSpan]="3">日期性质</nz-form-label>
+            <nz-form-control [nzSpan]="21">
+                <ant-bizcode [bizObj]="params" [BizType]="'DateType'" [ModelName]="'dateType'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8" nzType="flex" nzJustify="center">
+
+        <div nz-col nzSpan="24">
+            <nz-form-label [nzSpan]="3">地点性质</nz-form-label>
+            <nz-form-control [nzSpan]="10">
+                <nz-select class='col-w' nzPlaceHolder="地点性质" [nzShowSearch]="true" [(ngModel)]="params.placeType" (ngModelChange)="change($event,'placeType')" name="placeType" required>
+                    <nz-option *ngFor="let option of PlaceTypes" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode">
+                    </nz-option>
+                </nz-select>
+            </nz-form-control>
+            <nz-form-control [nzSpan]="11">
+                <nz-select class='col-w' [nzPlaceHolder]="'地点性质详细'" [nzShowSearch]="true" [(ngModel)]="params.placeTypeDetail" name="placeTypeDetail" required>
+                    <nz-option *ngFor="let option of PlaceTypeDetails" [nzLabel]="option.CodeName" [nzValue]="option.Code">
+                    </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">事故性质</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <nz-select class='col-w' nzPlaceHolder="事故性质" [nzShowSearch]="true" [(ngModel)]="params.incidentType" (ngModelChange)="change($event,'IncidentType')" name="IncidentType" required>
+                    <nz-option *ngFor="let option of IncidentTypes" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode">
+                    </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">事故方式</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <nz-select class='col-w' [nzPlaceHolder]="'事故方式'" [nzShowSearch]="true" [(ngModel)]="params.incidentMode" name="incidentMode" required>
+                    <nz-option *ngFor="let option of incidentModes" [nzLabel]="option.CodeName" [nzValue]="option.Code">
+                    </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">事故结果</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'IncidentResult'" [PlaceHolder]="'事故结果'" [ModelName]="'incidentResult'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">处置情况</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'DealDetail'" [PlaceHolder]="'处置情况'" [ModelName]="'dealDetail'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24" class='mb'>
+            <nz-form-label [nzSpan]="3">赔偿</nz-form-label>
+            <nz-form-control [nzSpan]="21">
+                <textarea nz-input name="compensation" placeholder="赔偿" [(ngModel)]="params.compensation" maxlength="100" required [nzAutosize]="{ minRows: 2, maxRows: 6 }"></textarea>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8" class='mb'>
+        <div nz-col nzSpan="24">
+            <nz-form-label [nzSpan]="3">人道主义救援</nz-form-label>
+            <nz-form-control [nzSpan]="21">
+                <textarea nz-input name="humanitarianAid" placeholder="人道主义救援" [(ngModel)]="params.humanitarianAid" maxlength="100" required [nzAutosize]="{ minRows: 2, maxRows: 6 }"></textarea>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8" class='mb'>
+        <div nz-col nzSpan="24">
+            <nz-form-label [nzSpan]="3">心理疏导</nz-form-label>
+            <nz-form-control [nzSpan]="21">
+                <textarea nz-input name="consultation" placeholder="心理疏导" [(ngModel)]="params.consultation" maxlength="100" required [nzAutosize]="{ minRows: 2, maxRows: 6 }"></textarea>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8" class='mb'>
+        <div nz-col nzSpan="24">
+            <nz-form-label [nzSpan]="3">其他措施</nz-form-label>
+            <nz-form-control [nzSpan]="21">
+                <textarea nz-input name="otherMeasures" placeholder="其他措施" [(ngModel)]="params.otherMeasures" maxlength="100" required [nzAutosize]="{ minRows: 2, maxRows: 6 }"></textarea>
+            </nz-form-control>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button nz-button type="button" (click)="close()">关闭</button>
+        <button nz-button class="btn-zj-color" [disabled]="!f.form.valid||!params.dateType||!params.incidentResult||!params.dealDetail" [nzType]="'primary'" (click)="save()">保存</button>
+    </div>
+</form>

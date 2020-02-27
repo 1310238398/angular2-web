@@ -1,0 +1,69 @@
+page-workertasklist {
+  .scroll-content {
+    background-color: #FAFAFA;
+    margin: 0px;
+    overflow-y: auto;
+  }
+  ul,
+  li,
+  p {
+    margin: 0px;
+    padding: 0px;
+  }
+  .dateline {
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    font-size: 14px;
+    color: #9B9B9B;
+  }
+  .list-ios {
+    margin: 1px 0 0px;
+  }
+  .list-ios>.item-block:first-child {
+    border-top: 0px solid #e3e3e3;
+    box-shadow: 0 1px 3px 0 #E3E3E3;
+  }
+  .list-ios>.item-block {
+    border-bottom: 0.5px solid #e3e3e3;
+  }
+  .list-ios>.item-block:last-child {
+    border-bottom: 0px solid #e3e3e3;
+    box-shadow: 0 1px 3px 0 #E3E3E3;
+  }
+  .list-ios .item-block .item-inner {
+    border-bottom: 0px solid #c8c7cc;
+  }
+  .item-ios[detail-push] .item-inner,
+  button.item-ios:not([detail-none]) .item-inner,
+  a.item-ios:not([detail-none]) .item-inner {
+    background-image: url("assets/imgs/arrow@2x.png");
+    padding-right: 15px;
+    background-position: right 15px center;
+    background-position: right calc(15px + constant(safe-area-inset-right)) center;
+    background-position: right calc(15px + env(safe-area-inset-right)) center;
+    background-repeat: no-repeat;
+    background-size: 8px 18px;
+  }
+  .item-ios {
+    padding-left: 15px;
+  }
+  .label-ios {
+    margin: 15px 12px 11px 0;
+  }
+  .item-title {
+    font-size: 16px;
+    color: #4A4A4A;
+  }
+  .item-tips {
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    color: #9B9B9B;
+  }
+}

@@ -1,0 +1,165 @@
+<div class="content">
+    <!-- top -->
+    <div class="components-table-demo-control-bar">
+        <div nz-row>
+            <div nz-col [nzSpan]="22">
+
+                <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-left">
+                    <div nz-row nz-form-item>
+                        <div nz-form-label>
+                            <label>标题</label>
+                        </div>
+                        <div nz-form-control>
+                            <nz-input style="width:118px" [(ngModel)]="searchObj.Title" name="Title" [nzSize]="'middle'" [nzPlaceHolder]="'请输入查询的标题'"></nz-input>
+                        </div>
+                    </div>
+
+                    <div nz-row nz-form-item>
+                        <div nz-form-label>
+                            <label>状态</label>
+                        </div>
+                        <div nz-form-control>
+                            <nz-select style="width: 150px;" [(ngModel)]="searchObj.Status" name="Status" nzAllowClear [nzPlaceHolder]="'不做选择默认显示全部'">
+                                <!-- <nz-option *ngFor="let option of StaffTypes" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode">
+                              </nz-option> -->
+                                <nz-option [nzLabel]="'全部'" [nzValue]="'999'"></nz-option>
+                                <nz-option [nzLabel]="'未发布'" [nzValue]="'0'"></nz-option>
+                                <nz-option [nzLabel]="'进行中'" [nzValue]="'1'"></nz-option>
+                                <nz-option [nzLabel]="'已结束'" [nzValue]="'2'"></nz-option>
+
+                            </nz-select>
+                        </div>
+                    </div>
+
+                    <div nz-row nz-form-item>
+                        <div nz-col [nzSpan]="24" style="text-align: right;">
+                            <button nz-button [disabled]="httpService.loading" [nzType]="'primary'" (click)="onSearch()" class="search">查询</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button nz-button (click)="resetForm(f)" class="btn_reset">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div nz-col [nzSpan]="2" style="text-align:center;padding-right:20px;">
+                <div (click)="help()" class="help_img">
+                    <img src="./assets/images/bangzhu@2x.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content -->
+    <!-- 小整块 -->
+
+    <div class="loadingDiv">
+        <nz-spin [nzSize]="'large'" class="loading" [nzSpinning]="loading">
+            <div class="content" class="cont_simple" *ngFor="let item of datas">
+                <div (click)="deatial()" style="height:50px; line-height:50px;" nz-row>
+                    <a [class.selected]="item.SurveyID === selectedId" [routerLink]="['/questionnaire/prieview',item.SurveyID,item.Status]">
+                        <div nz-col [nzSpan]="8" class="title">
+                            <!-- 问卷名称 -->
+                            {{item.Title}}
+                        </div>
+                        <div nz-col [nzSpan]="12" class="time" *ngIf="item.Status==='1' || item.Status==='2'">开放时间：{{item.StartDate}} 至 {{item.EndDate}}</div>
+                        <div nz-col [nzSpan]="12" class="time" *ngIf="item.Status==='0'"></div>
+                        <div nz-col [nzSpan]="4" class="ing" *ngIf="item.Status==='0'" style="color:#009efd;">未发布</div>
+                        <div nz-col [nzSpan]="4" class="ing" *ngIf="item.Status==='1'">进行中</div>
+                        <div nz-col [nzSpan]="4" class="ing" *ngIf="item.Status==='2'" style="color:#666666;">已结束</div>
+                    </a>
+                </div>
+                <hr style="height:0px;border:none;border-top:2px solid #eeeeee;" />
+                <!-- botton_Content -->
+                <div nz-row>
+                    <div nz-col [nzSpan]="14" class="bili">
+                        <div nz-row *ngIf="item.Status==='1' || item.Status==='2'">
+                            <div nz-col [nzSpan]="11" [nzOffset]="1" style="color:#666666">
+                                {{item.Scales[0].Name}}
+                            </div>
+                            <div nz-col [nzSpan]="4" [nzOffset]="8">
+                                {{item.Scales[0].DoCount}}/{{item.Scales[0].Count}}人
+                            </div>
+                        </div>
+                        <div nz-row *ngIf="item.Status==='1' || item.Status==='2'">
+                            <div nz-col [nzSpan]="23" [nzOffset]="1">
+                                <nz-progress [ngModel]="item.Scales[0].Percent" [nzStrokeWidth]="5" [nzStatus]="'active'"></nz-progress>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div *ngIf="item.Status == '1' || item.Status == '2'" nz-col [nzSpan]="10" style="text-align:right;padding-right:20px;padding-top:10px;"
+                        class="btn_analy">
+                        <button class="analysis" (click)='quetionAnalysis(item)'>问卷分析</button>
+                    </div>
+                    <div *ngIf="item.Status == '0'" nz-col [nzSpan]="10" style="text-align:right;padding-right:20px;" class="btn_analy">
+                        <button class="analysis">
+                            <a class="use" [class.selected]="item.SurveyID === selectedId" [routerLink]="['/questionnaire/prieview',item.SurveyID,item.Status]">使用</a>
+                        </button>
+                    </div>
+                </div>
+                <div nz-row *ngIf="item.Scales[1]">
+                    <div nz-col [nzSpan]="14" class="bili">
+                        <div nz-row *ngIf="item.Status==='1' || item.Status==='2'">
+                            <div nz-col [nzSpan]="11" [nzOffset]="1" style="color:#666666">
+                                {{item.Scales[1].Name}}
+                            </div>
+                            <div nz-col [nzSpan]="4" [nzOffset]="8">
+                                {{item.Scales[1].DoCount}}/{{item.Scales[1].Count}}人
+                            </div>
+                        </div>
+                        <div nz-row *ngIf="item.Status==='1' || item.Status==='2'">
+                            <div nz-col [nzSpan]="23" [nzOffset]="1">
+                                <nz-progress [ngModel]="item.Scales[1].Percent" [nzStrokeWidth]="5" [nzStatus]="'active'"></nz-progress>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div nz-col [nzSpan]="10" style="text-align:right;padding-right:20px;padding-top:30px;" (click)="noanswerlist()" *ngIf="item.Status==='1' || item.Status==='2'">
+                        <a [class.selected]="item.SurveyID === selectedId" [routerLink]="['/questionnaire/academynoanswer',item.SurveyID,item.Title,item.Status]">点击查看本学院未答题人员</a>
+                    </div>
+                </div>
+            </div>
+            <div class="Btn_More">
+                <!-- <button class="moreBtn" *ngIf="dataItems.length>0 && showMore == true" (click)="onSearch()">点击查看更多</button> -->
+                <button nz-button [nzType]="'primary'" class="moreBtn" *ngIf="datas.length != 0 && showMore == true" (click)="onMore()">点击查看更多</button>
+                <!-- <button class="moreBtn" *ngIf="datas.length != 0  && showMore == false">已经到底儿了</button> -->
+                <p class="endBtn" *ngIf="datas.length != 0  && showMore == false">已经到底儿了</p>
+            </div>
+        </nz-spin>
+    </div>
+    <!-- </div> -->
+    <!-- <div></div> -->
+
+
+    <div *ngIf="loading == false && dataItems.length == 0;" class="null">
+        <div class="null_img">
+            <img src="./assets/images/kong@2x.png" alt="">
+        </div>
+        <p>暂无调查问卷，请查看右上角“帮助”新增调查问卷吧</p>
+    </div>
+    <!-- <nz-pagination [nzPageIndex]="1" [nzTotal]="500"></nz-pagination> -->
+    <!-- 蒙层 -->
+
+
+    <nz-modal [nzVisible]="isVisible" [nzTitle]="'帮助说明'" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)">
+        <ng-template #modalContent>
+            <hr style="height:0px;border:none;border-top:2px solid #eeeeee; padding-bottom:16px;" />
+            <ul>
+                <li>
+                    步骤一：
+                    <br/> 请将要发布的调查问卷编辑好后发给集结号小助手，官方QQ号为：2028762261，请按照格式命名电子版文件，格式为：标题+内容。
+                </li>
+                <li class="noOneLi">
+                    步骤二：
+                    <br/> 系统为您制作好可以在手机端填写的调查问卷后，小助手会以QQ或者其他方式通知您制作完成，您可以登录PC端查看，选择相关发布条件后就可以发布了。
+                </li>
+                <li class="noOneLi">
+                    步骤三：
+                    <br/> 学生填写调查问卷后，您可以查看系统为您整合的问卷分析和未答人员名单，并进行问卷数据和未答人员名单的导出。
+                </li>
+            </ul>
+        </ng-template>
+        <ng-template #modalFooter>
+        </ng-template>
+    </nz-modal>
+
+
+</div>

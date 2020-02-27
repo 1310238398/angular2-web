@@ -1,0 +1,100 @@
+<ion-content class="outer-content">
+    <div style='height: 215px'>
+        <img class="slice-img" *ngIf="adItems.length == 0" src="assets/images/task/banner.jpg" (click)="onAd(item,$event)"/>
+        <ion-slides #slides [pager]='adItems.length>1' style="height: 215px" *ngIf="adItems.length > 0" autoplay="3000" loop="flag">
+            <ion-slide *ngFor="let item of adItems">
+                <img class="slice-img" onerror="this.src='assets/images/task/banner.jpg'" src="/{{item.Src||'assets/images/task/banner.jpg'}}" (click)="onAd(item,$event)"/>
+            </ion-slide>
+        </ion-slides>
+    </div>
+
+    <!--<img src="assets/images/task/ad-bg.png">-->
+    <div class="task-top" [ngClass]="{'going':going,'task-top':!going}">
+        <div class="container">
+            <!--     <div class="news-m inline white font14">入学<br>头条</div>
+                 &lt;!&ndash; <div class="inline" #Box>
+
+                    <div #content>
+                    <div class="news-content" *ngFor="let new of news">{{new.Title||''}}</div>
+                    </div>
+                  </div>&ndash;&gt;
+                 <div class="slide-container">
+                     <ul class="slide-list js-slide-list">
+                         <li class="news-content" *ngFor="let new of news" (click)="onTop(new)">{{new.Title||''}}</li>
+                     </ul>
+                 </div>-->
+        </div>
+        <div class="task-time" *ngIf="!going">
+            <div class="time"><span>{{time.leftDays>0?time.leftDays:0}}</span></div>
+            <span class="zi">天</span>
+            <div class="time"><span>{{time.leftHours>0?time.leftHours:0}}</span></div>
+            <span class="zi">时</span>
+            <div class="time"><span>{{time.leftMinutes>0?time.leftMinutes:0}}</span></div>
+            <span class="zi">分</span>
+            <div class="time"><span>{{time.leftSeconds>0?time.leftSeconds:0}}</span></div>
+            <span class="zi">秒</span>
+
+            <!--  <span style="color: #fbed21">{{Tip}}</span>天-->
+        </div>
+    </div>
+    <div class="task-task">我的入学任务</div>
+    <!--<div class="task-task">我的入学任务</div>
+    <div class="task-finish">完成度 / 排名:2000</div>
+    <ion-row>
+      <ion-col col-10>
+        <div class="am-progress">
+          <div class="am-progress-bar" style="width: 30%"></div>
+        </div>
+      </ion-col>
+      <ion-col col-2>
+        <img src="assets/images/task/king.png">
+      </ion-col>
+    </ion-row>-->
+    <!-- <div id="cd-timeline" class="cd-container">
+       <div *ngFor="let  activity of timeline">
+         <div class="cd-timeline-block">
+           <div class="cd-timeline-left royal">180人<br>已完成</div>
+           <div class="cd-timeline-icon royal">
+           </div>
+           <div class="cd-timeline-content">
+             <p class="timelineText">{{activity.title}}</p>
+           </div>
+           <div class="cd-timeline-right royal">
+             <p>马上去</p>
+           </div>
+         </div>
+       </div>
+     </div>-->
+    <div id="cd-timeline" class="cd-container">
+        <div *ngFor="let  task of taskList">
+            <div class="cd-timeline-block">
+                <div class="cd-timeline-left">
+                    <div class="t-center">{{task.DoneNum}}人</div>
+                    <div>已完成</div>
+                </div>
+                <div class="cd-timeline-icon">
+                </div>
+                <div class="cd-timeline-content" (click)="onTask(task)"
+                     [ngClass]="{'unopen-bg':!task.Status,'content-shadow':task.Status}"
+                     *ngIf="task.Status!=2">
+                    <p [ngClass]="{'c-open': task.Status, 'c-unopen': !task.Status}">{{task.Name}}</p>
+                </div>
+                <!--已完成 需要加个对号-->
+                <div class="cd-timeline-content content-shadow" (click)="onTask(task)" *ngIf="task.Status==2">
+                    <p class="c-finish">{{task.Name}}</p>
+                    <img src="assets/images/task/true.png" class="true-img">
+                </div>
+                <div class="cd-timeline-right unopen c-unopen" *ngIf="task.Status==0">
+                    <p>{{task.StartTime| stringToDate}}开启</p>
+                </div>
+                <div class="cd-timeline-right open c-open" *ngIf="task.Status==1" (click)="onTask(task)">
+                    <p>马上去</p>
+                </div>
+                <div class="cd-timeline-right finish c-finish" *ngIf="task.Status==2&&task.AllowView"
+                     (click)="onTask(task)">
+                    <p>再看<br>一遍</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

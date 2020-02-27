@@ -1,0 +1,37 @@
+page-index {
+  .index-bg {
+    background: url("../assets/images/index/index.jpg") no-repeat;
+    background-size: cover;
+    .index-img {
+      margin-top: 6rem;
+    }
+    .index-des{
+      position: absolute;
+      bottom: 100px;
+      font-size:16px;
+      color: #FFFFFF;
+    }
+    .des{
+      font-size: 15px;
+      color: #ffffff;
+      position: absolute;
+      bottom: 100px;
+      letter-spacing: 3px;
+      margin-left: 16px;
+    }
+    .mt{
+      margin-bottom: 12px;
+    }
+    .index-btn{
+      position: fixed;
+      width: 193px;
+      background-color: #7D70E6;
+      height: 48px;
+      left: 50%;
+      margin-left: -96.5px;
+      bottom: 18px;
+      font-size: 18px;
+      color: #FCA0F7;
+    }
+  }
+}

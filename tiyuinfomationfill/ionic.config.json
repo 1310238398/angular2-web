@@ -1,0 +1,7 @@
+{
+  "name": "baoxiunew",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

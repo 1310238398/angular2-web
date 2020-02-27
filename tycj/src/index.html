@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>电竞抽签</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="build/main.css" rel="stylesheet">
+  <base href="./">
+  <style type="text/css">
+    .spinnerw {
+      margin: 160px auto 0;
+      width: 80px;
+      text-align: center;
+    }
+
+    .spinnerw > div {
+      width: 18px;
+      height: 18px;
+      background-color: #eb9d21;
+      border-radius: 100%;
+      display: inline-block;
+      -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+      animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    }
+
+    .spinnerw .bounce1 {
+      -webkit-animation-delay: -0.32s;
+      animation-delay: -0.32s;
+    }
+
+    .spinnerw .bounce2 {
+      -webkit-animation-delay: -0.16s;
+      animation-delay: -0.16s;
+    }
+
+    @-webkit-keyframes sk-bouncedelay {
+      0%,
+      80%,
+      100% {
+        -webkit-transform: scale(0)
+      }
+      40% {
+        -webkit-transform: scale(1.0)
+      }
+    }
+
+    @keyframes sk-bouncedelay {
+      0%,
+      80%,
+      100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+      }
+      40% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<ion-app>
+  <div class="spinnerw" id="spinnerw">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</ion-app>
+<script src="build/polyfills.js"></script>
+<script src="build/main.js"></script>
+</body>
+
+</html>

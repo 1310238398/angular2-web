@@ -1,0 +1,139 @@
+.content {
+  padding: 18px 15px;
+  min-width: 1224px;
+}
+
+.left {
+  width: 300px;
+  margin-top: 30px;
+}
+.t-title{
+  .t_all{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
+}
+.school-icon {
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.school-title {
+  padding-top: 20px;
+  .title {
+    font-size: 24px;
+    color: #ffffff;
+    letter-spacing: 0.29px;
+    line-height: 35px;
+  }
+}
+
+.main-box {
+  float: right;
+  background: #2c3359;
+  box-shadow: 0 8px 9px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  height: 160px;
+}
+
+.time {
+  background: #242c56;
+  border-radius: 25px;
+  text-align: center;
+  height: 35px;
+  font-size: 18px;
+  color: #4a90e2;
+  margin-right: 14px;
+  margin-top: 4px;
+  letter-spacing: 0.22px;
+  line-height: 35px;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
+}
+
+.m_t {
+  margin-top: 20px;
+}
+
+.i_p {
+  padding-bottom: 6px;
+}
+
+.num_d {
+  letter-spacing: 0.72px;
+  padding: 8px 16px 0 0;
+  border-right: 1px solid #d8d8d8;
+  text-shadow: 0 0 20px #d17009;
+  text-align: left;
+}
+
+.num_b {
+  letter-spacing: 0.72px;
+  padding: 8px 16px 0 0;
+  text-shadow: 0 0 20px #d17009;
+  text-align: left;
+}
+
+.list {
+  margin: 4px;
+  display: inline-block;
+  .item {
+    margin: 18px;
+  }
+}
+
+.tongji {
+  background: #242c56;
+  border-radius: 10px;
+  height: 56px;
+  line-height: 56px;
+  span {
+    margin-left: 20px;
+  }
+}
+
+.progress {
+  span {
+    margin: 4px 8px;
+    display: inline-block;
+  }
+  .p_time {
+
+  }
+  .p_bar {
+    width: 110px;
+    margin-left: 10px;
+    div {
+      display: inline-block;
+      background: #ff982b;
+      border-radius: 65px;
+      width: 30px;
+      height: 10px;
+    }
+  }
+}
+
+.masked {
+  /*渐变背景*/
+  background-image: -webkit-linear-gradient(left, #3498db, #f47920 10%, #d71345 20%, #f7acbc 30%,
+  #ffd400 40%, #3498db 50%, #f47920 60%, #d71345 70%, #f7acbc 80%, #ffd400 90%, #3498db);
+  color: transparent; /*文字填充色为透明*/
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; /*背景剪裁为文字，只将文字显示为背景*/
+  background-size: 200% 100%; /*背景图片向水平方向扩大一倍，这样background-position才有移动与变化的空间*/
+  /* 动画 */
+  animation: masked-animation 4s infinite linear;
+}
+
+@keyframes masked-animation {
+  0% {
+    background-position: 0 0; /*background-position 属性设置背景图像的起始位置。*/
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+

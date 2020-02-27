@@ -1,0 +1,177 @@
+page-wenjuan-detail {
+  .none {
+    display: none;
+  }
+  .cailiao {
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #666666;
+    letter-spacing: 0.29px;
+  }
+  ion-card {
+    min-height: 135px;
+    padding-bottom: 8px;
+  }
+  .list-ios .item-block:not(.alert-danger) {
+    border-bottom: none !important;
+  }
+  .item-input ion-textarea {
+    border: 1px solid #acacac;
+    height: 100px;
+    border-radius: 2px;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0.34px;
+    text-align: left;
+  }
+  .ziNum {
+    position: absolute;
+    right: 16px;
+    bottom: 6px;
+  }
+  ul {
+    padding: 0px;
+
+    &.rating li {
+      padding: 5px 10px !important;
+      background: none;
+      color: #ffb400;
+
+      ion-icon {
+        font-size: 30px;
+      }
+    }
+  }
+  .di {
+    background-image: url("../assets/imgs/di.png");
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    background-repeat: no-repeat;
+    span {
+      font-size: 18px;
+      color: #ffffff;
+      margin-left: 6px;
+      line-height: 40px;
+    }
+  }
+  .score-title {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    margin-left: 8px;
+    margin-bottom: 2px;
+    color: #666666;
+    letter-spacing: 0.34px;
+    text-align: left;
+  }
+  .score {
+    text-align: right;
+    input {
+      width: 40px;
+      margin-right: 16px;
+      margin-bottom: 8px;
+      border: 1px solid #acacac;
+    }
+  }
+  .underimg {
+    clear: left;
+    margin-top: 8px;
+  }
+  /**
+  量表
+   */
+  .jq-stars {
+    display: inline-block;
+  }
+
+  .jq-rating-label {
+    font-size: 22px;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    font-family: helvetica, arial, verdana;
+  }
+
+  .jq-star {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .jq-star-svg {
+    padding-left: 3px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .jq-star:hover .fs-star-svg path {
+  }
+
+  .jq-star-svg path {
+    /* stroke: #000; */
+    stroke-linejoin: round;
+  }
+
+  /* un-used */
+  .jq-shadow {
+    -webkit-filter: drop-shadow(-2px -2px 2px #888);
+    filter: drop-shadow(-2px -2px 2px #888);
+  }
+
+  .title {
+    font-size: 16px;
+    height: 75px;
+    line-height: 60px;
+    color: #3e3e3e;
+  }
+  .qustitle {
+    font-size: 15px;
+    margin-left: 8px;
+    margin-bottom: 16px;
+    color: #666666;
+  }
+  .btns {
+    text-align: center;
+    margin-top: 30px;
+    button {
+      width: 130px;
+      margin: 0 24px 10px 24px;
+    }
+  }
+
+  .Certify {
+    img {
+      display: inline-block;
+      width: 80px;
+      margin: 3px;
+      height: 80px;
+    }
+  }
+
+  .disable {
+    background: #d5d5d5;
+  }
+  .info {
+    display: inline-block;
+    vertical-align: 35px;
+    margin-left: 10px;
+  }
+  input[type="checkbox"][readonly] {
+    pointer-events: none;
+  }
+  .w-check {
+    color: #ffc000;
+    margin-right: 8px;
+    font-size: 24px;
+  }
+
+  .w-text {
+    font-size: 12px;
+    color: #666666;
+  }
+  .w-c-ml {
+    margin-left: 32px;
+  }
+}

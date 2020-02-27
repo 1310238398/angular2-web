@@ -1,0 +1,28 @@
+<ion-content class="index-cont">
+    <p class="center head-title fn16">{{roomName}}(可住{{setNum}}人)</p>
+    <div *ngIf="boongBt">
+        <p class="common-txt fn16">已住学生 ({{haveLiveNum}}人)</p>
+        <ion-list>
+            <ion-item *ngFor="let item of itemsObj">
+                <h2>{{ item.name }}</h2>
+                <p>{{item.classname}}</p>
+                <button *ngIf="item.remove" ion-button clear item-end (click)="boongDeletBtn(item.intelusercode)">移除</button>
+            </ion-item>
+        </ion-list>
+    </div>
+
+    <p class="common-txt fn16">待添加学生 ({{failLiveNum}}人)</p>
+    <ion-list>
+        <ion-item *ngFor="let item of soonObj">
+            <h2>{{ item.name }}</h2>
+            <p>{{className}}</p>
+            <button ion-button clear item-end (click)="soonDeletBtn(item.code)">移除</button>
+        </ion-item>
+    </ion-list>
+
+    <div class="center" style="margin:20px 0;">
+        <button ion-button class="exit-css" [disabled]="forbidBtn" clear (click)="gotoIndex()">取消</button>
+        <button ion-button class="yes-css" [disabled]="forbidBtn" (click)="submitFunc()">提交</button>
+    </div>
+
+</ion-content>

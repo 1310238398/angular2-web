@@ -1,0 +1,40 @@
+.content{
+    background-color: #fafafa;
+    margin: 0;
+    padding: 16px;
+    height: 100%;
+}
+.questions{
+    background:#ffffff;
+}
+.titleOne{
+    font-family:PingFangSC-Regular;
+    font-size:14px;
+    color:#3e3e3e;
+    letter-spacing:0;
+    text-align:left;
+    height: 30px;
+    line-height: 30px;
+}
+.daan{
+margin-top: 12px;
+}
+.titleTwo{
+    font-family:PingFangSC-Regular;
+    font-size:14px;
+    color:#3e3e3e;
+    letter-spacing:0.17px;
+    text-align:left;
+    height: 40px;
+    padding-top: 20px;
+    line-height: 20px;
+}
+.daan p{
+    font-family:PingFangSC-Regular;
+    font-size:14px;
+    color:#666666;
+    letter-spacing:0.17px;
+    line-height:22px;
+    text-align:left;
+    margin-top: 6px;
+}

@@ -1,0 +1,78 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            我的名单
+        </ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+                <!--<span ion-text>关闭</span>-->
+                <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content no-padding>
+    <ion-row>
+        <ion-col col-7 no-padding>
+         <!--   <ion-card *ngIf='!NotSaveRoll'>
+                <ion-card-header>
+                    已选择：<span *ngIf='num'>{{num||0}}人</span>
+                </ion-card-header>
+
+                <span *ngFor="let SelectedRoll of SelectedRolls; let i = index" class="selected">
+                <span class="box">{{SelectedRoll.Name}}（{{SelectedRoll.UserCount||''}}人）</span>
+                <ion-icon class="ml" name="close" (click)='removeRoll(SelectedRoll)'></ion-icon>
+                </span>
+            </ion-card>
+            <ion-card *ngIf='NotSaveRoll'>
+                <ion-card-header>
+                    已选择：<span *ngIf='selectedNum'>{{selectedNum||''}}人</span><span *ngIf='selectedDept'>，其中有{{selectedDept||''}}个机构（含子机构）</span>
+                </ion-card-header>
+                &lt;!&ndash;  {{Contacts|json}} &ndash;&gt;
+                <span *ngFor="let Contact of Contacts; let i = index" class="selected">
+            <span class="box" *ngIf='Contact.dept'>{{Contact.DeptName}}</span>
+                <span class="box" *ngIf='Contact.DeptMember'>{{Contact.Name}}</span>
+                <span class="box" *ngIf='Contact.group'>{{Contact.GroupName}}</span>
+                <span class="box" *ngIf='Contact.groupMember'>{{Contact.Name}}</span>
+                <span class="box" *ngIf='Contact.friend'>{{Contact.Name}}</span>
+                <span class="box" *ngIf='Contact.search'>{{Contact.Name}}</span>
+                <ion-icon class="ml" name="close" (click)='removeContact(Contact)'></ion-icon>
+                </span>
+            </ion-card>-->
+            <ion-card>
+                <ion-card-header>
+                    已选择：<span *ngIf='selectedRollNum'>{{selectedRollNum||0}}人</span>
+                </ion-card-header>
+                <span *ngFor="let Contact of Contacts; let i = index" class="selected" [ngClass]="{'roll':Contact.roll}">
+                <span class="box" *ngIf='Contact.dept'>{{Contact.DeptName}}</span>
+                <span class="box" *ngIf='Contact.DeptMember'>{{Contact.Name}}</span>
+                <span class="box" *ngIf='Contact.group'>{{Contact.GroupName}}</span>
+                <span class="box" *ngIf='Contact.groupMember'>{{Contact.Name}}</span>
+                <span class="box" *ngIf='Contact.friend'>{{Contact.Name}}</span>
+                <span class="box" *ngIf='Contact.search'>{{Contact.Name}}</span>
+                    <span class="box" *ngIf='Contact.roll'>{{Contact.Name}}<span>（{{Contact.UserCount}}人）</span></span>
+                <ion-icon class="ml" name="close" (click)='removeContact(Contact)'></ion-icon>
+                </span>
+            </ion-card>
+        </ion-col>
+        <ion-col col-5 no-padding>
+            <ion-card style="height:87.5%">
+                <ion-list>
+                    <ion-item *ngFor="let Roll of Rolls">
+                        <ion-label>{{ Roll.Name }}<span>（{{Roll.UserCount}}人）</span>
+                        </ion-label>
+                        <ion-checkbox [(ngModel)]="Roll.check" (click)="setRolls(Roll)"></ion-checkbox>
+                    </ion-item>
+                </ion-list>
+            </ion-card>
+            <div text-center><button ion-button class="btn w100pre" (click)="navPersonList()">手动选择</button></div>
+        </ion-col>
+    </ion-row>
+</ion-content>
+<ion-footer>
+    <ion-toolbar text-center>
+        <button ion-button class="btn" (click)="saveMessage()">完成</button>
+    </ion-toolbar>
+</ion-footer>

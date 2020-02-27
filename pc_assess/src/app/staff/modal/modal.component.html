@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <div class="modal-title">质量提升加分</div>
+</div>
+<div>
+  <div class="text-center mm">质量提升加分为：<nz-input-number [(ngModel)]="score" [nzMin]="0" [nzMax]="6" [nzStep]="1"></nz-input-number>
+  </div>
+    <nz-table #basicTable [nzData]="dataSet" [nzShowPagination]="false">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>奖项名称</th>
+                <th>所获奖项级别</th>
+                <th>名次</th>
+                <th>获奖时间</th>
+                <th>证明材料</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable.data;let index=index">
+                <td>{{index+1}}</td>
+                <td>{{data.WinningName}}</td>
+                <td>{{data.Level}}</td>
+                <td>{{data.Orders}}</td>
+                <td>{{data.AwardDate}}</td>
+                <td><a (click)="nav(data.AttachmentCode)"><i class="anticon anticon-folder"></i></a></td>
+            </tr>
+        </tbody>
+    </nz-table>
+  <div class="text-center mb"><button nz-button (click)="onSave()" class="search-btn">确定</button></div>
+
+</div>

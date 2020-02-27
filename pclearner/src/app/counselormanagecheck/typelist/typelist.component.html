@@ -1,0 +1,140 @@
+<div class="content">
+    <div class="components-table-demo-control-bar">
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-center">
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>日志标题</label>
+                </div>
+                <div nz-form-control>
+                    <textarea class='file-message' #text name="LogTitle" [(ngModel)]="searchObj.LogTitle" (ngModelChange)="txtChange(text.value)"
+                        maxlength="10" cols="1" rows="1" (keydown)="checkEnter($event)"></textarea>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>记录类型</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 140px;" [(ngModel)]="searchObj.CateGray" name="CateGray" [nzPlaceHolder]="''">
+                        <nz-option *ngFor="let option of optioncategray" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>学年学期</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 145px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.YearDat" name="YearDat" (ngModelChange)="onloadWeekTime('1')">
+                        <nz-option *ngFor="let option of optionyear" [nzLabel]="option.AcademicNameTerm" [nzValue]="option.indexNum">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>学院</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 140px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.CollegeDat" name="CollegeDat" (ngModelChange)="onSearchTeacher()">
+                        <nz-option *ngFor="let option of optioncollege" [nzLabel]="option.AcademyName" [nzValue]="option.AcademyCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>辅导员</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 100px;" [nzPlaceHolder]="''" nzShowSearch [(ngModel)]="searchObj.TeacherDat" name="TeacherDat">
+                        <nz-option *ngFor="let option of optionteacher" [nzLabel]="option.name" [nzValue]="option.IntelUserCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>发布日期 (周)</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select style="width: 100px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.fabTime" name="fabTime">
+                        <nz-option *ngFor="let option of optionfabtime" [nzLabel]="option.Name" [nzValue]="option.Weeks">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+
+
+            <div nz-row nz-form-item>
+                <div nz-col [nzSpan]="24" style="text-align: right;">
+                    <button nz-button [disabled]="httpService.loading" [nzType]="'primary'" (click)="onSearch(true)">查询</button>
+                    <button style="margin-right:20px;" nz-button (click)="resetForm(f)">重置</button>
+                    <a [routerLink]="['/counselormanagecheck',{saveselectYear: saveselectYear,saveselectCollege:saveselectCollege,saveselectTeacher:saveselectTeacher,saveselectAcademicYearCode:saveselectAcademicYearCode,saveselectAcademicTermCode:saveselectAcademicTermCode,saveselectMonth:saveselectMonth}]">
+                        <button nz-button [nzType]="'primary'">工作日志统计</button>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div style="margin-top:20px;">
+        <nz-table #nzTable [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [(nzTotal)]="total" [(nzPageIndex)]="page.Page"
+            [(nzPageSize)]="page.PageSize" [nzBordered]="true" (nzPageIndexChange)="onSearch()">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>序号</th>
+                    <th nz-th>日志标题</th>
+                    <th nz-th>记录类型</th>
+                    <th nz-th>学院</th>
+                    <th nz-th>姓名</th>
+                    <th nz-th>创建时间</th>
+                    <th nz-th>发布时间</th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i = index;" (click)="navToDetail()">
+                    <td nz-td>{{(page.Page)*(page.PageSize)-(page.PageSize) + i +1}}</td>
+                    <td nz-td>
+                        <a [routerLink]="['/counselormanagecheck/contdetailcheck',{RecordID: data.RecordID}]">
+                            <span>{{data.LogTitle}}</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a [routerLink]="['/counselormanagecheck/contdetailcheck',{RecordID: data.RecordID}]">
+                            <span>{{data.RecordName}}</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a [routerLink]="['/counselormanagecheck/contdetailcheck',{RecordID: data.RecordID}]">
+                            <span>{{data.DepartmentName}}</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a [routerLink]="['/counselormanagecheck/contdetailcheck',{RecordID: data.RecordID}]">
+                            <span>{{data.IntelUserName}}</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a [routerLink]="['/counselormanagecheck/contdetailcheck',{RecordID: data.RecordID}]">
+                            <span>{{data.InsertDatetime}}</span>
+                        </a>
+                    </td>
+                    <td nz-td>
+                        <a [routerLink]="['/counselormanagecheck/contdetailcheck',{RecordID: data.RecordID}]">
+                            <span>{{data.PublishDateTime}}</span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+
+    </div>
+
+</div>

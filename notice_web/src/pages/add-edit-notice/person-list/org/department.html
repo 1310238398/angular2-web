@@ -1,0 +1,39 @@
+<!--Create by hanzhendong on 2017/7/24.-->
+<ion-content>
+    <ol class="breadcrumb">
+        <li [ngClass]="{'active': !showMemberList}" (click)="setState()">组织机构</li>
+        <li [ngClass]="{'active': showMemberList}" text-nowrap *ngIf="showMemberList">{{departments[currentIndex]?.DeptName}}</li>
+    </ol>
+    <ion-list *ngIf="!showMemberList">
+        <ion-item [ngClass]="{'part': partCheck}">
+            <ion-label>全选
+            </ion-label>
+            <ion-checkbox (click)='onAll($event)' [(ngModel)]='allCheck'></ion-checkbox>
+        </ion-item>
+        <ion-item *ngFor="let department of departments; let i = index">
+            <ion-label>
+                <span class="lable">{{department.DeptName}}</span>
+                <span class='lable'*ngIf="!department.memNum">（{{department.UserCount||0}}人）</span>
+                <span class='lable' *ngIf="department.memNum">（{{department.memNum||0}}/{{department.UserCount||0}}人）</span>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="department.check" (click)="setContacts(department)"></ion-checkbox>
+            <button ion-button item-end clear [ngClass]="{'downcheck': !department.check, 'downUncheck': department.check}" (click)="tiggerShowStaffList(department,i)">下级</button>
+        </ion-item>
+    </ion-list>
+    <ion-list *ngIf="showMemberList">
+        <ion-item [ngClass]="{'part': partMemberCheck}">
+            <ion-label>全选
+            </ion-label>
+            <ion-checkbox (click)='onMemberAll($event)' [(ngModel)]='departments[currentIndex].allMemberCheck'></ion-checkbox>
+        </ion-item>
+        <ion-item *ngFor="let staff of curentDepartment.members">
+            <ion-label>
+                <img class='avatar' src="/static/headpictures/{{staff.UID}}.jpg-thumb" alt="">
+                <img class='rengzheng' *ngIf='staff.IsAuth' src="assets/image/icon_renzheng_20.png">
+                <p item-end class="lable">{{staff.Name}}</p>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="staff.check" (click)="setMemberContacts(staff)"></ion-checkbox>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

@@ -1,0 +1,151 @@
+<div *ngIf="permission">
+    <div class="bg-grand">
+      <div class="card bg-total">
+            <div>
+                <div class="card-content left-content" [ngSwitch]="boardsItems.Role">
+                    <div nz-row nzType="flex" nzJustify="center" nzAlign="middle">
+                        <div (click)="goHome()"><img class="school-icon" [src]="Logo" alt="">
+                        </div>
+                        <div *ngIf="!activateAcadey">
+                            <div class="font16 base-font white" *ngSwitchCase="'一类'">{{boardsItems.School}}学生</div>
+                            <div class="font16 base-font white" *ngSwitchDefault>{{boardsItems.School}}{{boardsItems.Role||''}}学生</div>
+                            <div class="font16 base-font white" *ngSwitchCase="'三类'">{{boardsItems.School}}我负责的学生</div>
+                            <div class="font26 base-font white" *ngIf="boardsItems.Role!='一类'">{{boardsItems.TotalHits||0}} <span class="font14">人</span></div>
+                            <div class="font26 text-left base-font white" *ngIf="boardsItems.Role=='一类'"><a [routerLink]="['/academy']" style="color: #FFC000;">{{boardsItems.TotalHits||0}}</a><span class="font14">人</span></div>
+                        </div>
+                        <div *ngIf="activateAcadey">
+                            <div class="font16 base-font white">{{boardsItems.School}} {{activateAcadey}}学生</div>
+                            <div class="font26 base-font text-left white">{{boardsItems.TotalHits||0}}<span class="font14">人</span></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-content" *ngIf="boardsItems.DayWeek&&boardsItems.DayWeek.SurplusDay>0&&boardsItems.DayWeek&&boardsItems.DayWeek.SurplusWeek>0">
+                    <div class="font16 base-font white">本学期共{{boardsItems?.DayWeek?.TotalDay||0}}天</div>
+                    <div class="font16 base-font white">已度过 <span class="font26">{{boardsItems?.DayWeek?.SpendDay||0}}</span> 天 (<span class="font26">{{boardsItems?.DayWeek?.NowWeek||0}}<span class="font16">周</span></span>)，还剩 <span class="font26">{{boardsItems?.DayWeek?.SurplusDay||0}}</span>                        天 (<span class="font26">{{boardsItems?.DayWeek?.SurplusWeek||0}}<span
+            class="font16">周</span></span>)
+                    </div>
+                </div>
+                <div class="card-content finish" *ngIf="boardsItems.DayWeek&&boardsItems.DayWeek.SurplusDay<=0||boardsItems.DayWeek&&boardsItems.DayWeek.SurplusDay=='NULL'||boardsItems.DayWeek&&boardsItems.DayWeek.SurplusWeek<=0||boardsItems.DayWeek&&boardsItems.DayWeek.SurplusWeek=='NULL'">
+<!--
+                    <div class="font26 base-font white">本学期已结束</div>
+-->
+                  <div class="font26 base-font white" style="margin-top: 20px">距离开学还有<span class="font28" style="color: #FFC000">{{boardsItems.DayNewTermLeft}}</span>天</div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center" style="height:auto;padding: 10px 0;position: relative">
+          <img class="icon-right" src="assets/images/img00.png" alt="">
+            <div class="base-font font20 d-ib white">学生查询</div>
+            <div class="p-ab-r100 base-font font14 d-ib white">
+                <a class="white" [routerLink]="['/student']">高级查询</a>
+            </div>
+            <!--     <div class="p-ab-r100 base-font font14 d-ib" *ngIf="!Advanced"><a href="#" style="color: #13A0FA" (click)="onAdvanced()">全文搜索</a></div> -->
+
+            <div class="p20">
+                <nz-input-group nzSuffixIcon="anticon anticon-search">
+                    <input (keyup)="enEnter($event)" nz-input placeholder=" 请输入（多个关键词请使用空格分隔或使用高级查询)" [(ngModel)]="searchValue">
+                </nz-input-group>
+                <button nz-button (click)="esSearch()">查询</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="chart">
+        <div nz-row nzType="flex" [nzGutter]="8">
+            <div nz-col nzXs="24" nzSm="12" nzMd="6">
+                <div class="card-chart">
+                    <div class="card-bar"><img class="bar-icon" src="assets/images/xingbie@2x.png" alt="">性别统计</div>
+                    <div class="card-body">
+                        <div (window:resize)="onResize($event)" id="sexId" style="width:auto;min-height: 150px"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div nz-col nzXs="24" nzSm="12" nzMd="6">
+                <div class="card-chart">
+                    <div class="card-bar"><img class="bar-icon" src="assets/images/xuesheng@2x.png" alt="">学生状态统计 <a href="#" class="expand base-font font10 blue" (click)="expand('SbiStatus')">展开</a></div>
+                    <div class="card-body">
+                        <div *ngIf="(boardsItems.SbiStatus||[]).length" class="item">
+                            <div class="base-font item-m font14" *ngFor="let status of boardsItems.SbiStatus.slice(0,5)">
+                                <span class="status"><a (click)="onClickStatus(status.Key)">{{status.Key}} </a></span><span>{{status.Value}}人</span><span>{{status.Rate}}%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div nz-col nzXs="24" nzSm="12" nzMd="6">
+                <div class="card-chart">
+                    <div class="card-bar"><img class="bar-icon" src="assets/images/renkoufenbu@2x.png" alt="">民族统计 <a href="#" class="expand base-font font10 blue" (click)="expand('SbiNationality')">展开</a>
+                    </div>
+                    <div class="card-body">
+                        <!--     <div *ngIf="boardsItems.SbiNationality.length">
+                <div class="base-font item-m font12" *ngFor="let nation of boardsItems.SbiNationality">
+                    <div *ngIf="nation.Value>500"><span>{{nation.Key}} </span><span>{{nation.Value}}人</span><span>{{nation.Rate}}%。</span></div>
+                </div>
+            </div> -->
+                        <div (window:resize)="onResize($event)" id="SbiNationId" style="width:auto;min-height: 150px"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div nz-col nzXs="24" nzSm="12" nzMd="6">
+                <div class="card-chart">
+                    <div class="card-bar"><img class="bar-icon" src="assets/images/zhengzhi@2x.png" alt="">政治面貌统计 <a href="#" class="expand base-font font10 blue" (click)="expand('SbiPolitical')">展开</a>
+                    </div>
+                    <div class="card-body">
+                        <div (window:resize)="onResize($event)" id="SbiPoliticalId" style="width:auto;min-height: 150px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="chart1">
+        <div nz-row nzType="flex" nzGutter="8">
+            <div nz-col nzSpan="12">
+                <div class="card-chart">
+                    <div class="card-bar"><img class="bar-icon" src="assets/images/qingjia@2x.png" alt="">今日请假缺勤人员统计</div>
+                    <div class="card-body">
+                        <div class="needback-title">今天因请假<a *ngIf="boardsItems?.Leave[0]?.AllCount>0" (click)="navLeaveDetail(boardsItems?.Leave[0]?.AllIds)">{{boardsItems?.Leave[0]?.AllCount}}</a>
+                            <span *ngIf="boardsItems?.Leave[0]?.AllCount==0">0</span>位学生缺勤，当前<a *ngIf="boardsItems?.Leave[0]?.AllCountNow>0" (click)="navLeaveDetail(boardsItems?.Leave[0]?.AllIdsNow)">{{boardsItems?.Leave[0]?.AllCountNow}}</a>
+                          <span *ngIf="boardsItems?.Leave[0]?.AllCountNow==0">0</span>位学生请假中
+                        </div>
+                        <div (window:resize)="onResize($event)" id="leavelId" style="width:auto;min-height: 200px"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div nz-col nzSpan="12">
+                <div class="card-chart">
+                    <div class="card-bar"><img class="bar-icon" src="assets/images/xiaojia@2x.png" alt="">需要销假人员统计</div>
+                    <div class="card-body">
+                        <div class="needback-title">截至今日有<a *ngIf="boardsItems?.NeedBack?.AllUnBack>0" (click)="JumpXiaojia(1)">{{boardsItems?.NeedBack?.AllUnBack}}</a><span *ngIf="boardsItems?.NeedBack?.AllUnBack==0">0</span>位学生需要销假
+                        </div>
+                        <div (window:resize)="onResize($event)" nz-col id="NeedBackId" style="width:auto;min-height: 200px"></div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<a *ngIf="activateAcadey" (click)="goBack()"><img class="b-cancle" src="assets/images/back.png"></a>
+<div *ngIf="!permission">
+    <div class="shuoming">
+        <img src="assets/images/shuoming.png" alt="" (click)="question()">
+    </div>
+    <div class="pop" *ngIf="questionFlag">
+        <img src="assets/images/pop@2x.png" alt="">
+        <div class="content base font-14 color-666">如果您需要“大数据中心”权限， 请联系通讯录中的“集结号小助手”
+        </div>
+    </div>
+
+    <div class="kong">
+        <img src="assets/images/kong.png" alt="">
+        <div class="base color-666 welcome">欢迎来到校园集结号</div>
+    </div>
+</div>

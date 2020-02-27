@@ -1,0 +1,12 @@
+<ion-content class="outer-content">
+    <div class="optMod" *ngFor="let x of xlist;let j = index">
+        <p class="depict">{{x.id}}.{{x.problem}}</p>
+        <p class="result">
+            <span *ngFor="let c of x.option;let i = index" [ngClass]="{active:c.isOn}" (click)="Toxh(x,i)"></span>
+            <label>{{x.score}}分</label>
+        </p>
+    </div>
+    <div class="pageBtnDiv">
+        <button type="button" class="" style="transition: none;" (click)="SubBtn()">提交</button>
+    </div>
+</ion-content>

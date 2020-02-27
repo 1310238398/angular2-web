@@ -1,0 +1,12 @@
+<ion-content>
+  <div class="cadre">
+    <p class="class-name">{{className}}</p>
+    <div class="role-list">
+      <div class="role" *ngFor="let cadre of cadreData">
+        <p class="role-p no-line-break"><span>{{cadre.CodeName}}：</span><span
+            class="role-student">{{cadre.Names}}</span></p>
+        <a class="set" (click)="setCadre(cadre)">设置</a>
+      </div>
+    </div>
+  </div>
+</ion-content>

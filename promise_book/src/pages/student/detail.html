@@ -1,0 +1,28 @@
+<ion-content class="detail">
+  <div class="cover">
+    <p class="title">{{pro.Title}}</p>
+    <div class="content" style="padding: 25px 15px 15px 15px;" [innerHTML]="pro.Content">
+    </div>
+    <div class="sign">
+      <!-- 0未签署 1已签署 2待签署 -->
+      <p *ngIf="pro.WrittenTime"><span>{{writtenYear}}年{{writtenMonth}}月{{writtenDay}}日</span></p>
+      <div class="sign_list">
+        <p class="sign2">承诺人：</p>
+        <p class="sign1"><img src="{{pro.SignLink}}" *ngIf="pro.SignLink" width="110" height="40"></p>
+      </div>
+      <div class="sign_list">
+        <p class="sign2">时&nbsp;&nbsp;&nbsp;&nbsp;间：</p>
+        <p class="sign1"><span *ngIf="pro.SignTime">{{year}}年{{month}}月{{day}}日</span></p>
+      </div>
+    </div>
+    <div class="btn-one" *ngIf="pro.Status===2">
+      <button type="button" class="btn-center" (click)="goSign()">签署承诺书</button>
+    </div>
+    <div class="btn-one" *ngIf="userID">
+      <button type="button" class="btn-center" (click)="export()">导出</button>
+    </div>
+    <div class="btn-one" *ngIf="pro.Status===0">
+
+    </div>
+  </div>
+</ion-content>

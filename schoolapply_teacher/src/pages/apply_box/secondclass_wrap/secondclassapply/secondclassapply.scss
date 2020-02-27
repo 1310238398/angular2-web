@@ -1,0 +1,173 @@
+page-secondclassapply {
+    ul,li{list-style: none;margin:0;padding:0;}
+    p,h1,h2,h3{margin:0;padding:0;}
+    .fl{float: left;}
+    .fr{float: right;}
+    .center{text-align: center;}
+    .dib{display: inline-block;}
+    .relative{position: relative;}
+    .absolute{position: absolute;}
+    .fixed{position: fixed}
+    .overh{overflow: hidden;}
+    .mr{margin:0 auto;}
+    .db{display: block;}
+    .fn9{font-size: 9px;}
+    .fn12{font-size: 12px;}
+    .fn14{font-size: 14px;}
+    .fn16{font-size: 16px;}
+    .fn18{font-size: 18px;}
+    .color4a{color: #4A4A4A;}
+    .color9b{color: #9B9B9B;}
+
+    .index-cont{background: #FAFAFA;color: #4A4A4A;}
+    .cont-form{width: 100%;padding: 0 15px;}
+    .text-css{color: #9B9B9B;font-size: 14px;margin:15px 0 10px;}
+
+    .item-ios {
+        padding-left: 0px;
+        border-radius: 8px;
+    }
+    .item-ios.item-block .item-inner {
+        padding-right: 0px;
+        padding-left: 0px;
+        border: 1px solid #E4E4E4;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px 0 #E3E3E3;
+        background: #fff;
+    } 
+    //下拉选择
+    .item-block {
+        min-height: 35px;   
+    }
+
+    .select-search {
+        .item-inner {
+            padding-right: 0px;
+            padding-left: 0px;
+            border: 1px solid #E4E4E4;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px 0 #E3E3E3;
+            background: #fff;
+        }
+        .label-ios {
+            margin: 7px 0px;
+        }
+        
+        .select-searchable-label {
+            flex: 0;
+            width: 0px;
+            display: none;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .select-searchable-ios .select-searchable-value {
+            padding-left: 10px;
+        }
+        .select-searchable-value {
+            max-width: 100%;
+        }
+        .select-searchable-value-item {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            font-size: 14px;
+            color: #4A4A4A;
+        }
+        .select-searchable-icon {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 0px;
+            height:0px;
+        }
+        .select-searchable-icon-inner{
+            border-top: none;
+        }
+    }
+
+  
+    ion-select {
+        position: relative;
+        flex: 1;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        overflow: hidden;
+        max-width: 100%;
+        height: 33px;
+        line-height: 33px;
+        background: #FFFFFF;
+
+        box-shadow: 0 2px 5px 0 #E3E3E3;
+        border-radius: 4px;
+
+        padding:0px 8px 0px 10px!important;
+
+
+        .select-text {
+            font-size: 14px;
+            color: #4A4A4A;
+            line-height: 34px;
+        }
+    }
+    .select-ios .select-icon {
+        position: relative;
+        width: 15px;
+        height: 33px;
+    }
+
+    ion-datetime{
+        padding:0px 8px 0px 10px!important; 
+        .datetime-text {
+            font-size: 16px;
+            color: #4a4a44;
+            line-height: 33px;
+        }
+    }
+
+
+    .text-input-ios {
+        margin: 11px 8px 11px 10px !important;
+    }
+
+    .upload {background: #fff;padding:10px;}
+
+    .upload .Certify {margin:0 15px 15px 0;height: 85px;width: 85px;line-height: 85px;z-index: 3;}
+    .upload .Certify .file-img {vertical-align: middle;max-width: 85px;max-height: 85px;}
+    .upload .Certify .delete-icon {top: -6px;right: -6px;width: 12px;height: 12px;}
+    .upload .container {width: 85px;height:85px;margin-right:15px;}
+    
+    .hiddenFile {display: block;position: absolute;width: 100%;height: 100%;top: 0;left: 0;opacity: 0;-moz-opacity: 0; /* 兼容老式浏览器 */filter: alpha(opacity=0); /* 兼容IE */}
+
+    .submit-tab{width: 130px;height:40px;background: #FFC000 !important;}
+
+    .info-box{width: 100%;padding:15px;}
+    .img-box{margin-top:10px;}
+    .img-box p{width: 30%;height:30%;margin:0 5px 10px;}
+    .img-box p img{max-width: 85px;max-height:85px;}
+
+    textarea.text-input {
+        height: 150px !important;
+        font-size: 14px;
+        color: #4A4A4A;
+
+    }
+    .css-li{line-height: 30px;display: flex;margin-top: 10px;}
+    .info-head {display: flex;width: 25%;justify-content: left;align-items: normal;}  
+    .info-span {display: flex;width: 75%;justify-content: left;align-items: center;}  
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+

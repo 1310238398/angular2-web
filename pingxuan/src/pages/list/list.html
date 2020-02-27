@@ -1,0 +1,43 @@
+<ion-content class="outer-content">
+  <ion-card class="mwbor">
+    <img src="assets/images/banner.jpg"/>
+  </ion-card>
+  <ion-grid class="padding0">
+    <ion-row class="bgFFF">
+      <ion-col col-6 text-center>总票数<label class="cored">{{total}}</label></ion-col>
+      <ion-col col-6 text-center>访问量<label class="cored">{{views}}</label></ion-col>
+    </ion-row>
+    <ion-row class="bgFFF mt5">
+      <ion-col  text-left>活动倒计时<label class="cored">{{dataString}}</label></ion-col>
+    </ion-row>
+  </ion-grid>
+  <div>
+    <div class="pwbor" *ngFor="let item of list" (click)="toView(item)">
+      <ion-card class="mwbor">
+        <div class="imgd">
+          <img src="{{item.Photo}}">
+        </div>
+        <ion-card-content class="padding4">
+          <h2>{{item.Name|slice:0:10}}</h2>
+          <p>{{item.Academy|slice:0:20}}</p>
+        </ion-card-content>
+
+        <ion-row>
+
+          <ion-col text-right>
+            <ion-note>
+              <button ion-button color="danger" icon-left clear small class="padding0">
+                <div>{{item.Vote}}票</div>
+              </button>
+            </ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+
+
+
+
+  </div>
+
+</ion-content>

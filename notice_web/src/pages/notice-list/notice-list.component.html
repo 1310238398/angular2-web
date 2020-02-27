@@ -1,0 +1,20 @@
+<ion-content padding>
+    <ion-list>
+        <ion-item *ngFor="let notice of notices" (click)="gotoDetail(notice)" style="height: 60px;">
+
+                <div class="listtitle">
+                    <span class="readtip" [hidden]="notice.ISREADED"></span>
+                    {{notice.MUSTTITLE}}
+                    <img src="assets/image/addon@1x.png" style="margin-left: 10px;"
+                    [hidden]="notice.ISATTACHMENT === '0' ? true : false"/>
+                </div>
+                <p class="listtime">{{fomateDate(notice.MUSTTIME)}}</p>
+                <!--<HR margin-left="10px" margin-right="10px">-->
+                <!--<p  class = "listcontent" >{{notice.MUSTDESC}}</p>-->
+        </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>

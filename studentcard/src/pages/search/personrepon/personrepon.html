@@ -1,0 +1,143 @@
+<ion-content>
+    <div class="xinxi">
+
+        <p class="fontw">{{schoolName||'尚未配置学校名称参数'}}学籍登记表</p>
+        <p class="fontq">请认真填写学籍登记表，此表将会放入您的档案</p>
+
+
+    </div>
+
+    <div>
+
+        <div *ngFor="let form of Family ; let j = index">
+            <!-- <ion-list class="xiangxitop">家庭主要成员0{{j+1}}
+                    <div class="pageDele" *ngIf="j+1>=2" (click)="removePage() ">
+                        <img src="assets/images/shanchu@2x.png">
+                    </div>
+                </ion-list> -->
+            <ion-list>
+                <div class="testtitle">家庭主要成员0{{j+1}}</div>
+                <div class="pageDele" *ngIf="j+1>=2" (click)="removePage() ">
+                    <img src="assets/images/shanchu@2x.png">
+                </div>
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">成员姓名</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" [(ngModel)]="form.Name" type="text"></ion-input>
+                </ion-item>
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">与本人关系</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="form.Relation" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+                </ion-item>
+
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">政治面貌</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="form.Political" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+                </ion-item>
+
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">职业</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="form.Job" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+                </ion-item>
+
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">工作单位</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="form.WorkAddress" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+                </ion-item>
+
+            </ion-list>
+
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">联系电话</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="form.Phone" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+                </ion-item>
+
+            </ion-list>
+
+        </div>
+        <div class="pageBtnh">
+            <button type='button' (click)="addPage() " class="addptn">
+                添加
+            </button>
+        </div>
+
+        <div *ngFor="let formw of Social ; let i = index">
+            <ion-list>
+                <div class="testtitle">主要成员社会关系0{{i+1}}</div>
+                <div class="pageDele" *ngIf="i+1>=2" (click)="removeScoPage() ">
+                    <img src="assets/images/shanchu@2x.png">
+                </div>
+            </ion-list>
+            <!-- <ion-list class="xiangxitop">主要成员社会关系0{{i+1}}</ion-list> -->
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">成员姓名</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" [(ngModel)]="formw.Name" type="text"></ion-input>
+                </ion-item>
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft" fixed>与本人关系</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="formw.Relation" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+                </ion-item>
+
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">政治面貌</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="formw.Political" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+                </ion-item>
+
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">职务</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="formw.Job" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+                </ion-item>
+
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">工作单位</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="formw.WorkAddress" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+                </ion-item>
+
+            </ion-list>
+            <ion-list class="xiangxi">
+                <ion-item class="xinxiyuanjiao">
+                    <ion-label class="xinxileft">联系电话</ion-label>
+                    <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="formw.Phone" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+                </ion-item>
+
+            </ion-list>
+
+        </div>
+        <div class="pageBtnh">
+            <button type='button' (click)="addsoPage() " class="addptn">
+                    添加
+                </button>
+
+        </div>
+    </div>
+    <div class="pageBtnDiv">
+        <button ion-button (click)="onTopPage() " class="pageBtnw">
+            上一步
+        </button>
+        <button ion-button (click)="onDetailPage() " class="pageBtnq">
+            下一步
+        </button>
+    </div>
+    <div class="yeshu">
+        3/5
+    </div>
+</ion-content>

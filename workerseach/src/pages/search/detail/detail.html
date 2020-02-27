@@ -1,0 +1,33 @@
+<ion-content class="outer-content">
+    <ion-item-group>
+        <ion-list *ngFor="let outter of listitems">
+            <ion-item-divider color="light">{{outter.type}}</ion-item-divider>
+            <!--{{outter.value.length}}-->
+            <ion-item *ngIf="outter.value.length === 0">无</ion-item>
+            <ion-list *ngFor="let inner of outter.value">
+         <!--       {{inner|json}}-->
+                <div *ngIf="!isArray(inner.value)">
+                    <ion-item><span class="region-left">{{inner.type}}</span>
+                        <div *ngIf="isUrl(inner.value)">
+                            <span class="region-right"><img src="{{inner.value}}" onerror="this.src='http://ojiau555e.bkt.clouddn.com/DefaultImage?e=1501055292&token=dywNhER60L4id2RMmevx4obW9qUBtPTW7vlxOGR8:SNyzJX9efwpJphkKUqWkc7tG-Os'" (click)="shouBigImage($event.target.src)"></span>
+                        </div>
+                        <div *ngIf="!isUrl(inner.value)">
+                            <span class="region-right">{{inner.value}}</span>
+                            <!-- <span class="region-right">无</span> -->
+                        </div>
+                    </ion-item>
+                </div>
+                <div *ngIf="isArray(inner.value)">
+                    <ion-list *ngFor="let item of inner.value">
+                    <!--    {{item|json}}-->
+                        <ion-item><span class="region-left">{{item.type}}</span><span class="region-right"> {{item.value}}</span></ion-item>
+                    </ion-list>
+                </div>
+            </ion-list>
+        </ion-list>
+    </ion-item-group>
+    <div id="rightDisplay" *ngIf="bigImage" class="popover-backdrop" style="  background: rgba(0, 0, 0, 0.4);position: fixed; top: 0;left: 0;z-index: 10; width: 100%;height: 100%;" (click)="hideBigImage()">
+        <img class="img-responsive" style="position: absolute;top: 10%;left: 50%;z-index: 10;display: block;margin-top: 18px;  
+         margin-left: -165px;height: 420px;width: 330px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);" src="{{Url}}" />
+    </div>
+</ion-content>

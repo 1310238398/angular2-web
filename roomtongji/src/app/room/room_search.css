@@ -1,0 +1,249 @@
+ul,
+li,
+p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.room {
+    background: #f8f8f8;
+    width: 100%;
+    overflow: hidden;
+}
+
+.top {
+    width: 100%;
+    height: 60px;
+    position: relative;
+    background: -webkit-linear-gradient(to bottom left, #7998F0, #7FB4FF), url("assets/images/sushe2.png") no-repeat 7px 100%;
+    /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(to top right, #7998F0, #7FB4FF), url("assets/images/sushe2.png") no-repeat 7px 100%;
+    /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(to top right, #7998F0, #7FB4FF), url("assets/images/sushe2.png") no-repeat 7px 100%;
+    /* Firefox 3.6 - 15 */
+    background: url("assets/images/sushe2.png") no-repeat 98% 7px, linear-gradient(to top right, #7998F0, #7FB4FF);
+    /* 标准的语法 */
+}
+
+.search_num {
+    margin-left: 17px;
+    line-height: 60px;
+    float: left;
+}
+
+.search_num .circle {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    border-radius: 100%;
+    background: #FFFFFF;
+}
+
+.search_num .search_num_tips {
+    font-size: 14px;
+    color: #FFFFFF;
+    margin-right: 8px;
+}
+
+.search_room {
+    float: left;
+    margin-left: 60px;
+    line-height: 60px;
+}
+
+.search_room li {
+    float: left;
+}
+
+.room_number {
+    font-size: 12px;
+    color: #FFFFFF;
+}
+
+.search_input input {
+    padding: 0px 5px;
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid #ffffff;
+    border-radius: 2px;
+    color: #9B9B9B;
+    background: #ffffff;
+}
+
+.search_input ::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: #9B9B9B;
+}
+
+.search_input :-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #9B9B9B;
+}
+
+.search_input ::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #9B9B9B;
+}
+
+.search_input :-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: #9B9B9B;
+}
+
+.seatch_btn {
+    margin-left: 10px;
+}
+
+:host ::ng-deep .ant-btn {
+    background: #5B80F1;
+    border-radius: 2px;
+    color: #ffffff;
+    border: none;
+    height: 25px;
+}
+
+:host ::ng-deep .ant-btn:hover {
+    background: #5B80F1;
+    border-radius: 2px;
+    color: #ffffff;
+}
+:host ::ng-deep .ant-btn:hover, .ant-btn:focus, .ant-btn:active, .ant-btn.active {
+    background: #5B80F1;
+    color: #ffffff;
+}
+
+.statis_table {
+    margin: 10px 20px;
+    box-shadow: 0 2px 5px 0 #E3E3E3;
+}
+
+:host ::ng-deep .ant-table-bordered .ant-table-body>table {
+    background: #FFFFFF;
+    box-shadow: 0 2px 5px 0 #E3E3E3;
+    border: none;
+    border-width: 0px;
+}
+
+:host ::ng-deep .ant-table {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.65);
+    overflow: hidden;
+    position: relative;
+    border-radius: 4px 4px 0 0;
+}
+
+:host ::ng-deep .ant-table table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: left;
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
+}
+
+.ant-table-thead>tr>th {
+    background: #4972F0;
+    opacity: 0.9;
+    font-weight: 500;
+    transition: background .3s ease;
+    text-align: left;
+    color: #ffffff;
+}
+
+:host ::ng-deep .ant-table-thead>tr>th,
+:host ::ng-deep .ant-table-tbody>tr>td {
+    padding: 8px 8px;
+    word-break: break-all;
+}
+
+:host ::ng-deep .ant-table-bordered .ant-table-thead>tr>th {
+    border-right: 1px solid #ffffff;
+}
+
+:host ::ng-deep .ant-table-bordered .ant-table-tbody>tr>td {
+    border-right: 1px solid #E3E3E3;
+}
+
+:host ::ng-deep .ant-table-tbody>tr>td {
+    border-bottom: 1px solid #E3E3E3;
+    transition: all .3s;
+}
+
+.partial_empty {
+    background: #FFF3CF;
+}
+
+.all_empty {
+    background: #FFE28A;
+}
+
+.paging {
+    text-align: center;
+    margin: 20px 0px 40px;
+}
+
+:host ::ng-deep .ant-pagination-item-active {
+    background-color: #FFC000;
+    border-color: #FFC000;
+}
+
+:host ::ng-deep .ant-pagination-item-active:hover {
+    background-color: #FFC000;
+    border-color: #FFC000;
+}
+
+:host ::ng-deep .ant-pagination-item:hover {
+    transition: all .3s;
+    border-color: #FFC000;
+    color: #FFC000;
+}
+
+:host ::ng-deep .ant-pagination-item:hover a {
+    color: #FFC000;
+}
+
+:host ::ng-deep .ant-pagination-item a:hover {
+    color: #FFC000;
+}
+
+:host ::ng-deep .ant-pagination-item-active:hover a {
+    color: #ffffff;
+}
+
+:host ::ng-deep.ant-pagination-prev .ant-pagination-item-link:hover,
+:host ::ng-deep .ant-pagination-next .ant-pagination-item-link:hover {
+    border: 1px solid #FFC000;
+}
+
+:host ::ng-deep.ant-pagination-prev a:hover,
+:host ::ng-deep .ant-pagination-next a:hover {
+    color: #FFC000;
+    user-select: none;
+}
+
+:host ::ng-deep .ant-table-column-sorter .anticon-caret-down,
+:host ::ng-deep .ant-table-column-sorter .anticon-caret-up {
+    color: #fff;
+}
+:host ::ng-deep .ant-table-column-sorter-up.on .anticon-caret-up,
+:host ::ng-deep .ant-table-column-sorter-down.on .anticon-caret-up,
+:host ::ng-deep .ant-table-column-sorter-up.on .anticon-caret-down,
+:host ::ng-deep .ant-table-column-sorter-down.on .anticon-caret-down {
+    color: #f7a935;
+}
+.page_back {
+    display: block;
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    position: fixed;
+    right: 5px;
+    bottom: 10px;
+}
+
+.page_back img {
+    width: 100%;
+    height: 100%;
+    border: 0px;
+}

@@ -1,0 +1,115 @@
+.dormitoryData{
+    background: rgb(250, 249, 249);
+    
+}
+.search-form{
+    padding:20px 10px 0 10px;
+}
+:host ::ng-deep .ant-input{
+    font-size: 16px;
+}
+.load{
+    padding-left: 20px;
+    padding-right: 20px;
+    /* margin-top: 22px; */
+}
+:host ::ng-deep .ant-select-selection--multiple .ant-select-selection__rendered {
+    margin-left: 5px;
+    margin-bottom: -3px;
+    /*height: 24px;*/
+    /*overflow: overlay;*/
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+:host ::ng-deep .ant-select-selection--multiple .ant-select-arrow:before{
+    content: '';
+    transition: transform 0.2s ease;
+}
+/* 下拉框的整体颜色 */
+:host ::ng-deep  .ant-select-selection{
+    background: #f5f5f5;
+}
+:host ::ng-deep  .ant-select-selection__placeholder, .ant-select-search__field__placeholder{
+    color: #ACACAC;
+    font-size: 16px;
+}
+/* 输入框input样式 */
+:host ::ng-deep  .ant-input-group-addon{
+    color:#ACACAC;
+    font-size: 16px;
+}
+/* 下拉框下间距 */
+.mgb20px{
+    margin-bottom: 20px !important;
+}
+.btn{
+    margin-top: 4px;
+    background: #FFC000;
+    border: none;
+    width: 60px;
+    height: 24px;
+    border-radius: 4px;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: 0.19px;
+}
+._btn{
+    background: #FFC000;
+    border: none;
+    margin-right: 26px;
+    width: 60px;
+    height: 24px;
+    border-radius: 4px;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: 0.19px;
+}
+.btnOk{
+    width: 100%;
+    text-align: right;
+}
+
+/* :host ::ng-deep .search-form[_ngcontent-c1]{
+    padding: 0px;
+} */
+
+/* 选择条件样式 */
+:host ::ng-deep  .ant-input-group-addon:first-child{
+    border: 1px solid #eee;
+    border-right:none;
+}
+:host ::ng-deep  .ant-input{
+    border: 1px solid #F5F5F5;
+
+}
+:host ::ng-deep .ant-select-selection{
+    border: 1px solid #f5f5f5;
+    font-size: 16px;
+    text-align: center;
+}
+
+:host ::ng-deep  .ant-table table {
+    font-family: pingfang;
+    font-size: 14px;
+}
+
+.null{
+    height: 100%;
+  }
+  .null_img{
+    margin-top: 10%;
+    text-align: center;
+  }
+  .null_img img{
+    width: 230px;
+    height: 205px;
+  }
+  .null p{
+    font-family:PingFangSC-Regular;
+    font-size:14px;
+    color:#666666;
+    letter-spacing:0.18px;
+    text-align:center;
+  }

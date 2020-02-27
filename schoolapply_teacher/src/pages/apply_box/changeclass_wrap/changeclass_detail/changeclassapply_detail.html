@@ -1,0 +1,48 @@
+<ion-content class="index-cont">
+
+    <div class="info-cont overh">
+        <div class="fl">
+            <img class="user-header" [src]="dataSet.AvatarUrl" onerror="this.src='assets/images/header.png'">
+        </div>
+        <div class="fl info-detail">
+            <span class="info-detail-name fn16 db">姓名 : {{dataSet.name}}</span>
+            <span class="db fn14">学号: {{dataSet.UserCode}}</span>
+            <span class="db fn14">学院: {{dataSet.AcademyName}}</span>
+        </div>
+    </div>
+
+
+    <div class="relative titlestatus-box overh">
+        <div class="" *ngIf="dataSet.status == '3'" style="padding:20px 15px 15px;">
+            <p class="fn14" style="color:#FF0000">审批不通过原因</p>
+            <p class="fn14" style="color: #9B9B9B;text-indent:2em">{{dataSet.remarktxt}}</p>
+        </div>
+        <P class="fn18 color4a center" style="margin:15px 0;">{{dataSet.title}}</P>
+
+        <img class="absolute" style="width: 50px;top:5px;right:10px;" *ngIf="dataSet.status == '2' && dataObj.status != 9"
+            src="assets/images/shenpizhong@2x.png" alt="">
+        <img class="absolute" style="width: 50px;top:5px;right:10px;" *ngIf="dataSet.status == '1' && dataObj.status != 9"
+            src="assets/images/shenpizhong@2x.png" alt="">
+        <img class="absolute" style="width: 50px;top:5px;right:10px;" *ngIf="dataSet.status == '2' && dataObj.status == 9"
+            src="assets/images/yiwncheng@2x.png" alt="">
+        <img class="absolute" style="width: 50px;top:5px;right:10px;" *ngIf="dataSet.status == '3'" src="assets/images/butongguo@2x.png"
+            alt="">
+    </div>
+
+    <div class="userinfo-box overh">
+        <ul>
+            <li class="css-li">
+                <span class="color9b fn14 fl">原班级 : </span>
+                <span class="color4a fn14 fr">{{dataSet.classname}}</span>
+            </li>
+            <li class="css-li" *ngIf="dataSet.title != '移出班级申请'">
+                <span class="color9b fn14 fl">被调入班级 : </span>
+                <span class="color4a fn14 fr">{{dataSet.NewClassName}}</span>
+            </li>
+            <li class="css-li">
+                <span class="color9b fn14 fl">申请人 : </span>
+                <span class="color4a fn14 fr">{{dataSet.sponsor}}</span>
+            </li>
+        </ul>
+    </div>
+</ion-content>

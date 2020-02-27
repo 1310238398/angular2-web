@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no"/>
+  <meta name="format-detection" content="email=no"/>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Include Editor style. -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+  <!-- Include jQuery lib. -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+  <!-- Include Editor JS files. -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
+  <style type="text/css">
+    #content{
+      margin: 0 12px;
+      overflow: auto;
+    }
+    img,video{
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body onload="load()">
+<div id="content">
+
+</div>
+
+</body>
+<script>
+  function load() {
+    var top = JSON.parse(localStorage.getItem('item')) || '';
+    console.log(top);
+    var content = document.getElementById('content');
+    document.title = top.Title||'';
+    content.innerHTML = top.Content || '';
+  }
+
+</script>
+</html>

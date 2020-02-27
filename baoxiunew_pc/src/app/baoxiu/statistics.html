@@ -1,0 +1,65 @@
+<div class="content">
+    <div style="margin-bottom: 10px;">
+        <h1 style="margin-bottom: 10px;">网上报修</h1>
+        <button nz-button nzType="default" (click)="goToList();">报修工单管理</button>
+        <button nz-button nzType="primary">维修数据统计</button>
+    </div>
+    <div style="text-align: center;">
+        <nz-datepicker style="width: 100px;" (ngModelChange)="Time1=$event;_startValueChange()" [nzDisabledDate]="_disabledStartDate"
+            [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="'请选择'" [(ngModel)]="Time1"></nz-datepicker>
+        <span>&nbsp;&nbsp;至&nbsp;&nbsp;</span>
+        <nz-datepicker style="width: 100px;" (ngModelChange)="Time2=$event;_endValueChange()" [ngModel]="Time2" [nzDisabledDate]="_disabledEndDate"
+            [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="'请选择'" [(ngModel)]="Time2"></nz-datepicker>
+        &nbsp;&nbsp;
+        <button nz-button nzType="primary" (click)="getChartOption();">查询</button>
+    </div>
+    <div style="text-align: center; margin-top:20px;">
+        <h2>{{StatisticsTitle}}</h2>
+    </div>
+    <div style="margin-top:20px;" *ngIf="StatisticsType != 'AreaStatistics'">
+        <div echarts [options]="chartOption" class="demo-chart" (chartClick)="onChartClick($event)"></div>
+    </div>
+    <div style="margin-top:20px; margin-bottom: 20px; text-align: center;" *ngIf="StatisticsType == 'AreaStatistics'">
+        <!-- <nz-radio-group [(ngModel)]="AreaStatisticsType" style="margin-bottom: 20px;">
+            <label nz-radio nzValue="campus">校区</label>
+            <label nz-radio nzValue="district">园区</label>
+            <label nz-radio nzValue="dormitory">宿舍楼</label>
+        </nz-radio-group> -->
+        <nz-table #nzTable [nzAjaxData]="AreaStatisticsData" [nzIsPagination]="false">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>
+                        <span>序号</span>
+                    </th>
+                    <th nz-th *ngFor="let v of AreaStatisticsItems">
+                        <span>{{v.show}}</span>
+                        <nz-table-sort [(nzValue)]="sortMap[v.sortKey]" (nzValueChange)="sort(v.sortKey,$event)"></nz-table-sort>
+                    </th>
+                </tr>
+            </thead>
+            <tbody nz-tbody class="my-tbody2">
+                <tr nz-tbody-tr *ngFor="let data of AreaStatisticsData; let i=index;">
+                    <td nz-td>
+                        {{i+1}}
+                    </td>
+                    <td nz-td *ngFor="let key of getKeys(data)">
+                        {{ data[key] || 0 }}
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+    <div style="text-align: center;">
+        <nz-radio-group [(ngModel)]="StatisticsType" (ngModelChange)="getChartOption();">
+            <label nz-radio-button nzValue="WorkloadStatistics">
+                <span>维修人员工作量统计</span>
+            </label>
+            <label nz-radio-button nzValue="ItemStatistics">
+                <span>维修项目统计</span>
+            </label>
+            <label nz-radio-button nzValue="AreaStatistics">
+                <span>维修区域统计</span>
+            </label>
+        </nz-radio-group>
+    </div>
+</div>

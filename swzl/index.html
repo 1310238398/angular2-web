@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>失物招领</title>
+    <meta content="width=device-width, initial-scale=1,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport"/>
+    <link rel="stylesheet" href="./css/donghua.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./js/zepto.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./lib/antlinker.1.0.9.js"></script>
+    <script>
+        antlinker.configTitle({
+            type: "label",
+            title: "失物招领",
+            success: function(){
+            }
+        });
+
+        function pageShow(){
+            antlinker.configTitle({
+                type: "label",
+                title: "失物招领",
+                success: function(){
+                }
+            });
+        }
+    </script>
+</head>
+<body onpageshow="pageShow()">
+    <div class="container" style="">
+    <div class="ds_record_container">
+        <div class="ds_record" onclick="my_ds()">
+            我的丢失记录
+        </div>
+    </div>
+
+    <div class="ds_success_show">
+        已为 <span style="color:deepskyblue;" id="count"></span> 件丢失物品找到主人
+    </div>
+
+    <div class="sq_info_container">
+        <div class="njdds">您捡到的是</div>
+        <div class="if_many">如捡到多个，任选一项即可</div>
+
+        <div class="span_container">
+            <span class="target_span">校园卡</span>
+            <span class="target_span">学生证</span>
+            <span class="target_span">钱包</span>
+            <span class="target_span">银行卡</span>
+            <span class="target_span">图书卡</span>
+            <span class="target_span">其他</span>
+        </div>
+    </div>
+
+    <div class="num_container">
+        <div class="qsrxh">请输入学号</div>
+        <div class="num_input_container">
+            <input type="number" id="stu_input" placeholder="目前仅支持输入学号查找失主" min="6" max="18">
+            <div id="stu_div" class="stu_div">下一步</div>
+            <div id="stu_div_send" class="stu_div_send" onclick="stu_div_send()">下一步</div>
+        </div>
+    </div>
+
+
+
+    <div class="alert_div" id="alert_div">
+        <div class="tel_div">失主会通过您注册的手机号码联系您。如已更换手机号，请先在设置—手机号码修改</div>
+        <div id="telephone" class="telephone"></div>
+        <div class="bottom_div">
+            <div class="qx" onclick="qx_func()">取消</div>
+            <div class="next" onclick="next_func()">下一步</div>
+        </div>
+    </div>
+    <!--加载中小弹窗-->
+    <div class="alert_div2" id="alert_div2">
+        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;margin: 10px 0 0 0;" xml:space="preserve">
+        <path fill="#000" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+        <animateTransform attributeType="xml"
+         attributeName="transform"
+         type="rotate"
+         from="0 25 25"
+         to="360 25 25"
+         dur="0.6s"
+         repeatCount="indefinite"/>
+        </path>
+        </svg>
+        <div class="alert_div2_inner">查找中...</div>
+    </div>
+
+</div>
+
+    <div class="mengban" id="mengban">
+        <a href="" id="121"></a>
+    </div>
+
+<script>
+    $(function(){
+        span_chose();
+        var obj = {};
+        antlinker.exeUserBasicInfoSdk(obj,function(obj,success){
+            span_num();
+        });
+    });
+
+    $('#stu_input').bind('input propertychange', function() {
+        var stu_input = document.getElementById("stu_input");
+        var span_chose = document.getElementsByClassName("target_span_chose")[0];
+//            console.log(stu_input.value);
+        var stu_div = document.getElementById("stu_div");
+        var stu_div_send = document.getElementById("stu_div_send");
+//            console.log(span_chose.innerHTML);
+        if (stu_input.value !== "" && span_chose) {
+            stu_div.style.display = "none";
+            stu_div_send.style.display = "block";
+        } else {
+            stu_div.style.display = "block";
+            stu_div_send.style.display = "none";
+        }
+    });
+
+</script>
+</body>
+</html>

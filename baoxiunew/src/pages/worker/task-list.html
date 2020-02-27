@@ -1,0 +1,109 @@
+<ion-header class="box-shadow">
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="activeSegment" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="10">
+        <span>待处理（{{statusQuantity.waiting}}）</span>
+      </ion-segment-button>
+      <ion-segment-button value="20,21">
+        <span>我的接单（{{statusQuantity.processing}}）</span>
+      </ion-segment-button>
+      <ion-segment-button value="30,31,40">
+        <span>已处理（{{statusQuantity.completed}}）</span>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="activeSegment==='10'">
+    <div *ngFor="let data of todeDataList; let i=index;">
+      <div class="dateline" *ngIf="compareA('todo',i)">
+        {{data.launch_time}}
+      </div>
+      <ion-list (click)="navigate(data.flow_instance_id)">
+        <button ion-item>
+          <p class="item-title no-line-break ">
+            <span>【{{i+1}}】</span>
+            <!-- {{data.input_data.AreaName}}{{data.input_data.SpecificSite}}
+            <span *ngIf="data.input_data.ItemCode==='0009020'">水</span>
+            <span *ngIf="data.input_data.ItemCode==='0009030'">电</span>
+            <span *ngIf="data.input_data.ItemCode==='0009040'">门、窗</span>
+            <span *ngIf="data.input_data.ItemCode==='0009010'">其他</span>报修 -->
+            {{data.input_data.TaskTitle}}
+          </p>
+          <p class="item-tips no-line-break ">
+            <span class="mr-15">上报时间：{{data.launch_time}}</span>
+            <span>编号：{{data.input_data.SerialNumber}}</span>
+          </p>
+        </button>
+      </ion-list>
+    </div>
+    <div class="empty" *ngIf="todeDataList.length===0">
+      <a>
+        <img src="assets/imgs/kong.png" width="187" height="159">
+      </a>
+      <p class="tips">暂无报修单</p>
+    </div>
+  </div>
+  <div *ngIf="activeSegment==='20,21'">
+    <div *ngFor="let data of proceingDataList; let i=index;">
+      <div class="dateline" *ngIf="compareA('proceing',i)">
+        {{data.launch_time}}
+      </div>
+      <ion-list (click)="navigate(data.flow_instance_id)">
+        <button ion-item>
+          <p class="item-title no-line-break ">
+            <span>【{{i+1}}】</span>
+            <!-- {{data.input_data.AreaName}}{{data.input_data.SpecificSite}}
+            <span *ngIf="data.input_data.ItemCode==='0009020'">水</span>
+            <span *ngIf="data.input_data.ItemCode==='0009030'">电</span>
+            <span *ngIf="data.input_data.ItemCode==='0009040'">门、窗</span>
+            <span *ngIf="data.input_data.ItemCode==='0009010'">其他</span>报修 -->
+            {{data.input_data.TaskTitle}}报修
+          </p>
+          <p class="item-tips no-line-break ">
+            <span class="mr-15">上报时间：{{data.launch_time}}</span>
+            <span>编号：{{data.input_data.SerialNumber}}</span>
+          </p>
+        </button>
+      </ion-list>
+    </div>
+    <div class="empty" *ngIf="proceingDataList.length===0">
+      <a>
+        <img src="assets/imgs/kong.png" width="187" height="159">
+      </a>
+      <p class="tips">暂无报修单</p>
+    </div>
+  </div>
+  <div *ngIf="activeSegment==='30,31,40'">
+    <div *ngFor="let data of doneList; let i=index;">
+      <div class="dateline" *ngIf="compareA('completed',i)">
+        {{data.CreateTime|_date:'YYYY-MM-DD'}}
+      </div>
+      <ion-list (click)="navigate(data.FlowInstanceRecordID)">
+        <button ion-item>
+          <p class="item-title no-line-break ">
+            <span>【{{i+1}}】</span>{{data.AreaName}}{{data.SpecificSite}}<span>{{data.Item[0].Name}}</span>报修
+            <p class="item-tips no-line-break ">
+              <span class="mr-15">上报时间：{{data.CreateTime|_date:'YYYY-MM-DD'}}</span>
+              <span>编号：{{data.SerialNumber}}</span>
+            </p>
+        </button>
+      </ion-list>
+    </div>
+    <div class="empty" *ngIf="doneList.length===0">
+      <a>
+        <img src="assets/imgs/kong.png" width="187" height="159">
+      </a>
+      <p class="tips">暂无报修单</p>
+    </div>
+    <div class="bottom" *ngIf="reachBottom">
+      <div class="line"></div>
+      <div class="tips">我们是有底线的</div>
+      <div class="line"></div>
+    </div>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>

@@ -1,0 +1,16 @@
+<ion-content padding-top>
+  <div class="cover">
+    <div class="content overh" style="padding:0 15px;">
+      <span class="change-title">请填写审批不通过的原因</span>
+      <div class="pro-text overh center relative">
+        <textarea class='file-message mr' #textarea name="remarktxt" [(ngModel)]="remarktxt" (ngModelChange)="txtChange(textarea.value)"
+          style="resize:none" maxlength="50" cols="1" rows="3"></textarea>
+        <p class="file-num absolute">{{values}}</p>
+      </div>
+    </div>
+    <div class="pro-btn center">
+      <button ion-button class="not-css" outline (click)="exitpage()">取消</button>
+      <button ion-button class="yes-css" [disabled]="numdisb" outline (click)="notpassTab()">确定</button>
+    </div>
+  </div>
+</ion-content>

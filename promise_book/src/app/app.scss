@@ -1,0 +1,423 @@
+// http://ionicframework.com/docs/theming/
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+html,
+body {
+  background-color: #f5f5f5;
+}
+
+.ion-page {
+  background-color: #f5f5f5;
+}
+
+.scroll-content {
+  overflow-y: auto !important;
+  background-color: #f5f5f5;
+}
+
+.content-ios:not([no-bounce])>.scroll-content::before {
+  bottom: 0px !important;
+}
+
+.text-right {
+  float: right;
+}
+
+.m-r-12 {
+  margin-right: 12px;
+}
+
+.m-t-10 {
+  margin-top: 10px;
+}
+
+.header-md::after,
+.footer-md::before {
+  background-image: none !important;
+}
+
+.toolbar-md {
+  padding: 0px;
+  height: 40px !important;
+  min-height: 40px !important;
+}
+
+.toolbar-ios {
+  padding: 0px !important;
+  height: 40px !important;
+  min-height: 40px !important;
+}
+
+ion-fab[bottom] {
+  bottom: 50px !important;
+}
+
+ion-fab[right] {
+  right: 20px !important;
+}
+
+.fab-ios,
+.fab-md {
+  color: #fff !important;
+  background-color: #ffc000 !important;
+  background: url("../assets/img/new.png") no-repeat !important;
+  box-shadow: none !important;
+}
+
+.fab {
+  width: 45px !important;
+  height: 45px !important;
+}
+
+.mask {
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  .mask_div {
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .tips {
+    position: absolute;
+    width: 186px;
+    top: 40%;
+    left: 25%;
+    margin-top: -30px;
+    margin-left: -94px;
+    z-index: 9999;
+    margin: 0px 0px 0px 0px;
+    padding: 0;
+    font-size: 14px;
+    color: #ffffff;
+    letter-spacing: 0.34px;
+    text-align: center;
+  }
+}
+
+.empty {
+  width: 210px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -75px;
+  margin-left: -105px;
+  text-align: center;
+  a {
+    width: 210px;
+    height: 150px;
+    display: block;
+  }
+  .tips {
+    margin: 15px 0px 0px 0px !important;
+    padding: 0;
+    font-size: 14px;
+    color: #acacac;
+    letter-spacing: 0.34px;
+    text-align: center;
+  }
+}
+
+.btn-one {
+  width: 100%;
+  padding: 30px 0px;
+  text-align: center;
+  .btn-center {
+    display: inline-block;
+    background: #ffc000;
+    border-radius: 4px;
+    width: 248px;
+    height: 37px;
+    line-height: 37px;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+  }
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 37px 15px;
+  .btn-left,
+  .btn-right {
+    text-align: center;
+    flex: 1;
+  }
+  .btn {
+    display: inline-block;
+    background: #ffc000;
+    border-radius: 4px;
+    width: 130px;
+    height: 37px;
+    line-height: 37px;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+  }
+  .btn:disabled {
+    background-color: #d5d5d5;
+    opacity: 1 !important;
+  }
+}
+
+.detail {
+  background-color: #ffffff;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  .title {
+    padding: 15px 15px 0px;
+    margin: 0px;
+    font-size: 16px;
+    color: #3e3e3e;
+    text-align: center;
+    line-height: 25px;
+    overflow: hidden;
+  }
+  .content {
+    padding: 15px;
+    line-height: 25px !important;
+    font-size: 14px !important;
+    color: #666666 !important;
+    text-align: left;
+  }
+  .sign {
+    margin: 5px 15px 8px;
+    font-size: 14px;
+    color: #666666;
+    line-height: 30px;
+    text-align: right;
+    .sign_list {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+    .sign2 {
+      flex: 2;
+    }
+    .sign1 {
+      text-align: left;
+      width: 120px;
+    }
+  }
+}
+
+.list_arrow {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background: #ffffff;
+  .list {
+    background-color: #ffffff;
+    height: 43px;
+    line-height: 43px; // border-bottom: 1px solid #d5d5d5;
+    a {
+      height: 42px;
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 16px;
+      color: #3e3e3e;
+      text-align: left;
+      padding-left: 15px;
+      background: url("../assets/img/open@2x.png");
+      background-size: 7px 17px;
+      background-position: right 15px center;
+      background-repeat: no-repeat;
+    }
+    .line {
+      height: 1px;
+      background-color: #d5d5d5;
+      -webkit-transform: scale(1, 0.5);
+      transform: scale(1, 0.5);
+      -webkit-transform-origin: center bottom;
+      transform-origin: center bottom
+    }
+    .title {
+      display: block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      min-width: 1px;
+      margin-right: 32px;
+    }
+  }
+  .list:last-child .line {
+    height: 0px;
+  } //  :last-child {
+  //   border: none;
+  // }
+  .stu_list {
+    margin-bottom: 2px;
+    background-color: #ffffff;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .photo {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      img {
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        border: 0;
+      }
+    }
+    .auth {
+      width: 16px;
+      height: 16px;
+      line-height: 16px;
+      text-align: center;
+      background-color: #ffc000;
+      border-radius: 50%;
+      color: #ffffff;
+      display: block;
+      position: absolute;
+      bottom: -3px;
+      right: -5px;
+      ;
+    }
+    .stu_info {
+      flex: 1;
+      margin-left: 10px;
+      margin-top: 1px;
+      margin-bottom: 1px; // border-bottom: 1px solid #d5d5d5;
+      .stu_info_content {
+        height: 49px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        .nickname {
+          flex: 2;
+          font-size: 16px;
+          color: #3e3e3e;
+          letter-spacing: 0.38px;
+          text-align: left;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+        .status {
+          flex: 1;
+          padding-right: 15px;
+          font-size: 12px;
+          color: #666666;
+          letter-spacing: 0.29px;
+          text-align: right;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          .remind {
+            padding-right: 15px;
+          }
+          i.tixing {
+            font-size: 16px;
+            color: #666666;
+          }
+          i.export {
+            font-size: 16px;
+            color: #666666;
+          }
+        }
+      }
+      .line {
+        height: 1px;
+        background-color: #d5d5d5;
+        -webkit-transform: scale(1, 0.5);
+        transform: scale(1, 0.5);
+        -webkit-transform-origin: center bottom;
+        transform-origin: center bottom
+      }
+    }
+  }
+  .stu_list:last-child .stu_info .line {
+    height: 0px;
+  }
+  .noarrow_list {
+    background-color: #ffffff; // border-bottom: 1px solid #d5d5d5;
+    height: 50px;
+    line-height: 50px;
+    .noarrow_list_info {
+      height: 49px;
+      padding: 0px 15px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      .left {
+        flex: 2;
+        font-size: 16px;
+        color: #3e3e3e;
+        letter-spacing: 0.38px;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .right {
+        flex: 1;
+        font-size: 12px;
+        color: #666666;
+        letter-spacing: 0.29px;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+    .line {
+      height: 1px;
+      background-color: #d5d5d5;
+      -webkit-transform: scale(1, 0.5);
+      transform: scale(1, 0.5);
+      -webkit-transform-origin: center bottom;
+      transform-origin: center bottom
+    }
+  }
+  .noarrow_list:last-child .line {
+    height: 0px;
+  }
+}
+
+// .list_arrow:last-child .stu_list .stu_info .line {
+//   height: 0px;
+// }

@@ -1,0 +1,54 @@
+page-resume-leave-address {
+  .zhengming {
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #acacac;
+    letter-spacing: 0.29px;
+    padding-bottom: 8px;
+  }
+  .upload {
+    background-color: #fff;
+    padding: 10px 0 0 20px;
+    margin-top: 20px;
+    height: 126px;
+  }
+  #pickfilesImg{
+    float: left;
+    margin-right: 4px;
+  }
+  .Certify {
+    float: left;
+    margin: 0 4px;
+  /*  display: inline-block;
+    margin: 0px 6px;*/
+    position: relative;
+    height: 80px;
+    width: 60px;
+    line-height: 80px;
+    background-color : #EEE;
+    text-align : center;
+    img {
+      vertical-align : middle;
+      float: left;
+      width:auto;
+      height:auto;
+      max-width:100%;
+      max-height:100%;
+    }
+  }
+  .delete {
+    position: absolute;
+    top: -12px;
+    right: -1px;
+    color: red;
+    font-size: 24px;
+  }
+  .clear{
+    clear: both;
+  }
+  .info {
+    display: inline-block;
+    vertical-align: 35px;
+    margin-left: 10px;
+  }
+}

@@ -1,0 +1,36 @@
+<ion-content class="index-cont">
+
+    <div class="info-cont overh">
+        <div class="fl">
+            <img class="user-header" [src]="dataSet.AvatarUrl" onerror="this.src='assets/images/header.png'">
+        </div>
+        <div class="fl info-detail">
+            <span class="info-detail-name fn16 db">姓名 : {{dataSet.Name}}</span>
+            <span class="db fn14">学号: {{dataSet.UserCode}}</span>
+            <span class="db fn14">学院: {{dataSet.AcademyName}}</span>
+        </div>
+    </div>
+
+
+    <div class="relative titlestatus-box overh">
+        <div class="" *ngIf="dataSet.status == '3'" style="padding:20px 15px 15px;">
+            <p class="fn14" style="color:#FF0000">审批不通过原因</p>
+            <p class="fn14" style="color: #9B9B9B;text-indent:2em">{{dataSet.remarktxt}}</p>
+        </div>
+        <P class="fn18 color4a center" style="margin:15px 0;">{{dataSet.title}}</P>
+
+        <img class="absolute img-css" *ngIf="dataSet.status == '2' && appStatus == '2'" src="assets/images/yiwncheng@2x.png">
+        <img class="absolute img-css" *ngIf="appStatus == '1'" src="assets/images/shenpizhong@2x.png">
+        <img class="absolute img-css" *ngIf="dataSet.status == '3' && appStatus == '2'" src="assets/images/butongguo@2x.png">
+    </div>
+
+    <div class="info-box overh">
+        <p class="color4a">申请理由：</p>
+        <pre class="fn14 color4a">{{dataSet.filetext}}</pre>
+    </div>
+
+    <div class="center" style="margin:50px 0" *ngIf="appStatus == '1'">
+        <button ion-button class="not-css" outline (click)="notpassTab()">审批不通过</button>
+        <button ion-button class="yes-css" outline [disabled]="numdisb" (click)="passTabBtn()">审批通过</button>
+    </div>
+</ion-content>

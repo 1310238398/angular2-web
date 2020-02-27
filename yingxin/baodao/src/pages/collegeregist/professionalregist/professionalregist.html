@@ -1,0 +1,73 @@
+<!--<ion-header>
+    <ion-navbar color="twitter">
+        <ion-title text-center>
+            {{Person.Name}}
+        </ion-title>
+    </ion-navbar>
+</ion-header>-->
+
+<ion-content class="outer-content">
+    <!-- <ion-searchbar (click)="navToSearch();$event.stopPropagation()" placeholder="可搜索新生姓名"></ion-searchbar> -->
+
+    <div class="seachd">
+        <input readonly="readonly" class="myname" placeholder="可搜索新生姓名" (click)="navToSearch();$event.stopPropagation()" />
+    </div>
+
+
+    <div class="haiyan">
+        <div class="tuhezi">
+            <div class="regiontop">
+                <img src={{campus.CampusLogo}}>
+            </div>
+            <div class="regintopleft">
+                <span>{{campus.AcademyName}}</span>
+                <p *ngIf="campus.CheckinStatus==1">报到进行中</p>
+                <p *ngIf="campus.CheckinStatus==2">报到已结束</p>
+                <!-- <span *ngIf="task.CheckinStatus==1">报到进行中</span><span *ngIf="task.CheckinStatus==2">报到进行中</span> -->
+
+            </div>
+        </div>
+        <!-- <div class="baodaoshu">
+
+            <div class="baodaoshus">{{campus.ReportedNum}}
+                <span class=" baodaoshup">人已报到</span>
+            </div>    
+
+        </div> -->
+        <div class="test">
+            <div class="test1">{{campus.ReportedNum}}<span class="test2">人已报到</span></div>
+            <!-- <span class="test2">人已报到</span> -->
+        </div>
+        <div class="tongji">
+            <div class="tongjileft">
+                <span class="zhaoshengwen">招生人数：</span><span class="zhaoshengshu">{{campus.RecruitNum}}</span><span class="zhaoshengwen">人</span>
+
+            </div>
+            <div class="line2">
+            </div>
+            <div class="tongjiright">
+                <span class="zhaoshengwen">新生报到率：</span><span class="zhaoshengshu">{{campus.ReportedRate}}</span><span class="zhaoshengwen">%</span>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="xueyuan">
+        -各专业情况查看-
+    </div>
+    <div class="pwbor" (click)="NavigationTo(chat)" *ngFor="let chat of listitems">
+        <ion-card class="mwbor">
+            <ion-card-content class="padding4">
+                <p class="xueyuanshu">{{chat.MajorName}}</p>
+                <p class="xueyuanshuzi">{{chat.ReportedNum}}/{{chat.RecruitNum}}</p>
+            </ion-card-content>
+            <hr style="width:86%;height:1px;border:0px;color:#ffffff;" />
+            <ion-card-content class="padding5">
+                <p class="xueyuanshu">专业报到率</p>
+                <p class="xueyuanshuzi">{{chat.ReportedRate}}%</p>
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+</ion-content>

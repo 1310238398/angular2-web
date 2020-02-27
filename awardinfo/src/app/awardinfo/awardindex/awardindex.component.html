@@ -1,0 +1,452 @@
+<div class="cont-page">
+    <div class="page-header overh relative">
+        <div class="overh absolute" style="z-index:1;">
+            <div class="school-info fl">
+                <img class="school-icon dib fl" [src]="schooLogo" alt="">
+                <div class="school-txt overh fl">
+                    <p class="overh">
+                        <span class="fn24 colfff marn-r10">{{schooName}}</span>
+                        <span class="fn16 colfff">奖助数据管理</span>
+                    </p>
+                    <p class="overh">
+                        <span class="fn14 colfff marn-r10">{{beginYearName}} 学年</span>
+                        <span *ngIf="endYearName" class="fn14 colfff">至</span>
+                    </p>
+                    <p class="overh">
+                        <span *ngIf="endYearName" class="fn14 colfff marn-r10">{{endYearName}} 学年</span>
+                        <span class="cp fn14 static-time" (click)="showModal()">切换统计时间</span>
+                    </p>
+                    <p>
+                        <span class="fn14" style="color:#4365CD;">所有数据均由您角色权限下的学生资助信息统计生成</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="num-money fl overh">
+                <div class="people-num fl">
+                    <p class="overh">
+                        <a class="colffc fn48" [routerLink]="['./awarddetail']">{{totalMemders}}</a>
+                        <span class="fn14 colfff">人</span>
+                    </p>
+                    <p class="fn14 colfff">奖助学生</p>
+                </div>
+                <div class="money-num fl">
+                    <p>
+                        <a class="colffc fn48" [routerLink]="['./awarddetail']">{{totalAmount}}</a>
+                        <span class="fn14 colfff">万</span>
+                    </p>
+                    <p class="fn14 colfff">奖助金额</p>
+                </div>
+            </div>
+        </div>
+        <img class="absolute header-floor" src="assets/images/header_floor_01.png" alt="">
+    </div>
+
+    <div class="charts-warp relative">
+        <!-- 奖助补图 -->
+        <div class="charts-left absolute">
+            <p class="charts-header fn14">奖助金额类别统计</p>
+            <div class="charts-left-body center">
+                <div class="center charts-left-peo-wrap dib">
+                    <p class="fn16 col4a">人数</p>
+                    <div id="awardNum" class="echarts-bt dib" (window:resize)="onResize($event)" style="width:160px;height: 160px"></div>
+                </div>
+
+                <div class="center charts-left-num-wrap dib">
+                    <p class="fn16 col4a">金额</p>
+                    <div id="awardMoney" class="echarts-bt dib" (window:resize)="onResize($event)" style="width:160px;height: 160px"></div>
+                </div>
+            </div>
+            <div class="charts-left-txt">
+                <ng-container *ngFor="let data of awardData;">
+                    <a *ngIf="data.TypeName != 'Work'" class="center charts-txt-p overh mr db" [routerLink]="['./awarddetail',{awardType: data.TypeCode}]">
+                        <img class="dib marn-r10" [src]="data.awardImg" alt="">
+                        <span class="fn16 col4a dib left txt-p1">{{data.awardName}}</span>
+                        <span class="fn16 col4a dib left txt-p2">{{data.Members}}人</span>
+                        <span class="fn16 col4a dib left txt-p3">{{data.Amount}}万</span>
+                    </a>
+                    <a *ngIf="data.TypeName == 'Work'" class="center charts-txt-p overh mr db" [routerLink]="['./awardproject',{awardType: data.TypeCode}]">
+                        <img class="dib marn-r10" [src]="data.awardImg" alt="">
+                        <span class="fn16 col4a dib left txt-p1">{{data.awardName}}</span>
+                        <span class="fn16 col4a dib left txt-p2">{{data.Members}}人</span>
+                        <span class="fn16 col4a dib left txt-p3">{{data.Amount}}万</span>
+                    </a>
+                </ng-container>
+            </div>
+        </div>
+        <!-- 困难等级图 -->
+        <div class="charts-right absolute">
+            <p class="charts-header fn14">困难等级统计</p>
+            <div class="charts-left-body center">
+                <div class="center charts-left-peo-wrap dib">
+                    <p class="fn16 col4a">人数</p>
+                    <div id="poolNum" class="echarts-bt dib" (window:resize)="onResize($event)" style="width:160px;height: 160px"></div>
+                </div>
+
+                <div class="center charts-left-num-wrap dib">
+                    <p class="fn16 col4a">金额</p>
+                    <div id="poolMoney" class="echarts-bt dib" (window:resize)="onResize($event)" style="width:160px;height: 160px"></div>
+                </div>
+            </div>
+            <div class="charts-left-txt pool-txt">
+                <a *ngFor="let data of poolData;" class="center charts-txt-p overh mr db" [routerLink]="['./awarddetail',{poolType: data.TypeCode}]">
+                    <span class="dib div-col1 marn-r10"></span>
+                    <span class="fn16 col4a dib left txt-p1">{{data.awardName}}</span>
+                    <span class="fn16 col4a dib left txt-p2">{{data.Members}}人</span>
+                    <span class="fn16 col4a dib left txt-p3">{{data.Amount}}万</span>
+                </a>
+            </div>
+        </div>
+        <!-- 侧栏图标按钮 -->
+        <div class="right-btn-wrap absolute">
+            <a class="db fn22 colfff center relative" [routerLink]="['./awardpool',{awardType: awardData[0].TypeCode,awardTypName:'Prize'}]">
+                <span>奖</span>
+                <span class="dib absolute tool-name fn14 disno">奖学金</span>
+            </a>
+            <a class="db fn22 colfff center relative" [routerLink]="['./awardpool',{awardType: awardData[1].TypeCode,awardTypName:'Aid'}]">
+                <span>助</span>
+                <span class="dib absolute tool-name fn14 disno">助学金</span>
+            </a>
+            <a class="db fn22 colfff center relative" [routerLink]="['./awardpool',{awardType: awardData[2].TypeCode,awardTypName:'Loan'}]">
+                <span>贷</span>
+                <span class="dib absolute tool-name fn14 disno">助学贷款</span>
+            </a>
+            <a class="db fn22 colfff center relative" [routerLink]="['./awardproject',{awardType: awardData[3].TypeCode}]">
+                <span>勤</span>
+                <span class="dib absolute tool-name fn14 disno">勤工助学</span>
+            </a>
+            <a class="db fn22 colfff center relative" [routerLink]="['./awardpool',{awardType: awardData[4].TypeCode,awardTypName:'Subsidy'}]">
+                <span>补</span>
+                <span class="dib absolute tool-name fn14 disno">困难补助</span>
+            </a>
+            <a class="db fn22 colfff center relative" [routerLink]="['./awardpool',{awardType: awardData[5].TypeCode,awardTypName:'Free'}]">
+                <span>减</span>
+                <span class="dib absolute tool-name fn14 disno">学费减免</span>
+            </a>
+            <a class="db fn22 colfff center relative" style="margin-top:15px;" [routerLink]="['./awardpool',{awardType: 'DifficultyLevel',awardTypName:'DifficultyLevel'}]">
+                <span class="dib absolute kun-txt">困</span>
+                <img class="absolute kun-img" src="assets/images/money.png" alt="">
+                <span class="dib absolute tool-name fn14 disno">困难等级</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="table-box overh">
+        <p class="overh table-btn">
+            <span class="dib cp fn12 center fl" [ngStyle]="{'background':cutProtBT ? '#4972F0' : '','color':cutProtBT ? '#fff' : '#4972F0'}"
+                (click)="cutProtFunc(1)">奖助项目</span>
+            <span class="dib cp fn12 center fl" [ngStyle]="{'background':!cutProtBT ? '#4972F0' : '','color':!cutProtBT ? '#fff' : '#4972F0' }"
+                (click)="cutProtFunc(2)">困难等级</span>
+        </p>
+        <!-- 学院数据 -->
+        <div class="table-wrap center" *ngIf="acaOrclass">
+            <!-- 奖助项目表格数据 -->
+            <nz-table class="table-center" *ngIf="cutProtBT" #nzTable [nzShowPagination]="false" [nzFrontPagination]="false"
+                [nzData]="awardTableData" [nzBordered]="true" [nzLoading]="_loading">
+                <thead nz-thead>
+                    <tr>
+                        <th rowspan="2"><span class="fn12">序号</span></th>
+                        <th rowspan="2" nzWidth="130px"><span>学院</span></th>
+                        <th colspan="2"><span>奖学金</span></th>
+                        <th colspan="2"><span>助学金</span></th>
+                        <th colspan="2"><span>助学贷款</span></th>
+                        <th colspan="2"><span>勤工助学</span></th>
+                        <th colspan="2"><span>困难补助</span></th>
+                        <th colspan="2"><span>学费减免</span></th>
+                        <th rowspan="2"><span>合计人次</span></th>
+                        <th rowspan="2"><span>合计金额</span><br><span>(万)</span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th><span>人数</span></th>
+                        <th><span>金额 (万)</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额 (万)</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额 (万)</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额 (万)</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额 (万)</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额 (万)</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of nzTable.data;let i=index;">
+                        <td>{{i+1}}</td>
+                        <td><a [routerLink]="['./awardacademy',{Type: 'Awardlevel',betweenCode:data.Code}]">{{data.Name}}</a></td>
+                        <td><a [routerLink]="['./awarddetail',{awardType: awardData[0].TypeCode,betweenCode:data.Code}]">{{data.PrizeMembers}}</a></td>
+                        <td>{{data.PrizeAmount/10000}}</td>
+                        <td><a [routerLink]="['./awarddetail',{awardType: awardData[1].TypeCode,betweenCode:data.Code}]">{{data.AidMembers}}</a></td>
+                        <td>{{data.AidAmount/10000}}</td>
+                        <td><a [routerLink]="['./awarddetail',{awardType: awardData[2].TypeCode,betweenCode:data.Code}]">{{data.LoanMembers}}</a></td>
+                        <td>{{data.LoanAmount/10000}}</td>
+                        <td><a [routerLink]="['./awardproject',{awardType: awardData[3].TypeCode,betweenCode:data.Code}]">{{data.WorkMembers}}</a></td>
+                        <td>{{data.WorkAmount/10000}}</td>
+                        <td><a [routerLink]="['./awarddetail',{awardType: awardData[4].TypeCode,betweenCode:data.Code}]">{{data.SubsidyMembers}}</a></td>
+                        <td>{{data.SubsidyAmount/10000}}</td>
+                        <td><a [routerLink]="['./awarddetail',{awardType: awardData[5].TypeCode,betweenCode:data.Code}]">{{data.FreeMembers}}</a></td>
+                        <td>{{data.FreeAmount/10000}}</td>
+                        <td><a [routerLink]="['./awarddetail',{awardType: '',betweenCode:data.Code}]">{{data.totalNum}}</a></td>
+                        <td>{{data.totalMon/10000}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <span>合计</span>
+                        </td>
+                        <td>
+                            <a [routerLink]="['./awarddetail',{awardType: awardData[0].TypeCode,betweenCode:''}]">{{awardTotal.PrizeMembersTotal}}</a>
+                        </td>
+                        <td>{{awardTotal.PrizeAmountTotal/10000}}</td>
+                        <td>
+                            <a [routerLink]="['./awarddetail',{awardType: awardData[1].TypeCode,betweenCode:''}]">{{awardTotal.AidMembersTotal}}</a>
+                        </td>
+                        <td>{{awardTotal.AidAmountTotal/10000}}</td>
+                        <td>
+                            <a [routerLink]="['./awarddetail',{awardType: awardData[2].TypeCode,betweenCode:''}]">{{awardTotal.LoanMembersTotal}}</a>
+                        </td>
+                        <td>{{awardTotal.LoanAmountTotal/10000}}</td>
+                        <td>
+                            <a [routerLink]="['./awardproject',{awardType: awardData[3].TypeCode,betweenCode:''}]">{{awardTotal.WorkMembersTotal}}</a>
+                        </td>
+                        <td>{{awardTotal.WorkAmountTotal/10000}}</td>
+                        <td>
+                            <a [routerLink]="['./awarddetail',{awardType: awardData[4].TypeCode,betweenCode:''}]">{{awardTotal.SubsidyMembersTotal}}</a>
+                        </td>
+                        <td>{{awardTotal.SubsidyAmountTotal/10000}}</td>
+                        <td>
+                            <a [routerLink]="['./awarddetail',{awardType: awardData[5].TypeCode,betweenCode:''}]">{{awardTotal.FreeMembersTotal}}</a>
+                        </td>
+                        <td>{{awardTotal.FreeAmountTotal/10000}}</td>
+                        <td>
+                            <a [routerLink]="['./awarddetail',{awardType: '',betweenCode:''}]">{{awardTotal.awardTotalMembers}}</a>
+                        </td>
+                        <td>{{awardTotal.awardTotalAmount/10000}}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+            <!-- 困难等级表格数据 -->
+            <nz-table class="table-center" *ngIf="!cutProtBT" #nzTable [nzShowPagination]="false" [nzFrontPagination]="false"
+                [nzData]="poolTableData" [nzBordered]="true" [nzLoading]="_loading">
+                <thead nz-thead>
+                    <tr>
+                        <th rowspan="2"><span class="fn12">序号</span></th>
+                        <th rowspan="2" nzWidth="130px"><span>学院</span></th>
+                        <th colspan="2"><span>特殊困难</span></th>
+                        <th colspan="2"><span>困难</span></th>
+                        <th colspan="2"><span>一般困难</span></th>
+                        <th colspan="2"><span>无等级</span></th>
+                        <th rowspan="2"><span>合计人次</span></th>
+                        <th rowspan="2"><span>合计金额</span><br><span>(万)</span></th>
+                    </tr>
+                    <tr>
+                        <th><span>人数</span></th>
+                        <th><span>金额 (万)</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额 (万)</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额 (万)</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额 (万)</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of nzTable.data;let i=index;">
+                        <td>{{i+1}}</td>
+                        <td><a [routerLink]="['./awardacademy',{Type: 'Difficultlevel',betweenCode:data.Code}]">{{data.Name}}</a></td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000030',betweenCode:data.Code}]">{{data.SpecialMembers}}</a></td>
+                        <td>{{data.SpecialAmount/10000}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000020',betweenCode:data.Code}]">{{data.MiddleMembers}}</a></td>
+                        <td>{{data.MiddleAmount/10000}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000010',betweenCode:data.Code}]">{{data.NomalMembers}}</a></td>
+                        <td>{{data.NomalAmount/10000}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000040',betweenCode:data.Code}]">{{data.NoGradeMembers}}</a></td>
+                        <td>{{data.NoGradeAmount/10000}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '',betweenCode:data.Code}]">{{data.totalNum}}</a></td>
+                        <td>{{data.totalMon/10000}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><span>合计</span></td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000030',betweenCode:''}]">{{poolTotal.SpecialMembersTotal}}</a></td>
+                        <td>{{poolTotal.SpecialAmountTotal/10000}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000020',betweenCode:''}]">{{poolTotal.MiddleMembersTotal}}</a></td>
+                        <td>{{poolTotal.MiddleAmountTotal/10000}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000010',betweenCode:''}]">{{poolTotal.NomalMembersTotal}}</a></td>
+                        <td>{{poolTotal.NomalAmountTotal/10000}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000040',betweenCode:''}]">{{poolTotal.NoGradeMembersTotal}}</a></td>
+                        <td>{{poolTotal.NoGradeAmountTotal/10000}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '',betweenCode:''}]">{{poolTotal.poolMembersTotal}}</a></td>
+                        <td>{{poolTotal.poolAmountTotal/10000}}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+
+        <!-- 班级数据 -->
+        <div class="table-wrap center" *ngIf="!acaOrclass">
+            <!-- 奖助项目表格数据 -->
+            <nz-table class="table-center" *ngIf="cutProtBT" #nzTable [nzShowPagination]="false" [nzFrontPagination]="false"
+                [nzData]="awardTableData" [nzBordered]="true" [nzLoading]="_loading">
+                <thead nz-thead>
+                    <tr>
+                        <th rowspan="2"><span class="fn12">序号</span></th>
+                        <th rowspan="2" nzWidth="130px"><span>班级</span></th>
+                        <th colspan="2"><span>奖学金</span></th>
+                        <th colspan="2"><span>助学金</span></th>
+                        <th colspan="2"><span>助学贷款</span></th>
+                        <th colspan="2"><span>勤工助学</span></th>
+                        <th colspan="2"><span>困难补助</span></th>
+                        <th colspan="2"><span>学费减免</span></th>
+                        <th rowspan="2"><span>合计人次</span></th>
+                        <th rowspan="2"><span>合计金额</span><br><span>(万)</span>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of nzTable.data;let i=index;">
+                        <td>{{i+1}}</td>
+                        <td><span>{{data.Name}}</span></td>
+                        <td><a [routerLink]="['./awarddetail',{awardType: awardData[0].TypeCode,betweenCode:data.Code}]">{{data.PrizeMembers}}</a></td>
+                        <td>{{data.PrizeAmount}}</td>
+                        <td><a [routerLink]="['./awarddetail',{awardType: awardData[1].TypeCode,betweenCode:data.Code}]">{{data.AidMembers}}</a></td>
+                        <td>{{data.AidAmount}}</td>
+                        <td><a [routerLink]="['./awarddetail',{awardType: awardData[2].TypeCode,betweenCode:data.Code}]">{{data.LoanMembers}}</a></td>
+                        <td>{{data.LoanAmount}}</td>
+                        <td><a [routerLink]="['./awardproject',{awardType: awardData[3].TypeCode,betweenCode:data.Code}]">{{data.WorkMembers}}</a></td>
+                        <td>{{data.WorkAmount}}</td>
+                        <td><a [routerLink]="['./awarddetail',{awardType: awardData[4].TypeCode,betweenCode:data.Code}]">{{data.SubsidyMembers}}</a></td>
+                        <td>{{data.SubsidyAmount}}</td>
+                        <td><a [routerLink]="['./awarddetail',{awardType: awardData[5].TypeCode,betweenCode:data.Code}]">{{data.FreeMembers}}</a></td>
+                        <td>{{data.FreeAmount}}</td>
+                        <td><a [routerLink]="['./awarddetail',{awardType: '',betweenCode:data.Code}]">{{data.totalNum}}</a></td>
+                        <td>{{data.totalMon/10000}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <span>合计</span>
+                        </td>
+                        <td>
+                            <a [routerLink]="['./awarddetail',{awardType: awardData[0].TypeCode,betweenCode:''}]">{{awardTotal.PrizeMembersTotal}}</a>
+                        </td>
+                        <td>{{awardTotal.PrizeAmountTotal}}</td>
+                        <td>
+                            <a [routerLink]="['./awarddetail',{awardType: awardData[1].TypeCode,betweenCode:''}]">{{awardTotal.AidMembersTotal}}</a>
+                        </td>
+                        <td>{{awardTotal.AidAmountTotal}}</td>
+                        <td>
+                            <a [routerLink]="['./awarddetail',{awardType: awardData[2].TypeCode,betweenCode:''}]">{{awardTotal.LoanMembersTotal}}</a>
+                        </td>
+                        <td>{{awardTotal.LoanAmountTotal}}</td>
+                        <td>
+                            <a [routerLink]="['./awardproject',{awardType: awardData[3].TypeCode,betweenCode:''}]">{{awardTotal.WorkMembersTotal}}</a>
+                        </td>
+                        <td>{{awardTotal.WorkAmountTotal}}</td>
+                        <td>
+                            <a [routerLink]="['./awarddetail',{awardType: awardData[4].TypeCode,betweenCode:''}]">{{awardTotal.SubsidyMembersTotal}}</a>
+                        </td>
+                        <td>{{awardTotal.SubsidyAmountTotal}}</td>
+                        <td>
+                            <a [routerLink]="['./awarddetail',{awardType: awardData[5].TypeCode,betweenCode:''}]">{{awardTotal.FreeMembersTotal}}</a>
+                        </td>
+                        <td>{{awardTotal.FreeAmountTotal}}</td>
+                        <td>
+                            <a [routerLink]="['./awarddetail',{awardType: '',betweenCode:''}]">{{awardTotal.awardTotalMembers}}</a>
+                        </td>
+                        <td>{{awardTotal.awardTotalAmount/10000}}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+            <!-- 困难等级表格数据 -->
+            <nz-table class="table-center" *ngIf="!cutProtBT" #nzTable [nzShowPagination]="false" [nzFrontPagination]="false"
+                [nzData]="poolTableData" [nzBordered]="true" [nzLoading]="_loading">
+                <thead nz-thead>
+                    <tr>
+                        <th rowspan="2"><span class="fn12">序号</span></th>
+                        <th rowspan="2" nzWidth="130px"><span>班级</span> </th>
+                        <th colspan="2"><span>特殊困难</span></th>
+                        <th colspan="2"><span>困难</span></th>
+                        <th colspan="2"><span>一般困难</span></th>
+                        <th colspan="2"><span>无等级</span></th>
+                        <th rowspan="2"><span>合计人次</span></th>
+                        <th rowspan="2"><span>合计金额</span><br><span>(万)</span></th>
+                    </tr>
+                    <tr>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                        <th><span>人数</span></th>
+                        <th><span>金额</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of nzTable.data;let i=index;">
+                        <td>{{i+1}}</td>
+                        <td><span>{{data.Name}}</span></td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000030',betweenCode:data.Code}]">{{data.SpecialMembers}}</a></td>
+                        <td>{{data.SpecialAmount}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000020',betweenCode:data.Code}]">{{data.MiddleMembers}}</a></td>
+                        <td>{{data.MiddleAmount}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000010',betweenCode:data.Code}]">{{data.NomalMembers}}</a></td>
+                        <td>{{data.NomalAmount}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000040',betweenCode:data.Code}]">{{data.NoGradeMembers}}</a></td>
+                        <td>{{data.NoGradeAmount}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '',betweenCode:data.Code}]">{{data.totalNum}}</a></td>
+                        <td>{{data.totalMon/10000}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><span>合计</span></td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000030',betweenCode:''}]">{{poolTotal.SpecialMembersTotal}}</a></td>
+                        <td>{{poolTotal.SpecialAmountTotal}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000020',betweenCode:''}]">{{poolTotal.MiddleMembersTotal}}</a></td>
+                        <td>{{poolTotal.MiddleAmountTotal}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000010',betweenCode:''}]">{{poolTotal.NomalMembersTotal}}</a></td>
+                        <td>{{poolTotal.NomalAmountTotal}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '87000040',betweenCode:''}]">{{poolTotal.NoGradeMembersTotal}}</a></td>
+                        <td>{{poolTotal.NoGradeAmountTotal}}</td>
+                        <td><a [routerLink]="['./awarddetail',{poolType: '',betweenCode:''}]">{{poolTotal.poolMembersTotal}}</a></td>
+                        <td>{{poolTotal.poolAmountTotal/10000}}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+
+    <nz-modal class="time-select" [(nzVisible)]="isVisible" nzTitle="切换统计时段" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <p>
+            <span>开始时间 : </span>
+            <nz-select style="width: 220px;" [(ngModel)]="beginTimeObj" nzAllowClear nzPlaceHolder="开始时间">
+                <nz-option *ngFor="let option of timeOption" [nzValue]="option" [nzLabel]="option.Name"></nz-option>
+            </nz-select>
+        </p>
+        <p class="fn14 center" style="margin:10px 0;">至</p>
+        <p>
+            <span>结束时间 : </span>
+            <nz-select style="width: 220px;" [(ngModel)]="endTimeObj" nzAllowClear nzPlaceHolder="结束时间">
+                <nz-option *ngFor="let option of timeOption" [nzValue]="option" [nzLabel]="option.Name"></nz-option>
+            </nz-select>
+        </p>
+    </nz-modal>
+
+</div>

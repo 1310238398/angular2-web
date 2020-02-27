@@ -1,0 +1,37 @@
+<ion-content class="outer-content">
+    <ion-list>
+        <ion-searchbar (ionInput)="getItems($event)" placeholder="搜索"></ion-searchbar>
+            <ion-row>
+                <ion-col>
+                    <ion-item>
+                        <ion-label>校区</ion-label>
+                        <ion-select [(ngModel)]="gaming1" multiple="false" cancelText="取消" okText="确定">
+                            <ion-option value="xq1">校区A</ion-option>
+                            <ion-option value="xq2">校区B</ion-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>学院</ion-label>
+                        <ion-select [(ngModel)]="gaming2">
+                            <ion-option value="xy1">学院A</ion-option>
+                            <ion-option value="xy2">学院B</ion-option>
+                        </ion-select>
+                     </ion-item>
+                </ion-col>
+            </ion-row>
+
+        <button ion-item (click)="urlViewApproval()">
+            <h2>姓名</h2>
+            <h3>学院</h3>
+            <p>时间</p>
+        </button>
+
+    </ion-list>
+
+</ion-content>
+
+<ion-select [(ngModel)]="toppings" multiple="false" cancelText="取消" okText="确定">
+    <ion-option value="bacon" selected="true">必修课</ion-option>
+    <ion-option value="olives">选修课</ion-option>
+    <ion-option value="xcheese" selected="true">专修课</ion-option>
+</ion-select>

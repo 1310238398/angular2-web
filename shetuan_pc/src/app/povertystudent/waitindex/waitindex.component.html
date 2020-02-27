@@ -1,0 +1,268 @@
+<div class="home">
+    <div class="top">
+        <!-- <div class="top-title"> -->
+        <h1>学生社团</h1>
+        <!-- </div> -->
+        <div>
+            <button [ngClass]="{'title-content':isshow == 'zuzhi'}" nz-button (click)="change()">社团组织管理</button>
+            <button nz-button (click)="cardbodychange()" class="button">社团活动管理</button>
+        </div>
+    </div>
+
+    <div class="zuzhicontent" *ngIf="isshow =='zuzhi'">
+
+        <div class="components-table-demo-control-bar">
+            <form #f="ngForm" [nzLayout]="'inline'" nz-form class="search-form text-center">
+                <div nz-row nz-form-item>
+                    <div nz-form-label>
+                        <label>社团名称</label>
+                    </div>
+                    <div nz-form-control>
+                        <nz-input style="width: 160px;" [(ngModel)]="searchObj.UnionName" name="UserCode"></nz-input>
+                    </div>
+                </div>
+                <div nz-row nz-form-item>
+                    <div nz-form-label>
+                        <label>类别</label>
+                    </div>
+                    <div nz-form-control>
+                        <nz-select style="width: 120px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.UnionType" name="Grade"
+                            nzAllowClear>
+                            <nz-option *ngFor="let option of optiontype" [nzLabel]="option.CodeName" [nzValue]="option.Code">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+
+                <div nz-row nz-form-item>
+                    <div nz-form-label>
+                        <label>负责人</label>
+                    </div>
+                    <div nz-form-control>
+                        <nz-input style="width: 120px;" [(ngModel)]="searchObj.StudentCode" name="UserCode"></nz-input>
+                    </div>
+                </div>
+                <div nz-row nz-form-item>
+                    <div nz-form-label>
+                        <label>挂靠单位</label>
+                    </div>
+                    <div nz-form-control>
+                        <nz-select style="width: 160px;" #class [nzPlaceHolder]="''" [(ngModel)]="searchObj.Department"
+                            name="Class" nzAllowClear [nzFilter]="true" [nzNotFoundContent]="'无法找到'" nzShowSearch>
+                            <nz-option *ngFor="let option of optiondepart" [nzLabel]="option.AcademyName" [nzValue]="option.AcademyCode">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+                <div nz-row nz-form-item>
+                    <div nz-form-label>
+                        <label>指导教师</label>
+                    </div>
+                    <div nz-form-control>
+                        <nz-select style="width: 120px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.StaffCode" name="Status"
+                            nzAllowClear [nzFilter]="true" [nzNotFoundContent]="'无法找到'" nzShowSearch>
+                            <nz-option *ngFor="let option of optionstaff" [nzLabel]="option.Name" [nzValue]="option.IntelUserCode">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+                <div nz-row nz-form-item>
+                    <div nz-col [nzSpan]="24" style="text-align: right;">
+                        <button nz-button [nzType]="'primary'" (click)="onSearch(true)" class="button">查询</button>
+                        <button nz-button (click)="resetForm(f)" class="button">重置</button>
+                        <a routerLink="/shetuan">
+                            <button nz-button [nzType]="'primary'" class="button">创建社团</button>
+                        </a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+
+        <div style="margin:20px 10px;">
+            <nz-table #nzTable [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [(nzTotal)]="total"
+                [(nzPageIndex)]="page.Page" [(nzPageSize)]="page.PageSize" [nzBordered]="true" (nzPageIndexChange)="onSearch()">
+                <thead nz-thead>
+                    <tr>
+                        <th nz-th>
+                            <span>序号</span>
+                        </th>
+                        <th nz-th>
+                            <span>社团名称</span>
+                        </th>
+                        <th nz-th>
+                            <span>类别</span>
+                        </th>
+                        <th nz-th>
+                            <span>人数</span>
+                        </th>
+                        <th nz-th>
+                            <span>负责人</span>
+                        </th>
+                        <th nz-th>
+                            <span>挂靠单位</span>
+                        </th>
+                        <th nz-th>
+                            <span>指导教师</span>
+                        </th>
+                        <th nz-th>
+                            <span>本学期活动</span>
+                        </th>
+                        <th nz-th>
+                            <span>动态</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i=index;">
+                        <td nz-td [routerLink]="['/organizeguanli',{UnionCode: data.UnionCode,StudentCode:'1',currentCode: 'SbiInfo'}]">
+                            <span>{{i+1}}</span>
+                        </td>
+                        <td nz-td [routerLink]="['/organizeguanli',{UnionCode: data.UnionCode,StudentCode:'1',currentCode: 'SbiInfo'}]">
+                            <span>
+                                {{data.UnionName}}</span>
+                        </td>
+                        <td nz-td [routerLink]="['/organizeguanli',{UnionCode: data.UnionCode,StudentCode:'1',currentCode: 'SbiInfo'}]">
+                            <span>
+                                {{data.CodeName}}</span>
+                        </td>
+                        <td nz-td [routerLink]="['/organizeguanli',{UnionCode: data.UnionCode,StudentCode:'1',currentCode: 'SbiInfo'}]">
+                            <span>
+                                {{data.autotal}}人</span>
+                        </td>
+                        <td nz-td [routerLink]="['/organizeguanli',{UnionCode: data.UnionCode,StudentCode:'1',currentCode: 'SbiInfo'}]">
+                            <span>
+                                {{data.StudentName}}</span>
+                        </td>
+                        <td nz-td [routerLink]="['/organizeguanli',{UnionCode: data.UnionCode,StudentCode:'1',currentCode: 'SbiInfo'}]">
+                            <span>
+                                {{data.AcademyName}}</span>
+                        </td>
+                        <td nz-td [routerLink]="['/organizeguanli',{UnionCode: data.UnionCode,StudentCode:'1',currentCode: 'SbiInfo'}]">
+                            <span>
+                                {{data.StaffName}}</span>
+                        </td>
+                        <td nz-td [routerLink]="['/organizeguanli',{UnionCode: data.UnionCode,StudentCode:'1',currentCode: 'SbiInfo'}]">
+                            <span>{{data.avtotal}}个</span>
+                        </td>
+                        <td nz-td [routerLink]="['/organizeguanli',{UnionCode: data.UnionCode,StudentCode:'1',currentCode: 'academicInfo'}]">
+                            <span *ngIf="data.avtotal >0 && data.IsThis ==0 " (click)="unionstatusinsert(data.UnionCode)">提交活动总结</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+
+        </div>
+
+    </div>
+    <div class="huodongcontent" *ngIf="isshow == 'huodong'">
+
+        <div class="components-table-demo-control-bar">
+            <form #f="ngForm" [nzLayout]="'inline'" nz-form class="search-form text-center">
+                <div nz-row nz-form-item>
+                    <div nz-form-label>
+                        <label>活动名称</label>
+                    </div>
+                    <div nz-form-control>
+                        <nz-input style="width: 120px;" [(ngModel)]="searchObj.Aname" name="Aname"></nz-input>
+                    </div>
+                </div>
+                <div nz-row nz-form-item>
+                    <div nz-form-label>
+                        <label>所属社团</label>
+                    </div>
+                    <div nz-form-control>
+                        <nz-select style="width: auto; min-width: 120px;" [nzPlaceHolder]="''" [(ngModel)]="searchObj.Uname"
+                            name="Uname" nzAllowClear>
+                            <nz-option *ngFor="let option of optionunion" [nzLabel]="option.UnionName" [nzValue]="option.UnionCode">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+                <div nz-row nz-form-item>
+                    <div nz-form-label>
+                        <label>负责人</label>
+                    </div>
+                    <div nz-form-control>
+                        <nz-input style="width: 120px;" [(ngModel)]="searchObj.fuzeCode" name="fuzeCode"></nz-input>
+                    </div>
+                </div>
+                <div nz-row nz-form-item>
+                    <div nz-form-label>
+                        <label>申请时间</label>
+                    </div>
+                    <div nz-form-control>
+                        <nz-datepicker [nzSize]="'large'" [nzPlaceHolder]="'开始日期'" [(ngModel)]="searchObj.Sbtime" name="Sbtime"></nz-datepicker>
+                        <nz-datepicker [nzSize]="'large'" [nzPlaceHolder]="'结束日期'" [(ngModel)]="searchObj.Setime" name="Setime"></nz-datepicker>
+                    </div>
+                </div>
+                <div nz-row nz-form-item>
+                    <div nz-form-label>
+                        <label>举办时间</label>
+                    </div>
+                    <div nz-form-control>
+                        <nz-datepicker [nzSize]="'large'" [nzPlaceHolder]="'开始日期'" [(ngModel)]="searchObj.Pbtime" name="Pbtime"></nz-datepicker>
+                        <nz-datepicker [nzSize]="'large'" [nzPlaceHolder]="'结束日期'" [(ngModel)]="searchObj.Petime" name="Petime"></nz-datepicker>
+                    </div>
+                </div>
+                <div style="margin: 5px auto;">
+                    <!-- <div nz-col [nzSpan]="24" style="text-align: right;"> -->
+                    <button nz-button [nzType]="'primary'" (click)="onAcSearch(true)" class="button">查询</button>
+                    <button nz-button (click)="resetForm(f)" class="button">重置</button>
+                    <!-- </div> -->
+                </div>
+
+            </form>
+        </div>
+        <div style="cursor: pointer;margin: 20px;">
+            <div *ngFor="let data of Activity">
+                <div style="font-size: 14px;" class="body" (click)="goorganize(data)">
+                    <div style="margin-top:5px;">
+                        <a>
+                            <span class="title">{{data.Activity}}</span>
+                        </a>
+                        <a>
+                            <span class="titleright">————{{data.UnionName}}</span>
+                        </a>
+                        <a>
+                            <span *ngIf="data.status == 1" style="float: right;color:red;width: 100px;text-align: center;">待审批</span>
+                            <span *ngIf="data.status == 3" style="float: right;color:red;width: 100px;text-align: center;">审批通过</span>
+                            <span *ngIf="data.status == 2" style="float: right;color:red;width: 100px;text-align: center;">审批未通过</span>
+                            <span *ngIf="data.status == 4" style="float: right;color:red;width: 100px;text-align: center;">待总结</span>
+                            <span *ngIf="data.status == 5" style="float: right;width: 100px;text-align: center;">已总结</span>
+                        </a>
+
+                    </div>
+
+                    <div style="margin-top: 15px;">
+                        <a>
+                            <span style="color:gray;">负责人： </span><span>{{data.name}}</span>
+                        </a>
+                        <a>
+                            <span style="color:gray;">申请时间：</span><span>{{data.InsertDatetime}}</span>
+                        </a>
+                        <a>
+                            <span style="color:gray;">举办时间：</span><span>{{data.Starttime}}</span>
+                        </a>
+                        <a>
+                            <span style="color:gray;">举办地点：</span><span class="place-content">{{data.Place}}</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:20px;" *ngIf="Activity.length > 0">
+            <nz-pagination style="float: right;" [(nzTotal)]="Atotal" [(nzPageIndex)]="page.Page" [(nzPageSize)]="page.PageSize"
+                (nzPageIndexChange)="onAcSearch()"></nz-pagination>
+        </div>
+
+        <div *ngIf="Activity.length <= 0" class="none"><img class="noneimg" src="../../../assets/images/kong.png">
+            <div class="noneFont">暂无更多内容</div>
+        </div>
+
+    </div>
+
+</div>

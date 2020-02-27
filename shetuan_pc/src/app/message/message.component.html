@@ -1,0 +1,113 @@
+<!-- <div class="modal-header">
+    <div class="modal-title" *ngIf="type=='status'">
+        学生状态
+    </div>
+    <div class="modal-title" *ngIf="type=='StayInfo'">
+        住宿信息
+    </div>
+    <div class="modal-title" *ngIf="type=='StudentCadres'">
+        学生干部
+    </div>
+</div>
+<div *ngIf="type=='status'">
+    <nz-table #nzTable [nzShowPagination]="false" [nzData]="data||[]" [nzBordered]="true">
+        <thead nz-thead>
+            <tr>
+                <th>
+                    <span>学年</span>
+                </th>
+                <th>
+                    <span>学期</span>
+                </th>
+                <th>
+                    <span>学生状态</span>
+                </th>
+                <th>
+                    <span>原因</span>
+                </th>
+                <th>
+                    <span>批准部门</span>
+                </th>
+                <th>
+                    <span>结束状态</span>
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of nzTable.data">
+                <td>{{data.SsAcademicYearName}}</td>
+                <td>{{data.SsAcademicTermName}}</td>
+                <td>{{data.SsStatusSortName}}</td>
+                <td>{{data.SsReason}}</td>
+                <td>{{data.SsDepartmentCodeName}}</td>
+                <td>{{data.SsEndStatusName}}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
+<div *ngIf="type=='StayInfo'">
+    <nz-table #nzTable1 [nzShowPagination]="false" [nzData]="StayInfo||[]" [nzBordered]="true">
+        <thead nz-thead>
+            <tr>
+                <th>
+                    <span>校区</span>
+                </th>
+                <th>
+                    <span>园区</span>
+                </th>
+                <th>
+                    <span>宿舍楼</span>
+                </th>
+                <th>
+                    <span>单元</span>
+                </th>
+                <th>
+                    <span>房间</span>
+                </th>
+                <th>
+                    <span>床位</span>
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of nzTable1.data">
+                <td>{{data.DmCampusCodeName}}</td>
+                <td>{{data.DtDistrictName}}</td>
+                <td>{{data.DmDormitoryName}}</td>
+                <td>{{data.UtUnitName}}</td>
+                <td>{{data.RRoomName}}</td>
+                <td>{{data.BBedName}}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
+<div *ngIf="type=='StudentCadres'">
+    <nz-table #nzTable2 [nzShowPagination]="false" [nzData]="data||[]" [nzBordered]="true">
+        <thead nz-thead>
+            <tr>
+                <th>
+                    <span>职务单位</span>
+                </th>
+                <th>
+                    <span>职务</span>
+                </th>
+                <th>
+                    <span>任职起始时间</span>
+                </th>
+                <th>
+                    <span>任职截止日期</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of nzTable2.data">
+                <td>{{data.ScDepartmentOfDutyName}}</td>
+                <td>{{data.ScDutyName}}</td>
+                <td>{{data.ScStartDate}}</td>
+                <td>{{data.ScEndDate}}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div> -->

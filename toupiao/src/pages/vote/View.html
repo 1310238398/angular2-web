@@ -1,0 +1,23 @@
+<ion-content class="outer-content">
+    <ion-card class="mwbor">
+        <img *ngIf="voteInfo.Video ==''" class="mwimg" src="{{voteInfo.Photo}}"/>
+      <video *ngIf="voteInfo.Video !=''" src="{{voteInfo.Video}}" width="100%" poster="assets/images/xiaoyuan.png"
+             controls autobuffer preload="auto"></video>
+
+    </ion-card>
+    <ion-card class="mwbor">
+        <ion-card-header>
+            <h1>项目名称:{{voteInfo.Name}}</h1>
+            <h2>项目负责人:{{voteInfo.Principal}}</h2>
+            <h2>学院:{{voteInfo.Academy}}</h2>
+        </ion-card-header>
+        <ion-card-content>
+            项目简介:{{voteInfo.Introduction}}
+        </ion-card-content>
+    </ion-card>
+    <ion-fab center bottom>
+        <button *ngIf="!voteStatus" ion-fab mini color="light" (click)="onVoteOn()"><ion-icon name="thumbs-up"></ion-icon></button>
+        <button *ngIf="voteStatus" ion-fab mini color="danger" (click)="onVoteOff()"><ion-icon name="thumbs-up"></ion-icon></button>
+        <p class="ps">{{voteInfo.Vote}}票</p>
+    </ion-fab>
+</ion-content>

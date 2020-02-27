@@ -1,0 +1,73 @@
+page-list {
+  // .bgc{
+  //   background-color: #f5f5f5;
+  // }
+  .note-ios{
+    font-size: 12px;
+  font-family:"PingFangSC-Regular";
+
+  color:#666666;
+  letter-spacing:0.29px;
+  }
+  ion-list-header{
+    min-height: 30px;
+  }
+  .list-header-ios {
+    border-bottom: 0
+  }
+  .list-ios > .item-block:first-child {
+    border: 0;
+  }
+
+  .list-ios .item-block {
+    border: 0 !important;
+    }
+  .list-ios {
+       margin: 0 0 5px 0
+  }
+  .course{
+  font-size:16px;
+   color:#3e3e3e;
+   font-family:PingFangSC-Regular;
+  letter-spacing:0.38px;
+  }
+  .picture_go{
+    width:45px;
+   height:20px;
+  }
+  .picture_ok{
+    width:35px;
+    height:26px;
+  }
+  .explain {
+    margin: 20px;
+    color: #999;
+    font-size: 16px;
+  }
+  .explain p{
+    margin: 0;
+    padding: 0;
+    line-height: 20px;
+    margin-top: 5px;
+  }
+.depict{
+  font-size: 16px;
+  line-height: 18px;
+
+}
+
+  .depict .left{
+    display: inline-block;
+    padding-left: 10px;
+    
+
+  }
+  .depict .right{
+    display: inline-block;
+    padding-right:10px;
+
+  }
+  .gray{
+    color: gray
+  }
+}

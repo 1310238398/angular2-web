@@ -1,0 +1,20 @@
+  <!--<div class="page-back">
+    <button (click)="goBack()">返回</button>
+  </div>-->
+<br>
+<br>
+<ion-header no-border no-shadow style="height: 40px;">
+    <div class="page-back"><button (click)="goBack()">< 返回</button></div>
+</ion-header>
+<ion-content>
+<ion-tabs tabsPlacement="top" >
+    <ion-tab  [root]="tab1Root" [rootParams]="rootParams" tabTitle={{readText}} tabIcon="" ></ion-tab>
+    <ion-tab  [root]="tab2Root" [rootParams]="rootParams" tabTitle={{unreadText}} tabIcon=""></ion-tab>
+</ion-tabs>
+</ion-content>
+<!--<ion-fab right bottom>
+    <button ion-fab color="primary" (click)="goAddEditNotice()"><ion-icon name="add"></ion-icon></button>
+</ion-fab>-->
+        <!--<ion-icon name="add-circle" color="primary" ></ion-icon>-->
+        <!--(ionSelect)="goAddEditNotice()" -->
+

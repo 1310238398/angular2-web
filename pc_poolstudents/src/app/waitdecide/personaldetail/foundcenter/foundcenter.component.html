@@ -1,0 +1,85 @@
+<div class="content overh" style="margin-top: 30px;">
+
+    <p class="fn16 bold center" style="margin:20px 0;">辅导员认定意见</p>
+    <div class="have-detail">
+        <nz-table style="width: 100%;" [nzBordered]="true" [nzDataSource]="'1'" [nzIsPagination]="false">
+            <tbody nz-tbody>
+                <tr nz-tbody-tr>
+                    <td nz-td>
+                        <span>认定意见</span>
+                    </td>
+                    <td nz-td>
+                        <p class="left padd-left20" *ngIf="dataObj.Status == '41'">直接认定</p>
+                        <p class="left padd-left20" *ngIf="dataObj.Status == '42'">一票否定</p>
+                        <p class="left padd-left20" *ngIf="dataObj.Status == '43'">小组评议</p>
+                    </td>
+                </tr>
+                <tr nz-tbody-tr>
+                    <td nz-td>
+                        <span>原因</span>
+                    </td>
+                    <td nz-td>
+                        <p class="left padd-left20" *ngFor="let data of dataArr;let i = index">{{i+1}} {{data}}</p>
+                    </td>
+                </tr>
+                <tr nz-tbody-tr>
+                    <td nz-td>
+                        <span>认定等级</span>
+                    </td>
+                    <td nz-td>
+                        <p class="left padd-left20" *ngIf="dataObj.RecognitionLevel == '87000010'">一般困难</p>
+                        <p class="left padd-left20" *ngIf="dataObj.RecognitionLevel == '87000020'">困难</p>
+                        <p class="left padd-left20" *ngIf="dataObj.RecognitionLevel == '87000030'">特殊困难</p>
+                        <p class="left padd-left20" *ngIf="dataObj.RecognitionLevel == '87000040'">不予评级</p>
+                    </td>
+                </tr>
+                <tr nz-tbody-tr>
+                    <td nz-td>
+                        <span>详细说明</span>
+                    </td>
+                    <td nz-td>
+                        <p class="left padd-left20">{{dataObj.ConfirmReason}}</p>
+                    </td>
+                </tr>
+                <tr nz-tbody-tr>
+                    <td nz-td>
+                        <span>审批意见</span>
+                    </td>
+                    <td nz-td>
+                        <p *ngIf="menDataObj.SchoolAttitude == '0'" class="left padd-left20">审批中</p>
+                        <p *ngIf="menDataObj.SchoolAttitude == '1'" class="left padd-left20">审批已通过</p>
+                        <p *ngIf="menDataObj.SchoolAttitude == '2'" class="left padd-left20">审批不通过 : {{dataObj.SchoolConfirmReason}}</p>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+    <div class="center" style="margin:30px 0 20px;" *ngIf="menDataObj.SchoolAttitude == '0'">
+        <button nz-button [nzType]="'default'" style="width: 120px;height:40px;margin:0 20px;" (click)="showModal()">
+            <span>审批不通过</span>
+        </button>
+        <button nz-button [nzType]="'primary'" style="width: 120px;height:40px;margin:0 20px;" (click)="approvePass()">
+            <span>审批通过</span>
+        </button>
+        <p class="center cp" style="color: #169BD5;margin-top:20px;" (click)="historyBack()">返回</p>
+    </div>
+    
+
+    <p class="center" style="margin-top:20px;" *ngIf="menDataObj.SchoolAttitude != '0' && menDataObj.SchoolAttitude != ''">
+        <button nz-button [nzType]="'primary'" style="width: 150px;height:40px;" (click)="historyBack()">
+            <span>返回</span>
+        </button>
+    </p>
+
+    <!-- 拒绝原因 -->
+    <nz-modal class="approve-not" [nzVisible]="isVisible" [nzTitle]="'不通过原因'" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)"
+        (nzOnOk)="handleOk($event)" nzCancelText="取消" nzOkText="确定">
+        <ng-template #modalContent>
+            <div class="relative">
+                <textarea class='message' #textarea name="fileNews" [(ngModel)]="writeText" (ngModelChange)="txtChange(textarea.value)"
+                    maxlength="50" cols="1" rows="1" placeholder="审批不通过时必填"></textarea>
+                <p class="file-num absolute">{{valuesNum}}</p>
+            </div>
+        </ng-template>
+    </nz-modal>
+</div>

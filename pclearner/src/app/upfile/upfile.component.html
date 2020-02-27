@@ -1,0 +1,89 @@
+<div class="upfile-cont">
+  <h3 style="margin-left:5px;">文件传输列表</h3>
+  <div class="table-thead">
+    <ul>
+      <li class="fl center">学校</li>
+      <li class="fl center">发送人</li>
+      <li class="fl center">接收人</li>
+      <li class="fl center">文件名</li>
+      <li class="fl center">文件大小</li>
+      <li class="fl center">上传时间</li>
+      <li class="fl center">备注信息</li>
+    </ul>
+  </div>
+  <div class="table-tbody">
+    <ul *ngFor="let data of dataSet;">
+      <li class="fl center"><p>{{data.UniversityName}}</p></li>
+      <li class="fl center"><p>{{data.SendName}}</p></li>
+      <li class="fl center"><p>{{data.ReceiveName}}</p></li>
+      <li class="fl center">
+        <a *ngIf="data.disA!='dis-a'" class="dis-b" title="{{data.FileName}}" [href]="data.DownloadURL" download="{{data.FileName}}">
+          <span class="dib file-mc">{{data.FileName}}</span><span class="dib file-sx">{{data.FileExt}}</span> 
+        </a>
+        
+        <a *ngIf="data.disA=='dis-a'" [ngClass]="data.disA" title="{{data.FileName}}" [href]="data.DownloadURL" download="{{data.FileName}}">
+          <span class="dib file-mc">{{data.FileName}}</span><span class="dib file-sx">{{data.FileExt}}</span>
+        </a>
+        <span class="dib dis-a file-sb" *ngIf="data.disA=='dis-a'">上传失败</span><br>
+        <span class="dib dis-a file-cx" *ngIf="data.disA=='dis-a'">请重新选择文件上传</span>
+      </li>
+      <li class="fl center"><p>{{data.FileSize}}</p></li>
+      <li class="fl center"><p>{{data.Created}}</p></li>
+      <li class="fl center"><p>{{data.Remark}}</p></li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="upfile-foot">
+  <hr>
+  <form #f="ngForm">
+    
+    <div class="btn-wraper" *ngIf="IsLittleHelper">
+      <div class="fl">
+          <label class="school-tit fl">学 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;校 : </label>
+          <nz-select style="width: 170px;float:left;" [(ngModel)]="selectedSchool" name="school" [nzPlaceHolder]="'请选择接学校'" (ngModelChange)="setInfoschool()"
+            nzAllowClear>
+            <nz-option *ngFor="let option of optionschool" [nzLabel]="option.UniversityName" [nzValue]="option">
+            </nz-option>
+          </nz-select>
+      </div>
+
+      <div class="fr" style="margin-left:10%;">
+          <label class="men-tit fl">接 &nbsp;&nbsp;&nbsp;收&nbsp;&nbsp;&nbsp;人 : </label>
+          <nz-select style="width: 170px;float:left;" [(ngModel)]="selectedMen" name="men" [nzPlaceHolder]="'请选择接收人'" (ngModelChange)="setInfomen()"
+            nzAllowClear>
+            <nz-option *ngFor="let option of optionmen" [nzLabel]="option.REALNAME" [nzValue]="option">
+            </nz-option>
+          </nz-select>
+      </div>
+
+    </div>
+    <div class="btn-wraper">
+      <label class="file-tit fl">请选择文件 : </label>
+      <input class="file-name fl" [value]='fileName' name="fileName" readonly="readonly" [(ngModel)]="fileName">
+      <button class="fr" nz-button [nzType]="'primary'" [nzSize]="size" id="pickfiles">
+        <span>添加</span>
+      </button>
+    </div>
+
+
+    <div class="btn-wraper" style="position: relative;">
+      <label class="beiz-tit fl">备 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注 : </label>
+      <textarea class='file-message fl' #textarea name="fileNews" [(ngModel)]="fileNews" (ngModelChange)="txtChange(textarea.value)"
+        style="resize:none" maxlength="30" cols="1" rows="3" (keydown)="checkEnter($event)"></textarea>
+      <p class="file-num">{{values}}</p>
+    </div>
+
+    <div class="file-up">
+      <button class="fl" nz-button [nzType]="'default'" (click)="resetForm(f)">
+        <span>重置</span>
+      </button>
+      <button class="fr" id="uploadfiles" (click)="upFileStart()" nz-button [nzType]="'primary'" [ngClass]="antBtn">
+        <span>上传</span>
+      </button>
+
+
+    </div>
+  </form>
+</div>

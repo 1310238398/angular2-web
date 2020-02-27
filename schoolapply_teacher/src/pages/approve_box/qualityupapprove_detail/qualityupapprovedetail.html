@@ -1,0 +1,55 @@
+<ion-content class="index-cont">
+    <div class="info-cont overh">
+        <div class="fl">
+            <img class="user-header" [src]="dataSet.AvatarUrl" onerror="this.src='assets/images/header.png'">
+        </div>
+        <div class="fl info-detail">
+            <span class="info-detail-name fn16 db">姓名 : {{dataSet.StaffName}}</span>
+            <span class="db fn14">学院: {{dataSet.StaffDepartmentName}}</span>
+        </div>
+    </div>
+
+    <div class="relative titlestatus-box overh">
+        <div class="" *ngIf="dataSet.status == '3'" style="padding:20px 15px 15px;">
+            <p class="fn14" style="color:#FF0000">审批不通过原因</p>
+            <p class="fn14" style="color: #9B9B9B;text-indent:2em">{{dataSet.remarktxt}}</p>
+        </div>
+        <P class="fn18 color4a center" style="margin:15px 0;">{{dataSet.title}}</P>
+
+        <img class="absolute img-css" *ngIf="dataSet.status == '2'" src="assets/images/yiwncheng@2x.png">
+        <img class="absolute img-css" *ngIf="dataSet.status == '1'" src="assets/images/shenpizhong@2x.png">
+        <img class="absolute img-css" *ngIf="dataSet.status == '3'" src="assets/images/butongguo@2x.png">
+    </div>
+
+    <div class="info-box overh">
+        <ul>
+            <li class="css-li">
+                <span class="color9b fn14 fl" style="width: 21%;">奖项名称 : </span>
+                <span class="color4a fn14 fr overh"  style="width: 79%;text-align: right;">{{dataSet.WinningName}}</span>
+            </li>
+            <li class="css-li">
+                <span class="color9b fn14 fl">级别 : </span>
+                <span class="color4a fn14 fr">{{dataSet.RewardLevelsName}}</span>
+            </li>
+            <li class="css-li">
+                <span class="color9b fn14 fl">名次 : </span>
+                <span class="color4a fn14 fr">{{dataSet.WinningOrderName}}</span>
+            </li>
+            <li class="css-li">
+                <span class="color9b fn14 fl">获奖时间 : </span>
+                <span class="color4a fn14 fr">{{dataSet.AwardDate}}</span>
+            </li>
+            <li class="overh" style="margin-top:10px;">
+                <p class="color9b fn14">获奖证书 : </p>
+                <div class="img-box fl overh">
+                    <img *ngFor="let item of imagepath;let index=index;" (click)="navPreview({time:false,index:index,items:imagepath})" [src]="item.ThumbnailURL" alt="">
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="center" style="margin:10px 0 50px" *ngIf="appStatus == '1'">
+        <button ion-button class="not-css" outline (click)="notpassTab()">审批不通过</button>
+        <button ion-button class="yes-css" outline [disabled]="spotBW" (click)="passTabBtn()">审批通过</button>
+    </div>
+</ion-content>

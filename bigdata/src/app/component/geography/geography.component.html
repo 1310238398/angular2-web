@@ -1,0 +1,14 @@
+<nz-select class="more-w" [nzPlaceHolder]="'省'" [(ngModel)]="geoObj.sheng" [nzShowSearch]="true"  (ngModelChange)="onSelect('sheng')"  name="sheng"
+           nzAllowClear>
+  <nz-option *ngFor="let option of sheng" [nzLabel]="option.GeographyName" [nzValue]="option.GeographyCode">
+  </nz-option>
+</nz-select>
+<nz-select class="more-w" [nzPlaceHolder]="'市'" [nzShowSearch]="true" [(ngModel)]="geoObj.shi"  (ngModelChange)="onSelect('shi')"  name="shi" nzAllowClear>
+  <nz-option *ngFor="let option of shi" [nzLabel]="option.GeographyName" [nzValue]="option.GeographyCode">
+  </nz-option>
+</nz-select>
+<nz-select class="more-w" [nzPlaceHolder]="'县'" [(ngModel)]="geoObj.xian" [nzShowSearch]="true"  name="xian"
+           nzAllowClear>
+  <nz-option *ngFor="let option of xian" [nzLabel]="option.GeographyName" [nzValue]="option.GeographyCode">
+  </nz-option>
+</nz-select>

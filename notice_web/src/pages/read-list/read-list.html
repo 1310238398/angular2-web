@@ -1,0 +1,11 @@
+<ion-content padding>
+    <ion-list *ngIf="showList">
+        <ion-item *ngFor="let user of userReply.UserList" >
+            <p class="user-name">{{user.UNAME}}</p>
+            <p class="tel">{{user.TEL}}</p>
+        </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

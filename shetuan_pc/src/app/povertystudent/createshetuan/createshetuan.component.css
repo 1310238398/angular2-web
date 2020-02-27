@@ -1,0 +1,17 @@
+
+.shetuanform {
+    border: 1px solid #ddd;
+    background-color: white;
+    margin: 5px;
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+}
+.title {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+::ng-deep form textarea.ant-input {
+    resize: none;
+  }

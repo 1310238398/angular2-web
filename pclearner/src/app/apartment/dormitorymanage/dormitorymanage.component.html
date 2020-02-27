@@ -1,0 +1,251 @@
+<div class="content">
+  <div class="components-table-demo-control-bar">
+    <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-center">
+      <div nz-row nz-form-item>
+        <div nz-form-control>
+          <nz-select style="width: 120px;" [(ngModel)]="searchObj.Campus" [nzPlaceHolder]="'校区'" [nzShowSearch]="true" name="Campus"
+            nzAllowClear>
+            <nz-option *ngFor="let option of LeaveTypes" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-row nz-form-item>
+        <div nz-form-control>
+          <nz-select style="width: 120px;" [(ngModel)]="searchObj.Dormitory" [nzPlaceHolder]="'宿舍楼'" [nzShowSearch]="true" name="Dormitory"
+            nzAllowClear>
+            <nz-option *ngFor="let option of LeaveTypes" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-row nz-form-item>
+        <div nz-form-control>
+          <nz-select style="width: 120px;" [(ngModel)]="searchObj.Number" [nzPlaceHolder]="'宿舍号'" [nzShowSearch]="true" name="Number"
+            nzAllowClear>
+            <nz-option *ngFor="let option of UseStatuss" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-row nz-form-item>
+        <div nz-col [nzSpan]="24" style="text-align: right;">
+          <button nz-button [disabled]="httpService.loading" [nzType]="'primary'" (click)="onSearch(true)">查询</button>
+          <button nz-button (click)="resetForm(f)">重置</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="text-right">
+      <nz-popconfirm [nzTitle]="'确定要新增吗？'" (nzOnConfirm)="add()">
+        <button [disabled]="isDisabled" nz-popconfirm nz-button [nzType]="'primary'">新增</button>
+      </nz-popconfirm>
+    </div>
+  </div>
+  <nz-table #nzTable [nzDataSource]="" [nzBordered]="true" [nzPageSize]="10">
+    <!-- (nzPageIndexChange)="_refreshStatus()" (nzPageSizeChange)="_refreshStatus()"> -->
+    <!-- <nz-table #nzTable [nzDataSource]="data" [nzBordered]="true" [nzPageSize]="10" (nzDataChange)="_displayDataChange($event)"
+      (nzPageIndexChange)="_refreshStatus()" (nzPageSizeChange)="_refreshStatus()"> -->
+    <thead nz-thead>
+      <tr>
+        <th nz-th [nzWidth]="'50px'">
+          <span>操作</span>
+        </th>
+        <th nz-th class="min90">
+          <span>校区</span>
+        </th>
+        <!-- <th nz-th class="min90">
+          <span>园区</span>
+        </th> -->
+        <th nz-th class="min100">
+          <span>宿舍楼号</span>
+        </th>
+        <th nz-th class="min90">
+          <span>宿舍号</span>
+        </th>
+        <th nz-th class="min120">
+          <span>住宿人员</span>
+        </th>
+        <th nz-th class="min90">
+          <span>状态</span>
+        </th>
+        <th nz-th class="min120">
+          <span>备注</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody nz-tbody>
+
+      <!-- <tr nz-tbody-tr *ngFor="let data of nzTable.data"> -->
+      <tr nz-tbody-tr>
+        <td nz-td>
+          <nz-tooltip [nzTitle]="'修改'">
+            <a nz-tooltip (click)="edit()">
+              <i class="anticon anticon-edit"></i>
+            </a>
+          </nz-tooltip>
+        </td>
+        <td nz-td>20165554895</td>
+        <td nz-td>花花公子</td>
+        <td nz-td></td>
+        <td nz-td (click)="details()" style="color:rgb(206, 15, 15)">8</td>
+        <td nz-td>可用</td>
+        <td nz-td></td>
+
+      </tr>
+    </tbody>
+  </nz-table>
+
+
+  <!-- <div *ngIf="loading == true && Items.length == 0;" class="null">
+    <div class="null_img">
+      <img src="./assets/images/kong @2x.png" alt="">
+    </div>
+    <p>该查询条件下的学生已全部完成</p>
+  </div> -->
+
+  <nz-modal [nzVisible]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel($event)"
+    (nzOnOk)="handleOk($event)">
+    <ng-template #modalTitle class="title">
+      &nbsp;
+    </ng-template>
+    <ng-template #modalContent>
+      <form #f="ngForm" (ngSubmit)="save()" nz-form [nzType]="'horizontal'">
+        <div nz-form-item nz-row class="mb-sm">
+          <div nz-form-label nz-col [nzSpan]="4">
+            <label>校区</label>
+          </div>
+
+          <div nz-form-control nz-col [nzSpan]="20">
+            <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'不做选择默认查询全部校区'" [(ngModel)]="Campus" name="Campus">
+              <nz-option *ngFor="let option of Campuss" [nzLabel]="option.CampusName" [nzValue]="option.CampusID">
+              </nz-option>
+            </nz-select>
+          </div>
+
+        </div>
+
+        <div nz-form-item nz-row class="mb-sm">
+
+          <div nz-form-label nz-col [nzSpan]="4">
+            <label>园区</label>
+          </div>
+
+          <div nz-form-control nz-col [nzSpan]="20">
+            <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'不做选择默认查询全部园区'" [(ngModel)]="Academy" name="Academy">
+              <nz-option *ngFor="let opt of Academys" [nzLabel]="opt.deptname" [nzValue]="opt.deptcode">
+              </nz-option>
+            </nz-select>
+          </div>
+        </div>
+
+        <div nz-form-item nz-row class="mb-sm">
+          <div nz-form-label nz-col [nzSpan]="4">
+            <label>宿舍楼</label>
+          </div>
+
+          <div nz-form-control nz-col [nzSpan]="20">
+            <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'不做选择默认查询全部宿舍楼'" (click)="onSelect('major')" [(ngModel)]="Major" name="Major">
+              <nz-option *ngFor="let opt of Majors" [nzLabel]="opt.deptname" [nzValue]="opt.deptcode">
+              </nz-option>
+            </nz-select>
+          </div>
+        </div>
+
+        <div nz-form-item nz-row class="mb-sm">
+          <div nz-form-label nz-col [nzSpan]="4">
+            <label>单元</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="20">
+            <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'不做选择默认查询全部单元'" [(ngModel)]="Grade" name="Grade">
+              <nz-option *ngFor="let opt of Grades" [nzLabel]="opt.deptname" [nzValue]="opt.deptcode">
+              </nz-option>
+            </nz-select>
+          </div>
+        </div>
+        <div nz-form-item nz-row class="mb-sm">
+          <div nz-form-label nz-col [nzSpan]="4">
+            <label>宿舍名</label>
+          </div>
+          <div nz-form-control nz-col [nzSpan]="20">
+            <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'不做选择默认查询全部宿舍名'" (click)="onSelect('class')" [(ngModel)]="Class" name="Class">
+              <nz-option *ngFor="let opt of Classs" [nzLabel]="opt.deptname" [nzValue]="opt.deptcode">
+              </nz-option>
+            </nz-select>
+          </div>
+        </div>
+
+      </form>
+    </ng-template>
+    <ng-template #modalFooter>
+      <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleCancel($event)" [nzLoading]="isConfirmLoading">
+        返回
+      </button>
+      <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOk($event)" [nzLoading]="isConfirmLoading">
+        添加
+      </button>
+    </ng-template>
+
+  </nz-modal>
+
+
+
+  <!-- 展示宿舍内信息 -->
+  <nz-modal [nzVisible]="isOnlyVisible" [nzTitle]="modalTitle1" [nzContent]="modalContent1" [nzFooter]="modalFooter" (nzOnCancel)="handleOnlyCancel($event)"
+    (nzOnOk)="handleOk($event)">
+    <ng-template #modalTitle1 class="title">
+      此宿舍内详细信息 &nbsp;
+    </ng-template>
+    <ng-template #modalContent1>
+      <nz-table #nzTable [nzDataSource]="" [nzBordered]="true">
+        <thead nz-thead>
+          <tr>
+
+            <th nz-th>
+              <span>学号</span>
+            </th>
+            <th nz-th>
+              <span>姓名</span>
+            </th>
+            <th nz-th>
+              <span>班级</span>
+            </th>
+            <th nz-th>
+              <span>宿舍</span>
+            </th>
+            <th nz-th>
+              <span>床位</span>
+            </th>
+            <th nz-th>
+              <span>政治面貌</span>
+            </th>
+            <th nz-th>
+              <span>生源地</span>
+            </th>
+            <th nz-th>
+              <span>手机号</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody nz-tbody>
+
+          <!-- <tr nz-tbody-tr *ngFor="let data of nzTable.data"> -->
+          <tr nz-tbody-tr>
+            <td nz-td>20165554895</td>
+            <td nz-td>花花公子</td>
+            <td nz-td>16级化学系</td>
+            <td nz-td>25号楼302</td>
+            <td nz-td>302</td>
+            <td nz-td>团员</td>
+            <td nz-td>济南市历城区巴拉巴拉县</td>
+            <td nz-td>18519788997</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </ng-template>
+    <ng-template #modalFooter>
+
+    </ng-template>
+
+  </nz-modal>
+</div>

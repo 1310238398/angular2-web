@@ -1,0 +1,159 @@
+<div class="content">
+
+    <div>
+        <nz-table #nzTable [nzAjaxData]="dataSet" [nzBordered]="true" [nzIsPagination]="false">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>
+                        <span>学号</span>
+                    </th>
+                    <th nz-th>
+                        <span>姓名</span>
+                    </th>
+                    <th nz-th>
+                        <span>申请所需资料</span>
+                    </th>
+                    <th nz-th>
+                        <span>经济情况调查问卷</span>
+                    </th>
+                    <th nz-th>
+                        <span>学生自评调查问卷</span>
+                    </th>
+                    <th nz-th>
+                        <span>辅导员认定意见</span>
+                    </th>
+                    <th nz-th>
+                        <span>小组评议</span>
+                    </th>
+                    <th nz-th>
+                        <span>合计分数</span>
+                    </th>
+                    <th nz-th>
+                        <span>认定等级</span>
+                    </th>
+                    <th nz-th>
+                        <span>认定申请表</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="center">
+                <tr nz-tbody-tr style="height:40px;">
+                    <td nz-td>{{dataSet.UserCode}}</td>
+                    <td nz-td>{{dataSet.Name}}</td>
+                    <td nz-td [ngClass]="menData.categray == '1'?'bgc':''">
+                        <span *ngIf="dataSet.IsAttach == '1'" class="comm-css" (click)="categrayChange(1)">
+                            查看
+                        </span>
+                    </td>
+                    <td nz-td [ngClass]="menData.categray == '2'?'bgc':''">
+                        <span *ngIf="dataSet.EnconomicScore != ''" class="comm-css" (click)="categrayChange(2)">
+                            {{dataSet.EnconomicScore}}
+                        </span>
+                    </td>
+                    <td nz-td [ngClass]="menData.categray == '3'?'bgc':''">
+                        <span *ngIf="dataSet.SelfAssessmentScore != ''" class="comm-css" (click)="categrayChange(3)">
+                            {{dataSet.SelfAssessmentScore}}
+                        </span>
+                    </td>
+
+                    <td nz-td [ngClass]="menData.categray == '4'?'bgc':''">
+                        <span *ngIf="dataSet.CounsellorOpinion == ''">请先公示小组评议成员</span>
+                        <span *ngIf="dataSet.CounsellorOpinion == '0' && dataSet.Status != '41' && dataSet.Status != '42' && dataSet.Status != '43'" class="comm-css" (click)="categrayChange(4)">点击认定</span>
+                        <span *ngIf="dataSet.CounsellorOpinion == '0' && dataSet.Status == '41'" class="comm-css" (click)="categrayChange(4)">直接认定</span>
+                        <span *ngIf="dataSet.CounsellorOpinion == '0' && dataSet.Status == '42'" class="comm-css" (click)="categrayChange(4)">一票否决</span>
+                        <span *ngIf="dataSet.CounsellorOpinion == '0' && dataSet.Status == '43'" class="comm-css" (click)="categrayChange(4)">小组评议</span>
+                    </td>
+
+                    <td nz-td [ngClass]="menData.categray == '5'?'bgc':''">
+                        <span *ngIf="dataSet.EliberateStatus == '1'" (click)="categrayChange(5)" class="comm-css">
+                            {{dataSet.EliberateScore}}
+                        </span>
+                        <span *ngIf="dataSet.EliberateStatus == '2'"></span>
+                        <span *ngIf="dataSet.EliberateStatus == '3' && userJsonStr == 'Counselor'" (click)="categrayChange(5)" class="comm-css">
+                            点击录入
+                        </span>
+                    </td>
+                    <td nz-td>
+                        <span *ngIf="dataSet.EnconomicScore != '' && dataSet.SelfAssessmentScore != '' && dataSet.EliberateStatus == '1'">
+                            {{((dataSet.EnconomicScore*5 + dataSet.SelfAssessmentScore*2 + dataSet.EliberateScore*3)/10).toFixed(2)}}
+                        </span>
+                        <span *ngIf="dataSet.EnconomicScore == '' && dataSet.SelfAssessmentScore == '' && dataSet.EliberateStatus == '1'">
+                            {{((dataSet.EliberateScore*3)/10).toFixed(2)}}
+                        </span>
+                    </td>
+
+                    <td nz-td [ngClass]="menData.categray == '6'?'bgc':''">
+                        <span *ngIf="dataSet.RecognitionLevel == '87000010'">
+                            <label *ngIf="statusJsonStr == '3' && userJsonStr == 'Counselor' && isSubmitJsonStr != '2'" (click)="tankbox(menData.IntelUserCode)" style="cursor: pointer;color:#108EE9;">一般困难</label>
+                            <label *ngIf="statusJsonStr != '3' || userJsonStr != 'Counselor' || isSubmitJsonStr == '2'">一般困难</label>
+                        </span>
+                        <span *ngIf="dataSet.RecognitionLevel == '87000020'">
+                            <label *ngIf="statusJsonStr == '3' && userJsonStr == 'Counselor' && isSubmitJsonStr != '2'" (click)="tankbox(menData.IntelUserCode)" style="cursor: pointer;color:#108EE9;">困难</label>
+                            <label *ngIf="statusJsonStr != '3' || userJsonStr != 'Counselor' || isSubmitJsonStr == '2'">困难</label>
+                        </span>
+                        <span *ngIf="dataSet.RecognitionLevel == '87000030'">
+                            <label *ngIf="statusJsonStr == '3' && userJsonStr == 'Counselor' && isSubmitJsonStr != '2'" (click)="tankbox(menData.IntelUserCode)" style="cursor: pointer;color:#108EE9;">特殊困难</label>
+                            <label *ngIf="statusJsonStr != '3' || userJsonStr != 'Counselor' || isSubmitJsonStr == '2'">特殊困难</label>
+                        </span>
+                        <span *ngIf="dataSet.RecognitionLevel == '87000040'">
+                            <label *ngIf="statusJsonStr == '3' && userJsonStr == 'Counselor' && isSubmitJsonStr != '2'" (click)="tankbox(menData.IntelUserCode)" style="cursor: pointer;color:#108EE9;">不予评级</label>
+                            <label *ngIf="statusJsonStr != '3' || userJsonStr != 'Counselor' || isSubmitJsonStr == '2'">不予评级</label>
+                        </span>
+                        <span *ngIf="dataSet.RecognitionLevel == '1'">
+                            <label *ngIf="statusJsonStr == '3' && userJsonStr == 'Counselor' && isSubmitJsonStr != '2'" (click)="tankbox(menData.IntelUserCode)" style="cursor: pointer;color:#108EE9;">点击评议</label>
+                            <label *ngIf="statusJsonStr != '3' || userJsonStr != 'Counselor' || isSubmitJsonStr == '2'">暂未评议</label>
+                        </span>
+                    
+                    </td>
+                    <td nz-td>
+                        <span></span>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+    <div>
+        <app-applybook *ngIf="menData.categray == '1'" [menData]="menData"></app-applybook>
+        <app-jingjiquestion *ngIf="menData.categray == '2'" [menData]="menData"></app-jingjiquestion>
+        <app-selfquestion *ngIf="menData.categray == '3'" [menData]="menData"></app-selfquestion>
+        <app-teacherview *ngIf="menData.categray == '4'" [menData]="menData"></app-teacherview>
+        <app-studentview *ngIf="menData.categray == '5'" [menData]="menData"></app-studentview>
+        
+    </div>
+
+
+    <div class="medigo" [hidden]="disdden" (click)="overbox()"></div>
+    <div class="file-box" [hidden]="disdden">
+        <div class="pass-cont center mr">
+            <div class="top-btn">
+                <button nz-button [nzType]="dataSet5.BgStyle1" (click)="onoff(87000030)">
+                    <span>特殊困难</span>
+                </button>
+                <button nz-button [nzType]="dataSet5.BgStyle2" (click)="onoff(87000020)">
+                    <span>困难</span>
+                </button>
+                <button nz-button [nzType]="dataSet5.BgStyle3" (click)="onoff(87000010)">
+                    <span>一般困难</span>
+                </button>
+                <button nz-button [nzType]="dataSet5.BgStyle4" (click)="onoff(87000040)">
+                    <span>不予评级</span>
+                </button>
+            </div>
+
+            <div class="foot-btn center">
+                <button nz-button [nzType]="'default'" (click)="overbox()">
+                    <span>返回</span>
+                </button>
+                <button nz-button [nzType]="'primary'" (click)="onPass()">
+                    <span>完成</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>

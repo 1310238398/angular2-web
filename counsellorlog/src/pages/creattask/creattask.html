@@ -1,0 +1,34 @@
+<ion-content class="index-cont">
+    <form name="f">
+        <div class="cont-form">
+            <ul>
+                <li>
+                    <p class="text-css fn14 color9b"><i style="color: #ff0000;">*</i> 记录类型</p>
+                    <ion-item>
+                        <ion-select [(ngModel)]="searchObj.TaskType" interface="action-sheet" [cancelText]="'取消'" name="TaskType" (ngModelChange)="changeText()">
+                            <ion-option [value]='option' *ngFor="let option of optioncatgray">{{option.Name}}
+                            </ion-option>
+                        </ion-select>
+                    </ion-item>
+                </li>
+                <li>
+                    <p class="text-css fn14 color9b"><i style="color: #ff0000;">*</i> 日志标题</p>
+                    <ion-item class="input-creat">
+                        <!-- <ion-input class="input-box" type="text" maxlength="30" [(ngModel)]="searchObj.TaskName" name="TaskName" (ngModelChange)="txtChange()"></ion-input> -->
+             
+                        <input class="input-box" type="text" maxlength="30" [(ngModel)]="searchObj.TaskName" name="TaskName" (ngModelChange)="txtChange()">
+                    </ion-item>
+                    <span style="color: #999;">{{wainTxt}}</span>
+                </li>
+            </ul>
+        </div>
+    </form>
+    <div class="center foot-btn-wrap" style="margin:40px 0;">
+        <button class="remove-css fn16" ion-button (click)="goBack()">取消</button>
+        <button class="submit-tab fn16" ion-button [disabled]="forbbien" (click)="tabAlert()">创建</button>
+    </div>
+
+
+
+
+</ion-content>

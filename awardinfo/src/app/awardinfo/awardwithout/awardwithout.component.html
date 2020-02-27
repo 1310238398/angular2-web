@@ -1,0 +1,69 @@
+<div class="cont-page">
+    <div class="page-header overh relative">
+        <div class="overh absolute" style="z-index:1;">
+            <div class="award-head-txt overh fl">
+                <p class="overh">
+                    <span class="cir-icon dib marn-r10"></span>
+                    <span class="fn14 colfff">共</span>
+                    <span class="fn18 colfff"> 45 </span>
+                    <span class="fn14 colfff"> 条结果 </span>
+                </p>
+            </div>
+        </div>
+        <img class="absolute header-floor" src="assets/images/small_m.png" alt="">
+    </div>
+
+    <div class="table-box overh">
+        <div class="table-wrap center">
+            <nz-table class="table-center" #nzTable [nzShowPagination]="true" [nzData]="DiligentStudyObj" [nzBordered]="true"
+                [nzTotal]="total" [nzPageIndex]="Page" [nzPageSize]="PageSize" [nzFrontPagination]="false"
+                (nzPageIndexChange)="getBoardsData(false)">
+                <thead nz-thead>
+                    <tr>
+                        <th>
+                            <span>学号</span>
+                        </th>
+                        <th>
+                            <span>姓名</span>
+                        </th>
+                        <th>
+                            <span>学院</span>
+                        </th>
+                        <th>
+                            <span>专业</span>
+                        </th>
+                        <th>
+                            <span>年级</span>
+                        </th>
+                        <th>
+                            <span>班级</span>
+                        </th>
+                        <th>
+                            <span>困难等级</span>
+                        </th>
+                        <th>
+                            <span>认定时间</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of nzTable.data;let i=index;">
+                        <td>{{data.userid}}</td>
+                        <td>{{data.name}}</td>
+                        <td>{{data.academy}}</td>
+                        <td>{{data.major}}</td>
+                        <td>{{data.grade}}</td>
+                        <td>{{data.class}}</td>
+                        <td>{{data.status}}</td>
+                        <td>{{data.time}}</td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+
+</div>
+
+
+
+<a (click)="goBack()"><img class="b-cancle fixed" src="assets/images/back.png"></a>

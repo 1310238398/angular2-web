@@ -1,0 +1,54 @@
+page-notice-list {
+  // div {
+  //   margin-top: 5px;
+  // }
+  font-family: "PingFang SC";
+  .listtitle {
+    margin-left: 15px;
+    // margin-top: 10px;
+    // margin-bottom: 5px;
+    // font-weight:500;
+    font-size: 16px;
+    font-family: "Microsoft YaHei";
+    color: #3e3e3e;
+
+    //padding: 5px;
+  }
+  .listtime {
+    margin-top: 10px;
+    margin-left: 15px;
+    font-size : 14px;
+    font-family: "Microsoft YaHei";
+    color:#acacac;
+  
+
+  }
+  // .item-md.item-block .item-inner{
+  //   border: 1px solid #d5d5d5;
+  //   border-radius: 4px;
+  // }
+  // .list-md > .item-block:last-child ion-label, .list-md > .item-block:last-child .item-inner, .list-md > .item-wrapper:last-child ion-label, .list-md > .item-wrapper:last-child .item-inner{
+  //   border: 1px solid #d5d5d5;
+  // }
+  .input-wrapper{
+    border: 1px solid #d5d5d5;
+    border-radius: 4px;
+    // margin-bottom: 20px;
+
+  }
+
+  .readtip {
+    height: 8px;
+    width: 8px;
+    margin-left: 0px;
+    margin-right: 5px;
+    border-radius: 5px;
+    background: red;
+    //text-align:left;
+    vertical-align:middle;
+    display: inline-block;
+  }
+}
+
+
+

@@ -1,0 +1,303 @@
+<div class="mm">
+    <div nz-row style="height: 100%;">
+        <div nz-col nzXs="24" nzSm="24" nzMd="4" nzLg="4">
+            <div class="icon">
+                <div class="back">
+                    <img *ngIf="!ActivityOne.RecordId" src="assets/images/社团默认头像.png" alt="社团LOGO">
+                    <img *ngIf="ActivityOne.RecordId" [src]="DomS.bypassSecurityTrustUrl(CertifyImg.AttachmentURL)" alt="社团LOGO">
+                </div>
+                <div class="icon-body base font-16">
+                    <h2>{{union.UnionName}}</h2>
+                    <div>属性：{{union.CodeName}}</div>
+
+                    <div>人数：{{Totar}}人</div>
+
+                    <div>指导教师：{{union.StaffName}}<span *ngIf="mtotal > 1">等{{mtotal}}人</span></div>
+
+                    <div>负责人：{{union.StudentName}}<span *ngIf="stotal > 1">等{{stotal}}人</span></div>
+
+                    <div>联系方式：{{union.phone}}</div>
+
+                    <div>创建时间：{{union.Createtime}}</div>
+
+                    <div>社团简介：{{union.UnionInfo}}</div>
+                </div>
+            </div>
+        </div>
+        <!-- 社团成员 -->
+        <div nz-col nzXs="24" nzSm="24" nzMd="18" nzLg="18" *ngIf="currentCode=='SbiInfo'">
+            <div class="card">
+                <div class="card-chart">
+                    <div class="card-bar">
+                        <span>社团成员</span>
+                        <span>({{Totar}}人)</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="body-title">
+                        <span>指导教师</span>
+                        <a (click)="GoTeacherManage()">&nbsp;指导教师管理</a>
+                    </div>
+                    <div style="margin-left: 20px;margin-right: 5px;">
+                        <nz-table #nzTablet [nzAjaxData]="dataSetTeacher" [nzLoading]="httpService.loading"
+                            [nzBordered]="true" [nzIsPagination]="false">
+                            <thead nz-thead>
+                                <tr>
+                                    <th>
+                                        <span>校内工号</span>
+                                    </th>
+                                    <th>
+                                        <span>姓名</span>
+                                    </th>
+                                    <th>
+                                        <span>性别</span>
+                                    </th>
+                                    <th>
+                                        <span>工作单位</span>
+                                    </th>
+                                    <th>
+                                        <span>学工类型</span>
+                                    </th>
+                                    <th>
+                                        <span>联系方式</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody nz-tbody>
+                                <tr nz-tbody-tr *ngFor="let data of nzTablet.data">
+                                    <td *ngIf="data.Days <= 0" nz-td>{{data.UserCode}}</td>
+                                    <td *ngIf="data.Days <= 0" nz-td>{{data.Name}}</td>
+                                    <td *ngIf="data.Days <= 0" nz-td>{{data.SexName}}</td>
+                                    <td *ngIf="data.Days <= 0" nz-td>{{data.DepartmentName}}</td>
+                                    <td *ngIf="data.Days <= 0" nz-td>{{data.StaffTyepName}}</td>
+                                    <td *ngIf="data.Days <= 0" nz-td>{{data.Phone}}</td>
+                                </tr>
+                            </tbody>
+                        </nz-table>
+                    </div>
+                    <div class="body-title">
+                        <span>负责人</span>
+                        <a (click)="cardbodychange()">负责人管理</a>
+                    </div>
+                    <div style="margin-left: 20px;margin-right: 5px;">
+                        <nz-table #nzTablef [nzAjaxData]="dataSetf" [nzLoading]="httpService.loading" [nzBordered]="true"
+                            [nzIsPagination]="false">
+                            <thead nz-thead>
+                                <tr>
+                                    <th>
+                                        <span>学号</span>
+                                    </th>
+                                    <th>
+                                        <span>姓名</span>
+                                    </th>
+                                    <th>
+                                        <span>性别</span>
+                                    </th>
+                                    <th>
+                                        <span>学院</span>
+                                    </th>
+                                    <th>
+                                        <span>专业</span>
+                                    </th>
+                                    <th>
+                                        <span>年级</span>
+                                    </th>
+                                    <th>
+                                        <span>班级</span>
+                                    </th>
+                                    <th>
+                                        <span>联系方式</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody nz-tbody>
+                                <tr nz-tbody-tr *ngFor="let data of nzTablef.data">
+                                    <td *ngIf="data.Days <= 0" nz-td>{{data.usercode}}</td>
+                                    <td *ngIf="data.Days <= 0" nz-td>{{data.name}}</td>
+                                    <td *ngIf="data.Days <= 0" nz-td>{{data.CodeName}}</td>
+                                    <td *ngIf="data.Days <= 0" nz-td>{{data.AcademyName}}</td>
+                                    <td *ngIf="data.Days <= 0" nz-td>{{data.majorname}}</td>
+                                    <td *ngIf="data.Days <= 0" nz-td>{{data.Grade}}级</td>
+                                    <td *ngIf="data.Days <= 0" nz-td>{{data.classname}}</td>
+                                    <td *ngIf="data.Days <= 0" nz-td>{{data.phone}}</td>
+                                </tr>
+                            </tbody>
+                        </nz-table>
+                    </div>
+
+                    <div class="body-title">
+                        <span>成员</span>
+                    </div>
+                    <div style="margin-left: 20px;margin-right: 5px;">
+                        <nz-table #nzTable [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [nzBordered]="true"
+                            [(nzTotal)]="Total" [(nzPageIndex)]="pagem.Page" [(nzPageSize)]="pagem.PageSize"
+                            [nzBordered]="true" (nzPageIndexChange)="GetShetuanMember()">
+                            <thead nz-thead>
+                                <tr>
+                                    <th>
+                                        <span>学号</span>
+                                    </th>
+                                    <th>
+                                        <span>姓名</span>
+                                    </th>
+                                    <th>
+                                        <span>性别</span>
+                                    </th>
+                                    <th>
+                                        <span>学院</span>
+                                    </th>
+                                    <th>
+                                        <span>专业</span>
+                                    </th>
+                                    <th>
+                                        <span>年级</span>
+                                    </th>
+                                    <th>
+                                        <span>班级</span>
+                                    </th>
+                                    <th>
+                                        <span>联系方式</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody nz-tbody>
+                                <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                                    <td nz-td>{{data.usercode}}</td>
+                                    <td nz-td>{{data.name}}</td>
+                                    <td nz-td>{{data.CodeName}}</td>
+                                    <td nz-td>{{data.AcademyName}}</td>
+                                    <td nz-td>{{data.majorname}}</td>
+                                    <td nz-td>{{data.Grade}}级</td>
+                                    <td nz-td>{{data.classname}}</td>
+                                    <td nz-td>{{data.phone}}</td>
+                                </tr>
+                            </tbody>
+                        </nz-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 社团活动 -->
+        <div nz-col nzXs="24" nzSm="24" nzMd="18" nzLg="18" *ngIf="currentCode=='academicInfo'">
+            <div class="card">
+                <div class="card-chart">
+                    <div class="card-bar">
+                        <span>社团活动</span>
+                    </div>
+                </div>
+                <div style="margin: 40px;cursor: pointer;">
+                    <div *ngFor="let data of Activity">
+                        <div style="font-size: 14px;" class="body" (click)="goorganize(data)">
+                            <div style="margin-left:2%;margin-top:5px;">
+                                <a>
+                                    <span class="title" style="font-size:18px"><b>{{data.Activity}}</b></span>
+                                </a>
+                                <a>
+                                    <span class="titleright" style="font-size:16px;">————{{data.UnionName}}</span>
+                                </a>
+                                <a>
+                                    <span *ngIf="data.status == 1" style="float: right;color:red;width: 100px;text-align: center;">待审批</span>
+                                    <span *ngIf="data.status == 3" style="float: right;color:black;width: 100px;text-align: center;">审批通过</span>
+                                    <span *ngIf="data.status == 2" style="float: right;color:black;width: 100px;text-align: center;">审批未通过</span>
+                                    <span *ngIf="data.status == 4" style="float: right;color:red;width: 100px;text-align: center;">待总结</span>
+                                    <span *ngIf="data.status == 5" style="float: right;width: 100px;text-align: center;">已总结</span>
+                                </a>
+
+                            </div>
+
+                            <div class="body-info">
+                                <a>
+                                    <span style="color:gray;">负责人： </span><span>{{data.name}}</span>
+                                </a>
+                                <a>
+                                    <span style="color:gray;">申请时间：</span><span>{{data.InsertDatetime}}</span>
+                                </a>
+                                <a>
+                                    <span style="color:gray;">举办时间：</span><span>{{data.Starttime}}</span>
+                                </a>
+                                <a>
+                                    <span style="color:gray;">举办地点：</span><span class="place-content">{{data.Place}}</span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:20px;" *ngIf="Activity.length > 0">
+                    <nz-pagination style="float: right;" [(nzTotal)]="Htotal" [(nzPageIndex)]="page.Page"
+                        [(nzPageSize)]="page.PageSize" (nzPageIndexChange)="getallactivityinfo()"></nz-pagination>
+                </div>
+
+                <div *ngIf="Activity.length <= 0" class="none"><img class="noneimg" src="assets/images/kong.png">
+                    <div class="noneFont">暂无更多内容</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 社团荣誉 -->
+        <div nz-col nzXs="24" nzSm="24" nzMd="18" nzLg="18" *ngIf="currentCode=='ScoreInfo'">
+            <div class="card">
+                <div class="card-chart">
+                    <div class="card-bar">
+                        <span>社团荣誉</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div style="margin: 10px">
+                        <div *ngFor="let item of SheTuanHonor;let i = index">
+                            <div style="color: #4A4A4A;font-family: PingFangSC-Regular;margin-top: 30px;">
+
+                                <div nz-row nz-form-item style="margin:5px 0 !important">
+                                    <div nz-col style="text-align: left;">
+                                        <span class="title" style="font-size: 20px;">{{item.name}}</span>
+                                    </div>
+                                </div>
+
+                                <div nz-row nz-form-item style="margin:5px 0 !important">
+                                    <div nz-col style="text-align: left;">
+                                        <span>{{item.insertdatetime}}</span>
+                                        <span style="margin-left: 10px;">由{{item.username}}上传</span>
+                                    </div>
+                                </div>
+                                <div nz-row nz-form-item class="zhaopian" style="margin:5px 0 !important">
+                                    <!-- <div nz-col style="text-align: left;"> -->
+                                    <!-- <img [src]='DomS.bypassSecurityTrustUrl(item.attachmenturl)' *ngFor=" (click)=" preview(item.attachmenturl,index) "> -->
+                                    <ul id="jq33{{i}}">
+                                        <li *ngFor="let item of item.attachmenturl;">
+                                            <img [src]="DomS.bypassSecurityTrustUrl(item.attachmenturl)" alt="" (click)="viewBigImg(i)">
+                                        </li>
+                                    </ul>
+                                    <!-- </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:20px; " *ngIf="SheTuanHonor.length> 0">
+                        <nz-pagination style="float: right;" [(nzTotal)]="Atotal" [(nzPageIndex)]="honorpage.lastid"
+                            [(nzPageSize)]="honorpage.count" (nzPageIndexChange)="getunionhonorinfo()"></nz-pagination>
+                    </div>
+                    <div *ngIf="SheTuanHonor.length <= 0" class="none"><img class="noneimg" src="assets/images/kong.png">
+                        <div class="noneFont">暂无更多内容</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<img class="b-cancle" src="assets/images/back.png" (click)="goback()">
+<div class="fixedall">
+    <button nz-button class="fixedBar" (click)="expand()">
+        <i *ngIf="!expand_f" class="anticon anticon-left"></i>
+        <i *ngIf="expand_f" class="anticon anticon-right"></i>
+    </button>
+    <div class="fixedMenu" *ngIf="expand_f">
+        <div class="menu">
+            <div [ngClass]="{'check': item.checked}" class='item base' *ngFor="let item of menus">
+                <a (click)="changeMenu(item)">{{item.name}}</a>
+            </div>
+        </div>
+    </div>
+</div>

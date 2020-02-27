@@ -1,0 +1,67 @@
+page-home {
+    .content-ios {
+        background: #ffffff;
+    }
+    .ab-inner {
+        margin-top: 12px;
+        overflow: auto;
+    }
+    /*  .scroll-content{
+      margin-bottom: 120px;
+    }*/
+    .pi {
+        font-family: PingFangSC-Regular;
+        font-size: 12px;
+        color: #666666;
+        letter-spacing: 0.92px;
+        text-align: left;
+    }
+    .checkbox-md {
+        top: 0px;
+    }
+    .checkbox-md .checkbox-icon {
+        margin-right: 5px;
+        border-width: 1px;
+        width: 12px;
+        height: 12px;
+    }
+    .checkbox-md .checkbox-checked {
+        border-width: 0.1px;
+    }
+    .bt {
+        width: 320px;
+    }
+    @media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 3) {
+        .btn-w {
+            position: relative !important;
+            bottom: 10px;
+        }
+        .scroll-content {
+            margin-bottom: 0px !important;
+        }
+    }
+    @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: portrait) {
+        /*iPhone 6 Portrait*/
+        /* 兼容iphone6  */
+        .btn-w {
+            position: relative !important;
+            bottom: 10px;
+        }
+        .scroll-content {
+            margin-bottom: 0px !important;
+        }
+    }
+    .scroll-content {
+        margin-bottom: 120px;
+    }
+    .btn-w {
+        position: fixed;
+        bottom: 10px;
+    }
+    .item-ios {
+        background: none;
+    }
+    .item-ios.item-block .item-inner {
+        border-bottom: none;
+    }
+}

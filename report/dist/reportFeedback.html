@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>举报反馈</title>
+    <script src="js/zepto.js"></script>
+    <script src="js/antlinker.1.0.10.js"></script>
+    <link rel="stylesheet" href="./css/reportFeedback.css">
+</head>
+
+<body>
+    <div class="box">
+        <div id="title">
+            <span class="select" id="spanOne">
+                <img src="./img/activeUntreated.png" alt="" id="imgOne">
+                <p>未处理</p>
+            </span>
+            <span id="spanTwo">
+                <img src="./img/Alreadyprocessed.png" alt="" id="imgTwo">
+                <p>已处理</p>
+            </span>
+        </div>
+        <ul id="content">
+            <!-- 未处理 -->
+            <li class="show" id="li_not_deal">
+                <!--<div class="content-list border-bottom-1px">-->
+                    <!--<p class="content-list-title  post-title">标题标题标题标题标题标题标题标题标题标题标题标题标题标题</p>-->
+                    <!--<div class="content-list-desc">-->
+                        <!--<p class="content-list-desc-type post-type">帖子</p>-->
+                        <!--<div class="content-list-handel">-->
+                            <!--<p>-->
+                                <!--<a href="./reportCommentdetails.html">查看举报详情</a>-->
+                            <!--</p>-->
+                            <!--<p onclick="showModal('帖子')">操作</p>-->
+                        <!--</div>-->
+                        <!--</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="content-list border-bottom-1px">-->
+                    <!--<p class="content-list-title  user-title">标题标题标题标题标题标题标题标题标题标题标题标题标题标题</p>-->
+                    <!--<div class="content-list-desc">-->
+                        <!--<p class="content-list-desc-type user-type">用户</p>-->
+                        <!--<div class="content-list-handel">-->
+                            <!--<p>查看举报详情</p>-->
+                            <!--<p onclick="showModal('用户')">操作</p>-->
+                        <!--</div>-->
+                        <!--</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="content-list box-shadow-1px">-->
+                    <!--<p class="comment-desc">被举报的当前评论当前评论、可展示前一百字，超出部分省略号表示…被举报的当前评论当前评论、可展示前一百字，超出部分省略号表示被举报的当前评论当前评论、可展示前一百字，超出部分省略号表示百字，超出部分省略号表示</p>-->
+                    <!--<p class="content-list-title  comment-title">标题标题标题标题标题标题标题标题标题标题标题标题标题标题</p>-->
+                    <!--<div class="content-list-desc">-->
+                        <!--<p class="content-list-desc-type comment-type">评论</p>-->
+                        <!--<div class="content-list-handel">-->
+                            <!--<p>-->
+                                <!--<a href="./reportPostdetails.html">查看举报详情</a>-->
+                            <!--</p>-->
+                            <!--<p onclick="showModal('评论')">操作</p>-->
+                        <!--</div>-->
+                        <!--</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </li>
+            <!-- 已处理=================================================================================================================================== -->
+            <li id="li_deal">
+                <!--<div class="content-list border-bottom-1px">-->
+                    <!--<p class="content-list-title  post-title handle-title">-->
+                        <!--标题标题标题标题标题标题标题标题标题标题标题标题标题标题-->
+                        <!--<span class="handle">已删除</span>-->
+                    <!--</p>-->
+                    <!--<div class="content-list-desc">-->
+                        <!--<p class="content-list-desc-type post-type">帖子</p>-->
+                        <!--<div class="content-list-handel">-->
+                            <!--<p>查看举报详情</p>-->
+                            <!--<p onclick="showModal('帖子','已删除')">恢复</p>-->
+                        <!--</div>-->
+                        <!--</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="content-list border-bottom-1px">-->
+                    <!--<p class="content-list-title  user-title handle-title">标题标题标题标题标题标题标题标题标题标题标题标题标题标题-->
+                        <!--<span class="handle">删帖禁言一个月</span>-->
+                    <!--</p>-->
+                    <!--<div class="content-list-desc">-->
+                        <!--<p class="content-list-desc-type user-type">用户</p>-->
+                        <!--<div class="content-list-handel">-->
+                            <!--<p>查看举报详情</p>-->
+                            <!--<p onclick="showModal('用户','禁言一星期')">恢复</p>-->
+                        <!--</div>-->
+                        <!--</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="content-list box-shadow-1px">-->
+                    <!--<p class="comment-desc">被举报的当前评论当前评论、可展示前一百字，超出部分省略号表示…被举报的当前评论当前评论、可展示前一百字，超出部分省略号表示被举报的当前评论当前评论、可展示前一百字，超出部分省略号表示百字，超出部分省略号表示</p>-->
+                    <!--<p class="content-list-title  comment-title handle-title">标题标题标题标题标题标题标题标题标题标题标题标题标题标题-->
+                        <!--<span class="handle">删评论禁言三个月</span>-->
+                    <!--</p>-->
+                    <!--<div class="content-list-desc">-->
+                        <!--<p class="content-list-desc-type comment-type">评论</p>-->
+                        <!--<div class="content-list-handel">-->
+                            <!--<p>-->
+                                <!--<a href="./reportPostdetails.html">查看举报详情</a>-->
+                            <!--</p>-->
+                            <!--<p onclick="showModal('评论','删评论禁言一天')">恢复</p>-->
+                        <!--</div>-->
+                        <!--</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </li>
+        </ul>
+    </div>
+    <!-- 模态框================================================================================================================================================================= -->
+    <!-- 帖子举报========================================================================================================================================================== -->
+    <div class="modal-wrapper" id="post_report" onclick="hidemodal(this)">
+        <div class="modal" onclick="stopHidemodal(event)">
+            <div class="modal-body" id="modal_post_show">
+
+            </div>
+            <div class="submission">
+                <button id="button_submit1" onclick="submit_post('post')">提交</button>
+            </div>
+        </div>
+    </div>
+    <!-- 评论举报 ===================================================================================================================================================-->
+    <div class="modal-wrapper" id="comment_report" onclick="hidemodal(this)">
+        <div class="modal" onclick="stopHidemodal(event)">
+            <div class="modal-body" id="modal_comment_show">
+            </div>
+            <div class="submission">
+                <button id="button_submit2" onclick="submit_post('comment')">提交</button>
+            </div>
+        </div>
+    </div>
+    <!-- 用户举报 ==============================================================================================================================-->
+    <div class="modal-wrapper" id="user_report" onclick="hidemodal(this)">
+        <div class="modal" b onclick="stopHidemodal(event)">
+            <div class="modal-body" id="modal_user_show">
+            </div>
+            <div class="submission">
+                <button id="button_submit3" onclick="submit_post('user')">提交</button>
+            </div>
+        </div>
+    </div>
+    <!-- confirm -->
+    <div class="window-container fix" id="window_confirm">
+        <h2>提示</h2>
+        <div class="window-content">
+            <p class="window-text">您好，确定要恢复吗 ？</p>
+        </div>
+        <div class="window-btn fix">
+            <a class="cancel-button fl" href="javascript:;" onclick="userCatch()">取消</a>
+            <a class="confirm-button fr" href="javascript:;" onclick="userThen()">确定</a>
+        </div>
+    </div>
+    <!-- 遮挡 -->
+    <div id="occlusion"></div>
+    <script src="./js/feedback.js"></script>
+</body>
+
+</html>

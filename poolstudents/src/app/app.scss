@@ -1,0 +1,113 @@
+// http://ionicframework.com/docs/theming/
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+.zj-main-color {
+  color: #8e9093;
+}
+
+/*取消按钮*/
+.zj-alert-close {
+  color: #8e9093 !important;
+}
+
+/* over custom style
+ hanzhendong
+*/
+//***********************************************
+
+/************
+list
+*******/
+list-ios > .item-block:first-child {
+  border-top: $hairlines-width solid $list-ios-border-color;
+}
+.list-ios .item-block:not(.alert-danger) {
+  border-bottom: 1px solid $list-md-border-color !important;
+  .item-inner {
+    border-bottom: 0 !important;
+  }
+  background-color: #fff;
+  textarea{
+    height: 56px;
+  }
+  &:first-child{
+    border-top: 0;
+  }
+  .label-ios,h2{
+    font-family:PingFangSC-Regular;
+    font-size:16px;
+    color:#3e3e3e;
+    letter-spacing:0.38px;
+    text-align:left;
+  }
+  input{
+    text-align: right;
+  }
+}
+.card-content {
+  div {
+    font-family:PingFangSC-Regular;
+    font-size:16px;
+    color:#3e3e3e;
+    letter-spacing:0.38px;
+    text-align:left;
+    span {
+      color: #13a0fa;
+    }
+  }
+  span {
+    img {
+      z-index: 1;
+      background-size: cover;
+      margin: 8px 0;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+}
+/*按钮*/
+.button-ios{
+  color: #fff;
+}
+
+//*************************************************
+.zj-label-textOverflow-initial {
+  text-overflow: initial;
+}
+
+.zj-text-indent {
+  text-indent: 2em
+}
+.font{
+  font-size: 12px;
+  margin-right: 3px;
+}
+
+.zj-t-center {
+  text-align: center;
+}
+.waring{
+  margin-left: 15px;
+  margin-top: 2px;
+  font-family:PingFangSC-Regular;
+  font-size:12px;
+  color:#fb5f2d;
+  letter-spacing:-0.01px;
+  line-height:15px;
+  text-align:left;
+}
+
+
+.alert-ios .alert-sub-title{font-size: 12px;text-align: left;margin:2px 0;}

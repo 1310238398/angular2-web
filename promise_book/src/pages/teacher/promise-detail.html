@@ -1,0 +1,36 @@
+<ion-content class="detail">
+  <p class="title">{{promiseBook.Title}}</p>
+  <div class="content" style="padding: 25px 15px 15px 15px;" [innerHTML]="promiseBook.Content">
+  </div>
+  <div class="sign">
+    <p *ngIf="promiseBook.WrittenTime"><span>{{year}}年{{month}}月{{day}}日</span></p>
+    <div class="sign_list">
+      <p class="sign2">承诺人：</p>
+      <p class="sign1"></p>
+    </div>
+    <div class="sign_list">
+      <p class="sign2">时&nbsp;&nbsp;&nbsp;&nbsp;间：</p>
+      <p class="sign1"></p>
+    </div>
+  </div>
+  <div class="btn-group" *ngIf="promiseBook.Status===0">
+    <div class="btn-left"><a class="btn" (click)="publish()">发布</a></div>
+    <div class="btn-right"><a class="btn" (click)="editMembers()">修改发文范围</a></div>
+  </div>
+  <div class="btn-group" *ngIf="promiseBook.Status===1&&promiseBook.IsCreater===1">
+    <div class="btn-left"><a class="btn" (click)="goto('查看进度')">查看进度</a></div>
+    <div class="btn-right"><a class="btn" (click)="finish()">结束</a></div>
+  </div>
+  <div class="btn-group" *ngIf="promiseBook.Status===1&&promiseBook.IsCreater===0">
+    <div class="btn-left"><a class="btn" (click)="goto('查看进度')">查看进度</a></div>
+  </div>
+  <div class="btn-group" *ngIf="promiseBook.Status===2">
+    <div class="btn-left"><a class="btn" (click)="goto('查看结果')">查看结果</a></div>
+    <div class="btn-right"><a class="btn" (click)="rePublish()">再次发布</a></div>
+  </div>
+  <div class="status">
+    <i *ngIf="promiseBook.Status===0" class="iconfont icon-daifabu daifabu"></i>
+    <i *ngIf="promiseBook.Status===1" class="iconfont icon-yibaodao yibaodao"></i>
+    <i *ngIf="promiseBook.Status===2" class="iconfont icon-yijieshu yijieshu"></i>
+  </div>
+</ion-content>

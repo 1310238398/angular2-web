@@ -1,0 +1,120 @@
+<div class="room">
+    <div class="top">
+        <div class="room_info1">
+            <span class="room_name">{{roomName}}</span>
+            <div class="room_sex">
+                <span *ngIf="room.roomsex==='男'">
+                    <img src="assets/images/boy.png">
+                </span>
+                <span *ngIf="room.roomsex==='女'">
+                    <img src="assets/images/girl.png">
+                </span>
+            </div>
+        </div>
+        <div class="room_info2">
+            <p class="room_info_p">所属学院：{{room.academy}}</p>
+            <p class="room_info_p">所属辅导员：{{room.counselor}}</p>
+            <p class="room_info_p">宿舍成员：{{room.number}}</p>
+        </div>
+    </div>
+    <div class="detail">
+        <div class="stu_list">
+            <p style="text-align:center;margin-top: 25px;" *ngIf="roomDetailLoading">
+                <nz-spin></nz-spin>
+                <span style="color:#108ee9;">数据加载中</span>
+            </p>
+            <a class="stu" *ngFor="let stu of room.member" (click)="showStuDetail(stu)">
+                <img class="icon" onerror='this.src="assets/images/default.png"' [src]="stu.usericonurl||'assets/images/default.png'"
+                    alt="">
+                <div class="font14  color-3E3E3E">{{stu.name}}
+                    <img *ngIf="stu.sex==='男'" class="stu_sex" src="assets/images/man@2x.png">
+                    <img *ngIf="stu.sex==='女'" class="stu_sex" src="assets/images/woman@2x.png">
+                </div>
+                <div class="font12  color-FB5F2D">{{stu.usercode}}</div>
+                <div class="font12  color-666 b-bottom-dash">学院：{{stu.academyname}}</div>
+            </a>
+        </div>
+        <div class="mark">
+            <div>
+                <span class="mark_tips">本学期宿舍检查结果：</span>
+                <span>
+                    <nz-radio-group [(ngModel)]="check" name="check" (ngModelChange)="onModelChange($event)">
+                        <label nz-radio [nzValue]="'health'">
+                            <span>卫生</span>
+                        </label>
+                        <label nz-radio [nzValue]="'violation'">
+                            <span>违纪</span>
+                        </label>
+                    </nz-radio-group>
+                </span>
+            </div>
+            <div [hidden]="check!='health'">
+                <span *ngIf="!hasScore">暂无宿舍检查成绩</span>
+                <div (window:resize)="onResize($event)" id="lineChart" class="linechart">
+                    <!-- <div echarts [options]="option"></div> -->
+                </div>
+            </div>
+            <div [hidden]="check!='violation'">
+                <div class="statis_table">
+                    <!-- <nz-table #nzTable [nzDataSource]="violationData" [nzTotal]="total" [nzPageIndex]="pageIndex"
+                        [nzPageSize]="pageSize" [nzBordered]="true"  (nzPageIndexChange)="pageIndexChange($event)"> -->
+                    <!-- <nz-table #nzTable [nzDataSource]="violationData" [nzPageIndex]="pageIndex" [nzPageSize]="pageSize"
+                        [nzTotal]="total" [nzBordered]="true" [nzIsPagination]="true" (nzPageIndexChange)="getRoomViolation()"> -->
+                    <nz-table #nzTable [nzAjaxData]="violationData" [(nzTotal)]="total" [(nzPageIndex)]="pageIndex"
+                        [(nzPageSize)]="pageSize" [nzBordered]="true" (nzPageIndexChange)="getRoomViolation()">
+                        <thead nz-thead>
+                            <tr>
+                                <th nz-th [nzWidth]="'45px'">
+                                    序号
+                                </th>
+                                <th nz-th>
+                                    检查时间
+                                </th>
+                                <th nz-th [nzWidth]="'35%'">
+                                    违纪情况说明
+                                </th>
+                                <th nz-th [nzWidth]="'35%'">
+                                    没收物品
+                                </th>
+                                <th nz-th>
+                                    附件
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody nz-tbody *ngIf="nzTable.data">
+                            <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i=index">
+                                <td nz-td>{{i+1}}</td>
+                                <td nz-td>
+                                    {{data.Day}}
+                                </td>
+                                <td nz-td>
+                                    {{data.Discipline}}
+                                </td>
+                                <td nz-td>
+                                    {{data.ContraBand}}
+                                </td>
+                                <td nz-td>
+                                    <span *ngIf="data.Enclosure==='noexist'">无</span>
+                                    <a *ngIf="data.Enclosure==='exist'" (click)="loadImg(data.RecordId,i)">点击查看</a>
+                                    <ul class="jq22{{i}}" style="display: none;">
+                                        <li *ngFor="let url of data.annex; let ii=index;">
+                                            <img id="a{{i}}{{ii}}" (click)="viewBigImg(i)" src="{{url}}">
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+            </div>
+        </div>
+        <div class="mark">
+            <div>
+                <span class="mark_tips">宿舍备注：</span>{{room.remark}}
+            </div>
+        </div>
+    </div>
+    <a onclick="javascript:history.back()" class="page_back">
+        <img class="b-cancle" src="assets/images/back.png">
+    </a>
+</div>

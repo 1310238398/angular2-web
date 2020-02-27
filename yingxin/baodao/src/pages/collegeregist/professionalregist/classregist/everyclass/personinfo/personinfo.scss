@@ -1,0 +1,201 @@
+  page-personinfo {
+      //个人
+      .scroll-content {
+          background-color: #f5f5f5;
+          background-image: url("../assets/images/combined_shape@2x.png");
+          background-repeat: no-repeat;
+          background-size: contain;
+      }
+      .personxing {
+          margin-top: 36px;
+          background: #ffffff;
+          border-radius: 8px;
+          margin-left: 15px;
+          margin-right: 15px;
+          height: 120px;
+          width: 92%
+      }
+      .personphoto {
+          width: 60px;
+          height: 80px;
+          margin-top: 15px;
+          margin-right: 9px;
+          margin-left: 15px;
+          float: left;
+          overflow: hidden;
+          //   border: 1px solid red;
+      }
+      .personxiangq {
+          float: left;
+          margin-top: 25px;
+          width: 70%;
+          height: 90px;
+      }
+      .xingm {
+          font-family: PingFangSC-Regular;
+          font-size: 16px;
+          color: #3e3e3e;
+          letter-spacing: 0.38px;
+          text-align: left;
+          margin-bottom: 8px;
+          //   overflow: hidden;
+          //   text-overflow: ellipsis;
+          //   white-space: nowrap;
+      }
+      .zi {
+          //   overflow: hidden;
+          //   text-overflow: ellipsis;
+          //   white-space: nowrap;
+      }
+      .xuehao {
+          font-family: PingFangSC-Regular;
+          font-size: 14px;
+          color: #666666;
+          letter-spacing: 0.34px;
+          text-align: left;
+      }
+      .shezhi {
+          padding: 0;
+      }
+      .xingb {
+          background-image: url("../assets/images/group.png");
+          background-repeat: no-repeat;
+          width: 16px;
+          height: 16px;
+          display: inline-block;
+          margin-left: 8px;
+          border-radius: 100%;
+          background-position-y: 2px;
+      }
+      .xingb1 {
+          background-image: url("../assets/images/_copy.png");
+          background-repeat: no-repeat;
+          width: 16px;
+          height: 16px;
+          display: inline-block;
+          margin-left: 8px;
+          border-radius: 100%;
+          background-position-y: 2px;
+      }
+      .baodaoqingk {
+          background-image: url("../assets/images/weibaodao@2x.png");
+          background-repeat: no-repeat;
+          width: 83px;
+          height: 62px;
+          float: right;
+          margin-top: 8px;
+          margin-right: 6px;
+          background-size: contain;
+          position: fixed;
+          z-index: 10;
+          top: 6%;
+          right: 5%;
+      }
+      .baodaoqingk1 {
+          background-image: url("../assets/images/baodao@2x.png");
+          background-repeat: no-repeat;
+          width: 83px;
+          height: 62px;
+          float: right;
+          margin-top: 8px;
+          margin-right: 6px;
+          background-size: contain;
+          position: fixed;
+          z-index: 10;
+          top: 6%;
+          right: 5%;
+      }
+      /*适应小屏手机*/
+      @media (device-height: 480px) and (-webkit-min-device-pixel-ratio: 2),
+      (device-height: 568px) and (-webkit-min-device-pixel-ratio: 2) {
+          /* 兼容iphone4/4s5/5 */
+          .baodaoqingk {
+              width: 83px;
+              height: 62px;
+              float: right;
+              margin-top: 8px;
+              margin-right: 6px;
+              background-size: contain;
+              position: fixed;
+              z-index: 10;
+              top: 6%;
+              right: 4%;
+          }
+          ;
+          .personxiangq {
+              float: left;
+              margin-top: 25px;
+              width: 70%;
+              height: 90px;
+          }
+          .baodaoqingk1 {
+              width: 83px;
+              height: 62px;
+              float: right;
+              margin-top: 8px;
+              margin-right: 6px;
+              background-size: contain;
+              position: fixed;
+              z-index: 10;
+              top: 6%;
+              right: 4%;
+          }
+      }
+      @media (device-height:736px) and (-webkit-min-device-pixel-ratio:2) {
+          /* 兼容iphone6 plus */
+          .baodaoqingk {
+              width: 83px;
+              height: 62px;
+              float: right;
+              margin-top: 8px;
+              margin-right: 6px;
+              background-size: contain;
+              position: fixed;
+              z-index: 10;
+              top: 5%;
+              right: 5%;
+          }
+          ;
+          .baodaoqingk1 {
+              width: 83px;
+              height: 62px;
+              float: right;
+              margin-top: 8px;
+              margin-right: 6px;
+              background-size: contain;
+              position: fixed;
+              z-index: 10;
+              top: 5%;
+              right: 5%;
+          }
+      }
+      .personsch {
+          background: #ffffff;
+          border-radius: 4px;
+          height: auto;
+          margin-top: 15px;
+          margin-left: 15px;
+          margin-right: 15px;
+          width: 92%;
+      }
+      .scl {
+          padding: 15px 9px 15px 9px;
+      }
+      .scl span {
+          font-family: PingFangSC-Regular;
+          font-size: 16px;
+          color: #666666;
+          letter-spacing: 0.38px;
+          line-height: 20px;
+          text-align: left;
+      }
+      .personmar {
+          background: #ffffff;
+          border-radius: 4px;
+          height: auto;
+          margin-top: 10px;
+          margin-left: 15px;
+          margin-right: 15px;
+          width: 92%;
+      }
+  }

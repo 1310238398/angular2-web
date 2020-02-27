@@ -1,0 +1,30 @@
+<ion-content>
+  <div class="top">
+    <svg width="165" height="165">
+      <circle class="big_clrcle" cx="81" cy="81" r="77" stroke-width="2" stroke="#B0CCFF" fill="none"></circle>
+      <circle cx="81" cy="81" r="65" stroke-width="10" stroke="#B1D4FF" fill="none"></circle>
+      <circle class="circle_bar" id="circle" cx="81" cy="81" r="65" stroke-width="10" stroke="#4C8AFE" fill="none" stroke-linecap="round"></circle>
+    </svg>
+    <div class="progress">
+      <p class="progress_num">{{sign.SignCount}}/{{sign.TotalCount}}<span style="font-size:14px;">人</span></p>
+    </div>
+    <a class="no_sign" *ngIf="sign.IsCounselor === 0" (click)="goToAcademy()">谁还未签署</a>
+    <a class="no_sign" *ngIf="sign.IsCounselor === 1" (click)="goToNoSign()">谁还未签署</a>
+  </div>
+  <ion-list class="m-t-10" *ngIf="sign.IsCounselor === 0">
+    <div class="list_arrow">
+      <div class="list" *ngFor="let academy of signResultList">
+        <a (click)="goToMajor(academy)"><span class="title">{{academy.DeptName}}（{{academy.SignCount}}/{{academy.TotalCount}}）</span></a>
+        <div class="line"></div>
+      </div>
+    </div>
+  </ion-list>
+  <ion-list class="m-t-10" *ngIf="sign.IsCounselor === 1">
+    <div class="list_arrow">
+      <div class="list" *ngFor="let class of signResultList">
+        <a (click)="goToStudents(class)"><span class="title">{{class.DeptName}}（{{class.SignCount}}/{{class.TotalCount}}）</span></a>
+        <div class="line"></div>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>

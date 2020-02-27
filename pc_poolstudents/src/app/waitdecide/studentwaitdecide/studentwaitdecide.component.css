@@ -1,0 +1,33 @@
+.fl{float: left;}
+.fr{float: right;}
+.cp{cursor: pointer;}
+.left{text-align: left;}
+.center{text-align: center;}
+.dib{display: inline-block;}
+.relative{position: relative;}
+.absolute{position: absolute;}
+.overh{overflow: hidden;}
+.fn14{font-size: 14px;}
+.fn16{font-size: 16px;}
+.fn18{font-size: 18px;}
+.color10{color: #108EE9;}
+
+.help-btn{margin-left: 20px;cursor: pointer;color:#108EE9;}
+
+.ant-btn{padding:0 5px;}
+.ant-modal-footer{text-align: center;}
+
+.pass-cont{margin:20px 0;}
+.pass-cont button{width: 80px;height:40px;margin:5px;}
+
+.foot-btn{margin-top:70px;}
+.foot-btn button{width: 100px;height:30px;margin:0 10px;}
+
+.weight-txt{width: 150px;}
+
+
+
+
+
+
+

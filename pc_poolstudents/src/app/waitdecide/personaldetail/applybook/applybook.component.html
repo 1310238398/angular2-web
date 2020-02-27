@@ -1,0 +1,50 @@
+<div class="content" style="margin-top:20px;">
+    <div class="comb-css" *ngIf="imgArr1.length">
+        <h2 style="margin-top:20px;">家庭经济情况调查表</h2>
+        <hr>
+        <div class="img-warp overh">
+            <ul id="jq11">
+                <li class="fl overh" *ngFor="let data of imgArr1" (click)="viewBigImg('1')">
+                    <img [src]="data.AttachmentURL" alt="">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="comb-css" *ngIf="imgArr2.length">
+        <h2 style="margin-top:20px;">家庭经济困难学生认定知情同意书</h2>
+        <hr>
+        <div class="img-warp overh">
+            <ul id="jq22">
+                <li class="fl overh" *ngFor="let data of imgArr2" (click)="viewBigImg('2')">
+                    <img [src]="data.AttachmentURL" alt="">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="combtm-css" *ngIf="imgArr3.length">
+        <h2 style="margin-top:20px;">家庭持有的相关困难证件（如低保证等）</h2>
+        <hr>
+        <div class="img-warp overh">
+            <ul id="jq33">
+                <li class="fl overh cp" *ngFor="let data of imgArr3" (click)="viewBigImg('3')">
+                    <p class="overh">
+                        <img [src]="data.AttachmentURL" alt="">
+                    </p>
+                    <span class="dib center img-name">{{data.Caption}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <hr style="margin-top:20px;">
+
+    <button *ngIf="loadingHidden" class="fixed loading-w" nz-button nzLoading nzType="primary" nzShape="circle"></button>
+
+    <p class="center" style="margin-top:20px;">
+        <button nz-button [nzType]="'primary'" style="width: 150px;height:40px;" (click)="goBack()">
+            <span>返回</span>
+        </button>
+    </p>
+</div>

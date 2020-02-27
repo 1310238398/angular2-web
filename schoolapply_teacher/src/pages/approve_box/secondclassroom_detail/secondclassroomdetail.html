@@ -1,0 +1,93 @@
+<ion-content class="index-cont" forceOverscroll={true}>
+
+    <div class="info-cont overh">
+        <div class="fl">
+            <img class="user-header" [src]="dataSet.AvatarUrl" onerror="this.src='assets/images/header.png'">
+        </div>
+        <div class="fl info-detail">
+            <span class="info-detail-name fn16 db">姓名 : {{dataSet.Name}}</span>
+            <span class="db fn14">学号: {{dataSet.UserCode}}</span>
+            <span class="db fn14">学院: {{dataSet.AcademyName}}</span>
+        </div>
+    </div>
+
+
+    <div class="relative titlestatus-box overh">
+        <div class="" *ngIf="dataSet.status == '3'" style="padding:20px 15px 15px;">
+            <p class="fn14" style="color:#FF0000">审批不通过原因</p>
+            <p class="fn14" style="color: #9B9B9B;text-indent:2em">{{dataSet.remarktxt}}</p>
+        </div>
+        <P class="fn18 color4a center" style="margin:15px 0;">{{dataSet.title}}</P>
+
+        <img class="absolute img-css" *ngIf="dataSet.status == '2' && appStatus == '2'" src="assets/images/yiwncheng@2x.png">
+        <img class="absolute img-css" *ngIf="appStatus == '1'" src="assets/images/shenpizhong@2x.png">
+        <img class="absolute img-css" *ngIf="dataSet.status == '3' && appStatus == '2'" src="assets/images/butongguo@2x.png">
+    </div>
+
+
+    <div class="info-box overh">
+        <ul>
+            <li class="css-li">
+                <span class="color9b fn14 info-head">成绩类别 : </span>
+                <span class="color4a fn14 info-span">{{dataSet.PortName}}</span>
+            </li>
+            <li class="css-li">
+                <span class="color9b fn14 info-head">所属项目 : </span>
+                <span class="color4a fn14 info-span">{{dataSet.MainName}}</span>
+            </li>
+            <li class="css-li">
+                <span class="color9b fn14 info-head">所属子项目 : </span>
+                <span class="color4a fn14 info-span">{{dataSet.SubName}}</span>
+            </li>
+            <li class="css-li" *ngIf="dataSet.RewardLevelsCode != 1">
+                <span class="color9b fn14 info-head">名次 : </span>
+                <span class="color4a fn14 info-span">{{dataSet.RewardLevelsName}}</span>
+            </li>
+            <li class="css-li" *ngIf="dataSet.RewardLevelsCode != 1">
+                <span class="color9b fn14 info-head">活动名称 : </span>
+                <span class="color4a fn14 info-span">{{dataSet.ActivityName}}</span>
+            </li>
+            <li class="css-li">
+                <span class="color9b fn14 info-head">参与时间 : </span>
+                <span class="color4a fn14 info-span">{{dataSet.StartDate}}</span>
+            </li>
+            <li class="css-li" *ngIf="dataSet.RewardLevelsCode != 1">
+                <span class="color9b fn14 info-head">获奖时间 : </span>
+                <span class="color4a fn14 info-span">{{dataSet.AwardDate}}</span>
+            </li>
+            <li class="css-li" *ngIf="dataSet.RewardLevelsCode == 1">
+                <span class="color9b fn14 info-head">详细描述 : </span>
+                <span class="color4a fn14 info-span">{{dataSet.Info}}</span>
+            </li>
+
+
+            <li class="css-div">
+                <p class="color9b fn14" style="width: 100%;">证明材料（证书等） : </p>
+                <div class="img-box center">
+                    <p class="fl center" *ngFor="let item of imagepath;let index=index;">
+                        <img (click)="navPreview({time:false,index:index,items:imagepath})" [src]="item.ThumbnailURL"
+                            alt="">
+                    </p>
+                </div>
+            </li>
+
+            <div style="height:2px;"></div>
+            <li class="css-input" *ngIf="scorerank.LimitMax != 0">
+                <span class="color9b fn14 info-head">自定义分数 : </span>
+                <ion-input [(ngModel)]="LeaveApply.CustomScore" name="CustomScore" type="number" class="b-input color4a fn14"></ion-input>
+                <span class="color9b fn14 info-head" style="margin-left:10px;">范围：{{scorerank.LimitMin/100}}-{{scorerank.LimitMax/100}}分</span>
+            </li>
+
+
+        </ul>
+    </div>
+    <div class="center" *ngIf="appStatus == '1'" style="margin-bottom:10px;">
+        <button ion-button class="not-css" outline (click)="notpassTab()">审批不通过</button>
+        <button ion-button class="yes-css" outline [disabled]="numdisb" (click)="passTabBtn()">审批通过</button>
+    </div>
+
+    <div class="center" *ngIf="appStatus == '1'" style="margin-bottom:30px;margin-top: 30px;height:40px;" (click)="gosecondclass()">
+        <span class="colore2 fn14"><u>查看该生第二课堂成绩单</u></span>
+    </div>
+
+</ion-content>

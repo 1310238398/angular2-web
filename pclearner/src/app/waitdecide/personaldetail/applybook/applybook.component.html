@@ -1,0 +1,66 @@
+<div class="content" style="margin-top:20px;">
+
+    <div class="comb-css">
+        <h2 style="margin-top:20px;">家庭经济情况调查表</h2>
+        <hr>
+        <div class="img-warp overh">
+            <img #obx (click)="tankbox(obx.src,data.Caption)" *ngFor="let data of imgArr1" [src]="data.path" alt="">
+        </div>
+    </div>
+
+
+    <div class="comb-css">
+        <h2 style="margin-top:20px;">家庭经济困难学生认定知情同意书</h2>
+        <hr>
+        <div class="img-warp overh">
+            <img #box (click)="tankbox(box.src,data.Caption)" *ngFor="let data of imgArr2" [src]="data.path" alt="">
+        </div>
+    </div>
+
+
+    <div class="combtm-css">
+        <h2 style="margin-top:20px;">家庭持有的相关困难证件（如低保证等）</h2>
+        <hr>
+        <div class="img-warp overh">
+            <div *ngFor="let data of imgArr3" class="img-warp-box fl relative">
+                <img #xob (click)="tankbox(xob.src,data.Caption)" [src]="data.path" alt="">
+                <span class="dib center img-name">{{data.Caption}}</span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <button *ngIf="loadingHidden" class="fixed loading-w" nz-button nzLoading nzType="primary" nzShape="circle"></button>
+
+    <div class="medigo" [hidden]="disdden" (click)="overbox()"></div>
+    <div class="file-box" [hidden]="disdden">
+        <div class="big-img center">
+            <img [src]="topImg.img" alt="">
+            <span class="dib center img-fj">{{topImg.caption}}</span>
+        </div>
+
+        <div class="center" style="height:40px;line-height: 40px;">
+            <button nz-button [nzType]="'primary'" style="width: 100px;height:30px;" (click)="overbox()">
+                <span>返回</span>
+            </button>
+        </div>
+
+    </div>
+
+
+
+    <p class="center" style="margin-top:20px;">
+        <button nz-button [nzType]="'primary'" (click)="historyBack()" style="width:150px;height:40px;">
+            <span>返回</span>
+        </button>
+    </p>
+
+
+
+
+
+
+
+
+</div>

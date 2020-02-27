@@ -1,0 +1,7 @@
+<ion-content class="outer-content">
+     <ion-slides pager   loop=true initialSlide={{index}} (click)="navView()">
+      <ion-slide *ngFor="let item of items">
+        <img  src={{item}}/>
+      </ion-slide>
+    </ion-slides>
+</ion-content>

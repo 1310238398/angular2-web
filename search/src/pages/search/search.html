@@ -1,0 +1,38 @@
+<!--<ion-header>
+    <ion-navbar color="twitter">
+        <ion-title text-center>
+            {{Person.Name}}
+        </ion-title>
+    </ion-navbar>
+</ion-header>-->
+
+<ion-content class="outer-content">
+    <form>
+        <ion-searchbar ion-fixed name="search"  #searchbar [debounce]="350" (ionInput)="search(searchQuery)" placeholder="搜索" [(ngModel)]="searchQuery" type="search" #si></ion-searchbar>
+    </form>
+    <ion-list style="margin-top: 44px">
+
+        <ion-item detail-push *ngFor="let chat of items" (click)="NavigationTo(chat)">
+
+            <!--<h2 [innerHTML]="'<span>姓名：</span>' + chat.Name | sanitizeHtml"></h2>
+            <h2 [innerHTML]="'<span>班级：</span>' + chat.SbiClass | sanitizeHtml"></h2>
+            <p [innerHTML]="chat.Highlighthit | sanitizeHtml"></p>-->
+            <!-- <h2 [innerHTML]="chat.Name | sanitizeHtml"></h2>
+            <h2 [innerHTML]="chat.SbiClass | sanitizeHtml"></h2>
+            <p [innerHTML]="chat.Highlighthit | sanitizeHtml"></p> -->
+            <h2>{{chat.Name}}</h2>
+            <h2>{{chat.SbiClass}}</h2>
+            <p [innerHTML]="chat.Highlighthit | sanitizeHtml"></p>
+        </ion-item>
+
+    </ion-list>
+    <div *ngIf="items.length <= 0" style="text-align: center;margin-top: 30%"><img src="assets/images/1@2x_2.png">没有更多内容！
+    </div>
+    <div *ngIf="items.length >0">
+        <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+        <div style="text-align: center;color: #8e9093;" *ngIf="!moreData">我是有底线的！</div>
+    </div>
+</ion-content>

@@ -1,0 +1,65 @@
+page-index {
+ul,li{list-style: none;margin:0;padding:0;}
+p,h1,h2,h3{margin:0;padding:0;}
+.fl{float: left;}
+.fr{float: right;}
+.center{text-align: center;}
+.dib{display: inline-block;}
+.relative{position: relative;}
+.absolute{position: absolute;}
+.overh{overflow: hidden;}
+.mr{margin:0 auto;}
+.db{display: block;}
+.fn12{font-size: 12px;}
+.fn14{font-size: 14px;}
+.fn16{font-size: 16px;}
+
+.index-cont{color: #3E3E3E;background: #FAFAFA;}
+
+.info-cont{height:120px;background: #fff;padding: 20px 0 0 35px;}
+.user-header{width:60px;height:80px;}
+.info-detail{margin-left: 20px;}
+
+.cognise-class{margin-top:10px;height:30px;line-height: 30px;color: #4A4A4A;}
+
+.cognisebg1{background: #E1E1E1;}
+.cognisebg2{background: #FFE28A;}
+
+.btn-wrap{padding: 0 0 0 10px;}
+
+.tit-num{width: 62px;height:220px;}
+.tit-num .cir-num{width: 32px;height:32px;background: #FFC000;line-height: 32px;color: #fff;border-radius: 32px;box-shadow: -1px -2px 6px 1px }
+.tit-num .bor-dash1{width: 18px;height:29px;border-right:2px dashed #CECECE}
+.tit-num .bor-dash2{width: 18px;height:42px;border-right:2px dashed #CECECE}
+.tit-num .w-bor-dash{width: 30px;height:18px;border-bottom:2px dashed #CECECE}
+
+.info-li{height:53px;}
+.info-li .apply-btn1{width: 70%;height:50px;color: #4a4a4a;box-shadow: 0 2px 5px 0 #E3E3E3;border-radius: 6px;background: #fff;}
+
+.over-off{width: 40px;color: #4a4a4a;height:50px;margin-right:10px;}
+.over-off img{margin:5px auto;}
+.info-li .text-two{line-height: 19px;}
+
+.process-box{margin-top:30px;padding:0 15px;}
+.process-li{padding-left: 10px;color: #4a4a4a;}
+.process-li .didi{width: 5px;height:5px;border-radius: 5px;background: #FFC000;margin:8px 5px;}
+.process-li p{height:20px;line-height: 20px;}
+.proerrbg{background: #FFBFBF;width: 100%;padding:5px 0 5px 15px;}
+.proerrbg1{background: #FFBFBF;width: 93%;margin-left:25px;}
+
+
+.foot-btn-wrap{margin:30px 0;}
+.didi-gray{width: 5px;height:5px;border-radius: 5px;background: #9B9B9B;margin:8px 5px;}
+
+.foot-btn-wrap button{background: #FFC000;border-radius: 6px;width: 250px;height:40px;}
+.remove-css{background: transparent!important;border: 2px solid #FFC000;color: #FFC000;}
+.change-css{color: #4A90E2;text-decoration: underline;margin:10px 0 20px;}
+
+.item-block{height:30px;min-height: 30px;}
+.item-ios [item-right]{margin:0 8px;}
+
+
+
+
+
+}

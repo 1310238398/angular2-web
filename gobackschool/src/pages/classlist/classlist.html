@@ -1,0 +1,59 @@
+<ion-content class="index-cont">
+  <div class="cont-box">
+    <div class="overh head-wrap">
+      <P class="head-title center fn17">{{dataHeadObj.academyname}}</P>
+      <p class="head-cont fn14 center">
+        <span class="col9b">总计人数 : </span>
+        <span>{{dataHeadObj.total}}</span>
+        <span class="col9b" style="margin-left:10px;">已到人数 : </span>
+        <span>{{dataHeadObj.back}}</span>
+        <span class="col9b" style="margin-left:10px;">未到人数 : </span>
+        <span class="fn17" style="color: #FF4E4E;" (click)="goToDetail()">{{dataHeadObj.noback}}</span>
+      </p>
+    </div>
+    <div class="list-cont">
+      <ion-list no-lines>
+        <div class="overh list-li" *ngFor="let data of dataSet" style="margin-bottom:1px;box-shadow: 0 2px 5px 0 #E3E3E3;">
+          <ion-item style="border-bottom:none!important;" (click)="NavigationTo(data.classcode)">
+            <p class="item-start fn15 col4a">
+              <span>{{data.classname}}&nbsp;</span><span class="col9b">----&nbsp;{{data.counselorname}}</span>
+            </p>
+            <p>
+              <span class="fn12 dib col9b" *ngIf="data.notStol != 0" style="margin-right:20px;">{{data.notStol}}人未统计</span>
+              <span class="fn12 dib colf0c" *ngIf="data.notStol == 0" style="margin-right:20px;">统计已完成</span>
+              <span class="fn16 dib colf4e" style="height:16px;line-height: 17px;"> {{data.noback}}</span>
+              <span class="fn12 dib colf4e">人未返校</span>
+            </p>
+            <p class="item-end center" item-end>
+              <img class="fl dib item-end-img" src="assets/images/gengduo.png">
+            </p>
+          </ion-item>
+        </div>
+      </ion-list>
+    </div>
+  </div>
+
+  <p class="absolute email-wrap" *ngIf="sendEmail" (click)="tankBox()"><img src="assets/images/youxiang@2x.png" alt=""></p>
+
+  <div class="medigo fixed" *ngIf="tapBoxSH" (click)="overbox()"></div>
+  <div class="file-box center mr absolute" *ngIf="tapBoxSH">
+    <div class="top-btn center">
+      <h2 style="margin:0 0 10px;">导出未到人员统计明细</h2>
+      <ion-input class="input-box mr fn14" placeholder="请输入想要发送的邮箱地址" type="text" maxlength="30" [(ngModel)]="Email"
+        name="Email" (ngModelChange)="txtChange()"></ion-input>
+      <p class="fn12 col4a" style="padding:0 10px;text-align: left;margin-top:10px;">导出的结果5分钟内即可发送到指定邮箱,如果没有找到相关邮件,请在邮箱的垃圾箱中查找</p>
+    </div>
+    <div class="foot-btn center">
+      <button ion-button color="" outline (click)="overbox()">取消</button>
+      <button ion-button color="secondary" [disabled]="forbbien" (click)="onPassFun()">发送</button>
+    </div>
+  </div>
+
+  <div class="ssc-ov fixed" *ngIf="mengGo"></div>
+  <div class="spinnerw fixed" *ngIf="mengGo" id="spinnerw">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+
+</ion-content>

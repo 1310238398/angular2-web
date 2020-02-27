@@ -1,0 +1,224 @@
+
+.content{
+  background-color:#fafafa;
+  margin: 0;
+  padding: 16px;
+  height: 100%;
+}
+.components-table-demo-control-bar {
+    margin-bottom: 10px;
+  }
+
+  .components-table-demo-control-bar ::ng-deep .ant-form-item {
+    margin-right: 16px;
+    margin-bottom: 8px;
+  }
+  .ant-btn-primary:hover, .ant-btn-primary:focus {
+    color: #fff;
+    background-color: #ffc000;
+    border-color: #ffc000;
+}
+.help_img{
+  background:#efefef;
+  width:24px;
+  height:24px;
+  border-radius:100%;
+
+}
+.help_img img{
+  display: inline-block;
+  width:24px;
+  height:24px;
+
+}
+.search{
+  background:#ffc000;
+  border-radius:4px;
+  width:60px;
+  height:24px;
+  border: none;
+  font-family:PingFangSC-Regular;
+  font-size:16px;
+  color:#ffffff;
+  letter-spacing:0.19px;
+  text-align:left;
+  margin-top: 5px;
+}
+.btn_reset{
+  background:#ffc000;
+  border-radius:4px;
+  width:60px;
+  height:24px;
+  border:none;
+  font-family:PingFangSC-Regular;
+  font-size:16px;
+  color:#ffffff;
+  letter-spacing:0.19px;
+  text-align:left;
+}
+.cont_simple{
+  width:100%;
+
+  border: none;
+  /* margin-left:8%; */
+  background:#ffffff;
+  margin-bottom: 20px;
+}
+
+  .title{
+    font-family:PingFangSC-Regular;
+    font-size:14px;
+    color:#3e3e3e;
+    text-align:left;
+    padding-left: 28px;
+    /* width:331px; */
+    padding-right: 44px;
+    white-space:nowrap;
+    word-break:keep-all;
+    overflow:hidden;
+    text-overflow:ellipsis;
+
+  }
+  .time{
+    font-family:PingFangSC-Regular;
+    font-size:12px;
+    color:#666666;
+    letter-spacing:0;
+    text-align:left;
+    height: 50px;
+  }
+  .ing{
+    font-family:PingFangSC-Regular;
+    font-size:12px;
+    color:#fb5f2d;
+    letter-spacing:0;
+    text-align:right;
+    padding-right: 10px;
+  }
+  .analysis{
+    border:1px solid #d5d5d5;
+    border-radius:2px;
+    width:66px;
+    height:22px;
+    font-family:PingFangSC-Regular;
+    font-size:12px;
+    color:#666666;
+    letter-spacing:0;
+    text-align:center;
+    background-color: white;
+  }
+  .use{
+    font-family:PingFangSC-Regular;
+    font-size:12px;
+    color:#666666;
+    letter-spacing:0;
+    text-align:center;
+  }
+  .use:hover{
+    color: #666666;
+  }
+  .bili{
+    margin-top: 20px;
+  }
+  .btn_analy{
+    margin-top: 22px;
+  }
+
+  /* 蒙层样式 */
+  :host ::ng-deep .ant-modal-body{
+    padding: 0;
+  }
+  .ant-modal-content{
+    width: 370px;
+    height: 320px;
+  }
+
+  :host ::ng-deep .ant-modal-title   {
+    margin: 0;
+    font-size: 16px !important;
+    font-family: PingFangSC-Regular;
+    text-align: center;
+    line-height: 21px;
+    font-weight: 500;
+    color: #3e3e3e ;
+}
+
+  li{
+    /* list-style:circle; */
+    list-style-type:none;
+    list-style-image: url(../../assets/images/Oval.png);
+    font-family:PingFangSC-Regular;
+    font-size:12px;
+    color:#666666;
+    letter-spacing:0;
+    text-align:left;
+    margin-left: 25px;
+    margin-right: 35px;
+  }
+
+  .noOneLi{
+    margin-top: 20px;
+  }
+
+  .null_img{
+    margin-top: 10%;
+    text-align: center;
+  }
+  .null_img img{
+    width: 230px;
+    height: 205px;
+  }
+  .null p{
+    font-family:PingFangSC-Regular;
+    font-size:14px;
+    color:#666666;
+    letter-spacing:0.18px;
+    text-align:center;
+  }
+  :host ::ng-deep .ant-modal-footer {
+    border-top: 0px solid #e9e9e9;
+    text-align: right;
+    border-radius: 0 0 4px 4px;
+}
+
+ :host ::ng-deep .ant-modal-header {
+  border-bottom: 0px solid #e9e9e9;
+}
+
+:host ::ng-deep  nz-spin > div {
+  display: block;
+}
+.Btn_More{
+
+  width: 2000px;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.moreBtn{
+  /* display: block; */
+  border: none;
+  border-radius: 2px;
+  width: 114px;
+  height: 26px;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: white;
+  letter-spacing: 0;
+  text-align: center;
+  background-color: #ffc000;
+  margin-bottom: 30px;
+
+}
+
+.endBtn {
+  display: -webkit-inline-box;
+  width: 114px;
+  height: 26px;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #666666;
+  letter-spacing: 0;
+  text-align: center;
+}

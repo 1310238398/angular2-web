@@ -1,0 +1,24 @@
+<ion-content>
+  <div class="page-tips">
+    重置密码针对于学工忘记了密码且更换了手机号的情况，重置密码后会将密码设置为123456，请通知学工尽快登录后修改密码
+  </div>
+  <div class="line"></div>
+  <div class="search">
+    <p class="search-title">学工用户查询</p>
+    <div class="search-body">
+      <p class="search-label">用户姓名</p>
+      <input type="text" class="input-name" [(ngModel)]="name" (ngModelChange)="onChange($event)" name="name" (blur)="onBlur($event)"
+        placeholder="" />
+      <p *ngIf="nameNull" class="name-tips">请输入用户姓名</p>
+    </div>
+    <div class="search-body">
+      <p class="search-label">所属部门</p>
+      <ion-select okText="确定" cancelText="取消" [(ngModel)]="department" name="department">
+        <ion-option value="{{dept.DepartmentCode}}" *ngFor="let dept of departmentData">{{dept.DepartmentName}}</ion-option>
+      </ion-select>
+    </div>
+    <div style="text-align:center;margin-top:20px">
+      <button ion-button (click)="search()">查询</button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>电子竞技大赛</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" href=""  sizes="20x20">
+    <meta name="viewport"  content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body>
+<div id="app">
+</div>
+<script src="src/assets/lib/antlinker.1.0.4.js"></script>
+<script src="src/assets/lib/mock.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
+<script>
+    var obj = {};
+    antlinker.exeUserBasicInfoSdk(obj, function (obj, success) {
+        s = document.createElement("script");
+        s.setAttribute("src", "/dist/build.js");
+        document.body.appendChild(s);
+    })
+</script>
+</body>
+</html>

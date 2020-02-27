@@ -1,0 +1,41 @@
+page-lottery {
+  .relative-div {
+    margin-top: 30px;
+    position: relative;
+  }
+  .absolute-result {
+    position: absolute;
+    left: 40px;
+    top: 30px;
+    font-size: 1em;
+  }
+
+  .po-img {
+    position: fixed;
+    width: 80px;
+    top: 50%;
+    left: 50%;
+    margin-left: -40px;
+    height: 70px;
+  }
+  .num {
+    font-size: 9em;
+    text-align: center;
+  }
+  //android,
+  @media(min-width: 375px) {
+    .num {
+      font-size: 9em;
+      text-align: center;
+      margin-left: 5px;
+    }
+  }
+  //iphone6,6s,
+  @media(min-width: 412px) {
+    .num {
+      font-size: 9em;
+      text-align: center;
+      margin-left: 15px;
+    }
+  }
+}

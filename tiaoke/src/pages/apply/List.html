@@ -1,0 +1,14 @@
+<ion-content class="outer-content">
+    <ion-list>
+        <button *ngFor="let item of applylist" ion-item class="sign"
+                [ngClass]="{signp:item.Status == 0,signc:item.Status == 1,signz:item.Status == 2,signs:item.Status == 3}" (click)="toUrl(item)">
+            <h2>{{item.CourseName}}</h2>
+            <h3>{{item.InsertDatetime}}</h3>
+        </button>
+    </ion-list>
+</ion-content>
+<ion-footer>
+    <ion-toolbar color="light">
+        <button ion-button full class="yellow" [navPush]="addLessonPage">调课申请</button>
+    </ion-toolbar>
+</ion-footer>

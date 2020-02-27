@@ -1,0 +1,39 @@
+<ion-content class="index-cont">
+    <div *ngIf="Record.length<=0" class="none">
+        <img class="noneimg" src="assets/images/kong.png">
+        <div class="noneFont">暂无更多内容</div>
+    </div>
+
+    <h2 class="color4a center fn16" style="margin-top:15px;">我的申请</h2>
+    <div style="margin-top:30px;z-index: 3000;" class="fn12 color4a">
+        <div *ngFor=" let item of Record">
+            <div *ngIf="item.type == 'pushclass'" style="margin-top:15px;">
+                <h2 class="color4a fn12" style="margin-left: 15px;">移出班级申请记录</h2>
+                <div class="shenpizhong-2 hr" style="margin-top:2px;">
+                    <span style="margin-left: 15px;">原{{item.ClassName}}</span>
+                    <span style="margin-left: 10px;">{{item.Name}} ({{item.UserCode}})</span>
+                    <span style="float: right; margin-right: 15px; color: #9B9B9B;">审批中</span>
+                </div>
+            </div>
+            <div *ngIf="item.type == 'changeclass'" style="margin-top:15px;">
+                <h2 class="color4a fn12" style="margin-left: 15px;">调班申请记录</h2>
+                <div class="shenpizhong-1 hr" style="margin-top:2px;">
+                    <span style="margin-left: 15px;">现班级人数：{{item.peoplenum}}+1</span>
+                </div>
+                <div class="shenpizhong-2 hr">
+                    <span style="margin-left: 15px;">原{{item.ClassName}}</span>
+                    <span style="margin-left: 10px;">{{item.Name}} ({{item.UserCode}})</span>
+                    <span style="float: right; margin-right: 15px; color: #9B9B9B;">审批中</span>
+                </div>
+            </div>
+
+        </div>
+        <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+        <div style="text-align: center;color: #8e9093;margin-top: 5px;" *ngIf="!moreData && Record.length">我是有底线的！</div>
+    </div>
+
+
+</ion-content>

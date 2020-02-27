@@ -1,0 +1,99 @@
+<ion-content>
+    <div class="xinxi">
+        <p class="fontw">{{schoolName||'尚未配置学校名称参数'}}学籍登记表</p>
+        <p class="fontq">请认真填写学籍登记表，此表将会放入您的档案</p>
+
+    </div>
+
+    <div>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft" fixed>院系</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" [(ngModel)]="InformationFilling.Academy" type="text"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft" fixed>年级</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="InformationFilling.Grade" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft" fixed>专业</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="InformationFilling.Major" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">班级</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="InformationFilling.Class" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiaow">
+                <div class="input-file">
+                    <div class="xinxileftble">
+                        <span class="photoq">上传照片</span>
+
+                        <span class="photow">1、上传本人蓝色背景证件照</span>
+                        <span class="photowr">2、照片不大于2M</span>
+
+                    </div>
+
+
+                    <input class="file" accept="image/*" type="file" (change)="handleFiles($event)" />
+                    <!-- <span class="xujia">{{fileDefaultName}}</span> -->
+                    <div class="xujia">
+                        <img *ngIf="filesrc" [src]="filesrc" class="img-card"></div>
+
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">姓名</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="InformationFilling.Name" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">性别</ion-label>
+                <ion-select [(ngModel)]="InformationFilling.Sex" interface="action-sheet" cancelText="取消" okText="确定" placeholder="请选择">
+                    <!-- <ion-option [value]='item.Code' *ngFor="let item of SexTypes">{{item.CodeName}}
+                    </ion-option> -->
+                    <ion-option value="1">男</ion-option>
+                    <ion-option value="0">女</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+
+
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">出生年月</ion-label>
+                <!--<ion-input class="xinxiright " placeholder="请选择 "></ion-input>-->
+                <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY MMM DD" monthShortNames="1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月 " [(ngModel)]="InformationFilling.Birthday" doneText="完成" cancelText="取消" placeholder="请选择"></ion-datetime>
+
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">政治面貌</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="InformationFilling.Political" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+
+        </ion-list>
+    </div>
+
+    <button ion-button (click)="onDetailPage() " class="btn-shaw">
+          下一步
+      </button>
+    <div class="yeshu">
+        1/5
+    </div>
+</ion-content>

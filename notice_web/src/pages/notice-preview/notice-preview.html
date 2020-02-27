@@ -1,0 +1,63 @@
+<ion-header no-border no-shadow style="height: 40px;">
+    <div class="page-back">
+        <button (click)="goBack()">< 返回</button>
+    </div>
+</ion-header>
+<ion-content>
+<div *ngIf="notice">
+    <!--<div class="page-back"><button (click)="goBack()">< 返回</button></div>-->
+    <div class="contentDiv" *ngIf="mustdesc">
+        <!--<p>{{mustdesc}}</p>-->
+    </div>
+    <p class="noticeTitle">{{notice.MUSTTITLE}}</p>
+    <p class="creator">发布部门：{{notice.DEPTNAME}}</p>
+    <p class="time">{{fomateTime(notice.MUSTTIME)}}</p>
+
+    <!--<div>
+        <a href='{{attachment.FileLink}}' *ngFor="let attachment of notice.ATTACHMENTS" download>{{attachment.FileName}}</a>
+    </div>-->
+    <HR class="separate">
+    <!--<p class="content">{{notice.MUSTDESC}}</p>-->
+    <div class="contentDiv">
+        <div id="editor2" [innerHTML]="notice.MUSTDESC | sanitizeHtml"> </div>
+    </div>
+
+    <div class="default-div-border" [hidden]="notice.ATTACHMENTS.length === 0 ? true : false">
+        <img src="assets/image/附件.png"><span class="">附件</span> 
+        <ion-list>
+            <ion-item *ngFor="let attachment of notice.ATTACHMENTS">
+                <img  [src]="attachment.FileName | fileNameToTypeImageUrl" style="float: left;margin-right: 10px;"
+                />
+                <h2>{{attachment.FileName}}</h2>
+                <p>{{attachment.FileSize | toReadableSize}}</p>
+                <ion-avatar item-right>
+                    <a href='/{{attachment.FileLink}}' download><img src="assets/image/下载.png"></a>
+                </ion-avatar>
+            </ion-item>
+        </ion-list>
+    </div>
+    <div>
+        <!--<HR class="separate">-->
+        <div class="users"><span class="tip1">通知对象：<span *ngIf='selectedNum' class="recive">（去重后已选择{{selectedNum||''}}人）</span></span><span class="user" *ngFor="let user of notice.RECEIVEOBJECTS">{{user.NAME}}</span></div>
+
+        <div class="margin-div">
+            <p class="time2"><span class="tip1">有效期至: </span >{{fomateTime(notice.VALIDTIME,true)}}</p>
+
+            <p class="time2" [hidden]="notice.ISREMIND === '0' ? true: false"><span class="tip1">特定的提醒时间: </span>{{fomateTime(notice.REMINDTIME)}}</p>
+        </div>
+
+    </div>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+</ion-content>
+<ion-footer style="height: 50px;">
+    <div class="button-div">
+        <button class="button2" [style.background-color]="createAvalible ? '#ea9e21' : '#666666'" (click)="saveNotice()">确认并发布</button>
+    </div>
+</ion-footer>
+
+

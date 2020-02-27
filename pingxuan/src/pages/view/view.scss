@@ -1,0 +1,36 @@
+page-view{
+  .content-ios.outer-content{
+    background-color: #FFF;
+  }
+  .card-ios{
+    margin: 0px;
+    width: 100%;
+  }
+  .mwbor{
+    margin-bottom: 70px;
+  }
+  //beige
+  ion-slides{
+    background-color:beige ;
+  }
+  .ps{
+    margin: 0;
+    text-align: center;
+  }
+  .card-ios{
+    box-shadow: none;
+  }
+  .mwimg{
+    max-height: 250px;
+    width:auto;
+  }
+  .card-header h1,.card-header h2{
+    text-align: left;
+    word-break: break-all;
+    work-wrap: break-word;
+    white-space: normal;
+  }
+  video{
+    max-height: 250px;
+  }
+}

@@ -1,0 +1,46 @@
+<div class="content">
+  <div class="title content text-center font20">请假缺勤人员</div>
+  <div class="text-right" style="margin-bottom: 4px"><button nz-popconfirm nzTitle="确定要导出吗?" (nzOnConfirm)="export()" [disabled]="isDisabled" nz-button nzType="primary">导出</button></div>
+    <div class="outer">
+        <nz-table #nzTable [nzData]="dataSet" [nzFrontPagination]="false" [nzShowPagination]="false"  [nzBordered]="true">
+            <thead nz-thead>
+                <tr>
+                    <th><span>学号</span></th>
+                    <th><span>姓名</span></th>
+                    <th><span>学院</span></th>
+                    <th><span>专业</span></th>
+                    <th><span>年级</span></th>
+                    <th><span>班级</span></th>
+                    <th><span>联系电话</span></th>
+                    <th><span>开始时间</span></th>
+                    <th><span>结束时间</span></th>
+                    <th><span>状态</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of nzTable.data">
+                    <td>{{data.UserCode}}</td>
+                    <td>{{data.Name}}</td>
+                    <td>{{data.AcademyName}}</td>
+                    <td>{{data.MajorName}}</td>
+                    <td>{{data.GradeName}}</td>
+                    <td>{{data.ClassName}}</td>
+                    <td>{{data.EmergencyNumber}}</td>
+                    <td>{{data.StartDate}}</td>
+                    <td>{{data.EndDate}}</td>
+                    <td [ngSwitch]="data.Status">
+                        <span *ngSwitchCase="'0'" style="color: #0025ff">已取消请假</span>
+                        <span *ngSwitchCase="'1'" style="color: red">待审核</span>
+                        <span *ngSwitchCase="'2'" style="color: red">待销假</span>
+                        <span *ngSwitchCase="'3'" style="color: #0025ff">已销假</span>
+                        <span *ngSwitchCase="'4'" style="color: #0025ff">请假未批准</span>
+                        <span *ngSwitchCase="'5'" style="color: #0025ff">正销假</span>
+                        <span *ngSwitchCase="'6'" style="color: #0025ff">销假未批准</span>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+</div>
+<a [routerLink]="['/']"><img class="b-cancle" src="assets/images/back.png" ></a>

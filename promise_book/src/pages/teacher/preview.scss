@@ -1,0 +1,51 @@
+preview {
+  .scroll-content {
+    background-color: #ffffff;
+  }
+  ion-content {
+    .btn {
+      display: block;
+      width: 100%;
+      background: #ffc000;
+      border-radius: 0px;
+      height: 40px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      font-size: 16px;
+      color: #ffffff;
+      text-align: center;
+    }
+  }
+  .toolbar-ios {
+    padding: 0px;
+    height: 40px !important;
+  }
+  .toolbar-md {
+    padding: 0px;
+    height: 40px !important;
+  }
+  .toolbar-background-md {
+    border-color: #ffc000 !important;
+    background: #ffc000 !important;
+  }
+  .toolbar-title-md {
+    text-align: center;
+    font-size: 16px !important;
+    color: #ffffff !important;
+  }
+  .footer-ios .toolbar-background-ios {
+    border-style: solid;
+    border-color: #ffc000 !important;
+  }
+  .toolbar-background-ios {
+    background: #ffc000 !important;
+  }
+  .toolbar-title-ios {
+    text-align: center;
+    font-size: 16px !important;
+    color: #ffffff !important;
+    pointer-events: auto;
+  }
+}

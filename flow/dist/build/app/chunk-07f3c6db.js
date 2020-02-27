@@ -1,0 +1,2 @@
+/*! Built with http://stenciljs.com */
+const{h:t}=window.App;import{a as s}from"./chunk-f40e6196.js";class a{constructor(){this.title="",this.content="",this.apply_date=s.getDate(),this.audit_comment="",this.action=""}}export{a};

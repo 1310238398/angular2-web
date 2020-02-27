@@ -1,0 +1,69 @@
+page-cadre {
+  .scroll-content {background-color: #f5f5f5;margin: 0px;overflow-y: auto;}
+
+  ul,li,p {margin: 0px;padding: 0px;}
+  .fl{float: left;}
+  .fr{float: right;}
+  .center{text-align: center;}
+  .dib{display: inline-block;}
+  .db{display: block;}
+  .relative{position: relative;}
+  .absolute{position: absolute;}
+  .middle{vertical-align: middle;}
+  .fixed{position: fixed}
+  .overh{overflow: hidden;}
+  .mr{margin:0 auto;}
+  .db{display: block;}
+  .fn9{font-size: 9px;}
+  .fn12{font-size: 12px;}
+  .fn13{font-size: 13px;}
+  .fn14{font-size: 14px;}
+  .fn16{font-size: 16px;}
+  .fn18{font-size: 18px;}
+
+  .info_list {.item.item-ios .checkbox-ios {position: static;display: block;margin: 8px 0px 8px 2px;}}
+  .username {font-size: 14px;color: #666666;margin-left:10px;}
+  .useraddress {font-size: 13px;color: #909090;text-align:right;margin:0px!important;}
+  .toolbar-title-ios {text-align: center;pointer-events: auto;}
+  .info_list .label-ios{margin:9px 0;}
+  .item-ios.item-block .item-inner{padding-right:0px;}
+
+  .info_list .item-block{border-bottom: 1px solid #c8c7cc;}
+
+  .wain-txt{padding:8px;color: #4A4A4A;background: #fff;border-bottom:0.55px solid #c8c7cc;text-indent: 2em;margin-bottom:8px;}
+
+  .toolbar-background-ios {background: #FFC000;}
+  .footer-ios .toolbar-background-ios {border-style: solid;border-color: #FFC000;}
+  .button-ios {width: 100%;border-radius: 4px;height: 40px;line-height: 40px;font-size: 2rem;color: #fff;background: #FFC000;margin: 0px;padding: 0px;}
+  .button-ios.activated {background-color: #FFC000;opacity: 1;}
+
+.tabStatus{width: 280px;padding-bottom:10px;border-radius:10px;background: #fff;z-index: 9999;top:50%;margin-top:-210px;left:50%;margin-left:-140px;box-shadow: 1px 1px 5px  #ccc;}
+.tabStatus-title{height:35px;line-height: 35px;font-weight: 600;}
+.tabStatus .tabStatus-li{border-bottom:1px solid #ccc;padding:0px 20px;color: #666666;}
+.list-ios .item-block .item-inner{border-bottom:none;}
+.tabStatus .item-block{min-height: 0rem;height:40px;}
+.tabStatus .button-ios{width:100px;margin:0 10px;height:35px;line-height: 35px;}
+
+
+.tabStatus-btn-wrap button:nth-child(1){background: transparent;border:1px solid #ffc000;color: #ffc000;}
+.toolbar-content-ios{text-align: center;}
+.ssc-ov{top:0;left: 0;width:100%;height:100%;opacity: 0.3;background: #4A4A4A;z-index: 9999;}
+.tabStatus .list-ios{margin:-1px 0 15px;height:285px;overflow-y: auto;}
+
+.status-img{width:25px;vertical-align: middle;margin-right:10px;}
+.what-img{width:16px;top:12px;right:30px;z-index: 1001;}
+.item-ios .radio-ios{margin:8px 0 8px 3px;}
+.info_list .label-ios{padding-right:20px;}
+
+.ion-footer{height:48px;overflow: hidden;}
+
+
+
+
+
+
+
+
+
+
+}

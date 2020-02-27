@@ -1,0 +1,22 @@
+.fl{float: left;}
+.fr{float: right;}
+.center{text-align: center;}
+.dib{display: inline-block;}
+.overh{overflow: hidden;}
+.relative{position: relative;}
+.absolute{position: absolute;}
+.fn14{font-size: 14px;}
+.fn16{font-size: 16px;}
+.mr{margin:0 auto}
+.bold{font-weight: bold;}
+
+
+
+
+
+.speak-message{width: 600px;height:150px;resize:none;border-radius: 4px;border:1px solid #d9d9d9;padding:0 7px;}
+.file-num2{bottom:5px;right:10px;}
+.footer-btn button{width: 120px;height:35px;margin:50px 20px;}
+
+
+.ant-checkbox{display: block!important;text-align: left!important;}

@@ -1,0 +1,21 @@
+<ion-content class="bgb" padding>
+  <div class="relative-div">
+    <div class="absolute-result">
+      <ion-row>
+        <ion-col align-self: center>
+          <div class="num">{{Atext}}</div>
+        </ion-col>
+        <ion-col>
+          <div class="num">{{Btext}}</div>
+        </ion-col>
+        <ion-col>
+          <div class="num">{{Ctext}}</div>
+        </ion-col>
+      </ion-row>
+        <img *ngIf="Flag" class="po-img" src="assets/images/chouqian@2x.png" (click)="stop()">
+        <img *ngIf="!Flag" class="po-img" src="assets/images/yichouqian@2x.png">
+    </div>
+    <img src="assets/images/11@2x.png">
+  </div>
+  <p class="bl t-center"><a href="http://www.antlinker.com/download/index.html" class="yg">校园集结号</a>提供技术支持</p>
+</ion-content>

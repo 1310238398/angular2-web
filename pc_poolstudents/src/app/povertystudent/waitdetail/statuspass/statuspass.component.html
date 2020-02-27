@@ -1,0 +1,33 @@
+<div class="content">
+    <p style="color: #FF0000;" class="center">请在查看过学生申请所需资料、家庭情况调查问卷、学生自评调查问卷后做出统一的审批</p>
+    <h2 style="margin:15px auto;" class="center">是否通过该学生提交的认定信息</h2>
+
+    <div class="pass-cont" style="margin:0 auto">
+        <div class="top-btn center">
+            <img class="cp" [src]="dataSet.BgStyle1" alt="" (click)="onoff(1)">
+            <img class="cp" [src]="dataSet.BgStyle2" alt="" (click)="onoff(2)" style="margin:0 20px;">
+        </div>
+
+        <div class="relative" style="margin:20px 0 0px;">
+            <p style="margin:5px 0;">
+                <span class="fn14 bold">审批原因 </span>
+                <span style="color:#434B50;">(审批不通过时必填)</span>
+            </p>
+            <textarea class='message-box' #textarea name="fileNews" [(ngModel)]="dataSet.RefuseReason" (ngModelChange)="txtChange(textarea.value)"
+                maxlength="50" cols="1" rows="1"></textarea>
+            <p class="file-num absolute">{{values}}</p>
+        </div>
+        <p class="fn12 center" style="color: #999;margin-bottom:20px;">审批通过学生的认定资料会移动到【待认定】功能中，请在【待认定】中认定学生的困难情况</p>
+
+        <div class="foot-btn center">
+            <a [routerLink]="['/poverty']">
+                <button nz-button [nzType]="'default'" (click)="reset()">
+                    <span>返回</span>
+                </button>
+            </a>
+            <button nz-button [nzType]="'primary'" style="margin:0 20px;" (click)="onSearch()">
+                <span>确定</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="modal-header">
+  <div class="modal-title">修改-学生状态</div>
+</div>
+<form nz-form [formGroup]="validateForm" #f="ngForm">
+  <div nz-form-item nz-row>
+    <div nz-col [nzSpan]="7" nz-form-label>
+      <label>当前状态</label>
+    </div>
+    <div nz-col [nzSpan]="12" nz-form-control>
+      {{currentStatus||''}}
+    </div>
+  </div>
+  <div nz-form-item nz-row>
+    <div nz-col [nzSpan]="7" nz-form-label>
+      <label nz-form-item-required>变更为</label>
+    </div>
+    <div nz-col [nzSpan]="12" nz-form-control>
+      <nz-select [nzPlaceHolder]="''" formControlName="StudentStatus" [(ngModel)]="item.StudentStatus"
+                 name="StudentStatus" required>
+        <nz-option *ngFor="let opt of StudentStatus" [nzLabel]="opt.ItemName" [nzValue]="opt.ItemCode">
+        </nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <div nz-form-item nz-row>
+    <div nz-col [nzSpan]="7" nz-form-label>
+      <label nz-form-item-required>备注(原因)</label>
+    </div>
+    <div nz-col [nzSpan]="12" nz-form-control>
+      <nz-input [nzRows]="2" formControlName="Remark" [nzType]="'textarea'" [(ngModel)]="item.Remark"
+                [nzPlaceHolder]="'例：（参军）'" [nzSize]="'large'">
+      </nz-input>
+      <div nz-form-explain *ngIf="getFormControl('Remark').dirty&&getFormControl('Remark').hasError('required')">
+        备注(原因)是必填的!
+      </div>
+      <div nz-form-explain *ngIf="getFormControl('Remark').dirty&&getFormControl('Remark').hasError('maxlength')">
+        备注(原因)25字以内!
+      </div>
+    </div>
+  </div>
+</form>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+  <button nz-button [disabled]="!f.form.valid || !f.form.dirty||disabled" [nzType]="'primary'" (click)="save()">保存
+  </button>
+</div>

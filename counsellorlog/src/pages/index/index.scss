@@ -1,0 +1,30 @@
+page-index {
+    body{ -webkit-overflow-scrolling: touch;}
+    ul,li{list-style: none;margin:0;padding:0;}
+    p,h1,h2,h3{margin:0;padding:0;}
+    .fl{float: left;}
+    .fr{float: right;}
+    .center{text-align: center;}
+    .dib{display: inline-block;}
+    .relative{position: relative;}
+    .absolute{position: absolute;}
+    .fixed{position: fixed}
+    .right{text-align: right;}
+    .overh{overflow: hidden;}
+    .mr{margin:0 auto;}
+    .db{display: block;}
+    .fn9{font-size: 9px;}
+    .fn12{font-size: 12px;}
+    .fn14{font-size: 14px;}
+    .fn16{font-size: 16px;}
+    .color4a{color: #4A4A4A;}
+    
+    .index-cont{background: #FAFAFA;color: #4A4A4A;}
+
+    .cont-box{width: 100%;overflow-y: auto;top: 0;bottom: 0; -webkit-overflow-scrolling: touch;}
+    .index-cont .list-ios{margin:-1px 0 15px}
+    .index-cont .class-title{color: #4A4A4A!important;height:18px;line-height: 16px;margin-bottom:5px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+    .index-cont .gray-c{color: #9B9B9B;}
+    
+    .creat-btn{background:#ffc000;height:40px;line-height: 40px;color:#fff;}
+}

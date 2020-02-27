@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>chart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+
+<body>
+    <div id="main" style="height:400px;"></div>
+    <div id="main1" style="height:400px;"></div>
+    <div id="main2" style="height:400px;"></div>
+    <div id="main3" style="height:400px;"></div>
+    <div id="main4" style="height:400px;"></div>
+    <div id="main5" style="height:400px;"></div>
+    <script src="echarts.min.js"></script>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script>
+        var getRecordCount = 8;
+        var device_id = 'aaa';
+        var timeTicket1;
+        var timeTicket2;
+        var timeTicket3;
+        var timeTicket4;
+        var timeTicket5;
+        var timeTicket6;
+        //热电偶温度
+        var a1 = [];
+        var a1x = [];
+        //加速度
+        var a2 = [];
+        var a2x = [];
+        //陀螺仪
+        var a3 = [];
+        var a3x = [];
+        //电磁感应计
+        var a4 = [];
+        var a4x = [];
+        //气压计
+        var a5 = [];
+        var a5x = [];
+        //电阻变应片
+        var a6 = [];
+        var a6x = [];
+        //获取前一天的时间
+        //new Date(new Date(-24*60*60*1000))
+        var timestamp = Date.parse(new Date());
+        console.log(timestamp)
+        var text = new Date(timestamp - 0.1 * 60 * 60 * 1000);
+        //var text = new Date(timestamp);
+        console.log(text)
+        var myDate = new Date(text);
+        console.log(myDate)
+        var seperator2 = ":";
+        var year = myDate.getFullYear();
+        console.log(year);
+        var month = myDate.getMonth() + 1;
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        var day = myDate.getDate();
+        if (day >= 0 && day <= 9) {
+            day = "0" + day;
+        }
+        var hours = myDate.getHours();
+        var minutes = myDate.getMinutes();
+        var seconds = myDate.getSeconds();
+        var timestamp = new Date().getTime();
+        var quan = year + "-" + month + "-" + day + " " + hours + seperator2 + minutes + seperator2 + seconds;
+        console.log(quan)
+
+        var req = {
+            device_id: device_id,
+            count: getRecordCount,
+            start_datetime: quan,
+        };
+
+        var latestDatetime;
+
+        var initChartByOption = function(chart, option) {
+            chart.setOption(option);
+            $.ajax({
+                data: req,
+                type: 'get',
+                url: "/getRecentDataByDeviceIdAndStartDatetimeAndCount",
+                dataType: 'json',
+                success: function(msg) {
+                    a1 = msg.Result[0];
+                    if (chart._dom.id == 'main') {
+                        var dataX = option.series[0].data;
+
+                        for (i = 0; i < a1.length; i++) {
+                            dataX.push(a1[i].Value);
+                        }
+                        for (i = 0; i < a1.length; i++) {
+                            option.xAxis[0].data.push(a1[i].InsertDatetime);
+                        }
+                        latestDatetime = a1[a1.length - 1].InsertDatetime;
+                        chart.setOption(option);
+                        clearInterval(timeTicket1);
+                        timeTicket1 = setInterval(function() {
+                            $.ajax({
+                                data: {
+                                    device_id: device_id,
+                                    count: 1,
+                                    start_datetime: latestDatetime,
+                                },
+                                type: 'get',
+                                url: "/getRecentDataByDeviceIdAndStartDatetimeAndCount",
+                                dataType: 'json',
+                                async: false,
+                                success: function(msg) {
+                                    parseMsgToAxis1(chart, msg, option);
+                                }
+                            });
+                        }, 2100);
+                    };
+                    if (chart._dom.id == 'main1') {
+                        var dataX = option.series[0].data;
+                        var dataY = option.series[1].data;
+                        var dataZ = option.series[2].data;
+                        a2 = msg.Result[1];
+                        for (i = 0; i < a2.length; i++) {
+                            option.xAxis[0].data.push(a2[i].InsertDatetime);
+                        }
+                        for (i = 0; i < a2.length; i++) {
+                            dataX.push(a2[i].AcceRx);
+                            dataY.push(a2[i].AcceRy);
+                            dataZ.push(a2[i].AcceRz);
+                        }
+                        latestDatetime1 = a2[a2.length - 1].InsertDatetime;
+                        clearInterval(timeTicket2);
+                        timeTicket2 = setInterval(function() {
+                            console.log(latestDatetime1);
+                            $.ajax({
+                                data: {
+                                    device_id: device_id,
+                                    count: 1,
+                                    start_datetime: latestDatetime1,
+                                },
+
+                                type: 'get',
+                                url: "/getRecentDataByDeviceIdAndStartDatetimeAndCount",
+                                dataType: 'json',
+                                async: false,
+                                success: function(msg) {
+                                    parseMsgToAxis2(chart, msg, option);
+                                }
+                            });
+                        }, 2100);
+                    };
+                    if (chart._dom.id == 'main2') {
+                        var dataX = option.series[0].data;
+                        var dataY = option.series[1].data;
+                        var dataZ = option.series[2].data;
+                        a3 = msg.Result[2];
+                        for (i = 0; i < a3.length; i++) {
+                            option.xAxis[0].data.push(a3[i].InsertDatetime);
+                        }
+                        for (i = 0; i < a3.length; i++) {
+                            dataX.push(a3[i].GyroRx);
+                            dataY.push(a3[i].GyroRy);
+                            dataZ.push(a3[i].GyroRz);
+                        }
+                        latestDatetime2 = a3[a3.length - 1].InsertDatetime;
+                        clearInterval(timeTicket3);
+                        timeTicket3 = setInterval(function() {
+
+                            $.ajax({
+                                data: {
+                                    device_id: device_id,
+                                    count: 1,
+                                    start_datetime: latestDatetime2,
+                                },
+                                type: 'get',
+                                url: "/getRecentDataByDeviceIdAndStartDatetimeAndCount",
+                                dataType: 'json',
+                                async: false,
+                                success: function(msg) {
+                                    parseMsgToAxis3(chart, msg, option);
+                                }
+                            });
+                        }, 2100);
+                    };
+                    if (chart._dom.id == 'main3') {
+                        var dataX = option.series[0].data;
+                        var dataY = option.series[1].data;
+                        var dataZ = option.series[2].data;
+                        a4 = msg.Result[3];
+                        for (i = 0; i < a4.length; i++) {
+                            option.xAxis[0].data.push(a4[i].InsertDatetime);
+                        }
+                        for (i = 0; i < a4.length; i++) {
+                            dataX.push(a4[i].MegnX);
+                            dataY.push(a4[i].MegnY);
+                            dataZ.push(a4[i].MegnZ);
+                        }
+                        latestDatetime3 = a4[a4.length - 1].InsertDatetime;
+                        clearInterval(timeTicket4);
+                        timeTicket4 = setInterval(function() {
+                            $.ajax({
+                                data: {
+                                    device_id: device_id,
+                                    count: 1,
+                                    start_datetime: latestDatetime3,
+                                },
+                                type: 'get',
+                                url: "/getRecentDataByDeviceIdAndStartDatetimeAndCount",
+                                dataType: 'json',
+                                async: false,
+                                success: function(msg) {
+                                    parseMsgToAxis4(chart, msg, option);
+                                }
+                            });
+                        }, 2100);
+                    };
+                    if (chart._dom.id == 'main4') {
+                        var dataX = option.series[0].data;
+                        a5 = msg.Result[4];
+                        for (i = 0; i < a5.length; i++) {
+                            option.xAxis[0].data.push(a5[i].InsertDatetime);
+                        }
+                        for (i = 0; i < a5.length; i++) {
+                            dataX.push(a5[i].Value);
+                        }
+                        latestDatetime4 = a5[a5.length - 1].InsertDatetime;
+                        clearInterval(timeTicket5);
+                        timeTicket5 = setInterval(function() {
+                            $.ajax({
+                                data: {
+                                    device_id: device_id,
+                                    count: 1,
+                                    start_datetime: latestDatetime4,
+                                },
+                                type: 'get',
+                                url: "/getRecentDataByDeviceIdAndStartDatetimeAndCount",
+                                dataType: 'json',
+                                async: false,
+                                success: function(msg) {
+                                    parseMsgToAxis5(chart, msg, option);
+                                }
+                            });
+                        }, 2100);
+                    };
+                    if (chart._dom.id == 'main5') {
+                        var dataX = option.series[0].data;
+                        a6 = msg.Result[5];
+                        for (i = 0; i < a6.length; i++) {
+                            option.xAxis[0].data.push(a6[i].InsertDatetime);
+                        }
+                        for (i = 0; i < a6.length; i++) {
+                            dataX.push(a6[i].Value);
+                        }
+                        latestDatetime5 = a5[a5.length - 1].InsertDatetime;
+                        clearInterval(timeTicket6);
+                        timeTicket6 = setInterval(function() {
+
+                            $.ajax({
+                                data: {
+                                    device_id: device_id,
+                                    count: 1,
+                                    start_datetime: latestDatetime5,
+                                },
+                                type: 'get',
+                                url: "/getRecentDataByDeviceIdAndStartDatetimeAndCount",
+                                dataType: 'json',
+                                async: false,
+                                success: function(msg) {
+                                    parseMsgToAxis6(chart, msg, option);
+                                }
+                            });
+                        }, 2100);
+                    }
+
+                    // 设置最新的时间为最后一条数据的时间
+                    // latestDatetime = a1[a1.length - 1].InsertDatetime;
+                    console.log("现在是" + latestDatetime);
+                    // 设置定时器定期获取数据，将最后一条数据的时间传到服务器，在回调函数中将数据添加到展示界面
+                    // parseMsgToAxis(chart, option, a1);
+
+                },
+                // error: function(errorMsg) {
+                //     alert("数据请求失败");
+                // }
+            });
+        };
+        var parseMsgToAxis1 = function(chart, msg, option) {
+
+            if (chart._dom.id == 'main') {
+                latestDatetime = msg.Result[0][0].InsertDatetime;
+
+                var dataX = option.series[0].data;
+
+                // var dataY = option1.series[1].data;
+                //热电偶温度
+                a1 = msg.Result[0];
+                for (i = 0; i < a1.length; i++) {
+                    dataX.push(a1[i].Value);
+                    dataX.shift();
+
+                    option.xAxis[0].data.push(a1[i].InsertDatetime);
+                    option.xAxis[0].data.shift();
+                    chart.setOption(option);
+
+                }
+                latestDatetime = a1[a1.length - 1].InsertDatetime;
+            }
+        };
+        var parseMsgToAxis2 = function(chart, msg, option) {
+
+            if (chart._dom.id == 'main1') {
+                latestDatetime1 = msg.Result[1][0].InsertDatetime;
+
+                var dataX = option.series[0].data;
+                var dataY = option.series[1].data;
+                var dataZ = option.series[2].data;
+                a2 = msg.Result[1];
+                for (i = 0; i < a2.length; i++) {
+                    dataX.push(a2[i].AcceRx);
+                    dataX.shift();
+                    dataY.push(a2[i].AcceRy);
+                    dataY.shift();
+                    dataZ.push(a2[i].AcceRz);
+                    dataZ.shift();
+
+                    option.xAxis[0].data.push(a2[i].InsertDatetime);
+                    option.xAxis[0].data.shift();
+                    chart.setOption(option);
+                }
+                latestDatetime1 = a2[a2.length - 1].InsertDatetime;
+            }
+        };
+        var parseMsgToAxis3 = function(chart, msg, option) {
+
+            if (chart._dom.id == 'main2') {
+
+                latestDatetime2 = msg.Result[2][0].InsertDatetime;
+
+                var dataX = option.series[0].data;
+                var dataY = option.series[1].data;
+                var dataZ = option.series[2].data;
+                a3 = msg.Result[2];
+                for (i = 0; i < a3.length; i++) {
+                    dataX.push(a3[i].GyroRx);
+                    dataX.shift();
+                    dataY.push(a3[i].GyroRy);
+                    dataY.shift();
+                    dataZ.push(a3[i].GyroRz);
+                    dataZ.shift();
+
+                    option.xAxis[0].data.push(a3[i].InsertDatetime);
+                    option.xAxis[0].data.shift();
+                    chart.setOption(option);
+                }
+
+                latestDatetime2 = a3[a3.length - 1].InsertDatetime;
+            }
+
+
+            // for (i = 0; i < a1.length; i++) {
+            //  option.xAxis[0].data.push(a1[i].InsertDatetime);
+            //  option.xAxis[0].data.shift();
+            // }添加上y轴就能动
+
+        };
+        var parseMsgToAxis4 = function(chart, msg, option) {
+
+            if (chart._dom.id == 'main3') {
+
+                latestDatetime3 = msg.Result[3][0].InsertDatetime;
+
+                var dataX = option.series[0].data;
+                var dataY = option.series[1].data;
+                var dataZ = option.series[2].data;
+                a4 = msg.Result[3];
+                for (i = 0; i < a4.length; i++) {
+                    dataX.push(a4[i].MegnX);
+                    dataX.shift();
+                    dataY.push(a4[i].MegnY);
+                    dataY.shift();
+                    dataZ.push(a4[i].MegnZ);
+                    dataZ.shift();
+
+                    option.xAxis[0].data.push(a4[i].InsertDatetime);
+                    option.xAxis[0].data.shift();
+                    chart.setOption(option);
+                }
+                latestDatetime3 = a4[a4.length - 1].InsertDatetime;
+            }
+
+
+            // for (i = 0; i < a1.length; i++) {
+            //  option.xAxis[0].data.push(a1[i].InsertDatetime);
+            //  option.xAxis[0].data.shift();
+            // }添加上y轴就能动
+
+        };
+        var parseMsgToAxis5 = function(chart, msg, option) {
+
+            if (chart._dom.id == 'main4') {
+
+                latestDatetime4 = msg.Result[4][0].InsertDatetime;
+
+                var dataX = option.series[0].data;
+                a5 = msg.Result[4];
+                for (i = 0; i < a5.length; i++) {
+                    dataX.push(a5[i].Value);
+
+                    dataX.shift();
+                    option.xAxis[0].data.push(a5[i].InsertDatetime);
+                    option.xAxis[0].data.shift();
+                    chart.setOption(option);
+                }
+                latestDatetime4 = a5[a5.length - 1].InsertDatetime;
+            }
+
+
+            // for (i = 0; i < a1.length; i++) {
+            //  option.xAxis[0].data.push(a1[i].InsertDatetime);
+            //  option.xAxis[0].data.shift();
+            // }添加上y轴就能动
+
+        };
+        var parseMsgToAxis6 = function(chart, msg, option) {
+            console.log('chart------' + chart._dom.id);
+            if (chart._dom.id == 'main5') {
+
+                latestDatetime5 = msg.Result[4][0].InsertDatetime;
+
+                var dataX = option.series[0].data;
+                a6 = msg.Result[5];
+                for (i = 0; i < a6.length; i++) {
+                    dataX.push(a6[i].Value);
+
+                    dataX.shift();
+                    option.xAxis[0].data.push(a6[i].InsertDatetime);
+                    option.xAxis[0].data.shift();
+                    chart.setOption(option);
+                }
+                latestDatetime5 = a6[a6.length - 1].InsertDatetime;
+            }
+
+
+            // for (i = 0; i < a1.length; i++) {
+            //  option.xAxis[0].data.push(a1[i].InsertDatetime);
+            //  option.xAxis[0].data.shift();
+            // }添加上y轴就能动
+
+        };
+
+
+
+
+        //日期
+        var formatDate = function(datestring) {
+            if (datestring.length != 8) return;
+            return datestring.substring(2, 4) + '/' + datestring.substring(4, 6) + '/' + datestring.substring(6, 8);
+        }
+
+        var chart1 = function() {
+            var myChart = echarts.init(document.getElementById('main'));
+            var option1 = {
+                title: {
+                    x: 'center', // 水平安放位置，默认为左对齐，可选为：
+                    // 'center' ¦ 'left' ¦ 'right'
+                    // ¦ {number}（x坐标，单位px）
+                    y: 'top',
+                    text: '热电偶温度',
+                    // subtext: '芯片型号：2015QWIUIO12',
+                    textStyle: {
+                        fontWeight: 'normal', //标题颜色
+                        color: '#000000'
+                    },
+
+                },
+                grid: {
+                    x: 35,
+                    y: 30,
+                    x2: 2,
+                    y2: 150,
+                    borderWidth: 1
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+
+
+                dataZoom: {
+                    show: false,
+                    start: 0,
+                    end: 100
+                },
+                xAxis: [{
+                    type: 'category',
+                    boundaryGap: true,
+                    axisLabel: {
+                        rotate: 70,
+                        interval: 0, //横轴信息全部显示 
+                    },
+                    // data: function() {
+                    //     var list = [];
+                    //     for (var x in a1x) {
+                    //         if (x != '')
+                    //             list.push(formatDate(x));
+                    //     }
+                    //     return list;
+                    // }(),
+                    data: a1x
+                }, ],
+                yAxis: [{
+                    type: 'value',
+                    scale: true,
+                    // name: '探头',
+                    max: 100,
+                    min: 0,
+                    boundaryGap: [0.2, 0.2]
+                }, ],
+                series: [{
+                    // name: '探头',
+                    type: 'line',
+                    //data: a1y
+                    data: [],
+                }]
+            };
+            initChartByOption(myChart, option1);
+        };
+        var chart2 = function() {
+            var myChart2 = echarts.init(document.getElementById('main1'));
+            var option2 = {
+                title: {
+                    x: 'center', // 水平安放位置，默认为左对齐，可选为：
+                    // 'center' ¦ 'left' ¦ 'right'
+                    // ¦ {number}（x坐标，单位px）
+                    y: 'top',
+                    text: '加速度计',
+                    // subtext: '芯片型号：2015QWIUIO12',
+                    textStyle: {
+                        fontWeight: 'normal', //标题颜色
+                        color: '#000000'
+                    },
+
+                },
+                grid: {
+                    x: 35,
+                    y: 30,
+                    x2: 2,
+                    y2: 150,
+                    borderWidth: 1
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+
+
+                dataZoom: {
+                    show: false,
+                    start: 0,
+                    end: 100
+                },
+                xAxis: [{
+                    type: 'category',
+                    boundaryGap: true,
+                    axisLabel: {
+                        rotate: 70,
+                        interval: 0, //横轴信息全部显示 
+                    },
+                    // data: function() {
+                    //     var list = [];
+                    //     for (var x in a1x) {
+                    //         if (x != '')
+                    //             list.push(formatDate(x));
+                    //     }
+                    //     return list;
+                    // }(),
+                    data: a2x
+                }, ],
+                yAxis: [{
+                    type: 'value',
+                    scale: true,
+                    // name: '探头',
+                    max: 100,
+                    min: 0,
+                    boundaryGap: [0.2, 0.2]
+                }, ],
+                series: [{
+                    // name: '探头',
+                    type: 'line',
+                    //data: a1y
+                    data: [],
+                }, {
+                    // name: '探头',
+                    type: 'line',
+                    //data: a1y
+                    data: [],
+                }, {
+                    // name: '探头',
+                    type: 'line',
+                    //data: a1y
+                    data: [],
+                }]
+            };
+            initChartByOption(myChart2, option2);
+        };
+        var chart3 = function() {
+            var myChart3 = echarts.init(document.getElementById('main2'));
+            var option3 = {
+                title: {
+                    x: 'center', // 水平安放位置，默认为左对齐，可选为：
+                    // 'center' ¦ 'left' ¦ 'right'
+                    // ¦ {number}（x坐标，单位px）
+                    y: 'top',
+                    text: '陀螺仪',
+                    // subtext: '芯片型号：2015QWIUIO12',
+                    textStyle: {
+                        fontWeight: 'normal', //标题颜色
+                        color: '#000000'
+                    },
+
+                },
+                grid: {
+                    x: 35,
+                    y: 30,
+                    x2: 2,
+                    y2: 150,
+                    borderWidth: 1
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+
+
+                dataZoom: {
+                    show: false,
+                    start: 0,
+                    end: 100
+                },
+                xAxis: [{
+                    type: 'category',
+                    boundaryGap: true,
+                    axisLabel: {
+                        rotate: 70,
+                        interval: 0, //横轴信息全部显示 
+                    },
+                    // data: function() {
+                    //     var list = [];
+                    //     for (var x in a1x) {
+                    //         if (x != '')
+                    //             list.push(formatDate(x));
+                    //     }
+                    //     return list;
+                    // }(),
+                    data: a3x
+                }, ],
+                yAxis: [{
+                    type: 'value',
+                    scale: true,
+                    // name: '探头',
+                    max: 100,
+                    min: 0,
+                    boundaryGap: [0.2, 0.2]
+                }, ],
+                series: [{
+                    // name: '探头',
+                    type: 'bar',
+                    //data: a1y
+                    data: [],
+                }, {
+                    // name: '探头',
+                    type: 'bar',
+                    //data: a1y
+                    data: [],
+                }, {
+                    // name: '探头',
+                    type: 'bar',
+                    //data: a1y
+                    data: [],
+                }]
+            };
+            initChartByOption(myChart3, option3);
+        };
+        var chart4 = function() {
+            var myChart4 = echarts.init(document.getElementById('main3'));
+            var option4 = {
+                title: {
+                    x: 'center', // 水平安放位置，默认为左对齐，可选为：
+                    // 'center' ¦ 'left' ¦ 'right'
+                    // ¦ {number}（x坐标，单位px）
+                    y: 'top',
+                    text: '电磁感应计',
+                    // subtext: '芯片型号：2015QWIUIO12',
+                    textStyle: {
+                        fontWeight: 'normal', //标题颜色
+                        color: '#000000'
+                    },
+
+                },
+                grid: {
+                    x: 35,
+                    y: 30,
+                    x2: 2,
+                    y2: 150,
+                    borderWidth: 1
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+
+
+                dataZoom: {
+                    show: false,
+                    start: 0,
+                    end: 100
+                },
+                xAxis: [{
+                    type: 'category',
+                    boundaryGap: true,
+                    axisLabel: {
+                        rotate: 70,
+                        interval: 0, //横轴信息全部显示 
+                    },
+                    // data: function() {
+                    //     var list = [];
+                    //     for (var x in a1x) {
+                    //         if (x != '')
+                    //             list.push(formatDate(x));
+                    //     }
+                    //     return list;
+                    // }(),
+                    data: a4x
+                }, ],
+                yAxis: [{
+                    type: 'value',
+                    scale: true,
+                    // name: '探头',
+                    max: 100,
+                    min: 0,
+                    boundaryGap: [0.2, 0.2]
+                }, ],
+                series: [{
+                    // name: '探头',
+                    type: 'bar',
+                    //data: a1y
+                    data: [],
+                }, {
+                    // name: '探头',
+                    type: 'bar',
+                    //data: a1y
+                    data: [],
+                }, {
+                    // name: '探头',
+                    type: 'bar',
+                    //data: a1y
+                    data: [],
+                }]
+            };
+            initChartByOption(myChart4, option4);
+        };
+        var chart5 = function() {
+            var myChart5 = echarts.init(document.getElementById('main4'));
+            var option5 = {
+                title: {
+                    x: 'center', // 水平安放位置，默认为左对齐，可选为：
+                    // 'center' ¦ 'left' ¦ 'right'
+                    // ¦ {number}（x坐标，单位px）
+                    y: 'top',
+                    text: '气压计',
+                    // subtext: '芯片型号：2015QWIUIO12',
+                    textStyle: {
+                        fontWeight: 'normal', //标题颜色
+                        color: '#000000'
+                    },
+
+                },
+                grid: {
+                    x: 35,
+                    y: 30,
+                    x2: 2,
+                    y2: 150,
+                    borderWidth: 1
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+
+
+                dataZoom: {
+                    show: false,
+                    start: 0,
+                    end: 100
+                },
+                xAxis: [{
+                    type: 'category',
+                    boundaryGap: true,
+                    axisLabel: {
+                        rotate: 70,
+                        interval: 0, //横轴信息全部显示 
+                    },
+                    // data: function() {
+                    //     var list = [];
+                    //     for (var x in a1x) {
+                    //         if (x != '')
+                    //             list.push(formatDate(x));
+                    //     }
+                    //     return list;
+                    // }(),
+                    data: a5x
+                }, ],
+                yAxis: [{
+                    type: 'value',
+                    scale: true,
+                    // name: '探头',
+                    max: 100,
+                    min: 0,
+                    boundaryGap: [0.2, 0.2]
+                }, ],
+                series: [{
+                    // name: '探头',
+                    type: 'bar',
+                    //data: a1y
+                    data: [],
+                }, ]
+            };
+            initChartByOption(myChart5, option5);
+        };
+        var chart6 = function() {
+            var myChart6 = echarts.init(document.getElementById('main5'));
+            var option6 = {
+                title: {
+                    x: 'center', // 水平安放位置，默认为左对齐，可选为：
+                    // 'center' ¦ 'left' ¦ 'right'
+                    // ¦ {number}（x坐标，单位px）
+                    y: 'top',
+                    text: '电阻应变片',
+                    // subtext: '芯片型号：2015QWIUIO12',
+                    textStyle: {
+                        fontWeight: 'normal', //标题颜色
+                        color: '#000000'
+                    },
+
+                },
+                grid: {
+                    x: 35,
+                    y: 30,
+                    x2: 2,
+                    y2: 150,
+                    borderWidth: 1
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+
+
+                dataZoom: {
+                    show: false,
+                    start: 0,
+                    end: 100
+                },
+                xAxis: [{
+                    type: 'category',
+                    boundaryGap: true,
+                    axisLabel: {
+                        rotate: 70,
+                        interval: 0, //横轴信息全部显示 
+                    },
+                    // data: function() {
+                    //     var list = [];
+                    //     for (var x in a1x) {
+                    //         if (x != '')
+                    //             list.push(formatDate(x));
+                    //     }
+                    //     return list;
+                    // }(),
+                    data: a6x
+                }, ],
+                yAxis: [{
+                    type: 'value',
+                    scale: true,
+                    // name: '探头',
+                    max: 100,
+                    min: 0,
+                    boundaryGap: [0.2, 0.2]
+                }, ],
+                series: [{
+                    // name: '探头',
+                    type: 'line',
+                    //data: a1y
+                    data: [],
+                }]
+            };
+            initChartByOption(myChart6, option6);
+        };
+    </script>
+
+</body>
+
+<script>
+    $(document).ready(function() {
+        chart1();
+        chart2();
+        chart3();
+        chart4();
+        chart5();
+        chart6();
+    });
+</script>
+
+
+</html>

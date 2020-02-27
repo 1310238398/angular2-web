@@ -1,0 +1,250 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="queryType" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="0" (ionSelect)="queryType='0';">
+        <!-- Kittens -->
+        <span>
+                全部
+            </span>
+      </ion-segment-button>
+      <ion-segment-button value="1" (ionSelect)="queryType='1';">
+        <!-- Puppies -->
+        <span>待发布</span>
+      </ion-segment-button>
+      <ion-segment-button value="2" (ionSelect)="queryType='2';">
+        <!-- Puppies -->
+        <span>进行中</span>
+      </ion-segment-button>
+      <ion-segment-button value="3" (ionSelect)="queryType='3';">
+        <!-- Puppies -->
+        <span>已结束</span>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!-- <div> -->
+  <!-- <ion-segment [(ngModel)]="queryType" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="0" (ionSelect)="queryType='0';">
+        <span>
+                全部
+            </span>
+      </ion-segment-button>
+      <ion-segment-button value="1" (ionSelect)="queryType='1';">
+        <span>待发布</span>
+      </ion-segment-button>
+      <ion-segment-button value="2" (ionSelect)="queryType='2';">
+        <span>进行中</span>
+      </ion-segment-button>
+      <ion-segment-button value="3" (ionSelect)="queryType='3';">
+        <span>已结束</span>
+      </ion-segment-button>
+    </ion-segment> -->
+  <!-- </div> -->
+  <div *ngIf="queryType=='0'">
+    <div *ngFor="let list of promiseList;let i=index">
+      <div class="pre_year" *ngIf="compareA(i)">
+        <div class="line line_left"></div>
+        <div class="year">{{list.CreateTime.substring(0,4)}}</div>
+        <div class="line line_right"></div>
+      </div>
+      <div class="list">
+        <div (click)="goToDetail(list.CommitmentID)">
+          <div class="line1">
+            <div class="date">{{list.CreateTime|dateformat:list.CreateTime}}</div>
+            <div class="title">{{list.Title}}</div>
+            <div class="status" *ngIf="list.Status===0">待发布</div>
+            <div class="status" *ngIf="list.Status===1">进行中</div>
+            <div class="status" *ngIf="list.Status===2">已结束</div>
+          </div>
+          <div class="line"></div>
+          <!-- <div class="line2" [innerHTML]="list.Content.length>50?list.Content.substring(0,51)+'...':list.Content" (click)="goToDetail(list.CommitmentID)"> -->
+          <div class="line2">{{list.Content.trim()}}</div>
+        </div>
+        <div class="line"></div>
+        <div class="line3" *ngIf="list.Status===0">
+          <a class="btn text-right" (click)="publish(list)">发布</a>
+          <a class="btn btn-90 text-right m-r-12" (click)="changeScope(list.CommitmentID)">修改发文范围</a>
+        </div>
+        <div class="line3" *ngIf="list.Status===1">
+          <a class="btn text-right" *ngIf="list.IsCreater===1" (click)="finish(list)">结束</a>
+          <a class="btn text-right" [style.marginRight]="list.IsCreater===1 ? '12px' : '0px;'" (click)="checkProgress(list.CommitmentID,'查看进度')">查看进度</a>
+        </div>
+        <div class="line3" *ngIf="list.Status===2">
+          <a class="btn text-right" (click)="checkProgress(list.CommitmentID,'查看结果')">查看结果</a>
+          <a class="btn text-right m-r-12" (click)="rePublish(list.CommitmentID)">再次发布</a>
+        </div>
+      </div>
+    </div>
+    <div class="empty" *ngIf="iSNull">
+      <a><img src="assets/img/kong@2x.png" width="187" height="159"></a>
+      <p class="tips">暂无更多</p>
+    </div>
+    <div class="bottom" *ngIf="reachBottom&&!iSNull">
+      <div class="line"></div>
+      <div class="tips">我们是有底线的</div>
+      <div class="line"></div>
+    </div>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <div *ngIf="queryType=='1'">
+    <div *ngFor="let list of promiseList;let i=index">
+      <div class="pre_year" *ngIf="compareA(i)">
+        <div class="line line_left"></div>
+        <div class="year">{{list.CreateTime.substring(0,4)}}</div>
+        <div class="line line_right"></div>
+      </div>
+      <div class="list">
+        <div (click)="goToDetail(list.CommitmentID)">
+          <div class="line1">
+            <div class="date">{{list.CreateTime|dateformat:list.CreateTime}}</div>
+            <div class="title">{{list.Title}}</div>
+            <div class="status" *ngIf="list.Status===0">待发布</div>
+            <div class="status" *ngIf="list.Status===1">进行中</div>
+            <div class="status" *ngIf="list.Status===2">已结束</div>
+          </div>
+          <div class="line"></div>
+          <!-- <div class="line2" [innerHTML]="list.Content.length>50?list.Content.substring(0,51)+'...':list.Content" (click)="goToDetail(list.CommitmentID)"> -->
+          <div class="line2">{{list.Content.trim()}}</div>
+        </div>
+        <div class="line"></div>
+        <div class="line3" *ngIf="list.Status===0">
+          <a class="btn text-right" (click)="publish(list)">发布</a>
+          <a class="btn btn-90 text-right m-r-12" (click)="changeScope(list.CommitmentID)">修改发文范围</a>
+        </div>
+        <div class="line3" *ngIf="list.Status===1">
+          <a class="btn text-right" *ngIf="list.IsCreater===1" (click)="finish(list)">结束</a>
+          <a class="btn text-right" [style.marginRight]="list.IsCreater===1 ? '12px' : '0px;'" (click)="checkProgress(list.CommitmentID,'查看进度')">查看进度</a>
+        </div>
+        <div class="line3" *ngIf="list.Status===2">
+          <a class="btn text-right" (click)="checkProgress(list.CommitmentID,'查看结果')">查看结果</a>
+          <a class="btn text-right m-r-12" (click)="rePublish(list.CommitmentID)">再次发布</a>
+        </div>
+      </div>
+    </div>
+    <div class="empty" *ngIf="iSNull">
+      <a><img src="assets/img/kong@2x.png" width="187" height="159"></a>
+      <p class="tips">暂无更多</p>
+    </div>
+    <div class="bottom" *ngIf="reachBottomWaite&&!iSNull">
+      <div class="line"></div>
+      <div class="tips">我们是有底线的</div>
+      <div class="line"></div>
+    </div>
+
+    <ion-infinite-scroll (ionInfinite)="doInfiniteWaite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <div *ngIf="queryType=='2'">
+    <div *ngFor="let list of promiseList;let i=index">
+      <div class="pre_year" *ngIf="compareA(i)">
+        <div class="line line_left"></div>
+        <div class="year">{{list.CreateTime.substring(0,4)}}</div>
+        <div class="line line_right"></div>
+      </div>
+      <div class="list">
+        <div (click)="goToDetail(list.CommitmentID)">
+          <div class="line1">
+            <div class="date">{{list.CreateTime|dateformat:list.CreateTime}}</div>
+            <div class="title">{{list.Title}}</div>
+            <div class="status" *ngIf="list.Status===0">待发布</div>
+            <div class="status" *ngIf="list.Status===1">进行中</div>
+            <div class="status" *ngIf="list.Status===2">已结束</div>
+          </div>
+          <div class="line"></div>
+          <!-- <div class="line2" [innerHTML]="list.Content.length>50?list.Content.substring(0,51)+'...':list.Content" (click)="goToDetail(list.CommitmentID)"> -->
+          <div class="line2">{{list.Content.trim()}}</div>
+        </div>
+        <div class="line"></div>
+        <div class="line3" *ngIf="list.Status===0">
+          <a class="btn text-right" (click)="publish(list)">发布</a>
+          <a class="btn btn-90 text-right m-r-12" (click)="changeScope(list.CommitmentID)">修改发文范围</a>
+        </div>
+        <div class="line3" *ngIf="list.Status===1">
+          <a class="btn text-right" *ngIf="list.IsCreater===1" (click)="finish(list)">结束</a>
+          <a class="btn text-right" [style.marginRight]="list.IsCreater===1 ? '12px' : '0px;'" (click)="checkProgress(list.CommitmentID,'查看进度')">查看进度</a>
+        </div>
+        <div class="line3" *ngIf="list.Status===2">
+          <a class="btn text-right" (click)="checkProgress(list.CommitmentID,'查看结果')">查看结果</a>
+          <a class="btn text-right m-r-12" (click)="rePublish(list.CommitmentID)">再次发布</a>
+        </div>
+      </div>
+    </div>
+    <div class="empty" *ngIf="iSNull">
+      <a><img src="assets/img/kong@2x.png" width="187" height="159"></a>
+      <p class="tips">暂无更多</p>
+    </div>
+    <div class="bottom" *ngIf="reachBottomIng&&!iSNull">
+      <div class="line"></div>
+      <div class="tips">我们是有底线的</div>
+      <div class="line"></div>
+    </div>
+
+    <ion-infinite-scroll (ionInfinite)="doInfiniteIng($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <div *ngIf="queryType=='3'">
+    <div *ngFor="let list of promiseList;let i=index">
+      <div class="pre_year" *ngIf="compareA(i)">
+        <div class="line line_left"></div>
+        <div class="year">{{list.CreateTime.substring(0,4)}}</div>
+        <div class="line line_right"></div>
+      </div>
+      <div class="list">
+        <div (click)="goToDetail(list.CommitmentID)">
+          <div class="line1">
+            <div class="date">{{list.CreateTime|dateformat:list.CreateTime}}</div>
+            <div class="title">{{list.Title}}</div>
+            <div class="status" *ngIf="list.Status===0">待发布</div>
+            <div class="status" *ngIf="list.Status===1">进行中</div>
+            <div class="status" *ngIf="list.Status===2">已结束</div>
+          </div>
+          <div class="line"></div>
+          <!-- <div class="line2" [innerHTML]="list.Content.length>50?list.Content.substring(0,51)+'...':list.Content" (click)="goToDetail(list.CommitmentID)"> -->
+          <div class="line2">{{list.Content.trim()}}</div>
+        </div>
+        <div class="line"></div>
+        <div class="line3" *ngIf="list.Status===0">
+          <a class="btn text-right" (click)="publish(list)">发布</a>
+          <a class="btn btn-90 text-right m-r-12" (click)="changeScope(list.CommitmentID)">修改发文范围</a>
+        </div>
+        <div class="line3" *ngIf="list.Status===1">
+          <a class="btn text-right" *ngIf="list.IsCreater===1" (click)="finish(list)">结束</a>
+          <a class="btn text-right" [style.marginRight]="list.IsCreater===1 ? '12px' : '0px;'" (click)="checkProgress(list.CommitmentID,'查看进度')">查看进度</a>
+        </div>
+        <div class="line3" *ngIf="list.Status===2">
+          <a class="btn text-right" (click)="checkProgress(list.CommitmentID,'查看结果')">查看结果</a>
+          <a class="btn text-right m-r-12" (click)="rePublish(list.CommitmentID)">再次发布</a>
+        </div>
+      </div>
+    </div>
+    <div class="empty" *ngIf="iSNull">
+      <a><img src="assets/img/kong@2x.png" width="187" height="159"></a>
+      <p class="tips">暂无更多</p>
+    </div>
+    <div class="bottom" *ngIf="reachBottomOver&&!iSNull">
+      <div class="line"></div>
+      <div class="tips">我们是有底线的</div>
+      <div class="line"></div>
+    </div>
+
+    <ion-infinite-scroll (ionInfinite)="doInfiniteOver($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <!-- <div class="add">
+    <a (click)="newPage()"></a>
+  </div> -->
+  <ion-fab right bottom>
+      <button ion-fab (click)="newPage()"></button>
+    </ion-fab>
+</ion-content>

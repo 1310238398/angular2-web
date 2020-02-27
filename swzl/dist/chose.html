@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta content="width=device-width, initial-scale=1,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport"/>
+    <style>
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, select, img {
+            margin: 0;
+            padding: 0;
+            /* [disabled]padding:0; */
+        }
+
+        body {
+            /*控制背景图固定*/
+            background-attachment: fixed;
+            /*背景图大小自适应*/
+            background-size: 100% 100%;
+        }
+
+        .byj {
+            font-family: PingFangSC-Regular;
+            font-size: 21px;
+            color: #3E3E3E;
+            letter-spacing: 0.25px;
+            width: 345px;
+            height: 55px;
+            margin: 95px 15px 39px 15px;
+        }
+
+        .message {
+            font-family: PingFangSC-Regular;
+            font-size: 14px;
+            color: #666666;
+            letter-spacing: 0.17px;
+            width: 345px;
+            height: 40px;
+            margin: 0 15px 69px 15px;
+        }
+
+        .lianxi {
+            font-family: PingFangSC-Regular;
+            font-size: 12px;
+            color: #13A0FA;
+            letter-spacing: 0.15px;
+            width: 73px;
+            height: 17px;
+            float: right;
+            margin: 0 15px 0 0;
+            text-align: center;
+        }
+
+        .hulve {
+            width: 38px;
+            height: 17px;
+            font-family: PingFangSC-Regular;
+            font-size: 12px;
+            color: #666666;
+            letter-spacing: 0.15px;
+            float: right;
+            margin: 0 15px 0 0;
+            text-align: center;
+        }
+        .none{
+            display: none;
+        }
+
+        .hulve_func {
+            position: fixed;
+            display: none;
+            width: 190px;
+            height: 250px;
+            top: 136px;
+            left: 92px;
+            z-index: 9999;
+            background-color: #FFFFFF;
+        }
+
+        .hulve_func_title {
+            height: 40px;
+            line-height: 40px;
+            width: 190px;
+            text-align: center;
+            border-bottom: 1px solid #D5D5D5;
+            font-family: PingFangSC-Regular;
+            font-size: 16px;
+            color: #666666;
+            letter-spacing: 0.19px;
+        }
+
+        .radio_container {
+            width: 190px;
+            height: 210px;
+        }
+
+        .radio_container div {
+            width: 100px;
+            height: 23px;
+            margin: 15px 45px 17px 45px;
+            /*font-family: PingFangSC-Regular;*/
+            /*font-size: 16px;*/
+            /*color: #3E3E3E;*/
+            /*letter-spacing: 0.19px;*/
+        }
+     
+        .radio_container label {
+            padding-left: 25px;
+            font-family: PingFangSC-Regular;
+            font-size: 16px;
+            color: #3E3E3E;
+            letter-spacing: 0.19px;
+        }
+
+        .mengban {
+            position: fixed;
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-color: #666666;
+            opacity: 0.3;
+            top: 0;
+            z-index: 1000;
+        }
+    </style>
+    <script>
+        function cannot_see(){
+                var mengban = document.getElementById("mengban");
+                var hulve_func = document.getElementById("hulve_func");
+                var hulve = document.getElementById("hulve");
+                var hulve_ok = document.getElementById("hulve_ok");
+                var rc = document.getElementById("radio_container");
+
+                mengban.style.display = "block";
+                hulve_func.style.display = "block";
+
+                mengban.onclick = function(){
+                    hulve_func.style.display = "none";
+                    mengban.style.display = "none";
+                    hulve.style.display = "none";
+                    hulve_ok.style.display = "block";
+                }
+                hulve_func.onclick = function(){
+                    hulve_func.style.display = "none";
+                    mengban.style.display = "none";
+                    hulve.style.display = "none";
+                    hulve_ok.style.display = "block";
+
+//                获取选中的标签
+//                var a = document.getElementsByName("radio_chose");
+//                for (i=0; i<a.length; i++) {
+//                    if (a[i].checked) {
+//                        alert(a[i].value)
+//                    }
+//                }
+                }
+
+        }
+    </script>
+</head>
+<body>
+<div style="width:375px;magin:0 auto;">
+
+    <div class="byj">
+        不要着急<br>你丢失的物品被找到了
+    </div>
+
+    <div class="message">你丢失的<span>xxxxx</span>已经被其他同学捡到，他也在着急找你哦，不要拖太久，快联系他取回吧~</div>
+
+    <div class="bottom_bar">
+        <div class="lianxi">查看联系方式</div>
+        <div class="hulve" id="hulve" onclick="cannot_see()">忽略</div>
+        <div class="hulve none" id="hulve_ok">已忽略</div>
+    </div>
+    <!--<a href="tel:13764567708">拨打电话</a>-->
+</div>
+
+
+<div class="mengban" id="mengban">
+
+</div>
+
+<div class="hulve_func" id="hulve_func">
+    <div class="hulve_func_title">选择忽略原因</div>
+    <div class="radio_container" id="radio_container">
+        <div>
+            <input type="radio" id="wds" name="radio_chose" value="未丢失">
+            <label for="wds">未丢失</label>
+        </div>
+
+        <div>
+            <input type="radio" id="yzh" name="radio_chose" value="已找回">
+            <label for="yzh">已找回</label>
+        </div>
+
+        <div>
+            <input type="radio" id="ybb" name="radio_chose" value="已补办">
+            <label for="ybb">已补办</label>
+        </div>
+
+        <div>
+            <input type="radio" id="byl" name="radio_chose" value="不要啦">
+            <label for="byl">不要啦</label>
+        </div>
+
+        <div>
+            <input type="radio" id="qt" name="radio_chose" value="其它">
+            <label for="qt">其它</label>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

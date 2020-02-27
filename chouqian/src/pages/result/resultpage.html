@@ -1,0 +1,20 @@
+<ion-content class="bg">
+  <img src="assets/images/zi.png" class="img">
+
+  <div class="relative-div">
+    <div class="absolute-result">
+      <div *ngFor="let item of results">
+        <span class="overflow-hidden">{{item.ProjectName}}</span><span
+        class="overflow"> 已抽签，参赛顺序为 {{item.Number}} 号</span>
+      </div>
+    </div>
+    <img src="assets/images/bg3@2x_2.png">
+    <p class="publish des">对应参赛时间和地点将在校园集结号第一时间发布，敬请留意。</p>
+  </div>
+
+  <a href="http://www.antlinker.com/download/index.html" target="_blank"><img src="assets/images/xiazai@2x_2.png" alt=""></a>
+  <div class="btn-mb">
+    <button ion-button class="btn-radius orange" full (click)="onLogin()">参赛队伍抽签</button>
+  </div>
+
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-content class="outer-content">
+    <div padding>
+        <ion-segment [(ngModel)]="pet">
+            <ion-segment-button value="a1">
+                待审批
+            </ion-segment-button>
+            <ion-segment-button value="a2">
+                已审批
+            </ion-segment-button>
+        </ion-segment>
+    </div>
+
+    <div [ngSwitch]="pet">
+        <ion-list *ngSwitchCase="'a1'">
+            <button ion-item (click)="urlApproval(item)" *ngFor="let item of applylist">
+                <h2>{{item.Name}}</h2>
+                <h3>{{item.AcademyName}}</h3>
+                <p>{{item.InsertDatetime}}</p>
+            </button>
+            <ion-item *ngIf="applylist == ''">
+                暂无待审批调课
+            </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'a2'">
+            <ion-searchbar (ionInput)="getItems($event)" placeholder="搜索"></ion-searchbar>
+            <button ion-item *ngFor="let item of alreadylist" (click)="urlViewApproval(item)" class="sign"
+                    [ngClass]="{signp:item.Status == 0,signc:item.Status == 1 || item.Status == 3,signz:item.Status == 2}">
+                <h2>{{item.Name}}</h2>
+                <h3>{{item.AcademyName}}</h3>
+                <p>{{item.InsertDatetime}}</p>
+            </button>
+            <ion-item *ngIf="alreadylist == ''">
+                暂无已审批调课
+            </ion-item>
+        </ion-list>
+    </div>
+
+
+</ion-content>

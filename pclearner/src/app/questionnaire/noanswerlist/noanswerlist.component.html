@@ -1,0 +1,272 @@
+<div class="content">
+    <div nz-row>
+        <div nz-col [nzSpan]="20" class="title">
+            {{this.title}}-未答题人员
+        </div>
+        <div nz-col *ngIf="sta == '1'" [nzSpan]="3" [nzOffset]="1" class="red_ing" style="text-align:right;padding-right:10px;">
+            进行中
+        </div>
+        <div nz-col *ngIf="sta == '2'" [nzSpan]="3" [nzOffset]="1" class="gray_ing" style="text-align:right;padding-right:10px;">
+            已结束
+        </div>
+
+    </div>
+    <hr style="height:0px;border:none;border-top:2px solid #eeeeee;" />
+    <div>
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-left">
+            <div nz-row nz-form-item class="pd10">
+                <div nz-form-label>
+                    <label style="font-family:PingFangSC-Regular;font-size:14px;color:#3e3e3e;letter-spacing:0.17px;text-align:left;">请选择查询条件</label>
+                </div>
+                <div nz-form-control>
+                    <nz-input [nzType]="'text'" style="width: 258px; border-radius:2px;" (click)="modal()" [nzPlaceHolder]="'不做选择默认查询已发布的全部范围'"
+                        name="show_value" [(ngModel)]="show_value">
+                        <ng-template #prefix>
+                            <i class="anticon anticon-right"></i>
+                        </ng-template>
+                    </nz-input>
+                </div>
+            </div>
+
+            <div nz-row nz-form-item>
+                <div nz-col [nzSpan]="24" style="text-align: right;">
+                    <button nz-button [nzType]="'primary'" (click)="download()">导出</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <nz-spin [nzSize]="'large'" class="loading" [nzSpinning]="loadingSpin">
+        <div class="loadingDiv">
+            <div class="content" *ngIf="Items.length!=0">
+                <nz-table #nzTable [nzDataSource]="Items" [nzPageSize]="40" nzBordered>
+                    <thead nz-thead>
+                        <tr>
+                            <th nz-th>
+                                <span>序号</span>
+                            </th>
+                            <th nz-th>
+                                <span>学号</span>
+                            </th>
+                            <th nz-th>
+                                <span>姓名</span>
+                            </th>
+                            <th nz-th>
+                                <span>校区</span>
+                            </th>
+                            <th nz-th>
+                                <span>学院</span>
+                            </th>
+                            <th nz-th>
+                                <span>专业</span>
+                            </th>
+                            <th nz-th>
+                                <span>年级</span>
+                            </th>
+                            <th nz-th>
+                                <span>班级</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody nz-tbody>
+                        <tr nz-tbody-tr *ngFor="let data of nzTable.data; let i=index">
+                            <td nz-td>
+                                {{i+1}}
+                            </td>
+                            <td nz-td>
+                                {{data.UserCode}}
+                            </td>
+                            <td nz-td>
+                                {{data.Name}}
+                            </td>
+                            <td nz-td>
+                                {{data.Campus}}
+                            </td>
+                            <td nz-td>
+                                {{data.Academy}}
+                            </td>
+                            <td nz-td>
+                                {{data.Major}}
+                            </td>
+                            <td nz-td>
+                                {{data.Grade}}
+                            </td>
+                            <td nz-td>
+                                {{data.Class}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+        </div>
+    </nz-spin>
+
+
+
+    <div *ngIf="loading == true && Items.length == 0;" class="null">
+        <div class="null_img">
+            <img src="./assets/images/kong@2x.png" alt="">
+        </div>
+        <p>该查询条件下无未答题人员</p>
+    </div>
+    <!-- 所有范围未答题人员 -->
+    <nz-modal [nzVisible]="isVisibleSelect" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancelSelect($event)"
+        (nzOnOk)="handleOkSelect($event)">
+        <ng-template #modalTitle class="title">
+            &nbsp;
+        </ng-template>
+        <ng-template #modalContent>
+            <form #f="ngForm" (ngSubmit)="save()" nz-form [nzType]="'horizontal'">
+                <div nz-form-item nz-row class="mb-sm">
+                    <div nz-form-label nz-col [nzSpan]="4">
+                        <label>校区</label>
+                    </div>
+
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'不做选择默认查询已发布的全部校区'" [(ngModel)]="Campus" name="Campus">
+                            <nz-option *ngFor="let option of Campuss" [nzLabel]="option.CampusName" [nzValue]="option.CampusID">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+
+                </div>
+
+                <div nz-form-item nz-row class="mb-sm">
+
+                    <div nz-form-label nz-col [nzSpan]="4">
+                        <label>学院</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'不做选择默认查询已发布的全部学院'" [(ngModel)]="Academy" name="Academy">
+                            <nz-option *ngFor="let opt of Academys" [nzLabel]="opt.deptname" [nzValue]="opt.deptcode">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+
+                <div nz-form-item nz-row class="mb-sm">
+                    <div nz-form-label nz-col [nzSpan]="4">
+                        <label>专业</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'不做选择默认查询已发布的全部专业'" (click)="onSelect('major')" [(ngModel)]="Major" name="Major">
+                            <nz-option *ngFor="let opt of Majors" [nzLabel]="opt.deptname" [nzValue]="opt.deptcode">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+
+                <div nz-form-item nz-row class="mb-sm">
+                    <div nz-form-label nz-col [nzSpan]="4">
+                        <label>年级</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'不做选择默认查询已发布的全部年级'" [(ngModel)]="Grade" name="Grade">
+                            <nz-option *ngFor="let opt of Grades" [nzLabel]="opt.deptname" [nzValue]="opt.deptcode">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+                <div nz-form-item nz-row class="mb-sm">
+                    <div nz-form-label nz-col [nzSpan]="4">
+                        <label>班级</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'不做选择默认查询已发布的全部班级'" (click)="onSelect('class')" [(ngModel)]="Class" name="Class">
+                            <nz-option *ngFor="let opt of Classs" [nzLabel]="opt.deptname" [nzValue]="opt.deptcode">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+
+            </form>
+        </ng-template>
+        <ng-template #modalFooter>
+            <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOkSelect($event)" [nzLoading]="isConfirmLoading">
+                查询
+            </button>
+        </ng-template>
+
+    </nz-modal>
+
+    <!-- 学院未答题人员 -->
+    <!-- <nz-modal *ngIf= "status == 0" [nzVisible]="isVisibleSelect" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancelSelect($event)"
+        (nzOnOk)="handleOkSelect($event)">
+        <ng-template #modalTitle class="title">
+            &nbsp;学院未答题人员
+        </ng-template>
+        <ng-template #modalContent>
+            <form #f="ngForm" (ngSubmit)="save()" nz-form [nzType]="'horizontal'">
+                <div nz-form-item nz-row class="mb-sm">
+                    <div nz-form-label nz-col [nzSpan]="4">
+                        <label>校区</label>
+                    </div>
+
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'不做选择默认查询已发布的全部校区'" [(ngModel)]="Campus" name="Campus">
+                            <nz-option *ngFor="let option of Campuss" [nzLabel]="option.CampusName" [nzValue]="option.CampusID">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+
+                </div>
+
+                <div nz-form-item nz-row class="mb-sm">
+
+                    <div nz-form-label nz-col [nzSpan]="4">
+                        <label>学院</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'不做选择默认查询已发布的全部学院'" [(ngModel)]="modaiData.Academy" name="Academy">
+                            <nz-option *ngFor="let opt of Academys" [nzLabel]="opt.deptname" [nzValue]="opt.deptcode">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+
+                <div nz-form-item nz-row class="mb-sm">
+                    <div nz-form-label nz-col [nzSpan]="4">
+                        <label>专业</label>
+                    </div>
+
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'不做选择默认查询已发布的全部专业'" (click)="onSelect('major')" [(ngModel)]="Major" name="Major">
+                            <nz-option *ngFor="let opt of Majors" [nzLabel]="opt.deptname" [nzValue]="opt.deptcode">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+
+                <div nz-form-item nz-row class="mb-sm">
+                    <div nz-form-label nz-col [nzSpan]="4">
+                        <label>年级</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'不做选择默认查询已发布的全部年级'" [(ngModel)]="Grade" name="Grade">
+                            <nz-option *ngFor="let opt of Grades" [nzLabel]="opt.deptname" [nzValue]="opt.deptcode">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+                <div nz-form-item nz-row class="mb-sm">
+                    <div nz-form-label nz-col [nzSpan]="4">
+                        <label>班级</label>
+                    </div>
+                    <div nz-form-control nz-col [nzSpan]="20">
+                        <nz-select [nzMode]="'multiple'" [nzPlaceHolder]="'不做选择默认查询已发布的全部班级'" (click)="onSelect('class')" [(ngModel)]="Class" name="Class">
+                            <nz-option *ngFor="let opt of Classs" [nzLabel]="opt.deptname" [nzValue]="opt.deptcode">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                </div>
+
+            </form>
+        </ng-template>
+        <ng-template #modalFooter>
+            <button nz-button [nzType]="'primary'" [nzSize]="'large'" (click)="handleOkSelect($event)" [nzLoading]="isConfirmLoading">
+                查询
+            </button>
+        </ng-template>
+
+    </nz-modal> -->
+</div>

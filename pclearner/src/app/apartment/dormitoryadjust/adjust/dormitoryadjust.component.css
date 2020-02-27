@@ -1,0 +1,134 @@
+.distriadjust{
+    background: rgb(250, 249, 249);
+    /*margin:20px;*/
+}
+
+.components-table-demo-control-bar{
+    width: auto;
+    /*height: 30px;*/
+}
+
+.adjust-left{
+    padding: 10px;
+    height: 800px;
+    overflow-y:auto;
+    border: 1px solid #ccc;
+}
+
+.adjust-mid{
+    padding: 10px;
+    height: 800px;
+    overflow-y:auto;
+    border: 1px solid #ccc;
+}
+
+
+.adjust-right{
+    padding: 10px;
+    height: 800px;
+    overflow-y:auto;
+    border: 1px solid #ccc;
+}
+
+.search-form{
+    padding:20px 10px 0 10px;
+}
+
+.btn_reset,.search{
+    width: 60px;
+}
+
+.btn_push{
+    width: 100px!important;
+}
+.search-form[_ngcontent-c1]{
+    padding-top: 0px!important;
+}
+
+.btn{
+    margin-top: 4px;
+    background: #FFC000;
+    border: none;
+    width: 60px;
+    height: 24px;
+    border-radius: 4px;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: 0.19px;
+}
+.btn_distrbut{
+    width: 80px;
+    color: #FFFFFF;
+    color: #FFFFFF;
+    letter-spacing: 0.19px;
+}
+
+.search-form[_ngcontent-c13] {
+    padding: 0px!important;
+}
+
+
+._btn{
+    background: #FFC000;
+    border: none;
+    margin-right: 26px;
+    width: 60px;
+    height: 24px;
+    border-radius: 4px;
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: 0.19px;
+}
+.btnOk{
+    width: 100%;
+    text-align: right;
+}
+
+
+/*主体样式*/
+.content{
+    margin: 10px;
+}
+
+
+.left{
+    padding: 20px;
+    min-height: 660px;
+    border: 1px solid #ccc;
+}
+
+.distribut{
+    padding: 20px;
+    min-height: 660px;
+    border: 1px solid #ccc;
+}
+
+
+.distribut .tres{
+    padding: 10px;
+}
+
+
+
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 15000;
+}
+
+#loading .loading-spins {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 80px;
+    margin-top: -15px;
+    margin-left: -15px;
+}
+

@@ -1,0 +1,87 @@
+<div class="modal-header">
+    <div class="modal-title">{{params.recordId? '编辑' : '添加'}}-荣誉信息</div>
+</div>
+<form #f="ngForm" nz-form>
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">学年</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'AcademicYear'" [ModelName]="'academicYear'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">学期</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'AcademicTerm'" [ModelName]="'academicTerm'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+    </div>
+    <!--    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">
+            <nz-form-label [nzSpan]="3">奖助项目</nz-form-label>
+            <nz-form-control [nzSpan]="21">
+                <nz-select class='col-w' [nzPlaceHolder]="'奖助项目'" [nzShowSearch]="true" [(ngModel)]="params.scholarshipAidCode" (ngModelChange)="getRankmountsquery($event)" name="ScholarshipAid">
+                    <nz-option *ngFor="let option of scholarshipaid" [nzLabel]="option.ProjectName" [nzValue]="option.ScholarshipAidCode">
+                    </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </div>
+    </div> -->
+    <div nz-row [nzGutter]="8">
+
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">获奖日期</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <nz-date-picker [nzFormat]="'yyyy-MM-dd'" name="awardDate" [(ngModel)]="params.awardDate" placeholder="获奖日期"></nz-date-picker>
+            </nz-form-control>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">奖励名称</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <input nz-input name="rewardName" placeholder="奖励名称" [(ngModel)]="params.rewardName" maxlength="18" required>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">获奖等级</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'RewardGrade'" [PlaceHolder]="'获奖等级'" [ModelName]="'rewardGrade'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">奖励级别</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'RewardLevel'" [PlaceHolder]="'奖励级别'" [ModelName]="'rewardLevel'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">奖励类别</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'RewardType'" [PlaceHolder]="'奖励类别'" [ModelName]="'rewardType'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">本人位次</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'MyRanking'" [PlaceHolder]="'本人位次'" [ModelName]="'myRanking'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">授予单位</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <input nz-input name="grantingUnit" [placeholder]="'授予单位'" [(ngModel)]="params.grantingUnit" maxlength="18" required>
+            </nz-form-control>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button nz-button type="button" (click)="close()">关闭</button>
+        <button nz-button class="btn-zj-color" [disabled]="!f.form.valid||!params.academicYear||!params.academicTerm||!params.rewardGrade||!params.rewardLevel||!params.rewardType||!params.myRanking" [nzType]="'primary'" (click)="save()">保存</button>
+    </div>
+</form>.

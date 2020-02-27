@@ -1,0 +1,39 @@
+page-detail {
+    ion-list {
+        .item-ios {
+            .mg {
+                margin-left: 28px;
+                word-break: break-all;
+                white-space: normal;
+            }
+            span {
+                color: black;
+            }
+            .label-ios {
+                margin-top: 7.5px;
+            }
+        }
+    }
+    .list-ios {
+        margin-bottom: 2px;
+    }
+    .grid-bg {
+        background-color: white;
+    }
+    .region-right {
+        float: right;
+    }
+    .region-left {
+        float: left;
+    }
+    img {
+        width: 8%;
+        float: right;
+    }
+    .item-ios-light,
+    .item-divider-ios-light {
+        color: #000;
+        background-color: #f4f4f4;
+        position: inherit;
+    }
+}

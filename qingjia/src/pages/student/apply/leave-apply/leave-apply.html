@@ -1,0 +1,143 @@
+<ion-content class="outer-content" padding-top>
+  <form [formGroup]="ValidatorsForm">
+
+    <ion-list>
+      <!--  <div>{{LeaveApply|json}}</div>-->
+      <ion-item>
+                <textarea formControlName="LeaveReason" class="text-input"
+                          [(ngModel)]="LeaveApply.LeaveReason" rows="2"
+                          placeholder="请输入请假原因"></textarea>
+      </ion-item>
+      <ion-item class="alert-danger"
+                *ngIf="!ValidatorsForm.controls.LeaveReason.valid && (ValidatorsForm.controls.LeaveReason.dirty)">
+        <div [hidden]="!ValidatorsForm.controls.LeaveReason.errors.required">
+          请假原因是必须的！
+        </div>
+        <div [hidden]="!ValidatorsForm.controls.LeaveReason.errors.maxlength">
+          请假原因30字以内！
+        </div>
+      </ion-item>
+      <ion-item detail-push>
+        <ion-label>请假类型:</ion-label>
+        <ion-select formControlName="LeaveType"  [compareWith]="compareFn" [(ngModel)]="LeaveApply.LeaveType"   interface="action-sheet"
+                    cancelText="取消">
+          <ion-option [value]='item' *ngFor="let item of LeaveTypes">{{item.CodeName}}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="alert-danger"
+                *ngIf="!ValidatorsForm.controls.LeaveType.valid && (ValidatorsForm.controls.LeaveType.dirty)">
+        <div [hidden]="!ValidatorsForm.controls.LeaveType.errors.required">
+          请假类型是必须的！
+        </div>
+      </ion-item>
+      <!--    <ion-item detail-push>
+                    {{LeaveApply|json}}
+                </ion-item>-->
+      <ion-item detail-push>
+        <div class="input-file" id="pickfiles">
+          <span class="text"  >选择文件:</span>
+         <!-- <input class="file" type="file" accept="image/*"  name="file" (change)="handleFiles($event)" value="如：医院诊断证明等照片"/>-->
+          <span>   {{LeaveApply?.Evidence?.name}}</span>
+        </div>
+        <!-- <input type="file" name="file" (change)="handleFiles($event)" value="点击上传"/>-->
+      </ion-item>
+      <h6 style="padding-left: 16px;margin-top:0.7rem;margin-bottom: -0.8rem;color: #8e9093">如：医院诊断证明等照片</h6>
+    </ion-list>
+
+    <ion-list>
+      <ion-item  *ngIf="!StartFlag" >
+        <ion-label class="zj-label-textOverflow-initial">请假开始时间:
+        </ion-label>
+        <ion-datetime  (ionFinish)='DateSection(true)' [max]="Year+1" [min]="Year" id="StartDate" formControlName="StartDate" displayFormat="YYYY-MM-DD HH:mm" formControlName="StartDate"
+                      pickerFormat="YYYY MMM DD HH:mm"
+                      monthShortNames="1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月"
+                      [(ngModel)]="LeaveApply.StartDate"
+                      doneText="完成" cancelText="取消"></ion-datetime>
+      </ion-item>
+      <ion-item  *ngIf="StartFlag"  (click)="ChangeDateFlag()">
+        <ion-label class="zj-label-textOverflow-initial">请假开始时间:
+        </ion-label>
+        <input type="text"  item-end  class="text-input ab"  [ngModelOptions]="{standalone: true}" [(ngModel)]="LeaveApply.StartSection">
+      </ion-item>
+      <!--<div>{{LeaveApply.StartDate|json}}</div>-->
+      <ion-item   *ngIf="!EndFlag">
+        <ion-label class="zj-label-textOverflow-initial">请假结束时间:</ion-label>
+        <ion-datetime (ionFinish)='DateSection(false)' [max]="Year+1" [min]="Year" id="EndDate" formControlName="EndDate" displayFormat="YYYY-MM-DD HH:mm"
+                      pickerFormat="YYYY MMM DD HH:mm"
+                      monthShortNames="1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月"
+                      [(ngModel)]="LeaveApply.EndDate"
+                      doneText="完成" cancelText="取消"></ion-datetime>
+      </ion-item>
+      <ion-item  *ngIf="EndFlag"  (click)="ChangeDateFlag($event,false)">
+        <ion-label class="zj-label-textOverflow-initial">请假结束时间:
+        </ion-label>
+        <input type="text"  item-end  class="text-input ab"  [ngModelOptions]="{standalone: true}" [(ngModel)]="LeaveApply.EndSection">
+      </ion-item>
+      <ion-item>
+        <label class="zj-label-textOverflow-initial">累计请假节次:</label>
+        <input type="number" item-end  class="text-input" formControlName="ClassNum" [(ngModel)]="LeaveApply.ClassNum">
+      </ion-item>
+      <ion-item class="alert-danger"
+                *ngIf="!ValidatorsForm.controls.ClassNum.valid && (ValidatorsForm.controls.ClassNum.dirty)">
+        <div [hidden]="!ValidatorsForm.controls.ClassNum.errors.pattern">
+          请假节次应为整数！
+        </div>
+        <div [hidden]="!ValidatorsForm.controls.ClassNum.errors.required">
+          累计请假节次是必填的！
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item detail-push>
+        <ion-label>外出地点:</ion-label>
+        <ion-select formControlName="OutPlace" [compareWith]="compareFn" [(ngModel)]="LeaveApply.OutPlace" interface="action-sheet"
+                    cancelText="取消">
+          <ion-option [value]='item' *ngFor="let item of OutPlaces">{{item.CodeName}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+                <textarea formControlName="DetailAddress" class="text-input" [(ngModel)]="LeaveApply.DetailAddress"
+                          placeholder="请输入详细地址"></textarea>
+      </ion-item>
+      <ion-item class="alert-danger"
+                *ngIf="!ValidatorsForm.controls.DetailAddress.valid && (ValidatorsForm.controls.DetailAddress.dirty)">
+        <div [hidden]="!ValidatorsForm.controls.DetailAddress.errors.required">
+          详细地址是必须的！
+        </div>
+        <div [hidden]="!ValidatorsForm.controls.DetailAddress.errors.maxlength">
+          详细地址30字以内！
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+
+        <label>紧急联系人:</label>
+        <input type="text" item-end formControlName="EmergencyPerson" class="text-input" [(ngModel)]="LeaveApply.EmergencyPerson">
+      </ion-item>
+      <ion-item class="alert-danger"
+                *ngIf="!ValidatorsForm.controls.EmergencyPerson.valid && (ValidatorsForm.controls.EmergencyPerson.dirty)">
+        <div [hidden]="!ValidatorsForm.controls.EmergencyPerson.errors.required">
+          紧急联系人是必须的！
+        </div>
+        <div [hidden]="!ValidatorsForm.controls.EmergencyPerson.errors.maxlength">
+          紧急联系人10字以内！
+        </div>
+      </ion-item>
+      <ion-item>
+        <label>电话号码:</label>
+        <input type="number" item-end formControlName="EmergencyNumber" class="text-input" [(ngModel)]="LeaveApply.EmergencyNumber">
+      </ion-item>
+      <ion-item class="alert-danger"
+                *ngIf="!ValidatorsForm.controls.EmergencyNumber.valid && (ValidatorsForm.controls.EmergencyNumber.dirty)">
+          联系人电话号码是必须的！
+      </ion-item>
+    </ion-list>
+  </form>
+       <button ion-button [disabled]="!ValidatorsForm.valid || !ValidatorsForm.dirty"  (click)="onDetailPage()" block>
+           下一步
+       </button>
+</ion-content>

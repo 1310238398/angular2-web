@@ -1,0 +1,25 @@
+<div *ngIf="notice">
+    <div class="page-back" ><button  (click)="goBack()">< 返回</button></div>
+    <p class="noticeTitle">{{notice.MUSTTITLE}}</p>
+    <p class="creator">发布人：{{notice.MUSTCREATOR}}</p>
+    <p class="time">{{fomateDate(notice.MUSTTIME)}}</p>
+        <!--<a *ngFor="let attachment of notice.ATTACHMENTS">{{attachment.FileLink}}</a>-->
+    <div>
+        <a href='{{attachment.FileLink}}' *ngFor="let attachment of notice.ATTACHMENTS" download>{{attachment.FileName}}</a>
+    </div>
+    <HR class="separate">
+    <p class="content">{{notice.MUSTDESC}}</p>
+
+    <!--<div>-->
+    <!--<label>id: </label>{{notice.MUSTID}}</div>-->
+    <!--<div>-->
+    <!--<label>TILE: </label>-->
+    <!--<input [(ngModel)]="notice.MUSTTITLE" placeholder="title" />-->
+    <!--</div>-->
+    <!--<button (click)="goBack()">Back</button>-->
+    <!--<button (click)="save()">Save</button>-->
+</div>
+
+<!--<ion-content>Hello World</ion-content>-->
+
+

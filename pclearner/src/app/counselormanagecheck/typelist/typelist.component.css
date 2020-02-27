@@ -1,0 +1,6 @@
+.fl{float: left;}
+.fr{float: right;}
+.center{text-align: center;}
+.dib{display: inline-block;}
+
+.file-message{width: 140px;height:28px;resize:none;line-height: 26px;border-radius: 4px;border:1px solid #d9d9d9;padding:0 7px;vertical-align: middle;}

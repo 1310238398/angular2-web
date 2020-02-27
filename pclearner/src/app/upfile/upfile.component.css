@@ -1,0 +1,52 @@
+.fl{float: left;}
+.fr{float: right;}
+.center{text-align: center;}
+.dib{display: inline-block;}
+
+.upfile-cont{height:65%;width: 100%;margin:0 auto;overflow: auto;}
+.upfile-cont .table-thead,.table-tbody{width: 100%;overflow: hidden;}
+.upfile-cont .table-thead{background: #f7f7f7;border-bottom:1px solid #e9e9e9;}
+.upfile-cont .table-thead li{border-top:1px solid #e9e9e9;height:45px;line-height: 45px;}
+.upfile-cont ul{overflow: hidden;}
+.upfile-cont li{min-height:54px;overflow: hidden;border-right:1px solid #e9e9e9;}
+.upfile-cont .table-tbody ul{border-bottom:1px solid #e9e9e9;}
+
+.upfile-cont li:nth-child(1){width: 12%;}
+.upfile-cont li:nth-child(2){width: 8%;}
+.upfile-cont li:nth-child(3){width: 8%;}
+.upfile-cont li:nth-child(4){width: 26%;word-wrap:break-word}
+.upfile-cont li:nth-child(5){width: 10%;}
+.upfile-cont li:nth-child(6){width: 10%;}
+.upfile-cont li:nth-child(7){width: 26%;}
+.upfile-cont li:nth-child(7) p{overflow: hidden;text-overflow:ellipsis;white-space: nowrap;height:20px;line-height: 20px;}
+
+.upfile-cont .table-tbody li{position: relative;}
+.upfile-cont .table-tbody li p{position: absolute;top:50%;transform: translate(-50%, -50%);left: 50%;width: 100%;}
+.upfile-cont .table-tbody li .dis-b{position: absolute;top:50%;transform: translate(-50%, -50%);left: 50%;width: 100%;}
+
+.dis-a{pointer-events: none;color:red;width: 100%;line-height: 15px;display: inline-block;}
+
+.upfile-cont .table-tbody .file-sb{width:55px;}
+.upfile-cont .table-tbody .file-cx{width:120px;}
+
+.file-mc{max-width: 80%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;height:15px;line-height: 15px;}
+.file-sx{width: 26.7px;overflow: hidden;white-space: nowrap;height:15px;line-height: 15px}
+
+
+.btn-wraper{margin: 2% auto;width: 570px;overflow: hidden;}
+.file-tit{display: inline-block;font-weight: 600;height:30px;line-height: 30px;width: 80px;}
+.file-name{display: inline-block;width: 73%;height:28px;line-height: 28px;border:1px solid #e9e9e9;border-radius: 4px;padding: 0 5px;overflow: hidden;}
+.school-tit{display: inline-block;font-weight: 600;line-height: 28px;width: 80px; }
+.men-tit{display: inline-block;font-weight: 600;line-height: 28px;width: 80px;}
+
+.beiz-tit{display: inline-block;font-weight: 600;vertical-align: top;width: 80px; text-align:justify;}
+
+.file-message{border:1px solid #e9e9e9;border-radius: 4px;padding: 2px 5px;width: 73%;overflow-x:hidden;overflow-y:hidden;}
+
+.file-up{margin:2% auto;overflow: hidden;width: 200px;}
+.file-num{position: absolute;bottom: 5px;right:18%;}
+
+.upfile-foot{position: fixed;bottom: 0;overflow: hidden;width: 100%;background: #fff;height:35%;}
+
+
+.ant-btn-able{pointer-events: none;background-color: #e9e9e9!important;border-color: #e9e9e9!important;}

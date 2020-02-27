@@ -1,0 +1,20 @@
+<ion-content class="index-cont">
+    <p class="wain-txt center">
+        <span class="db fn12" style="color:#ff0000;">该二维码暂未与宿舍绑定</span>
+        <span class="db fn14">需要先与宿舍绑定后才可以使用</span>
+    </p>
+    <ion-list class="list-wrap overh" *ngIf="studentType == 'StudentCadres'">
+        <p class="title-txt fn14">请选择宿舍</p>
+        <ion-item *ngFor="let item of itemsObj" (click)="bindCode(item.RoomCode,item.name)">
+            <h2 class="overh">
+                <span class="dib fl">{{ item.name }}</span>
+                <img class="dib sex-icon fl" style="width:14px;" *ngIf="item.RoomSex == '0030001'" src="assets/imgs/nan.png" alt="">
+                <img class="dib sex-icon fl" *ngIf="item.RoomSex == '0030002'" src="assets/imgs/nv.png" alt="">
+            </h2>
+            <p style="height:16px;line-height:16px;">本班共{{item.Numbers}}名同学入住</p>
+            <button ion-button clear item-end>绑定</button>
+        </ion-item>
+    </ion-list>
+
+    <p *ngIf="studentType != 'StudentCadres'" class="center fn18" style="color:#ccc;line-height: 200px;">无绑定二维码权限</p>
+</ion-content>

@@ -1,0 +1,67 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, select, img {
+    margin: 0;
+    padding: 0;
+    /* [disabled]padding:0; */
+}
+
+body {
+    /*控制背景图固定*/
+    background-attachment: fixed;
+    /*背景图大小自适应*/
+    background-size: 100% 100%;
+}
+
+*{
+    font-family: PingFangSC-Regular;
+}
+
+.container{
+    width:100%;
+    magin:0 auto;
+}
+
+.pic_div {
+    width: 175px;
+    height: 134px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+.pic_div img{
+    width: 175px;
+    height: 134px;
+}
+.ytzsz{
+    /*width: 81px;*/
+    text-align: center;
+    height: 23px;
+    margin: 0 auto;
+    margin-top: 53px;
+    font-size: 16px;
+    color: #3E3E3E;
+    letter-spacing: 0.19px;
+}
+
+.fbcg{
+    width: 130px;
+    height: 36px;
+    line-height: 36px;
+    margin: 0 auto;
+    margin-top: 168px;
+    background-color: #FFC000;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: 0.19px;
+    text-align: center;
+}
+
+.warn{
+    width: 303px;
+    height: 60px;
+    margin: 0 auto;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666666;
+    letter-spacing: 0.17px;
+}
+

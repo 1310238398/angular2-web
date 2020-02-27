@@ -1,0 +1,59 @@
+<ion-content class="cont-box">
+  <div class="record-txt center fn12">
+    <p>该生本学期考勤{{headData.total}}次,出勤{{headData.normal}}次</p>
+    <p>请假
+      <span class="fn17">{{headData.leaves}}</span>次, 迟到
+      <span class="fn17">{{headData.late}}</span>次, 旷课
+      <span class="fn17">{{headData.absent}}</span>次</p>
+  </div>
+  <p class="center fn14 clor9b" style="margin:10px 0 2px;">只展示本学期请假、迟到、旷课的数据</p>
+  <div class="status-select center">
+    <p class="status-select-p overh mr">
+      <ion-item class="overh fl">
+        <ion-label>请假</ion-label>
+        <ion-checkbox [(ngModel)]="topTitle.qingJia" (click)="qingJiaCheck()"></ion-checkbox>
+      </ion-item>
+
+      <ion-item class="overh fl" style="margin:0 10px;">
+        <ion-label>迟到</ion-label>
+        <ion-checkbox [(ngModel)]="topTitle.chiDao" (click)="chiDaoCheck()"></ion-checkbox>
+      </ion-item>
+
+      <ion-item class="overh fl">
+        <ion-label>旷课</ion-label>
+        <ion-checkbox [(ngModel)]="topTitle.kuangKe" (click)="kuangKeCheck()"></ion-checkbox>
+      </ion-item>
+    </p>
+  </div>
+
+  <div class="name-list mr">
+    <p class="name-list-head">
+      <span class="center dib fl fn14">考勤时间</span>
+      <span class="center dib fl fn14">上课时间</span>
+      <span class="center dib fl fn14">课程名称</span>
+      <span class="center dib fl fn14">状态</span>
+    </p>
+    <div class="name-list-detail" *ngFor="let data of dataObj;let i = index;">
+      <p class="center fl fn14 css-c1 clor4a">{{data.Dates}} {{data.Week}}</p>
+      <p class="center fl fn14 css-c2 clor4a">{{data.Sections}}节</p>
+      <p class="center fl fn14 css-c3 clor4a" [ngStyle]="{'line-height':data.CourseName.length > 8 ? '21px' : '41px' }">{{data.CourseName}}</p>
+      <p class="center fl fn14 css-c4 relative">
+        <span class="dib" *ngIf="data.Status == '1'" style="color: #69C701;">请假</span>
+        <span class="dib" *ngIf="data.Status == '2'" style="color: #FD9520;">迟到</span>
+        <span class="dib" *ngIf="data.Status == '3'" style="color: #FF4E4E;">旷课</span>
+        <img class="dib absolute" *ngIf="data.LeaveRecord != ''" (click)="lookLeaveList(data.LeaveRecord)" src="assets/images/jiatiao2x.png"
+          alt="">
+      </p>
+    </div>
+  </div>
+
+  <div *ngIf="topTitle.emptyData" class="center">
+    <img src="assets/images/kong.png" style="margin-top:50px;" alt="">
+    <p style="color:#ACACAC;">暂无数据</p>
+  </div>
+
+  <ion-infinite-scroll *ngIf="topTitle.moreRili" (ionInfinite)="riLiinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,107 @@
+<ion-header class="box-shadow">
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="activeSegment" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="10">
+        <span>待处理（{{statusQuantity.waiting}}）</span>
+      </ion-segment-button>
+      <ion-segment-button value="20,21">
+        <span>处理中（{{statusQuantity.processing}}）</span>
+      </ion-segment-button>
+      <ion-segment-button value="30,31,40">
+        <span>已处理（{{statusQuantity.completed}}）</span>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!-- 待处理 -->
+  <div *ngIf="activeSegment==='10'">
+    <div *ngFor="let data of waitTaskList; let i=index;">
+      <div class="dateline" *ngIf="compareA(i)">
+        {{data.CreateTime|_date:'YYYY-MM-DD'}}
+      </div>
+      <ion-list (click)="navigate(data.FlowInstanceRecordID)">
+        <button ion-item>
+          <p class="item-title no-line-break ">
+            <span>【{{i+1}}】</span>{{data.AreaName}}{{data.SpecificSite}}<span *ngIf="data.Item&&data.Item.length>0&&data.Item[0].Name">{{data.Item[0].Name}}</span>报修</p>
+          <p class="item-tips no-line-break ">
+            <span class="mr-15">上报时间：{{data.CreateTime|_date:'YYYY-MM-DD HH:mm'}}</span>
+            <span>编号：{{data.SerialNumber}}</span>
+          </p>
+        </button>
+      </ion-list>
+    </div>
+    <div class="empty" *ngIf="statusQuantity.waiting == '0'">
+      <a>
+        <img src="assets/imgs/kong.png" width="187" height="159">
+      </a>
+      <p class="tips">暂无报修单</p>
+    </div>
+    <div class="bottom" *ngIf="reachBottom">
+      <div class="line"></div>
+      <div class="tips">我们是有底线的</div>
+      <div class="line"></div>
+    </div>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+  <!-- 进行中 -->
+  <div *ngIf="activeSegment==='20,21'">
+    <div class="work-list" *ngFor="let worker of workerList; let i= index">
+      <div class="work" (click)="showWorkTask(worker)" [class.downarrow]="worker.show===true" [class.rightarrow]="worker.show===false">
+        {{worker.UserName}}（{{worker.TaskNumber}}）
+      </div>
+      <ion-list style="margin-top:1px;" *ngIf="worker.show">
+        <button ion-item *ngFor="let task of workerTaskList; let i= index" (click)="navigate(task.FlowInstanceRecordID)">
+          <p class="item-title no-line-break ">
+            <span>【{{i+1}}】</span>{{task.AreaName}}{{task.SpecificSite}}<span *ngIf="task.Item&&task.Item.length>0&&task.Item[0].Name">{{task.Item[0].Name}}</span>报修</p>
+          <p class="item-tips no-line-break ">
+            <span class="mr-15">维修时间：{{task.CreateTime|_date:'YYYY-MM-DD HH:mm'}}</span>
+            <span>编号：{{task.SerialNumber}}</span>
+          </p>
+        </button>
+        <ion-infinite-scroll (ionInfinite)="doInfiniteIng($event)">
+          <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。" style="min-height: 1px;">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </ion-list>
+    </div>
+    <div class="empty" *ngIf="statusQuantity.processing == '0'">
+      <a>
+        <img src="assets/imgs/kong.png" width="187" height="159">
+      </a>
+      <p class="tips">暂无报修单</p>
+    </div>
+  </div>
+  <!-- 已完成 -->
+  <div *ngIf="activeSegment==='30,31,40'">
+    <div class="work-list" *ngFor="let worker of workerList; let i= index">
+      <div class="work" (click)="showWorkTask(worker)" [class.downarrow]="worker.show===true" [class.rightarrow]="worker.show===false">
+        {{worker.UserName}}（{{worker.TaskNumber}}）
+      </div>
+      <ion-list style="margin-top:1px;" *ngIf="worker.show">
+        <button ion-item *ngFor="let task of workerTaskList; let i= index" (click)="navigate(task.FlowInstanceRecordID)">
+          <p class="item-title no-line-break ">
+            <span>【{{i+1}}】</span>{{task.AreaName}}{{task.SpecificSite}}<span *ngIf="task.Item&&task.Item.length>0&&task.Item[0].Name">{{task.Item[0].Name}}</span>报修</p>
+          <p class="item-tips no-line-break ">
+            <span class="mr-15">维修时间：{{task.CreateTime|_date:'YYYY-MM-DD HH:mm'}}</span>
+            <span>编号：{{task.SerialNumber}}</span>
+          </p>
+        </button>
+        <ion-infinite-scroll (ionInfinite)="doInfiniteOver($event)">
+          <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。" style="min-height: 1px;">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </ion-list>
+    </div>
+    <div class="empty" *ngIf="statusQuantity.completed == '0'">
+      <a>
+        <img src="assets/imgs/kong.png" width="187" height="159">
+      </a>
+      <p class="tips">暂无报修单</p>
+    </div>
+  </div>
+</ion-content>

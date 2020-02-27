@@ -1,0 +1,119 @@
+<div class="distribution">
+    <div class="components-table-demo-control-bar">
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-left">
+            <div nz-form-item nz-col class="mgb20px">
+                <div nz-form-control class="h">
+                    <nz-select style="width: 162px;" [nzPlaceHolder]="'校区'" [nzShowSearch]="false" [(ngModel)]="searchObj.Campus" (ngModelChange)="getCampusName(searchObj.Campus)" name="Campus" nzAllowClear >
+                        <nz-option *ngFor="let option of Campus" [nzLabel]="option.CampusName" [nzValue]="option.CampusCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-form-item nz-col class="mgb20px">
+                <div nz-form-control>
+                    <nz-select style="width: 142px;border:none;" [nzPlaceHolder]="'性别'" [nzShowSearch]="false" [(ngModel)]="searchObj.Sex" name="Sex"
+                               nzAllowClear>
+                        <nz-option *ngFor="let option of Sex" [nzLabel]="option.CodeName" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+
+            <div nz-form-item nz-col class="mgb20px">
+                <div nz-form-control>
+                    <nz-select style="width: 142px;border:none;"  [nzPlaceHolder]="'年级'" [nzShowSearch]="false" [(ngModel)]="searchObj.Grade" name="Grade" nzAllowClear >
+                        <nz-option *ngFor="let option of Grade" [nzLabel]="option.GradeName" [nzValue]="option.GradeCode">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+
+            <div style="width: 220px; display: inline-block;">
+                <button (click)="onSearch(true)" class="btn_search btn">查询</button>
+                <button (click)="resetForm(f)" class="btn_reset btn">重置</button>
+                <button (click)="getDistributStudent()" [disabled]="buttonDisabled" class="btn_distrbut btn">分配宿舍</button>
+                <!--<button (click)="getDistributStudent()" disabled="disabled" class="btn_distrbut btn">分配宿舍</button>-->
+            </div>
+
+        </form>
+    </div>
+
+
+    <div nz-row class="content">
+        <div nz-col [nzSpan]="11">
+            <h3 style="height: 30px;line-height: 30px;"><span style="color: #0e77ca">{{allotCampusName}} </span>待分配学生信息</h3>
+            <div class="left">
+                <h3 *ngIf="data.length> 0">您已选中{{ num_stu }}人</h3>
+                <nz-table #nzTable [nzDataSource]="data" [nzLoading]="_loading" [nzIsPagination] ="false" [nzScroll]="false">
+                    <!--<ng-template #nzFixedHeader>-->
+                        <thead nz-thead>
+                        <tr>
+                            <th nz-th [nzWidth]="'2%'">
+                                <label nz-checkbox [(ngModel)]="_allChecked"  [nzIndeterminate]="_indeterminate" (ngModelChange)="_checkAll($event)">
+                                </label>
+                            </th>
+                            <th nz-th [nzWidth]="'50%'"><span>学院名称</span></th>
+                            <th nz-th [nzWidth]="'48%'"><span>人数</span></th>
+                        </tr>
+                        </thead>
+                    <!--</ng-template>-->
+                    <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                        <td nz-td nzCheckbox>
+                            <label nz-checkbox [(ngModel)]="data.checked"  (ngModelChange)="_refreshStatus($event)">
+                            </label>
+                        </td>
+                        <td nz-td>{{data.academyname}}</td>
+                        <td nz-td>{{data.studentnum}}</td>
+                    </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+
+        </div>
+        <div nz-col [nzSpan]="2"></div>
+        <div nz-col [nzSpan]="11" >
+            <h3 style="height: 30px;line-height: 30px;"> <span style="color: #0e77ca">{{allotCampusName}} </span>待分配公寓信息</h3>
+            <div class="distribut">
+                <nz-spin *ngIf="_nodeloading" style="margin-top:20px;padding: 0 auto;"></nz-spin>
+                <h4 *ngIf="_nodelnil">没有数据</h4>
+                <h3 *ngIf="nodes.length> 0">您已选中{{ num_bed }}个床位</h3>
+                <div class="tres"  *ngIf="nodes.length> 0" style="background-color:rgb(255, 255, 255);">
+                    <nz-tree [nzNodes]="nodes" [nzCheckable]="true" [nzAllowChildLinkage]="true" [nzAllowParentLinkage]="true" [nzShowLine]="true" [nzOptions]="options" (nzEvent)="onEvent($event)" (nzCheck)="onCheck($event)"></nz-tree>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--弹出显示班级宿舍对应分配信息-->
+    <nz-modal [nzWidth]=720 [nzVisible]="isVisibles" [nzTitle]="'班级对应的宿舍分配信息'" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)">
+        <ng-template #modalContent>
+                <nz-table #nzTable [nzDataSource]="showModel"  [nzIsPagination] ="false" [nzScroll]="false">
+                <!--<ng-template #nzFixedHeader>-->
+                    <thead nz-thead>
+                    <tr>
+                        <th nz-th [nzWidth]="'10%'"><span>班级名称</span></th>
+                        <th nz-th [nzWidth]="'15%'"><span>待分配学生人数</span></th>
+                        <th nz-th [nzWidth]="'80%'"><span>所分配的宿舍</span></th>
+                    </tr>
+                    </thead>
+                <!--</ng-template>-->
+                <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of showModel">
+                    <td nz-td>{{data.classname}}</td>
+                    <td nz-td>{{data.studnum}}</td>
+                    <td nz-td>{{data.bednum}}</td>
+                </tr>
+                </tbody>
+            </nz-table>
+        </ng-template>
+    </nz-modal>
+
+    <div id="loading" *ngIf="_isVisible">
+        <div class="loading-spins">
+            <nz-spin nzTip="正在分配,请稍后" [nzSize]="'large'" *ngIf="_isVisible"></nz-spin>
+        </div>
+    </div>
+
+</div>

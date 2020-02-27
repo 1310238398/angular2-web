@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>入学教育</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <script src="lib/antlinker.1.0.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+    <style type="text/css">
+       /* html, body {
+            width: 100%;
+            height: 100%;
+            overflow: scroll;
+            margin: 0;
+            padding: 0;
+        }
+*/
+        .bg {
+            background: url("img/bg.png") no-repeat fixed;
+            height: 300px;
+            background-size: contain;
+        }
+
+        .title {
+            padding-top: 50px;
+        }
+
+        .title_2 {
+            width: 100%;
+            text-align: center;
+            color: #4d4d4d;
+            font-size: 35px;
+            font-weight: 100;
+        }
+
+        .logo {
+            width: 100%;
+            text-align: center;
+        }
+
+        .campus_bg {
+            width: 100%;
+            height: 50px;
+            background: url("img/full.png") no-repeat center;
+            background-size: contain;
+        }
+
+        .fushan {
+            background: url("img/青大/54.png") no-repeat center;
+            background-size: contain;
+            width: 300px;
+            height: 150px;
+            position: relative;
+            margin: 50px auto 28px auto;
+        }
+
+        .jin {
+            background: url("img/青大/55.png") no-repeat center;
+            background-size: contain;
+            width: 300px;
+            height: 150px;
+            position: relative;
+            margin: auto;
+            bottom: 20px;
+        }
+
+        .finish {
+            position: absolute;
+            top: 30px;
+            width: 46px;
+            right: 10px;
+            visibility: hidden
+        }
+
+        .play {
+            position: absolute;
+            width: 15px;
+            left: 10px;
+            bottom: 30px;
+        }
+
+        .zi {
+            position: absolute;
+            left: 30px;
+            bottom: 15px;
+            font-size: 14px;
+            color: #FFFFFF;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .none {
+            color: #cbcbcb !important;
+        }
+
+        .cannot {
+            text-align: center;
+            font-size: 9px;
+            color: #b2b2b2;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="bg">
+    <div class="title">
+        <div class="logo"><img src="img/qd.png" width="100" height="100"></div>
+        <div class="campus_bg"></div>
+        <div class="title_2">青岛大学</div>
+    </div>
+    <!--<div class="cannot">如无法观看，请更新浏览器或Adobe Flash Player版本</div>-->
+    <a href="http://p.store.antlinker.com/static/info/100000004621/100000004621.html">
+        <div class="fushan">
+            <img src="img/finish.png" class="finish">
+            <!--     <img src="img/play.png" class="play">
+                 <p class="zi">浮山校区</p>-->
+        </div>
+    </a>
+    <a href="http://p.store.antlinker.com/static/info/100000004622/100000004622.html">
+        <div class="jin">
+            <img src="img/finish.png" class="finish">
+            <!--     <img src="img/play.png" class="play">
+                 <p class="zi">金家岭校区</p>-->
+        </div>
+    </a>
+</div>
+</body>
+<script>
+    function jump(data) {
+        console.log(data)
+        antlinker.openNewView({
+            uri: 'ant://info/one/open?detailID=' + data,
+            fail: function () {
+
+            }
+        });
+    }
+    $(document).ready(function () {
+        var video = JSON.parse(localStorage.getItem(window["__UserID"])) || {};
+        var obj = {};
+        antlinker.exeUserBasicInfoSdk(obj, function (obj, success) {
+            var video = JSON.parse(localStorage.getItem(window["__UserID"])) || {};
+            if (video.one) {
+                $('.fushan .finish').css('visibility', 'visible')
+            }
+            if (video.two) {
+                $('.jin .finish').css('visibility', 'visible')
+            }
+            $('.fushan').click(function () {
+                video.one = true;
+                localStorage.setItem(window["__UserID"], JSON.stringify(video));
+                console.log('我被点了')
+            });
+            $('.jin').click(function () {
+                video.two = true;
+                localStorage.setItem(window["__UserID"], JSON.stringify(video));
+                console.log('我被点了')
+            });
+            if (video.one && video.two) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/welcome/interface',
+                    data: JSON.stringify({
+                        Router: '/api/task/campus/done',
+                        Method: 'POST',
+                        Body: ""
+                    }),
+                    contentType: "application/json",
+                    headers: {
+                        "AccessToken": window["__AppWebkey"]
+                    }
+                }).done(function (data, status) {
+                    console.log(data, status);
+                });
+            }
+        })
+    })
+</script>
+</html>

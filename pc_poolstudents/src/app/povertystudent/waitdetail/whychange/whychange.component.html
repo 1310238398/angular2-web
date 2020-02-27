@@ -1,0 +1,26 @@
+<div class="content">
+    <div class="center" style="margin:20px 0">
+        <h2>变更理由</h2>
+    </div>
+    <div class="info-cont">
+        <ul>
+            <li class="overh" *ngFor="let data of dataSet">
+                <p style="margin:10px 0;">{{data.Modify}}</p>
+                <p class="overh" style="margin:10px 0;">
+                    <span class="dib fl" style="width: 65px;">变更理由：</span>
+                    <span class="dib fl" style="width: 88%;">{{data.ModifyReason}}</span>
+                </p>
+                <hr>
+            </li>
+        </ul>
+        <p class="center"></p>
+    </div>
+
+    <p class="center" style="margin-top:20px;">
+        <a [routerLink]="['/poverty']">
+            <button nz-button [nzType]="'primary'" style="width: 150px;height:40px;">
+                <span>返回</span>
+            </button>
+        </a>
+    </p>
+</div>

@@ -1,0 +1,91 @@
+<ion-content>
+    <div class="xinxi">
+        <p class="fontw">山东体育学院学籍登记表</p>
+        <p class="fontq">请认真填写学籍登记表，此表将会放入您的档案</p>
+    </div>
+
+    <div>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft" fixed>民族</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" [(ngModel)]="FamilyAddress.Nationality" type="text"></ion-input>
+            </ion-item>
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft" fixed>籍贯</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.OriginArea" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <!-- <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft" fixed>报考专项</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.Height" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+
+        </ion-list> -->
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">身高</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.Height" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+
+        </ion-list>
+
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">家庭电话</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.FamilyPhone" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+
+        </ion-list>
+
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">身份证号</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.IdentityNum" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">原毕业学校</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.OldSchool" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">曾担任何职务</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.OldDuties" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">现家庭住址</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.NewFamilyAddress" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">邮政编码</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.ZipCode" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'"></ion-input>
+            </ion-item>
+
+        </ion-list>
+    </div>
+    <div class="pageBtnDiv">
+        <button ion-button (click)="onTopPage() " class="pageBtnw">
+          上一步
+      </button>
+        <button ion-button (click)="onDetailPageTJ() " class="pageBtnq">
+            下一步
+        </button>
+    </div>
+    <div class="yeshu">
+        2/5
+    </div>
+</ion-content>

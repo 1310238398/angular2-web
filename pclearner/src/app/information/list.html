@@ -1,0 +1,117 @@
+<div class="content">
+    <div class="components-table-demo-control-bar">
+        <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form">
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-input [(ngModel)]="title" name="title" [nzPlaceHolder]="'标题'"></nz-input>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-control>
+                    <nz-select style="width: 120px;" [(ngModel)]="statuscode" [nzPlaceHolder]="'状态'" [nzShowSearch]="true"
+                        name="statuscode" nzAllowClear>
+                        <nz-option *ngFor="let option of statuslist" [nzLabel]="option.label" [nzValue]="option.value">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-col [nzSpan]="24" style="text-align: right;">
+                    <button nz-button [disabled]="httpService.loading" [nzType]="'primary'" (click)="onSearch()">查询</button>
+                    <button nz-button (click)="resetForm()">重置</button>
+                </div>
+            </div>
+            <div nz-row nz-form-item style="float:right;">
+                <button nz-button [nzType]="'primary'" [routerLink]="['/information/add']">新增</button>
+            </div>
+        </form>
+    </div>
+    <nz-table #nzTable class="simple-table" [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [(nzTotal)]="total"
+        [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzBordered]="true" (nzPageIndexChange)="getInfoList()">
+        <thead nz-thead class="t-center">
+            <tr>
+                <th nz-th [nzWidth]="'120px'">
+                    <span>操作</span>
+                </th>
+                <th nz-th>
+                    <span>标题</span>
+                </th>
+                <th nz-th [nzWidth]="'70px'">
+                    <span>点击量</span>
+                </th>
+                <th nz-th [nzWidth]="'70px'">
+                    <span>认证学生访问量</span>
+                </th>
+                <th nz-th [nzWidth]="'100px'">
+                    <span>发布时间</span>
+                </th>
+                <th nz-th [nzWidth]="'80px'">
+                    <span>发布人</span>
+                </th>
+                <th nz-th [nzWidth]="'60px'">
+                    <span>状态</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody nz-tbody class="t-center">
+            <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                <td nz-td>
+                    <nz-tooltip *ngIf="data.STATUS==='0'" [nzTitle]="'修改'">
+                        <a nz-tooltip [routerLink]="['/information/add']" [queryParams]="{id: data.INFOID}">
+                            <i class="anticon anticon-edit"></i>
+                        </a>
+                    </nz-tooltip>&nbsp;&nbsp;
+                    <nz-tooltip [nzTitle]="'删除'">
+                        <a nz-tooltip>
+                            <nz-popconfirm [nzTitle]="'确定要删除吗？'" (nzOnConfirm)="delete(data.INFOID)" (nzOnCancel)="cancel()">
+                                <a nz-popconfirm class="btndelete">
+                                    <i class="anticon anticon-delete"></i>
+                                </a>
+                            </nz-popconfirm>
+                        </a>
+                    </nz-tooltip>&nbsp;&nbsp;
+                    <nz-tooltip *ngIf="data.STATUS==='0'" [nzTitle]="'发布'">
+                        <a nz-tooltip>
+                            <nz-popconfirm [nzTitle]="'确定要发布吗？'" (nzOnConfirm)="publish(data.INFOID)" (nzOnCancel)="cancel()">
+                                <a nz-popconfirm>
+                                    <i class="anticon anticon-check"></i>
+                                </a>
+                            </nz-popconfirm>
+                        </a>
+                    </nz-tooltip>
+                </td>
+                <td nz-td style="text-align:left !important;">
+                    <a (click)="getInfoOne(data.INFOID)">{{data.INFOTITLE}}</a>
+                </td>
+                <td nz-td>
+                    {{data.INFOVISITCOUNT}}
+                </td>
+                <td nz-td>
+                    <a [routerLink]="['/information/statis']" [queryParams]="{id: data.INFOID}">{{data.INFOVISITSTUCOUNT}}</a>
+                </td>
+                <td nz-td>{{data.INFOTIME|_datestring:'YYYY-MM-DD'}}</td>
+                <td nz-td>{{data.INFOCREATER}}</td>
+                <td nz-td>
+                    <span *ngIf="data.STATUS==='0'">保存</span>
+                    <span *ngIf="data.STATUS==='1'">已发布</span>
+                    <span *ngIf="data.STATUS==='9'">敏感词待审核</span>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>
+<nz-modal [nzVisible]="isVisible" [nzTitle]="'资讯预览'" [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="closeOk()"
+    (nzOnOk)="closeOk()">
+    <ng-template #modalContent>
+        <div class="viewinfo">
+            <p class="info-title"><span class="info-type">资讯</span>{{infoDetail.INFOTITLE}}</p>
+            <p class="info-time"><span>时间：</span>{{formatTime(infoDetail.INFOTIME)}}</p>
+            <div class="kong"></div>
+            <div [innerHTML]="infoDetail.INFOHTML|safeHtml" class="info-content">
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #modalFooter>
+        <button nz-button nzType="default" (click)="closeOk()">关闭</button>
+    </ng-template>
+</nz-modal>

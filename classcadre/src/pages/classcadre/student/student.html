@@ -1,0 +1,29 @@
+<ion-content>
+  <div class="info_list">
+    <ion-list>
+      <div *ngFor="let stu of studentData">
+        <ion-item>
+          <ion-checkbox [(ngModel)]="stu.checked"></ion-checkbox>
+          <ion-label>
+            <p class="username no-line-break">{{stu.Name}}</p>
+            <p class="usercode no-line-break">{{stu.UserCode}}&nbsp;&nbsp;{{stu.Political}}</p>
+          </ion-label>
+        </ion-item>
+        <div class="line"></div>
+      </div>
+      <!-- <div>
+        <ion-item>
+          <ion-checkbox checked="true"></ion-checkbox>
+          <ion-label>孙俪</ion-label>
+        </ion-item>
+        <div class="line"></div>
+      </div> -->
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button (click)="saveCadre()" [disabled]="submitIng">确定</button>
+    <!-- <ion-title (click)="saveCadre()">确定</ion-title> -->
+  </ion-toolbar>
+</ion-footer>

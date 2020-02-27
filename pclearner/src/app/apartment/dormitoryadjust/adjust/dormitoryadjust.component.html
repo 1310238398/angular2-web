@@ -1,0 +1,150 @@
+<div class="distriadjust">
+    <div nz-row>
+        <div nz-col [nzSpan]="8" style="padding: 10px;">
+            <h2 style="text-align: center; height: 40px; line-height: 40px; ">查询条件</h2>
+            <div class="components-table-demo-control-bar" style="margin-bottom: 20px">
+                <!--<nz-alert style="margin-left: 10px;"-->
+                        <!--nzType="info"-->
+                        <!--nzMessage="查询提示"-->
+                        <!--nzDescription="请先选择校区>再选园区>然后宿舍楼宇，以此顺序选择查询条件。 都是必选项">-->
+                <!--</nz-alert>-->
+                <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-left">
+                    <div nz-form-item nz-col class="mgb10px">
+                        <div nz-form-control class="h">
+                            <nz-select style="width: 80px;" [nzPlaceHolder]="'校区'" [nzShowSearch]="false" [(ngModel)]="searchObj.Campus" name="Campus"  (ngModelChange)="campusDistrictLinkage(searchObj.Campus)">
+                                <nz-option *ngFor="let option of Campus" [nzLabel]="option.CampusName" [nzValue]="option.CampusCode">
+                                </nz-option>
+                            </nz-select>
+                        </div>
+                    </div>
+                    <div nz-form-item nz-col class="mgb10px">
+                        <div nz-form-control>
+                            <nz-select style="width: 80px;border:none;" [nzPlaceHolder]="'园区'" [nzShowSearch]="false" [(ngModel)]="searchObj.District"  (ngModelChange)="districtDormitoryLinkage(searchObj.District)" name="District">
+                                <!--nzAllowClear-->
+                                <nz-option *ngFor="let option of District" [nzLabel]="option.DistrictName" [nzValue]="option.DistrictCode">
+                                </nz-option>
+                            </nz-select>
+                        </div>
+                    </div>
+
+                    <div nz-form-item nz-col class="mgb10px">
+                        <div nz-form-control>
+                            <nz-select style="width: 80px;border:none;"  [nzPlaceHolder]="'宿舍楼'" [nzShowSearch]="false" [(ngModel)]="searchObj.DormNumber" name="DormNumber" >
+                                <nz-option *ngFor="let option of Dormitory" [nzLabel]="option.DormitoryName" [nzValue]="option.DormitoryCode">
+                                </nz-option>
+                            </nz-select>
+                        </div>
+                    </div>
+
+                    <button (click)="onSearch(true)" style="line-height: 24px; font-size: 14px;" class="btn_search btn">查询</button>
+                    <button (click)="resetForm(f)" style="line-height: 24px; font-size: 14px;" class="btn_reset btn">重置</button>
+                </form>
+            </div>
+
+            <div class="adjust-left">
+                <nz-table #nzTable [nzDataSource]="data" [nzLoading]="_loading" [nzIsPagination] ="false" [nzScroll]="false">
+                    <!--<ng-template #nzFixedHeader>-->
+                        <thead nz-thead>
+                        <tr>
+                            <th nz-th [nzWidth]="'100%'"><span>宿舍名称</span></th>
+                        </tr>
+                        </thead>
+                    <!--</ng-template>-->
+                    <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let data of nzTable.data; let i = index">
+                        <td nz-td style="margin: 10px auto;" [ngStyle]="{'background-color':i == selRow ? '#8cc9f5' : '' }" (click)="RoomRadio(i,data.RoomCode)">{{data.DistrictName}}{{data.DormitoryName}}{{data.UnitName}}{{data.RoomName}}</td>
+                    </tr>
+                    <!--</nz-radio-group>-->
+                    </tbody>
+                </nz-table>
+            </div>
+
+
+        </div>
+        <div nz-col [nzSpan]="8" style="padding: 10px;">
+            <h2 style="text-align: center; height: 40px; line-height: 40px; ">已分配宿舍学生</h2>
+            <div style="width: 100%;line-height: 30px; margin-bottom: 20px; overflow: hidden;">
+                <span style="float: left; margin-left: 20px; color: #108ee9; background: #f5f5f5; font-size: 12px;">该宿舍剩余 <span style="color: #000;">{{emptyBedNum || 0 }}</span> 张床位</span>
+                <button style="float: right; margin-right: 20px;line-height: 24px; font-size: 14px;" (click)="onPush()" class="btn_search btn">移出</button>
+            </div>
+            <div class="adjust-mid" style="width: 100%;" >
+                <nz-table #nzTable1 [nzDataSource]="distributData" [nzLoading]="_pushLoading" [nzIsPagination] ="false" [nzScroll]="false">
+                    <!--<ng-template #nzFixedHeader>-->
+                        <thead nz-thead>
+                        <tr>
+                            <th nz-th [nzWidth]="'20%'"></th>
+                            <th nz-th [nzWidth]="'20%'"><span>学号</span></th>
+                            <th nz-th [nzWidth]="'20%'"><span>姓名</span></th>
+                            <th nz-th [nzWidth]="'20%'"><span>性别</span></th>
+                            <th nz-th [nzWidth]="'20%'"><span>民族</span></th>
+                        </tr>
+                        </thead>
+                    <!--</ng-template>-->
+                    <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let items of distributData">
+                        <td nz-td nzCheckbox>
+                            <label nz-checkbox [(ngModel)]="items.checked" (ngModelChange)="_refreshdistributStatus(items)">
+                            </label>
+                        </td>
+                        <td nz-td>{{items.UserCode}}</td>
+                        <td nz-td>{{items.Name}}</td>
+                        <td nz-td>{{items.Sex}}</td>
+                        <td nz-td>{{items.Nationality}}</td>
+                    </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+        </div>
+
+
+        <div nz-col [nzSpan]="8" style="padding: 10px;">
+            <h2 style="text-align: center; height: 40px; line-height: 40px; ">未分配宿舍学生</h2>
+            <div class="components-table-demo-control-bar" style="">
+                <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-left">
+                    <div nz-form-item nz-col>
+                        <div nz-form-control >
+                            <nz-input-group nzSuffixIcon="anticon anticon-search">
+                                <input type="text" nz-input placeholder="输入要查询的学生姓名" [(ngModel)]="UnStuSearch" name="name">
+                            </nz-input-group>
+                        </div>
+                        <button (click)="onUnDistribution(true)" style="line-height: 24px; font-size: 14px;" class="btn_search btn">查询</button>
+                        <button (click)="onPull()" style="line-height: 24px; font-size: 14px;" class="btn_search btn">移入</button>
+                    </div>
+                </form>
+            </div>
+
+            <!--<div class="adjust-right" style="margin-top: 18px;" >-->
+            <div class="adjust-right" style="margin-top: 18px;" >
+                <nz-table style="margin-top: 16px;" #nzTables [nzAjaxData]="undistributData" [nzLoading]="_undistributloading" [(nzTotal)]="total" [(nzPageIndex)]="page.Page" [(nzPageSize)]="page.PageSize" (nzPageIndexChange)="onUnDistribution()" [nzScroll]="false">
+                    <!--<ng-template #nzFixedHeader>-->
+                        <thead nz-thead>
+                        <tr>
+                            <th nz-th [nzWidth]="'20%'"></th>
+                            <th nz-th [nzWidth]="'20%'"><span>学号</span></th>
+                            <th nz-th [nzWidth]="'20%'"><span>姓名</span></th>
+                            <th nz-th [nzWidth]="'20%'"><span>性别</span></th>
+                            <th nz-th [nzWidth]="'20%'"><span>民族</span></th>
+                        </tr>
+                        </thead>
+                    <!--</ng-template>-->
+                    <tbody nz-tbody>
+                    <tr nz-tbody-tr *ngFor="let items of undistributData">
+                        <td nz-td nzCheckbox>
+                            <label nz-checkbox [(ngModel)]="items.checked" (ngModelChange)="_refreshundistributStatus(items)">
+                            </label>
+                        </td>
+                        <td nz-td>{{items.UserCode}}</td>
+                        <td nz-td>{{items.Name}}</td>
+                        <td nz-td>{{items.Sex}}</td>
+                        <td nz-td>{{items.Nationality}}</td>
+                    </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>

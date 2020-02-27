@@ -1,0 +1,28 @@
+page-search {
+  ion-row{
+    background-color: #FFFFFF;
+    height: 87px;
+    color: #666666;
+    img{
+      width: 40px;
+    }
+  }
+  .item-divider-ios .label-ios{
+    font-size: 12px;
+  }
+  ion-item-group {
+    .item-ios {
+      h2 {
+        overflow: hidden;
+        font-size: 16px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      p{
+        font-size:12px;
+        color:#666666;
+        letter-spacing:0.29px;
+      }
+    }
+  }
+}

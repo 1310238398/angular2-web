@@ -1,0 +1,43 @@
+<ion-content class="index-cont">
+    <div class="search-wrap fixed">
+        <form action="javascript:return true;">
+            <ion-input class="search-input" mode="ios" [(ngModel)]="NameOrUserCode" type="search" placeholder="请输入姓名或学号"
+                [ngModelOptions]="{standalone: true}" (keyup)="onSearchKeyUp($event)"></ion-input>
+            <img class="absolute search-img" (click)="serachRoom()" src="assets/imgs/search.png" alt="">
+        </form>
+    </div>
+
+    <div *ngIf="!emptyData">
+        <div class="cont-wrap">
+            <ion-list *ngFor="let item of InfoData;let indx=index" style="margin: 0px">
+                <ion-item>
+                    <ion-item>
+                        <h2 class="txt-css">
+                            <span class="fn16 col666 name-txt">{{item.Name}}</span>
+                        </h2>
+                        <p class="txt-css">
+                            <span class="fn14 colaca" style="margin-right:20px;">{{item.UserCode}}</span>
+                            <span class="fn14 colaca">{{item.ClassName}}</span>
+                        </p>
+                    </ion-item>
+                </ion-item>
+            </ion-list>
+
+            <p *ngIf="isAdd20" class="center fn12" style="margin:20px;color:#FFC103;">更多数据请去Web端"辅导员测评"功能查看</p>
+        </div>
+
+        <div class="loading-wrap" *ngIf="loading">
+            <div class="spinnerw" id="spinnerw">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="emptyData" class="center">
+        <img src="assets/imgs/kong.png" style="margin-top:50px;" alt="">
+        <p class="fn16" style="color:#ACACAC;margin-top:20px;">无请求数据</p>
+    </div>
+
+</ion-content>

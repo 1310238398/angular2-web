@@ -1,0 +1,57 @@
+page-lottery {
+  .relative-div {
+    margin-top: 30px;
+    position: relative;
+  }
+  .absolute-result {
+    position: absolute;
+    left: 40px;
+    top: 30px;
+    font-size: 1em;
+  }
+
+  .po-img {
+    position: fixed;
+    top: 57%;
+    left: 36%;
+    height: 70px;
+  }
+  .num {
+    font-size: 9em;
+    text-align: center;
+  }
+  @media(min-width: 320px) {
+  }
+  //iPhone4,5,5s,
+  @media(min-width: 360px) {
+  }
+  //android,
+  @media(min-width: 375px) {
+    .num {
+      font-size: 9em;
+      text-align: center;
+      margin-left: 5px;
+    }
+    .po-img {
+      position: fixed;
+      top: 53%;
+      left: 36%;
+      height: 70px;
+    }
+  }
+  //iphone6,6s,
+  @media(min-width: 412px) {
+    .num {
+      font-size: 9em;
+      text-align: center;
+      margin-left: 15px;
+    }
+    .po-img {
+      position: fixed;
+      top: 57%;
+      left: 39%;
+      height: 70px;
+    }
+  }
+  //iphone6plus,6splus
+}

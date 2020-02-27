@@ -1,0 +1,20 @@
+<ion-content class="index-cont">
+    <div class="" *ngIf="dataSet.status == '3'" style="padding:20px 15px 15px;">
+        <p class="fn14" style="color:#FF0000">审批不通过原因</p>
+        <p class="fn14" style="color: #9B9B9B;text-indent:2em">{{dataSet.remarktxt}}</p>
+    </div>
+    <P class="fn18 color4a center" style="margin:15px 0;">{{dataSet.title}}</P>
+
+    <img class="absolute" style="width: 50px;top:5px;right:10px;" *ngIf="dataOrigin.status == 9" src="assets/images/yiwncheng@2x.png"
+        alt="">
+    <img class="absolute" style="width: 50px;top:5px;right:10px;" *ngIf="dataSet.status == '2' && dataOrigin.status == 1" src="assets/images/shenpizhong@2x.png"
+        alt="">
+    <img class="absolute" style="width: 50px;top:5px;right:10px;" *ngIf="dataSet.status == '1' && dataOrigin.status == 1" src="assets/images/shenpizhong@2x.png"
+        alt="">
+    <img class="absolute" style="width: 50px;top:5px;right:10px;" *ngIf="dataSet.status == '3'" src="assets/images/butongguo@2x.png"
+        alt="">
+
+    <div class="info-box overh">
+        <pre class="fn14 color4a">{{dataSet.filetext}}</pre>
+    </div>
+</ion-content>

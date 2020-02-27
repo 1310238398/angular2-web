@@ -1,0 +1,94 @@
+<ion-content>
+    <div class="xinxi">
+        <p class="fontw">{{title}}</p>
+        <p class="fontq">家庭成员信息</p>
+    </div>
+
+    <div>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"><span style="color:red">* </span>监护人一姓名</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" [(ngModel)]="FamilyAddress.MemberName1" type="text" maxlength="40"></ion-input>
+            </ion-item>
+        </ion-list>
+
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">
+                    <!-- <span class="qiunile ">
+                            <img src="assets/images/blodd.png">
+                        </span>  --><span style="color:red">* </span>监护人一关系
+                </ion-label>
+                <!--<ion-input class="xinxiright " placeholder="请选择 "></ion-input>-->
+                <ion-select [(ngModel)]="FamilyAddress.MemberTypeCode1" interface="action-sheet " cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-option [value]='item.Code' *ngFor="let item of MemberTypes">{{item.CodeName}}
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+
+        </ion-list>
+
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"><span style="color:red">* </span>监护人一工作单位</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.MemberWorkUnit1" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" maxlength="100"></ion-input>
+            </ion-item>
+
+        </ion-list>
+
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"><span style="color:red">* </span>监护人一联系电话</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.MobilePhone1" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" maxlength="15"></ion-input>
+            </ion-item>
+
+        </ion-list>
+
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"><span>&nbsp;&nbsp;</span>监护人二姓名</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.MemberName2" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" maxlength="40"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft">
+                    <!-- <span class="qiunile ">
+                                <img src="assets/images/blodd.png">
+                            </span>  --><span>&nbsp;&nbsp;</span>监护人二关系
+                </ion-label>
+                <!--<ion-input class="xinxiright " placeholder="请选择 "></ion-input>-->
+                <ion-select [(ngModel)]="FamilyAddress.MemberTypeCode2" interface="action-sheet " cancelText="取消" okText="确定" placeholder="请选择">
+                    <ion-option [value]='item.Code' *ngFor="let item of MemberTypes">{{item.CodeName}}
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"><span>&nbsp;&nbsp;</span>监护人二工作单位</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.MemberWorkUnit2" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" maxlength="100"></ion-input>
+            </ion-item>
+
+        </ion-list>
+        <ion-list class="xiangxi">
+            <ion-item class="xinxiyuanjiao">
+                <ion-label class="xinxileft"><span>&nbsp;&nbsp;</span>监护人二联系电话</ion-label>
+                <ion-input class="xinxiright" placeholder="请输入" [(ngModel)]="FamilyAddress.MobilePhone2" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='请输入'" maxlength="15"></ion-input>
+            </ion-item>
+
+        </ion-list>
+
+    </div>
+    <div class="pageBtnDiv">
+        <button ion-button (click)="onTopPage() " class="pageBtnw">
+              上一步
+          </button>
+        <button ion-button (click)="onDetailPageTJ() " class="pageBtnq">
+                确定
+            </button>
+    </div>
+
+</ion-content>

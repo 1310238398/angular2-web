@@ -1,0 +1,25 @@
+page-login {
+
+  .login-content {
+    background: url("../assets/images/back1.jpg") no-repeat;
+    background-size: cover;
+
+    ion-row {
+      align-items: center;
+      text-align: center;
+    }
+.img-top{
+  padding-top: 4rem;
+}
+    ion-item {
+      border-radius: 3px;
+      margin:20px 0;
+      background-color: #09161F;
+      border: 1px solid #17363E;
+    }
+    .item-ios.item-block .item-inner{
+      border: 0;
+    }
+  }
+
+}

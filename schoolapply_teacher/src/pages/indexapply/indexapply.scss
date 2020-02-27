@@ -1,0 +1,74 @@
+page-indexapply {
+  ul,li{list-style: none;margin:0;padding:0;}
+  p,h1,h2,h3{margin:0;padding:0;}
+  hr{margin:5px 0;}
+  .fl{float: left;}
+  .fr{float: right;}
+  .center{text-align: center;}
+  .dib{display: inline-block;}
+  .relative{position: relative;}
+  .absolute{position: absolute;}
+  .fixed{position: fixed}
+  .overh{overflow: hidden;}
+  .mr{margin:0 auto;}
+  .db{display: block;}
+  .fn12{font-size: 12px;}
+  .fn14{font-size: 14px;}
+  .fn16{font-size: 16px;}
+  .fn17{font-size: 17px;}
+  .color4a{color: #4A4A4A;}
+  
+  .index-cont{background: #FAFAFA;color: #4A4A4A;}
+  .head-title{height:32px;line-height: 32px;color: #ACACAC;}
+  
+  .class-title{color: #4A4A4A!important;height:16px;line-height: 16px;margin-bottom:8px;}
+  .gray-c{color: #9B9B9B;}
+  .gray-4a{color: #4A4A4A;}
+  .detail-text{margin:0 16px;border-top: 1px solid #E4E4E4;height:34px;line-height: 34px;background: #fff;}
+
+  .ssc-ov{top:0;left:0;width:100%;height:100%;opacity: 0.3;background: #4A4A4A;}
+
+  .rili-box{width:90%;top:100px;left:50%;margin-left:-45%;background: #FFFFFF;box-shadow: 0 5px 20px 5px rgba(74,74,74,0.45);border-radius: 10px;z-index: 1000;}
+  .rili-box-title{background: #FFC000;color: #fff;height:34px;width: 100%;line-height: 34px}
+  .process-close{position:absolute;right: 10px;top:10px;}
+
+  .process-p{width: 100%;height: 33px;line-height: 33px;padding:0 5px;border-bottom: 1px solid #E4E4E4;}
+
+  .not-process{width: 100%;line-height: 20px;padding:0 5px 0 10px;border-bottom: 1px solid #E4E4E4;margin-bottom: 5px;background-color: #FFE28A;}
+  //底部按钮
+  .my-process{right:15px;bottom:20px;width:50px;height:50px;padding-top: 11px;background: #FFC000;border-radius: 25px;box-shadow: 0 4px 5px 0 #E3E3E3;line-height: 15px;color: #FFFFFF;}
+
+
+
+  @keyframes attendmove{
+    0%   {top:0px; left:50%;opacity: 0;}
+    100% {top:100px; left:50%;opacity: 1;}
+  }
+  @-webkit-keyframes attendmove{
+    0%   {top:0px; left:50%;opacity: 0;}
+    100% {top:100px; left:50%;opacity: 1;}
+  }
+
+  .attend-animat {
+    animation:attendmove 0.4s;
+    -webkit-animation:attendmove 0.4s;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

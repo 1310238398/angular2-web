@@ -1,0 +1,109 @@
+<div class="modal-header">
+    <div class="modal-title">
+        学生状态
+    </div>
+</div>
+<div>
+    <div class="table-operations text-right mb8">
+        <button nz-button class="btn-zj-color add" (click)="onAdd()">新增</button>
+    </div>
+    <nz-table #nzTable class="table-center" [nzShowPagination]="false" [nzData]="dataSet||[]" [nzBordered]="true">
+        <thead nz-thead>
+            <tr>
+                <th>
+                    <span>操作</span>
+                </th>
+                <th>
+                    <span>状态</span>
+                </th>
+                <th>
+                    <span>原因</span>
+                </th>
+                <th>
+                    <span>批准部门</span>
+                </th>
+                <th>
+                    <span>开始时间</span>
+                </th>
+                <th>
+                    <span>结束时间</span>
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of nzTable.data">
+                <td nzLeft="0px" class="w80">
+                    <div class="editable-row-operations">
+                        <ng-container *ngIf="!editCache[data.key].edit">
+                            <a (click)="startEdit(data.key)" nz-tooltip nzTitle="编辑">
+                                <i class="anticon anticon-edit"></i>
+                            </a>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <a nz-popconfirm (nzOnConfirm)="onDelete(data)" nzTitle="确定要删除吗?"><a nz-tooltip  nzTitle="删除"><i class="anticon anticon-delete"></i></a></a>
+                        </ng-container>
+                        <ng-container *ngIf="editCache[data.key].edit">
+                            <a (click)="saveEdit(data.key)" nz-tooltip nzTitle="保存">
+                                <i class="anticon anticon-save"></i>
+                            </a>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <nz-popconfirm [nzTitle]="'确定要取消么?'" (nzOnConfirm)="cancelEdit(data.key)">
+                                <a nz-popconfirm nz-tooltip nzTitle="取消">
+                                    <i class="anticon anticon-rollback"></i>
+                                </a>
+                            </nz-popconfirm>
+                        </ng-container>
+                    </div>
+                </td>
+                <td>
+                    <ng-container *ngIf="!editCache[data.key].edit">
+                        {{data.StatusSort}}
+                    </ng-container>
+                    <ng-container *ngIf="editCache[data.key].edit">
+                        <!--{{editCache[data.key].data|json}}-->
+                        <nz-select class='col-w' [nzPlaceHolder]="'状态'" [nzShowSearch]="true" [(ngModel)]="editCache[data.key].data.StatusSortCode" name="StatusSort">
+                            <nz-option *ngFor="let option of StatusSorts" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode">
+                            </nz-option>
+                        </nz-select>
+                    </ng-container>
+                </td>
+                <td>
+                    <ng-container *ngIf="!editCache[data.key].edit">
+                        <span>{{data.Reason}}</span>
+                    </ng-container>
+                    <ng-container *ngIf="editCache[data.key].edit">
+                        <input class='col-w' nz-input name="Reason" placeholder="原因" [(ngModel)]="editCache[data.key].data.Reason" maxlength="50" required>
+                    </ng-container>
+                </td>
+                <td>
+                    <ng-container *ngIf="!editCache[data.key].edit">
+                        {{data.Department}}
+                    </ng-container>
+                    <ng-container *ngIf="editCache[data.key].edit">
+                        <!--{{editCache[data.key].data|json}}-->
+                        <nz-select class='col-w' [nzPlaceHolder]="'批准部门'" [nzShowSearch]="true" [(ngModel)]="editCache[data.key].data.DepartmentCode" name="departmentCode">
+                            <nz-option *ngFor="let option of departments" [nzLabel]="option.DepartmentName" [nzValue]="option.DepartmentCode">
+                            </nz-option>
+                        </nz-select>
+                    </ng-container>
+                </td>
+                <td>
+                    <ng-container *ngIf="!editCache[data.key].edit">
+                        <span>{{data.StartDate}}</span>
+                    </ng-container>
+                    <ng-container *ngIf="editCache[data.key].edit">
+                        <nz-date-picker class="width" [nzFormat]="'yyyy-MM-dd'" [(ngModel)]="editCache[data.key].data.StartDate" placeholder="任职开始时间"></nz-date-picker>
+                    </ng-container>
+                </td>
+                <td>
+                    <ng-container *ngIf="!editCache[data.key].edit">
+                        <span>{{data.EndDate}}</span>
+                    </ng-container>
+                    <ng-container *ngIf="editCache[data.key].edit">
+                        <nz-date-picker class="width" [nzFormat]="'yyyy-MM-dd'" [(ngModel)]="editCache[data.key].data.EndDate" placeholder="任职截止时间"></nz-date-picker>
+                    </ng-container>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

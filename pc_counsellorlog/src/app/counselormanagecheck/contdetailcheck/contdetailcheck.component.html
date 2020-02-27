@@ -1,0 +1,18 @@
+<div class="">
+  <div class="top-header">
+    <p class="top-title center fn18">{{itemObj.LogTitle}}</p>
+  </div>
+  <div class="content" style="width: 750px;margin:0 auto">
+
+    <div class="" [innerHTML]="itemObj.TemplateText"></div>
+
+    <div *ngIf="CertifyImgs.length>0" class="upload overh" style="margin-top:20px;" id="jq22">
+      <div class="Certify fl relative center" *ngFor="let item of CertifyImgs;let index=index;">
+        <img class="file-img" [src]="DomSanitizer.bypassSecurityTrustUrl(item.AttachmentURL)" (click)="viewBigImg()">
+      </div>
+    </div>
+    <div class="bt-footer center">
+      <button nz-button type="button" (click)="tankbox()">返回</button>
+    </div>
+  </div>
+</div>

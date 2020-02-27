@@ -1,0 +1,44 @@
+<ion-content class="index-cont">
+    <form name="f">
+        <div class="row-mar overh">
+            <P class="fn18 color4a center" style="margin:15px 0;">添加考勤信息</P>
+            <div class="cont-form">
+                <ul>
+                    <li>
+                        <p class="text-css"><i style="color: #ff0000;">*</i> 课程(事项)名称</p>
+                        <ion-item>
+                            <ion-input type="text" maxlength="15" [(ngModel)]="dataSet.recordName" name="recordName"></ion-input>
+                        </ion-item>
+                    </li>
+                    <li>
+                        <p class="text-css"><i style="color: #ff0000;">*</i> 课程(事项)开始时间</p>
+                        <ion-item>
+                            <ion-select [(ngModel)]="dataSet.startTime" interface="action-sheet" [cancelText]="'取消'" name="startTime" (ngModelChange)="startChange()">
+                                <ion-option [value]='item.Code' *ngFor="let item of ArrStartTime">{{item.CodeName}}
+                                </ion-option>
+                            </ion-select>
+                        </ion-item>
+                    </li>
+                    <li>
+                        <p class="text-css"><i style="color: #ff0000;">*</i> 课程(事项)结束时间</p>
+                        <ion-item>
+                            <ion-select [(ngModel)]="dataSet.endTime" interface="action-sheet" [cancelText]="'取消'" name="endTime" (ngModelChange)="endChange()">
+                                <ion-option [value]='item.Code' *ngFor="let item of ArrEndTime">{{item.CodeName}}
+                                </ion-option>
+                            </ion-select>
+                        </ion-item>
+                    </li>
+                    <li>
+                        <p class="text-css"><i style="color: #ff0000;">*</i> 课程(事项)地点</p>
+                        <ion-item>
+                            <ion-input type="text" maxlength="15" [(ngModel)]="dataSet.recordAddress" name="recordAddress"></ion-input>
+                        </ion-item>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+    <div class="center" style="margin:20px;">
+        <button class="submit-tab mr fn16" ion-button [disabled]="forbbidbtn" (click)="submitForm()" block>提交</button>
+    </div>
+</ion-content>

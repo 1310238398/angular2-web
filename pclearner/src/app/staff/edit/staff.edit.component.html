@@ -1,0 +1,158 @@
+<div class="modal-header">
+  <div class="modal-title">{{editeStaff? '编辑' : '添加'}}-用户管理</div>
+</div>
+<form nz-form [formGroup]="validateForm">
+  <div nz-row [nzGutter]="8">
+    <!-- <div nz-col [nzSpan]="12" *ngIf="item.IntelUserCode">
+      <div nz-form-item nz-row class="mb-sm">
+        <div nz-form-label nz-col [nzSpan]="8"><label>工号</label></div>
+        <div nz-form-control nz-col [nzSpan]="16">
+          <span>{{item?.UserCode}}</span>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div nz-col [nzSpan]="12" *ngIf="!item.IntelUserCode">
+      <div nz-form-item nz-row class="mb-sm">
+        <div nz-form-label nz-col [nzSpan]="8"><label nz-form-item-required>工号</label></div>
+        <div nz-form-control nz-col [nzSpan]="16">
+          <input [readonly]="item.IntelUserCode" nz-input [(ngModel)]="item.UserCode" name="UserCode" maxlength="18"
+            required />
+        </div>
+      </div>
+    </div> -->
+    <div nz-col [nzSpan]="12">
+      <div nz-form-item nz-row class="mb-sm">
+        <div nz-form-label nz-col [nzSpan]="8"><label nz-form-item-required>工号</label></div>
+        <div nz-form-control nz-col [nzSpan]="16">
+          <input nz-input formControlName="UserCode" maxlength="20" [nzDisabled]="editeStaff" />
+        </div>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <div nz-form-item nz-row class="mb-sm">
+        <div nz-form-label nz-col [nzSpan]="8"><label nz-form-item-required>姓名</label></div>
+        <div nz-form-control nz-col [nzSpan]="16">
+          <input nz-input formControlName="Name" maxlength="20" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="8">
+    <div nz-col [nzSpan]="12">
+      <div nz-form-item nz-row class="mb-sm">
+        <div nz-form-label nz-col [nzSpan]="8">
+          <label nz-form-item-required>行政单位</label>
+        </div>
+        <div nz-form-control nz-col [nzSpan]="16">
+          <nz-select [nzPlaceHolder]="''" formControlName="Department">
+            <nz-option *ngFor="let opt of Departments" [nzLabel]="opt.DepartmentName" [nzValue]="opt.DepartmentCode">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <div nz-form-item nz-row class="mb-sm">
+        <div nz-form-label nz-col [nzSpan]="8">
+          <label nz-form-item-required>学工类型</label>
+        </div>
+        <div nz-form-control nz-col [nzSpan]="16">
+          <nz-select formControlName="UserType" [nzPlaceHolder]="''">
+            <nz-option *ngFor="let opt of StaffTypes" [nzLabel]="opt.ItemName" [nzValue]="opt.ItemCode">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="8">
+    <div nz-col [nzSpan]="12">
+      <div nz-form-item nz-row class="mb-sm">
+        <div nz-form-label nz-col [nzSpan]="8">
+          <label nz-form-item-required>手机号</label>
+        </div>
+        <div nz-form-control nz-col [nzSpan]="16">
+          <input nz-input formControlName="Phone" maxlength="11" />
+        </div>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <div nz-form-item nz-row class="mb-sm">
+        <div nz-form-label nz-col [nzSpan]="8">
+          <label nz-form-item-required>性别</label>
+        </div>
+        <div nz-form-control nz-col [nzSpan]="16">
+          <nz-select formControlName="Sex" [nzPlaceHolder]="''">
+            <nz-option *ngFor="let opt of Sexs" [nzLabel]="opt.ItemName" [nzValue]="opt.ItemCode">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="8" *ngIf="!editeStaff">
+    <div nz-col [nzSpan]="12">
+      <div nz-form-item nz-row>
+        <div nz-col [nzSpan]="8" nz-form-label>
+          <label>密码</label>
+        </div>
+        <div nz-col [nzSpan]="16" nz-form-control>
+          <nz-input nzType='password' formControlName="Password" (ngModelChange)="updateConfirmValidator()" minlength='6'
+            maxlength='20' [nzPlaceHolder]="''" [nzSize]="'large'">
+          </nz-input>
+          <div nz-form-explain *ngIf="validateForm.controls.Password.dirty&&(validateForm.controls.Password.hasError('minlength')||validateForm.controls.Password.hasError('maxlength'))">6-20位密码</div>
+        </div>
+      </div>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <div nz-form-item nz-row>
+        <div nz-col [nzSpan]="8" nz-form-label>
+          <label>确认密码</label>
+        </div>
+        <div nz-col [nzSpan]="16" nz-form-control>
+          <nz-input nzType='password' formControlName="RePassword" minlength='6' maxlength='20' [nzPlaceHolder]="''"
+            [nzSize]="'large'">
+          </nz-input>
+          <div nz-form-explain *ngIf="validateForm.controls.RePassword.dirty&&validateForm.controls.RePassword.hasError('confirm')">两次输入密码不同</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-left: 2px;margin-bottom: 8px;text-align: left">
+    <button nz-button (click)="addRole()" [nzType]="'primary'">添加角色</button>
+  </div>
+  <nz-table #nzTable class="simple-table" [nzDataSource]="userAuths" [nzIsPagination]="false" [nzBordered]="true">
+    <thead nz-thead>
+      <tr>
+        <th nz-th [nzWidth]="'40%'"><span>工作单位</span></th>
+        <th nz-th [nzWidth]="'40%'"><span>角色</span></th>
+        <th nz-th><span>操作</span></th>
+      </tr>
+    </thead>
+    <tbody nz-tbody>
+      <tr nz-tbody-tr *ngFor="let data of nzTable.data;let index=index">
+
+        <td nz-td>
+          <nz-select [(ngModel)]="data.DepartmentCode" [nzPlaceHolder]="''" [ngModelOptions]="{standalone: true}">
+            <nz-option *ngFor="let opt of Departments" [nzLabel]="opt.DepartmentName" [nzValue]="opt.DepartmentCode">
+            </nz-option>
+          </nz-select>
+        </td>
+        <td nz-td>
+          <nz-select [(ngModel)]="data.RoleCode" [nzPlaceHolder]="''" [ngModelOptions]="{standalone: true}">
+            <nz-option *ngFor="let opt of Roles" [nzLabel]="opt.RoleName" [nzValue]="opt.RoleCode">
+            </nz-option>
+          </nz-select>
+        </td>
+        <td nz-td>
+          <a (click)="deleteAuth(index)">删除</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <div class="modal-footer">
+    <button nz-button type="button" (click)="close()">关闭</button>
+    <button nz-button [nzType]="'primary'" (click)="save()">保存</button>
+  </div>
+</form>

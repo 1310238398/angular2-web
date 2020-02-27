@@ -1,0 +1,112 @@
+<ion-content class="grid-basic-page" [style.height]="bodyHeight">
+    <span class="dib fn14 color9b absolute" style="top:5px;right:10px;" (click)="gotoHelp()" *ngIf="teacherstatus">帮助</span>
+    <span class="dib fn14 color9b absolute" style="top:5px;right:10px;" (click)="gotoprocess()" *ngIf="!Role.length && showoff">我的申请进程</span>
+    <div style="height:80px;z-index: 3000;"></div>
+    <div class="userinfo-box overh" *ngIf="Role && Role.length && !teacherstatus">
+        <h2 class="color4a fn16 center" style="margin-bottom:15px;">请选择班级</h2>
+        <ul style="position:relative;" *ngFor="let item of class; let i = index; ">
+            <li class="css-li" (click)="gotobegin(item,i)">
+                <span class="color9b fn14 fl">班级 : </span>
+                <span class="color4a fn14 " style="margin-left:15px;">{{item.ClassName}}</span>
+                <img class="fn14 img-css" src="assets/images/duihao@2x.png" *ngIf="pointer == i">
+            </li>
+        </ul>
+        <div class="center" style="margin-top:15px;">
+            <button class="submitr-tab" [disabled]="classStop" (click)="gototiaoban()">开始调班</button>
+        </div>
+    </div>
+
+    <div class="center" *ngIf="teacherstatus">
+        <div class="head">
+            请选择学号或者姓名标签
+        </div>
+        <div class="head-2">
+            将查询出的学生移入自己的班级
+        </div>
+        <ul class="tags">
+            <li [ngClass]="{true: 'tagshow'}[selecttag=='学号']" (click)="change('学号')">学号</li>
+            <li [ngClass]="{true: 'tagshow'}[selecttag=='姓名']" (click)="change('姓名')">姓名</li>
+        </ul>
+
+        <form style="width:90%;margin: 30px auto;">
+            <!-- <ion-searchbar name="search" #searchbar [debounce]="350" (ionInput)="searchbegin(searchQuery)" placeholder=""
+                [(ngModel)]="searchQuery" type="text" #si></ion-searchbar> -->
+            <ion-item class="overh li-css">
+                <ion-input name="search" (ionChange)="searchbegin(searchQuery)" placeholder="" [(ngModel)]="searchQuery"
+                    type="text" class="search-input" clearInput></ion-input>
+            </ion-item>
+        </form>
+        <div class="center" style="height:80px;">
+            <button class="submitr-tab" [disabled]="subStop" (click)="gotodetail()">查询</button>
+        </div>
+    </div>
+
+    <div class="userinfo-box overh" *ngIf="teacherstatus">
+        <h2 class="color4a fn16" style="margin-bottom:15px;"><span>{{ClassName}}</span> <span style="margin-left:8px;">在校{{Total}}人</span></h2>
+        <ul style="position:relative;" *ngFor="let item of StuInfo; let i = index; ">
+            <li class="css-li">
+                <span class="color9b fn14 fl honor-content">{{item.Name}}</span>
+                <span class="color4a fn14 " style="margin-left:15px;">{{item.UserCode}}</span>
+                <span class="fn14 img-css" (click)="classoff(item,i)">移除</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="center" *ngIf="!Role.length && showoff">
+        <div class="head">
+            请选择学号或者姓名标签
+        </div>
+        <div class="head-2">
+            将查询出的学生移入自己的班级
+        </div>
+
+        <ul class="tags">
+            <li [ngClass]="{true: 'tagshow'}[selecttag=='学号']" (click)="change('学号')">学号</li>
+            <li [ngClass]="{true: 'tagshow'}[selecttag=='姓名']" (click)="change('姓名')">姓名</li>
+        </ul>
+        <form style="width:90%;margin: 30px auto;">
+            <!-- <ion-searchbar name="search" #searchbar [debounce]="350" (ionInput)="searchbegin(searchQuery)" placeholder=""
+                [(ngModel)]="searchQuery" type="text" #si></ion-searchbar> -->
+            <ion-item class="overh li-css">
+                <ion-input name="search" (ionChange)="searchbegin(searchQuery)" placeholder="" [(ngModel)]="searchQuery"
+                    type="text" class="search-input" clearInput></ion-input>
+            </ion-item>
+        </form>
+
+        <div class="center" style="height:80px;">
+            <button class="submitr-tab" [disabled]="subStop" (click)="gotodetail()">查询</button>
+        </div>
+    </div>
+
+    <div class="userinfo-box overh" *ngIf="!Role.length && showoff">
+        <h2 class="color4a fn16" style="margin-bottom:15px;"><span>{{ClassName}}</span> <span style="margin-left:8px;">在校{{Total}}人</span></h2>
+        <ul style="position:relative;" *ngFor="let item of BanStuInfo; let i = index; ">
+            <li class="css-li">
+                <span class="color9b fn14 fl honor-content">{{item.Name}}</span>
+                <span class="color4a fn14 " style="margin-left:15px;">{{item.UserCode}}</span>
+                <span class="fn14 img-css" (click)="classoff(item,i)">移除</span>
+                <!-- <ion-icon ios="ios-remove" md="md-remove" class="fn24 img-css"></ion-icon> -->
+            </li>
+        </ul>
+    </div>
+
+    <div class="photoalert" *ngIf="substatus">
+        <div class="alertback"></div>
+        <div class="alertwapper">
+            <div class="alert-content">
+                <div class="center fn14" style="color:green;"><span>确定要将"</span><span>{{student.name}}</span><span>({{student.UserCode}})“</span>
+                    <span>移出</span><span>{{ClassName}}班吗?</span></div>
+                <div class="btn-wapper-line">
+                    <button ion-button class="btn-ghost" (click)="cancel()">取消</button>
+                    <button ion-button (click)="gosub()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!showoff" class="none">
+        <img class="noneimg" src="assets/images/kong.png">
+        <div class="noneFont">暂无更多内容</div>
+    </div>
+
+</ion-content>

@@ -1,0 +1,78 @@
+<div class="">
+  <div class="top-header relative" style="width: 800px;margin:0 auto">
+    <p class="top-title center fn18">{{itemObj.LogTitle}}</p>
+    <button *ngIf="itemObj.ReleaseStatus == '0'" class="absolute" style="top:20px;right:22px;" nz-button [nzType]="'primary'"
+      (click)="tankbox('发布')" [disabled]="forbbien">发布</button>
+  </div>
+
+  <div class="content relative" style="width: 800px;margin:0 auto">
+
+    <div *ngIf="itemObj.ReleaseStatus == '0'">
+      <form #f="ngForm" nz-form style="margin:0 auto;width: 750px;">
+        <div nz-form-item nz-row class="mr center">
+          <tinymce [(ngModel)]="itemObj.TemplateText" [config]="config" loading="" name="agreement"></tinymce>
+        </div>
+      </form>
+      <!-- 图片上传 -->
+      <nz-spin *ngIf="fileLoading" class="fixed loading-wrap" nzTip='正在上传，请稍等...'></nz-spin>
+
+      <div class="upload-cont mr">
+        <div class="overh upload-wrap">
+          <p class="fn14 fl">选择本地图片:</p>
+          <div class="add-wrap fl relative center cp" *ngIf="CertifyImgs.length<9">
+            <input type="file" value="file" class="hiddenFile cp absolute db" (change)="handleFiles($event)">
+            <p class="input-btn overh">
+              <img class="dib" src="assets/images/upload.png">
+              <span class="dib fn14" style="margin-left:5px;height: 15px;line-height: 15px;overflow: hidden;">点击上传</span>
+            </p>
+          </div>
+          <p class="fn12 fl" style="margin-left:20px;color: #d9d9d9;">(本地图片大小不能超过10M,最多可以上传9张图片)</p>
+        </div>
+
+        <div class="upload overh">
+          <div class="Certify fl relative center" *ngFor="let item of CertifyImgs;let index=index;">
+            <span *ngIf="itemObj.ReleaseStatus == '0'" class="delete-icon absolute dib center cp fn16" (click)="deleteCertify($event,index)">×</span>
+            <img class="file-img" [src]="DomSanitizer.bypassSecurityTrustUrl(item.AttachmentURL)">
+          </div>
+        </div>
+      </div>
+
+      <div class="bt-footer center">
+        <button nz-button type="button" (click)="tankbox('返回')">返回</button>
+        <button nz-button [nzType]="'primary'" (click)="saveRizhi()" [disabled]="forbbien">保存</button>
+      </div>
+      <div class="center">
+        <p style="text-decoration: underline;cursor: pointer;" (click)="tankbox('删除')">删除</p>
+      </div>
+    </div>
+
+    <div *ngIf="itemObj.ReleaseStatus == '1'">
+      <div class="over-text" [innerHTML]="itemObj.TemplateText"></div>
+
+      <div *ngIf="CertifyImgs.length>0" class="upload overh" style="margin-top:20px;" id="jq22">
+        <div class="Certify fl relative center" *ngFor="let item of CertifyImgs;let index=index;">
+          <img class="file-img" [src]="DomSanitizer.bypassSecurityTrustUrl(item.AttachmentURL)" (click)="viewBigImg()">
+        </div>
+      </div>
+
+      <div class="bt-footer center">
+        <button nz-button type="button" [nzType]="'primary'" (click)="returnPage()">返回</button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="medigo" *ngIf="disdden" (click)="overbox()"></div>
+  <div class="file-box" *ngIf="disdden">
+    <div class="pass-cont center mr">
+      <div class="top-btn">
+        <p>{{titleTxt}}</p>
+      </div>
+      <div class="foot-btn center">
+        <button nz-button [nzType]="'primary'" (click)="onPass()">确定</button>
+        <button nz-button [nzType]="'default'" (click)="overbox()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

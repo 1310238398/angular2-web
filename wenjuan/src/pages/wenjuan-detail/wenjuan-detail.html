@@ -1,0 +1,104 @@
+<ion-content (swipe)="swipeEvent($event)" swipe-vertical (onSwipeUp)="onSwipeUp($event)" (onSwipeDown)="onSwipeDown($event)">
+  <ion-card *ngIf="QuestionList.length">
+  <!--  <ion-row>
+      <ion-col no-padding col-5>
+        <div class="di">
+          <span>{{QuestionIndex+1}}/{{QuestionList.length}}</span>
+        </div>
+      </ion-col>
+      <ion-col padding-top>
+        <div class="title">{{WenjuanName||'蚁动问卷'}}</div>
+      </ion-col>
+    </ion-row>-->
+    <div class="di">
+      <span>{{QuestionIndex+1}}/{{QuestionList.length}}</span>
+    </div>
+    <div class="title" text-center>{{WenjuanName||'蚁动问卷-答题情况'}}</div>
+    <div class="qustitle">
+      <!--题目类型-->
+      <span *ngIf="QuestionList[QuestionIndex].type==1">单选</span>
+      <span *ngIf="QuestionList[QuestionIndex].type==2">多选</span>
+      <span *ngIf="QuestionList[QuestionIndex].type==3">填空题</span>
+      <span *ngIf="QuestionList[QuestionIndex].type==4">打分题</span>
+      <span *ngIf="QuestionList[QuestionIndex].type==5">量表题</span>
+      ：{{QuestionList[QuestionIndex].name}}
+    </div>
+    <!--单选或多选:题目选项-->
+    <ion-list *ngIf="QuestionList[QuestionIndex]&&QuestionList[QuestionIndex].type==1||QuestionList[QuestionIndex]&&QuestionList[QuestionIndex].type==2">
+<!--
+      {{QuestionList[QuestionIndex].options|json}}
+-->
+      <div *ngFor="let item of QuestionList[QuestionIndex].options">
+        <ion-item *ngIf="QuestionList[QuestionIndex]&&QuestionList[QuestionIndex].type==1">
+            <span> <ion-icon class="w-check" *ngIf="item.checked" name="checkmark-circle"></ion-icon></span>
+            <span [ngClass]="{'w-c-ml':!item.checked }" text-wrap class="w-text">{{item.name}}</span>
+        </ion-item>
+        <ion-item *ngIf="QuestionList[QuestionIndex]&&QuestionList[QuestionIndex].type==2">
+          <span> <ion-icon  class="w-check" *ngIf="item.checked" name="checkbox"></ion-icon></span>
+          <span [ngClass]="{'w-c-ml':!item.checked }" text-wrap class="w-text">{{item.name}}</span>
+        </ion-item>
+        <div  *ngIf="item.is_other===1&&item.checked" margin-bottom style="position: relative">
+          <ion-item>
+            <ion-textarea [readonly]="true" maxlength="100" [(ngModel)]="otherTextArea" minlength="2" placeholder="请输入"></ion-textarea>
+          </ion-item>
+          <span class="ziNum">{{otherTextArea.length}}/100</span>
+        </div>
+
+      </div>
+    </ion-list>
+    <!--填空题-->
+    <ion-list *ngIf="QuestionList[QuestionIndex].type==3" style="position: relative">
+      <ion-item style="padding-left: 8px">
+        <ion-textarea [readonly]="true" maxlength="100" [(ngModel)]="textArea" minlength="2" placeholder="请输入"></ion-textarea>
+      </ion-item>
+      <span class="ziNum">{{textArea.length}}/100</span>
+    </ion-list>
+    <!--打分题-->
+    <div *ngIf="QuestionList[QuestionIndex].type==4">
+      <div class="score-title" *ngFor="let item of QuestionList[QuestionIndex].options">
+        {{item.name}}
+      </div>
+      <div class="score">
+        得分: <input [readonly]="true" type="text" name="fname" [(ngModel)]="score" />
+      </div>
+      <div style="position: relative">
+        <ion-item style="padding-left: 8px">
+          <ion-textarea [readonly]="true" maxlength="100" [(ngModel)]="textArea" minlength="2" placeholder="请输入"></ion-textarea>
+        </ion-item>
+        <span class="ziNum">{{textArea.length||0}}/100</span>
+      </div>
+
+    </div>
+    <!--量表题-->
+    <ion-list *ngIf="QuestionList[QuestionIndex].type==5" style="position: relative">
+      <ion-item style="padding-left: 8px">
+        <span class="my-rating"></span>
+        <!-- <span class="live-rating"></span>-->
+        {{rate}}
+      </ion-item>
+    </ion-list>
+
+  </ion-card>
+  <div  *ngIf="CertifyImgs.length>0&&QuestionList[QuestionIndex].is_attach==1" [ngClass]="{'none': !QuestionList.length||QuestionList[QuestionIndex].is_attach!=1}">
+    <div class="cailiao" padding-left>
+      证明材料:
+    </div>
+    <ion-card>
+        <div class="Certify">
+          <img *ngFor="let item of CertifyImgs;let index=index;" [src]="DomSanitizer.bypassSecurityTrustUrl(item.url)"
+               (click)="navPreview({time:false,index:index,items:CertifyImgs})">
+        </div>
+    </ion-card>
+  </div>
+
+  <div class="btns">
+    <button ion-button color="zj-main-color" [disabled]="QuestionIndex==0" [ngClass]="{'disable':QuestionIndex==0}" (click)="onPrivious(QuestionList[QuestionIndex])" icon-left>上一题</button>
+    <button ion-button color="zj-main-color" [hidden]="(QuestionIndex+1)==QuestionList.length" (click)="onNext(QuestionList[QuestionIndex])" icon-right>下一题
+    </button>
+    <button ion-button color="zj-main-color" [hidden]="(QuestionIndex+1)!=QuestionList.length" (click)="onFinish(QuestionList[QuestionIndex])" icon-right>退出
+    </button>
+
+  </div>
+
+
+</ion-content>

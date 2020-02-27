@@ -1,0 +1,63 @@
+<div class="modal-header">
+    <div class="modal-title">{{params.SsaRecordId? '编辑' : '添加'}}-奖助信息</div>
+</div>
+<form #f="ngForm" nz-form>
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">学年</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'AcademicYear'" [ModelName]="'academicYear'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">学期</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'AcademicTerm'" [ModelName]="'academicTerm'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+    </div>
+    <!--    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">
+            <nz-form-label [nzSpan]="3">奖助项目</nz-form-label>
+            <nz-form-control [nzSpan]="21">
+                <nz-select class='col-w' [nzPlaceHolder]="'奖助项目'" [nzShowSearch]="true" [(ngModel)]="params.scholarshipAidCode" (ngModelChange)="getRankmountsquery($event)" name="ScholarshipAid">
+                    <nz-option *ngFor="let option of scholarshipaid" [nzLabel]="option.ProjectName" [nzValue]="option.ScholarshipAidCode">
+                    </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </div>
+    </div> -->
+    <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">奖助项目</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <nz-select class='col-w' [nzPlaceHolder]="'奖助项目'" [nzShowSearch]="true" [(ngModel)]="params.scholarshipAidCode" (ngModelChange)="getRankmountsquery($event)" name="ScholarshipAid" required>
+                    <nz-option *ngFor="let option of scholarshipaid" [nzLabel]="option.ProjectName" [nzValue]="option.ScholarshipAidCode">
+                    </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </div>
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">等次金额</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <nz-select class='col-w' [nzPlaceHolder]="'等次金额'" #rank [nzShowSearch]="true" [(ngModel)]="rankObj" (ngModelChange)="rankMountChange($event)" name="RankCode" required>
+                    <nz-option *ngFor="let option of RankAmonts" [nzLabel]="option.Lable" [nzValue]="option">
+                    </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="8">
+
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="6">发放状态</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+                <ant-bizcode [bizObj]="params" [BizType]="'IsPayment'" [ModelName]="'isPayment'"></ant-bizcode>
+            </nz-form-control>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button nz-button type="button" (click)="close()">关闭</button>
+        <button nz-button class="btn-zj-color" [disabled]="!f.form.valid||!params.academicYear||!params.academicTerm" [nzType]="'primary'" (click)="save()">保存</button>
+    </div>
+</form>

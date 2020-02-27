@@ -1,0 +1,38 @@
+<ion-content class="login-content" padding>
+  <ion-row>
+    <img src="assets/images/zi.png">
+  </ion-row>
+  <form [formGroup]="ValidatorsForm" style="margin-top: 20px">
+    <ion-row>
+      <ion-col>
+
+        <ion-item>
+          <input type="number" class="text-input bl" placeholder="学号" formControlName="UserCode"
+                 [(ngModel)]="user.UserCode">
+        </ion-item>
+        <ion-item>
+          <input type="number" class="text-input bl" placeholder="手机号" formControlName="Phone" [(ngModel)]="user.Phone">
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+
+  </form>
+  <div>
+    <button ion-button class="btn-radius orange" full [disabled]="!ValidatorsForm.valid" (click)="onLogin()">登录
+    </button>
+  </div>
+  <p class="bl t-center"><a href="http://www.antlinker.com/download/index.html" class="yg">校园集结号</a>提供技术支持</p>
+<!--  <ion-footer class="mb">
+    <ion-row>
+      <ion-col class="btn-mb">
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+
+      </ion-col>
+    </ion-row>
+  </ion-footer>-->
+</ion-content>

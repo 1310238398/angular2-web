@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <div class="modal-title">移入-班级</div>
+</div>
+<form nz-form>
+  <div nz-form-item nz-row>
+    <div nz-form-label nz-col [nzSpan]="6">
+      <label >{{data.UserCode}}</label>
+    </div>
+    <div nz-form-control nz-col [nzSpan]="14">
+     {{data.Name||''}}
+    </div>
+  </div>
+</form>
+<nz-table #nzTable [nzAjaxData]="StudentClass"
+          [nzIsPagination]="false" [nzBordered]="true">
+  <thead nz-thead>
+
+  <tr>
+    <th nz-th [nzCheckbox]="true">
+     <!-- <label nz-checkbox [(ngModel)]="allChecked" (ngModelChange)="checkAll($event)">
+      </label>-->
+    </th>
+    <!--<th nz-th><span>专业</span></th>-->
+    <th nz-th><span>班级</span></th>
+  </tr>
+  </thead>
+  <tbody nz-tbody>
+  <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+    <td nz-td [nzCheckbox]="true">
+      <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="refreshStatus(data)">
+      </label>
+    </td>
+   <!-- <td nz-td>{{data.MajorName}}</td>-->
+    <td nz-td>{{data.ClassName}}</td>
+  </tr>
+  </tbody>
+</nz-table>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+  <button nz-button  [nzType]="'primary'" (click)="save()">移入
+  </button>
+</div>

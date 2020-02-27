@@ -1,0 +1,264 @@
+page-eveyclass {
+    //banji
+    .content-ios.outer-content {
+        background: #ffffff;
+    }
+    .list-ios>.item-block:first-child {
+        border-top: none !important;
+    }
+    .list-ios .item-block {
+        border-bottom: none !important;
+    }
+    .list-ios .item-block {
+        border-bottom: none !important;
+    }
+    .item-ios.item-block .item-inner {
+        padding-right: 0;
+    }
+    .item-ios {
+        padding-left: 0;
+    }
+    .classtime {
+        font-family: PingFangSC-Semibold;
+        font-size: 16px;
+        color: #3e3e3e;
+        letter-spacing: 0.38px;
+        line-height: 16px;
+        text-align: center;
+        margin-bottom: 17px;
+    }
+    .bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: #ffffff;
+    }
+    .toolbar-ios .segment-button {
+        max-width: 46%;
+        height: 3.6rem;
+        font-size: 1.2rem;
+        line-height: 3.5rem;
+    }
+    .segment-ios .segment-button.segment-activated {
+        color: #fff;
+        background-color: #ffc000;
+        opacity: 1;
+        transition: 100ms all linear;
+    }
+    .segment-ios .segment-button {
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        width: 0;
+        height: 3.2rem;
+        border-width: 0px;
+        border-style: solid;
+        border-color: #f7f7f7;
+        font-size: 1.3rem;
+        line-height: 3rem;
+        color: #666666;
+        background-color: #f7f7f7;
+    }
+    .manping {
+        width: 92%;
+        margin-left: 15px;
+        margin-right: 15px;
+        font-size: 14px;
+        color: #ffffff;
+        letter-spacing: 0.34px;
+        text-align: center;
+        background: #d5d5d5;
+        border-radius: 4px;
+        height: 40px;
+        margin-top: 4px;
+    }
+    .laizi {
+        display: inline-block;
+        text-align: center;
+        width: 21%;
+        font-size: 14px;
+        float: left;
+        // margin-left: 22px;
+        margin-top: 11px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .laizi1 {
+        display: inline-block;
+        text-align: center;
+        width: 16%;
+        font-size: 14px;
+        height: 14px;
+        float: left;
+        margin-left: 3px;
+        margin-top: 11px;
+    }
+    .laizi2 {
+        display: inline-block;
+        text-align: center;
+        width: 28%;
+        height: 14px;
+        font-size: 14px;
+        float: left;
+        margin-left: 3px;
+        margin-top: 11px;
+    }
+    .line6 {
+        display: inline-block;
+        text-align: center;
+        width: 1px;
+        height: 14px;
+        float: left;
+        // margin-left: 6px;
+        margin-top: 9px;
+    }
+    .liazi4 {
+        display: inline-block;
+        text-align: center;
+        width: 30%;
+        height: 14px;
+        font-size: 14px;
+        float: left;
+        margin-left: 3px;
+        margin-top: 11px;
+    }
+    /*适应小屏手机*/
+    @media (device-height: 480px) and (-webkit-min-device-pixel-ratio: 2),
+    (device-height: 568px) and (-webkit-min-device-pixel-ratio: 2) {
+        /* 兼容iphone4/4s5/5 */
+        .manpig {
+            width: 92%;
+            margin-left: 14px;
+            margin-right: 15px;
+            font-size: 14px;
+            color: #666666;
+            letter-spacing: 0.34px;
+            text-align: center;
+            background: #f7f7f7;
+            border-radius: 4px;
+            height: 40px;
+            margin-top: 5px;
+        }
+    }
+    /*适应小屏手机se*/
+    @media only screen and (min-width: 250px) and (max-width: 320px) {
+        .manpig {
+            width: 92%;
+            margin-left: 12px;
+            margin-right: 15px;
+            font-size: 14px;
+            color: #666666;
+            letter-spacing: 0.34px;
+            text-align: center;
+            background: #f7f7f7;
+            border-radius: 4px;
+            height: 40px;
+            margin-top: 5px;
+        }
+        .laizi {
+            display: inline-block;
+            text-align: center;
+            width: 20%;
+            font-size: 13px;
+            float: left;
+            // margin-left: 22px;
+            margin-top: 11px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .laizi1 {
+            display: inline-block;
+            text-align: center;
+            width: 14%;
+            font-size: 13px;
+            height: 13px;
+            float: left;
+            margin-left: 3px;
+            margin-top: 11px;
+        }
+        .laizi2 {
+            display: inline-block;
+            text-align: center;
+            width: 32%;
+            height: 13px;
+            font-size: 13px;
+            float: left;
+            margin-left: 3px;
+            margin-top: 11px;
+        }
+        .line6 {
+            display: inline-block;
+            text-align: center;
+            width: 1px;
+            height: 13px;
+            float: left;
+            // margin-left: 6px;
+            margin-top: 9px;
+        }
+        .liazi4 {
+            display: inline-block;
+            text-align: center;
+            width: 29%;
+            height: 13px;
+            font-size: 13px;
+            float: left;
+            margin-left: 3px;
+            margin-top: 11px;
+        }
+    }
+    // .manpig {
+    //     width: 92%;
+    //     margin-left: 19px;
+    //     margin-right: 15px;
+    //     font-size: 14px;
+    //     color: #666666;
+    //     letter-spacing: 0.34px;
+    //     text-align: center;
+    //     background: #f7f7f7;
+    //     border-radius: 4px;
+    //     height: 40px;
+    //     margin-top: 5px;
+    // }
+    .seachd {
+        background: #f1f1f1;
+        border-radius: 100px;
+        // width: 650px;
+        height: 26px;
+        margin-left: 24px;
+        margin-right: 24px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .myname {
+        float: left;
+        border: none;
+        background-repeat: no-repeat;
+        background-position: center left;
+        background-color: #f1f1f1;
+        display: inline-block;
+        border-radius: 100px;
+        padding-left: 30px;
+        height: 25px;
+        background-image: url("../assets/images/group_3.png");
+        background-position-x: 8px;
+        background-position-y: 3px;
+        background-size: inherit;
+    }
+    .segment-ios .segment-button:last-of-type {
+        margin-left: 0;
+        border-left-width: 0;
+        border-radius: 0 4px 4px 0;
+        text-align: center;
+    }
+    .segment-ios .segment-button.segment-activated {
+        color: #fff;
+        background-color: #ffc000;
+        opacity: 1;
+        transition: 100ms all linear;
+        text-align: center;
+    }
+}

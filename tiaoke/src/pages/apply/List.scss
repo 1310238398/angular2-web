@@ -1,0 +1,30 @@
+page-list {
+  button.sign::after{
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    content: ' ';
+  }
+  button.signs::after{
+    background:url('../assets/images/signs4.png') no-repeat;
+  }
+  button.signp::after{
+    background:url('../assets/images/signp4.png') no-repeat;
+  }
+  button.signz::after{
+    background:url('../assets/images/signz4.png') no-repeat;
+  }
+  button.signc::after{
+    background:url('../assets/images/signc4.png') no-repeat;
+  }
+
+  .yellow {
+    background-color: #efb262;
+  }
+  .yellow:focus,.yellow:active {
+    background-color: #efb262;
+  }
+
+}

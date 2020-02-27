@@ -1,0 +1,43 @@
+<ion-content>
+    <p padding-left padding-right><span color="zj-font-gray">请选择考试语种级别</span>
+<!--
+        <ion-icon class="icon-bang bang"  (click)="onDeclare()"></ion-icon>
+-->
+    </p>
+    <!--    <button ion-button class="button-type" color="zj-main-color" *ngFor="let item of types" [ngClass]="{active:item.isClick}" (click)="setType(item)">
+            {{item.ExamSubject}}
+        </button>-->
+    <ion-list>
+
+        <ion-item [ngClass]="{active:type.isClick}" *ngFor="let type of types" (click)="setType(type)">
+            <span>{{type.CodeName }}</span>
+        </ion-item>
+        <ion-item (click)="onMore()">
+            <div *ngIf="!Expand" class="zj-t-center zj-font-color">点击查看更多
+                <ion-icon class="icon-arrow-down"></ion-icon>
+            </div>
+            <div *ngIf="Expand" class="zj-t-center zj-font-color"><span>收起 </span>
+                <ion-icon class="icon-arrow-up"></ion-icon>
+            </div>
+        </ion-item>
+
+    </ion-list>
+    <p padding-left><span color="zj-font-gray">上传照片：</span></p>
+    <ion-list>
+        <ion-item>
+            <div class="image-area"><img [src]="imgsrc||''"></div>
+            <div item-right>
+                <p>照片上传须知：</p>
+                <p>1、请上传蓝色背景一寸证件<br>照，照片为.jpg格式。</p>
+                <p>2、照片不大于500K。</p>
+                <button ion-button class="button-upload" color="zj-main-color"><input class="file" type="file"
+                                                                                      name="file"
+                                                                                      (change)="uploadFile($event)"/>图像选择
+                </button>
+            </div>
+        </ion-item>
+    </ion-list>
+    <button ion-button (click)="onCetDetail()" color="zj-main-color" block>
+        下一步
+    </button>
+</ion-content>

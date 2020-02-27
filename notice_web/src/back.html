@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ionic App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+
+    <link href="qrc:///notice_web/jslib/quill.snow.css" rel="stylesheet">
+
+
+    <link href="qrc:///notice_web/jslib/vendor.css" rel="stylesheet">
+
+    <link href="build/main.css" rel="stylesheet">
+
+    <script>
+        window.onload = function () {
+            new QWebChannel(qt.webChannelTransport, function (channel) {
+                // alert("aaa");
+                // all published objects are available in channel.objects under
+                // the identifier set in their attached WebChannel.id property
+                // 在完成webchannel的创建后，开始加载页面
+                pcAntLinker = channel.objects.antlinker;
+                foodemo = channel.objects.foo;
+
+                var head2 = document.getElementsByTagName('head')[0];
+                var script2 = document.createElement('script');
+                script2.type = 'text/javascript';
+                script2.src = "qrc:///notice_web/dist/main.js";
+
+
+                head2.appendChild(script2);
+            });
+        }
+    </script>
+    <style type="text/css">
+        .spinnerw {
+            margin: 160px auto 0;
+            /*  width: 80px;*/
+            text-align: center;
+        }
+        
+        .spinnerw>div {
+            width: 48px;
+            height: 48px;
+            /* background-color: #eb9d21;*/
+            background-color: #2CACFC;
+            border-radius: 100%;
+            display: inline-block;
+            -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+            animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+        }
+        
+        .spinnerw .bounce1 {
+            -webkit-animation-delay: -0.32s;
+            animation-delay: -0.32s;
+            background-color: #FB6127;
+        }
+        
+        .spinnerw .bounce2 {
+            -webkit-animation-delay: -0.16s;
+            animation-delay: -0.16s;
+            background-color: #8F67F9;
+        }
+        
+        @-webkit-keyframes sk-bouncedelay {
+            0%,
+            80%,
+            100% {
+                -webkit-transform: scale(0)
+            }
+            40% {
+                -webkit-transform: scale(1.0)
+            }
+        }
+        
+        @keyframes sk-bouncedelay {
+            0%,
+            80%,
+            100% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+            40% {
+                -webkit-transform: scale(1.0);
+                transform: scale(1.0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <ion-app>
+        <div class="spinnerw" id="spinnerw">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </ion-app>
+    <script src="qrc:///notice_web/jslib/jquery.js"></script>
+    <script src="qrc:///notice_web/jslib/quill.js"></script>
+    <script type="text/javascript" src="qrc:///webchannel/qwebchannel.js"></script>
+
+    <script type="text/javascript" src="qrc:///notice_web/dist/inline.js"></script>
+    <script type="text/javascript" src="qrc:///notice_web/dist/vendor.js"></script>
+    <!--<script type="text/javascript" src="main.1845ba54c35c2821a5c6.bundle.js"></script>-->
+</body>
+
+</html>

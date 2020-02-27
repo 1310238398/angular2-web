@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <meta content="width=device-width, initial-scale=1,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <link rel="stylesheet" href="./css_detail/main.css">
+  <link id="theme" href="./css_detail/moren.css" rel="stylesheet" type="text/css">
+  <script src="./js/zepto.js"></script>
+  <script src="lib/antlinker.1.0.10.js"></script>
+  <script src="./js/detail.js"></script>
+  <script src="./js/necessary.js"></script>
+  <!--<script src="./js/zepto.picLazyLoad.min.js"></script>-->
+  <!--<script src="js/img-2.es5.js"></script>-->
+  <!--<script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>-->
+  <!--<script src="js/webcomponents-loader.js"></script>-->
+
+</head>
+<body>
+<!--<div style="width: 100%;">-->
+  <div id="body_div" style="" class="all_container">
+
+
+    <!--封面容器-->
+    <div id="top_container">
+
+      <div id="topic">
+      </div>
+
+    </div>
+    <!--封面容器部署结束-->
+
+    <!--中间分隔区域-->
+    <!--<div class="middle_container">-->
+    <!--</div>-->
+    <!--中间分隔区域结束-->
+
+    <!--底部主要内容部分-->
+    <div class="bottom_container">
+      <!--简介内容-->
+      <div id="introduce" class="introduce">
+
+      </div>
+      <!--分割线-->
+      <div class="fenge" id="fenge">
+      </div>
+
+      <div class="json_content" id="json_content">
+
+      </div>
+
+    </div>
+    <!--底部主要内容部分结束-->
+    <div class="background_bottom" id="b_b" style="">
+      <div class="read_count" id="read_count">
+        <!--<div style="">阅读量 111</div>-->
+      </div>
+      <div class="key_word">
+        <div class="gjz" style="">专题:</div>
+        <div class="span_father" id="span_father">
+        <!--<span class="gjz_span">lasjd</span>-->
+        <!--<span class="gjz_span">lasjd</span>-->
+        <!--<span class="gjz_span">lasjd</span>-->
+        </div>
+      </div>
+      <div style="clear: both;background-color: white;width:100%;height: 1px;padding-bottom: 14px"></div>
+    </div>
+
+
+  </div>
+<!--</div>-->
+<script>
+//  var supportsES6 = function() {
+//    try {
+//      new Function("(a = 0) => a");
+//      return true;
+//    }
+//    catch (err) {
+//      return false;
+//    }
+//  }();
+//  var $script = document.createElement("script");
+//  $script.setAttribute("defer", "");
+//  $script.src = (supportsES6 === true) ? "js/img-2.js" : "js/img-2.es5.js";
+//  document.head.appendChild($script);
+</script>
+<script>
+//  全局变量的设置:
+//  环境存储字段 invironment_string
+//  资源的前缀字段 url_head
+//  图片资源存储数组(包含描述) img_SDK_Array
+  var invironment_string = 'ios';
+  var url_head = "https://pstore.xiaoyuanjijiehao.com";
+  var img_SDK_Array = [];
+  $(function() {
+//    获取配置文件
+    antlinker.getInitConfig({
+      success: function(config){
+        if(!!config&&config.length>0){
+          console.log("antlinker.getInitConfig ok!");
+          //config为初始化的配置参数
+          for(var i = 0;i< config.length;i++){
+            if (config[i].Key == "Store.Public.Host"){
+              url_head = config[i].Value;
+              break;
+            }
+          }
+        }
+
+        if (antlinker.isiOS) {
+          invironment_string = 'ios';
+        } else{
+          invironment_string = 'android';
+        }
+        console.log(url_head);
+
+        //请求内容
+        var obj = {};
+//        alert(url_head);
+        setTimeout(function(){
+          antlinker.exeUserBasicInfoSdk(obj,function(obj,success){
+            console.log("exeUserBasicInfoSdk ok!");
+            req_body();
+          });
+        },100)
+
+
+
+      },
+      fail: function(){
+        console.log("SDK读取配置文件失败")
+      }
+    })
+  })
+</script>
+
+</body>
+
+
+
+
+</html>

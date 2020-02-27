@@ -1,0 +1,36 @@
+
+page-myapplydetail {
+  .card-ios{
+    margin-top: 15px;
+  }
+  .img {
+    position: absolute;
+    display: inline-block;
+  }
+  .top120 {
+    top: 120px;
+  }
+  .left40 {
+    left: 40px;
+  }
+  .right40 {
+    right: 40px
+  }
+  .mt{
+    margin-top: 16px;
+  }
+  .top90{
+    top: 90px;
+  }
+  .commit{
+    width: 32px;
+    top:0;
+    left: 50%;
+    margin-left: -16px;
+  }
+  .success{
+    margin-top: 3px;
+    font-size: 14px;
+    text-align: center;
+  }
+}

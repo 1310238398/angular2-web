@@ -1,0 +1,64 @@
+page-staff-list {
+  .list-ios {
+    margin: 8px 0 32px 0;
+    .item-ios {
+      h2 {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      p{
+        font-size: 1.2rem;
+      }
+    }
+  }
+  .finish{
+    color: red;
+  }
+
+  .item-ios [item-right], .item-ios [item-end] .daishenpi{
+
+    width: 40px;
+    margin-top: -11px;
+    margin-right: -8px;
+  }
+  .segment-ios .segment-button {
+    border-style: none solid none none;
+    border-color: #e7e7e7;
+    font-size: 1.8rem;
+    line-height: 4.2rem;
+    height: 4.2rem;
+    color: color($colors, zj-dark);
+    background-color: $background-color;
+  }
+  .segment-ios .segment-button.segment-activated {
+    color: color($colors, zj-main-color);
+    opacity: 1;
+    background-color: $background-color;
+    border-bottom-color: color($colors, zj-main-color);
+    border-style: none solid solid none;
+    transition: 100ms all linear;
+  }
+  .segment-ios .segment-button:hover:not(.segment-activated) {
+    color: color($colors, zj-main-color);
+    opacity: 1;
+    background-color: $background-color;
+    border-bottom-color: color($colors, zj-main-color);
+    border-style: none solid solid none;
+    transition: 100ms all linear;
+  }
+  .searchbar-ios {
+    background: none;
+    .searchbar-input {
+      height: 4rem;
+    }
+    .searchbar-search-icon {
+      top: 17px;
+    }
+  }
+  .chuli{
+    width: 40px!important;
+    margin-top: -11px!important;
+    margin-right: -34px!important;
+  }
+}

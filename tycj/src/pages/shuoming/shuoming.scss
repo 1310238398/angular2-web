@@ -1,0 +1,29 @@
+page-shuoming {
+  .font {
+    font-size: 1em;
+    margin-left: 50px;
+    color: #ffffff;
+  }
+  .fix{
+    position: fixed;
+    bottom: 1rem;
+    width: 100%;
+    text-align: center;
+  }
+  .layer {
+    margin: 22rem auto 0 auto;
+    border-radius: 5px;
+    width: 90%;
+    height: 25rem;
+    background-color: #20305F;
+    opacity: 0.85;
+  }
+  .h31 {
+    padding-top: 6px;
+    margin-bottom: 6px;
+  }
+
+  .h32 {
+    margin: 8px 0;
+  }
+}

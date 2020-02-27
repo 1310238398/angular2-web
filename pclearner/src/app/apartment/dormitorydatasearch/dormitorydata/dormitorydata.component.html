@@ -1,0 +1,257 @@
+<div class="dormitoryData">
+  <div class="components-table-demo-control-bar">
+    <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-left">
+      <div nz-form-item nz-col class="mgb20px">
+        <div nz-form-control class="h">
+          <nz-select style="width: 162px;" [nzPlaceHolder]="'校区'"
+            [nzMode]="'multiple'" [nzShowSearch]="true" [(ngModel)]="searchObj.Campus" name="Campus" nzAllowClear nzKeepUnListOptions
+            (ngModelChange)="district(searchObj.Campus)">
+            <nz-option *ngFor="let option of Campus" [nzLabel]="option.CampusName" [nzValue]="option.CampusCode">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-form-item nz-col class="mgb20px">
+        <div nz-form-control>
+          <nz-select style="width: 162px;" [nzPlaceHolder]="'园区'" [nzShowSearch]="true" [(ngModel)]="searchObj.District"
+            [nzMode]="'multiple'" name="District" nzAllowClear (ngModelChange)="dormitory(searchObj.District)">
+            <nz-option *ngFor="let option of District" [nzLabel]="option.DistrictName" [nzValue]="option.DistrictCode">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-form-item nz-col class="mgb20px">
+        <div nz-form-control>
+          <nz-select style="width: 122px;" [nzPlaceHolder]="'楼号'" [nzShowSearch]="true" [(ngModel)]="searchObj.DormNumber"
+            [nzMode]="'multiple'" name="DormNumber" nzAllowClear (ngModelChange)="unit(searchObj.DormNumber)" >
+            <nz-option *ngFor="let option of Dormitoey" [nzLabel]="option.DormitoryName" [nzValue]="option.DormitoryCode">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-form-item nz-col class="mgb20px">
+        <div nz-form-control>
+          <nz-select style="width: 162px; " [nzPlaceHolder]="'单元'" [nzShowSearch]="true" [(ngModel)]="searchObj.Unit" name="Unit"
+            [nzMode]="'multiple'" nzAllowClear (ngModelChange)="room(searchObj.Unit)" >
+            <nz-option *ngFor="let option of Unit" [nzLabel]="option.UnitName" [nzValue]="option.UnitCode">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-form-item nz-col class="mgb20px">
+        <div nz-form-control>
+          <nz-select style="width: 142px;border:none;overflow:hidden;" [nzPlaceHolder]="'宿舍号'" [nzShowSearch]="false" [(ngModel)]="searchObj.RoomNumber"
+            name="RoomNumber" nzAllowClear>
+            <nz-option *ngFor="let option of Room" [nzLabel]="option.RoomName" [nzValue]="option.RoomCode">
+            </nz-option>
+          </nz-select>
+          <!-- <nz-input style="width:142px;" [(ngModel)]="searchObj.RoomNumber" name="RoomNumber" [nzPlaceHolder]="'请输入'">
+            <ng-template #addOnBefore>宿舍号</ng-template>
+          </nz-input> -->
+        </div>
+      </div>
+      <div nz-form-item nz-col class="mgb20px">
+        <div nz-form-control>
+
+          <nz-input style="width:142px;" [(ngModel)]="searchObj.StuID" name="StuID"  [nzPlaceHolder]="'请输入'" nzHasFeedback #student (focusout)="onBlurStudentVaild(searchObj.StuID)">
+            <ng-template #addOnBefore>学号</ng-template>
+          </nz-input>
+        </div>
+      </div>
+      <div nz-form-item nz-col class="mgb20px">
+        <div nz-form-control>
+          <nz-input style="width:142px;" [(ngModel)]="searchObj.StuName" name="StuName" [nzPlaceHolder]="'请输入'" nzHasFeedback #names (focusout)="onBlurNameVaild(searchObj.StuName)">
+            <ng-template #addOnBefore>姓名</ng-template>
+          </nz-input>
+        </div>
+      </div>
+      <div nz-form-item nz-col class="mgb20px">
+        <div nz-form-control>
+          <nz-select style="width: 142px;border:none;" [nzPlaceHolder]="'性别'" [nzShowSearch]="false" [(ngModel)]="searchObj.Sex" name="Sex"
+            nzAllowClear>
+            <nz-option *ngFor="let option of Sex" [nzLabel]="option.CodeName" [nzValue]="option.Code">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-form-item nz-col class="mgb20px">
+        <div nz-form-control>
+          <nz-select style="width: 142px;border:none;" [nzPlaceHolder]="'学院'" [nzShowSearch]="false" [(ngModel)]="searchObj.Academy"
+            name="Academy" nzAllowClear (ngModelChange)="major(searchObj.Academy)">
+            <nz-option *ngFor="let option of Academy" [nzLabel]="option.AcademyName" [nzValue]="option.AcademyCode">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-form-item nz-col class="mgb20px">
+        <div nz-form-control>
+          <nz-select style="width: 142px;border:none;" [nzPlaceHolder]="'专业'" [nzShowSearch]="false" [(ngModel)]="searchObj.Major" name="Major"
+            nzAllowClear (ngModelChange)="class(searchObj.Major,'major')">
+            <nz-option *ngFor="let option of Major" [nzLabel]="option.MajorName" [nzValue]="option.MajorCode">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-form-item nz-col class="mgb20px">
+        <div nz-form-control>
+          <nz-select style="width: 142px;border:none;"  [nzPlaceHolder]="'年级'" [nzShowSearch]="false" [(ngModel)]="searchObj.Grade"
+          name="Grade" nzAllowClear (ngModelChange)="class(searchObj.Grade,'grade')">
+            <nz-option *ngFor="let option of Grade" [nzLabel]="option.GradeName" [nzValue]="option.GradeCode">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-form-item nz-col class="mgb20px">
+        <div nz-form-control>
+          <nz-select style="width: 142px;border:none;" [nzPlaceHolder]="'班级'" [nzShowSearch]="false" [(ngModel)]="searchObj.Class" name="Class"
+            nzAllowClear>
+            <nz-option *ngFor="let option of Class" [nzLabel]="option.ClassName" [nzValue]="option.ClassCode">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-form-item nz-col class="mgb20px">
+        <div nz-form-control>
+          <nz-select style="width: 142px;border:none; background:#F5F5F5" [nzPlaceHolder]="'民族'" [nzShowSearch]="false" [(ngModel)]="searchObj.Nation"
+            name="Nation" nzAllowClear>
+            <nz-option *ngFor="let option of Nation" [nzLabel]="option.CodeName" [nzValue]="option.Code">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-form-item nz-col class="mgb20px">
+        <div nz-form-control>
+          <nz-select style="width: 142px;border:none;" [nzPlaceHolder]="'政治面貌'" [nzShowSearch]="false" [(ngModel)]="searchObj.PoliticalStatus"
+            name="PoliticalStatus" nzAllowClear>
+            <nz-option *ngFor="let option of Political" [nzLabel]="option.CodeName" [nzValue]="option.Code">
+            </nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div nz-form-item nz-col class="mgb20px">
+        <div nz-form-control>
+          <nz-input style="width: 142px;border:none;" [(ngModel)]="searchObj.Source" nzReadonly [nzPlaceHolder]="'生源地'" name="Source" (click)="modal()">
+
+          </nz-input>
+        </div>
+      </div>
+      <button (click)="onSearch(true)" class="btn_search btn">查询</button>
+      <button (click)="resetForm(f)" class="btn_reset btn">重置</button>
+    </form>
+  </div>
+  <div class="load" *ngIf = "data.length != 0">
+
+    <nz-table #nzTable class="simple-table" [nzAjaxData]="data" [nzLoading]="_loading"  [(nzTotal)]="total" [(nzPageIndex)]="page.Page" [(nzPageSize)]="page.PageSize" [nzBordered]="true" (nzPageIndexChange)="onSearch()" [nzScroll]="{ x: 1000, y: 500 }">
+      <thead nz-thead>
+        <tr>
+          <th nz-th style="min-width:50px">
+            <span>序号</span>
+          </th>
+          <th nz-th style="min-width:50px">
+            <span>学号</span>
+          </th>
+          <th nz-th style="min-width:70px">
+            <span>姓名</span>
+          </th>
+          <th nz-th style="min-width:50px">
+            <span>性别</span>
+          </th>
+          <th nz-th style="min-width:80px">
+            <span>所在宿舍</span>
+          </th>
+          <th nz-th style="min-width:80px">
+            <span>学院</span>
+          </th>
+          <th nz-th style="min-width:50px">
+            <span>专业</span>
+          </th>
+          <th nz-th style="min-width:50px">
+            <span>年级</span>
+          </th>
+          <th nz-th style="min-width:80px">
+            <span>班级</span>
+          </th>
+          <th nz-th style="min-width:50px">
+            <span>民族</span>
+          </th>
+          <th nz-th style="min-width:80px">
+            <span>政治面貌</span>
+          </th>
+          <th nz-th style="min-width:80px">
+            <span>生源地</span>
+          </th>
+          <th nz-th style="min-width:80px">
+            <span>联系方式</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody nz-tbody>
+        <tr nz-tbody-tr *ngFor="let item of nzTable.data;let i= index">
+          <td nz-td>{{i+1}}</td>
+          <td nz-td>{{item.UserCode}}</td>
+          <td nz-td>{{item.Name}}</td>
+          <td nz-td>{{item.sex}}</td>
+          <td nz-td (click)="details($event,item)" style="color:#13A0FA;cursor:pointer;">{{item.DistrictName}}{{item.DormitoryName}}{{item.UnitName}}{{item.RoomName}}</td>
+          <td nz-td>{{item.Academy}}</td>
+          <td nz-td>{{item.Major}}</td>
+          <td nz-td>{{item.Grade}}</td>
+          <td nz-td>{{item.Class}}</td>
+          <td nz-td>{{item.Nationality}}</td>
+          <td nz-td>{{item.Political}}</td>
+          <td nz-td>{{item.GeographyName}}</td>
+          <td nz-td>{{item.Phone}}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <div *ngIf="_loading == false && data.length == 0;" class="null">
+    <div class="null_img">
+      <img src="./assets/images/kong@2x.png" alt="">
+    </div>
+    <p>未查询到相关结果，请重新搜索</p>
+  </div>
+  <nz-modal [nzVisible]="isVisible" [nzTitle]="'生源地'" [nzContent]="modalContent" (nzOnCancel)="handleCancel()" [nzFooter]=false>
+    <ng-template #modalContent>
+      <!-- {{Province | json}} -->
+      <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form text-left">
+        <div nz-form-item nz-col class="mgb20px">
+          <div nz-form-control>
+            <nz-select style="width: 142px;border:none;" [nzPlaceHolder]="'省份'" [nzShowSearch]="true" [(ngModel)]="Geography.province"
+              name="province" nzAllowClear (ngModelChange)="cityList(Geography.province)">
+              <nz-option *ngFor="let option of Province" [nzLabel]="option.GeographyName" [nzValue]="option">
+              </nz-option>
+            </nz-select>
+          </div>
+        </div>
+        <div nz-form-item nz-col class="mgb20px">
+          <div nz-form-control>
+            <nz-select style="width: 142px;border:none;" [nzPlaceHolder]="'城市'" [nzShowSearch]="true" [(ngModel)]="Geography.city" name="city"
+              nzAllowClear (ngModelChange)="countryList(Geography.city)">
+              <nz-option *ngFor="let option of City" [nzLabel]="option.GeographyName" [nzValue]="option">
+              </nz-option>
+            </nz-select>
+          </div>
+        </div>
+        <div nz-form-item nz-col class="mgb20px">
+          <div nz-form-control>
+            <nz-select style="width: 142px;border:none;" [nzPlaceHolder]="'县区'" [nzShowSearch]="true" [(ngModel)]="Geography.country"
+              name="country" nzAllowClear>
+              <nz-option *ngFor="let option of County" [nzLabel]="option.GeographyName" [nzValue]="option">
+              </nz-option>
+            </nz-select>
+          </div>
+        </div>
+        <div class="btnOk">
+          <button (click)="handleOk($event,Geography.province,Geography.city,Geography.country)" class="_btn">确认</button>
+        </div>
+
+      </form>
+
+    </ng-template>
+    <!-- <ng-template #modalFooter> -->
+    <!-- <button (click)="handleOk($event,Geography.province,Geography.city,Geography.country)" class="_btn">确认</button> -->
+    <!-- </ng-template> -->
+  </nz-modal>
+
+
+</div>

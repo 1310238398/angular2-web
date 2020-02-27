@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <div class="modal-title" *ngIf="SbiStatus.length"><img class="bar-icon" src="assets/images/xuesheng@2x.png" alt="">学生状态</div>
+  <div class="modal-title" *ngIf="SbiNationality.length"><img class="bar-icon" src="assets/images/renkoufenbu@2x.png" alt="">民族统计</div>
+  <div class="modal-title" *ngIf="SbiPolitical.length"><img class="bar-icon" src="assets/images/zhengzhi@2x.png" alt="">政治面貌统计</div>
+</div>
+<div *ngIf="SbiStatus.length" class="nation">
+  <div class="base-font item-m font12" *ngFor="let Status of SbiStatus">
+    <div><span><a (click)="onJump('Status',Status.Key)">{{Status.Key}}</a> </span><span>{{Status.Value}}人</span><span>{{Status.Rate}}%</span></div>
+  </div>
+</div>
+<div *ngIf="SbiNationality.length" class="nation">
+  <div class="base-font item-m font12" *ngFor="let nation of SbiNationality">
+    <div><span><a (click)="onJump('Nationality',nation.Key)">{{nation.Key}}</a> </span><span>{{nation.Value}}人</span><span>{{nation.Rate}}%</span></div>
+  </div>
+</div>
+<div *ngIf="SbiPolitical.length">
+ <div id="ModalSbiPoliticalId"  style="width:auto;height: 400px;margin: 2px"></div>
+</div>
+

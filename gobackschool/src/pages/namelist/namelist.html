@@ -1,0 +1,111 @@
+<ion-content class="cont-box" *ngIf="isDeName">
+  <p class="center sp-text">
+    <span class="fn14 dib" style="margin-bottom:5px;">应到 {{totalNum}}人,实到 {{trueNum}}人,未到</span>
+    <span class="fn17 dib" style="color: #FF4E4E;">{{leaveNum}}</span>
+    <span class="fn14 dib">人,未统计 {{notRoll}}人</span>
+  </p>
+
+  <div class="one-page mr">
+    <div class="overh" style="margin:10px 0;">
+        <p class="fn14 fl" style="color: #ACACAC;">花名册</p>
+        <button class="fn14 fr all-back-btn" ion-button (click)="allBack()">一键全返校</button>
+    </div>
+    <div class="name-list">
+      <p class="name-list-head">
+        <span class="center dib fl fn14">序号</span>
+        <span class="center dib fl fn14">学号</span>
+        <span class="center dib fl fn14">姓名</span>
+        <span class="center dib fl fn14">状态</span>
+      </p>
+
+      <div class="name-list-detail" *ngFor="let data of dataSet;let i = index;">
+        <p class="center fl fn14 css-c1">{{i+1}}</p>
+        <p class="center fl fn14 css-c2">{{data.usercode}}</p>
+        <p class="center fl fn14 css-c3 relative" [ngStyle]="{'background':data.status == '2' ? '#FFC3C3' : '' }">
+          <span class="dib name-txt">{{data.name}}</span>
+        </p>
+        <div class="left fl fn14 relative css-c4">
+          <div class="dib center relative" style="width:100%;" (click)="tabBox(data.code)">
+            <img class="change-img absolute" *ngIf="isDeName" src="assets/images/xuanze@2x.png" alt="">
+            <label>
+              <span *ngIf="data.status == '3'" style="color: #4A90E2;">请设置</span>
+              <span *ngIf="data.status == '1'" style="color: #69C701;">已返校</span>
+              <span *ngIf="data.status == '2'" style="color: #FF4E4E;">未返校</span>
+            </label>
+          </div>
+
+          <div class="absolute tab-box" *ngIf="data.code == isvilible">
+            <span class="dib fn12 center leave-btn absolute leave-animat" (click)="changeStatusOver(data.code)">已返校</span>
+            <span class="dib fn12 center cut-btn absolute cut-animat" (click)="changeStatusNot(data.code,data.name)">未返校</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <p class="center" *ngIf="isDeName">
+      <button class="over-btn" [disabled]="banBT" ion-button (click)="submitInfo()">完成</button>
+    </p>
+  </div>
+
+  <div class="ssc-ov fixed aa" *ngIf="mengGo"></div>
+  <div class="spinnerw fixed" *ngIf="mengGo" id="spinnerw">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</ion-content>
+
+<div class="ssc-ov fixed bb" *ngIf="sscBox" (click)="closeTabBox()"></div>
+<!-- 填写未到原因  弹框 -->
+<div class="reason-cont fixed overh" *ngIf="inputBoxShow">
+  <P class="fn16 color4a top-title center">请添加“{{noBackName}}”未到原因</P>
+  <div class="cont-form">
+    <ul>
+      <li class="overh">
+        <p class="text-css">
+          <i style="color: #ff0000;">*</i>
+          <span>选择原因 : </span>
+        </p>
+        <a class="dib fn14 words" *ngFor="let items of reasonObj;" [class.seleced]='items.checked' (click)="checkWhyBtn(items.Code)">{{items.Name}}</a>
+      </li>
+      <li class="pro-text overh relative">
+        <p class="text-css">
+          <i style="color: #ff0000;">*</i>
+          <span>填写未到详情 : </span>
+        </p>
+        <textarea class='file-message mr' #textarea style="resize:none;" name="filetext" [(ngModel)]="filetext"
+          (ngModelChange)="txtChange(textarea.value)" maxlength="18" rows="5"></textarea>
+        <p class="file-num absolute">{{values}}</p>
+      </li>
+      <li>
+        <p class="text-css" style="margin:13px 0 0;">图片上传 : </p>
+        <div class="upload overh">
+          <span class="container fl relative" *ngIf="CertifyImgs.length<3">
+            <input type="file" value="file" class="hiddenFile" (change)="handleFiles($event)">
+            <img src="assets/images/add.png" style="width: 100%;">
+          </span>
+          <div class="Certify fl relative center" *ngFor="let item of CertifyImgs;let index=index;">
+            <img class="delete-icon absolute" src="assets/images/delete.png" (click)="deleteCertify($event,index)">
+            <img class="file-img" [src]="DomSanitizer.bypassSecurityTrustUrl(item.AttachmentURL)">
+          </div>
+          <div class="clear"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="center" style="margin-top:20px;">
+    <button class="submit-goback mr fn16" ion-button (click)="closeTabBox()">返回</button>
+    <button class="submit-tab mr fn16" ion-button (click)="tabAlert()">确定</button>
+  </div>
+</div>
+
+<!-- 不在任务时间内提示 -->
+<div class="not-time fixed overh" *ngIf="!isDeName">
+  <P class="fn16 color4a top-title center">提示</P>
+  <p class="not-time-cont center fn14">现在不在任务时间内，请在任务开启后进行点名</p>
+  <div class="center" style="margin-top:10px;">
+    <button class="not-time-tab mr fn16" ion-button (click)="backSource()">确定</button>
+  </div>
+</div>

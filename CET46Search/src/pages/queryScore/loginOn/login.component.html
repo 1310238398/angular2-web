@@ -1,0 +1,35 @@
+<ion-content>
+<div class="img"><img src="assets/images/chaxun@2x.png"></div>
+<div class="welcome">
+  <span class="top">欢迎进入王者荣耀版四六级</span><span>成绩查询</span>
+</div>
+<div class="login-box">
+  <!--<form (ngSubmit)="login()" #registerForm="ngForm">-->
+  <ion-row>
+      <ion-col>
+        <div class="cont">
+          <div class="one">
+            <label>准考证号</label>
+            <input class="ipt" id="ipt_1" type="text" [(ngModel)]="TicketNub" name="Name" (click)="getFocus1()" autocomplete="off" placeholder="2017年6月笔试准考证号" required minlength="18">
+          </div>
+          <div class="two">
+            <label class="labelTwo"><span class="letter-spacing">姓</span>名</label>
+            <input  class="ipt" id="ipt_2" type="text" [(ngModel)]="TicketName"  name="Id" (click)="getFocus2()" autocomplete="off" placeholder="请输入姓名" required>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  <ion-row>
+    <ion-col class="signup-col">
+      <button type="submit" class="submit-btn" (click)="login()">开始查询</button>
+    </ion-col>
+  </ion-row>
+<!--
+  </form>-->
+
+</div>
+<div class="footer">
+  <p>此数据来源于99宿舍、学信网、教育部考试中心综合查询网</p>
+</div>
+</ion-content>

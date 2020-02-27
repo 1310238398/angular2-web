@@ -1,0 +1,223 @@
+page-notice-preview {
+
+  font-family: "PingFang SC";
+  button {
+    background-color: transparent;
+    margin-left: 2px;
+    font-size: 14px;
+    color: #666666;
+  }
+  // button:hover {
+  //   background-color: #cccccc;
+  // }
+
+  .page-back {
+    position:relative;
+    // background-color: #e5e5e5;
+    border-bottom: 1px solid #d5d5d5;
+    margin-left: 20px;
+    margin-top: 0px;
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+    color: #666666;
+    margin-bottom: 15px;
+    height: 40px;
+    line-height: 40px; // 能够实现div中的元素垂直剧中
+    width:100%;
+  }
+  .noticeTitle {
+    text-align: center;
+    font-size: 16px;
+    color: #3e3e3e;
+    font-family: "Microsoft YaHei";
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    // font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+
+  .contentDiv {
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 10px;
+    //border-style:solid;
+    // border-width: 1px;
+    // border-color: #e5e5e5;
+    font-size: 14px;
+    //color: #999999;
+  }
+  .creator {
+    // text-align: center;
+    font-size: 16px;
+    font-family: "Microsoft YaHei";
+margin-left: 40px;
+color: #666666;
+    // color: #eaa020;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    //background: blue;
+
+  }
+  #editor2 {
+    // height: 250px;
+    border-color: #666666;
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+    // min-height: 250px;
+
+  }
+  .time {
+    // text-align: center;
+    font-size: 14px;
+    color: #acacac;
+    font-family: "Microsoft YaHei";
+    margin-left: 40px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  // .content {
+  //   text-align:justify;
+  //   text-indent: 2em;
+  //   // margin-left: 50px;
+  //   margin-right: 50px;
+  //   color: #333333;
+  //   font-size: 14px;
+  //   height: 300px;
+  //   //text-justify:inter-cluster;
+  //   //background-color: #7f7f7f;
+  // }
+  .item-md ion-avatar ion-img, .item-md ion-avatar img{
+    width: 20px;
+    height: 20px;
+  
+    margin-top: 11px;
+
+  }
+  .item-md h2{
+    font-size: 16px;
+    color: #666666;
+    font-family: "Microsoft YaHei";
+  }
+.default-div-border p{
+    font-size: 14px !important;
+    font-family: "Microsoft YaHei" !important;
+    color: #acacac !important;
+  }
+  .separate {
+    margin-left:30px;
+    margin-right : 30px;
+    height: 1px;
+    background-color: #e5e5e5;
+  }
+  .users {
+    // width: 200px;
+    //height: 75px;
+    margin-left: 50px;
+    margin-right: 50px;
+    display: -webkit-box;  // 可能很多情况下不兼容
+    display: -moz-box;
+    white-space: pre-wrap;
+
+    word-wrap: normal; //break-wordd;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:2;
+    line-height: 35px;
+
+
+  }
+  .user {
+    //height: 30px;
+    // border-radius: 15px;
+ border-radius: 4px;
+    height: 30px;
+    // border: solid #ea9e21 1px;
+    // background-color: #fbe9cc;
+    font-size: 16px;
+     font-family: "Microsoft YaHei";
+    // color: #ea9e21;
+     color:#666666;
+    background-color: #cff0ff;
+    text-align: center;
+    vertical-align: middle;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-left: 10px;
+    //margin-bottom: 10px;
+  }
+
+  
+ 
+
+  .tip1 {
+    font-size: 14px;
+    color: #666666;
+  }
+  .margin-div {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  .time2 {
+    font-size: 12px;
+    // color: #ea9e21;
+  }
+
+  .button-div {
+    vertical-align: center;
+    margin-right: 30px;
+    margin-top: 10px;
+    float: right;
+  }
+  
+  .button2 {
+    font-size: 16px;
+    background-color: #ea9e21 !important;
+    color: white;
+    height: 30px;
+    width: 120px;
+    margin-right: 30px;
+    // border: solid #ea9e21 1px;
+    border-radius: 4px;
+
+  }
+
+    .default-div-border {
+    margin-left: 30px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+   
+    //height: 30px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-top: 2px;
+    line-height: 30px;
+    font-size: 16px;
+    color: #999999;
+
+  }
+  .default-div-border  p{
+    font-size: 16px;
+    font-family: "Microsoft YaHei";
+    color: #666666;
+
+  }
+  .recive {
+    font-family: PingFangSC-Regular;
+    font-size: 16px;
+    color: #13a0fa;
+    letter-spacing: 0;
+    text-align: left;
+  }
+
+}

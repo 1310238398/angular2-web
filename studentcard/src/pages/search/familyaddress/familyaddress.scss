@@ -1,0 +1,245 @@
+page-familyaddress {
+    .xinxi {
+        // margin-left: 10%;
+        margin-top: 18px;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    .fontw {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-family: PingFangSC-Regular;
+        font-size: 15px;
+        color: #4a4a4a;
+        letter-spacing: 0.18px;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 5px;
+        height: 20px;
+        line-height: 20px;
+    }
+    .fontq {
+        font-family: PingFangSC-Regular;
+        font-size: 10px;
+        color: #acacac;
+        letter-spacing: 0.12px;
+        text-align: center;
+        width: 100%;
+        margin-top: 0px;
+    }
+    .item-ios.item-block .item-inner {
+        padding-right: 8px;
+        border-bottom: none;
+    }
+    .xiangxi {
+        margin: 0 17px 5px 17px;
+    }
+    .img-card {
+        width: 80px;
+        height: 113px;
+        position: absolute;
+        right: 8px;
+        top: 3px;
+    }
+    .input-file {
+        height: 113px;
+        line-height: 113px;
+    }
+    .list-ios>.item-block:last-child,
+    .list-ios>.item-wrapper:last-child .item-block {
+        border-bottom: 0px solid white;
+    }
+    .list-ios>.item-block:first-child {
+        border-top: 0px solid white;
+    }
+    .list-ios .item-block {
+        border-bottom: 0px solid white !important;
+    }
+    .xinxiyuanjiao {
+        height: 30px;
+        background-color: #fbfbfb;
+        margin-bottom: 5px;
+        border-radius: 5px;
+    }
+    .xinxiyuanjiaow {
+        height: 113px;
+        background-color: #fbfbfb;
+        margin-bottom: 5px;
+        border-radius: 5px;
+    }
+    .xinxileft {
+        font-size: 12pt;
+        color: #808080;
+        padding-left: 17px;
+    }
+    .text-input {
+        text-align: right;
+        float: right;
+        font-size: 12pt;
+        color: #4d4d4d;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        //margin: 0px 0px 0px 17px;
+    }
+    .text {
+        float: right;
+        // font-size: 12pt;
+        // color: #4d4d4d;
+        // margin: -22px 0px 0px 17px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        // max-width: 77%;
+    }
+    .text-input::-moz-placeholder {
+        color: #f6921e;
+    }
+    .text-input:-ms-input-placeholder {
+        color: #f6921e;
+    }
+    .text-input::-webkit-input-placeholder {
+        color: #f6921e;
+    }
+    .select-ios .select-placeholder {
+        color: #f6921e;
+        text-align: right;
+        font-size: 12pt;
+    }
+    .xinxileftble {
+        font-size: 12pt;
+        color: #808080;
+        padding-left: 9px;
+    }
+    .button-ios {
+        border: 1px solid #f5a623;
+        border-radius: 3px;
+        color: #f5a623;
+        width: 45%;
+        height: 39px;
+        font-family: PingFangSC-Regular;
+        font-size: 12px;
+        background: #FFF;
+        letter-spacing: 0.14px;
+        text-align: center;
+        display: inline-block;
+        // box-shadow: 0px 4px 20px #ffa200,
+    }
+    .button-ios.activated {
+        border: 1px solid #f5a623;
+        border-radius: 3px;
+        color: #ffffff;
+        width: 45%;
+        height: 39px;
+        font-family: PingFangSC-Regular;
+        font-size: 12px;
+        background: #f5a623;
+        letter-spacing: 0.14px;
+        text-align: center;
+        display: inline-block;
+        // box-shadow: 0px 4px 20px #ffa200,
+    }
+    .select-ios .select-icon {
+        position: relative;
+        width: 0px;
+        height: 0px;
+    }
+    .select-ios .select-icon .select-icon-inner {
+        position: absolute;
+        width: 0;
+        height: 0;
+        /* border-top: 5px solid; */
+        border-right: 0px solid transparent;
+        border-left: 0px solid transparent;
+        pointer-events: none;
+    }
+    .select-text {
+        color: #4d4d4d;
+        text-align: right;
+        font-size: 12pt;
+    }
+    .file {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        -moz-opacity: 0;
+        /* 兼容老式浏览器 */
+        filter: alpha(opacity=0);
+        /* 兼容IE */
+    }
+    .qiunile img {
+        width: 5px;
+        height: 5px;
+        margin-bottom: 3px;
+    }
+    .input-ios[clearInput] .text-input {
+        text-align: right;
+    }
+    .item-ios {
+        padding-left: 0px;
+        // border-radius: 0;
+        position: relative;
+        font-size: 1.7rem;
+        color: #000;
+        // background-color: #fff;
+        transition: background-color 200ms linear;
+    }
+    .text img {
+        width: 5px;
+        height: 5px;
+        margin-bottom: 3px;
+    }
+    // .btn-shaw {
+    //     -moz-box-shadow: 0px 6px 10px #FDE8AC;
+    //     -webkit-box-shadow: 0px 6px 10px #FDE8AC;
+    //     box-shadow: 0px 6px 10px #FDE8AC;
+    //     width: 80%;
+    // }
+    .xujia {
+        float: right;
+        color: #4d4d4d;
+        text-align: right;
+        font-size: 12pt;
+    }
+    .yeshu {
+        text-align: center;
+    }
+    .pageBtnDiv {
+        height: 39px;
+        width: 100%;
+        margin-top: 147px;
+        margin-bottom: 12px;
+    }
+    .pageBtnw {
+        margin: 0 auto;
+        border: 1px solid #f5a623;
+        border-radius: 3px;
+        color: #f5a623;
+        width: 45%;
+        height: 39px;
+        font-family: PingFangSC-Regular;
+        font-size: 12px;
+        background: #FFF;
+        letter-spacing: 0.14px;
+        text-align: center;
+        display: inline-block;
+        margin-left: 5%;
+    }
+    .pageBtnq {
+        margin: 0 auto;
+        border: 1px solid #f5a623;
+        border-radius: 3px;
+        color: #f5a623;
+        width: 45%;
+        height: 39px;
+        font-family: PingFangSC-Regular;
+        font-size: 12px;
+        background: #FFF;
+        letter-spacing: 0.14px;
+        text-align: center;
+        display: inline-block;
+    }
+}

@@ -1,0 +1,13 @@
+<ion-content>
+  <ion-list class="m-t-10">
+    <div class="list_arrow">
+      <div class="noarrow_list" *ngFor="let res of signResultList" (click)="goToMajor(res)">
+        <div class="noarrow_list_info">
+          <a class="left">{{res.DeptName}}</a>
+          <span class="right">{{res.TotalCount-res.SignCount}}人未签</span>
+        </div>
+        <div class="line"></div>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>

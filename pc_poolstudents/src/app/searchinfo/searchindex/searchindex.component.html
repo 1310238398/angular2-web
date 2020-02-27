@@ -1,0 +1,335 @@
+<div class="content search-info-page" *ngIf="isShowView">
+    <!-- 基础信息数据展示 -->
+    <form #f="ngForm" nz-form [nzLayout]="'inline'" class="search-form">
+        <div class="basic-wrap">
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>学院</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select class="w120" [nzPlaceHolder]="''" [(ngModel)]="searchObj.academy" name="academy"
+                        (ngModelChange)="loadMajor()" nzAllowClear>
+                        <nz-option *ngFor="let option of academyOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>专业</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select class="w120" [nzPlaceHolder]="''" [(ngModel)]="searchObj.major" name="major"
+                        (ngModelChange)="loadClass()" nzAllowClear>
+                        <nz-option *ngFor="let option of majorOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div> 
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>年级</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select class="w80" [nzPlaceHolder]="''" [(ngModel)]="searchObj.grade" name="grade"
+                        (ngModelChange)="loadClass()" nzAllowClear>
+                        <nz-option *ngFor="let option of gradeOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>班级</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select class="w120" [nzPlaceHolder]="''" [(ngModel)]="searchObj.class" name="class"
+                        nzAllowClear>
+                        <nz-option *ngFor="let option of classOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>姓名</label>
+                </div>
+                <div nz-form-control>
+                    <input style="width:120px;" class="name-input" autocomplete="off" type="text" maxlength="12"
+                        [(ngModel)]="searchObj.name" name="name">
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>性别</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select class="w80" [nzPlaceHolder]="''" [(ngModel)]="searchObj.sex" name="sex" nzAllowClear>
+                        <nz-option *ngFor="let option of sexOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>民族</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select class="w120" [nzPlaceHolder]="''" [(ngModel)]="searchObj.nation" name="nation"
+                        nzAllowClear>
+                        <nz-option *ngFor="let option of nationOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>政治面貌</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select class="w100" [nzPlaceHolder]="''" [(ngModel)]="searchObj.polity" name="polity"
+                        nzAllowClear>
+                        <nz-option *ngFor="let option of polityOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>学号</label>
+                </div>
+                <div nz-form-control>
+                    <input style="width:120px;" class="name-input" autocomplete="off" type="text" maxlength="14"
+                        [(ngModel)]="searchObj.schoolId" name="schoolId">
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>入学时间</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select class="w100" [nzPlaceHolder]="''" [(ngModel)]="searchObj.beginTime" name="beginTime"
+                        nzAllowClear>
+                        <nz-option *ngFor="let option of beginOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>毕业时间</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select class="w100" [nzPlaceHolder]="''" [(ngModel)]="searchObj.endTime" name="endTime"
+                        nzAllowClear>
+                        <nz-option *ngFor="let option of endOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>家庭住址</label>
+                </div>
+                <div nz-form-control class="relative">
+
+                    <div class="address-input relative cp" (mouseenter)="mouseenter()" (mouseleave)="mouseLeave()"
+                        (click)="showAddress()">
+                        <img class="absolute delet-t" *ngIf="addressIcon" (click)="deleteAddress($event)" src="assets/images/delet_01.png"
+                            alt="">
+                        <span>{{searchObj.addressName}}</span>
+                        <span class="ant-select-arrow"><b class="ng-tns-c4-9"></b></span>
+                    </div>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>困难等级</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select class="w100" [nzPlaceHolder]="''" [(ngModel)]="searchObj.rank" name="rank" nzAllowClear>
+                        <nz-option *ngFor="let option of ranksOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+            <div nz-row nz-form-item>
+                <div nz-form-label>
+                    <label>认定类型</label>
+                </div>
+                <div nz-form-control>
+                    <nz-select class="w100" [nzPlaceHolder]="''" [(ngModel)]="searchObj.type" name="type" nzAllowClear>
+                        <nz-option *ngFor="let option of typeOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                        </nz-option>
+                    </nz-select>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- 家庭经济情况展示 -->
+    <div class="economy-wrap">
+        <span class="fn14 bold" style="margin-right:10px;">学生情况筛选</span>
+        <nz-checkbox-group [(ngModel)]="displayCheckbox" name="check"></nz-checkbox-group>
+
+        <p class="basic-btn-box dib cp" (click)="showBasicInfo()">
+            <span class="fn16 bold">学生基础数据展示</span>
+            <img class="img-down-icon" src="assets/images/down_icon.png" alt="">
+        </p>
+        <p class="economy-btn-box dib cp" (click)="showFmEconomy()">
+            <span class="fn16 bold">家庭经济情况展示</span>
+            <img class="img-down-icon" src="assets/images/down_icon.png" alt="">
+        </p>
+    </div>
+    <!-- 按钮排列 -->
+    <div class="btn-wrap center relative">
+        <button class="btn-sub" nz-button [disabled]="httpService.loading" [nzType]="'primary'" (click)="onSearch(true)">查询</button>
+        <button class="btn-sub" nz-button (click)="resetForm(f)">重置</button>
+        <button class="w110 export-btn" nz-button [nzType]="'primary'" [disabled]="showLoading" (click)="exportAlert()">
+            <span *ngIf="!showLoading">查询结果导出</span>
+            <span *ngIf="showLoading">查询结果导出中</span>
+        </button>
+        <nz-spin class="dib" *ngIf="showLoading"></nz-spin>
+    </div>
+    <!-- 表格列表 -->
+    <div class="relative table-cont" *ngIf="dataEmpty">
+        <nz-table class="fl absolute table-left" #nzTable1 [nzAjaxData]="dataSet" [nzLoading]="httpService.loading"
+            [nzBordered]="true" [nzIsPagination]="false">
+            <thead nz-thead>
+                <tr style="height:49px;">
+                    <th nz-th style="width:45px;"><span>序号</span></th>
+                    <th nz-th style="width:80px;"><span>姓名</span></th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr style="height:59px;" *ngFor="let data of nzTable1.data;let i= index">
+                    <td nz-td><span>{{searchObj.Page*searchObj.PageSize-searchObj.PageSize + i +1}}</span></td>
+                    <td nz-td style="width:100px;"><span style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;">{{data.Name}}</span></td>
+                </tr>
+            </tbody>
+        </nz-table>
+
+        <nz-table class="fl table-right" #nzTable [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [(nzTotal)]="searchObj.total"
+            [(nzPageIndex)]="searchObj.Page" [(nzPageSize)]="searchObj.PageSize" [nzBordered]="true"
+            (nzPageIndexChange)="onSearch(false)">
+            <thead nz-thead>
+                <tr id="table-height-head" style="height:49px;">
+                    <ng-container *ngFor="let item of basicDisplayBox">
+                        <th *ngIf="item.checked" nz-th [ngStyle]="{'min-width':item.value === '9' ? '150px' : '100px' }">{{item.label}}</th>
+                    </ng-container>
+
+                    <th nz-th style="min-width:80px;"><span>困难等级</span></th>
+                    <th nz-th style="min-width:80px;"><span>认定类型</span></th>
+
+                    <ng-container *ngFor="let item of economyDisplayBox">
+                        <th *ngIf="item.checked" nz-th style="min-width:100px;max-width:160px;">{{item.label}}</th>
+                    </ng-container>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr id="table-height-cont" style="height:59px;" *ngFor="let data of nzTable.data;let i= index">
+                    <td nz-td *ngIf="basicDisplayBox[0].checked"><span>{{data.AcademyName}}</span></td>
+                    <td nz-td *ngIf="basicDisplayBox[1].checked"><span>{{data.MajorName}}</span></td>
+                    <td nz-td *ngIf="basicDisplayBox[2].checked"><span>{{data.ClassName}}</span></td>
+                    <td nz-td *ngIf="basicDisplayBox[3].checked"><span>{{data.SexName}}</span></td>
+                    <td nz-td *ngIf="basicDisplayBox[4].checked"><span>{{data.NationalityName}}</span></td>
+                    <td nz-td *ngIf="basicDisplayBox[5].checked"><span>{{data.PoliticalName}}</span></td>
+                    <td nz-td *ngIf="basicDisplayBox[6].checked"><span>{{data.UserCode}}</span></td>
+                    <td nz-td *ngIf="basicDisplayBox[7].checked"><span>{{data.EntranceDate}}</span></td>
+                    <td nz-td *ngIf="basicDisplayBox[8].checked"><span>{{data.GraduationDate}}</span></td>
+                    <td nz-td *ngIf="basicDisplayBox[9].checked"><span>{{data.FamilyAddress}}</span></td>
+                    <td nz-td *ngIf="basicDisplayBox[10].checked">
+                        <nz-tooltip [nzTitle]="data.DetailAddress">
+                            <span nz-tooltip class="dib address-css">{{data.DetailAddress}}</span>
+                        </nz-tooltip>
+                    </td>
+                    <td nz-td><span>{{data.RecognitionLevelName}}</span></td>
+                    <td nz-td><span>{{data.RecognitionTypeName}}</span></td>
+                    <ng-container *ngIf="economyDisplayBox.length>0">
+                        <td nz-td *ngIf="economyDisplayBox[0].checked" class="colff0"><span>{{data.situation1}}</span></td>
+                        <td nz-td *ngIf="economyDisplayBox[1].checked" class="colff0"><span>{{data.situation2}}</span></td>
+                        <td nz-td *ngIf="economyDisplayBox[2].checked" class="colff0"><span>{{data.situation4}}</span></td>
+                        <td nz-td *ngIf="economyDisplayBox[3].checked" class="colff0"><span>{{data.situation8}}</span></td>
+                        <td nz-td *ngIf="economyDisplayBox[4].checked" class="colff0"><span>{{data.situation16}}</span></td>
+                        <td nz-td *ngIf="economyDisplayBox[5].checked" class="colff0"><span>{{data.situation32}}</span></td>
+                        <td nz-td *ngIf="economyDisplayBox[6].checked" class="colff0"><span>{{data.situation64}}</span></td>
+                        <td nz-td *ngIf="economyDisplayBox[7].checked" class="colff0"><span>{{data.situation128}}</span></td>
+                        <td nz-td *ngIf="economyDisplayBox[8].checked" class="colff0"><span>{{data.situation256}}</span></td>
+                        <td nz-td *ngIf="economyDisplayBox[9].checked" class="colff0"><span>{{data.situation512}}</span></td>
+                        <td nz-td *ngIf="economyDisplayBox[10].checked" class="colff0"><span>{{data.situation1024}}</span></td>
+                        <td nz-td *ngIf="economyDisplayBox[11].checked" class="colff0"><span>{{data.situation2048}}</span></td>
+                        <td nz-td *ngIf="economyDisplayBox[12].checked" class="colff0"><span>{{data.situation4096}}</span></td>
+                        <td nz-td *ngIf="economyDisplayBox[13].checked" class="colff0"><span>{{data.situation8192}}</span></td>
+                    </ng-container>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+    <div class="no-data center" *ngIf="!dataEmpty">
+        <p><img style="width:200px;" src="assets/images/kong@2x.png" alt=""></p>
+        <p class="fn18">暂无数据</p>
+    </div>
+
+    <!-- =================弹框=============== -->
+
+    <!-- 家庭地址选择 -->
+    <nz-modal class="address-alert" [(nzVisible)]="isAddress" nzTitle="" [nzContent]="addressContent" (nzOnCancel)="addressCancel()"
+        (nzOnOk)="addressOk()">
+        <ng-template #addressContent>
+            <p class="address-alert-p">
+                <span class="dib w50 right fn14 label-txt">省 : </span>
+                <nz-select class="w140" [nzPlaceHolder]="''" [(ngModel)]="searchObj.province" (ngModelChange)="loadCity()"
+                    name="province" nzAllowClear>
+                    <nz-option *ngFor="let option of provinceOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                    </nz-option>
+                </nz-select>
+            </p>
+            <p class="address-alert-p">
+                <span class="dib w50 right fn14 label-txt">市 : </span>
+                <nz-select class="w140" [nzPlaceHolder]="''" [(ngModel)]="searchObj.city" (ngModelChange)="loadCounty()"
+                    name="city" nzAllowClear>
+                    <nz-option *ngFor="let option of cityOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                    </nz-option>
+                </nz-select>
+            </p>
+            <p class="address-alert-p">
+                <span class="dib w50 right fn14 label-txt">区 (县) : </span>
+                <nz-select class="w140" [nzPlaceHolder]="''" [(ngModel)]="searchObj.county" name="county" nzAllowClear>
+                    <nz-option *ngFor="let option of countyOption" [nzLabel]="option.Name" [nzValue]="option.Code">
+                    </nz-option>
+                </nz-select>
+            </p>
+        </ng-template>
+    </nz-modal>
+    <!-- 基础信息数据展示 -->
+    <nz-modal class="basic-alert" [nzVisible]="isBasicInfo" [nzTitle]="''" [nzContent]="basicContent" [nzCancelText]="null"
+        [nzOkText]="'收起'" (nzOnOk)="basicOk($event)" (nzOnCancel)="basicCancel($event)">
+        <ng-template #basicContent>
+            <nz-checkbox-group [(ngModel)]="basicDisplayBox" (ngModelChange)="getHeight()" name="basic"></nz-checkbox-group>
+            <p class="fn14 center basic-alert-btn">
+                <span class="cp col49e" (click)="basicCheckAll()">全选</span>
+                <span class="cp col49e" (click)="basicCannel()">取消全选</span>
+            </p>
+        </ng-template>
+    </nz-modal>
+    <!-- 家庭经济情况展示 -->
+    <nz-modal class="economy-alert" [nzVisible]="isFmEconomy" [nzTitle]="''" [nzContent]="economyContent" (nzOnOk)="economyOk($event)"
+        (nzOnCancel)="economyCancel($event)" [nzCancelText]="null" [nzOkText]="'收起'">
+        <ng-template #economyContent>
+            <nz-checkbox-group [(ngModel)]="economyDisplayBox" (ngModelChange)="getHeight()" name="economy"></nz-checkbox-group>
+            <p class="fn14 center economy-alert-btn">
+                <span class="cp col49e" (click)="economyCheckAll()">全选</span>
+                <span class="cp col49e" (click)="economyCannel()">取消全选</span>
+            </p>
+        </ng-template>
+    </nz-modal>
+    <!-- 确定导出吗 -->
+    <nz-modal class="export-alert" [nzVisible]="isExport" [nzTitle]="''" [nzContent]="exportContent" (nzOnOk)="exportOk($event)"
+        (nzOnCancel)="exportCancel($event)" [nzCancelText]="null" [nzOkText]="'确定'">
+        <ng-template #exportContent>
+            <p class="fn14 center export-alert-p">确定要导出此次查询的结果吗?</p>
+        </ng-template>
+    </nz-modal>
+
+
+</div>

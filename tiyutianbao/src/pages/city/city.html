@@ -1,0 +1,9 @@
+<ion-content class="outer-content">
+  <ion-list>
+
+    <ion-item detail-push *ngFor="let item of items" (click)="NavigationTo(item)">
+      <h2>{{item.CodeName }}</h2>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

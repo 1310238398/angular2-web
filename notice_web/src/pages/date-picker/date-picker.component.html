@@ -1,0 +1,36 @@
+<span>
+<select class="ant-date-select year" [(ngModel)]="currentYear" (change)="onYearChange($event.target.value)">
+    <option *ngFor="let year of years" value = "{{year}}">{{year}}</option>
+</select>
+年
+</span>
+<span>
+<select class="ant-date-select" [(ngModel)]="currentMonth" (change)="onMonthChange($event.target.value)">
+    <option *ngFor="let month of months" value = "{{month}}">{{month}}</option>
+</select>
+月
+</span>
+<span>
+<select class="ant-date-select" [(ngModel)]="currentDay" (change)="onDayChange($event.target.value)">
+    <option *ngFor="let day of days" value = "{{day}}">{{day}}</option>
+</select>
+日
+</span>
+<span *ngIf="showHhmm">
+<select class="ant-date-select" [(ngModel)]="currentHour" (change)="onHourChange($event.target.value)">
+    <option *ngFor="let hour of hours" value = "{{hour}}">{{hour}}</option>
+</select>
+时
+</span>
+<span *ngIf="showHhmm">
+<select class="ant-date-select" [(ngModel)]="currentMinute" (change)="onMinuteChange($event.target.value)">
+    <option *ngFor="let minute of minutes" value = "{{minute}}">{{minute}}</option>
+</select>
+分
+</span>
+<span *ngIf="showHhmmss">
+<select class="ant-date-select" [(ngModel)]="currentSecond"  (change)="onSecondChange($event.target.value)">
+    <option *ngFor="let second of seconds" value = "{{second}}">{{second}}</option>
+</select>
+秒
+</span>

@@ -1,0 +1,65 @@
+<div class="content">
+    <h2 class="center">{{TaskName}}</h2>
+    <p class="center" style="margin:10px 0">开放时间: {{StartDate}}  至  {{EndDate}}</p>
+
+    <div>
+        <a [routerLink]="['/waitdecide/waitdecidehomepage',{TaskName: TaskName,created:StartDate,EndDate:EndDate}]" class="fn14">全部范围</a>
+        <span> > </span>
+        <span class="fn14">结果查看</span>
+    </div>
+
+    <div style="margin-top:10px;">
+        <span class="dib" style="color: #FF0000;margin-bottom: 5px;">{{dataStudent}}</span>
+        <nz-table #nzTable [nzAjaxData]="dataSet" [nzLoading]="httpService.loading" [nzBordered]="true" [nzIsPagination]="false">
+            <thead nz-thead>
+                <tr>  
+                    <th nz-th><span>序号</span></th>
+                    <th nz-th><span>学号</span></th>
+                    <th nz-th><span>姓名</span></th>
+                    <th nz-th><span>身份证号</span></th>
+                    <th nz-th><span>困难等级</span></th>
+                    <th nz-th><span>校区</span></th>
+                    <th nz-th><span>学院</span></th>
+                    <th nz-th><span>专业</span></th>
+                    <th nz-th><span>年级</span></th>
+                    <th nz-th><span>班级</span></th>
+                    <th nz-th><span>学生类型</span></th>
+                    <th nz-th><span>初次/复核认定</span></th>
+                    <th nz-th><span>调整情况</span></th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data;let i= index">
+                    <td nz-td>{{i+1}}</td>
+                    <td nz-td>{{data.UserCode}}</td>
+                    <td nz-td>{{data.Name}}</td>
+                    <td nz-td>{{data.IdentityNum}}</td>
+                    <td nz-td>
+                        <a [routerLink]="['/waitdecide/personalindex',{IntelUserCode: data.IntelUserCode, categray: '1',TaskName:TaskName,StartDate:StartDate,EndDate:EndDate,ClassCode:ClassCode,Status:'0',RecognitionLevel:data.RecognitionLevel}]">
+                            <span *ngIf="data.RecognitionLevel == '87000010'">一般困难</span>
+                            <span *ngIf="data.RecognitionLevel == '87000020'">困难</span>
+                            <span *ngIf="data.RecognitionLevel == '87000030'">特殊困难</span>
+                        </a>
+                    </td>
+                    <td nz-td>{{data.Campus}}</td>
+                    <td nz-td>{{data.Academy}}</td>
+                    <td nz-td>{{data.Major}}</td>
+                    <td nz-td>{{data.Grade}}</td>
+                    <td nz-td>{{data.Class}}</td>
+                    <td nz-td>
+                        <span *ngIf="data.Status == '1'">正常</span>
+                        <span *ngIf="data.Status != '1'">异常</span>
+                    </td>
+                    <td nz-td>
+                        <span *ngIf="data.Type == '1'">初次认定</span>
+                        <span *ngIf="data.Type == '2'">复核认定</span>
+                    </td>
+                    <td nz-td>{{data.Adjust}}</td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+
+
+</div>

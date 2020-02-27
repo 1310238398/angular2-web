@@ -1,0 +1,7 @@
+
+<div>
+  <nz-select class="col-w"  [nzShowSearch]="true"  [(ngModel)]="bizObj[nameType]" nzAllowClear>
+    <nz-option *ngFor="let option of biztypes" [nzLabel]="option.ItemName" [nzValue]="option.ItemCode">
+    </nz-option>
+  </nz-select>
+</div>

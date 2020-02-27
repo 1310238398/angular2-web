@@ -1,0 +1,13 @@
+{
+  "presets": [
+    ["env", {
+      "modules": false,
+      "targets": {
+        "browsers": ["last 2 versions", "safari >= 7","not ie <= 8"]
+      }
+    }],
+    "es2015"
+  ],
+
+  "plugins": ["transform-vue-jsx", "transform-runtime"]
+}

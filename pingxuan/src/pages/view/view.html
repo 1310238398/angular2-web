@@ -1,0 +1,36 @@
+<ion-content class="outer-content">
+  <ion-row>
+    <ion-slides pager *ngIf="voteInfo.Photo?.length" autoplay="3000" loop=true>
+      <ion-slide *ngFor="let Photo of Photos;let index=index;">
+        <img class="mwimg" src="{{Photo}}?imageView2/2/h/250/q/75" (click)="navDetail({index:index,Photos:Photos})"/>
+      </ion-slide>
+    </ion-slides>
+  </ion-row>
+  <ion-card class="mwbor">
+    <ion-card-header>
+      <h1>姓名:{{voteInfo.Name}}</h1>
+      <h2>学院:{{voteInfo.Academy}}</h2>
+    </ion-card-header>
+    <ion-card-content>
+      <!--   <div *ngIf="videos.length>0">
+           <div *ngFor="let video of videos;let index=index">
+             <video src="{{video}}" width="100%" poster="assets/images/xiaoyuan.png"
+                    controls autobuffer preload="auto"></video>
+           </div>
+         </div>-->
+      个人简介:{{voteInfo.Introduction}}
+      <div class="t-center" padding-top><a
+        href="https://app.xiaoyuanjijiehao.com/static/info/{{voteInfo.Link}}/{{voteInfo.Link}}.html" target="_self">点击查看更多简介</a>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-fab center bottom>
+    <button *ngIf="!voteInfo.Check" ion-fab mini color="light" (click)="onVoteOn()">
+      <ion-icon name="thumbs-up"></ion-icon>
+    </button>
+    <button *ngIf="voteInfo.Check" ion-fab mini color="danger" (click)="onVoteOff()">
+      <ion-icon name="thumbs-up"></ion-icon>
+    </button>
+    <p class="ps">{{voteInfo.Vote}}票</p>
+  </ion-fab>
+</ion-content>

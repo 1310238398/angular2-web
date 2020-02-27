@@ -1,0 +1,19 @@
+<ion-content class="index-cont">
+    <ion-list class="list-wrap overh">
+        <p class="center park-name fn16">{{parkName}}</p>
+        <p class="title-txt fn14">请选择宿舍</p>
+        <ion-item *ngFor="let item of itemsObj" (click)="bindCode(item.RoomCode,item.RoomName)">
+            <p>
+                <span class="index-cont">{{ item.RoomName }}</span>
+                <span class="fr colf0 fn12" *ngIf="item.QrStatus == 'nobind'">未绑定二维码</span>
+            </p>
+            <button class="bind-btn" ion-button clear item-end>绑定</button>
+        </ion-item>
+    </ion-list>
+
+    <ion-infinite-scroll *ngIf="moreData" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="正在加载更多。。。">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <div style="text-align: center;color: #8e9093;margin-bottom:15px;" *ngIf="!moreData">我是有底线的！</div>
+</ion-content>

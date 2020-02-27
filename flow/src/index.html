@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8">
+  <title>申请类业务</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <meta http-equiv="x-ua-compatible" content="IE=Edge" />
+  <!-- <script src="build/app.js"></script> -->
+
+  <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
+  <!-- <link rel="manifest" href="manifest.json"> -->
+  <script src="assets/lib/antlinker.1.0.10.js"></script>
+  <!-- <script src="assets/lib/mock.js"></script> -->
+</head>
+
+<body>
+  <app-main></app-main>
+</body>
+<script>
+  var obj = {};
+  antlinker.exeUserBasicInfoSdk(obj, function (obj, success) {
+    s = document.createElement("script");
+    s.setAttribute("src", "build/app.js");
+    document.body.appendChild(s);
+  })
+</script>
+
+</html>

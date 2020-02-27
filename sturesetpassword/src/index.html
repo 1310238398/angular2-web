@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <title>学生账号</title>
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4e8ef7">
+
+  <!-- add to homescreen for ios -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- cordova.js required for cordova apps (remove if not needed) -->
+
+
+  <!-- un-comment this code to enable service worker
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('service worker installed'))
+        .catch(err => console.error('Error', err));
+    }
+  </script>-->
+
+  <link href="build/main.css" rel="stylesheet">
+  <style type="text/css">
+    .spinnerw {
+      margin: 160px auto 0;
+      width: 80px;
+      text-align: center;
+    }
+
+    .spinnerw>div {
+      width: 18px;
+      height: 18px;
+      background-color: #eb9d21;
+      border-radius: 100%;
+      display: inline-block;
+      -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+      animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    }
+
+    .spinnerw .bounce1 {
+      -webkit-animation-delay: -0.32s;
+      animation-delay: -0.32s;
+    }
+
+    .spinnerw .bounce2 {
+      -webkit-animation-delay: -0.16s;
+      animation-delay: -0.16s;
+    }
+
+    @-webkit-keyframes sk-bouncedelay {
+
+      0%,
+      80%,
+      100% {
+        -webkit-transform: scale(0)
+      }
+
+      40% {
+        -webkit-transform: scale(1.0)
+      }
+    }
+
+    @keyframes sk-bouncedelay {
+
+      0%,
+      80%,
+      100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+      }
+
+      40% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="spinnerw" id="spinnerw">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+  <!-- Ionic's root component and where the app will load -->
+  <ion-app clas="baoxiu-root"></ion-app>
+
+  <!-- The polyfills js is generated during the build process -->
+  <script src="build/polyfills.js"></script>
+
+  <!-- The vendor js is generated during the build process
+       It contains all of the dependencies in node_modules -->
+  <script src="build/vendor.js"></script>
+  <script src="https://h5public.xiaoyuanjijiehao.com/sdk/antlinker.1.0.10.js"></script>
+  <script src="https://h5public.xiaoyuanjijiehao.com/sdk/init.js"></script>
+  <script src="assets/lib/mock.js"></script>
+
+  <script>
+    // var obj = {};
+    // antlinker.exeUserBasicInfoSdk(obj, function (obj, success) {
+    //   s = document.createElement("script");
+    //   s.setAttribute("src", "build/main.js");
+    //   document.body.appendChild(s);
+    // })
+    initMobile({
+      file: 'build/main.js'
+    }) //手机端 params:{file:'入口文件,默认main.js'}
+
+  </script>
+
+</body>
+
+</html>

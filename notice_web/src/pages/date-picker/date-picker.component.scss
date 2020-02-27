@@ -1,0 +1,22 @@
+.ant-date-select {
+    // background: url('../assets/image/dropdown@1x.jpg') right center no-repeat;
+     background: url('../assets/image/箭头下.png') 33px center no-repeat;
+    //  D:\angular_webapp\angular-webapp\notice_web\www\assets\image\箭头下@1x.png
+    // margin-left:px;
+    width: 60px;
+    height: 28px;
+    // overflow: hidden;
+    border: solid 1px #e5e5e5;
+    font-size: 16px;
+    color: #666666;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    // text-align:center;
+    text-indent: 7px;
+}
+
+.year {
+    background: url('../assets/image/箭头下.png') 55px center no-repeat;
+    width: 80px;
+    text-indent: 8px;
+}

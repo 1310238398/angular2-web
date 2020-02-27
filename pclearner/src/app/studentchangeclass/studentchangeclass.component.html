@@ -1,0 +1,117 @@
+<div class="content">
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
+      <nz-card [nzBordered]="true" [nzNoHovering]="true">
+        <ng-template #title>机构</ng-template>
+        <ng-template #extra>已选择：{{_currentClass?.ClassName||''}}</ng-template>
+        <ng-template *ngIf="Orgs.length>0" #body>
+          <nz-tree [nzNodes]="Orgs"
+                   [nzCheckable]="true"
+                   [nzOptions]="options"
+                   (nzEvent)="onEvent($event)"></nz-tree>
+        </ng-template>
+      </nz-card>
+    </div>
+    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
+      <nz-card [nzBordered]="true" [nzNoHovering]="true">
+        <ng-template #title>已分配班级学生</ng-template>
+        <ng-template #extra>
+
+          <nz-popconfirm [nzTitle]="'确定移出这些学生么？'" [nzCondition]="$check.haveCheck" (nzOnConfirm)="onPush()">
+            <button nz-popconfirm nz-button [nzType]="'default'" [nzSize]="'large'">
+              <span >移出</span>
+            </button>
+          </nz-popconfirm>
+
+        </ng-template>
+        <ng-template #body>
+          <div nz-row [nzType]="'flex'" [nzJustify]="'center'" [nzAlign]="'middle'">
+            <div nz-col [nzSpan]="24">
+              <!-- <h3 class="font-weight-bold">已分配班级学生</h3>-->
+              <nz-table #nzTable class="simple-table" [nzAjaxData]="HaveClassStudent" [nzLoading]="httpService.loading"
+                        [nzIsPagination]="false" [nzBordered]="true">
+                <thead nz-thead>
+
+                <tr>
+                  <th nz-th [nzCheckbox]="true">
+                    <label nz-checkbox [(ngModel)]="allChecked" (ngModelChange)="checkAll($event)">
+                    </label>
+                  </th>
+                  <th nz-th><span>学号</span></th>
+                  <th nz-th><span>姓名</span></th>
+                  <th nz-th><span>性别</span></th>
+                  <th nz-th><span>民族</span></th>
+                  <th nz-th><span>生源地</span></th>
+                </tr>
+                </thead>
+                <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                  <td nz-td [nzCheckbox]="true">
+                    <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="refreshStatus()">
+                    </label>
+                  </td>
+                  <td nz-td>{{data.UserCode}}</td>
+                  <td nz-td>{{data.Name}}</td>
+                  <td nz-td>{{data.SexName}}</td>
+                  <td nz-td>{{data.NationalityCodeName}}</td>
+                  <td nz-td>{{data.OriginAreaName}}</td>
+                </tr>
+                </tbody>
+              </nz-table>
+            </div>
+          </div>
+        </ng-template>
+      </nz-card>
+    </div>
+    <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
+      <nz-card [nzBordered]="true" [nzNoHovering]="true">
+        <ng-template #title>未分配班级学生</ng-template>
+        <ng-template #extra>
+          <nz-popconfirm [nzTitle]="'确定移入这些学生么？'" [nzCondition]="$check.notHaveCheck" (nzOnConfirm)="onPull()">
+            <button nz-popconfirm nz-button [nzType]="'default'" [nzSize]="'large'">
+              <span>移入</span>
+            </button>
+          </nz-popconfirm>
+
+        </ng-template>
+        <ng-template #body>
+          <div nz-row [nzType]="'flex'" [nzJustify]="'center'" [nzAlign]="'middle'">
+            <div nz-col [nzSpan]="24">
+              <!-- <h3 class="font-weight-bold">已分配班级学生</h3>-->
+              <nz-table #nzTable class="simple-table" [nzAjaxData]="NotHaveClassStudent" [nzIsPagination]="false"
+                        [nzBordered]="true">
+                <thead nz-thead>
+
+                <tr>
+                  <th nz-th [nzCheckbox]="true">
+                    <label nz-checkbox [(ngModel)]="allNotChecked" (ngModelChange)="checkNotAll($event)">
+                    </label>
+                  </th>
+                  <th nz-th><span>学号</span></th>
+                  <th nz-th><span>姓名</span></th>
+                  <th nz-th><span>性别</span></th>
+                  <th nz-th><span>民族</span></th>
+                  <th nz-th><span>生源地</span></th>
+                </tr>
+                </thead>
+                <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+                  <td nz-td [nzCheckbox]="true">
+                    <label nz-checkbox [(ngModel)]="data.checked" (ngModelChange)="refreshStatus()">
+                    </label>
+                  </td>
+                  <td nz-td>{{data.UserCode}}</td>
+                  <td nz-td>{{data.Name}}</td>
+                  <td nz-td>{{data.SexName}}</td>
+                  <td nz-td>{{data.NationalityCodeName}}</td>
+                  <td nz-td>{{data.OriginAreaName}}</td>
+                </tr>
+                </tbody>
+              </nz-table>
+            </div>
+          </div>
+        </ng-template>
+      </nz-card>
+    </div>
+  </div>
+</div>

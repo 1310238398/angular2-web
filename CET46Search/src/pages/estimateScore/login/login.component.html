@@ -1,0 +1,50 @@
+<ion-content>
+    <div class="bgImg" id="cont">
+        <div class="title">
+            <span>
+                预约成绩单
+            </span>
+             <span>
+               估分拿大奖
+            </span>
+        </div>
+        <div class="login-box">
+            <form >
+                <!-- <ion-row> -->
+                    <!-- <ion-col> -->
+                        <div class="cont">
+                            <div class="one">
+                                <label>准考证号</label>
+                                <!--<div>华师大{{TicketNub}}</div>-->
+                                <input class="ipt" id = "ipt1" type="text" [(ngModel)]="TicketNub"  name="TicketNub" placeholder="2017年6月笔试准考证号" (click)="getFocus()" autocomplete="off" minlength="18">
+
+                                 <!--<input type="text" formControlName="EmergencyPerson" class="text-input" [(ngModel)]="LeaveApply.EmergencyPerson">-->
+                            </div>
+                            <div class="two">
+                                <label class="labelTwo"><span class="letter-spacing">姓</span>名</label>
+                                <input class="ipt" id = "ipt2" type="text" [(ngModel)]="TicketName"  name="TicketName" autocomplete="off" (click)="getFocus1()" placeholder="请输入姓名" required >
+                            </div>
+                            <div class="three">
+                                <label class="labelTwo"><span>预估分数</span></label>
+                                <input class="ipt" id = "ipt3" type="number" [(ngModel)]="Estimate" value="" name="Estimate"  autocomplete="off"   (click)="getFocus2()" placeholder="限10-710分之间" required
+                                onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'0')}else{this.value=this.value.replace(/\D/g,'')}">
+    
+
+                            </div>
+                        </div>
+
+                    <!-- </ion-col> -->
+                <!-- </ion-row> -->
+                <p class="tishi">·只有一次机会，慎重哈·</p>
+
+                <!-- <ion-row> -->
+                    <!-- <ion-col class="signup-col"> -->
+                        <button type="submit" class="submit-btn" (click) = 'query()'>提交分数</button>
+                    <!-- </ion-col> -->
+                <!-- </ion-row> -->
+
+            </form>
+        </div>
+    </div>
+
+</ion-content>

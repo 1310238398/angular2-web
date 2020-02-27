@@ -1,0 +1,31 @@
+page-leave-apply {
+  .alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+  }
+  .select-ios .select-icon {
+    display: none;
+  }
+  .button-block-ios{
+    margin: 20px auto;
+    width: 320px;
+  }
+  .file {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    -moz-opacity: 0; /* 兼容老式浏览器 */
+    filter: alpha(opacity=0); /* 兼容IE */
+  }
+  .timeMl{
+    margin-left: -35px!important;
+  }
+ .ab{
+   position: absolute;
+   right: 5px;
+   top: 4px;
+ }
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>入学教育</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no"/>
+  <meta name="format-detection" content="email=no"/>
+  <link rel="stylesheet" href="lib/plyr.css">
+  <script src="lib/antlinker.1.0.4.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+  <script src="lib/plyr.js"></script>
+  <style type="text/css">
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      margin: 0;
+      padding: 0;
+    }
+
+    .bg {
+      width: 100%;
+      height: 100%;
+      background: url("img/bg.png") no-repeat fixed top;
+      background-size: 100% 100%;
+    }
+
+    .title {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50px;
+    }
+
+    .title_2 {
+      width: 100%;
+      text-align: center;
+      color: #4d4d4d;
+      font-size: 35px;
+      font-weight: 100;
+    }
+
+    .logo {
+      width: 100%;
+      text-align: center;
+    }
+
+    .campus_bg {
+      height: 50px;
+      background: url("img/ruxue.png") no-repeat center;
+      background-size: contain;
+    }
+
+    .list {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 250px;
+      overflow: auto;
+    }
+
+    video {
+      border-radius: 25px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .play {
+      top: 230px;
+      left: 60px;
+      z-index: 100;
+    }
+
+    .play img {
+      margin-right: 6px;
+      width: 24px;
+    }
+
+    .play span {
+      vertical-align: super;
+      font-size: 14px;
+      color: #FFFFFF;
+    }
+
+    .finish {
+      width: 70px;
+      visibility: hidden;
+      margin: 10px 0 0 260px;
+      position: absolute;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+<div class="bg">
+
+  <div class="title">
+    <div class="logo"><img src="img/qd.png" width="100" height="100"></div>
+    <div class="campus_bg"></div>
+    <div class="title_2">青岛大学</div>
+  </div>
+  <div class="list">
+    <video preload="auto" poster="https://cdn.selz.com/plyr/1.5/View_From_A_Blue_Moon_Trailer-HD.jpg" class="js-player">
+      <source src="movie.mp4" type="video/mp4">
+    </video>
+    <video preload="auto" poster="https://cdn.selz.com/plyr/1.5/View_From_A_Blue_Moon_Trailer-HD.jpg" class="js-player">
+      <source src="movie.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
+
+</body>
+<script>
+  $(document).ready(function () {
+    var controls = ["<div class='plyr__controls'>",
+      "<button type='button' data-plyr='play'>",
+      "<svg><use xlink:href='#plyr-play'></use></svg>",
+      "<span class='plyr__sr-only'>Play</span>",
+      "</button>",
+      "<button type='button' data-plyr='pause'>",
+      "<svg><use xlink:href='#plyr-pause'></use></svg>",
+      "<span class='plyr__sr-only'>Pause</span>",
+      "</button>",
+      "<button type='button' data-plyr='mute'>",
+      "<svg class='icon--muted'><use xlink:href='#plyr-muted'></use></svg>",
+      "<svg><use xlink:href='#plyr-volume'></use></svg>",
+      "<span class='plyr__sr-only'>Toggle Mute</span>",
+      "</button>",
+      "<span class='plyr__volume'>",
+      "<label for='volume{id}' class='plyr__sr-only'>Volume</label>",
+      "<input id='volume{id}' class='plyr__volume--input' type='range' min='0' max='10' value='5' data-plyr='volume'>",
+      "<progress class='plyr__volume--display' max='10' value='0' role='presentation'></progress>",
+      "</span>",
+      "<button type='button' data-plyr='captions'>",
+      "<svg class='icon--captions-on'><use xlink:href='#plyr-captions-on'></use></svg>",
+      "<svg><use xlink:href='#plyr-captions-off'></use></svg>",
+      "<span class='plyr__sr-only'>Toggle Captions</span>",
+      "</button>",
+      "<button type='button' data-plyr='fullscreen'>",
+      "<svg class='icon--exit-fullscreen'><use xlink:href='#plyr-exit-fullscreen'></use></svg>",
+      "<svg><use xlink:href='#plyr-enter-fullscreen'></use></svg>",
+      "<span class='plyr__sr-only'>Toggle Fullscreen</span>",
+      "</button>",
+      "</div>"].join("");
+
+    var instances = plyr.setup('.js-player', {
+      html: controls
+    });
+   /* instances.forEach(function (instance) {
+      instance.on('ended', function (event) {
+        instance.toggleFullscreen()
+      });
+    });*/
+    var obj = {};
+    antlinker.exeUserBasicInfoSdk(obj, function (obj, success) {
+      $.ajax({
+        type: 'POST',
+        url: '/api/welcome/interface',
+        data: JSON.stringify({
+          Router: '/api/task/campus/done',
+          Method: 'POST',
+          Body: ""
+        }),
+        contentType: "application/json",
+        headers: {
+          "AccessToken": window["__AppWebkey"]
+        }
+      }).done(function (data, status) {
+        console.log(data, status);
+      });
+    })
+  })
+
+</script>
+</html>

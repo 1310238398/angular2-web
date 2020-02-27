@@ -1,0 +1,76 @@
+<div class="content">
+
+    <div>
+        <nz-table #nzTable [nzAjaxData]="dataSet" [nzBordered]="true" [nzIsPagination]="false">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>
+                        <span>学号</span>
+                    </th>
+                    <th nz-th>
+                        <span>姓名</span>
+                    </th>
+                    <th nz-th>
+                        <span>申请所需资料</span>
+                    </th>
+                    <th nz-th>
+                        <span>经济情况调查问卷</span>
+                    </th>
+                    <th nz-th>
+                        <span>学生自评调查问卷</span>
+                    </th>
+                    <th nz-th>
+                        <span>变更理由</span>
+                    </th>
+                    <th nz-th>
+                        <span>状态</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="center" *ngIf="dataKong">
+                <tr nz-tbody-tr style="height:40px;">
+                    <td nz-td>{{dataSet.UserCode}}</td>
+                    <td nz-td>{{dataSet.Name}}</td>
+                    <td nz-td [ngClass]="categray == '1'?'bgc':''">
+                        <span class="comm-css" (click)="categrayChange(1)">
+                            查看
+                            <span *ngIf="dataSet.AttachIsChange == '1'">(新)</span>
+                        </span>
+                    </td>
+                    <td nz-td [ngClass]="categray == '2'?'bgc':''">
+                        <span class="comm-css" (click)="categrayChange(2)">
+                            {{dataSet.EnconomicScore}}
+                            <span *ngIf="dataSet.EnconomicIsChange == '1'">(新)</span>
+                        </span>
+                    </td>
+                    <td nz-td [ngClass]="categray == '3'?'bgc':''">
+                        <span class="comm-css" (click)="categrayChange(3)">
+                            {{dataSet.SelfAssessmentScore}}
+                            <span *ngIf="dataSet.SelfAssessmentIsChange == '1'">(新)</span>
+                        </span>
+                        
+                    </td>
+                    <td nz-td [ngClass]="categray == '4'?'bgc':''">
+                        <span *ngIf="dataSet.IsChange == '1'" class="comm-css" (click)="categrayChange(4)">查看</span>
+                    </td>
+                    <td nz-td [ngClass]="categray == '5'?'bgc':''">
+                        <span *ngIf="dataSet.Status == '0'"  class="comm-css" (click)="categrayChange(5)">点击审批</span>
+                        <span *ngIf="dataSet.Status == '1'">未同步</span>
+                        <span *ngIf="dataSet.Status == '3'">已同步</span>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </div>
+
+    <div>
+        <app-applybook *ngIf="categray == '1'" [IntelUid]="IntelUserCode"></app-applybook>
+        <app-jingjiquestion *ngIf="categray == '2'" [IntelUid]="IntelUserCode"></app-jingjiquestion>
+        <app-selfquestion *ngIf="categray == '3'" [IntelUid]="IntelUserCode"></app-selfquestion>
+        <app-whychange *ngIf="categray == '4'" [IntelUid]="IntelUserCode"></app-whychange>
+        <app-statuspass *ngIf="categray == '5'" [IntelUid]="IntelUserCode"></app-statuspass>
+    </div>
+
+
+
+</div>

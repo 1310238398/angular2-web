@@ -1,0 +1,124 @@
+<div class="room">
+  <nz-card class="mr-20 ml-20 mt-20">
+    <form nz-form>
+      <div nz-row nzGutter="16">
+        <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="6">
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">学院</nz-form-label>
+            <nz-form-control [nzSm]="18" [nzXs]="24">
+              <nz-select style="width: 100%;" [(ngModel)]="search.Academy" name="Academy" nzShowSearch nzAllowClear
+                nzPlaceHolder="请选择">
+                <nz-option *ngFor="let academy of academyData" [nzLabel]="academy.AcademyName" [nzValue]="academy"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="6">
+          <nz-form-item>
+            <nz-form-label [nzSm]="6" [nzXs]="24">年级</nz-form-label>
+            <nz-form-control [nzSm]="18" [nzXs]="24">
+              <nz-select style="width: 100%;" [(ngModel)]="search.GradeName" name="GradeName" nzShowSearch nzAllowClear
+                nzPlaceHolder="请选择">
+                <nz-option *ngFor="let grade of gradeData" [nzLabel]="grade.GradeName" [nzValue]="grade.GradeName"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="6">
+          <nz-form-item>
+            <button nz-button nzType="primary" (click)="searchFunc()">查询</button>
+            <button nz-button nzType="primary" (click)="down()" style="margin-left:10px;">导出</button>
+            <button nz-button nzType="primary" (click)="showModal()" style="margin-left:10px;">统计</button>
+          </nz-form-item>
+        </div>
+      </div>
+    </form>
+  </nz-card>
+  <div class="biaoge">
+    <div class="statis_table">
+      <nz-table #basicTable [nzLoading]="loading" [nzFrontPagination]="false" [nzData]="dataSet" [nzTotal]="total"
+        [nzPageIndex]="pageIndex" [nzPageSize]="pageSize" (nzPageIndexChange)="getStatisticsPageChange($event)">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>班级</th>
+            <th>身高</th>
+            <th>体重</th>
+            <th>衣码</th>
+            <th>鞋码</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data;let i=index;">
+            <td>{{i+1}}</td>
+            <td>{{data.UserCode}}</td>
+            <td>{{data.Name}}</td>
+            <td>
+              {{data.SexName}}
+            </td>
+            <td>{{data.ClassName}}</td>
+            <td>{{data.Height==='0'?'--':data.Height}}</td>
+            <td>{{data.Weight===''?'--':data.Weight}}</td>
+            <td>
+              {{data.ClothSize===''?'--':data.ClothSize}}
+            </td>
+            <td>
+              {{data.FootSize==='0'?'--':data.FootSize}}
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <!-- <nz-table
+      #rowSelectionTable
+      [nzData]="dataSet"
+      [nzPageSize]="10"
+      >
+      <thead>
+        <tr>
+          <th nzShowCheckbox nzShowRowSelection [nzSelections]="listOfSelection" [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" ></th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of rowSelectionTable.data">
+          <td nzShowCheckbox [(nzChecked)]="data.checked" ></td>
+          <td>{{data.name}}</td>
+          <td>{{data.age}}</td>
+          <td>{{data.address}}</td>
+        </tr>
+      </tbody>
+    </nz-table> -->
+    </div>
+  </div>
+  <nz-modal [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handleCancel()">
+    <ng-template #modalTitle>
+      军训服统计
+    </ng-template>
+    <ng-template #modalContent>
+      <div class="modal-conent">
+        <h3><span *ngIf="this.search.Academy">{{this.search.Academy.AcademyName}}</span><span *ngIf="search.GradeName">{{search.GradeName}}年级</span>共有学生{{total}}人，其中男生{{boy}}人，女生{{girl}}人</h3>
+        <p class="color-1890ff">男生服装尺寸统计如下：</p>
+        <p *ngFor="let boys of boycloth"><span class="important-font">{{boys.ClothSize===''?'未知':boys.ClothSize}}</span>：<span
+            class="important-font">{{boys.C}}</span>件</p>
+        <p class="color-1890ff">男生鞋尺寸统计如下：</p>
+        <p *ngFor="let boys of boyfoot"><span class="important-font">{{boys.FootSize==='0'?'未知':boys.FootSize}}</span>：<span
+            class="important-font">{{boys.C}}</span>双</p>
+        <p style="height:10px;"></p>
+        <p class="color-1890ff">女生服装尺寸统计如下：</p>
+        <p *ngFor="let girls of girlcloth"><span class="important-font">{{girls.ClothSize===''?'未知':girls.ClothSize}}</span>：<span
+            class="important-font">{{girls.C}}</span>件</p>
+        <p class="color-1890ff">女生鞋尺寸统计如下：</p>
+        <p *ngFor="let girls of girlfoot"><span class="important-font">{{girls.FootSize==='0'?'未知':girls.FootSize}}</span>：<span
+            class="important-font">{{girls.C}}</span>双</p>
+      </div>
+    </ng-template>
+    <ng-template #modalFooter>
+      <button nz-button nzType="default" (click)="handleCancel()">关闭</button>
+    </ng-template>
+  </nz-modal>
